@@ -1,0 +1,89 @@
+class Game
+{
+   boolean isDone;
+* -- 2..4 Player;
+  0..* -- 1 SnapShot;
+}
+
+class Player
+{
+  position_pawn;
+  int num_wall_left;
+  boolean isWinner;
+  name;
+  2..4 -- 0..10 Wall;
+}
+
+class SnapShot
+{
+  String[] position_wall;
+  position_player1;
+  position_player2;
+  int step;
+}
+
+class Wall
+{
+  position;
+  1 -- 1 WallDirection;
+}
+
+class WallDirection
+{
+}
+
+class Vertical
+{
+  isA WallDirection;
+}
+
+class Horizontal
+{
+  isA WallDirection;
+}
+
+
+
+namespace -;
+
+
+class Game
+{
+  position 229 39 109 74;
+  position.association Game__Player 0,110 110,0;
+  position.association Game__SnapShot 120,57 69,0;
+}
+
+class Player
+{
+  position 60 168 171 107;
+  position.association Player__Wall 80,107 39,0;
+}
+
+class SnapShot
+{
+  position 340 206 186 107;
+  position.association SnapShot__Game 83,0 150,100;
+  position.association Game__SnapShot 89,0 150,74;
+}
+
+class Wall
+{
+  position 104 322 127 57;
+  position.association Wall__WallDirection 67,57 45,0;
+}
+
+class WallDirection
+{
+  position 129 409 109 39;
+}
+
+class Vertical
+{
+  position 56 502 109 39;
+}
+
+class Horizontal
+{
+  position 226 505 109 41;
+}//$?[End_of_model]$?
