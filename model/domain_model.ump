@@ -1,25 +1,23 @@
 class Game
 {
    boolean isDone;
-* -- 2..4 Player;
-  0..* -- 1 SnapShot;
+1 -- 2 Player;
+  1 -- * Round;
 }
 
 class Player
 {
-  position_pawn;
+  name;
   int num_wall_left;
   boolean isWinner;
-  name;
-  2..4 -- 0..10 Wall;
+  1 -- 0..10 Wall;
 }
 
-class SnapShot
+class Board
 {
-  String[] position_wall;
-  position_player1;
-  position_player2;
-  int step;
+  movement_player1;
+  movement_player2;
+  1 -- 1 Game;
 }
 
 class Wall
@@ -47,43 +45,69 @@ class Horizontal
 namespace -;
 
 
+class Pawn
+{
+  position;
+  1 -- 1 Player;
+}
+
+class Round
+{
+  round;
+}
+
 class Game
 {
-  position 229 39 109 74;
-  position.association Game__Player 0,110 110,0;
-  position.association Game__SnapShot 120,57 69,0;
+  position 364 344 109 75;
+  position.association Game__Player 28,0 114,92;
+  position.association Game__Round 98,0 42,58;
 }
 
 class Player
 {
-  position 60 168 171 107;
+  position 202 173 168 92;
   position.association Player__Wall 80,107 39,0;
+  position.association Player__Wall 60,92 72,0;
 }
 
-class SnapShot
+class Board
 {
-  position 340 206 186 107;
-  position.association SnapShot__Game 83,0 150,100;
-  position.association Game__SnapShot 89,0 150,74;
+  position 594 371 200 75;
+  position.association Board__Game 0,46 131,37;
+  position.association Game__Board 89,0 150,74;
 }
 
 class Wall
 {
-  position 104 322 127 57;
+  position 128 331 127 58;
   position.association Wall__WallDirection 67,57 45,0;
 }
 
 class WallDirection
 {
-  position 129 409 109 39;
+  position 148 432 109 41;
 }
 
 class Vertical
 {
-  position 56 502 109 39;
+  position 51 545 109 41;
 }
 
 class Horizontal
 {
-  position 226 505 109 41;
+  position 221 546 109 41;
 }//$?[End_of_model]$?
+
+namespace -;
+
+
+class Pawn
+{
+  position 15 175 125 58;
+  position.association Pawn__Player 126,28 0,37;
+}
+
+class Round
+{
+  position 479 132 112 58;
+}
