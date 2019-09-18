@@ -1,0 +1,84 @@
+class Game
+{
+   boolean isDone;
+1 -- 2 Player;
+  1 -- * Round;
+}
+
+class Player
+{
+  name;
+  int num_wall_left;
+  boolean isWinner;
+  1 -- 0..10 Wall;
+}
+
+class Board
+{
+  String[] movement_player1;
+  String[] movement_player2;
+  1 -- 1 Game;
+}
+
+class Wall
+{
+   enum WallDirction {Horizontal, Vertical}
+  position;
+    WallDirection direction;
+}
+
+namespace -;
+
+
+class Pawn
+{
+  position;
+  1 -- 1 Player;
+}
+
+class Round
+{
+  movement;
+}
+
+class Game
+{
+  position 290 229 132 58;
+  position.association Game__Player 28,0 114,92;
+  position.association Game__Round 132,31 0,29;
+}
+
+class Player
+{
+  position 204 71 168 93;
+  position.association Player__Wall 168,41 0,44;
+  position.association Player__Wall 60,92 72,0;
+}
+
+class Board
+{
+  position 263 343 109 93;
+  position.association Board__Game 60,0 33,58;
+  position.association Game__Board 89,0 150,74;
+}
+
+class Wall
+{
+  position 476 68 180 75;
+  }
+
+namespace -;
+
+
+class Pawn
+{
+  position 47 80 125 58;
+  position.association Pawn__Player 127,28 0,37;
+}
+
+class Round
+{
+  position 510 231 109 58;
+}//$?[End_of_model]$?
+
+namespace -;
