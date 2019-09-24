@@ -6,6 +6,8 @@ association{
   1 Game match <@>- 0..2 CurrentPlayer list_of_players;
   1 CurrentPlayer player <@>- * Movement movements;
   0..1 Movement previous -- 0..1 Movement next;
+  0..1 Movement destination <@>- 1 Coordinate pos;
+  1 Board board <@>- * Coordinate coordinate;
 }
 class System
 {
@@ -33,8 +35,7 @@ class CurrentPlayer
 class Movement
 {
   
-  destination;
-}
+  }
 
 class StepMovement
 {
@@ -48,6 +49,22 @@ class JumpMovement
 
 class WallMovement
 {
-  orientation;
-isA Movement;
+  isA Movement;
+}
+
+class Coordinate
+{
+  row;
+  column;
+}
+
+class PawnCoordinate
+{
+  isA Coordinate;
+}
+
+class WallCoordinate
+{
+    isA Coordinate;
+orientation;
 }
