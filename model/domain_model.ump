@@ -1,82 +1,53 @@
-//Unable to update umple code due to error at [4,23]
 association{
-  1 Game match -- 2 Player players;
-  1 Game match <@>- 1..* Board round;
-  1 Pawn pawn <@>- 1 Position pos;
-  1 Wall wall <@>- 1 Position pos;
-  1 Player owner <@>- 1 Pawn pawn;
-  1 Player owner <@>- 1 Wall wall;
-  0..1 Board previous -- 0..1 Board next;
-
+  1 User user <- 1 CurrentPlayer player;
+  0..1 System sys <@>- * User user;
+  0..1 System sys <@>- * Game match;
+  1 System sys <@>- 1 Board board;
+  1 Game match <@>- 0..2 CurrentPlayer list_of_players;
+  1 CurrentPlayer player <@>- * Movement movements;
+  0..1 Movement previous -- 0..1 Movement next;
 }
-class Game
+class System
 {
-  boolean isDone;
-  date;
 }
 
-class Player
+class User
 {
   name;
-  int num_wall_left;
-  boolean isWinner;
-  }
-
-class Wall
-{
-      
-     String direction;
-}
-
-namespace -;
-
-
-class Pawn
-{
-     
 }
 
 class Board
 {
-  movement;
-}
-
-class Position
-{
-    row;
-  column;
-  direction;
 }
 
 class Game
 {
-  position 474 158 109 57;
-  position.association Game__Player 28,0 95,90;
-  position.association Game__Board 132,31 0,29;
+  id;
 }
 
-class Player
+class CurrentPlayer
 {
-  position 58 140 168 90;
-  position.association Player__Wall 60,92 72,0;
+  int wall_number;
 }
 
-class Wall
+class Movement
 {
-  position 175 312 180 57;
-  }
-
-namespace -;
-
-
-class Pawn
-{
-  position 20 324 109 39;
-  }
-
-class Board
-{
-  position 495 374 109 57;
+  
+  destination;
 }
 
-namespace -;
+class StepMovement
+{
+  isA Movement;
+}
+
+class JumpMovement
+{
+  isA Movement;
+}
+
+class WallMovement
+{
+  orientation;
+isA Movement;
+}
