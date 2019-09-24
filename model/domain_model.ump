@@ -1,12 +1,18 @@
+//Unable to update umple code due to error at [4,23]
 association{
-  1 Match match -- 2 Player players;
-  1 Match match <@>- 1..* Snapshot round;
-  1 Match mathc <@>- 1 Board board;
-  1 Player player <@>- 0..* Chess chesses;
+  1 Game match -- 2 Player players;
+  1 Game match <@>- 1..* Board round;
+  1 Pawn pawn <@>- 1 Position pos;
+  1 Wall wall <@>- 1 Position pos;
+  1 Player owner <@>- 1 Pawn pawn;
+  1 Player owner <@>- 1 Wall wall;
+  0..1 Board previous -- 0..1 Board next;
+
 }
-class Match
+class Game
 {
   boolean isDone;
+  date;
 }
 
 class Player
@@ -16,15 +22,9 @@ class Player
   boolean isWinner;
   }
 
-class Board
-{
-  String[] movement_player1;
-  String[] movement_player2;
-}
-
 class Wall
 {
-     isA Chess;
+      
      String direction;
 }
 
@@ -33,42 +33,37 @@ namespace -;
 
 class Pawn
 {
-    isA Chess;
-}
-
-class Snapshot
-{
-  movement;
-}
-
-class Chess
-{
-  String position;
-}
-
-class Match
-{
-  position 408 262 109 57;
-  position.association Match__Player 28,0 95,90;
-  position.association Match__Snapshot 132,31 0,29;
-}
-
-class Player
-{
-  position 402 109 168 90;
-  position.association Player__Wall 60,92 72,0;
+     
 }
 
 class Board
 {
-  position 417 404 216 74;
-  position.association Board__Match 60,0 33,58;
-  position.association Match__Board 89,0 150,74;
+  movement;
+}
+
+class Position
+{
+    row;
+  column;
+  direction;
+}
+
+class Game
+{
+  position 474 158 109 57;
+  position.association Game__Player 28,0 95,90;
+  position.association Game__Board 132,31 0,29;
+}
+
+class Player
+{
+  position 58 140 168 90;
+  position.association Player__Wall 60,92 72,0;
 }
 
 class Wall
 {
-  position 170 328 180 57;
+  position 175 312 180 57;
   }
 
 namespace -;
@@ -76,12 +71,12 @@ namespace -;
 
 class Pawn
 {
-  position 44 337 109 39;
+  position 20 324 109 39;
   }
 
-class Snapshot
+class Board
 {
-  position 615 264 146 57;
+  position 495 374 109 57;
 }
 
 namespace -;
