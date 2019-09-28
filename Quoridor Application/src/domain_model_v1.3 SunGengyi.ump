@@ -1,0 +1,103 @@
+enum PlayerType {Black, White}
+enum WallDirection {Horizontal, Vertical}
+enum MoveType {JumpPawn, PlaceWall, NormalMove}
+
+class QuoridorSystem
+{
+  0..1 s <@>- 0..* User u;
+  0..1 s <@>- 0..* QuoridorGame g;
+  }
+
+class QuoridorGame
+{
+0..1 g <@>- 0..1 Position pst;
+ 0..1 g <@>- 2 Player p;
+}
+
+
+class User
+{
+  UserName;
+  UserID;
+  
+  
+}
+
+class Position
+{
+ 
+ 0..1 pst <@>- 0..20 Wall w;
+  0..1 pst <@>- 0..2 Pawn pw;
+}
+
+class Pawn
+{
+  Coordinate;
+1 -- 1 Player;
+}
+
+class Player
+{
+  PlayerType PlayerType;
+
+  1 -- 1 User;
+  1 -- 10 Wall;
+}
+
+class Wall
+{
+  Coordinate;
+  WallDirection WallDirection;
+}
+
+//$?[End_of_model]$?
+
+namespace -;
+
+
+class QuoridorSystem
+{
+  position 201 10 118 41;
+    position.association QuoridorGame:g__QuoridorSystem:s 14,39 76,0;
+}
+
+class QuoridorGame
+{
+  position 77 92 109 41;
+  position.association QuoridorGame__QuoridorSystem 75,0 34,41;
+  position.association QuoridorGame:g__QuoridorSystem:s 71,0 19,39;
+  position.association Player:p__QuoridorGame:g 109,39 46,0;
+}
+
+class User
+{
+  position 399 80 136 57;
+}
+
+class Position
+{
+  position 67 183 109 39;
+  position.association Position__QuoridorGame 45,0 36,41;
+  position.association Position__Wall 27,57 30,0;
+  position.association Pawn:pw__Position:pst 89,39 25,0;
+}
+
+class Pawn
+{
+  position 130 301 147 57;
+  position.association Pawn__Player 147,0 0,57;
+}
+
+class Player
+{
+  position 308 218 178 57;
+  position.association Player__QuoridorGame 78,0 90,41;
+  position.association Player__User 116,0 24,74;
+  position.association Player:p__QuoridorGame:g 0,10 110,12;
+  position.association Player__Wall 81,57 199,0;
+}
+
+class Wall
+{
+  position 48 406 210 74;
+}

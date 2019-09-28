@@ -3,125 +3,153 @@
 
 package ca.mcgill.ecse223.quoridor.model;
 
-// line 23 "../domain_model_v1.2.ump"
-// line 65 "../domain_model_v1.2.ump"
-public class Wall
-{
+// line 47 "../domain_model_v1.3 SunGengyi.ump"
+// line 100 "../domain_model_v1.3 SunGengyi.ump"
+public class Wall {
 
-  //------------------------
-  // ENUMERATIONS
-  //------------------------
+	// ------------------------
+	// ENUMERATIONS
+	// ------------------------
 
-  public enum WallDirction { Horizontal, Vertical }
+	public enum WallDirection {
+		Horizontal, Vertical
+	}
 
-  //------------------------
-  // MEMBER VARIABLES
-  //------------------------
+	// ------------------------
+	// MEMBER VARIABLES
+	// ------------------------
 
-  //Wall Attributes
-  private String position;
-  private WallDirction direction;
+	// Wall Attributes
+	private String Coordinate;
+	private WallDirection WallDirection;
 
-  //Wall Associations
-  private Player player;
+	// Wall Associations
+	private Position pst;
+	private Player player;
 
-  //------------------------
-  // CONSTRUCTOR
-  //------------------------
+	// ------------------------
+	// CONSTRUCTOR
+	// ------------------------
 
-  public Wall(String aPosition, WallDirction aDirection, Player aPlayer)
-  {
-    position = aPosition;
-    direction = aDirection;
-    boolean didAddPlayer = setPlayer(aPlayer);
-    if (!didAddPlayer)
-    {
-      throw new RuntimeException("Unable to create wall due to player");
-    }
-  }
+	public Wall(String aCoordinate, WallDirection aWallDirection, Player aPlayer) {
+		Coordinate = aCoordinate;
+		WallDirection = aWallDirection;
+		boolean didAddPlayer = setPlayer(aPlayer);
+		if (!didAddPlayer) {
+			throw new RuntimeException("Unable to create wall due to player");
+		}
+	}
 
-  //------------------------
-  // INTERFACE
-  //------------------------
+	// ------------------------
+	// INTERFACE
+	// ------------------------
 
-  public boolean setPosition(String aPosition)
-  {
-    boolean wasSet = false;
-    position = aPosition;
-    wasSet = true;
-    return wasSet;
-  }
+	public boolean setCoordinate(String aCoordinate) {
+		boolean wasSet = false;
+		Coordinate = aCoordinate;
+		wasSet = true;
+		return wasSet;
+	}
 
-  public boolean setDirection(WallDirction aDirection)
-  {
-    boolean wasSet = false;
-    direction = aDirection;
-    wasSet = true;
-    return wasSet;
-  }
+	public boolean setWallDirection(WallDirection aWallDirection) {
+		boolean wasSet = false;
+		WallDirection = aWallDirection;
+		wasSet = true;
+		return wasSet;
+	}
 
-  public String getPosition()
-  {
-    return position;
-  }
+	public String getCoordinate() {
+		return Coordinate;
+	}
 
-  public WallDirction getDirection()
-  {
-    return direction;
-  }
-  /* Code from template association_GetOne */
-  public Player getPlayer()
-  {
-    return player;
-  }
-  /* Code from template association_SetOneToAtMostN */
-  public boolean setPlayer(Player aPlayer)
-  {
-    boolean wasSet = false;
-    //Must provide player to wall
-    if (aPlayer == null)
-    {
-      return wasSet;
-    }
+	public WallDirection getWallDirection() {
+		return WallDirection;
+	}
 
-    //player already at maximum (10)
-    if (aPlayer.numberOfWalls() >= Player.maximumNumberOfWalls())
-    {
-      return wasSet;
-    }
-    
-    Player existingPlayer = player;
-    player = aPlayer;
-    if (existingPlayer != null && !existingPlayer.equals(aPlayer))
-    {
-      boolean didRemove = existingPlayer.removeWall(this);
-      if (!didRemove)
-      {
-        player = existingPlayer;
-        return wasSet;
-      }
-    }
-    player.addWall(this);
-    wasSet = true;
-    return wasSet;
-  }
+	/* Code from template association_GetOne */
+	public Position getPst() {
+		return pst;
+	}
 
-  public void delete()
-  {
-    Player placeholderPlayer = player;
-    this.player = null;
-    if(placeholderPlayer != null)
-    {
-      placeholderPlayer.removeWall(this);
-    }
-  }
+	public boolean hasPst() {
+		boolean has = pst != null;
+		return has;
+	}
 
+	/* Code from template association_GetOne */
+	public Player getPlayer() {
+		return player;
+	}
 
-  public String toString()
-  {
-    return super.toString() + "["+
-            "position" + ":" + getPosition()+ "]" + System.getProperties().getProperty("line.separator") +
-            "  " + "direction" + "=" + (getDirection() != null ? !getDirection().equals(this)  ? getDirection().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
-            "  " + "player = "+(getPlayer()!=null?Integer.toHexString(System.identityHashCode(getPlayer())):"null");
-  }
+	/* Code from template association_SetOptionalOneToOptionalN */
+	public boolean setPst(Position aPst) {
+		boolean wasSet = false;
+		if (aPst != null && aPst.numberOfW() >= Position.maximumNumberOfW()) {
+			return wasSet;
+		}
+
+		Position existingPst = pst;
+		pst = aPst;
+		if (existingPst != null && !existingPst.equals(aPst)) {
+			existingPst.removeW(this);
+		}
+		if (aPst != null) {
+			aPst.addW(this);
+		}
+		wasSet = true;
+		return wasSet;
+	}
+
+	/* Code from template association_SetOneToAtMostN */
+	public boolean setPlayer(Player aPlayer) {
+		boolean wasSet = false;
+		// Must provide player to wall
+		if (aPlayer == null) {
+			return wasSet;
+		}
+
+		// player already at maximum (10)
+		if (aPlayer.numberOfWalls() >= Player.maximumNumberOfWalls()) {
+			return wasSet;
+		}
+
+		Player existingPlayer = player;
+		player = aPlayer;
+		if (existingPlayer != null && !existingPlayer.equals(aPlayer)) {
+			boolean didRemove = existingPlayer.removeWall(this);
+			if (!didRemove) {
+				player = existingPlayer;
+				return wasSet;
+			}
+		}
+		player.addWall(this);
+		wasSet = true;
+		return wasSet;
+	}
+
+	public void delete() {
+		if (pst != null) {
+			Position placeholderPst = pst;
+			this.pst = null;
+			placeholderPst.removeW(this);
+		}
+		Player placeholderPlayer = player;
+		this.player = null;
+		if (placeholderPlayer != null) {
+			placeholderPlayer.removeWall(this);
+		}
+	}
+
+	public String toString() {
+		return super.toString() + "[" + "Coordinate" + ":" + getCoordinate() + "]"
+				+ System.getProperties().getProperty("line.separator") + "  " + "WallDirection" + "="
+				+ (getWallDirection() != null
+						? !getWallDirection().equals(this) ? getWallDirection().toString().replaceAll("  ", "    ")
+								: "this"
+						: "null")
+				+ System.getProperties().getProperty("line.separator") + "  " + "pst = "
+				+ (getPst() != null ? Integer.toHexString(System.identityHashCode(getPst())) : "null")
+				+ System.getProperties().getProperty("line.separator") + "  " + "player = "
+				+ (getPlayer() != null ? Integer.toHexString(System.identityHashCode(getPlayer())) : "null");
+	}
 }

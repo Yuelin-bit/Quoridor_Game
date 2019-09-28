@@ -3,78 +3,107 @@
 
 package ca.mcgill.ecse223.quoridor.model;
 
-// line 33 "../domain_model_v1.2.ump"
-// line 73 "../domain_model_v1.2.ump"
-public class Pawn
-{
+import ca.mcgill.ecse223.quoridor.model.Player.PlayerType;
 
-  //------------------------
-  // MEMBER VARIABLES
-  //------------------------
+// line 33 "../domain_model_v1.3 SunGengyi.ump"
+// line 85 "../domain_model_v1.3 SunGengyi.ump"
+public class Pawn {
 
-  //Pawn Attributes
-  private String position;
+	// ------------------------
+	// MEMBER VARIABLES
+	// ------------------------
 
-  //Pawn Associations
-  private Player player;
+	// Pawn Attributes
+	private String Coordinate;
 
-  //------------------------
-  // CONSTRUCTOR
-  //------------------------
+	// Pawn Associations
+	private Player player;
+	private Position pst;
 
-  public Pawn(String aPosition, Player aPlayer)
-  {
-    position = aPosition;
-    if (aPlayer == null || aPlayer.getPawn() != null)
-    {
-      throw new RuntimeException("Unable to create Pawn due to aPlayer");
-    }
-    player = aPlayer;
-  }
+	// ------------------------
+	// CONSTRUCTOR
+	// ------------------------
 
-  public Pawn(String aPosition, String aNameForPlayer, int aNum_wall_leftForPlayer, boolean aIsWinnerForPlayer, Game aGameForPlayer)
-  {
-    position = aPosition;
-    player = new Player(aNameForPlayer, aNum_wall_leftForPlayer, aIsWinnerForPlayer, aGameForPlayer, this);
-  }
+	public Pawn(String aCoordinate, Player aPlayer) {
+		Coordinate = aCoordinate;
+		if (aPlayer == null || aPlayer.getPawn() != null) {
+			throw new RuntimeException("Unable to create Pawn due to aPlayer");
+		}
+		player = aPlayer;
+	}
 
-  //------------------------
-  // INTERFACE
-  //------------------------
+	public Pawn(String aCoordinate, PlayerType aPlayerTypeForPlayer, User aUserForPlayer) {
+		Coordinate = aCoordinate;
+		player = new Player(aPlayerTypeForPlayer, aUserForPlayer, this);
+	}
 
-  public boolean setPosition(String aPosition)
-  {
-    boolean wasSet = false;
-    position = aPosition;
-    wasSet = true;
-    return wasSet;
-  }
+	// ------------------------
+	// INTERFACE
+	// ------------------------
 
-  public String getPosition()
-  {
-    return position;
-  }
-  /* Code from template association_GetOne */
-  public Player getPlayer()
-  {
-    return player;
-  }
+	public boolean setCoordinate(String aCoordinate) {
+		boolean wasSet = false;
+		Coordinate = aCoordinate;
+		wasSet = true;
+		return wasSet;
+	}
 
-  public void delete()
-  {
-    Player existingPlayer = player;
-    player = null;
-    if (existingPlayer != null)
-    {
-      existingPlayer.delete();
-    }
-  }
+	public String getCoordinate() {
+		return Coordinate;
+	}
 
+	/* Code from template association_GetOne */
+	public Player getPlayer() {
+		return player;
+	}
 
-  public String toString()
-  {
-    return super.toString() + "["+
-            "position" + ":" + getPosition()+ "]" + System.getProperties().getProperty("line.separator") +
-            "  " + "player = "+(getPlayer()!=null?Integer.toHexString(System.identityHashCode(getPlayer())):"null");
-  }
+	/* Code from template association_GetOne */
+	public Position getPst() {
+		return pst;
+	}
+
+	public boolean hasPst() {
+		boolean has = pst != null;
+		return has;
+	}
+
+	/* Code from template association_SetOptionalOneToOptionalN */
+	public boolean setPst(Position aPst) {
+		boolean wasSet = false;
+		if (aPst != null && aPst.numberOfPw() >= Position.maximumNumberOfPw()) {
+			return wasSet;
+		}
+
+		Position existingPst = pst;
+		pst = aPst;
+		if (existingPst != null && !existingPst.equals(aPst)) {
+			existingPst.removePw(this);
+		}
+		if (aPst != null) {
+			aPst.addPw(this);
+		}
+		wasSet = true;
+		return wasSet;
+	}
+
+	public void delete() {
+		Player existingPlayer = player;
+		player = null;
+		if (existingPlayer != null) {
+			existingPlayer.delete();
+		}
+		if (pst != null) {
+			Position placeholderPst = pst;
+			this.pst = null;
+			placeholderPst.removePw(this);
+		}
+	}
+
+	public String toString() {
+		return super.toString() + "[" + "Coordinate" + ":" + getCoordinate() + "]"
+				+ System.getProperties().getProperty("line.separator") + "  " + "player = "
+				+ (getPlayer() != null ? Integer.toHexString(System.identityHashCode(getPlayer())) : "null")
+				+ System.getProperties().getProperty("line.separator") + "  " + "pst = "
+				+ (getPst() != null ? Integer.toHexString(System.identityHashCode(getPst())) : "null");
+	}
 }
