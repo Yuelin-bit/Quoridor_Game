@@ -2,210 +2,229 @@
 /*This code was generated using the UMPLE 1.29.0.4181.a593105a9 modeling language!*/
 
 package ca.mcgill.ecse223.quoridor.model;
-
 import java.util.*;
 
-// line 11 "../domain_model_v1.3 SunGengyi.ump"
-// line 64 "../domain_model_v1.3 SunGengyi.ump"
-public class QuoridorGame {
+// line 28 "../domain_model_3.0.ump"
+// line 83 "../domain_model_3.0.ump"
+public class QuoridorGame
+{
 
-	// ------------------------
-	// ENUMERATIONS
-	// ------------------------
+  //------------------------
+  // ENUMERATIONS
+  //------------------------
 
-	public enum PlayerType {
-		Black, White
-	}
+  public enum PlayerType { Black, White }
 
-	// ------------------------
-	// MEMBER VARIABLES
-	// ------------------------
+  //------------------------
+  // MEMBER VARIABLES
+  //------------------------
 
-	// QuoridorGame Associations
-	private Position pst;
-	private List<Player> p;
-	private QuoridorSystem s;
+  //QuoridorGame Associations
+  private QuoridorSystem system;
+  private List<Player> Participant;
+  private Position ViewOfTheGame;
 
-	// ------------------------
-	// CONSTRUCTOR
-	// ------------------------
+  //------------------------
+  // CONSTRUCTOR
+  //------------------------
 
-	public QuoridorGame(Player... allP) {
-		p = new ArrayList<Player>();
-		boolean didAddP = setP(allP);
-		if (!didAddP) {
-			throw new RuntimeException("Unable to create QuoridorGame, must have 2 p");
-		}
-	}
+  public QuoridorGame(Position aViewOfTheGame)
+  {
+    Participant = new ArrayList<Player>();
+    if (aViewOfTheGame == null || aViewOfTheGame.getOnegame() != null)
+    {
+      throw new RuntimeException("Unable to create QuoridorGame due to aViewOfTheGame");
+    }
+    ViewOfTheGame = aViewOfTheGame;
+  }
 
-	// ------------------------
-	// INTERFACE
-	// ------------------------
-	/* Code from template association_GetOne */
-	public Position getPst() {
-		return pst;
-	}
+  public QuoridorGame(Movement aChangedPartForViewOfTheGame)
+  {
+    Participant = new ArrayList<Player>();
+    ViewOfTheGame = new Position(aChangedPartForViewOfTheGame, this);
+  }
 
-	public boolean hasPst() {
-		boolean has = pst != null;
-		return has;
-	}
+  //------------------------
+  // INTERFACE
+  //------------------------
+  /* Code from template association_GetOne */
+  public QuoridorSystem getSystem()
+  {
+    return system;
+  }
 
-	/* Code from template association_GetMany */
-	public Player getP(int index) {
-		Player aP = p.get(index);
-		return aP;
-	}
+  public boolean hasSystem()
+  {
+    boolean has = system != null;
+    return has;
+  }
+  /* Code from template association_GetMany */
+  public Player getParticipant(int index)
+  {
+    Player aParticipant = Participant.get(index);
+    return aParticipant;
+  }
 
-	public List<Player> getP() {
-		List<Player> newP = Collections.unmodifiableList(p);
-		return newP;
-	}
+  public List<Player> getParticipant()
+  {
+    List<Player> newParticipant = Collections.unmodifiableList(Participant);
+    return newParticipant;
+  }
 
-	public int numberOfP() {
-		int number = p.size();
-		return number;
-	}
+  public int numberOfParticipant()
+  {
+    int number = Participant.size();
+    return number;
+  }
 
-	public boolean hasP() {
-		boolean has = p.size() > 0;
-		return has;
-	}
+  public boolean hasParticipant()
+  {
+    boolean has = Participant.size() > 0;
+    return has;
+  }
 
-	public int indexOfP(Player aP) {
-		int index = p.indexOf(aP);
-		return index;
-	}
+  public int indexOfParticipant(Player aParticipant)
+  {
+    int index = Participant.indexOf(aParticipant);
+    return index;
+  }
+  /* Code from template association_GetOne */
+  public Position getViewOfTheGame()
+  {
+    return ViewOfTheGame;
+  }
+  /* Code from template association_SetOptionalOneToOptionalOne */
+  public boolean setSystem(QuoridorSystem aNewSystem)
+  {
+    boolean wasSet = false;
+    if (aNewSystem == null)
+    {
+      QuoridorSystem existingSystem = system;
+      system = null;
+      
+      if (existingSystem != null && existingSystem.getGame() != null)
+      {
+        existingSystem.setGame(null);
+      }
+      wasSet = true;
+      return wasSet;
+    }
 
-	/* Code from template association_GetOne */
-	public QuoridorSystem getS() {
-		return s;
-	}
+    QuoridorSystem currentSystem = getSystem();
+    if (currentSystem != null && !currentSystem.equals(aNewSystem))
+    {
+      currentSystem.setGame(null);
+    }
 
-	public boolean hasS() {
-		boolean has = s != null;
-		return has;
-	}
+    system = aNewSystem;
+    QuoridorGame existingGame = aNewSystem.getGame();
 
-	/* Code from template association_SetOptionalOneToOptionalOne */
-	public boolean setPst(Position aNewPst) {
-		boolean wasSet = false;
-		if (aNewPst == null) {
-			Position existingPst = pst;
-			pst = null;
+    if (!equals(existingGame))
+    {
+      aNewSystem.setGame(this);
+    }
+    wasSet = true;
+    return wasSet;
+  }
+  /* Code from template association_IsNumberOfValidMethod */
+  public boolean isNumberOfParticipantValid()
+  {
+    boolean isValid = numberOfParticipant() >= minimumNumberOfParticipant() && numberOfParticipant() <= maximumNumberOfParticipant();
+    return isValid;
+  }
+  /* Code from template association_RequiredNumberOfMethod */
+  public static int requiredNumberOfParticipant()
+  {
+    return 2;
+  }
+  /* Code from template association_MinimumNumberOfMethod */
+  public static int minimumNumberOfParticipant()
+  {
+    return 2;
+  }
+  /* Code from template association_MaximumNumberOfMethod */
+  public static int maximumNumberOfParticipant()
+  {
+    return 2;
+  }
+  /* Code from template association_AddMNToOnlyOne */
+  public Player addParticipant(PlayerType aPlayerType, int aNum_of_wall_left, Pawn aControlBy, User aAllUsersLoginedIn)
+  {
+    if (numberOfParticipant() >= maximumNumberOfParticipant())
+    {
+      return null;
+    }
+    else
+    {
+      return new Player(aPlayerType, aNum_of_wall_left, aControlBy, this, aAllUsersLoginedIn);
+    }
+  }
 
-			if (existingPst != null && existingPst.getG() != null) {
-				existingPst.setG(null);
-			}
-			wasSet = true;
-			return wasSet;
-		}
+  public boolean addParticipant(Player aParticipant)
+  {
+    boolean wasAdded = false;
+    if (Participant.contains(aParticipant)) { return false; }
+    if (numberOfParticipant() >= maximumNumberOfParticipant())
+    {
+      return wasAdded;
+    }
 
-		Position currentPst = getPst();
-		if (currentPst != null && !currentPst.equals(aNewPst)) {
-			currentPst.setG(null);
-		}
+    QuoridorGame existingGame = aParticipant.getGame();
+    boolean isNewGame = existingGame != null && !this.equals(existingGame);
 
-		pst = aNewPst;
-		QuoridorGame existingG = aNewPst.getG();
+    if (isNewGame && existingGame.numberOfParticipant() <= minimumNumberOfParticipant())
+    {
+      return wasAdded;
+    }
 
-		if (!equals(existingG)) {
-			aNewPst.setG(this);
-		}
-		wasSet = true;
-		return wasSet;
-	}
+    if (isNewGame)
+    {
+      aParticipant.setGame(this);
+    }
+    else
+    {
+      Participant.add(aParticipant);
+    }
+    wasAdded = true;
+    return wasAdded;
+  }
 
-	/* Code from template association_RequiredNumberOfMethod */
-	public static int requiredNumberOfP() {
-		return 2;
-	}
+  public boolean removeParticipant(Player aParticipant)
+  {
+    boolean wasRemoved = false;
+    //Unable to remove aParticipant, as it must always have a game
+    if (this.equals(aParticipant.getGame()))
+    {
+      return wasRemoved;
+    }
 
-	/* Code from template association_MinimumNumberOfMethod */
-	public static int minimumNumberOfP() {
-		return 2;
-	}
+    //game already at minimum (2)
+    if (numberOfParticipant() <= minimumNumberOfParticipant())
+    {
+      return wasRemoved;
+    }
+    Participant.remove(aParticipant);
+    wasRemoved = true;
+    return wasRemoved;
+  }
 
-	/* Code from template association_MaximumNumberOfMethod */
-	public static int maximumNumberOfP() {
-		return 2;
-	}
-
-	/* Code from template association_SetNToOptionalOne */
-	public boolean setP(Player... newP) {
-		boolean wasSet = false;
-		ArrayList<Player> checkNewP = new ArrayList<Player>();
-		for (Player aP : newP) {
-			if (checkNewP.contains(aP)) {
-				return wasSet;
-			} else if (aP.getG() != null && !this.equals(aP.getG())) {
-				return wasSet;
-			}
-			checkNewP.add(aP);
-		}
-
-		if (checkNewP.size() != minimumNumberOfP()) {
-			return wasSet;
-		}
-
-		p.removeAll(checkNewP);
-
-		for (Player orphan : p) {
-			setG(orphan, null);
-		}
-		p.clear();
-		for (Player aP : newP) {
-			setG(aP, this);
-			p.add(aP);
-		}
-		wasSet = true;
-		return wasSet;
-	}
-
-	/* Code from template association_GetPrivate */
-	private void setG(Player aP, QuoridorGame aG) {
-		try {
-			java.lang.reflect.Field mentorField = aP.getClass().getDeclaredField("g");
-			mentorField.setAccessible(true);
-			mentorField.set(aP, aG);
-		} catch (Exception e) {
-			throw new RuntimeException("Issue internally setting aG to aP", e);
-		}
-	}
-
-	/* Code from template association_SetOptionalOneToMany */
-	public boolean setS(QuoridorSystem aS) {
-		boolean wasSet = false;
-		QuoridorSystem existingS = s;
-		s = aS;
-		if (existingS != null && !existingS.equals(aS)) {
-			existingS.removeG(this);
-		}
-		if (aS != null) {
-			aS.addG(this);
-		}
-		wasSet = true;
-		return wasSet;
-	}
-
-	public void delete() {
-		Position existingPst = pst;
-		pst = null;
-		if (existingPst != null) {
-			existingPst.delete();
-			existingPst.setG(null);
-		}
-		while (p.size() > 0) {
-			Player aP = p.get(p.size() - 1);
-			aP.delete();
-			p.remove(aP);
-		}
-
-		if (s != null) {
-			QuoridorSystem placeholderS = s;
-			this.s = null;
-			placeholderS.removeG(this);
-		}
-	}
+  public void delete()
+  {
+    if (system != null)
+    {
+      system.setGame(null);
+    }
+    for(int i=Participant.size(); i > 0; i--)
+    {
+      Player aParticipant = Participant.get(i - 1);
+      aParticipant.delete();
+    }
+    Position existingViewOfTheGame = ViewOfTheGame;
+    ViewOfTheGame = null;
+    if (existingViewOfTheGame != null)
+    {
+      existingViewOfTheGame.delete();
+    }
+  }
 
 }

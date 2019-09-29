@@ -2,236 +2,240 @@
 /*This code was generated using the UMPLE 1.29.0.4181.a593105a9 modeling language!*/
 
 package ca.mcgill.ecse223.quoridor.model;
-
 import java.util.*;
 
-// line 5 "../domain_model_v1.3 SunGengyi.ump"
-// line 58 "../domain_model_v1.3 SunGengyi.ump"
-public class QuoridorSystem {
+// line 24 "../domain_model_3.0.ump"
+// line 78 "../domain_model_3.0.ump"
+public class QuoridorSystem
+{
 
-	// ------------------------
-	// MEMBER VARIABLES
-	// ------------------------
+  //------------------------
+  // MEMBER VARIABLES
+  //------------------------
 
-	// QuoridorSystem Associations
-	private List<User> u;
-	private List<QuoridorGame> g;
+  //QuoridorSystem Associations
+  private QuoridorGame game;
+  private Board board;
+  private List<User> AllUsersLoginedIn;
 
-	// ------------------------
-	// CONSTRUCTOR
-	// ------------------------
+  //------------------------
+  // CONSTRUCTOR
+  //------------------------
 
-	public QuoridorSystem() {
-		u = new ArrayList<User>();
-		g = new ArrayList<QuoridorGame>();
-	}
+  public QuoridorSystem(Board aBoard)
+  {
+    boolean didAddBoard = setBoard(aBoard);
+    if (!didAddBoard)
+    {
+      throw new RuntimeException("Unable to create system due to board");
+    }
+    AllUsersLoginedIn = new ArrayList<User>();
+  }
 
-	// ------------------------
-	// INTERFACE
-	// ------------------------
-	/* Code from template association_GetMany */
-	public User getU(int index) {
-		User aU = u.get(index);
-		return aU;
-	}
+  //------------------------
+  // INTERFACE
+  //------------------------
+  /* Code from template association_GetOne */
+  public QuoridorGame getGame()
+  {
+    return game;
+  }
 
-	public List<User> getU() {
-		List<User> newU = Collections.unmodifiableList(u);
-		return newU;
-	}
+  public boolean hasGame()
+  {
+    boolean has = game != null;
+    return has;
+  }
+  /* Code from template association_GetOne */
+  public Board getBoard()
+  {
+    return board;
+  }
+  /* Code from template association_GetMany */
+  public User getAllUsersLoginedIn(int index)
+  {
+    User aAllUsersLoginedIn = AllUsersLoginedIn.get(index);
+    return aAllUsersLoginedIn;
+  }
 
-	public int numberOfU() {
-		int number = u.size();
-		return number;
-	}
+  public List<User> getAllUsersLoginedIn()
+  {
+    List<User> newAllUsersLoginedIn = Collections.unmodifiableList(AllUsersLoginedIn);
+    return newAllUsersLoginedIn;
+  }
 
-	public boolean hasU() {
-		boolean has = u.size() > 0;
-		return has;
-	}
+  public int numberOfAllUsersLoginedIn()
+  {
+    int number = AllUsersLoginedIn.size();
+    return number;
+  }
 
-	public int indexOfU(User aU) {
-		int index = u.indexOf(aU);
-		return index;
-	}
+  public boolean hasAllUsersLoginedIn()
+  {
+    boolean has = AllUsersLoginedIn.size() > 0;
+    return has;
+  }
 
-	/* Code from template association_GetMany */
-	public QuoridorGame getG(int index) {
-		QuoridorGame aG = g.get(index);
-		return aG;
-	}
+  public int indexOfAllUsersLoginedIn(User aAllUsersLoginedIn)
+  {
+    int index = AllUsersLoginedIn.indexOf(aAllUsersLoginedIn);
+    return index;
+  }
+  /* Code from template association_SetOptionalOneToOptionalOne */
+  public boolean setGame(QuoridorGame aNewGame)
+  {
+    boolean wasSet = false;
+    if (aNewGame == null)
+    {
+      QuoridorGame existingGame = game;
+      game = null;
+      
+      if (existingGame != null && existingGame.getSystem() != null)
+      {
+        existingGame.setSystem(null);
+      }
+      wasSet = true;
+      return wasSet;
+    }
 
-	public List<QuoridorGame> getG() {
-		List<QuoridorGame> newG = Collections.unmodifiableList(g);
-		return newG;
-	}
+    QuoridorGame currentGame = getGame();
+    if (currentGame != null && !currentGame.equals(aNewGame))
+    {
+      currentGame.setSystem(null);
+    }
 
-	public int numberOfG() {
-		int number = g.size();
-		return number;
-	}
+    game = aNewGame;
+    QuoridorSystem existingSystem = aNewGame.getSystem();
 
-	public boolean hasG() {
-		boolean has = g.size() > 0;
-		return has;
-	}
+    if (!equals(existingSystem))
+    {
+      aNewGame.setSystem(this);
+    }
+    wasSet = true;
+    return wasSet;
+  }
+  /* Code from template association_SetOneToOptionalOne */
+  public boolean setBoard(Board aNewBoard)
+  {
+    boolean wasSet = false;
+    if (aNewBoard == null)
+    {
+      //Unable to setBoard to null, as system must always be associated to a board
+      return wasSet;
+    }
+    
+    QuoridorSystem existingSystem = aNewBoard.getSystem();
+    if (existingSystem != null && !equals(existingSystem))
+    {
+      //Unable to setBoard, the current board already has a system, which would be orphaned if it were re-assigned
+      return wasSet;
+    }
+    
+    Board anOldBoard = board;
+    board = aNewBoard;
+    board.setSystem(this);
 
-	public int indexOfG(QuoridorGame aG) {
-		int index = g.indexOf(aG);
-		return index;
-	}
+    if (anOldBoard != null)
+    {
+      anOldBoard.setSystem(null);
+    }
+    wasSet = true;
+    return wasSet;
+  }
+  /* Code from template association_MinimumNumberOfMethod */
+  public static int minimumNumberOfAllUsersLoginedIn()
+  {
+    return 0;
+  }
+  /* Code from template association_AddManyToOptionalOne */
+  public boolean addAllUsersLoginedIn(User aAllUsersLoginedIn)
+  {
+    boolean wasAdded = false;
+    if (AllUsersLoginedIn.contains(aAllUsersLoginedIn)) { return false; }
+    QuoridorSystem existingSystem = aAllUsersLoginedIn.getSystem();
+    if (existingSystem == null)
+    {
+      aAllUsersLoginedIn.setSystem(this);
+    }
+    else if (!this.equals(existingSystem))
+    {
+      existingSystem.removeAllUsersLoginedIn(aAllUsersLoginedIn);
+      addAllUsersLoginedIn(aAllUsersLoginedIn);
+    }
+    else
+    {
+      AllUsersLoginedIn.add(aAllUsersLoginedIn);
+    }
+    wasAdded = true;
+    return wasAdded;
+  }
 
-	/* Code from template association_MinimumNumberOfMethod */
-	public static int minimumNumberOfU() {
-		return 0;
-	}
+  public boolean removeAllUsersLoginedIn(User aAllUsersLoginedIn)
+  {
+    boolean wasRemoved = false;
+    if (AllUsersLoginedIn.contains(aAllUsersLoginedIn))
+    {
+      AllUsersLoginedIn.remove(aAllUsersLoginedIn);
+      aAllUsersLoginedIn.setSystem(null);
+      wasRemoved = true;
+    }
+    return wasRemoved;
+  }
+  /* Code from template association_AddIndexControlFunctions */
+  public boolean addAllUsersLoginedInAt(User aAllUsersLoginedIn, int index)
+  {  
+    boolean wasAdded = false;
+    if(addAllUsersLoginedIn(aAllUsersLoginedIn))
+    {
+      if(index < 0 ) { index = 0; }
+      if(index > numberOfAllUsersLoginedIn()) { index = numberOfAllUsersLoginedIn() - 1; }
+      AllUsersLoginedIn.remove(aAllUsersLoginedIn);
+      AllUsersLoginedIn.add(index, aAllUsersLoginedIn);
+      wasAdded = true;
+    }
+    return wasAdded;
+  }
 
-	/* Code from template association_AddManyToOptionalOne */
-	public boolean addU(User aU) {
-		boolean wasAdded = false;
-		if (u.contains(aU)) {
-			return false;
-		}
-		QuoridorSystem existingS = aU.getS();
-		if (existingS == null) {
-			aU.setS(this);
-		} else if (!this.equals(existingS)) {
-			existingS.removeU(aU);
-			addU(aU);
-		} else {
-			u.add(aU);
-		}
-		wasAdded = true;
-		return wasAdded;
-	}
+  public boolean addOrMoveAllUsersLoginedInAt(User aAllUsersLoginedIn, int index)
+  {
+    boolean wasAdded = false;
+    if(AllUsersLoginedIn.contains(aAllUsersLoginedIn))
+    {
+      if(index < 0 ) { index = 0; }
+      if(index > numberOfAllUsersLoginedIn()) { index = numberOfAllUsersLoginedIn() - 1; }
+      AllUsersLoginedIn.remove(aAllUsersLoginedIn);
+      AllUsersLoginedIn.add(index, aAllUsersLoginedIn);
+      wasAdded = true;
+    } 
+    else 
+    {
+      wasAdded = addAllUsersLoginedInAt(aAllUsersLoginedIn, index);
+    }
+    return wasAdded;
+  }
 
-	public boolean removeU(User aU) {
-		boolean wasRemoved = false;
-		if (u.contains(aU)) {
-			u.remove(aU);
-			aU.setS(null);
-			wasRemoved = true;
-		}
-		return wasRemoved;
-	}
-
-	/* Code from template association_AddIndexControlFunctions */
-	public boolean addUAt(User aU, int index) {
-		boolean wasAdded = false;
-		if (addU(aU)) {
-			if (index < 0) {
-				index = 0;
-			}
-			if (index > numberOfU()) {
-				index = numberOfU() - 1;
-			}
-			u.remove(aU);
-			u.add(index, aU);
-			wasAdded = true;
-		}
-		return wasAdded;
-	}
-
-	public boolean addOrMoveUAt(User aU, int index) {
-		boolean wasAdded = false;
-		if (u.contains(aU)) {
-			if (index < 0) {
-				index = 0;
-			}
-			if (index > numberOfU()) {
-				index = numberOfU() - 1;
-			}
-			u.remove(aU);
-			u.add(index, aU);
-			wasAdded = true;
-		} else {
-			wasAdded = addUAt(aU, index);
-		}
-		return wasAdded;
-	}
-
-	/* Code from template association_MinimumNumberOfMethod */
-	public static int minimumNumberOfG() {
-		return 0;
-	}
-
-	/* Code from template association_AddManyToOptionalOne */
-	public boolean addG(QuoridorGame aG) {
-		boolean wasAdded = false;
-		if (g.contains(aG)) {
-			return false;
-		}
-		QuoridorSystem existingS = aG.getS();
-		if (existingS == null) {
-			aG.setS(this);
-		} else if (!this.equals(existingS)) {
-			existingS.removeG(aG);
-			addG(aG);
-		} else {
-			g.add(aG);
-		}
-		wasAdded = true;
-		return wasAdded;
-	}
-
-	public boolean removeG(QuoridorGame aG) {
-		boolean wasRemoved = false;
-		if (g.contains(aG)) {
-			g.remove(aG);
-			aG.setS(null);
-			wasRemoved = true;
-		}
-		return wasRemoved;
-	}
-
-	/* Code from template association_AddIndexControlFunctions */
-	public boolean addGAt(QuoridorGame aG, int index) {
-		boolean wasAdded = false;
-		if (addG(aG)) {
-			if (index < 0) {
-				index = 0;
-			}
-			if (index > numberOfG()) {
-				index = numberOfG() - 1;
-			}
-			g.remove(aG);
-			g.add(index, aG);
-			wasAdded = true;
-		}
-		return wasAdded;
-	}
-
-	public boolean addOrMoveGAt(QuoridorGame aG, int index) {
-		boolean wasAdded = false;
-		if (g.contains(aG)) {
-			if (index < 0) {
-				index = 0;
-			}
-			if (index > numberOfG()) {
-				index = numberOfG() - 1;
-			}
-			g.remove(aG);
-			g.add(index, aG);
-			wasAdded = true;
-		} else {
-			wasAdded = addGAt(aG, index);
-		}
-		return wasAdded;
-	}
-
-	public void delete() {
-		while (u.size() > 0) {
-			User aU = u.get(u.size() - 1);
-			aU.delete();
-			u.remove(aU);
-		}
-
-		while (g.size() > 0) {
-			QuoridorGame aG = g.get(g.size() - 1);
-			aG.delete();
-			g.remove(aG);
-		}
-
-	}
+  public void delete()
+  {
+    QuoridorGame existingGame = game;
+    game = null;
+    if (existingGame != null)
+    {
+      existingGame.delete();
+      existingGame.setSystem(null);
+    }
+    Board existingBoard = board;
+    board = null;
+    if (existingBoard != null)
+    {
+      existingBoard.delete();
+    }
+    while (AllUsersLoginedIn.size() > 0)
+    {
+      User aAllUsersLoginedIn = AllUsersLoginedIn.get(AllUsersLoginedIn.size() - 1);
+      aAllUsersLoginedIn.delete();
+      AllUsersLoginedIn.remove(aAllUsersLoginedIn);
+    }
+    
+  }
 
 }

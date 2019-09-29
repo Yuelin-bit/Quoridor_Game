@@ -3,227 +3,188 @@
 
 package ca.mcgill.ecse223.quoridor.model;
 
-import java.util.*;
+// line 50 "../domain_model_3.0.ump"
+// line 110 "../domain_model_3.0.ump"
+public class Player
+{
 
-// line 39 "../domain_model_v1.3 SunGengyi.ump"
-// line 91 "../domain_model_v1.3 SunGengyi.ump"
-public class Player {
+  //------------------------
+  // ENUMERATIONS
+  //------------------------
 
-	// ------------------------
-	// ENUMERATIONS
-	// ------------------------
+  public enum PlayerType { Black, White }
 
-	public enum PlayerType {
-		Black, White
-	}
+  //------------------------
+  // MEMBER VARIABLES
+  //------------------------
 
-	public enum WallDirection {
-		Horizontal, Vertical
-	}
+  //Player Attributes
+  private ca.mcgill.ecse223.quoridor.model.Player.PlayerType PlayerType;
+  private int num_of_wall_left;
 
-	// ------------------------
-	// MEMBER VARIABLES
-	// ------------------------
+  //Player Associations
+  private Pawn ControlBy;
+  private QuoridorGame game;
+  private User AllUsersLoginedIn;
 
-	// Player Attributes
-	private PlayerType PlayerType;
+  //------------------------
+  // CONSTRUCTOR
+  //------------------------
 
-	// Player Associations
-	private User user;
-	private List<Wall> walls;
-	private QuoridorGame g;
-	private Pawn pawn;
+  public Player(ca.mcgill.ecse223.quoridor.model.Player.PlayerType aPlayerTypeForControlOf, int aNum_of_wall_left, Pawn aControlBy, QuoridorGame aGame, User aAllUsersLoginedIn)
+  {
+    PlayerType = aPlayerTypeForControlOf;
+    num_of_wall_left = aNum_of_wall_left;
+    if (aControlBy == null || aControlBy.getControlOf() != null)
+    {
+      throw new RuntimeException("Unable to create Player due to aControlBy");
+    }
+    ControlBy = aControlBy;
+    boolean didAddGame = setGame(aGame);
+    if (!didAddGame)
+    {
+      throw new RuntimeException("Unable to create Participant due to game");
+    }
+    if (!setAllUsersLoginedIn(aAllUsersLoginedIn))
+    {
+      throw new RuntimeException("Unable to create Player due to aAllUsersLoginedIn");
+    }
+  }
 
-	// ------------------------
-	// CONSTRUCTOR
-	// ------------------------
+  public Player(ca.mcgill.ecse223.quoridor.model.Player.PlayerType aPlayerType, int aNum_of_wall_left, String aCoordinateForControlBy, Position aPawnPositionOnBoardForControlBy, QuoridorGame aGame, User aAllUsersLoginedIn)
+  {
+    PlayerType = aPlayerType;
+    num_of_wall_left = aNum_of_wall_left;
+    ControlBy = new Pawn(aCoordinateForControlBy, aPawnPositionOnBoardForControlBy, this);
+    boolean didAddGame = setGame(aGame);
+    if (!didAddGame)
+    {
+      throw new RuntimeException("Unable to create Participant due to game");
+    }
+    boolean didAddAllUsersLoginedIn = setAllUsersLoginedIn(aAllUsersLoginedIn);
+    if (!didAddAllUsersLoginedIn)
+    {
+      throw new RuntimeException("Unable to create CurrentUser due to AllUsersLoginedIn");
+    }
+  }
 
-	public Player(PlayerType aPlayerType, User aUser, Pawn aPawn) {
-		PlayerType = aPlayerType;
-		if (aUser == null || aUser.getPlayer() != null) {
-			throw new RuntimeException("Unable to create Player due to aUser");
-		}
-		user = aUser;
-		walls = new ArrayList<Wall>();
-		if (aPawn == null || aPawn.getPlayer() != null) {
-			throw new RuntimeException("Unable to create Player due to aPawn");
-		}
-		pawn = aPawn;
-	}
+  //------------------------
+  // INTERFACE
+  //------------------------
 
-	public Player(PlayerType aPlayerType, String aUserNameForUser, String aUserIDForUser, String aCoordinateForPawn) {
-		PlayerType = aPlayerType;
-		user = new User(aUserNameForUser, aUserIDForUser, this);
-		walls = new ArrayList<Wall>();
-		pawn = new Pawn(aCoordinateForPawn, this);
-	}
+  public Player(ca.mcgill.ecse223.quoridor.model.QuoridorGame.PlayerType aPlayerType, int aNum_of_wall_left,
+		Pawn aControlBy, QuoridorGame aGame, User aAllUsersLoginedIn) {
+	// TODO Auto-generated constructor stub
+}
 
-	// ------------------------
-	// INTERFACE
-	// ------------------------
+public boolean setPlayerType(PlayerType aPlayerType)
+  {
+    boolean wasSet = false;
+    PlayerType = aPlayerType;
+    wasSet = true;
+    return wasSet;
+  }
 
-	public boolean setPlayerType(PlayerType aPlayerType) {
-		boolean wasSet = false;
-		PlayerType = aPlayerType;
-		wasSet = true;
-		return wasSet;
-	}
+  public boolean setNum_of_wall_left(int aNum_of_wall_left)
+  {
+    boolean wasSet = false;
+    num_of_wall_left = aNum_of_wall_left;
+    wasSet = true;
+    return wasSet;
+  }
 
-	public PlayerType getPlayerType() {
-		return PlayerType;
-	}
+  public ca.mcgill.ecse223.quoridor.model.Player.PlayerType getPlayerType()
+  {
+    return PlayerType;
+  }
 
-	/* Code from template association_GetOne */
-	public User getUser() {
-		return user;
-	}
+  public int getNum_of_wall_left()
+  {
+    return num_of_wall_left;
+  }
+  /* Code from template association_GetOne */
+  public Pawn getControlBy()
+  {
+    return ControlBy;
+  }
+  /* Code from template association_GetOne */
+  public QuoridorGame getGame()
+  {
+    return game;
+  }
+  /* Code from template association_GetOne */
+  public User getAllUsersLoginedIn()
+  {
+    return AllUsersLoginedIn;
+  }
+  /* Code from template association_SetOneToAtMostN */
+  public boolean setGame(QuoridorGame aGame)
+  {
+    boolean wasSet = false;
+    //Must provide game to Participant
+    if (aGame == null)
+    {
+      return wasSet;
+    }
 
-	/* Code from template association_GetMany */
-	public Wall getWall(int index) {
-		Wall aWall = walls.get(index);
-		return aWall;
-	}
+    //game already at maximum (2)
+    if (aGame.numberOfParticipant() >= QuoridorGame.maximumNumberOfParticipant())
+    {
+      return wasSet;
+    }
+    
+    QuoridorGame existingGame = game;
+    game = aGame;
+    if (existingGame != null && !existingGame.equals(aGame))
+    {
+      boolean didRemove = existingGame.removeParticipant(this);
+      if (!didRemove)
+      {
+        game = existingGame;
+        return wasSet;
+      }
+    }
+    game.addParticipant(this);
+    wasSet = true;
+    return wasSet;
+  }
+  /* Code from template association_SetUnidirectionalOne */
+  public boolean setAllUsersLoginedIn(User aNewAllUsersLoginedIn)
+  {
+    boolean wasSet = false;
+    if (aNewAllUsersLoginedIn != null)
+    {
+      AllUsersLoginedIn = aNewAllUsersLoginedIn;
+      wasSet = true;
+    }
+    return wasSet;
+  }
 
-	public List<Wall> getWalls() {
-		List<Wall> newWalls = Collections.unmodifiableList(walls);
-		return newWalls;
-	}
+  public void delete()
+  {
+    Pawn existingControlBy = ControlBy;
+    ControlBy = null;
+    if (existingControlBy != null)
+    {
+      existingControlBy.delete();
+    }
+    QuoridorGame placeholderGame = game;
+    this.game = null;
+    if(placeholderGame != null)
+    {
+      placeholderGame.removeParticipant(this);
+    }
+    AllUsersLoginedIn = null;
+  }
 
-	public int numberOfWalls() {
-		int number = walls.size();
-		return number;
-	}
 
-	public boolean hasWalls() {
-		boolean has = walls.size() > 0;
-		return has;
-	}
-
-	public int indexOfWall(Wall aWall) {
-		int index = walls.indexOf(aWall);
-		return index;
-	}
-
-	/* Code from template association_GetOne */
-	public QuoridorGame getG() {
-		return g;
-	}
-
-	public boolean hasG() {
-		boolean has = g != null;
-		return has;
-	}
-
-	/* Code from template association_GetOne */
-	public Pawn getPawn() {
-		return pawn;
-	}
-
-	/* Code from template association_IsNumberOfValidMethod */
-	public boolean isNumberOfWallsValid() {
-		boolean isValid = numberOfWalls() >= minimumNumberOfWalls() && numberOfWalls() <= maximumNumberOfWalls();
-		return isValid;
-	}
-
-	/* Code from template association_RequiredNumberOfMethod */
-	public static int requiredNumberOfWalls() {
-		return 10;
-	}
-
-	/* Code from template association_MinimumNumberOfMethod */
-	public static int minimumNumberOfWalls() {
-		return 10;
-	}
-
-	/* Code from template association_MaximumNumberOfMethod */
-	public static int maximumNumberOfWalls() {
-		return 10;
-	}
-
-	/* Code from template association_AddMNToOnlyOne */
-	public Wall addWall(String aCoordinate, ca.mcgill.ecse223.quoridor.model.Wall.WallDirection aWallDirection) {
-		if (numberOfWalls() >= maximumNumberOfWalls()) {
-			return null;
-		} else {
-			Wall return_wall = new Wall(aCoordinate, aWallDirection, this.getUser().getPlayer());
-			return return_wall;
-		}
-	}
-
-	public boolean addWall(Wall aWall) {
-		boolean wasAdded = false;
-		if (walls.contains(aWall)) {
-			return false;
-		}
-		if (numberOfWalls() >= maximumNumberOfWalls()) {
-			return wasAdded;
-		}
-
-		Player existingPlayer = aWall.getPlayer();
-		boolean isNewPlayer = existingPlayer != null && !this.equals(existingPlayer);
-
-		if (isNewPlayer && existingPlayer.numberOfWalls() <= minimumNumberOfWalls()) {
-			return wasAdded;
-		}
-
-		if (isNewPlayer) {
-			aWall.setPlayer(this);
-		} else {
-			walls.add(aWall);
-		}
-		wasAdded = true;
-		return wasAdded;
-	}
-
-	public boolean removeWall(Wall aWall) {
-		boolean wasRemoved = false;
-		// Unable to remove aWall, as it must always have a player
-		if (this.equals(aWall.getPlayer())) {
-			return wasRemoved;
-		}
-
-		// player already at minimum (10)
-		if (numberOfWalls() <= minimumNumberOfWalls()) {
-			return wasRemoved;
-		}
-		walls.remove(aWall);
-		wasRemoved = true;
-		return wasRemoved;
-	}
-
-	public void delete() {
-		User existingUser = user;
-		user = null;
-		if (existingUser != null) {
-			existingUser.delete();
-		}
-		for (int i = walls.size(); i > 0; i--) {
-			Wall aWall = walls.get(i - 1);
-			aWall.delete();
-		}
-		if (g != null) {
-			QuoridorGame placeholderG = g;
-			this.g = null;
-			placeholderG.delete();
-		}
-		Pawn existingPawn = pawn;
-		pawn = null;
-		if (existingPawn != null) {
-			existingPawn.delete();
-		}
-	}
-
-	public String toString() {
-		return super.toString() + "[" + "]" + System.getProperties().getProperty("line.separator") + "  " + "PlayerType"
-				+ "="
-				+ (getPlayerType() != null
-						? !getPlayerType().equals(this) ? getPlayerType().toString().replaceAll("  ", "    ") : "this"
-						: "null")
-				+ System.getProperties().getProperty("line.separator") + "  " + "user = "
-				+ (getUser() != null ? Integer.toHexString(System.identityHashCode(getUser())) : "null")
-				+ System.getProperties().getProperty("line.separator") + "  " + "g = "
-				+ (getG() != null ? Integer.toHexString(System.identityHashCode(getG())) : "null")
-				+ System.getProperties().getProperty("line.separator") + "  " + "pawn = "
-				+ (getPawn() != null ? Integer.toHexString(System.identityHashCode(getPawn())) : "null");
-	}
+  public String toString()
+  {
+    return super.toString() + "["+
+            "num_of_wall_left" + ":" + getNum_of_wall_left()+ "]" + System.getProperties().getProperty("line.separator") +
+            "  " + "PlayerType" + "=" + (getPlayerType() != null ? !getPlayerType().equals(this)  ? getPlayerType().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
+            "  " + "ControlBy = "+(getControlBy()!=null?Integer.toHexString(System.identityHashCode(getControlBy())):"null") + System.getProperties().getProperty("line.separator") +
+            "  " + "game = "+(getGame()!=null?Integer.toHexString(System.identityHashCode(getGame())):"null") + System.getProperties().getProperty("line.separator") +
+            "  " + "AllUsersLoginedIn = "+(getAllUsersLoginedIn()!=null?Integer.toHexString(System.identityHashCode(getAllUsersLoginedIn())):"null");
+  }
 }

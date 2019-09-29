@@ -3,117 +3,106 @@
 
 package ca.mcgill.ecse223.quoridor.model;
 
-import ca.mcgill.ecse223.quoridor.model.Player.PlayerType;
+// line 34 "../domain_model_3.0.ump"
+// line 93 "../domain_model_3.0.ump"
+public class User
+{
 
-// line 18 "../domain_model_v1.3 SunGengyi.ump"
-// line 72 "../domain_model_v1.3 SunGengyi.ump"
-public class User {
+  //------------------------
+  // MEMBER VARIABLES
+  //------------------------
 
-	// ------------------------
-	// MEMBER VARIABLES
-	// ------------------------
+  //User Attributes
+  private String UserName;
+  private String UserID;
 
-	// User Attributes
-	private String UserName;
-	private String UserID;
+  //User Associations
+  private QuoridorSystem system;
 
-	// User Associations
-	private QuoridorSystem s;
-	private Player player;
+  //------------------------
+  // CONSTRUCTOR
+  //------------------------
 
-	// ------------------------
-	// CONSTRUCTOR
-	// ------------------------
+  public User(String aUserName, String aUserID)
+  {
+    UserName = aUserName;
+    UserID = aUserID;
+  }
 
-	public User(String aUserName, String aUserID, Player aPlayer) {
-		UserName = aUserName;
-		UserID = aUserID;
-		if (aPlayer == null || aPlayer.getUser() != null) {
-			throw new RuntimeException("Unable to create User due to aPlayer");
-		}
-		player = aPlayer;
-	}
+  //------------------------
+  // INTERFACE
+  //------------------------
 
-	public User(String aUserName, String aUserID, PlayerType aPlayerTypeForPlayer, Pawn aPawnForPlayer) {
-		UserName = aUserName;
-		UserID = aUserID;
-		player = new Player(aPlayerTypeForPlayer, this, aPawnForPlayer);
-	}
+  public boolean setUserName(String aUserName)
+  {
+    boolean wasSet = false;
+    UserName = aUserName;
+    wasSet = true;
+    return wasSet;
+  }
 
-	// ------------------------
-	// INTERFACE
-	// ------------------------
+  public boolean setUserID(String aUserID)
+  {
+    boolean wasSet = false;
+    UserID = aUserID;
+    wasSet = true;
+    return wasSet;
+  }
 
-	public boolean setUserName(String aUserName) {
-		boolean wasSet = false;
-		UserName = aUserName;
-		wasSet = true;
-		return wasSet;
-	}
+  public String getUserName()
+  {
+    return UserName;
+  }
 
-	public boolean setUserID(String aUserID) {
-		boolean wasSet = false;
-		UserID = aUserID;
-		wasSet = true;
-		return wasSet;
-	}
+  public String getUserID()
+  {
+    return UserID;
+  }
+  /* Code from template association_GetOne */
+  public QuoridorSystem getSystem()
+  {
+    return system;
+  }
 
-	public String getUserName() {
-		return UserName;
-	}
+  public boolean hasSystem()
+  {
+    boolean has = system != null;
+    return has;
+  }
+  /* Code from template association_SetOptionalOneToMany */
+  public boolean setSystem(QuoridorSystem aSystem)
+  {
+    boolean wasSet = false;
+    QuoridorSystem existingSystem = system;
+    system = aSystem;
+    if (existingSystem != null && !existingSystem.equals(aSystem))
+    {
+      existingSystem.removeAllUsersLoginedIn(this);
+    }
+    if (aSystem != null)
+    {
+      aSystem.addAllUsersLoginedIn(this);
+    }
+    wasSet = true;
+    return wasSet;
+  }
 
-	public String getUserID() {
-		return UserID;
-	}
+  public void delete()
+  {
+    if (system != null)
+    {
+      QuoridorSystem placeholderSystem = system;
+      this.system = null;
+      placeholderSystem.removeAllUsersLoginedIn(this);
+    }
+  }
 
-	/* Code from template association_GetOne */
-	public QuoridorSystem getS() {
-		return s;
-	}
 
-	public boolean hasS() {
-		boolean has = s != null;
-		return has;
-	}
-
-	/* Code from template association_GetOne */
-	public Player getPlayer() {
-		return player;
-	}
-
-	/* Code from template association_SetOptionalOneToMany */
-	public boolean setS(QuoridorSystem aS) {
-		boolean wasSet = false;
-		QuoridorSystem existingS = s;
-		s = aS;
-		if (existingS != null && !existingS.equals(aS)) {
-			existingS.removeU(this);
-		}
-		if (aS != null) {
-			aS.addU(this);
-		}
-		wasSet = true;
-		return wasSet;
-	}
-
-	public void delete() {
-		if (s != null) {
-			QuoridorSystem placeholderS = s;
-			this.s = null;
-			placeholderS.removeU(this);
-		}
-		Player existingPlayer = player;
-		player = null;
-		if (existingPlayer != null) {
-			existingPlayer.delete();
-		}
-	}
-
-	public String toString() {
-		return super.toString() + "[" + "UserName" + ":" + getUserName() + "," + "UserID" + ":" + getUserID() + "]"
-				+ System.getProperties().getProperty("line.separator") + "  " + "s = "
-				+ (getS() != null ? Integer.toHexString(System.identityHashCode(getS())) : "null")
-				+ System.getProperties().getProperty("line.separator") + "  " + "player = "
-				+ (getPlayer() != null ? Integer.toHexString(System.identityHashCode(getPlayer())) : "null");
-	}
+  public String toString()
+  {
+    return super.toString() + "["+
+            "UserName" + ":" + getUserName()+ "," +
+            "UserID" + ":" + getUserID()+ "]" + System.getProperties().getProperty("line.separator") +
+            "  " + "system = "+(getSystem()!=null?Integer.toHexString(System.identityHashCode(getSystem())):"null");
+  }
 }
