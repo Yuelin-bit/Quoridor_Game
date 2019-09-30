@@ -1,0 +1,25 @@
+apply plugin: 'java'
+//apply plugin: 'junit-platform-gradle-plugin'
+sourceCompatibility = 8
+targetCompatibility = 8
+
+// Versioning of dependencies
+wrapper.gradleVersion = '5.6.2'
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation "io.cucumber:cucumber-java:4.7.2"
+    testImplementation "io.cucumber:cucumber-junit:4.7.2"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:5.5.0"
+    
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.5.0"
+    testRuntimeOnly "org.junit.vintage:junit-vintage-engine:5.5.0"
+}
+
+test {
+    useJUnitPlatform()
+}
