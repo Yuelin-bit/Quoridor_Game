@@ -4,6 +4,7 @@ import java.sql.Time;
 import java.util.List;
 import java.util.Map;
 
+import ca.mcgill.ecse223.quoridor.QuoridorApplication;
 import ca.mcgill.ecse223.quoridor.model.Board;
 import ca.mcgill.ecse223.quoridor.model.Direction;
 import ca.mcgill.ecse223.quoridor.model.Game;
@@ -49,12 +50,7 @@ public class CucumberStepDefinitions {
 	@And("^It is my turn to move$")
 	public void itIsMyTurnToMove() throws Throwable {
 		currentPlayer = player1;
-		game.getCurrentPosition().setPlayerToMove(currentPlayer);
-	}
-
-	@And("^I have a wall in my hand over the board$")
-	public void iHaveAWallInMyHandOverTheBoard() throws Throwable {
-		// Walls are in stock for all players
+		QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(currentPlayer);
 	}
 
 	@Given("The following walls exist:")
@@ -100,6 +96,11 @@ public class CucumberStepDefinitions {
 
 	}
 
+	@And("I do not have a wall in my hand")
+	public void iDoNotHaveAWallInMyHand() {
+		// Walls are in stock for all players
+	}
+	
 	// ***********************************************
 	// Scenario and scenario outline step definitions
 	// ***********************************************
@@ -130,7 +131,7 @@ public class CucumberStepDefinitions {
 	// Place your extracted methods below
 
 	private void initQuoridorAndBoard() {
-		quoridor = new Quoridor();
+		quoridor = QuoridorApplication.getQuoridor();
 		board = new Board(quoridor);
 		// Creating tiles by rows, i.e., the column index changes with every tile
 		// creation
