@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry excluding="ca.mcgill.ecse223.quoridor/src/main/java/|ca.mcgill.ecse223.quoridor/src/test/java/" kind="src" path=""/>
-	<classpathentry kind="src" path="ca.mcgill.ecse223.quoridor/src/main/java"/>
-	<classpathentry kind="src" path="ca.mcgill.ecse223.quoridor/src/test/java"/>
-	<classpathentry kind="output" path="ca.mcgill.ecse223.quoridor/bin/main"/>
-</classpath>
