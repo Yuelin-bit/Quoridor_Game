@@ -236,5 +236,30 @@ public class Quoridor
     }
     
   }
+  
+  //------------------------------------------------------------------------------------//
+  //-------------------------------Feature Implementation-------------------------------//
+  //------------------------------------Starts here-------------------------------------//
+  //------------------------------------------------------------------------------------//
+  
+  /**
+   * This method takes two users to initialize a new game for them. It will return a boolean value to 
+   * indicate if a new game is successfully initialized.
+   * 
+   * @author Pengnan Fan
+   * @param user1 The first user who will join in the game
+   * @param user2 The second user who will join in the game
+   * @return A boolean value to indicate if a new game is initialized successfully
+   * 
+   */
+  public boolean initializeNewGame(User user1, User user2) 
+  {
+	// REMOVE lines below before implementation
+	throw new java.lang.UnsupportedOperationException();
+  }
 
+  //------------------------------------------------------------------------------------//
+  //-------------------------------Feature Implementation-------------------------------//
+  //--------------------------------------Ends here-------------------------------------//
+  //------------------------------------------------------------------------------------//
 }
