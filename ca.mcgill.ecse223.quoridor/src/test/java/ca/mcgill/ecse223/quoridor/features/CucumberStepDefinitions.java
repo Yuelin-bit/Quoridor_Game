@@ -6,6 +6,8 @@ import java.sql.Time;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.After;
+
 import ca.mcgill.ecse223.quoridor.controller.QuoridorController;
 import ca.mcgill.ecse223.quoridor.model.Board;
 import ca.mcgill.ecse223.quoridor.model.Direction;
@@ -20,9 +22,9 @@ import ca.mcgill.ecse223.quoridor.model.Tile;
 import ca.mcgill.ecse223.quoridor.model.User;
 import ca.mcgill.ecse223.quoridor.model.Wall;
 import ca.mcgill.ecse223.quoridor.model.WallMove;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import io.cucumber.java.After;
+
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 
@@ -116,6 +118,27 @@ public class CucumberStepDefinitions {
 	 * are implemented
 	 * 
 	 */
+	
+	@Given("A new game is initializing")
+	public void a_new_game_is_initializing(User user1, User user2) {
+	    // Write code here that turns the phrase above into concrete actions
+		QuoridorController.initializeNewGame(user1, user2);
+	    throw new cucumber.api.PendingException();
+	}
+	
+	@When("White player chooses a username")
+	public void white_player_chooses_a_username(User user, String name) {
+	    // Write code here that turns the phrase above into concrete actions
+		QuoridorController.updateNewUserName(user, name);
+	    throw new cucumber.api.PendingException();
+	}
+
+	@When("Black player chooses a username")
+	public void black_player_chooses_a_username(User user, String name) {
+	    // Write code here that turns the phrase above into concrete actions
+		QuoridorController.updateNewUserName(user, name);
+	    throw new cucumber.api.PendingException();
+	}
 	
 	@When("I initiate to load a saved game quoridor_test_game_{int}.dat")
 	public void i_initiate_to_load_a_saved_game_quoridor_test_game__dat(Integer int1) {

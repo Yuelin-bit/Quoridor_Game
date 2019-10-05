@@ -5,20 +5,6 @@ import ca.mcgill.ecse223.quoridor.model.User;
 
 public class QuoridorController {
 	
-	/**
-	 * This method takes two users to initialize a new game for them. It will return a boolean value to 
-	 * indicate if a new game is successfully initialized.
-	 * 
-	 * @author Pengnan Fan
-	 * @param user1 The first player who will join in the game
-	 * @param user2 The second player who will join in the game
-	 * @return A boolean value to indicate if a new game is initialized successfully
-	 * 
-	 */
-	public boolean initializeNewGame(User user1, User user2) {
-		throw new UnsupportedOperationException();
-	}
-	
 	public static void loadGame(int number){ 
 		//TO-DO: Write logic to load game
 		throw new UnsupportedOperationException();
@@ -45,5 +31,35 @@ public class QuoridorController {
 		//game.getCurrentPosition().getBlackPosition().getTile()
 		throw new UnsupportedOperationException();
 	}
-
+	
+	/**
+	 * This is a static method which takes two User parameters to initialize a new game. 
+	 * It will return a boolean value to indicate if a new game is successfully initialized.
+	 * 
+	 * @author Pengnan Fan
+	 * @param user1 The first player who will join in the game
+	 * @param user2 The second player who will join in the game
+	 * @return A boolean value to indicate if a new game is initialized successfully
+	 * 
+	 */
+	public static boolean initializeNewGame(User user1, User user2) {
+		//TODO: To be implemented
+		throw new UnsupportedOperationException();
+	}
+	
+	/**
+	 * This is a static method which takes an user and a name, then set the latter as 
+	 * the new name of the former. It will return a boolean value to indicate if the name
+	 * is updated successfully.
+	 * 
+	 * @author Pengnan Fan
+	 * @param aUser The player who want to select a new name
+	 * @param name The new name 
+	 * @return A boolean value to indicate if the name of the user has been updated
+	 */
+	public static boolean updateNewUserName(User aUser, String name) {
+		//TODO: To be implemented
+		throw new UnsupportedOperationException();
+	}
+	
 }
