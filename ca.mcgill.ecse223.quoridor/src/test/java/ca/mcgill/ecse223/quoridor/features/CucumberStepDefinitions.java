@@ -126,13 +126,13 @@ public class CucumberStepDefinitions {
 		// public void saveGame(int number){ //TO-DO: Write logic to save game
 		// throw new UnsupportedOperatingException();
 		// }
-		QuoridorController.loadGame(int1);
+		QuoridorController.loadGame("uoridor_test_game_1.dat");
 	    throw new cucumber.api.PendingException();
 	}
 
 	@When("The position is valid")
 	public void the_position_is_valid() {
-	    QuoridorController.validatePosition();
+	    assertEquals(true, QuoridorController.validatePosition());
 	    throw new cucumber.api.PendingException();
 	}
 
@@ -162,91 +162,101 @@ public class CucumberStepDefinitions {
 
 	@Then("player has a vertical wall at {int}:{int}")
 	public void player_has_a_vertical_wall_at(Integer int1, Integer int2) {
-	    // Write code here that turns the phrase above into concrete actions
+		int col = QuoridorController.getBlackWallTile().getColumn();
+		int row = QuoridorController.getBlackWallTile().getRow();
+		assertEquals(row, 5);
+		assertEquals(col, 5);
 	    throw new cucumber.api.PendingException();
 	}
 
 	@Then("white has a horizontal wall at {int}:{int}")
 	public void white_has_a_horizontal_wall_at(Integer int1, Integer int2) {
-	    // Write code here that turns the phrase above into concrete actions
+	    int col = QuoridorController.getWhiteWallTile().getColumn();
+	    int row = QuoridorController.getWhiteWallTile().getRow();
+	    assertEquals(row, 1);
+	    assertEquals(col, 1);
 	    throw new cucumber.api.PendingException();
 	}
 
 	@Then("Both players have {int} in their stacks")
 	public void both_players_have_in_their_stacks(Integer int1) {
-	    // Write code here that turns the phrase above into concrete actions
+	    int blackwall = QuoridorController.getBlackWallSto().size();
+	    int whitewall = QuoridorController.getWhiteWallSto().size();
+	    assertEquals(blackwall, 9);
+	    assertEquals(whitewall, 9);
 	    throw new cucumber.api.PendingException();
 	}
+	
 
 	@When("I initiate to load a saved game quoridor_test_game_invalid_pawn.dat")
 	public void i_initiate_to_load_a_saved_game_quoridor_test_game_invalid_pawn_dat() {
-	    // Write code here that turns the phrase above into concrete actions
+	    QuoridorController.loadGame("quoridor_test_game_invalid_pawn.dat");
 	    throw new cucumber.api.PendingException();
 	}
 
 	@When("The position is invalid")
 	public void the_position_is_invalid() {
-	    // Write code here that turns the phrase above into concrete actions
+		assertEquals(false, QuoridorController.validatePosition());
 	    throw new cucumber.api.PendingException();
 	}
 
 	@Then("The load returns error")
 	public void the_load_returns_error() {
-	    // Write code here that turns the phrase above into concrete actions
+	    QuoridorController.getLoadResult();
 	    throw new cucumber.api.PendingException();
 	}
 
 	@When("I initiate to load a saved game quoridor_test_game_invalid_wall_overlap_.dat")
 	public void i_initiate_to_load_a_saved_game_quoridor_test_game_invalid_wall_overlap__dat() {
-	    // Write code here that turns the phrase above into concrete actions
+		QuoridorController.loadGame("quoridor_test_game_invalid_wall_overlap__dat");
 	    throw new cucumber.api.PendingException();
 	}
 
 	@When("I initiate to load a saved game quoridor_test_game_invalid_wall_out-of-track.dat")
 	public void i_initiate_to_load_a_saved_game_quoridor_test_game_invalid_wall_out_of_track_dat() {
-	    // Write code here that turns the phrase above into concrete actions
+		QuoridorController.loadGame("quoridor_test_game_invalid_wall_out_of_track_dat");
 	    throw new cucumber.api.PendingException();
 	}
 
 	@Given("The player to move is white")
 	public void the_player_to_move_is_white() {
-	    // Write code here that turns the phrase above into concrete actions
+	    QuoridorController.setWhiteToMove();
 	    throw new cucumber.api.PendingException();
 	}
 
 	@Given("The clock of white is running")
 	public void the_clock_of_white_is_running() {
-	    // Write code here that turns the phrase above into concrete actions
+	    QuoridorController.startClock(player1);
 	    throw new cucumber.api.PendingException();
 	}
 
 	@Given("The clock of black is stopped")
 	public void the_clock_of_black_is_stopped() {
-	    // Write code here that turns the phrase above into concrete actions
+	    QuoridorController.stopClock(player2);
 	    throw new cucumber.api.PendingException();
 	}
 
 	@When("Player white completes his move")
 	public void player_white_completes_his_move() {
-	    // Write code here that turns the phrase above into concrete actions
+	    QuoridorController.whiteMove();
 	    throw new cucumber.api.PendingException();
 	}
 
 	@Then("The clock of white is stopped")
 	public void the_clock_of_white_is_stopped() {
-	    // Write code here that turns the phrase above into concrete actions
+	    assertEquals(false, QuoridorController.clockIsRunning(player1));
 	    throw new cucumber.api.PendingException();
 	}
 
 	@Then("The clock of black is running")
 	public void the_clock_of_black_is_running() {
-	    // Write code here that turns the phrase above into concrete actions
+		assertEquals(true, QuoridorController.clockIsRunning(player2));
 	    throw new cucumber.api.PendingException();
 	}
 
 	@Then("The player to move is black")
 	public void the_player_to_move_is_black() {
-	    // Write code here that turns the phrase above into concrete actions
+		QuoridorController.setBlackToMove();
 	    throw new cucumber.api.PendingException();
 	}
 
@@ -257,50 +267,50 @@ public class CucumberStepDefinitions {
 	}
 
 	@Given("The player to move is black")
-	public void the_player_to_move_is_black() {
-	    // Write code here that turns the phrase above into concrete actions
+	public void the_player_to_move_is_black1() {
+		QuoridorController.setBlackToMove();
 	    throw new cucumber.api.PendingException();
 	}
 
 	@Given("The clock of black is running")
-	public void the_clock_of_black_is_running() {
-	    // Write code here that turns the phrase above into concrete actions
+	public void the_clock_of_black_is_running1() {
+		QuoridorController.startClock(player2);
 	    throw new cucumber.api.PendingException();
 	}
 
 	@Given("The clock of white is stopped")
-	public void the_clock_of_white_is_stopped() {
-	    // Write code here that turns the phrase above into concrete actions
+	public void the_clock_of_white_is_stopped1() {
+	    QuoridorController.stopClock(player1);
 	    throw new cucumber.api.PendingException();
 	}
 
 	@When("Player black completes his move")
 	public void player_black_completes_his_move() {
-	    // Write code here that turns the phrase above into concrete actions
+	    QuoridorController.BlackMove();
 	    throw new cucumber.api.PendingException();
 	}
 
 	@Then("The clock of black is stopped")
-	public void the_clock_of_black_is_stopped() {
-	    // Write code here that turns the phrase above into concrete actions
+	public void the_clock_of_black_is_stopped1() {
+		assertEquals(false, QuoridorController.clockIsRunning(player2));
 	    throw new cucumber.api.PendingException();
 	}
 
 	@Then("The clock of white is running")
-	public void the_clock_of_white_is_running() {
-	    // Write code here that turns the phrase above into concrete actions
+	public void the_clock_of_white_is_running1() {
+		assertEquals(true, QuoridorController.clockIsRunning(player1));
 	    throw new cucumber.api.PendingException();
 	}
 
 	@Then("The player to move is white")
-	public void the_player_to_move_is_white() {
-	    // Write code here that turns the phrase above into concrete actions
+	public void the_player_to_move_is_white1() {
+		QuoridorController.setWhiteToMove();
 	    throw new cucumber.api.PendingException();
 	}
 
 	@Then("The user interface is showing it is white's turn")
 	public void the_user_interface_is_showing_it_is_white_s_turn() {
-	    // Write code here that turns the phrase above into concrete actions
+	    assertEquals(true, QuoridorController.shownAsWhiteTurn());
 	    throw new cucumber.api.PendingException();
 	}
 

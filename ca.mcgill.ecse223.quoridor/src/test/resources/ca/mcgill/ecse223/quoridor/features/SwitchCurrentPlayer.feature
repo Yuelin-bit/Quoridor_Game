@@ -15,9 +15,7 @@ Feature: Switch Current Player
     And The clock of <other> is running
     And The player to move is <other>
     And The user interface is showing it is <other>'s turn
-
     Examples: 
       | player | other |
       | white  | black |
       | black  | white |
-      
