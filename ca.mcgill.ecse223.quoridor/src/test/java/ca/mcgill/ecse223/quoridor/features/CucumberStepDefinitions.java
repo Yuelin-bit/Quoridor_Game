@@ -120,9 +120,8 @@ public class CucumberStepDefinitions {
 	 */
 	
 	@Given("A new game is initializing")
-	public void a_new_game_is_initializing(User user1, User user2) {
+	public void a_new_game_is_initializing() {
 	    // Write code here that turns the phrase above into concrete actions
-		QuoridorController.initializeNewGame(user1, user2);
 	    throw new cucumber.api.PendingException();
 	}
 	
@@ -138,6 +137,12 @@ public class CucumberStepDefinitions {
 	    // Write code here that turns the phrase above into concrete actions
 		QuoridorController.updateNewUserName(user, name);
 	    throw new cucumber.api.PendingException();
+	}
+	
+	@Then("The game is ready to start")
+	public void the_game_is_ready_to_start(User user1, User user2, int thinking_time_seconds) {
+		QuoridorController.initializeNewGame(user1, user2, thinking_time_seconds);
+		throw new cucumber.api.PendingException();
 	}
 	
 	@When("I initiate to load a saved game quoridor_test_game_{int}.dat")

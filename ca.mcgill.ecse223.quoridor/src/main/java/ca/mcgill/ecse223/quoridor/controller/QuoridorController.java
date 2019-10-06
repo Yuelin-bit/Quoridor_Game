@@ -42,7 +42,7 @@ public class QuoridorController {
 	 * @return A boolean value to indicate if a new game is initialized successfully
 	 * 
 	 */
-	public static boolean initializeNewGame(User user1, User user2) {
+	public static boolean initializeNewGame(User user1, User user2, int thinking_time_seconds) {
 		//TODO: To be implemented
 		throw new UnsupportedOperationException();
 	}
