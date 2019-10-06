@@ -15,7 +15,8 @@ public class Controller {
 
 	public static boolean checkIfEqualInitialTime(Player player1, Player player2) {
 		//compare two players' remaining time here
-		boolean sameRemainingTime = player1.getRemainingTime() == player2.getRemainingTime();
+		boolean sameRemainingTime = false; //default setting 
+		//player1.getRemainingTime() == player2.getRemainingTime();
 		return sameRemainingTime;
 	}
 	
@@ -39,13 +40,14 @@ public class Controller {
 		
 	}
 	public static int checkNumOfWall(Player player) {
-		return player.getWalls().size();
+		//return player.getWalls().size();
+		return 0; //default setting
 	}
 	public static void countingClock(Player player) {
 		
 	}
 	public static void showPlayerOnMove(GamePosition gamePosition) {
-		gamePosition.getPlayerToMove();
+		//gamePosition.getPlayerToMove();
 	}
 	
 }
