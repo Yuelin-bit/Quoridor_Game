@@ -4,3 +4,4 @@
 # Ignore Gradle build output directory
 build
 ca.mcgill.ecse223.quoridor/
+/bin/
