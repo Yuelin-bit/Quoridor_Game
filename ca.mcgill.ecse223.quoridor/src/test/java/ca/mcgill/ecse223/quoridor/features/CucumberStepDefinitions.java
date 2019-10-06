@@ -4,6 +4,7 @@ import java.sql.Time;
 import java.util.List;
 import java.util.Map;
 
+import ca.mcgill.ecse223.quoridor.controller.Controller;
 import ca.mcgill.ecse223.quoridor.model.Board;
 import ca.mcgill.ecse223.quoridor.model.Direction;
 import ca.mcgill.ecse223.quoridor.model.Game;
@@ -17,9 +18,11 @@ import ca.mcgill.ecse223.quoridor.model.Tile;
 import ca.mcgill.ecse223.quoridor.model.User;
 import ca.mcgill.ecse223.quoridor.model.Wall;
 import ca.mcgill.ecse223.quoridor.model.WallMove;
+import cucumber.api.java.en.When;
 import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 
 public class CucumberStepDefinitions {
 
@@ -111,7 +114,83 @@ public class CucumberStepDefinitions {
 	 * are implemented
 	 * 
 	 */
+	/*
+	 * Feature: Set total thinking time.
+	 */
+	@When("{int}:{int} is set as the thinking time")
+	public void is_set_as_the_thinking_time(Integer int1, Integer int2) {
+	    // Write code here that turns the phrase above into concrete actions
+		Controller.setTotalThinkingTime(currentPlayer, int1, int2);
+	    throw new cucumber.api.PendingException();
+	}
 
+	@Then("Both players shall have {int}:{int} remaining time left")
+	public void both_players_shall_have_remaining_time_left(Integer int1, Integer int2) {
+	    // Write code here that turns the phrase above into concrete actions
+		
+		Controller.checkIfEqualInitialTime(player1, player2);
+	    throw new cucumber.api.PendingException();
+	}
+	/*
+	 * Feature: Initialize board
+	 */
+	@When("The board is initialized")
+	public void the_board_is_initialized() {
+		Controller.initializeBoard(quoridor, board);
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("It is white player to move")
+	public void it_is_white_player_to_move() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+		itIsMyTurnToMove();
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("White's pawn is in its initial position")
+	public void white_s_pawn_is_in_its_initial_position() {
+	    // Write code here that turns the phrase above into concrete actions
+		Controller.initializeWhitePawn(player1);
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("Black's pawn is in its initial position")
+	public void black_s_pawn_is_in_its_initial_position() {
+	    // Write code here that turns the phrase above into concrete actions
+		Controller.initializedBlackPawn(player2);
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("All of White's walls are in stock")
+	public void all_of_White_s_walls_are_in_stock() {
+	    // Write code here that turns the phrase above into concrete actions
+		Controller.initializeWhitePawn(player1);
+		boolean allSet = Controller.checkNumOfWall(player1) == 10;
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("All of Black's walls are in stock")
+	public void all_of_Black_s_walls_are_in_stock() {
+	    // Write code here that turns the phrase above into concrete actions
+		Controller.initializeBlackWall(player2);
+		boolean allSet = Controller.checkNumOfWall(player2) == 10;
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("White's clock is counting down")
+	public void white_s_clock_is_counting_down() {
+	    // Write code here that turns the phrase above into concrete actions
+		Controller.countingClock(currentPlayer);
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("It is shown that this is White's turn")
+	public void it_is_shown_that_this_is_White_s_turn() {
+	    // Write code here that turns the phrase above into concrete actions
+		Controller.showPlayerOnMove(game.getCurrentPosition());
+	    throw new cucumber.api.PendingException();
+	}
 	// ***********************************************
 	// Clean up
 	// ***********************************************
