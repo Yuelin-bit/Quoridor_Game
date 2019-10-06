@@ -1,5 +1,7 @@
 package ca.mcgill.ecse223.quoridor.controller;
 
+import ca.mcgill.ecse223.quoridor.model.Game;
+import ca.mcgill.ecse223.quoridor.model.Game.GameStatus;
 import ca.mcgill.ecse223.quoridor.model.Tile;
 import ca.mcgill.ecse223.quoridor.model.User;
 
@@ -39,6 +41,7 @@ public class QuoridorController {
 	 * @author Pengnan Fan
 	 * @param user1 The first player who will join in the game
 	 * @param user2 The second player who will join in the game
+	 * @param thinking_time_seconds Thinking time in the unit of second
 	 * @return A boolean value to indicate if a new game is initialized successfully
 	 * 
 	 */
@@ -58,6 +61,18 @@ public class QuoridorController {
 	 * @return A boolean value to indicate if the name of the user has been updated
 	 */
 	public static boolean updateNewUserName(User aUser, String name) {
+		//TODO: To be implemented
+		throw new UnsupportedOperationException();
+	}
+	
+	/**
+	 * This is a static method which check the status of a game. It will return a GameStatus
+	 * value of the status of a certain status.
+	 * 
+	 * @param game The game to be checked
+	 * @return A GameStatus value of the status of the game to be checked
+	 */
+	public static GameStatus getGameStatus(Game game) {
 		//TODO: To be implemented
 		throw new UnsupportedOperationException();
 	}

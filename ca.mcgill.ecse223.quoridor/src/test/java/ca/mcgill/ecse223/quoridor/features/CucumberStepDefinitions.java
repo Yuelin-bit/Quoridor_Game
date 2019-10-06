@@ -120,27 +120,29 @@ public class CucumberStepDefinitions {
 	 */
 	
 	@Given("A new game is initializing")
-	public void a_new_game_is_initializing() {
-	    // Write code here that turns the phrase above into concrete actions
+	public void a_new_game_is_initializing(Game game) {
+	    //TODO: Write code here that turns the phrase above into concrete actions
+		QuoridorController.getGameStatus(game);
 	    throw new cucumber.api.PendingException();
 	}
 	
 	@When("White player chooses a username")
 	public void white_player_chooses_a_username(User user, String name) {
-	    // Write code here that turns the phrase above into concrete actions
+	    //TODO: Write code here that turns the phrase above into concrete actions
 		QuoridorController.updateNewUserName(user, name);
 	    throw new cucumber.api.PendingException();
 	}
 
 	@When("Black player chooses a username")
 	public void black_player_chooses_a_username(User user, String name) {
-	    // Write code here that turns the phrase above into concrete actions
+	    //TODO: Write code here that turns the phrase above into concrete actions
 		QuoridorController.updateNewUserName(user, name);
 	    throw new cucumber.api.PendingException();
 	}
 	
 	@Then("The game is ready to start")
 	public void the_game_is_ready_to_start(User user1, User user2, int thinking_time_seconds) {
+		//TODO: Write code here that turns the phrase above into concrete actions
 		QuoridorController.initializeNewGame(user1, user2, thinking_time_seconds);
 		throw new cucumber.api.PendingException();
 	}
