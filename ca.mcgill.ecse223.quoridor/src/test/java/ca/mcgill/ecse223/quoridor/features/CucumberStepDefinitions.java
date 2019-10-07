@@ -9,6 +9,8 @@ import ca.mcgill.ecse223.quoridor.model.Direction;
 import ca.mcgill.ecse223.quoridor.model.Game;
 import ca.mcgill.ecse223.quoridor.model.Game.GameStatus;
 import ca.mcgill.ecse223.quoridor.model.Game.MoveMode;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import ca.mcgill.ecse223.quoridor.model.GamePosition;
 import ca.mcgill.ecse223.quoridor.model.Player;
 import ca.mcgill.ecse223.quoridor.model.PlayerPosition;
@@ -111,6 +113,104 @@ public class CucumberStepDefinitions {
 	 * are implemented
 	 * 
 	 */
+	@Given("No file save_game_test.dat exists in the filesystem")
+	public void no_file_save_game_test_dat_exists_in_the_filesystem() {
+	    // Write code here that turns the phrase above into concrete actions
+		
+	}
+
+	@When("The user initiates to save the game with name save_game_test.dat")
+	public void the_user_initiates_to_save_the_game_with_name_save_game_test_dat() {
+	    // Write code here that turns the phrase above into concrete actions
+			
+	}
+	
+	
+
+	@Then("A file with save_game_test.dat is created in the filesystem")
+	public void a_file_with_save_game_test_dat_is_created_in_the_filesystem() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Given("File save_game_test.dat exists in the filesystem")
+	public void file_save_game_test_dat_exists_in_the_filesystem() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@When("The user confirms to overwrite existing file")
+	public void the_user_confirms_to_overwrite_existing_file() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("File with save_game_test.dat is updated in the filesystem")
+	public void file_with_save_game_test_dat_is_updated_in_the_filesystem() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@When("The user cancels to overwrite existing file")
+	public void the_user_cancels_to_overwrite_existing_file() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("File save_game_test.dat is not changed in the filesystem")
+	public void file_save_game_test_dat_is_not_changed_in_the_filesystem() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Given("A game position is supplied with pawn coordinate {int}:{int}")
+	public void a_game_position_is_supplied_with_pawn_coordinate(Integer int1, Integer int2) {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@When("Validation of the position is initiated")
+	public void validation_of_the_position_is_initiated() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("The position is ok")
+	public void the_position_is_ok() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("The position is error")
+	public void the_position_is_error() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Given("A game position is supplied with wall coordinate {int}:{int}-horizontal")
+	public void a_game_position_is_supplied_with_wall_coordinate_horizontal(Integer int1, Integer int2) {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Given("A game position is supplied with wall coordinate {int}:{int}-vertical")
+	public void a_game_position_is_supplied_with_wall_coordinate_vertical(Integer int1, Integer int2) {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("The position is valid")
+	public void the_position_is_valid() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("The position is invalid")
+	public void the_position_is_invalid() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
 
 	// ***********************************************
 	// Clean up
