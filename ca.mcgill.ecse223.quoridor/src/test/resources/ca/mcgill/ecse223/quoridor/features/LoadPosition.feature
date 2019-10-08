@@ -6,7 +6,7 @@ Feature: Load Position
 
   Scenario Outline: Load position
     When I initiate to load a saved game <filename>
-    And The position is valid
+    And The position to load is valid
     Then It is <player>'s turn
     And <player> is at <p_row>:<p_col>
     And <opponent> is at <o_row>:<o_col>
@@ -21,7 +21,7 @@ Feature: Load Position
 
   Scenario Outline: Load invalid position
     When I initiate to load a saved game <filename>
-    And The position is invalid
+    And The position to load is invalid
     Then The load returns <result>
 
     Examples: 

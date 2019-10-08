@@ -65,7 +65,9 @@ public class CucumberStepDefinitions {
 			Integer wcol = Integer.decode(map.get("wcol"));
 			// Wall to place
 			// Walls are placed on an alternating basis wrt. the owners
-			Wall wall = Wall.getWithId(playerIdx * 10 + wallIdxForPlayer);
+			//Wall wall = Wall.getWithId(playerIdx * 10 + wallIdxForPlayer);
+			Wall wall = players[playerIdx].getWall(wallIdxForPlayer); // above implementation sets wall to null
+
 
 			String dir = map.get("wdir");
 
@@ -120,8 +122,11 @@ public class CucumberStepDefinitions {
 	// After each scenario, the test model is discarded
 	@After
 	public void tearDown() {
-		quoridor.delete();
-		quoridor = null;
+		// Avoid null pointer for step definitions that are not yet implemented.
+		if (quoridor != null) {
+			quoridor.delete();
+			quoridor = null;
+		}
 	}
 
 	// ***********************************************

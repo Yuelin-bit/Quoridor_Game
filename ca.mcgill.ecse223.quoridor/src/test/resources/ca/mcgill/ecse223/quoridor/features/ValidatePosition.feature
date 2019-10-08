@@ -2,6 +2,9 @@ Feature: Validate Position
   As a player, I want to check if a given position is invalid with e.g. 
   overlapping walls or out-of-track pawn or wall positions.
 
+	Background:
+		Given The game is running
+
   Scenario Outline: Validate pawn position
     Given A game position is supplied with pawn coordinate <row>:<col>
     When Validation of the position is initiated

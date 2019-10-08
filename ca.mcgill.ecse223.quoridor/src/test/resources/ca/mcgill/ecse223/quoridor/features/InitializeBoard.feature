@@ -7,7 +7,7 @@ Feature: Initialize Board
 	#	Given The game is running
 	
 	Scenario: Initialize board
-    When The board is initialized 
+    When The initialization of the board is initiated 
     Then It is white player to move
 		And White's pawn is in its initial position
 		And Black's pawn is in its initial position
