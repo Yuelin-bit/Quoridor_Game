@@ -5,7 +5,7 @@ Feature: Start New Game
     Given The game is not running
 
   Scenario: Initiate a new game
-    When A new game is initializing
+    When A new game is being initialized
     And White player chooses a username
     And Black player chooses a username
     And Total thinking time is set
