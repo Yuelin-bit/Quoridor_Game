@@ -3,11 +3,11 @@ Feature: Drop Wall
   (valid) target position in order to register my wall placement as my move.
 
   Background: 
+    Given The game is running
     Given The following walls exist:
       | wrow | wcol | wdir       |
       |    1 |    1 | horizontal |
       |    7 |    4 | vertical   |
-    Given The game is running
     And It is my turn to move
     And I have a wall in my hand over the board
 
