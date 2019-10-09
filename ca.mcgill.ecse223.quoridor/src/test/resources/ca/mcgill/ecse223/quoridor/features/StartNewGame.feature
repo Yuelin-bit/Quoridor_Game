@@ -9,10 +9,10 @@ Feature: Start New Game
     And White player chooses a username
     And Black player chooses a username
     And Total thinking time is set
-    Then The game is ready to start
+    Then The game shall become ready to start
 
   Scenario: Start clock 
   	Given The game is ready to start
   	When I start the clock
-  	Then The game is running
-  	And The board is initialized
+  	Then The game shall be running
+  	And The board shall be initialized

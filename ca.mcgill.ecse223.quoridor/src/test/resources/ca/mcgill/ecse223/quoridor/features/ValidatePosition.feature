@@ -8,7 +8,7 @@ Feature: Validate Position
   Scenario Outline: Validate pawn position
     Given A game position is supplied with pawn coordinate <row>:<col>
     When Validation of the position is initiated
-    Then The position is <result>
+    Then The position shall be "<result>"
 
     Examples: 
       | row | col | result |
@@ -23,9 +23,9 @@ Feature: Validate Position
       |   5 |  10 | error  |
 
   Scenario Outline: Validate wall position
-    Given A game position is supplied with wall coordinate <row>:<col>-<dir>
+    Given A game position is supplied with wall coordinate <row>:<col>-"<dir>"
     When Validation of the position is initiated
-    Then The position is <result>
+    Then The position shall be "<result>"
 
     Examples: 
       | row | col | dir        | result |
@@ -43,7 +43,7 @@ Feature: Validate Position
       |    1 |    1 | horizontal |
       |    7 |    4 | vertical   |
     When Validation of the position is initiated
-    Then The position is valid
+    Then The position shall be valid
 
   Scenario: Validate overlapping walls (invalid-1)
     Given The following walls exist:
@@ -51,7 +51,7 @@ Feature: Validate Position
       |    2 |    3 | horizontal |
       |    2 |    4 | horizontal |
     When Validation of the position is initiated
-    Then The position is invalid
+    Then The position shall be invalid
 
   Scenario: Validate overlapping walls (invalid-2)
     Given The following walls exist:
@@ -59,7 +59,7 @@ Feature: Validate Position
       |    3 |    2 | vertical |
       |    2 |    2 | vertical |
     When Validation of the position is initiated
-    Then The position is invalid
+    Then The position shall be invalid
 
   Scenario: Validate overlapping walls (invalid-3)
     Given The following walls exist:
@@ -67,4 +67,4 @@ Feature: Validate Position
       |    3 |    2 | vertical   |
       |    3 |    2 | horizontal |
     When Validation of the position is initiated
-    Then The position is invalid
+    Then The position shall be invalid

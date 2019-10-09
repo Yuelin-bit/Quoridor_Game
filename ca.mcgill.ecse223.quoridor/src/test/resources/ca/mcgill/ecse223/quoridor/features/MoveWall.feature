@@ -9,11 +9,11 @@ Feature: Move Wall
     And I have a wall in my hand over the board
 
   Scenario Outline: Move wall over the board
-    Given A wall move candidate exists with <dir> at position (<row>, <col>)
-    And The wall candidate is not at the <side> edge of the board
-    When I try to move the wall <side>
+    Given A wall move candidate exists with "<dir>" at position (<row>, <col>)
+    And The wall candidate is not at the "<side>" edge of the board
+    When I try to move the wall "<side>"
     Then The wall shall be moved over the board to position (<nrow>, <ncol>)
-    And A wall move candidate shall exist with <dir> at position (<nrow>, <ncol>)
+    And A wall move candidate shall exist with "<dir>" at position (<nrow>, <ncol>)
 
     Examples: 
       | dir        | row | col | side  | nrow | ncol |
@@ -23,11 +23,11 @@ Feature: Move Wall
       | horizontal |   5 |   6 | down  |    6 |    6 |
 
   Scenario Outline: Move wall at the edge of the board
-    Given A wall move candidate exists with <dir> at position (<row>, <col>)
-    And The wall candidate is at the <side> edge of the board
-    When I try to move the wall <side>
-    Then I should be notified that my move is illegal 
-    And A wall move candidate shall exist with <dir> at position (<nrow>, <ncol>)
+    Given A wall move candidate exists with "<dir>" at position (<row>, <col>)
+    And The wall candidate is at the "<side>" edge of the board
+    When I try to move the wall "<side>"
+    Then I shall be notified that my move is illegal 
+    And A wall move candidate shall exist with "<dir>" at position (<nrow>, <ncol>)
 
     Examples: 
       | dir        | row | col | side  | nrow | ncol |
