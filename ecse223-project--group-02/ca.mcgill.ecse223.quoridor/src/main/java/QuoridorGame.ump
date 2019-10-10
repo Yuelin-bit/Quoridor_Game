@@ -1,0 +1,99 @@
+namespace ca.mcgill.ecse223.quoridor.model;  
+
+use ca.mcgill.ecse223.quoridor.model.Direction;
+
+// Due to a bug in Umple, this enum has been added manually to the ca.mcgill.ecse223.quoridor.model package
+// public enum Direction { Horizontal, Vertical }
+
+
+class Quoridor {
+	1 <@>- 0..1 Board board;
+	1 <@>- 0..1 Game currentGame; 
+	1 <@>- * User users; 
+}
+
+class Board {
+	1 <@>- * Tile tiles;
+}
+
+class Tile { 
+	immutable Integer row;
+	immutable Integer column;
+	[row >= 1 && row <= 9]
+	[column >= 1 && column <= 9]
+}
+
+class User {
+	unique String name;
+}
+
+class Wall {
+	unique Integer id;
+}
+
+class Player {
+	* -> 1 User user;
+	1 <@>- 1 Destination destination; 	
+	Time remainingTime;
+	1 owner <@>- 0..10 Wall walls; 
+	0..1 -> 0..1 Player nextPlayer; // Alternates between white and black
+}
+
+class Game {
+	enum GameStatus { Initializing, ReadyToStart, Running, WhiteWon, BlackWon, Draw, Replay };
+	GameStatus gameStatus;
+	enum MoveMode { WallMove, PlayerMove};
+	MoveMode moveMode;
+	1 <@>- * Move moves; 
+	0..1 -> 0..1 GamePosition currentPosition;
+	1 <@>- * GamePosition positions; 
+	0..1 <@>- 0..1 WallMove wallMoveCandidate; // placeholder for a wall move which is not yet finalized
+	0..1 gameAsWhite <@>- 1 Player whitePlayer;  
+	0..1 gameAsBlack <@>- 1 Player blackPlayer;
+//	1 <@>- * Player players; // Add this for four player game
+}
+
+class GamePosition {
+	unique Integer id;
+	0..1 whiteInGame <@>- 1 PlayerPosition whitePosition;
+	0..1 blackInGame <@>- 1 PlayerPosition blackPosition;
+	0..1 -> 1 Player playerToMove;
+	0..1 -> * Wall whiteWallsOnBoard;
+	0..1 -> * Wall blackWallsOnBoard;
+	0..1 -> * Wall whiteWallsInStock;
+	0..1 -> * Wall blackWallsInStock;
+}
+
+class Destination {
+	Integer targetNumber; 
+	Direction direction;
+}
+
+class Move  {
+	abstract;
+	Integer moveNumber; 
+	Integer roundNumber;
+	* -> 1 Player player;
+	* -> 1 Tile targetTile;
+	0..1 prevMove -- 0..1 Move nextMove;
+}
+
+class StepMove {
+	isA Move; 
+}
+
+class JumpMove {
+	isA Move; 
+}
+
+class WallMove {
+	isA Move; 
+	Direction wallDirection;
+	0..1 move -- 1 Wall wallPlaced;
+}
+
+class PlayerPosition {
+	* -> 1 Player player; 
+	* -> 1 Tile tile; 
+}
+
