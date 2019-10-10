@@ -346,7 +346,7 @@ public class CucumberStepDefinitions {
 	    throw new cucumber.api.PendingException();
 	}
 	
-	//The above is MoveWall
+	//The above is MoveWall1
 	
 	
 	
