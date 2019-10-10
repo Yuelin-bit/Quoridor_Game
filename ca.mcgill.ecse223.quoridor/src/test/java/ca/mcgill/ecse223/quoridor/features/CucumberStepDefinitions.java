@@ -122,36 +122,35 @@ public class CucumberStepDefinitions {
 	 * 
 	 */
 	
-	@When("I initiate to load a saved game quoridor_test_game_{int}.dat") //what input to load game (fiename?
-	public void i_initiate_to_load_a_saved_game_quoridor_test_game__dat(Integer int1) {
-		// CALL METHOD FROM CONTROLLER
-		// QuoridorController.callMethod(int1);
-		// IN CONTROLLER:
-		// Write signature so...
-		// public void saveGame(int number){ //TO-DO: Write logic to save game
-		// throw new UnsupportedOperatingException();
-		// }
-		QuoridorController.loadGame();
+	// ***********************************************
+	// Load game
+	// ***********************************************
+	@When("I initiate to load a saved game {string}")
+	public void i_initiate_to_load_a_saved_game(String string) {
+		QuoridorController.loadGame(string);
 	    throw new cucumber.api.PendingException();
 	}
 
-	@When("The position is valid")
-	public void the_position_is_valid() {
+	@When("The position to load is valid")
+	public void the_position_to_load_is_valid() {
 	    assertEquals(true, QuoridorController.validatePosition());
 	    throw new cucumber.api.PendingException();
 	}
 
-	@Then("It is player's turn") //what doses player stands for? what is turn
-	public void it_is_player_s_turn() {
-		assertEquals(true, quoridor.getCurrentGame().getCurrentPosition().setPlayerToMove(currentPlayer));
+
+	@Then("It shall be {string}'s turn")
+	public void it_shall_be_s_turn(String string) {
+		String playerName = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove().getUser().getName();
+		assertEquals(playerName, "player");
 	    throw new cucumber.api.PendingException();
 	}
 
-	@Then("player is at {int}:{int}")
-	public void player_is_at(Integer int1, Integer int2) {
-		//int row = quoridor.getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
-		int row = QuoridorController.getPlayerTile("Player").getRow();
-		int col = QuoridorController.getPlayerTile("Player").getColumn();
+	@Then("{string} shall be at {int}:{int}")
+	public void shall_be_at(String string, Integer int1, Integer int2) {
+		int row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
+		int col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getColumn();
+		//int row = QuoridorController.getPlayerTile("Player").getRow();
+		//int col = QuoridorController.getPlayerTile("Player").getColumn();
 		assertEquals((Integer)row, int1);
 		assertEquals((Integer)col, int2);
 	    throw new cucumber.api.PendingException();
@@ -159,25 +158,27 @@ public class CucumberStepDefinitions {
 
 	@Then("white is at {int}:{int}")
 	public void white_is_at(Integer int1, Integer int2) {
-		int row = QuoridorController.getWhiteTile().getRow();
-		int col = QuoridorController.getWhiteTile().getColumn();
+		int row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
+		int col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
 		assertEquals((Integer)row, int1);
 		assertEquals((Integer)col, int2);
 	    throw new cucumber.api.PendingException();
 	}
 
-	@Then("player has a vertical wall at {int}:{int}") 
-	public void player_has_a_vertical_wall_at(Integer int1, Integer int2) {
+	@Then("{string} shall have a vertical wall at {int}:{int}") // Is player in black side?
+	public void shall_have_a_vertical_wall_at(String string, Integer int1, Integer int2) {
+		Direction walldirection = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer().getWall(0).getMove().getWallDirection();
 		int col = QuoridorController.getBlackWallTile().getColumn();
 		int row = QuoridorController.getBlackWallTile().getRow();
+		assertEquals(Direction.Vertical, walldirection);
 		assertEquals((Integer)row, int1);
 		assertEquals((Integer)col, int2);
 	    throw new cucumber.api.PendingException();
 	}
 
-	@Then("white has a horizontal wall at {int}:{int}")//how to get wall direction
-	public void white_has_a_horizontal_wall_at(Integer int1, Integer int2) {
-		Direction walldirection = game.getWhitePlayer().getWall(0).getMove().getWallDirection();
+	@Then("{string} shall have a horizontal wall at {int}:{int}") // Is opponent in white side?
+	public void shall_have_a_horizontal_wall_at(String string, Integer int1, Integer int2) {
+		Direction walldirection = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer().getWall(0).getMove().getWallDirection();
 	    int col = QuoridorController.getWhiteWallTile().getColumn();
 	    int row = QuoridorController.getWhiteWallTile().getRow();
 	    assertEquals(Direction.Horizontal, walldirection);
@@ -186,8 +187,8 @@ public class CucumberStepDefinitions {
 	    throw new cucumber.api.PendingException();
 	}
 
-	@Then("Both players have {int} in their stacks")
-	public void both_players_have_in_their_stacks(Integer int1) {
+	@Then("Both players shall have {int} in their stacks")
+	public void both_players_shall_have_in_their_stacks(Integer int1) {
 	    int blackwall = QuoridorController.getBlackWallSto().size();
 	    int whitewall = QuoridorController.getWhiteWallSto().size();
 	    assertEquals((Integer)blackwall, int1);
@@ -195,25 +196,26 @@ public class CucumberStepDefinitions {
 	    throw new cucumber.api.PendingException();
 	}
 	
-
+	/*
 	@When("I initiate to load a saved game quoridor_test_game_invalid_pawn.dat")
 	public void i_initiate_to_load_a_saved_game_quoridor_test_game_invalid_pawn_dat() {
 	    QuoridorController.loadGame();
 	    throw new cucumber.api.PendingException();
-	}
+	} */
 
-	@When("The position is invalid")
-	public void the_position_is_invalid() {
+	@When("The position to load is invalid")
+	public void the_position_to_load_is_invalid() {
 		assertEquals(false, QuoridorController.validatePosition());
 	    throw new cucumber.api.PendingException();
 	}
 
-	@Then("The load returns error") //what is return error
-	public void the_load_returns_error() {
+	@Then("The load shall return an error") //what is return error
+	public void the_load_shall_return_an_error() {
 	    assertEquals(false, QuoridorController.getLoadResult());
 	    throw new cucumber.api.PendingException();
 	}
 
+	/*
 	@When("I initiate to load a saved game quoridor_test_game_invalid_wall_overlap_.dat")
 	public void i_initiate_to_load_a_saved_game_quoridor_test_game_invalid_wall_overlap__dat() {
 		QuoridorController.loadGame();
@@ -224,113 +226,65 @@ public class CucumberStepDefinitions {
 	public void i_initiate_to_load_a_saved_game_quoridor_test_game_invalid_wall_out_of_track_dat() {
 		QuoridorController.loadGame();
 	    throw new cucumber.api.PendingException();
-	}
+	} */
 
-	@Given("The player to move is white")
-	public void the_player_to_move_is_white() {
-		if( player1.getGameAsBlack() == null) {
-			game.getCurrentPosition().setPlayerToMove(player1);
-		}
-		game.getCurrentPosition().setPlayerToMove(player2);
-		QuoridorController.setWhiteToMove();
+	
+	
+	// ***********************************************
+	// Switch Player
+	// ***********************************************
+	@Given("The player to move is {string}") //how to get player with name?
+	public void the_player_to_move_is_white(String string) {
+		//if( player1.getGameAsBlack() == null) {
+		//	game.getCurrentPosition().setPlayerToMove(player1);
+		//}
+		//game.getCurrentPosition().setPlayerToMove(player2);
+		//QuoridorController.setWhiteToMove();
 	    throw new cucumber.api.PendingException();
 	}
 
-	@Given("The clock of white is running") //how to implement clock
-	public void the_clock_of_white_is_running() {
-	    QuoridorController.startClock(player1);
+	@Given("The clock of {string} is running") //how to implement clock
+	public void the_clock_of_is_running(String string) {
+	    QuoridorController.startClock(string);
 	    throw new cucumber.api.PendingException();
 	}
 
-	@Given("The clock of black is stopped")
-	public void the_clock_of_black_is_stopped() {
-	    QuoridorController.stopClock(player2);
+	@Given("The clock of {string} is stopped")
+	public void the_clock_of_is_stopped(String string) {
+	    QuoridorController.stopClock(string);
 	    throw new cucumber.api.PendingException();
 	}
 
-	@When("Player white completes his move") //
-	public void player_white_completes_his_move() {
+	@When("Player {string} completes his move") // how to check one has complete move?
+	public void player_completes_his_move(String string) {
 	    QuoridorController.whiteMove();
 	    throw new cucumber.api.PendingException();
 	}
 
-	@Then("The clock of white is stopped")
-	public void the_clock_of_white_is_stopped() {
-	    assertEquals(false, QuoridorController.clockIsRunning(player1));
+	@Then("The user interface shall be showing it is {string} turn") //how to access to interface?
+	public void the_user_interface_shall_be_showing_it_is_turn(String string) {
+	    // Write code here that turns the phrase above into concrete actions
 	    throw new cucumber.api.PendingException();
 	}
-
-	@Then("The clock of black is running")
-	public void the_clock_of_black_is_running() {
-		assertEquals(true, QuoridorController.clockIsRunning(player2));
-	    throw new cucumber.api.PendingException();
-	}
-
-	@Then("The player to move is black")
-	public void the_player_to_move_is_black() {
-		QuoridorController.setBlackToMove();
-	    throw new cucumber.api.PendingException();
-	}
-
-	@Then("The user interface is showing it is black's turn")
-	public void the_user_interface_is_showing_it_is_black_s_turn() {
+	
+	@Then("The clock of {string} shall be stopped")
+	public void the_clock_of_shall_be_stopped(String string) {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new cucumber.api.PendingException();
 	}
 
-	/*// Strings in the annotation (@...) are unique 
-	@Given("The player to move is black")
-	public void the_player_to_move_is_black1() {
-		QuoridorController.setBlackToMove();
+	@Then("The clock of {string} shall be running")
+	public void the_clock_of_shall_be_running(String string) {
+	    // Write code here that turns the phrase above into concrete actions
 	    throw new cucumber.api.PendingException();
 	}
 
-	@Given("The clock of black is running")
-	public void the_clock_of_black_is_running1() {
-		QuoridorController.startClock(player2);
+	@Then("The next player to move shall be {string}")
+	public void the_next_player_to_move_shall_be(String string) {
+	    // Write code here that turns the phrase above into concrete actions
 	    throw new cucumber.api.PendingException();
 	}
-
-	@Given("The clock of white is stopped")
-	public void the_clock_of_white_is_stopped1() {
-	    QuoridorController.stopClock(player1);
-	    throw new cucumber.api.PendingException();
-	}
-	*/
-
-	@When("Player black completes his move")
-	public void player_black_completes_his_move() {
-	    QuoridorController.BlackMove();
-	    throw new cucumber.api.PendingException();
-	}
-
-	/*
-	@Then("The clock of black is stopped")
-	public void the_clock_of_black_is_stopped1() {
-		assertEquals(false, QuoridorController.clockIsRunning(player2));
-	    throw new cucumber.api.PendingException();
-	}
-
-	@Then("The clock of white is running")
-	public void the_clock_of_white_is_running1() {
-		assertEquals(true, QuoridorController.clockIsRunning(player1));
-	    throw new cucumber.api.PendingException();
-	}
-
-	@Then("The player to move is white")
-	public void the_player_to_move_is_white1() {
-		QuoridorController.setWhiteToMove();
-	    throw new cucumber.api.PendingException();
-	}
-	*/
-
-	@Then("The user interface is showing it is white's turn")
-	public void the_user_interface_is_showing_it_is_white_s_turn() {
-	    assertEquals(true, QuoridorController.shownAsWhiteTurn());
-	    throw new cucumber.api.PendingException();
-	}
-
-
+	
 
 	// ***********************************************
 	// Clean up

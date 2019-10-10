@@ -16,7 +16,7 @@ public class QuoridorController {
 	 * @param name of the file 
 	 * @return void
 	 */
-	public static void loadGame(){ 
+	public static void loadGame(String filename){ 
 		//TO-DO: Write logic to load game
 		throw new UnsupportedOperationException();
 	}
@@ -31,18 +31,7 @@ public class QuoridorController {
 		//TO-DO: Write logic to load game
 		throw new UnsupportedOperationException();
 	}
-	
-	/**
-	 * Feature:laod game
-	 * 
-	 * @author Zirui He
-	 * @param Plyer's name 
-	 * @return Tile of player's pawn
-	 */
-	public static Tile getPlayerTile(String name) {
-		//TO-DO: Write logic to load game
-		throw new UnsupportedOperationException();
-	}	
+		
 	
 	/**
 	 * Feature:laod game
@@ -94,7 +83,7 @@ public class QuoridorController {
 	 * Feature:laod game
 	 * 
 	 * @author Zirui He
-	 * @return 
+	 * @return List of wall in white stock
 	 */
 	public static List<Wall> getWhiteWallSto(){
 		//TO-DO: Write logic to load game
@@ -105,7 +94,7 @@ public class QuoridorController {
 	 * Feature:laod game
 	 * 
 	 * @author Zirui He
-	 * @return list of wall in white stock
+	 * @return list of wall in black stock
 	 */
 	public static List<Wall> getBlackWallSto(){
 		//To-DO: Write logic to load game
@@ -123,30 +112,9 @@ public class QuoridorController {
 		throw new UnsupportedOperationException();
 	}
 	
-	/**
-	 * Feature:laod game
-	 * 
-	 * @author Zirui He
-	 * @return void
-	 */
-	public static void setWhiteToMove() {
-		//TO-DO: Write logic to load game
-		throw new UnsupportedOperationException();
-	}
 	
 	/**
-	 * Feature:laod game
-	 * 
-	 * @author Zirui He
-	 * @return void
-	 */
-	public static void setBlackToMove() {
-		//TO-DO: Write logic to load game
-		throw new UnsupportedOperationException();
-	}
-	
-	/**
-	 * Feature:laod game
+	 * Feature:switch player
 	 * 
 	 * @author Zirui He
 	 * @return void
@@ -157,7 +125,7 @@ public class QuoridorController {
 	}
 	
 	/**
-	 * Feature:laod game
+	 * Feature:switch player
 	 * 
 	 * @author Zirui He
 	 * @return void
@@ -168,48 +136,37 @@ public class QuoridorController {
 	}
 	
 	/**
-	 * Feature:laod game
-	 * 
-	 * @author Zirui He
-	 * @return boolean
-	 */
-	public static boolean shownAsWhiteTurn() {
-		//TO-DO: Write logic to load game
-		throw new UnsupportedOperationException();
-	}
-	
-	/**
-	 * Feature:laod game
+	 * Feature: switch player 
 	 * 
 	 * @author Zirui He
 	 * @param the name of player
 	 * @return void
 	 */
-	public static void startClock(Player player) {
+	public static void startClock(String name) {
 		//TO-DO: Write logic to load game
 		throw new UnsupportedOperationException();
 	}
 	
 	/**
-	 * Feature:laod game
+	 * Feature: switch player
 	 * 
 	 * @author Zirui He
 	 * @param name of the player
 	 * @return void
 	 */
-	public static void stopClock(Player player) {
+	public static void stopClock(String name) {
 		//TO-DO: Write logic to load game
 		throw new UnsupportedOperationException();
 	}
 	
 	/**
-	 * Feature:laod game
+	 * Feature: switch player
 	 * 
 	 * @author Zirui He
 	 * @param name of the player
 	 * @return boolean
 	 */
-	public static boolean clockIsRunning(Player player) {
+	public static boolean clockIsRunning(String name) {
 		//TO-DO: Write logic to load game
 		throw new UnsupportedOperationException();
 	}
