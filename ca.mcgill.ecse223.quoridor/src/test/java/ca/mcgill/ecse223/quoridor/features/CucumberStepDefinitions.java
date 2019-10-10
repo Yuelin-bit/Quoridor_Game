@@ -216,7 +216,7 @@ public class CucumberStepDefinitions {
 	}
 
 	/*
-	@When("I initiate to load a saved game quoridor_test_game_invalid_wall_overlap_.dat")
+	@When("I initiate to load a saved game {string}")
 	public void i_initiate_to_load_a_saved_game_quoridor_test_game_invalid_wall_overlap__dat() {
 		QuoridorController.loadGame();
 	    throw new cucumber.api.PendingException();
@@ -235,6 +235,9 @@ public class CucumberStepDefinitions {
 	// ***********************************************
 	@Given("The player to move is {string}") //how to get player with name?
 	public void the_player_to_move_is_white(String string) {
+		if (string == "white") {
+			
+		}
 		//if( player1.getGameAsBlack() == null) {
 		//	game.getCurrentPosition().setPlayerToMove(player1);
 		//}
@@ -255,7 +258,7 @@ public class CucumberStepDefinitions {
 	    throw new cucumber.api.PendingException();
 	}
 
-	@When("Player {string} completes his move") // how to check one has complete move?
+	@When("Player {string} completes his move") // how to check one has complete move? just create a move method in controller
 	public void player_completes_his_move(String string) {
 	    QuoridorController.whiteMove();
 	    throw new cucumber.api.PendingException();
@@ -263,8 +266,7 @@ public class CucumberStepDefinitions {
 
 	@Then("The user interface shall be showing it is {string} turn") //how to access to interface?
 	public void the_user_interface_shall_be_showing_it_is_turn(String string) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+	    
 	}
 	
 	@Then("The clock of {string} shall be stopped")
