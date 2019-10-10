@@ -20,11 +20,11 @@ import ca.mcgill.ecse223.quoridor.model.Tile;
 import ca.mcgill.ecse223.quoridor.model.User;
 import ca.mcgill.ecse223.quoridor.model.Wall;
 import ca.mcgill.ecse223.quoridor.model.WallMove;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 
 public class CucumberStepDefinitions {
 
@@ -117,7 +117,7 @@ public class CucumberStepDefinitions {
 	 * 
 	 */
 	
-	@When("I initiate to load a saved game quoridor_test_game_{int}.dat")
+	@When("I initiate to load a saved game quoridor_test_game_{int}.dat") //what input to load game (fiename?
 	public void i_initiate_to_load_a_saved_game_quoridor_test_game__dat(Integer int1) {
 		// CALL METHOD FROM CONTROLLER
 		// QuoridorController.callMethod(int1);
@@ -126,7 +126,7 @@ public class CucumberStepDefinitions {
 		// public void saveGame(int number){ //TO-DO: Write logic to save game
 		// throw new UnsupportedOperatingException();
 		// }
-		QuoridorController.loadGame("uoridor_test_game_1.dat");
+		QuoridorController.loadGame();
 	    throw new cucumber.api.PendingException();
 	}
 
@@ -136,18 +136,19 @@ public class CucumberStepDefinitions {
 	    throw new cucumber.api.PendingException();
 	}
 
-	@Then("It is player's turn")
+	@Then("It is player's turn") //what doses player stands for? what is turn
 	public void it_is_player_s_turn() {
-		assertEquals(true, game.getCurrentPosition().setPlayerToMove(currentPlayer));
+		assertEquals(true, quoridor.getCurrentGame().getCurrentPosition().setPlayerToMove(currentPlayer));
 	    throw new cucumber.api.PendingException();
 	}
 
 	@Then("player is at {int}:{int}")
 	public void player_is_at(Integer int1, Integer int2) {
+		//int row = quoridor.getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
 		int row = QuoridorController.getPlayerTile("Player").getRow();
 		int col = QuoridorController.getPlayerTile("Player").getColumn();
-		assertEquals(row, 7);
-		assertEquals(col, 7);
+		assertEquals((Integer)row, int1);
+		assertEquals((Integer)col, int2);
 	    throw new cucumber.api.PendingException();
 	}
 
@@ -155,26 +156,28 @@ public class CucumberStepDefinitions {
 	public void white_is_at(Integer int1, Integer int2) {
 		int row = QuoridorController.getWhiteTile().getRow();
 		int col = QuoridorController.getWhiteTile().getColumn();
-		assertEquals(row, 7);
-		assertEquals(col, 7);
+		assertEquals((Integer)row, int1);
+		assertEquals((Integer)col, int2);
 	    throw new cucumber.api.PendingException();
 	}
 
-	@Then("player has a vertical wall at {int}:{int}")
+	@Then("player has a vertical wall at {int}:{int}") 
 	public void player_has_a_vertical_wall_at(Integer int1, Integer int2) {
 		int col = QuoridorController.getBlackWallTile().getColumn();
 		int row = QuoridorController.getBlackWallTile().getRow();
-		assertEquals(row, 5);
-		assertEquals(col, 5);
+		assertEquals((Integer)row, int1);
+		assertEquals((Integer)col, int2);
 	    throw new cucumber.api.PendingException();
 	}
 
-	@Then("white has a horizontal wall at {int}:{int}")
+	@Then("white has a horizontal wall at {int}:{int}")//how to get wall direction
 	public void white_has_a_horizontal_wall_at(Integer int1, Integer int2) {
+		Direction walldirection = game.getWhitePlayer().getWall(0).getMove().getWallDirection();
 	    int col = QuoridorController.getWhiteWallTile().getColumn();
 	    int row = QuoridorController.getWhiteWallTile().getRow();
-	    assertEquals(row, 1);
-	    assertEquals(col, 1);
+	    assertEquals(Direction.Horizontal, walldirection);
+	    assertEquals((Integer)row, int1);
+	    assertEquals((Integer)col, int2);
 	    throw new cucumber.api.PendingException();
 	}
 
@@ -182,15 +185,15 @@ public class CucumberStepDefinitions {
 	public void both_players_have_in_their_stacks(Integer int1) {
 	    int blackwall = QuoridorController.getBlackWallSto().size();
 	    int whitewall = QuoridorController.getWhiteWallSto().size();
-	    assertEquals(blackwall, 9);
-	    assertEquals(whitewall, 9);
+	    assertEquals((Integer)blackwall, int1);
+	    assertEquals((Integer)whitewall, int1);
 	    throw new cucumber.api.PendingException();
 	}
 	
 
 	@When("I initiate to load a saved game quoridor_test_game_invalid_pawn.dat")
 	public void i_initiate_to_load_a_saved_game_quoridor_test_game_invalid_pawn_dat() {
-	    QuoridorController.loadGame("quoridor_test_game_invalid_pawn.dat");
+	    QuoridorController.loadGame();
 	    throw new cucumber.api.PendingException();
 	}
 
@@ -200,31 +203,35 @@ public class CucumberStepDefinitions {
 	    throw new cucumber.api.PendingException();
 	}
 
-	@Then("The load returns error")
+	@Then("The load returns error") //what is return error
 	public void the_load_returns_error() {
-	    QuoridorController.getLoadResult();
+	    assertEquals(false, QuoridorController.getLoadResult());
 	    throw new cucumber.api.PendingException();
 	}
 
 	@When("I initiate to load a saved game quoridor_test_game_invalid_wall_overlap_.dat")
 	public void i_initiate_to_load_a_saved_game_quoridor_test_game_invalid_wall_overlap__dat() {
-		QuoridorController.loadGame("quoridor_test_game_invalid_wall_overlap__dat");
+		QuoridorController.loadGame();
 	    throw new cucumber.api.PendingException();
 	}
 
 	@When("I initiate to load a saved game quoridor_test_game_invalid_wall_out-of-track.dat")
 	public void i_initiate_to_load_a_saved_game_quoridor_test_game_invalid_wall_out_of_track_dat() {
-		QuoridorController.loadGame("quoridor_test_game_invalid_wall_out_of_track_dat");
+		QuoridorController.loadGame();
 	    throw new cucumber.api.PendingException();
 	}
 
 	@Given("The player to move is white")
 	public void the_player_to_move_is_white() {
-	    QuoridorController.setWhiteToMove();
+		if( player1.getGameAsBlack() == null) {
+			game.getCurrentPosition().setPlayerToMove(player1);
+		}
+		game.getCurrentPosition().setPlayerToMove(player2);
+		QuoridorController.setWhiteToMove();
 	    throw new cucumber.api.PendingException();
 	}
 
-	@Given("The clock of white is running")
+	@Given("The clock of white is running") //how to implement clock
 	public void the_clock_of_white_is_running() {
 	    QuoridorController.startClock(player1);
 	    throw new cucumber.api.PendingException();
@@ -236,7 +243,7 @@ public class CucumberStepDefinitions {
 	    throw new cucumber.api.PendingException();
 	}
 
-	@When("Player white completes his move")
+	@When("Player white completes his move") //
 	public void player_white_completes_his_move() {
 	    QuoridorController.whiteMove();
 	    throw new cucumber.api.PendingException();
@@ -266,6 +273,7 @@ public class CucumberStepDefinitions {
 	    throw new cucumber.api.PendingException();
 	}
 
+	/*// Strings in the annotation (@...) are unique 
 	@Given("The player to move is black")
 	public void the_player_to_move_is_black1() {
 		QuoridorController.setBlackToMove();
@@ -283,6 +291,7 @@ public class CucumberStepDefinitions {
 	    QuoridorController.stopClock(player1);
 	    throw new cucumber.api.PendingException();
 	}
+	*/
 
 	@When("Player black completes his move")
 	public void player_black_completes_his_move() {
@@ -290,6 +299,7 @@ public class CucumberStepDefinitions {
 	    throw new cucumber.api.PendingException();
 	}
 
+	/*
 	@Then("The clock of black is stopped")
 	public void the_clock_of_black_is_stopped1() {
 		assertEquals(false, QuoridorController.clockIsRunning(player2));
@@ -307,6 +317,7 @@ public class CucumberStepDefinitions {
 		QuoridorController.setWhiteToMove();
 	    throw new cucumber.api.PendingException();
 	}
+	*/
 
 	@Then("The user interface is showing it is white's turn")
 	public void the_user_interface_is_showing_it_is_white_s_turn() {
@@ -326,6 +337,7 @@ public class CucumberStepDefinitions {
 		quoridor.delete();
 		quoridor = null;
 	}
+	
 
 	// ***********************************************
 	// Extracted helper methods

@@ -1,4 +1,9 @@
-package ca.mcgill.ecse223.quoridor.features;
+	/**
+	 * Feature:laod game
+	 * 
+	 * @author Zirui He
+	 * @return Tile of white wall
+	 */package ca.mcgill.ecse223.quoridor.features;
 
 import org.junit.runner.RunWith;
 
