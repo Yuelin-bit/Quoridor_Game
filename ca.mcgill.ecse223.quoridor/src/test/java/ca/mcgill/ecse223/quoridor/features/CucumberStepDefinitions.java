@@ -115,6 +115,19 @@ public class CucumberStepDefinitions {
 	 * are implemented
 	 * 
 	 */
+	
+	
+	@Given("The wall move candidate with {string} at position \\({int}, {int}) is valid")
+	public void the_wall_move_candidate_with_at_position_is_valid(String string, Integer int1, Integer int2) {
+		Quoridor quoridor = QuoridorApplication.getQuoridor();
+		Board board = new Board(quoridor);
+		Tile tile = new Tile(int1, int2, board);
+		Game aGame = quoridor.getCurrentGame();
+		Player aPlayer = quoridor.getCurrentGame().getCurrentPosition().getPlayerToMove();
+		WallMove candidate = new WallMove(int aMoveNumber, int aRoundNumber,aPlayer, tile, aGame, string, Wall aWallPlaced);
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
 
 	// ***********************************************
 	// Clean up
