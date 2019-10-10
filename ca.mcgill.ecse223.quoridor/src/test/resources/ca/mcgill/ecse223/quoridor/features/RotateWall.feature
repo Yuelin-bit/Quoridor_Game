@@ -8,10 +8,10 @@ Feature: Rotate Wall
     And I have a wall in my hand over the board
 
   Scenario Outline: Flip wall from horizontal to vertical or vice versa
-    Given A wall move candidate exists with <dir> at position (<row>, <col>)
+    Given A wall move candidate exists with "<dir>" at position (<row>, <col>)
     When I try to flip the wall
-    Then The wall shall be rotated over the board to <newdir>
-    And A wall move candidate shall exist with <newdir> at position (<row>, <col>)
+    Then The wall shall be rotated over the board to "<newdir>"
+    And A wall move candidate shall exist with "<newdir>" at position (<row>, <col>)
 
     Examples: 
       | dir        | row | col | newdir     |
