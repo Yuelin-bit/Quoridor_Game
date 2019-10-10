@@ -1,5 +1,5 @@
 package ca.mcgill.ecse223.quoridor.features;
-
+//import static org.junit.Assert.assertEquals;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +22,9 @@ import ca.mcgill.ecse223.quoridor.model.WallMove;
 import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import org.junit.Assert;
 
 public class CucumberStepDefinitions {
 
@@ -124,11 +127,149 @@ public class CucumberStepDefinitions {
 		Tile tile = new Tile(int1, int2, board);
 		Game aGame = quoridor.getCurrentGame();
 		Player aPlayer = quoridor.getCurrentGame().getCurrentPosition().getPlayerToMove();
+		
+		
 		WallMove candidate = new WallMove(int aMoveNumber, int aRoundNumber,aPlayer, tile, aGame, string, Wall aWallPlaced);
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new cucumber.api.PendingException();
 	}
 
+	
+	@When("I release the wall in my hand")
+	public void i_release_the_wall_in_my_hand() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("A wall move shall be registered with {string} at position \\({int}, {int})")
+	public void a_wall_move_shall_be_registered_with_at_position(String string, Integer int1, Integer int2) {
+		
+		
+		Assert. (Direction vertical )
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("I shall not have a wall in my hand")
+	public void i_shall_not_have_a_wall_in_my_hand() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("My move shall be completed")
+	public void my_move_shall_be_completed() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("It shall not be my turn to move")
+	public void it_shall_not_be_my_turn_to_move() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+	
+	
+	@Given("The wall move candidate with {string} at position \\({int}, {int}) is invalid")
+	public void the_wall_move_candidate_with_at_position_is_invalid(String string, Integer int1, Integer int2) {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("I shall be notified that my wall move is invalid")
+	public void i_shall_be_notified_that_my_wall_move_is_invalid() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("I shall have a wall in my hand over the board")
+	public void i_shall_have_a_wall_in_my_hand_over_the_board() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("It shall be my turn to move")
+	public void it_shall_be_my_turn_to_move() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("No wall move shall be registered with {string} at position \\({int}, {int})")
+	public void no_wall_move_shall_be_registered_with_at_position(String string, Integer int1, Integer int2) {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+	
+	
+	
+	
+	
+	////
+	////
+	////
+	////
+	////
+	////
+	
+	@Given("A wall move candidate exists with {string} at position \\({int}, {int})")
+	public void a_wall_move_candidate_exists_with_at_position(String string, Integer int1, Integer int2) {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Given("The wall candidate is not at the {string} edge of the board")
+	public void the_wall_candidate_is_not_at_the_edge_of_the_board(String string) {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@When("I try to move the wall {string}")
+	public void i_try_to_move_the_wall(String string) {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("The wall shall be moved over the board to position \\({int}, {int})")
+	public void the_wall_shall_be_moved_over_the_board_to_position(Integer int1, Integer int2) {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("A wall move candidate shall exist with {string} at position \\({int}, {int})")
+	public void a_wall_move_candidate_shall_exist_with_at_position(String string, Integer int1, Integer int2) {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Given("The wall candidate is at the {string} edge of the board")
+	public void the_wall_candidate_is_at_the_edge_of_the_board(String string) {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("I shall be notified that my move is illegal")
+	public void i_shall_be_notified_that_my_move_is_illegal() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	// ***********************************************
 	// Clean up
 	// ***********************************************
