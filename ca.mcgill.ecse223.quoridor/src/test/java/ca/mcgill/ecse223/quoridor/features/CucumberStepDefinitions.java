@@ -1,6 +1,9 @@
 package ca.mcgill.ecse223.quoridor.features;
 
+import static org.junit.Assert.assertEquals;
+
 import java.sql.Time;
+
 import java.util.List;
 import java.util.Map;
 
@@ -18,11 +21,11 @@ import ca.mcgill.ecse223.quoridor.model.Tile;
 import ca.mcgill.ecse223.quoridor.model.User;
 import ca.mcgill.ecse223.quoridor.model.Wall;
 import ca.mcgill.ecse223.quoridor.model.WallMove;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 
 public class CucumberStepDefinitions {
 
@@ -119,13 +122,21 @@ public class CucumberStepDefinitions {
 	 */
 	@When("{int}:{int} is set as the thinking time")
 	public void is_set_as_the_thinking_time(Integer int1, Integer int2) {
-		Controller.setTotalThinkingTime(currentPlayer, int1, int2);
+		Controller.setTotalThinkingTime(int1, int2);
+		throw new cucumber.api.PendingException();
 	}
 
 	@Then("Both players shall have {int}:{int} remaining time left")
 	public void both_players_shall_have_remaining_time_left(Integer int1, Integer int2) {
-		
-		Controller.checkIfEqualInitialTime(player1, player2);
+		int minConversion = 60;
+		int secConversion = 1000;
+		long millisec = (int1 * minConversion + int2 ) * secConversion;
+		Time timeLeft = new Time(millisec);
+		assertEquals(timeLeft.valueOf(timeLeft.toString()),player1.getRemainingTime().valueOf(player1.getRemainingTime().toString()));
+		assertEquals(timeLeft.valueOf(timeLeft.toString()),player2.getRemainingTime().valueOf(player2.getRemainingTime().toString()));
+
+		throw new cucumber.api.PendingException();
+
 	}
 	/*
 	 * Feature: Initialize board
@@ -133,43 +144,56 @@ public class CucumberStepDefinitions {
 	@When("The board is initialized")
 	public void the_board_is_initialized() {
 		Controller.initializeBoard(quoridor, board);
+		throw new cucumber.api.PendingException();
+
 	}
 
 	@Then("It is white player to move")
 	public void it_is_white_player_to_move() throws Throwable {
-		itIsMyTurnToMove();
+		boolean isWhite = false;
+		if() {
+			
+		}
+		throw new cucumber.api.PendingException();
+
 	}
 
 	@Then("White's pawn is in its initial position")
 	public void white_s_pawn_is_in_its_initial_position() {
-		Controller.initializeWhitePawn(player1);
+		throw new cucumber.api.PendingException();
+
 	}
 
 	@Then("Black's pawn is in its initial position")
 	public void black_s_pawn_is_in_its_initial_position() {
-		Controller.initializedBlackPawn(player2);
+		throw new cucumber.api.PendingException();
+
 	}
 
 	@Then("All of White's walls are in stock")
 	public void all_of_White_s_walls_are_in_stock() {
 		Controller.initializeWhitePawn(player1);
-		boolean allSet = Controller.checkNumOfWall(player1) == 10;
+		throw new cucumber.api.PendingException();
+
 	}
 
 	@Then("All of Black's walls are in stock")
 	public void all_of_Black_s_walls_are_in_stock() {
 		Controller.initializeBlackWall(player2);
-		boolean allSet = Controller.checkNumOfWall(player2) == 10;
+		throw new cucumber.api.PendingException();
+
 	}
 
 	@Then("White's clock is counting down")
 	public void white_s_clock_is_counting_down() {
-		Controller.countingClock(currentPlayer);
+		throw new cucumber.api.PendingException();
+
 	}
 
 	@Then("It is shown that this is White's turn")
 	public void it_is_shown_that_this_is_White_s_turn() {
-		Controller.showPlayerOnMove(game.getCurrentPosition());
+		throw new cucumber.api.PendingException();
+
 	}
 	// ***********************************************
 	// Clean up

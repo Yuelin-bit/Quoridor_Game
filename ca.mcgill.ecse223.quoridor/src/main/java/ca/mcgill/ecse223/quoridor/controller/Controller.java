@@ -10,11 +10,10 @@ public class Controller {
 
 	/**
 	 * This method sets a player's total thinking time by calling method in Player class.
-	 * @param currentPlayer
 	 * @param min
 	 * @param sec
 	 */
-	public static void setTotalThinkingTime(Player currentPlayer, Integer min, Integer sec) {
+	public static void setTotalThinkingTime(Integer min, Integer sec) {
 		throw new UnsupportedOperationException();
 	}
 
