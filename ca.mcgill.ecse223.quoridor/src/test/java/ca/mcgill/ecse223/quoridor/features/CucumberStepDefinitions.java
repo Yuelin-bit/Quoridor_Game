@@ -104,6 +104,13 @@ public class CucumberStepDefinitions {
 		// GUI-related feature -- TODO for later
 	}
 	
+	@Given("^A new game is initializing$")
+	public void aNewGameIsInitializing() throws Throwable {
+		initQuoridorAndBoard();
+		ArrayList<Player> players = createUsersAndPlayers("user1", "user2");
+		new Game(GameStatus.Initializing, MoveMode.PlayerMove, players.get(0), players.get(1), QuoridorApplication.getQuoridor());
+	}
+
 	// ***********************************************
 	// Scenario and scenario outline step definitions
 	// ***********************************************
