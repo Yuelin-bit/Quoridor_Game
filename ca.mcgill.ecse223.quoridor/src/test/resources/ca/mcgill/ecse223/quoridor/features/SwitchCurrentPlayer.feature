@@ -7,14 +7,14 @@ Feature: Switch Current Player
     Given The game is running
 
   Scenario Outline: Switch current player
-    Given The player to move is <player>
-    And The clock of <player> is running
-    And The clock of <other> is stopped
-    When Player <player> completes his move
-    Then The clock of <player> is stopped
-    And The clock of <other> is running
-    And The player to move is <other>
-    And The user interface is showing it is <other>'s turn
+    Given The player to move is "<player>"
+    And The clock of "<player>" is running
+    And The clock of "<other>" is stopped
+    When Player "<player>" completes his move
+    Then The user interface shall be showing it is "<other>" turn
+    And The clock of "<player>" shall be stopped
+    And The clock of "<other>" shall be running
+    And The next player to move shall be "<other>" 
 
     Examples: 
       | player | other |
