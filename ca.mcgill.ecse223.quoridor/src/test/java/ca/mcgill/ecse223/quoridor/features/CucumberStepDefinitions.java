@@ -181,12 +181,12 @@ public class CucumberStepDefinitions {
 		Direction wallDirection;
 		if(string == "black") {
 			wallDirection = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer().getWall(0).getMove().getWallDirection();
-			col = QuoridorController.getBlackWallTile().getColumn();
-			row = QuoridorController.getBlackWallTile().getRow();
+			col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard(0).getMove().getTargetTile().getColumn();
+			row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard(0).getMove().getTargetTile().getRow();
 		}else {
 			wallDirection = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer().getWall(0).getMove().getWallDirection();
-			col = QuoridorController.getWhiteWallTile().getColumn();
-			row = QuoridorController.getWhiteWallTile().getRow();
+			col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard(0).getMove().getTargetTile().getColumn();
+			row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard(0).getMove().getTargetTile().getRow();
 		}
 		assertEquals(Direction.Vertical, wallDirection);
 		assertEquals(row, int1);
@@ -201,12 +201,12 @@ public class CucumberStepDefinitions {
 		Direction wallDirection;
 		if(string == "black") {
 			wallDirection = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer().getWall(0).getMove().getWallDirection();
-			col = QuoridorController.getBlackWallTile().getColumn();
-			row = QuoridorController.getBlackWallTile().getRow();
+			col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard(0).getMove().getTargetTile().getColumn();
+			row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard(0).getMove().getTargetTile().getRow();
 		}else {
 			wallDirection = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer().getWall(0).getMove().getWallDirection();
-			col = QuoridorController.getWhiteWallTile().getColumn();
-			row = QuoridorController.getWhiteWallTile().getRow();
+			col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard(0).getMove().getTargetTile().getColumn();
+			row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard(0).getMove().getTargetTile().getRow();
 		}
 		assertEquals(Direction.Horizontal, wallDirection);
 		assertEquals(row, int1);
@@ -240,7 +240,7 @@ public class CucumberStepDefinitions {
 	// ***********************************************
 	// Switch Player
 	// ***********************************************
-	@Given("The player to move is {string}") //how to get player with name?
+	@Given("The player to move is {string}")
 	public void the_player_to_move_is_white(String string) {
 		Player player;
 		if (string == "white") {
@@ -253,44 +253,81 @@ public class CucumberStepDefinitions {
 	    throw new cucumber.api.PendingException();
 	}
 
-	@Given("The clock of {string} is running") //how to implement clock
+	@Given("The clock of {string} is running") 
 	public void the_clock_of_is_running(String string) {
-	    QuoridorController.startClock(string);
+		Player player;
+		if(string == "black") {
+			player = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
+		}else {
+			player = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
+		}
+		QuoridorController.startClock(player);
 	    throw new cucumber.api.PendingException();
 	}
 
 	@Given("The clock of {string} is stopped")
 	public void the_clock_of_is_stopped(String string) {
-	    QuoridorController.stopClock(string);
+		Player player;
+		if(string == "black") {
+			player = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
+		}else {
+			player = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
+		}
+		QuoridorController.stopClock(player);
 	    throw new cucumber.api.PendingException();
 	}
 
 	@When("Player {string} completes his move") // how to check one has complete move? just create a move method in controller
 	public void player_completes_his_move(String string) {
-	    QuoridorController.whiteMove();
+		Player player;
+		if(string == "black") {
+			player = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
+		}else {
+			player = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
+		}
+	    QuoridorController.makeMove(player);
 	    throw new cucumber.api.PendingException();
 	}
 
-	@Then("The user interface shall be showing it is {string} turn") //how to access to interface?
+	@Then("The user interface shall be showing it is {string} turn")
 	public void the_user_interface_shall_be_showing_it_is_turn(String string) {
 	    
 	}
 	
 	@Then("The clock of {string} shall be stopped")
 	public void the_clock_of_shall_be_stopped(String string) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+		Player player;
+		if(string == "black") {
+			player = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
+		}else {
+			player = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
+		}
+		assertEquals(false, QuoridorController.clockIsRunning(player));
+		throw new cucumber.api.PendingException();
 	}
 
 	@Then("The clock of {string} shall be running")
 	public void the_clock_of_shall_be_running(String string) {
-	    // Write code here that turns the phrase above into concrete actions
+		Player player;
+		if(string == "black") {
+			player = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
+		}else {
+			player = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
+		}
+		assertEquals(true, QuoridorController.clockIsRunning(player));
 	    throw new cucumber.api.PendingException();
 	}
 
 	@Then("The next player to move shall be {string}")
 	public void the_next_player_to_move_shall_be(String string) {
-	    // Write code here that turns the phrase above into concrete actions
+		String toCompare;	
+		Player player = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove().getNextPlayer();
+		if(player.hasGameAsBlack()) {
+			toCompare = "black";
+		}else {
+			toCompare = "white";
+		}
+		assertEquals(string, toCompare);
 	    throw new cucumber.api.PendingException();
 	}
 	

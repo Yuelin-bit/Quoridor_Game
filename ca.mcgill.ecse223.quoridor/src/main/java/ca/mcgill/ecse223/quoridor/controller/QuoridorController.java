@@ -21,6 +21,7 @@ public class QuoridorController {
 		throw new UnsupportedOperationException();
 	}
 	
+	
 	/**
 	 * Feature:laod game
 	 * 
@@ -32,74 +33,6 @@ public class QuoridorController {
 		throw new UnsupportedOperationException();
 	}
 		
-	
-	/**
-	 * Feature:laod game
-	 * 
-	 * @author Zirui He
-	 * @return Tile of white pawn
-	 */
-	public static Tile getWhiteTile() {
-		//TO-DO: Write logic to load game
-		//game.getCurrentPosition().getWhitePosition().getTile()
-		throw new UnsupportedOperationException();
-	}
-	
-	/**
-	 * Feature:laod game
-	 * 
-	 * @author Zirui He
-	 * @return Tile of black pawn
-	 */
-	public static Tile getBlackTile() {
-		//TO-DO: Write logic to load game
-		//game.getCurrentPosition().getBlackPosition().getTile()
-		throw new UnsupportedOperationException();
-	}
-	
-	/**
-	 * Feature:laod game
-	 * 
-	 * @author Zirui He
-	 * @return Tile of black wall
-	 */
-	public static Tile getBlackWallTile() {
-		//TO-DO: Write logic to load game
-		throw new UnsupportedOperationException();
-	}
-	
-	/**
-	 * Feature:laod game
-	 * 
-	 * @author Zirui He
-	 * @return Tile of white wall
-	 */
-	public static Tile getWhiteWallTile() {
-		//TO-DO: Write logic to load game
-		throw new UnsupportedOperationException();
-	}
-	
-	/**
-	 * Feature:laod game
-	 * 
-	 * @author Zirui He
-	 * @return List of wall in white stock
-	 */
-	public static List<Wall> getWhiteWallSto(){
-		//TO-DO: Write logic to load game
-		throw new UnsupportedOperationException();
-	}
-	
-	/**
-	 * Feature:laod game
-	 * 
-	 * @author Zirui He
-	 * @return list of wall in black stock
-	 */
-	public static List<Wall> getBlackWallSto(){
-		//To-DO: Write logic to load game
-		throw new UnsupportedOperationException();
-	}
 	
 	/**
 	 * Feature:laod game
@@ -117,32 +50,23 @@ public class QuoridorController {
 	 * Feature:switch player
 	 * 
 	 * @author Zirui He
+	 * @param player
 	 * @return void
 	 */
-	public static void whiteMove() {
+	public static void makeMove(Player player) {
 		//TO-DO: Write logic to load game
 		throw new UnsupportedOperationException();
 	}
-	
-	/**
-	 * Feature:switch player
-	 * 
-	 * @author Zirui He
-	 * @return void
-	 */
-	public static void BlackMove() {
-		//TO-DO: Write logic to load game
-		throw new UnsupportedOperationException();
-	}
+
 	
 	/**
 	 * Feature: switch player 
 	 * 
 	 * @author Zirui He
-	 * @param the name of player
+	 * @param player
 	 * @return void
 	 */
-	public static void startClock(String name) {
+	public static void startClock(Player player) {
 		//TO-DO: Write logic to load game
 		throw new UnsupportedOperationException();
 	}
@@ -151,10 +75,10 @@ public class QuoridorController {
 	 * Feature: switch player
 	 * 
 	 * @author Zirui He
-	 * @param name of the player
+	 * @param player
 	 * @return void
 	 */
-	public static void stopClock(String name) {
+	public static void stopClock(Player player) {
 		//TO-DO: Write logic to load game
 		throw new UnsupportedOperationException();
 	}
@@ -163,10 +87,10 @@ public class QuoridorController {
 	 * Feature: switch player
 	 * 
 	 * @author Zirui He
-	 * @param name of the player
+	 * @param player
 	 * @return boolean
 	 */
-	public static boolean clockIsRunning(String name) {
+	public static boolean clockIsRunning(Player player) {
 		//TO-DO: Write logic to load game
 		throw new UnsupportedOperationException();
 	}
