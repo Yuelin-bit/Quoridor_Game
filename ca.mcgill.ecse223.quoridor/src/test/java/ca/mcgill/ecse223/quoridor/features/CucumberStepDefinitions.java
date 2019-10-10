@@ -250,7 +250,6 @@ public class CucumberStepDefinitions {
 			player = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
 			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(player);
 		}
-	    throw new cucumber.api.PendingException();
 	}
 
 	@Given("The clock of {string} is running") 
@@ -262,7 +261,6 @@ public class CucumberStepDefinitions {
 			player = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
 		}
 		QuoridorController.startClock(player);
-	    throw new cucumber.api.PendingException();
 	}
 
 	@Given("The clock of {string} is stopped")
@@ -274,7 +272,6 @@ public class CucumberStepDefinitions {
 			player = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
 		}
 		QuoridorController.stopClock(player);
-	    throw new cucumber.api.PendingException();
 	}
 
 	@When("Player {string} completes his move") // how to check one has complete move? just create a move method in controller
@@ -286,7 +283,6 @@ public class CucumberStepDefinitions {
 			player = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
 		}
 	    QuoridorController.makeMove(player);
-	    throw new cucumber.api.PendingException();
 	}
 
 	@Then("The user interface shall be showing it is {string} turn")
@@ -303,7 +299,6 @@ public class CucumberStepDefinitions {
 			player = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
 		}
 		assertEquals(false, QuoridorController.clockIsRunning(player));
-		throw new cucumber.api.PendingException();
 	}
 
 	@Then("The clock of {string} shall be running")
@@ -315,7 +310,6 @@ public class CucumberStepDefinitions {
 			player = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
 		}
 		assertEquals(true, QuoridorController.clockIsRunning(player));
-	    throw new cucumber.api.PendingException();
 	}
 
 	@Then("The next player to move shall be {string}")
@@ -328,7 +322,6 @@ public class CucumberStepDefinitions {
 			toCompare = "white";
 		}
 		assertEquals(string, toCompare);
-	    throw new cucumber.api.PendingException();
 	}
 	
 

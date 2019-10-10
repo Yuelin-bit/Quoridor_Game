@@ -1,11 +1,6 @@
 package ca.mcgill.ecse223.quoridor.controller;
 
-import java.util.List;
-
-import ca.mcgill.ecse223.quoridor.model.*;
 import ca.mcgill.ecse223.quoridor.model.Player;
-import ca.mcgill.ecse223.quoridor.model.Tile;
-import ca.mcgill.ecse223.quoridor.model.Wall;
 
 public class QuoridorController {
 	
