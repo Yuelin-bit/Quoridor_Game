@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import ca.mcgill.ecse223.quoridor.QuoridorApplication;
+import ca.mcgill.ecse223.quoridor.controller.QuoridorController;
 import ca.mcgill.ecse223.quoridor.model.Board;
 import ca.mcgill.ecse223.quoridor.model.Direction;
 import ca.mcgill.ecse223.quoridor.model.Game;
@@ -137,21 +138,25 @@ public class CucumberStepDefinitions {
 	
 	@When("I release the wall in my hand")
 	public void i_release_the_wall_in_my_hand() {
+		QuoridorController.ReleaseWall();
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new cucumber.api.PendingException();
 	}
 
 	@Then("A wall move shall be registered with {string} at position \\({int}, {int})")
 	public void a_wall_move_shall_be_registered_with_at_position(String string, Integer int1, Integer int2) {
-		
-		
-		Assert. (Direction vertical )
+		//QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition();
+		Board newBoard = QuoridorApplication.getQuoridor().getBoard();
+		Tile tile = new Tile(int1, int2, newBoard);
+		Assert.assertEquals(tile, QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition());
+		Assert.assertEquals(string, QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getWallDirection());
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new cucumber.api.PendingException();
 	}
 
 	@Then("I shall not have a wall in my hand")
 	public void i_shall_not_have_a_wall_in_my_hand() {
+		Assert.assertEquals(false, QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove().hasWalls());
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new cucumber.api.PendingException();
 	}
@@ -171,6 +176,7 @@ public class CucumberStepDefinitions {
 	
 	@Given("The wall move candidate with {string} at position \\({int}, {int}) is invalid")
 	public void the_wall_move_candidate_with_at_position_is_invalid(String string, Integer int1, Integer int2) {
+		 QuoridorApplication.getQuoridor().getCurrentGame().setWallMoveCandidate(wall.
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new cucumber.api.PendingException();
 	}
@@ -224,6 +230,7 @@ public class CucumberStepDefinitions {
 
 	@When("I try to move the wall {string}")
 	public void i_try_to_move_the_wall(String string) {
+		QuoridorController.MoveWall(string);	
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new cucumber.api.PendingException();
 	}
