@@ -129,13 +129,6 @@ public class CucumberStepDefinitions {
 	/*
 	 * Feature: Set total thinking time.
 	 */
-	@Given("A new game is initializing")
-	public void a_new_game_is_initializing() {
-		if(!QuoridorApplication.getQuoridor().hasCurrentGame()) {
-			Game newGame = new Game(null, null, null, null, null);
-		}
-	    throw new cucumber.api.PendingException();
-	}   
 	@When ("{int}:{int} is set as the thinking time")
 	public void is_set_as_the_thinking_time(Integer int1, Integer int2) {
 		QuoridorController.setTotalThinkingTime(int1, int2);
