@@ -1,6 +1,5 @@
 package ca.mcgill.ecse223.quoridor.controller;
 
-<<<<<<< HEAD
 import ca.mcgill.ecse223.quoridor.model.GamePosition;
 
 public class QuoridorController{
@@ -101,43 +100,6 @@ public class QuoridorController{
 		throw new UnsupportedOperationException();
 	}
 	
-	
-}
-=======
-import ca.mcgill.ecse223.quoridor.model.Game;
-import ca.mcgill.ecse223.quoridor.model.Game.GameStatus;
-import ca.mcgill.ecse223.quoridor.model.Tile;
-import ca.mcgill.ecse223.quoridor.model.User;
-
-public class QuoridorController {
-	
-	public static void loadGame(int number){ 
-		//TO-DO: Write logic to load game
-		throw new UnsupportedOperationException();
-	}
-	
-	public static void validatePosition() {
-		//TO-DO: Write logic to load game
-		throw new UnsupportedOperationException();
-	}
-	
-	public static Tile getPlayerTile(String name) {
-		//TO-DO: Write logic to load game
-		throw new UnsupportedOperationException();
-	}	
-	
-	public static Tile getWhiteTile() {
-		//TO-DO: Write logic to load game
-		//game.getCurrentPosition().getWhitePosition().getTile()
-		throw new UnsupportedOperationException();
-	}
-	
-	public static Tile getBlackTile() {
-		//TO-DO: Write logic to load game
-		//game.getCurrentPosition().getBlackPosition().getTile()
-		throw new UnsupportedOperationException();
-	}
-	
 	/**
 	 * This is a static method which takes two User parameters to initialize a new game. 
 	 * It will return a boolean value to indicate if a new game is successfully initialized.
@@ -153,7 +115,7 @@ public class QuoridorController {
 		//TODO: To be implemented
 		throw new UnsupportedOperationException();
 	}
-	
+
 	/**
 	 * This is a static method which takes an user and a name, then set the latter as 
 	 * the new name of the former. It will return a boolean value to indicate if the name
@@ -168,11 +130,12 @@ public class QuoridorController {
 		//TODO: To be implemented
 		throw new UnsupportedOperationException();
 	}
-	
+
 	/**
 	 * This is a static method which check the status of a game. It will return a GameStatus
 	 * value of the status of a certain status.
 	 * 
+	 * @author Pengnan Fan
 	 * @param game The game to be checked
 	 * @return A GameStatus value of the status of the game to be checked
 	 */
@@ -182,4 +145,3 @@ public class QuoridorController {
 	}
 	
 }
->>>>>>> 17fe7dbabf16f2c9511cdb403528b133511079e0
