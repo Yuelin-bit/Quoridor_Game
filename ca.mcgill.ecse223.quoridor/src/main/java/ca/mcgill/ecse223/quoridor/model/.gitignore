@@ -1,2 +1,2 @@
-!.gitignore
-!Direction.java
+.gitignore
+*.class

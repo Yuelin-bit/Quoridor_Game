@@ -1,9 +1,14 @@
 package ca.mcgill.ecse223.quoridor.features;
 
+import static org.junit.Assert.assertEquals;
+
 import java.sql.Time;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.After;
+
+import ca.mcgill.ecse223.quoridor.controller.QuoridorController;
 import ca.mcgill.ecse223.quoridor.model.Board;
 import ca.mcgill.ecse223.quoridor.model.Direction;
 import ca.mcgill.ecse223.quoridor.model.Game;
@@ -19,7 +24,9 @@ import ca.mcgill.ecse223.quoridor.model.Tile;
 import ca.mcgill.ecse223.quoridor.model.User;
 import ca.mcgill.ecse223.quoridor.model.Wall;
 import ca.mcgill.ecse223.quoridor.model.WallMove;
-import io.cucumber.java.After;
+
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 
@@ -113,6 +120,7 @@ public class CucumberStepDefinitions {
 	 * are implemented
 	 * 
 	 */
+<<<<<<< HEAD
 	@Given("No file save_game_test.dat exists in the filesystem")
 	public void no_file_save_game_test_dat_exists_in_the_filesystem() {
 	    // Write code here that turns the phrase above into concrete actions
@@ -129,88 +137,293 @@ public class CucumberStepDefinitions {
 
 	@Then("A file with save_game_test.dat is created in the filesystem")
 	public void a_file_with_save_game_test_dat_is_created_in_the_filesystem() {
+=======
+	
+	@Given("A new game is initializing")
+	public void a_new_game_is_initializing(Game game) {
+	    //TODO: Write code here that turns the phrase above into concrete actions
+		QuoridorController.getGameStatus(game);
+	    throw new cucumber.api.PendingException();
+	}
+	
+	@When("White player chooses a username")
+	public void white_player_chooses_a_username(User user, String name) {
+	    //TODO: Write code here that turns the phrase above into concrete actions
+		QuoridorController.updateNewUserName(user, name);
+	    throw new cucumber.api.PendingException();
+	}
+
+	@When("Black player chooses a username")
+	public void black_player_chooses_a_username(User user, String name) {
+	    //TODO: Write code here that turns the phrase above into concrete actions
+		QuoridorController.updateNewUserName(user, name);
+	    throw new cucumber.api.PendingException();
+	}
+	
+	@Then("The game is ready to start")
+	public void the_game_is_ready_to_start(User user1, User user2, int thinking_time_seconds) {
+		//TODO: Write code here that turns the phrase above into concrete actions
+		QuoridorController.initializeNewGame(user1, user2, thinking_time_seconds);
+		throw new cucumber.api.PendingException();
+	}
+	
+	@When("I initiate to load a saved game quoridor_test_game_{int}.dat")
+	public void i_initiate_to_load_a_saved_game_quoridor_test_game__dat(Integer int1) {
+		// CALL METHOD FROM CONTROLLER
+		// QuoridorController.callMethod(int1);
+		// IN CONTROLLER:
+		// Write signature so...
+		// public void saveGame(int number){ //TO-DO: Write logic to save game
+		// throw new UnsupportedOperatingException();
+		// }
+		QuoridorController.loadGame(int1);
+	    throw new cucumber.api.PendingException();
+	}
+
+	@When("The position is valid")
+	public void the_position_is_valid() {
+	    QuoridorController.validatePosition();
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("It is player's turn")
+	public void it_is_player_s_turn() {
+		assertEquals(true, game.getCurrentPosition().setPlayerToMove(currentPlayer));
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("player is at {int}:{int}")
+	public void player_is_at(Integer int1, Integer int2) {
+		int row = QuoridorController.getPlayerTile("Player").getRow();
+		int col = QuoridorController.getPlayerTile("Player").getColumn();
+		assertEquals(row, 7);
+		assertEquals(col, 7);
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("white is at {int}:{int}")
+	public void white_is_at(Integer int1, Integer int2) {
+		int row = QuoridorController.getWhiteTile().getRow();
+		int col = QuoridorController.getWhiteTile().getColumn();
+		assertEquals(row, 7);
+		assertEquals(col, 7);
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("player has a vertical wall at {int}:{int}")
+	public void player_has_a_vertical_wall_at(Integer int1, Integer int2) {
+>>>>>>> 17fe7dbabf16f2c9511cdb403528b133511079e0
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new cucumber.api.PendingException();
 	}
 
+<<<<<<< HEAD
 	@Given("File save_game_test.dat exists in the filesystem")
 	public void file_save_game_test_dat_exists_in_the_filesystem() {
+=======
+	@Then("white has a horizontal wall at {int}:{int}")
+	public void white_has_a_horizontal_wall_at(Integer int1, Integer int2) {
+>>>>>>> 17fe7dbabf16f2c9511cdb403528b133511079e0
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new cucumber.api.PendingException();
 	}
 
+<<<<<<< HEAD
 	@When("The user confirms to overwrite existing file")
 	public void the_user_confirms_to_overwrite_existing_file() {
+=======
+	@Then("Both players have {int} in their stacks")
+	public void both_players_have_in_their_stacks(Integer int1) {
+>>>>>>> 17fe7dbabf16f2c9511cdb403528b133511079e0
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new cucumber.api.PendingException();
 	}
 
+<<<<<<< HEAD
 	@Then("File with save_game_test.dat is updated in the filesystem")
 	public void file_with_save_game_test_dat_is_updated_in_the_filesystem() {
+=======
+	@When("I initiate to load a saved game quoridor_test_game_invalid_pawn.dat")
+	public void i_initiate_to_load_a_saved_game_quoridor_test_game_invalid_pawn_dat() {
+>>>>>>> 17fe7dbabf16f2c9511cdb403528b133511079e0
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new cucumber.api.PendingException();
 	}
 
+<<<<<<< HEAD
 	@When("The user cancels to overwrite existing file")
 	public void the_user_cancels_to_overwrite_existing_file() {
+=======
+	@When("The position is invalid")
+	public void the_position_is_invalid() {
+>>>>>>> 17fe7dbabf16f2c9511cdb403528b133511079e0
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new cucumber.api.PendingException();
 	}
 
+<<<<<<< HEAD
 	@Then("File save_game_test.dat is not changed in the filesystem")
 	public void file_save_game_test_dat_is_not_changed_in_the_filesystem() {
+=======
+	@Then("The load returns error")
+	public void the_load_returns_error() {
+>>>>>>> 17fe7dbabf16f2c9511cdb403528b133511079e0
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new cucumber.api.PendingException();
 	}
 
+<<<<<<< HEAD
 	@Given("A game position is supplied with pawn coordinate {int}:{int}")
 	public void a_game_position_is_supplied_with_pawn_coordinate(Integer int1, Integer int2) {
+=======
+	@When("I initiate to load a saved game quoridor_test_game_invalid_wall_overlap_.dat")
+	public void i_initiate_to_load_a_saved_game_quoridor_test_game_invalid_wall_overlap__dat() {
+>>>>>>> 17fe7dbabf16f2c9511cdb403528b133511079e0
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new cucumber.api.PendingException();
 	}
 
+<<<<<<< HEAD
 	@When("Validation of the position is initiated")
 	public void validation_of_the_position_is_initiated() {
+=======
+	@When("I initiate to load a saved game quoridor_test_game_invalid_wall_out-of-track.dat")
+	public void i_initiate_to_load_a_saved_game_quoridor_test_game_invalid_wall_out_of_track_dat() {
+>>>>>>> 17fe7dbabf16f2c9511cdb403528b133511079e0
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new cucumber.api.PendingException();
 	}
 
+<<<<<<< HEAD
 	@Then("The position is ok")
 	public void the_position_is_ok() {
+=======
+	@Given("The player to move is white")
+	public void the_player_to_move_is_white() {
+>>>>>>> 17fe7dbabf16f2c9511cdb403528b133511079e0
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new cucumber.api.PendingException();
 	}
 
+<<<<<<< HEAD
 	@Then("The position is error")
 	public void the_position_is_error() {
+=======
+	@Given("The clock of white is running")
+	public void the_clock_of_white_is_running() {
+>>>>>>> 17fe7dbabf16f2c9511cdb403528b133511079e0
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new cucumber.api.PendingException();
 	}
 
+<<<<<<< HEAD
 	@Given("A game position is supplied with wall coordinate {int}:{int}-horizontal")
 	public void a_game_position_is_supplied_with_wall_coordinate_horizontal(Integer int1, Integer int2) {
+=======
+	@Given("The clock of black is stopped")
+	public void the_clock_of_black_is_stopped() {
+>>>>>>> 17fe7dbabf16f2c9511cdb403528b133511079e0
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new cucumber.api.PendingException();
 	}
 
+<<<<<<< HEAD
 	@Given("A game position is supplied with wall coordinate {int}:{int}-vertical")
 	public void a_game_position_is_supplied_with_wall_coordinate_vertical(Integer int1, Integer int2) {
+=======
+	@When("Player white completes his move")
+	public void player_white_completes_his_move() {
+>>>>>>> 17fe7dbabf16f2c9511cdb403528b133511079e0
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new cucumber.api.PendingException();
 	}
 
+<<<<<<< HEAD
 	@Then("The position is valid")
 	public void the_position_is_valid() {
+=======
+	@Then("The clock of white is stopped")
+	public void the_clock_of_white_is_stopped() {
+>>>>>>> 17fe7dbabf16f2c9511cdb403528b133511079e0
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new cucumber.api.PendingException();
 	}
 
+<<<<<<< HEAD
 	@Then("The position is invalid")
 	public void the_position_is_invalid() {
+=======
+	@Then("The clock of black is running")
+	public void the_clock_of_black_is_running() {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new cucumber.api.PendingException();
 	}
 
+	@Then("The player to move is black")
+	public void the_player_to_move_is_black() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("The user interface is showing it is black's turn")
+	public void the_user_interface_is_showing_it_is_black_s_turn() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Given("The player to move is black")
+	public void the_player_to_move_is_black() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Given("The clock of black is running")
+	public void the_clock_of_black_is_running() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Given("The clock of white is stopped")
+	public void the_clock_of_white_is_stopped() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@When("Player black completes his move")
+	public void player_black_completes_his_move() {
+>>>>>>> 17fe7dbabf16f2c9511cdb403528b133511079e0
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+<<<<<<< HEAD
+=======
+	@Then("The clock of black is stopped")
+	public void the_clock_of_black_is_stopped() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("The clock of white is running")
+	public void the_clock_of_white_is_running() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("The player to move is white")
+	public void the_player_to_move_is_white() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("The user interface is showing it is white's turn")
+	public void the_user_interface_is_showing_it_is_white_s_turn() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+
+>>>>>>> 17fe7dbabf16f2c9511cdb403528b133511079e0
 
 	// ***********************************************
 	// Clean up
