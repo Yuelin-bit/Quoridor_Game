@@ -158,21 +158,21 @@ public class CucumberStepDefinitions {
 	public void i_shall_not_have_a_wall_in_my_hand() {
 		Assert.assertEquals(false, QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove().hasWalls());
 	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+	    
 	}
 
 	@Then("My move shall be completed")
 	public void my_move_shall_be_completed() {
 		Assert.assertEquals(true, QuoridorApplication.getQuoridor().getCurrentGame().hasWallMoveCandidate());
 	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+	    
 	}
 
 	@Then("It shall not be my turn to move")
 	public void it_shall_not_be_my_turn_to_move() {
 		Assert.assertEquals(false, QuoridorApplication.getQuoridor().getCurrentGame().hasWallMoveCandidate());
 	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+	   
 	}
 	
 	
@@ -180,31 +180,31 @@ public class CucumberStepDefinitions {
 	public void the_wall_move_candidate_with_at_position_is_invalid(String string, Integer int1, Integer int2) {
 		 QuoridorApplication.getQuoridor().getCurrentGame().
 	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+	   
 	}
 
 	@Then("I shall be notified that my wall move is invalid")
 	public void i_shall_be_notified_that_my_wall_move_is_invalid() {
 	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+	   
 	}
 
 	@Then("I shall have a wall in my hand over the board")
 	public void i_shall_have_a_wall_in_my_hand_over_the_board() {
 	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+	    
 	}
 
 	@Then("It shall be my turn to move")
 	public void it_shall_be_my_turn_to_move() {
 	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+	    
 	}
 
 	@Then("No wall move shall be registered with {string} at position \\({int}, {int})")
 	public void no_wall_move_shall_be_registered_with_at_position(String string, Integer int1, Integer int2) {
 	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+	   
 	}
 	
 	
@@ -221,63 +221,103 @@ public class CucumberStepDefinitions {
 	@Given("A wall move candidate exists with {string} at position \\({int}, {int})")
 	public void a_wall_move_candidate_exists_with_at_position(String string, Integer int1, Integer int2) {
 		Quoridor quoridor = QuoridorApplication.getQuoridor();
-		Board board = new Board(quoridor);
-		Tile tile = new Tile(int1, int2, board);
-		Wall wall = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsInStock().get(0);;
+		//Board board = new Board(quoridor);
+		Tile tile = new Tile(int1, int2, QuoridorApplication.getQuoridor().getBoard());
+		Wall wall = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsInStock().get(0);
 		Player aPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
 		int a = QuoridorApplication.getQuoridor().getCurrentGame().getMoves().size();
-		if(string=="Vertical") {
-		WallMove candidate = new WallMove(a, (a+1)/2, aPlayer, tile, QuoridorApplication.getQuoridor().getCurrentGame(), Direction.Vertical, wall);
+		
+		if(aPlayer.hasGameAsBlack()) {
+			
+			Wall newWallFromStock = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsInStock().get(0);				
+				
+				if(string.equals("vertical")) {
+					
+					WallMove WallMove = new WallMove(a+1, (a+1)/2, aPlayer, tile, 
+					QuoridorApplication.getQuoridor().getCurrentGame(), Direction.Vertical, newWallFromStock );
+					QuoridorApplication.getQuoridor().getCurrentGame().setWallMoveCandidate(WallMove);	
+				}else {
+				
+					WallMove WallMove = new WallMove(a+1, (a+1)/2, aPlayer, tile, 
+					QuoridorApplication.getQuoridor().getCurrentGame(), Direction.Horizontal, newWallFromStock );
+					QuoridorApplication.getQuoridor().getCurrentGame().setWallMoveCandidate(WallMove);	
+				}		
+		
+		}
+		
+		if(aPlayer.hasGameAsWhite()) {
+			
+			Wall newWallFromStock = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsInStock().get(0);				
+				
+				if(string.equals("vertical")) {
+					
+					WallMove WallMove = new WallMove(a+1, (a+1)/2, aPlayer, tile, 
+					QuoridorApplication.getQuoridor().getCurrentGame(), Direction.Vertical, newWallFromStock );
+					QuoridorApplication.getQuoridor().getCurrentGame().setWallMoveCandidate(WallMove);	
+				}else {
+				
+					WallMove WallMove = new WallMove(a+1, (a+1)/2, aPlayer, tile, 
+					QuoridorApplication.getQuoridor().getCurrentGame(), Direction.Horizontal, newWallFromStock );
+					QuoridorApplication.getQuoridor().getCurrentGame().setWallMoveCandidate(WallMove);	
+				}		
+		
+		}
+		/*if(string=="Vertical") {
+		WallMove candidate = new WallMove(a+1, (a+1)/2, aPlayer, tile, QuoridorApplication.getQuoridor().getCurrentGame(), Direction.Vertical, wall);
 		}
 		else {
-			WallMove candidate = new WallMove(a, (a+1)/2, aPlayer, tile, QuoridorApplication.getQuoridor().getCurrentGame(), Direction.Horizontal, wall);
+			WallMove candidate = new WallMove(a+1, (a+1)/2, aPlayer, tile, QuoridorApplication.getQuoridor().getCurrentGame(), Direction.Horizontal, wall);
 			}
 		//WallMove wallmove;
 		if(QuoridorApplication.getQuoridor().getCurrentGame().hasPositions()==true)
 			QuoridorApplication.getQuoridor().getCurrentGame().setWallMoveCandidate(candidate);
 		if(QuoridorApplication.getQuoridor().getCurrentGame().hasPositions()!=true)
-			return;
+			return;*/
 	
 		
 	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+	    
 	}
+	
+	
+	
+	
 
 	@Given("The wall candidate is not at the {string} edge of the board")
 	public void the_wall_candidate_is_not_at_the_edge_of_the_board(String string) {
 	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+	    
 	}
 
 	@When("I try to move the wall {string}")
 	public void i_try_to_move_the_wall(String string) {
 		QuoridorController.MoveWall(string);	
 	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+	    
 	}
 
 	@Then("The wall shall be moved over the board to position \\({int}, {int})")
 	public void the_wall_shall_be_moved_over_the_board_to_position(Integer int1, Integer int2) {
 	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+	    
 	}
 
 	@Then("A wall move candidate shall exist with {string} at position \\({int}, {int})")
 	public void a_wall_move_candidate_shall_exist_with_at_position(String string, Integer int1, Integer int2) {
 	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+	    
 	}
 
 	@Given("The wall candidate is at the {string} edge of the board")
 	public void the_wall_candidate_is_at_the_edge_of_the_board(String string) {
 	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+	   
 	}
 
 	@Then("I shall be notified that my move is illegal")
 	public void i_shall_be_notified_that_my_move_is_illegal() {
 	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+	    
 	}
 	
 	
