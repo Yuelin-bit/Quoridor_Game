@@ -215,6 +215,7 @@ public class CucumberStepDefinitions {
 	@Given("A game position is supplied with wall coordinate {int}:{int}-{string}")
 	public void a_game_position_is_supplied_with_wall_coordinate(Integer int1, Integer int2, String string) {
 	    // Write code here that turns the phrase above into concrete actions
+		
 	    throw new cucumber.api.PendingException();
 	}
 
