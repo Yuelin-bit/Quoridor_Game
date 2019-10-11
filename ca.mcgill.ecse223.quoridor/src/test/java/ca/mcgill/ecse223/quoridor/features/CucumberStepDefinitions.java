@@ -1,5 +1,4 @@
 package ca.mcgill.ecse223.quoridor.features;
-import java.io.*;
 import static org.junit.Assert.*;
 import java.sql.Time;
 import java.util.List;
@@ -7,7 +6,6 @@ import java.util.Map;
 
 import ca.mcgill.ecse223.quoridor.QuoridorApplication;
 import ca.mcgill.ecse223.quoridor.controller.QuoridorController;
-import ca.mcgill.ecse223.quoridor.controller.cucumber;
 import ca.mcgill.ecse223.quoridor.model.Board;
 import ca.mcgill.ecse223.quoridor.model.Direction;
 import ca.mcgill.ecse223.quoridor.model.Game;
@@ -211,11 +209,15 @@ public class CucumberStepDefinitions {
 	    throw new cucumber.api.PendingException();
 	}
 
-	//-------------------------------------------------------------------------------------------------------
 	@Given("A game position is supplied with wall coordinate {int}:{int}-{string}")
 	public void a_game_position_is_supplied_with_wall_coordinate(Integer int1, Integer int2, String string) {
 	    // Write code here that turns the phrase above into concrete actions
-		
+		String di = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getWallDirection().toString();
+		Integer wrow = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getRow();
+		Integer wcol = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getColumn();
+		assertEquals(di , string);
+		assertEquals(wrow , int1);
+		assertEquals(wcol , int2);
 	    throw new cucumber.api.PendingException();
 	}
 
