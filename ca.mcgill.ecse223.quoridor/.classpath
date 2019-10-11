@@ -28,6 +28,7 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8/"/>
 	<classpathentry kind="con" path="org.eclipse.buildship.core.gradleclasspathcontainer"/>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="/Users/apple/.gradle/caches/modules-2/files-2.1/io.cucumber/cucumber-java/4.7.2/79c76767a3a8754b0ef110aadb6491933e675bd/cucumber-java-4.7.2.jar" sourcepath="/Users/apple/.gradle/caches/modules-2/files-2.1/io.cucumber/cucumber-java/4.7.2/9e1387ef0d873f27aa9373812a107708e6be760/cucumber-java-4.7.2-sources.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="test"/>
@@ -53,5 +54,7 @@
 			<attribute name="test" value="true"/>
 		</attributes>
 	</classpathentry>
+=======
+>>>>>>> yuelin_liu
 	<classpathentry kind="output" path="bin/default"/>
 </classpath>

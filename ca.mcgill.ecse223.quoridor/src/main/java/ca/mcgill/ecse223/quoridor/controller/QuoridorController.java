@@ -1,5 +1,6 @@
 package ca.mcgill.ecse223.quoridor.controller;
 
+<<<<<<< HEAD
 import ca.mcgill.ecse223.quoridor.model.GamePosition;
 
 public class QuoridorController{
@@ -102,3 +103,20 @@ public class QuoridorController{
 	
 	
 }
+=======
+public class QuoridorController {
+	
+	public static void ReleaseWall() 
+	{	
+		throw new UnsupportedOperationException();
+	}
+	
+	
+	
+	public static void MoveWall(String string)
+	{	
+		throw new UnsupportedOperationException();
+	}
+	
+}
+>>>>>>> yuelin_liu

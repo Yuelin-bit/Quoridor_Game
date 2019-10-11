@@ -6,6 +6,7 @@ Feature: Move Player
 		Given The game is running
 		
   Scenario Outline: Move one tile 
+<<<<<<< HEAD
     Given The player to move is <player> 
     And The player is located at <row>:<col>
     And There are no <dir> walls <side> from the player 
@@ -14,6 +15,16 @@ Feature: Move Player
     Then The move <side> is <status> 
     And Player's new position is <nrow>:<ncol>
     And The next player to move becomes <nplayer>
+=======
+    Given The player to move is "<player>" 
+    And The player is located at <row>:<col>
+    And There are no "<dir>" walls "<side>" from the player 
+    And The opponent is not "<side>" from the player  
+    When Player "<player>" initiates to move "<side>"
+    Then The move "<side>" shall be "<status>" 
+    And Player's new position shall be <nrow>:<ncol>
+    And The next player to move shall become "<nplayer>"
+>>>>>>> yuelin_liu
     Examples: 
       | player	| row | col | dir 				| side 	| status 	| nrow 	| ncol	 | nplayer	|
       | white		| 3 	| 3		| vertical 		| left	|	success | 3			| 2	 		 | black		|
@@ -27,6 +38,7 @@ Feature: Move Player
 
   
   Scenario Outline: Move of player blocked by wall
+<<<<<<< HEAD
     Given The player to move is <player>
     And The player is located at <row>:<col>
     And There is a <dir> wall <side> from the player
@@ -35,6 +47,16 @@ Feature: Move Player
     Then The move <side> is <status> 
     And Player's new position is <nrow>:<ncol>
     And The next player to move becomes <nplayer>
+=======
+    Given The player to move is "<player>"
+    And The player is located at <row>:<col>
+    And There is a "<dir>" wall "<side>" from the player
+    And My opponent is not "<side>" from the player
+    When Player "<player>" initiates to move "<side>"
+    Then The move "<side>" shall be "<status>" 
+    And Player's new position shall be <nrow>:<ncol>
+    And The next player to move shall become "<nplayer>"
+>>>>>>> yuelin_liu
     Examples: 
       | player 	| row | col | dir 				| side 	| status 	| nrow 	| ncol	 | player		|
       | white		| 3 	| 3		| vertical 		| left	|	illegal | 3			| 3	 		 | white		|

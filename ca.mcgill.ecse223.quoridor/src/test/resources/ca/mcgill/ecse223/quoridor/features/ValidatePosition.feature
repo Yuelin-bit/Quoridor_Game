@@ -2,10 +2,20 @@ Feature: Validate Position
   As a player, I want to check if a given position is invalid with e.g. 
   overlapping walls or out-of-track pawn or wall positions.
 
+<<<<<<< HEAD
   Scenario Outline: Validate pawn position
     Given A game position is supplied with pawn coordinate <row>:<col>
     When Validation of the position is initiated
     Then The position is <result>
+=======
+	Background:
+		Given The game is running
+
+  Scenario Outline: Validate pawn position
+    Given A game position is supplied with pawn coordinate <row>:<col>
+    When Validation of the position is initiated
+    Then The position shall be "<result>"
+>>>>>>> yuelin_liu
 
     Examples: 
       | row | col | result |
@@ -20,9 +30,15 @@ Feature: Validate Position
       |   5 |  10 | error  |
 
   Scenario Outline: Validate wall position
+<<<<<<< HEAD
     Given A game position is supplied with wall coordinate <row>:<col>-<dir>
     When Validation of the position is initiated
     Then The position is <result>
+=======
+    Given A game position is supplied with wall coordinate <row>:<col>-"<dir>"
+    When Validation of the position is initiated
+    Then The position shall be "<result>"
+>>>>>>> yuelin_liu
 
     Examples: 
       | row | col | dir        | result |
@@ -40,7 +56,11 @@ Feature: Validate Position
       |    1 |    1 | horizontal |
       |    7 |    4 | vertical   |
     When Validation of the position is initiated
+<<<<<<< HEAD
     Then The position is valid
+=======
+    Then The position shall be valid
+>>>>>>> yuelin_liu
 
   Scenario: Validate overlapping walls (invalid-1)
     Given The following walls exist:
@@ -48,7 +68,11 @@ Feature: Validate Position
       |    2 |    3 | horizontal |
       |    2 |    4 | horizontal |
     When Validation of the position is initiated
+<<<<<<< HEAD
     Then The position is invalid
+=======
+    Then The position shall be invalid
+>>>>>>> yuelin_liu
 
   Scenario: Validate overlapping walls (invalid-2)
     Given The following walls exist:
@@ -56,7 +80,11 @@ Feature: Validate Position
       |    3 |    2 | vertical |
       |    2 |    2 | vertical |
     When Validation of the position is initiated
+<<<<<<< HEAD
     Then The position is invalid
+=======
+    Then The position shall be invalid
+>>>>>>> yuelin_liu
 
   Scenario: Validate overlapping walls (invalid-3)
     Given The following walls exist:
@@ -64,4 +92,8 @@ Feature: Validate Position
       |    3 |    2 | vertical   |
       |    3 |    2 | horizontal |
     When Validation of the position is initiated
+<<<<<<< HEAD
     Then The position is invalid
+=======
+    Then The position shall be invalid
+>>>>>>> yuelin_liu
