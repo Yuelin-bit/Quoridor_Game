@@ -286,7 +286,13 @@ public class CucumberStepDefinitions {
 	@Given("The wall candidate is not at the {string} edge of the board")
 	public void the_wall_candidate_is_not_at_the_edge_of_the_board(String string) {
 	    // Write code here that turns the phrase above into concrete actions
-	    
+		//QuoridorController.ExceedBoard(int a);
+		if(string.equals("vertical")) {
+			Assert.assertEquals(false, QuoridorController.ExceedBoard(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getRow()));
+	}
+		if(string.equals("horizontal")) {
+			Assert.assertEquals(false,  QuoridorController.ExceedBoard(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getColumn()));
+		}
 	}
 
 	@When("I try to move the wall {string}")
@@ -298,12 +304,21 @@ public class CucumberStepDefinitions {
 
 	@Then("The wall shall be moved over the board to position \\({int}, {int})")
 	public void the_wall_shall_be_moved_over_the_board_to_position(Integer int1, Integer int2) {
+		Tile tile = new Tile(int1, int2, QuoridorApplication.getQuoridor().getBoard());
+		Assert.assertEquals(true,QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(tile));
+		
 	    // Write code here that turns the phrase above into concrete actions
 	    
 	}
 
 	@Then("A wall move candidate shall exist with {string} at position \\({int}, {int})")
 	public void a_wall_move_candidate_shall_exist_with_at_position(String string, Integer int1, Integer int2) {
+	    Board newBoard = QuoridorApplication.getQuoridor().getBoard();
+		Tile tile = new Tile(int1, int2, newBoard);
+		Assert.assertEquals(tile, QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition());
+		Assert.assertEquals(string, QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getWallDirection());
+		//Assert.assertEquals(int1, QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getRow());
+		//Assert.assertEquals(int2, QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getColumn());
 	    // Write code here that turns the phrase above into concrete actions
 	    
 	}
@@ -311,13 +326,20 @@ public class CucumberStepDefinitions {
 	@Given("The wall candidate is at the {string} edge of the board")
 	public void the_wall_candidate_is_at_the_edge_of_the_board(String string) {
 	    // Write code here that turns the phrase above into concrete actions
+		if(string.equals("vertical")) {
+			Assert.assertEquals(true, QuoridorController.ExceedBoard(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getRow()));
+	}
+		if(string.equals("horizontal")) {
+			Assert.assertEquals(true,  QuoridorController.ExceedBoard(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getColumn()));
+		}
 	   
 	}
 
 	@Then("I shall be notified that my move is illegal")
 	public void i_shall_be_notified_that_my_move_is_illegal() {
 	    // Write code here that turns the phrase above into concrete actions
-	    
+		Assert.assertEquals(false,QuoridorApplication.getQuoridor().getCurrentGame().hasCurrentPosition());
+	    //System.out.println("This move is illegal");
 	}
 	
 	

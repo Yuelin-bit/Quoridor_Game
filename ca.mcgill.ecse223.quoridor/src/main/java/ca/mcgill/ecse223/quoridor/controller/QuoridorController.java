@@ -35,4 +35,21 @@ public class QuoridorController {
 		throw new UnsupportedOperationException();
 	}
 	
+	
+	
+	/**
+	 * Feature:MoveWall
+	 * 
+	 * @author Yuelin Liu
+	 * @param Whether the wall_candidate is within the valid tile;
+	 * @return boolean
+	 *
+	 *
+	 */
+	public static boolean ExceedBoard(int a)
+	{	
+		//TODO: Write logic
+		throw new UnsupportedOperationException();
+	}
+	
 }
