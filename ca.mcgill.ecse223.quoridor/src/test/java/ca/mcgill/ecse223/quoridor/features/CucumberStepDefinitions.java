@@ -220,6 +220,25 @@ public class CucumberStepDefinitions {
 	
 	@Given("A wall move candidate exists with {string} at position \\({int}, {int})")
 	public void a_wall_move_candidate_exists_with_at_position(String string, Integer int1, Integer int2) {
+		Quoridor quoridor = QuoridorApplication.getQuoridor();
+		Board board = new Board(quoridor);
+		Tile tile = new Tile(int1, int2, board);
+		Wall wall = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsInStock().get(0);;
+		Player aPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
+		int a = QuoridorApplication.getQuoridor().getCurrentGame().getMoves().size();
+		if(string=="Vertical") {
+		WallMove candidate = new WallMove(a, (a+1)/2, aPlayer, tile, QuoridorApplication.getQuoridor().getCurrentGame(), Direction.Vertical, wall);
+		}
+		else {
+			WallMove candidate = new WallMove(a, (a+1)/2, aPlayer, tile, QuoridorApplication.getQuoridor().getCurrentGame(), Direction.Horizontal, wall);
+			}
+		//WallMove wallmove;
+		if(QuoridorApplication.getQuoridor().getCurrentGame().hasPositions()==true)
+			QuoridorApplication.getQuoridor().getCurrentGame().setWallMoveCandidate(candidate);
+		if(QuoridorApplication.getQuoridor().getCurrentGame().hasPositions()!=true)
+			return;
+	
+		
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new cucumber.api.PendingException();
 	}
