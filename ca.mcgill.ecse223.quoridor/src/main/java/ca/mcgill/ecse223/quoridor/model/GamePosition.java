@@ -296,7 +296,22 @@ public class GamePosition
     wasSet = true;
     return wasSet;
   }
-  /* Code from template association_SetUnidirectionalOne */
+  /* Code from template association_AddIndexControlFunctions */
+  public boolean addWhiteWallsOnBoardAt(Wall aWhiteWallsOnBoard, int index)
+  {  
+    boolean wasAdded = false;
+    if(addWhiteWallsOnBoard(aWhiteWallsOnBoard))
+    {
+      if(index < 0 ) { index = 0; }
+      if(index > numberOfWhiteWallsOnBoard()) { index = numberOfWhiteWallsOnBoard() - 1; }
+      whiteWallsOnBoard.remove(aWhiteWallsOnBoard);
+      whiteWallsOnBoard.add(index, aWhiteWallsOnBoard);
+      wasAdded = true;
+    }
+    return wasAdded;
+  }
+
+/* Code from template association_SetUnidirectionalOne */
   public boolean setPlayerToMove(Player aNewPlayerToMove)
   {
     boolean wasSet = false;
@@ -332,21 +347,6 @@ public class GamePosition
     }
     return wasRemoved;
   }
-  /* Code from template association_AddIndexControlFunctions */
-  public boolean addWhiteWallsOnBoardAt(Wall aWhiteWallsOnBoard, int index)
-  {  
-    boolean wasAdded = false;
-    if(addWhiteWallsOnBoard(aWhiteWallsOnBoard))
-    {
-      if(index < 0 ) { index = 0; }
-      if(index > numberOfWhiteWallsOnBoard()) { index = numberOfWhiteWallsOnBoard() - 1; }
-      whiteWallsOnBoard.remove(aWhiteWallsOnBoard);
-      whiteWallsOnBoard.add(index, aWhiteWallsOnBoard);
-      wasAdded = true;
-    }
-    return wasAdded;
-  }
-
   public boolean addOrMoveWhiteWallsOnBoardAt(Wall aWhiteWallsOnBoard, int index)
   {
     boolean wasAdded = false;
