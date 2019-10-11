@@ -1,7 +1,5 @@
 package ca.mcgill.ecse223.quoridor.controller;
 
-import ca.mcgill.ecse223.quoridor.model.GamePosition;
-
 public class QuoridorController{
 	
 	/**
@@ -71,7 +69,7 @@ public class QuoridorController{
 	}
 	
 	/**
-	 * Feature:ValidatePosition
+	 * Feature:SavePosition
 	 * 
 	 * @author Bozhong Lu
 	 * @param filename

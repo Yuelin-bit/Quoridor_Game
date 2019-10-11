@@ -119,7 +119,7 @@ public class CucumberStepDefinitions {
 	@Given("No file {string} exists in the filesystem")
 	public void no_file_exists_in_the_filesystem(String string) {
 	    // Write code here that turns the phrase above into concrete actions
-		QuoridorController.checkFileExistence(string);
+		assertEquals(false , QuoridorController.checkFileExistence(string));
 	    throw new cucumber.api.PendingException();
 	}
 
@@ -140,7 +140,7 @@ public class CucumberStepDefinitions {
 	@Given("File {string} exists in the filesystem")
 	public void file_exists_in_the_filesystem(String string) {
 	    // Write code here that turns the phrase above into concrete actions
-		QuoridorController.checkFileExistence(string);
+		assertEquals(true , QuoridorController.checkFileExistence(string));
 	    throw new cucumber.api.PendingException();
 	}
 
@@ -151,7 +151,6 @@ public class CucumberStepDefinitions {
 	    throw new cucumber.api.PendingException();
 	}
 
-	//-----------------------------------------------------------------------
 	@Then("File with {string} shall be updated in the filesystem")
 	public void file_with_shall_be_updated_in_the_filesystem(String string){
 	    // Write code here that turns the phrase above into concrete actions
@@ -166,7 +165,6 @@ public class CucumberStepDefinitions {
 	    throw new cucumber.api.PendingException();
 	}
 
-	//------------------------------------------------------------------------
 	@Then("File {string} shall not be changed in the filesystem")
 	public void file_shall_not_be_changed_in_the_filesystem(String string) {
 	    // Write code here that turns the phrase above into concrete actions
