@@ -156,8 +156,7 @@ public class CucumberStepDefinitions {
 	}
 
 	@Then("It shall be white player to move")
-	public void it_shall_be_white_player_to_move() {
-		
+	public void it_shall_be_white_player_to_move() {		
 		boolean whiteToMove = false;
 		if(QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove().equals(QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer())) {
 			whiteToMove = true;
@@ -167,7 +166,6 @@ public class CucumberStepDefinitions {
 
 	}
 
-	//TODO
 	@Then("White's pawn shall be in its initial position")
 	public void white_s_pawn_shall_be_in_its_initial_position() {
 		//white starts from e9
@@ -219,9 +217,12 @@ public class CucumberStepDefinitions {
 
 	@Then("It shall be shown that this is White's turn")
 	public void it_shall_be_shown_that_this_is_White_s_turn() {
-		boolean isWhite = 
-		QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove().hasGameAsWhite();
-		assertEquals(true,isWhite);	
+		//This is a GUI related step. 
+		boolean whiteToMove = false;
+		if(QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove().equals(QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer())) {
+			whiteToMove = true;
+		}
+		assertEquals(true,whiteToMove);
 		throw new cucumber.api.PendingException();
 
 	}
