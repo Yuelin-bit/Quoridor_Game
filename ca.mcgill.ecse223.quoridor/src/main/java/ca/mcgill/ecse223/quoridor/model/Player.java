@@ -21,13 +21,9 @@ public class Player
   private Destination destination;
   private List<Wall> walls;
   private Player nextPlayer;
-  private Game gameAsWhite; // 0..1 so this can be null;
-  //If 0..2:
-  //private List<Game> gameAsWhite; // 0..2 so this can be empty;
-  private Game gameAsBlack; // 0..1 so this can be null;
-  //If 0..2
-  //private List<Game> gameAsBlack; // 0..2 so this can be empty; 
-  
+  private Game gameAsWhite;
+  private Game gameAsBlack;
+
   //------------------------
   // CONSTRUCTOR
   //------------------------
