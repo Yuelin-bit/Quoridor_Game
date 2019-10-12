@@ -58,13 +58,28 @@ public class QuoridorController {
 	 * 
 	 * @author Yuelin Liu
 	 * @param  a Integer that stands for the row or column of TargetTile.
-	 * @return (boolean)Whether the wall_candidate is within the valid tile;
+	 * @return (boolean)Whether the wall_candidate exceeds the valid tile;
 	 *
 	 */
 	public static boolean ExceedBoard(int a)
 	{	
 		//TODO: Write logic
 		throw new UnsupportedOperationException();
+	}
+	
+	
+	
+	/**
+	 * Feature:MoveWall
+	 * 
+	 * @author Yuelin Liu
+	 * @param  string String stands for direction and tile Tile stands for the targetTile.
+	 * @return a Tile in the edge.
+	 *
+	 */
+	public static Tile getEdgeTile(String string,Tile tile) {
+		//TODO: Write logic
+				throw new UnsupportedOperationException();
 	}
 	
 }

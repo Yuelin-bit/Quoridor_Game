@@ -184,8 +184,7 @@ public class CucumberStepDefinitions {
 
 	@Then("My move shall be completed")
 	public void my_move_shall_be_completed() {
-		//int a = QuoridorApplication.getQuoridor().getCurrentGame().getMoves().size();
-		//no set
+		
 		Assert.assertEquals(false, QuoridorApplication.getQuoridor().getCurrentGame().hasWallMoveCandidate());
 	    
 	    
@@ -315,11 +314,17 @@ public class CucumberStepDefinitions {
 	@Given("The wall candidate is not at the {string} edge of the board")
 	public void the_wall_candidate_is_not_at_the_edge_of_the_board(String string) {
 	    
-		if(string.equals("vertical")) {
-			Assert.assertEquals(false, QuoridorController.ExceedBoard(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getRow()));
+		if(string.equalsIgnoreCase("vertical")) {
+			if(QuoridorController.ExceedBoard(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getRow())==true) {
+				Tile a = QuoridorController.getEdgeTile(string,QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile());
+				QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().setTargetTile(a);
+			}	
 	}
-		if(string.equals("horizontal")) {
-			Assert.assertEquals(false,  QuoridorController.ExceedBoard(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getColumn()));
+		if(string.equalsIgnoreCase("horizontal")) {
+			if(QuoridorController.ExceedBoard(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getColumn())==true) {
+				Tile a = QuoridorController.getEdgeTile(string,QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile());
+				QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().setTargetTile(a);
+			}	
 		}
 	}
 
@@ -356,12 +361,18 @@ public class CucumberStepDefinitions {
 
 	@Given("The wall candidate is at the {string} edge of the board")
 	public void the_wall_candidate_is_at_the_edge_of_the_board(String string) {
-	   
-		if(string.equals("vertical")) {
-			Assert.assertEquals(true, QuoridorController.ExceedBoard(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getRow()));
+		
+		if(string.equalsIgnoreCase("vertical")) {
+			if(QuoridorController.ExceedBoard(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getRow())==true) {
+				Tile a = QuoridorController.getEdgeTile(string,QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile());
+				QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().setTargetTile(a);
+			}	
 	}
-		if(string.equals("horizontal")) {
-			Assert.assertEquals(true,  QuoridorController.ExceedBoard(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getColumn()));
+		if(string.equalsIgnoreCase("horizontal")) {
+			if(QuoridorController.ExceedBoard(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getColumn())==true) {
+				Tile a = QuoridorController.getEdgeTile(string,QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile());
+				QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().setTargetTile(a);
+			}	
 		}
 	   
 	}
