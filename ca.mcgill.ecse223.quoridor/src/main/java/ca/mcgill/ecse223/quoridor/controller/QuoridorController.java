@@ -190,18 +190,28 @@ public class QuoridorController{
 	}
 	
 	/**
+	 * This method verify if the total thinking time of a give game is correctly 
+	 * set. It will return a boolean variable to suggest if it is valid. 
+	 * 
+	 * @author Sun, Gengyi
+	 * @param g
+	 * @return A flag indicating whether the thinking time is valid.
+	 */
+	public static boolean verifyTotalThinkingTime(Game g) {
+		throw new UnsupportedOperationException();
+	}
+	
+	/**
 	 * This is a static method which takes two User parameters to initialize a new game. 
 	 * It will return a boolean value to indicate if a new game is successfully initialized.
 	 * 
 	 * @author Pengnan Fan
 	 * @param user1 The first player who will join in the game
 	 * @param user2 The second player who will join in the game
-	 * @param thinking_time_minute Total thinking time (minute part) per player
-	 * @param thinking_time_second Total thinking time (second part) per player
 	 * @return A boolean value to indicate if a new game is initialized successfully
 	 * 
 	 */
-	public static boolean initializeNewGame(User user1, User user2, int thinking_time_minute, int thinking_time_second) {
+	public static boolean initializeNewGame(User user1, User user2) {
 		//TODO: To be implemented
 		throw new UnsupportedOperationException();
 	}
@@ -258,6 +268,35 @@ public class QuoridorController{
 	 * @return A boolean value to suggest if it is successful.
 	 */
 	public static boolean linkUserAndPlayer(User u, Player p) {
+		//TODO: To be implemented
+		throw new UnsupportedOperationException();
+	}
+	
+	/**
+	 * This is a static method which takes two inputs, a game and a player. It will set
+	 * the player to be the next one to play of the game. It will return a boolean to
+	 * suggest it is successful.
+	 * 
+	 * @author Pengnan Fan
+	 * @param g The game to change the player
+	 * @param p The player to be set as the next player
+	 * @return A boolean variable to suggest if it is successful
+	 */
+	public static boolean setNextPlayer(Game g, Player p) {
+		//TODO: To be implemented
+		throw new UnsupportedOperationException();
+	}
+	
+	/**
+	 * This is a static method which verify if a game is ready to start. If so, it 
+	 * will set the status as ReadyToStart. It will return a boolean value to suggest
+	 * if it is successful.
+	 * 
+	 * @author Pengnan Fan
+	 * @param g The game to be verified.
+	 * @return A boolean variable to suggest if it is successful
+	 */
+	public static boolean verifyNewGame(Game g) {
 		//TODO: To be implemented
 		throw new UnsupportedOperationException();
 	}

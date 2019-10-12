@@ -136,9 +136,11 @@ public class CucumberStepDefinitions {
 	@When("A new game is being initialized")
 	public void a_new_game_is_being_initialized() {
 	    // Write code here that turns the phrase above into concrete actions
-		GameStatus gs = GameStatus.Initializing;
-		Game g = QuoridorApplication.getQuoridor().getCurrentGame();
-		boolean b = g.setGameStatus(gs);
+//		GameStatus gs = GameStatus.Initializing;
+//		Game g = QuoridorApplication.getQuoridor().getCurrentGame();
+//		boolean b = g.setGameStatus(gs);
+		List<User> users = QuoridorApplication.getQuoridor().getUsers();
+		QuoridorController.initializeNewGame(users.get(0), users.get(1));
 		throw new cucumber.api.PendingException();
 	}
 
@@ -159,7 +161,7 @@ public class CucumberStepDefinitions {
 	@When("Total thinking time is set")
 	public void total_thinking_time_is_set() {
 	    // Write code here that turns the phrase above into concrete actions
-		
+		QuoridorController.verifyTotalThinkingTime(QuoridorApplication.getQuoridor().getCurrentGame());
 		throw new cucumber.api.PendingException();
 	}
 
@@ -173,7 +175,7 @@ public class CucumberStepDefinitions {
 	@Given("The game is ready to start")
 	public void the_game_is_ready_to_start() {
 	    // Write code here that turns the phrase above into concrete actions
-		QuoridorApplication.getQuoridor().getCurrentGame().setGameStatus(GameStatus.ReadyToStart);
+		QuoridorController.verifyNewGame(QuoridorApplication.getQuoridor().getCurrentGame());
 		throw new cucumber.api.PendingException();
 	}
 
@@ -212,7 +214,7 @@ public class CucumberStepDefinitions {
 		}else {
 			next = g.getWhitePlayer();
 		}
-		g.getCurrentPosition().setPlayerToMove(next);
+		QuoridorController.setNextPlayer(g, next);
 		throw new cucumber.api.PendingException();
 	}
 	
