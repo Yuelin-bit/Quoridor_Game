@@ -23,11 +23,13 @@ import ca.mcgill.ecse223.quoridor.model.Tile;
 import ca.mcgill.ecse223.quoridor.model.User;
 import ca.mcgill.ecse223.quoridor.model.Wall;
 import ca.mcgill.ecse223.quoridor.model.WallMove;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+
+
 
 public class CucumberStepDefinitions {
 
@@ -132,29 +134,184 @@ public class CucumberStepDefinitions {
 	// ***********************************************
 	// Start New Game
 	// ***********************************************
-	//TODO FUCK
-	@When("A new game is being initialized")
-	public void a_new_game_is_being_initialized() {
+	@Given("The game is not running")
+	public void the_game_is_not_running() {
 	    // Write code here that turns the phrase above into concrete actions
-		
+	    throw new cucumber.api.PendingException();
+	}
+	@When("A new game is being initialized")
+	public void a_new_game_is_being_initialized(User user1, User user2, int thinking_time_minute, int thinking_time_second) {
+	    // Write code here that turns the phrase above into concrete actions
+		QuoridorController.initializeNewGame(user1, user2, thinking_time_minute, thinking_time_second);
 	    throw new cucumber.api.PendingException();
 	}
 	
 	@When("White player chooses a username")
-	public void white_player_chooses_a_username() {
+	public void white_player_chooses_a_username(Game game, String name) {
 	    // Write code here that turns the phrase above into concrete actions
+		QuoridorController.setNewNameWhitePlayer(game, name);
 	    throw new cucumber.api.PendingException();
 	}
 
 	@When("Black player chooses a username")
-	public void black_player_chooses_a_username() {
+	public void black_player_chooses_a_username(Game game, String name) {
 	    // Write code here that turns the phrase above into concrete actions
+		QuoridorController.setNewNameBlackPlayer(game, name);
 	    throw new cucumber.api.PendingException();
+	}
+	
+	@And("Total thinking time is set")
+	public void total_thinking_time_is_set(int minute, int second) {
+		// Write code here that turns the phrase above into concrete actions
+		QuoridorController.setTotalThinkingTime(minute, second);
+		throw new cucumber.api.PendingException();
 	}
 	
 	@Then("The game shall become ready to start")
 	public void the_game_shall_become_ready_to_start() {
 	    // Write code here that turns the phrase above into concrete actions
+		// Check status
+	    throw new cucumber.api.PendingException();
+	}
+	
+	@Given("The game is ready to start")
+	public void the_game_is_ready_to_start() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+	
+	@When("I start the clock")
+	public void i_start_the_clock(Player white_player) {
+	    // Write code here that turns the phrase above into concrete actions
+		QuoridorController.startClock(white_player);
+	    throw new cucumber.api.PendingException();
+	}
+	
+	@Then("The game shall be running")
+	public void the_game_shall_be_running() {
+	    // Write code here that turns the phrase above into concrete actions
+		// Check status
+	    throw new cucumber.api.PendingException();
+	}
+	
+	@And("The board shall be initialized")
+	public void the_board_shall_be_initialized() {
+		// Write code here that turns the phrase above into concrete actions
+		QuoridorController.initializeBoard();
+		throw new cucumber.api.PendingException();
+	}
+	
+	// ***********************************************
+	// ProvideSelectUserName
+	// ***********************************************
+	@Given("A new game is initializing")
+	public void a_new_game_is_initializing_PSU() {
+		// Write code here that turns the phrase above into concrete actions
+		// Check status
+		throw new cucumber.api.PendingException();
+	}
+	
+	@Given("Next player to set user name is {string}")
+	public void next_player_to_set_user_name_is(String string) {
+	    // Write code here that turns the phrase above into concrete actions
+		String toCompare;
+		if(QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove().hasGameAsBlack()) {
+			toCompare = "black";
+		}else {
+			toCompare = "white";
+		}
+		assertEquals(string, toCompare);
+	    throw new cucumber.api.PendingException();
+	}
+	
+	@Given("There is existing user {string}")
+	public void there_is_existing_user(String string) {
+	    // Write code here that turns the phrase above into concrete actions
+		String toCompare;
+		if(QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove().hasGameAsBlack()) {
+			toCompare = "black";
+		}else {
+			toCompare = "white";
+		}
+		assertEquals(string, toCompare);
+	    throw new cucumber.api.PendingException();
+	}
+
+	@When("The player selects existing {string}")
+	public void the_player_selects_existing(String string) {
+	    // Write code here that turns the phrase above into concrete actions
+		String toCompare;
+		if(QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove().hasGameAsBlack()) {
+			toCompare = "black";
+		}else {
+			toCompare = "white";
+		}
+		assertEquals(string, toCompare);
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("The name of player {string} in the new game shall be {string}")
+	public void the_name_of_player_in_the_new_game_shall_be(String string, String string2) {
+	    // Write code here that turns the phrase above into concrete actions
+		String toCompare;
+		if(QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove().hasGameAsBlack()) {
+			toCompare = "black";
+		}else {
+			toCompare = "white";
+		}
+		assertEquals(string, toCompare);
+	    throw new cucumber.api.PendingException();
+	}
+	
+	@Given("There is no existing user {string}")
+	public void there_is_no_existing_user(String string) {
+	    // Write code here that turns the phrase above into concrete actions
+		String toCompare;
+		if(QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove().hasGameAsBlack()) {
+			toCompare = "black";
+		}else {
+			toCompare = "white";
+		}
+		assertEquals(string, toCompare);
+	    throw new cucumber.api.PendingException();
+	}
+
+	@When("The player provides new user name: {string}")
+	public void the_player_provides_new_user_name(String string) {
+	    // Write code here that turns the phrase above into concrete actions
+		String toCompare;
+		if(QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove().hasGameAsBlack()) {
+			toCompare = "black";
+		}else {
+			toCompare = "white";
+		}
+		assertEquals(string, toCompare);
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("The player shall be warned that {string} already exists")
+	public void the_player_shall_be_warned_that_already_exists(String string) {
+	    // Write code here that turns the phrase above into concrete actions
+		String toCompare;
+		if(QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove().hasGameAsBlack()) {
+			toCompare = "black";
+		}else {
+			toCompare = "white";
+		}
+		assertEquals(string, toCompare);
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("Next player to set user name shall be {string}")
+	public void next_player_to_set_user_name_shall_be(String string) {
+	    // Write code here that turns the phrase above into concrete actions
+		String toCompare;
+		if(QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove().hasGameAsBlack()) {
+			toCompare = "black";
+		}else {
+			toCompare = "white";
+		}
+		assertEquals(string, toCompare);
 	    throw new cucumber.api.PendingException();
 	}
 	
