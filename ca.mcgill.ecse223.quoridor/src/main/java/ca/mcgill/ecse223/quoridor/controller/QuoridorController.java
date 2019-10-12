@@ -1,13 +1,16 @@
 package ca.mcgill.ecse223.quoridor.controller;
+import java.io.*;
+import ca.mcgill.ecse223.quoridor.features.*;
+import ca.mcgill.ecse223.quoridor.model.Game;
 
 public class QuoridorController{
 	
 	/**
-	 * Feature:SavePosition
 	 * 
 	 * @author Bozhong Lu
+	 * Checks that file with specified name exists in my folder
 	 * @param filename
-	 * @return boolean
+	 * @return whether the file with the specified name exists
 	 */
 	public static boolean checkFileExistence(String filename) {
 		throw new UnsupportedOperationException();
@@ -18,22 +21,28 @@ public class QuoridorController{
 	 * 
 	 * @author Bozhong Lu
 	 * @param filename
-	 * @return void
+	 * @return String: the content of the new file;
+	 * @throws IOException 
 	 */
-	public static void saveGame(String filename) {
-		throw new UnsupportedOperationException();
+	// 1. Compute the string to be saved
+	// 2. Save to file 
+	// 3. Return the computed string 
+	public static String saveGame(Game game , String filename) throws IOException {
+		BufferedReader br = new BufferedReader(new FileReader(filename));
+		StringBuilder sb = new StringBuilder();
+	    String line = br.readLine();
+
+	    while (line != null) {
+	        sb.append(line);
+	        sb.append(System.lineSeparator());
+	        line = br.readLine();
+	    }
+	    String everything = sb.toString();
+	    br.close();
+	    return everything ;
+	    
 	}
 	
-	/**
-	 * Feature:SavePosition
-	 * 
-	 * @author Bozhong Lu
-	 * @param none
-	 * @return String
-	 */
-	public static String getSavedFile() {
-		throw new UnsupportedOperationException();
-	}
 	
 	/**
 	 * Feature:SavePosition

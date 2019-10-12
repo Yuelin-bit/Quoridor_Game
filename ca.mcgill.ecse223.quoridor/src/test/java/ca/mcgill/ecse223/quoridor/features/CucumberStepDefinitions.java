@@ -1,5 +1,8 @@
 package ca.mcgill.ecse223.quoridor.features;
 import static org.junit.Assert.*;
+
+import java.io.File;
+import java.io.IOException;
 import java.sql.Time;
 import java.util.List;
 import java.util.Map;
@@ -33,11 +36,13 @@ public class CucumberStepDefinitions {
 	private Player player2;
 	private Player currentPlayer;
 	private Game game;
+	
+	private String newContent ;
 
 	// ***********************************************
 	// Background step definitions
 	// ***********************************************
-
+	
 	@Given("^The game is not running$")
 	public void theGameIsNotRunning() {
 		initQuoridorAndBoard();
@@ -117,30 +122,44 @@ public class CucumberStepDefinitions {
 	 */
 	
 	@Given("No file {string} exists in the filesystem")
-	public void no_file_exists_in_the_filesystem(String string) {
+	public void no_file_exists_in_the_filesystem(String filename) throws IOException {
 	    // Write code here that turns the phrase above into concrete actions
-		assertEquals(false , QuoridorController.checkFileExistence(string));
+		if(QuoridorController.checkFileExistence(filename)) {
+			//delete file
+			File file = new File(filename);
+			String path = file.getCanonicalPath();
+			File filePath = new File(path);
+			filePath.delete();
+		}
 	    throw new cucumber.api.PendingException();
 	}
 
 	@When("The user initiates to save the game with name {string}")
-	public void the_user_initiates_to_save_the_game_with_name(String string) {
+	public void the_user_initiates_to_save_the_game_with_name(String string) throws IOException {
 	    // Write code here that turns the phrase above into concrete actions
-		QuoridorController.saveGame(string);
+		Game game = QuoridorApplication.getQuoridor().getCurrentGame();
+		newContent = QuoridorController.saveGame(game , string);
 	    throw new cucumber.api.PendingException();
 	}
 
 	@Then("A file with {string} shall be created in the filesystem")
-	public void a_file_with_shall_be_created_in_the_filesystem(String string) {
+	// Check that filename exists in file system
+	public void a_file_with_shall_be_created_in_the_filesystem(String filename) {
 	    // Write code here that turns the phrase above into concrete actions
-		assertEquals(string , QuoridorController.getSavedFile());
+		// Insert Code here that checks that there is a file with name: "filename"
+		assertEquals(true , QuoridorController.checkFileExistence(filename));
 	    throw new cucumber.api.PendingException();
 	}
 
 	@Given("File {string} exists in the filesystem")
-	public void file_exists_in_the_filesystem(String string) {
+	// Make file with filename in the file system
+	public void file_exists_in_the_filesystem(String filename) throws IOException {
 	    // Write code here that turns the phrase above into concrete actions
-		assertEquals(true , QuoridorController.checkFileExistence(string));
+		if(!QuoridorController.checkFileExistence(filename)) {
+			//create file
+			File file = new File(filename);
+			file.createNewFile();
+		}
 	    throw new cucumber.api.PendingException();
 	}
 
@@ -151,6 +170,9 @@ public class CucumberStepDefinitions {
 	    throw new cucumber.api.PendingException();
 	}
 
+	// Before: "a, b, c"
+	// After: "d, e, f, g"
+	// I know my new addition is "d, e, f, g"; - you just need to check file contains that string
 	@Then("File with {string} shall be updated in the filesystem")
 	public void file_with_shall_be_updated_in_the_filesystem(String string){
 	    // Write code here that turns the phrase above into concrete actions
@@ -178,13 +200,22 @@ public class CucumberStepDefinitions {
 		if(QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove().hasGameAsBlack()) {
 			Integer col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getColumn();
 			Integer row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
-			assertEquals(row , int1);
-			assertEquals(col , int2);
+			if(row!=int1 || col!=int2) {
+				Tile newTile = new Tile(int1,int2,QuoridorApplication.getQuoridor().getBoard());
+				Player currentPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
+				PlayerPosition aNewBlackPosition = new PlayerPosition(currentPlayer , newTile);
+				QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setBlackPosition(aNewBlackPosition);
+			}
 		}else {
 			Integer col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
 			Integer row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
-			assertEquals(row , int1);
-			assertEquals(col , int2);
+			if(row!=int1 || col!=int2) {
+				Tile newTile = new Tile(int1,int2,QuoridorApplication.getQuoridor().getBoard());
+				Player currentPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
+				PlayerPosition aNewWhitePosition = new PlayerPosition(currentPlayer , newTile);
+				QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setWhitePosition(aNewWhitePosition);
+			}
+			
 		}
 	    throw new cucumber.api.PendingException();
 	}
@@ -208,14 +239,23 @@ public class CucumberStepDefinitions {
 	}
 
 	@Given("A game position is supplied with wall coordinate {int}:{int}-{string}")
-	public void a_game_position_is_supplied_with_wall_coordinate(Integer int1, Integer int2, String string) {
+	public void a_game_position_is_supplied_with_wall_coordinate(Integer int1, Integer int2, String direction) {
 	    // Write code here that turns the phrase above into concrete actions
 		String di = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getWallDirection().toString();
 		Integer wrow = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getRow();
 		Integer wcol = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getColumn();
-		assertEquals(di , string);
-		assertEquals(wrow , int1);
-		assertEquals(wcol , int2);
+		if(wrow!=int1 || wcol!=int2 || di!=direction) {
+			int moveNumber = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getMoveNumber();
+			int roundNumber = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getRoundNumber();
+			Player currentPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
+			Board currentBoard = QuoridorApplication.getQuoridor().getBoard();
+			Tile newTargetTile = new Tile(int1 , int2 , currentBoard);
+			Game currentGame = QuoridorApplication.getQuoridor().getCurrentGame();
+			Wall owallPlaced = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getWallPlaced();
+			WallMove newWallmove = new WallMove(moveNumber,roundNumber,currentPlayer,
+					newTargetTile,currentGame,Direction.valueOf(direction),owallPlaced);
+			QuoridorApplication.getQuoridor().getCurrentGame().addMove(newWallmove);
+		}
 	    throw new cucumber.api.PendingException();
 	}
 
