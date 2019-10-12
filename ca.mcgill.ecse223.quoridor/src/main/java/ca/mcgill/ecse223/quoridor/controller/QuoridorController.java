@@ -7,6 +7,7 @@ public class QuoridorController{
 	
 	/**
 	 * Feature:laod game
+	 * This method load a game by input a filename
 	 * 
 	 * @author Zirui He
 	 * @param name of the file 
@@ -20,6 +21,8 @@ public class QuoridorController{
 	
 	/**
 	 * Feature:laod game
+	 * This method validate if all the pawn and wall position at board 
+	 * is with the board boundary 
 	 * 
 	 * @author Zirui He 
 	 * @return boolean
@@ -32,6 +35,8 @@ public class QuoridorController{
 	
 	/**
 	 * Feature:laod game
+	 * This method return the result of loading game by showing a string
+	 * "Failed to load game" or "Successfully load game!"
 	 * 
 	 * @author Zirui He
 	 * @return the string shown on the UI
@@ -44,6 +49,7 @@ public class QuoridorController{
 	
 	/**
 	 * Feature:switch player
+	 * This method let player to make a move in the game
 	 * 
 	 * @author Zirui He
 	 * @param player
@@ -57,6 +63,7 @@ public class QuoridorController{
 	
 	/**
 	 * Feature: switch player 
+	 * This method start a clock to count the time passed for the player
 	 * 
 	 * @author Zirui He
 	 * @param player
@@ -69,6 +76,7 @@ public class QuoridorController{
 	
 	/**
 	 * Feature: switch player
+	 * This method stop a clock the player
 	 * 
 	 * @author Zirui He
 	 * @param player
@@ -80,65 +88,20 @@ public class QuoridorController{
 	}
 	
 	/**
-	 * This is a static method which takes two User parameters to initialize a new game. 
-	 * It will return a boolean value to indicate if a new game is successfully initialized.
+	 * Feature: switch player
+	 * This method test if the clock of the player is still running
 	 * 
-	 * @author Pengnan Fan
-	 * @param user1 The first player who will join in the game
-	 * @param user2 The second player who will join in the game
-	 * @param thinking_time_minute Total thinking time (minute part) per player
-	 * @param thinking_time_second Total thinking time (second part) per player
-	 * @return A boolean value to indicate if a new game is initialized successfully
-	 * 
+	 * @author Zirui He
+	 * @param player
+	 * @return boolean
 	 */
-	public static boolean initializeNewGame(User user1, User user2, int thinking_time_minute, int thinking_time_second) {
-		//TODO: To be implemented
+	public static boolean clockIsRunning(Player player) {
+		//TO-DO: Write logic to load game
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * This is a static method which takes an game and a new name, then set the latter as 
-	 * the name of the white player of the former. It will return a boolean value to 
-	 * indicate if the name is updated successfully.
-	 * 
-	 * @author Pengnan Fan
-	 * @param game The game of the specific white player
-	 * @param name The new name 
-	 * @return A boolean value to indicate if the name of the user has been updated
-	 */
-	public static boolean setNewNameWhitePlayer(Game game, String name) {
-		//TODO: To be implemented
-		throw new UnsupportedOperationException();
-	}
-	
-	/**
-	 * This is a static method which takes an game and a new name, then set the latter as 
-	 * the name of the black player of the former. It will return a boolean value to 
-	 * indicate if the name is updated successfully.
-	 * 
-	 * @author Pengnan Fan
-	 * @param game The game of the specific black player
-	 * @param name The new name 
-	 * @return A boolean value to indicate if the name of the user has been updated
-	 */
-	public static boolean setNewNameBlackPlayer(Game game, String name) {
-		//TODO: To be implemented
-		throw new UnsupportedOperationException();
-	}
 
-	/**
-	 * This is a static method which check the status of a game. It will return a GameStatus
-	 * value of the status of a certain status.
-	 * 
-	 * @author Pengnan Fan
-	 * @param game The game to be checked
-	 * @return A GameStatus value of the status of the game to be checked
-	 */
-	public static GameStatus getGameStatus(Game game) {
-		//TODO: To be implemented
-		throw new UnsupportedOperationException();
-	}
-	
+
 	/**
 	 * This static method sets a player's total thinking time by taking two inputs
 	 * in the form (min:sec).
@@ -216,13 +179,86 @@ public class QuoridorController{
 
 	/**
 	 * This method checks the clock of the current player to count down.
-	 * It returns true if the clock is running.
+	 * It returns true if the clock is counting down.
 	 * 
 	 * @author Sun, Gengyi
 	 * @param player
 	 * @return A flag indicating whether the method successfully launched.
 	 */	
-	public static boolean clockIsRunning(Player player) {
+	public static boolean clockIsCountingDown(Player player) {
+		throw new UnsupportedOperationException();
+	}
+	
+	/**
+	 * This is a static method which takes two User parameters to initialize a new game. 
+	 * It will return a boolean value to indicate if a new game is successfully initialized.
+	 * 
+	 * @author Pengnan Fan
+	 * @param user1 The first player who will join in the game
+	 * @param user2 The second player who will join in the game
+	 * @param thinking_time_minute Total thinking time (minute part) per player
+	 * @param thinking_time_second Total thinking time (second part) per player
+	 * @return A boolean value to indicate if a new game is initialized successfully
+	 * 
+	 */
+	public static boolean initializeNewGame(User user1, User user2, int thinking_time_minute, int thinking_time_second) {
+		//TODO: To be implemented
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * This is a static method which takes a player and a new name, then set the latter as 
+	 * the name of the former. It will return a boolean value to indicate if the 
+	 * name is updated successfully.
+	 * 
+	 * @author Pengnan Fan
+	 * @param game The game of the specific white player
+	 * @param name The new name 
+	 * @return A boolean value to indicate if the name of the user has been updated
+	 */
+	public static boolean setUserName(Player player, String name) {
+		//TODO: To be implemented
+		throw new UnsupportedOperationException();
+	}
+	
+	/**
+	 * This is a static method which takes a player. Then it will allows the player to select
+	 * his/her user name. It will return a boolean value to indicate if the name is updated 
+	 * successfully.
+	 * 
+	 * @author Pengnan Fan
+	 * @param game The game of the specific white player
+	 * @param name The new name 
+	 * @return A boolean value to indicate if the name of the user has been updated
+	 */
+	public static boolean selectUserName(Player player) {
+		//TODO: To be implemented
+		throw new UnsupportedOperationException();
+	}
+	
+	/**
+	 * This is a static method which check the status of a game. It will return a GameStatus
+	 * value of the status of a certain status.
+	 * 
+	 * @author Pengnan Fan
+	 * @param game The game to be checked
+	 * @return A GameStatus value of the status of the game to be checked
+	 */
+	public static GameStatus getGameStatus(Game game) {
+		//TODO: To be implemented
+		throw new UnsupportedOperationException();
+	}
+	
+	/**
+	 * This is a static method which link an user u and a player p. It will return a boolean
+	 * value to suggest if it is successful.
+	 * 
+	 * @param u The user to link
+	 * @param p The player to link
+	 * @return A boolean value to suggest if it is successful.
+	 */
+	public static boolean linkUserAndPlayer(User u, Player p) {
+		//TODO: To be implemented
 		throw new UnsupportedOperationException();
 	}
 	
