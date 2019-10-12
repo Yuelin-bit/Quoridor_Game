@@ -6,6 +6,7 @@ public class QuoridorController {
 	
 	/**
 	 * Feature:laod game
+	 * This method load a game by input a filename
 	 * 
 	 * @author Zirui He
 	 * @param name of the file 
@@ -19,6 +20,8 @@ public class QuoridorController {
 	
 	/**
 	 * Feature:laod game
+	 * This method validate if all the pawn and wall position at board 
+	 * is with the board boundary 
 	 * 
 	 * @author Zirui He 
 	 * @return boolean
@@ -31,6 +34,8 @@ public class QuoridorController {
 	
 	/**
 	 * Feature:laod game
+	 * This method return the result of loading game by showing a string
+	 * "Failed to load game" or "Successfully load game!"
 	 * 
 	 * @author Zirui He
 	 * @return the string shown on the UI
@@ -43,6 +48,7 @@ public class QuoridorController {
 	
 	/**
 	 * Feature:switch player
+	 * This method let player to make a move in the game
 	 * 
 	 * @author Zirui He
 	 * @param player
@@ -56,6 +62,7 @@ public class QuoridorController {
 	
 	/**
 	 * Feature: switch player 
+	 * This method start a clock to count the time passed for the player
 	 * 
 	 * @author Zirui He
 	 * @param player
@@ -68,6 +75,7 @@ public class QuoridorController {
 	
 	/**
 	 * Feature: switch player
+	 * This method stop a clock the player
 	 * 
 	 * @author Zirui He
 	 * @param player
@@ -80,6 +88,7 @@ public class QuoridorController {
 	
 	/**
 	 * Feature: switch player
+	 * This method test if the clock of the player is still running
 	 * 
 	 * @author Zirui He
 	 * @param player

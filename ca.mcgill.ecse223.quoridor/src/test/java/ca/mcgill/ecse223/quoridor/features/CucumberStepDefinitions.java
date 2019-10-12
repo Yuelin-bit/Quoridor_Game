@@ -231,7 +231,7 @@ public class CucumberStepDefinitions {
 
 	@Then("The load shall return an error") //what is return error
 	public void the_load_shall_return_an_error() {
-	    assertEquals(false, QuoridorController.getLoadResult());
+	    assertEquals("Failed to load game", QuoridorController.getLoadResult());
 	    throw new cucumber.api.PendingException();
 	}
 
