@@ -128,6 +128,7 @@ public class CucumberStepDefinitions {
 	 * are implemented
 	 * 
 	 */
+
 	
 	// ***********************************************
 	// Load Position
@@ -325,6 +326,107 @@ public class CucumberStepDefinitions {
 	}
 	
 
+	/*
+	 * Feature: Set total thinking time.
+	 */
+	@When ("{int}:{int} is set as the thinking time")
+	public void is_set_as_the_thinking_time(Integer int1, Integer int2) {
+		QuoridorController.setTotalThinkingTime(int1, int2);
+		throw new cucumber.api.PendingException();
+	}
+
+	@Then("Both players shall have {int}:{int} remaining time left")
+	public void both_players_shall_have_remaining_time_left(Integer int1, Integer int2) {
+		int minConversion = 60;
+		int secConversion = 1000;
+		long millisec = (int1 * minConversion + int2 ) * secConversion;
+		Time timeLeft = new Time(millisec);
+		assertEquals(Time.valueOf(timeLeft.toString()),Time.valueOf(QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer().getRemainingTime().toString()));
+		assertEquals(Time.valueOf(timeLeft.toString()),Time.valueOf(QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer().getRemainingTime().toString()));
+		throw new cucumber.api.PendingException();
+
+	}
+	/*
+	 * Feature: Initialize board
+	 */
+	@When ("The initialization of the board is initiated")
+	public void the_initialization_of_the_board_is_initiated() {
+		QuoridorController.initializeBoard();
+		throw new cucumber.api.PendingException();
+	}
+
+	@Then("It shall be white player to move")
+	public void it_shall_be_white_player_to_move() {		
+		boolean whiteToMove = false;
+		if(QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove().equals(QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer())) {
+			whiteToMove = true;
+		}
+		assertEquals(true,whiteToMove);
+		throw new cucumber.api.PendingException();
+
+	}
+
+	@Then("White's pawn shall be in its initial position")
+	public void white_s_pawn_shall_be_in_its_initial_position() {
+		//white starts from e9
+		int whiteRow = 9;
+		int whiteColumn = 'e';
+		int whiteCurrentRow = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
+		int whiteCurrentColumn = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
+		assertEquals(whiteRow,whiteCurrentRow);
+		assertEquals(whiteColumn,whiteCurrentColumn);
+		throw new cucumber.api.PendingException();
+
+	}
+	
+	@Then("Black's pawn shall be in its initial position")
+	public void black_s_pawn_shall_be_in_its_initial_position() {
+		//black starts from e1, e is column and 1 is row
+		int blackRow = 1;
+		int blackColumn = 'e';
+		int blackCurrentRow = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
+		int blackCurrentColumn = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getColumn();
+		assertEquals(blackRow,blackCurrentRow);
+		assertEquals(blackColumn,blackCurrentColumn);
+		throw new cucumber.api.PendingException();
+	}
+
+	@Then("All of White's walls shall be in stock")
+	public void all_of_White_s_walls_shall_be_in_stock() {
+		assertEquals(10,QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer().numberOfWalls());
+		throw new cucumber.api.PendingException();
+
+
+	}
+
+	@Then("All of Black's walls shall be in stock")
+	public void all_of_Black_s_walls_shall_be_in_stock() {
+		assertEquals(10,QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer().numberOfWalls());
+		throw new cucumber.api.PendingException();
+
+	}
+
+	//TODO: Duplicate controller method needed
+	@Then("White's clock shall be counting down")
+	public void white_s_clock_shall_be_counting_down() {
+		boolean clockIsRunning = 
+				QuoridorController.clockIsCountingDown(QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer());
+		assertEquals(true, clockIsRunning);
+		throw new cucumber.api.PendingException();
+
+	}
+
+	@Then("It shall be shown that this is White's turn")
+	public void it_shall_be_shown_that_this_is_White_s_turn() {
+		//This is a GUI related step. 
+		boolean whiteToMove = false;
+		if(QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove().equals(QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer())) {
+			whiteToMove = true;
+		}
+		assertEquals(true,whiteToMove);
+		throw new cucumber.api.PendingException();
+
+	}
 	// ***********************************************
 	// Clean up
 	// ***********************************************

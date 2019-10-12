@@ -6,7 +6,6 @@
 	 */package ca.mcgill.ecse223.quoridor.features;
 
 import org.junit.runner.RunWith;
-
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 
@@ -16,4 +15,5 @@ import io.cucumber.junit.CucumberOptions;
 		features = "src/test/resources",
 		glue = "ca.mcgill.ecse223.quoridor.features")
 public class CucumberTestsRunner {
+	
 }
