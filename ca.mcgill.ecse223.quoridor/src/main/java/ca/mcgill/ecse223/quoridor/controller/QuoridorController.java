@@ -7,8 +7,8 @@ public class QuoridorController {
 	 * Feature:DropWall
 	 * 
      * @author Yuelin Liu
-	 * @param tile
-	 * @return Whether the wall_candidate'tile is valid;
+	 * @param tile and dir Tile and direction to be check whether it is valid
+	 * @return Whether the wall_candidate with tile and dir is valid;
 	 * @exception UnsupportedOperationException
 	 *
 	 */
@@ -19,31 +19,31 @@ public class QuoridorController {
 	
 	
 	
-	
-	
 	/**
 	 * Feature:DropWall
 	 * 
      * @author Yuelin Liu
-	 * @param release the wall in hand
+	 * @param wallmove WallMove candidate to be released.
 	 * @return void
-	 *
+	 * @exception UnsupportedOperationException
 	 *
 	 */
-	public static void ReleaseWall() 
+	public static void ReleaseWall(WallMove wallmove) 
 	{	
 		//TODO: Write logic
 		throw new UnsupportedOperationException();
 	}
 	
 	
+	
+	
 	/**
 	 * Feature:MoveWall
 	 * 
 	 * @author Yuelin Liu
-	 * @param move the wall with specified direction
+	 * @param string String stands for the direction of the wall that is to be moved.
 	 * @return void
-	 *
+	 * @exception UnsupportedOperationException
 	 */
 	public static void MoveWall(String string)
 	{	
@@ -57,8 +57,8 @@ public class QuoridorController {
 	 * Feature:MoveWall
 	 * 
 	 * @author Yuelin Liu
-	 * @param Whether the wall_candidate is within the valid tile;
-	 * @return boolean
+	 * @param  a Integer that stands for the row or column of TargetTile.
+	 * @return (boolean)Whether the wall_candidate is within the valid tile;
 	 *
 	 */
 	public static boolean ExceedBoard(int a)
