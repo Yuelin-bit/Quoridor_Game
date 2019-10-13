@@ -134,7 +134,7 @@ public class CucumberStepDefinitions {
 	
 	@Given("The wall move candidate with {string} at position \\({int}, {int}) is valid")
 	public void the_wall_move_candidate_with_at_position_is_valid(String string, Integer int1, Integer int2) {	
-		
+			
 			Tile tile = new Tile(int1, int2, QuoridorApplication.getQuoridor().getBoard());
 			Player aPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
 			int a = QuoridorApplication.getQuoridor().getCurrentGame().getMoves().size();
@@ -155,7 +155,9 @@ public class CucumberStepDefinitions {
 			}
 			
 			WallMove wallmove = new WallMove(a, (a+1)/2, aPlayer, tile, QuoridorApplication.getQuoridor().getCurrentGame(), dir, newWallFromStock );
-			QuoridorController.verifyWallMoveValid(wallmove);	
+			if(QuoridorController.verifyWallMoveValid(wallmove)==false) {
+				Assert.fail();
+			}
 	}
 
 	
@@ -177,7 +179,8 @@ public class CucumberStepDefinitions {
 		Tile tile = new Tile(int1, int2, QuoridorApplication.getQuoridor().getBoard());
 		// not right
 		Assert.assertEquals(false, QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().setTargetTile(tile));
-		Assert.assertEquals(false, QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().setWallDirection(dir));	    
+		Assert.assertEquals(false, QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().setWallDirection(dir));	
+		
 	}
 	
 	
@@ -196,9 +199,9 @@ public class CucumberStepDefinitions {
 
 	@Then("It shall not be my turn to move")
 	public void it_shall_not_be_my_turn_to_move() {
-		Assert.assertEquals(true, QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove().hasNextPlayer());
+		Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getPlayer();
+		Assert.assertNotEquals(whitePlayer, QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove());
 	    
-	   
 	}
 	
 	
@@ -224,7 +227,9 @@ public class CucumberStepDefinitions {
 		}
 		
 		WallMove wallmove = new WallMove(a, (a+1)/2, aPlayer, tile, QuoridorApplication.getQuoridor().getCurrentGame(), dir, newWallFromStock );
-		QuoridorController.verifyWallMoveInvalid(wallmove);	
+		if(QuoridorController.verifyWallMoveInvalid(wallmove)==false) {
+			Assert.fail();
+		}
 }
 	    
 	
@@ -246,8 +251,9 @@ public class CucumberStepDefinitions {
 	@Then("It shall be my turn to move")
 	public void it_shall_be_my_turn_to_move() {
 		// if this is my turn to move, then it means I have not finished yet, thus there should not be a next player due to unfinished move
-		Assert.assertEquals(false, QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove().hasNextPlayer());
-	    
+		//Assert.assertEquals(false, QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove().hasNextPlayer());
+		Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getPlayer();
+		Assert.assertEquals(whitePlayer, QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove());
 	}
 
 	@Then("No wall move shall be registered with {string} at position \\({int}, {int})")
