@@ -19,4 +19,4 @@ Feature: Grab Wall
 		When I try to grab a wall from my stock
 		Then I shall be notified that I have no more walls
 		And I shall have no walls in my hand 
-		
+

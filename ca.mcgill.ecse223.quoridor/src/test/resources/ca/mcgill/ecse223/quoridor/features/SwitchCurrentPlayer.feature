@@ -20,5 +20,3 @@ Feature: Switch Current Player
       | player | other |
       | white  | black |
       | black  | white |
-      
-      
