@@ -15,4 +15,4 @@ Feature: Start New Game
   	Given The game is ready to start
   	When I start the clock
   	Then The game shall be running
-  	And The board shall be initialized
+
