@@ -1,6 +1,7 @@
 package ca.mcgill.ecse223.quoridor.features;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 import java.sql.Time;
 import java.util.ArrayList;
@@ -131,14 +132,401 @@ public class CucumberStepDefinitions {
 
 	
 	// ***********************************************
+	// StartNewGame
+	// ***********************************************
+	@When("A new game is being initialized")
+	public void a_new_game_is_being_initialized() {
+	    // Write code here that turns the phrase above into concrete actions
+		List<User> users = QuoridorApplication.getQuoridor().getUsers();
+		QuoridorController.initializeNewGame(users.get(0), users.get(1));
+		throw new cucumber.api.PendingException();
+	}
+
+	@When("White player chooses a username")
+	public void white_player_chooses_a_username() {
+	    // Write code here that turns the phrase above into concrete actions
+		QuoridorController.selectUserName(QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer());
+		throw new cucumber.api.PendingException();
+	}
+
+	@When("Black player chooses a username")
+	public void black_player_chooses_a_username() {
+	    // Write code here that turns the phrase above into concrete actions
+		QuoridorController.selectUserName(QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer());
+		throw new cucumber.api.PendingException();
+	}
+
+	@When("Total thinking time is set")
+	public void total_thinking_time_is_set() {
+	    // Write code here that turns the phrase above into concrete actions
+		QuoridorController.verifyTotalThinkingTime(QuoridorApplication.getQuoridor().getCurrentGame());
+		throw new cucumber.api.PendingException();
+	}
+
+	@Then("The game shall become ready to start")
+	public void the_game_shall_become_ready_to_start() {
+	    // Write code here that turns the phrase above into concrete actions
+		assertEquals(GameStatus.ReadyToStart, QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus());
+	    throw new cucumber.api.PendingException();
+	}
+	
+	@Given("The game is ready to start")
+	public void the_game_is_ready_to_start() {
+	    // Write code here that turns the phrase above into concrete actions
+		QuoridorController.verifyNewGame(QuoridorApplication.getQuoridor().getCurrentGame());
+		throw new cucumber.api.PendingException();
+	}
+
+	@When("I start the clock")
+	public void i_start_the_clock() {
+	    // Write code here that turns the phrase above into concrete actions
+	    QuoridorController.clockIsRunning(QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove());
+		throw new cucumber.api.PendingException();
+	}
+
+	@Then("The game shall be running")
+	public void the_game_shall_be_running() {
+	    // Write code here that turns the phrase above into concrete actions
+		assertEquals(GameStatus.Running, QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus());
+		throw new cucumber.api.PendingException();
+	}
+
+	@Then("The board shall be initialized")
+	public void the_board_shall_be_initialized() {
+	    // Write code here that turns the phrase above into concrete actions
+		QuoridorController.initializeBoard();
+	    throw new cucumber.api.PendingException();
+	}
+	
+	// ***********************************************
+	// ProvideSelectUserName
+	// ***********************************************
+	// Scenario: Select existing user name
+	@Given("Next player to set user name is {string}")
+	public void next_player_to_set_user_name_is(String string) {
+	    // Write code here that turns the phrase above into concrete actions
+		Game g = QuoridorApplication.getQuoridor().getCurrentGame();
+		Player next;
+		if(string=="black") {
+			next = g.getBlackPlayer();
+		}else {
+			next = g.getWhitePlayer();
+		}
+		QuoridorController.setNextPlayer(g, next);
+		throw new cucumber.api.PendingException();
+	}
+	
+	@Given("There is existing user {string}")
+	public void there_is_existing_user(String string) {
+	    // Write code here that turns the phrase above into concrete actions
+		QuoridorApplication.getQuoridor().addUser(string);
+	    throw new cucumber.api.PendingException();
+	}
+	
+	@When("The player selects existing {string}")
+	public void the_player_selects_existing(String string) {
+	    // Write code here that turns the phrase above into concrete actions
+		QuoridorController.linkUserAndPlayer(User.getWithName(string), QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove());
+	    throw new cucumber.api.PendingException();
+	}
+	
+	@Then("The name of player {string} in the new game shall be {string}")
+	public void the_name_of_player_in_the_new_game_shall_be(String string, String string2) {
+	    // Write code here that turns the phrase above into concrete actions
+		String n;
+		if (string=="white") {
+			n = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer().getUser().getName();
+		} else {
+			n = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer().getUser().getName();
+		}
+		assertEquals(string, n);
+	    throw new cucumber.api.PendingException();
+	}
+	
+	// Scenario: Create new user name
+//	@Given("Next player to set user name is {string}")
+//	public void next_player_to_set_user_name_is(String string) {
+//	    // Write code here that turns the phrase above into concrete actions
+//		Game g = QuoridorApplication.getQuoridor().getCurrentGame();
+//		Player next;
+//		if(string=="black") {
+//			next = g.getBlackPlayer();
+//		}else {
+//			next = g.getWhitePlayer();
+//		}
+//		g.getCurrentPosition().setPlayerToMove(next);
+//		throw new cucumber.api.PendingException();
+//	}
+	
+	@Given("There is no existing user {string}")
+	public void there_is_no_existing_user(String string) {
+	    // Write code here that turns the phrase above into concrete actions
+		QuoridorApplication.getQuoridor().removeUser(User.getWithName(string));
+	    throw new cucumber.api.PendingException();
+	}
+
+	@When("The player provides new user name: {string}")
+	public void the_player_provides_new_user_name(String string) {
+	    // Write code here that turns the phrase above into concrete actions
+		QuoridorApplication.getQuoridor().addUser(string);
+	    throw new cucumber.api.PendingException();
+	}
+	
+//	@Then("The name of player {string} in the new game shall be {string}")
+//	public void the_name_of_player_in_the_new_game_shall_be(String string, String string2) {
+//	    // Write code here that turns the phrase above into concrete actions
+//	    throw new cucumber.api.PendingException();
+//	}
+	
+	// User name already exists
+//	@Given("Next player to set user name is {string}")
+//	public void next_player_to_set_user_name_is(String string) {
+//	    // Write code here that turns the phrase above into concrete actions
+//		Game g = QuoridorApplication.getQuoridor().getCurrentGame();
+//		Player next;
+//		if(string=="black") {
+//			next = g.getBlackPlayer();
+//		}else {
+//			next = g.getWhitePlayer();
+//		}
+//		g.getCurrentPosition().setPlayerToMove(next);
+//		throw new cucumber.api.PendingException();
+//	}
+	
+//	@Given("There is existing user {string}")
+//	public void there_is_existing_user(String string) {
+//	    // Write code here that turns the phrase above into concrete actions
+//	    throw new cucumber.api.PendingException();
+//	}
+
+//	@When("The player provides new user name: {string}")
+//	public void the_player_provides_new_user_name(String string) {
+//	    // Write code here that turns the phrase above into concrete actions
+//		QuoridorController.setUserName(QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove(), string);
+//	    throw new cucumber.api.PendingException();
+//	}
+	
+	@Then("The player shall be warned that {string} already exists")
+	public void the_player_shall_be_warned_that_already_exists(String string) {
+	    // Write code here that turns the phrase above into concrete actions
+		//TODO
+		assertEquals(null, User.getWithName(string));
+	    throw new cucumber.api.PendingException();
+	}
+	
+	@Then("Next player to set user name shall be {string}")
+	public void next_player_to_set_user_name_shall_be(String string) {
+	    // Write code here that turns the phrase above into concrete actions
+		Game g = QuoridorApplication.getQuoridor().getCurrentGame();
+		Player p;
+		if(string=="white") {
+			p = g.getWhitePlayer();
+		} else {
+			p = g.getBlackPlayer();
+		}
+		g.getCurrentPosition().setPlayerToMove(p);
+	    throw new cucumber.api.PendingException();
+	}
+
+	
+
+	
+	
+	// ***********************************************
 	// Load Position
 	// ***********************************************
 	@When("I initiate to load a saved game {string}")
 	public void i_initiate_to_load_a_saved_game(String string) {
 		QuoridorController.loadGame(string);
 	    throw new cucumber.api.PendingException();
+
+	@When("The position to load is valid")
+	public void the_position_to_load_is_valid() {
+	    assertEquals(true, QuoridorController.validatePosition());
+	    throw new cucumber.api.PendingException();
 	}
 
+
+	@Then("It shall be {string}'s turn")
+	public void it_shall_be_s_turn(String string) {
+		String toCompare;
+		if(QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove().hasGameAsBlack()) {
+			toCompare = "black";
+		}else {
+			toCompare = "white";
+		}
+		assertEquals(string, toCompare);
+	    throw new cucumber.api.PendingException();
+	}
+		
+
+	@Then("{string} shall be at {int}:{int}")
+	public void shall_be_at(String string, Integer int1, Integer int2) {
+		Integer row;
+		Integer col;
+		if(string == "black") {
+			row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
+			col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getColumn();
+		}else {
+			row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
+			col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
+		}
+		assertEquals(row, int1);
+		assertEquals(col, int2);
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("{string} shall have a vertical wall at {int}:{int}")
+	public void shall_have_a_vertical_wall_at(String string, Integer int1, Integer int2) {
+		Integer col;
+		Integer row;
+		Direction wallDirection;
+		if(string == "black") {
+			wallDirection = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer().getWall(0).getMove().getWallDirection();
+			col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard(0).getMove().getTargetTile().getColumn();
+			row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard(0).getMove().getTargetTile().getRow();
+		}else {
+			wallDirection = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer().getWall(0).getMove().getWallDirection();
+			col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard(0).getMove().getTargetTile().getColumn();
+			row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard(0).getMove().getTargetTile().getRow();
+		}
+		assertEquals(Direction.Vertical, wallDirection);
+		assertEquals(row, int1);
+		assertEquals(col, int2);
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("{string} shall have a horizontal wall at {int}:{int}")
+	public void shall_have_a_horizontal_wall_at(String string, Integer int1, Integer int2) {
+		Integer col;
+		Integer row;
+		Direction wallDirection;
+		if(string == "black") {
+			wallDirection = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer().getWall(0).getMove().getWallDirection();
+			col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard(0).getMove().getTargetTile().getColumn();
+			row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard(0).getMove().getTargetTile().getRow();
+		}else {
+			wallDirection = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer().getWall(0).getMove().getWallDirection();
+			col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard(0).getMove().getTargetTile().getColumn();
+			row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard(0).getMove().getTargetTile().getRow();
+		}
+		assertEquals(Direction.Horizontal, wallDirection);
+		assertEquals(row, int1);
+		assertEquals(col, int2);
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("Both players shall have {int} in their stacks")
+	public void both_players_shall_have_in_their_stacks(Integer int1) {
+	    Integer blackwall = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer().getWalls().size();
+	    Integer whitewall = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer().getWalls().size();
+	    assertEquals(blackwall, int1);
+	    assertEquals(whitewall, int1);
+	    throw new cucumber.api.PendingException();
+	}
+
+	@When("The position to load is invalid")
+	public void the_position_to_load_is_invalid() {
+		assertEquals(false, QuoridorController.validatePosition());
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("The load shall return an error") //what is return error
+	public void the_load_shall_return_an_error() {
+	    assertEquals("Failed to load game", QuoridorController.getLoadResult());
+	    throw new cucumber.api.PendingException();
+	}
+
+	
+	
+	// ***********************************************
+	// Switch Player
+	// ***********************************************
+	@Given("The player to move is {string}")
+	public void the_player_to_move_is_white(String string) {
+		Player player;
+		if (string == "white") {
+			player = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
+			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(player);
+		}else {
+			player = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
+			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(player);
+		}
+	}
+
+	@Given("The clock of {string} is running") 
+	public void the_clock_of_is_running(String string) {
+		Player player;
+		if(string == "black") {
+			player = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
+		}else {
+			player = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
+		}
+		QuoridorController.startClock(player);
+	}
+
+	@Given("The clock of {string} is stopped")
+	public void the_clock_of_is_stopped(String string) {
+		Player player;
+		if(string == "black") {
+			player = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
+		}else {
+			player = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
+		}
+		QuoridorController.stopClock(player);
+	}
+
+	@When("Player {string} completes his move") // how to check one has complete move? just create a move method in controller
+	public void player_completes_his_move(String string) {
+		Player player;
+		if(string == "black") {
+			player = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
+		}else {
+			player = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
+		}
+	    QuoridorController.makeMove(player);
+	}
+
+	@Then("The user interface shall be showing it is {string} turn")
+	public void the_user_interface_shall_be_showing_it_is_turn(String string) {
+	    
+	}
+	
+	@Then("The clock of {string} shall be stopped")
+	public void the_clock_of_shall_be_stopped(String string) {
+		Player player;
+		if(string == "black") {
+			player = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
+		}else {
+			player = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
+		}
+		assertEquals(false, QuoridorController.clockIsRunning(player));
+	}
+
+	@Then("The clock of {string} shall be running")
+	public void the_clock_of_shall_be_running(String string) {
+		Player player;
+		if(string == "black") {
+			player = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
+		}else {
+			player = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
+		}
+		assertEquals(true, QuoridorController.clockIsRunning(player));
+	}
+
+	@Then("The next player to move shall be {string}")
+	public void the_next_player_to_move_shall_be(String string) {
+		String toCompare;	
+		Player player = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove().getNextPlayer();
+		if(player.hasGameAsBlack()) {
+			toCompare = "black";
+		}else {
+			toCompare = "white";
+		}
+		assertEquals(string, toCompare);
+
+	}
+	
 	@When("The position to load is valid")
 	public void the_position_to_load_is_valid() {
 	    assertEquals(true, QuoridorController.validatePosition());
@@ -325,6 +713,106 @@ public class CucumberStepDefinitions {
 		assertEquals(string, toCompare);
 	}
 	
+
+	/*
+	 * Feature: Set total thinking time.
+	 */
+	@When ("{int}:{int} is set as the thinking time")
+	public void is_set_as_the_thinking_time(Integer int1, Integer int2) {
+		QuoridorController.setTotalThinkingTime(int1, int2);
+		throw new cucumber.api.PendingException();
+	}
+
+	@Then("Both players shall have {int}:{int} remaining time left")
+	public void both_players_shall_have_remaining_time_left(Integer int1, Integer int2) {
+		int minConversion = 60;
+		int secConversion = 1000;
+		long millisec = (int1 * minConversion + int2 ) * secConversion;
+		Time timeLeft = new Time(millisec);
+		assertEquals(Time.valueOf(timeLeft.toString()),Time.valueOf(QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer().getRemainingTime().toString()));
+		assertEquals(Time.valueOf(timeLeft.toString()),Time.valueOf(QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer().getRemainingTime().toString()));
+		throw new cucumber.api.PendingException();
+
+	}
+	/*
+	 * Feature: Initialize board
+	 */
+	@When ("The initialization of the board is initiated")
+	public void the_initialization_of_the_board_is_initiated() {
+		QuoridorController.initializeBoard();
+		throw new cucumber.api.PendingException();
+	}
+
+	@Then("It shall be white player to move")
+	public void it_shall_be_white_player_to_move() {		
+		boolean whiteToMove = false;
+		if(QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove().equals(QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer())) {
+			whiteToMove = true;
+		}
+		assertEquals(true,whiteToMove);
+		throw new cucumber.api.PendingException();
+
+	}
+
+	@Then("White's pawn shall be in its initial position")
+	public void white_s_pawn_shall_be_in_its_initial_position() {
+		//white starts from e9
+		int whiteRow = 9;
+		int whiteColumn = 'e';
+		int whiteCurrentRow = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
+		int whiteCurrentColumn = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
+		assertEquals(whiteRow,whiteCurrentRow);
+		assertEquals(whiteColumn,whiteCurrentColumn);
+		throw new cucumber.api.PendingException();
+
+	}
+	
+	@Then("Black's pawn shall be in its initial position")
+	public void black_s_pawn_shall_be_in_its_initial_position() {
+		//black starts from e1, e is column and 1 is row
+		int blackRow = 1;
+		int blackColumn = 'e';
+		int blackCurrentRow = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
+		int blackCurrentColumn = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getColumn();
+		assertEquals(blackRow,blackCurrentRow);
+		assertEquals(blackColumn,blackCurrentColumn);
+		throw new cucumber.api.PendingException();
+	}
+
+	@Then("All of White's walls shall be in stock")
+	public void all_of_White_s_walls_shall_be_in_stock() {
+		assertEquals(10,QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer().numberOfWalls());
+		throw new cucumber.api.PendingException();
+
+
+	}
+
+	@Then("All of Black's walls shall be in stock")
+	public void all_of_Black_s_walls_shall_be_in_stock() {
+		assertEquals(10,QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer().numberOfWalls());
+		throw new cucumber.api.PendingException();
+
+	}
+
+	//TODO: Duplicate controller method needed
+	@Then("White's clock shall be counting down")
+	public void white_s_clock_shall_be_counting_down() {
+		boolean clockIsRunning = 
+				QuoridorController.clockIsCountingDown(QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer());
+		assertEquals(true, clockIsRunning);
+		throw new cucumber.api.PendingException();
+
+	}
+
+	@Then("It shall be shown that this is White's turn")
+	public void it_shall_be_shown_that_this_is_White_s_turn() {
+		//This is a GUI related step. 
+		boolean whiteToMove = false;
+		if(QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove().equals(QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer())) {
+			whiteToMove = true;
+		}
+		assertEquals(true,whiteToMove);
+		throw new cucumber.api.PendingException();
 
 	/*
 	 * Feature: Set total thinking time.
