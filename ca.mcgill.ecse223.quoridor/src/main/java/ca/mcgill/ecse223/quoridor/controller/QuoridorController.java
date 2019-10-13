@@ -118,12 +118,13 @@ public class QuoridorController{
 	}
 	
 	/**
-	 * Feature: switch player
-	 * This method test if the clock of the player is still running
+	 * Feature: switch player & InitialzeBoard
+	 * This method test if the clock of the player is still running.
+	 * It returns true if the clock is counting down.
 	 * 
-	 * @author Zirui He
+	 * @author Zirui He & Gengyi
 	 * @param player
-	 * @return boolean
+	 * @return A flag indicating whether the method successfully launched.
 	 */
 	public static boolean clockIsRunning(Player player) {
 		//TO-DO: Write logic to load game
@@ -133,6 +134,7 @@ public class QuoridorController{
 
 
 	/**
+	 * Feature: SetTotalThinkingTime
 	 * This static method sets a player's total thinking time by taking two inputs
 	 * in the form (min:sec).
 	 * It returns true if setting is successful.
@@ -146,6 +148,7 @@ public class QuoridorController{
 		throw new UnsupportedOperationException();
 	}
 	/**
+	 * Feature: InitialzeBoard
 	 * This method initialize a new board with 9*9 tiles. Then it 
 	 * initializes pawns and walls for the players. Finally it sets
 	 * the same thinking time for both players. The white player will
@@ -160,6 +163,7 @@ public class QuoridorController{
 	}
 
 	/**
+	 * Feature: InitialzeBoard
 	 * This static method set the white player's pawn to initial location(e9).
 	 * It returns true if the initiating is successful.
 	 * 
@@ -171,6 +175,7 @@ public class QuoridorController{
 		throw new UnsupportedOperationException();
 	}
 	/**
+	 * Feature: InitialzeBoard
 	 * This static method sets the black player's pawn to initial position(e1).
 	 * It returns true if the initiating is successful.
 	 * 
@@ -182,6 +187,7 @@ public class QuoridorController{
 		throw new UnsupportedOperationException();
 	}
 	/**
+	 * Feature: InitialzeBoard
 	 * This static method initializes initial number of walls left for the black player, 
 	 * contains all of them in a list.
 	 * It returns true if the initiating is successful.
@@ -194,7 +200,7 @@ public class QuoridorController{
 		throw new UnsupportedOperationException();
 	}
 	/**
-	 * 
+	 * Feature: InitialzeBoard
 	 * This static method initializes initial number of walls left for the white player,
 	 * contains all of them in a list.
 	 * It returns true if the initiating is successful.
@@ -205,107 +211,6 @@ public class QuoridorController{
 	 */
 	public static boolean initializeWhiteWall(Player whitePlayer) {
 			throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * This method checks the clock of the current player to count down.
-	 * It returns true if the clock is counting down.
-	 * 
-	 * @author Sun, Gengyi
-	 * @param player
-	 * @return A flag indicating whether the method successfully launched.
-	 */	
-	public static boolean clockIsCountingDown(Player player) {
-		throw new UnsupportedOperationException();
-	}
-
-
-
-	/**
-	 * This static method sets a player's total thinking time by taking two inputs
-	 * in the form (min:sec).
-	 * It returns true if setting is successful.
-	 * 
-	 * @author Sun, Gengyi
-	 * @param min
-	 * @param sec
-	 * @return A flag indicating whether the method successfully launched.
-	 */
-	public static boolean setTotalThinkingTime(Integer min, Integer sec) {
-		throw new UnsupportedOperationException();
-	}
-	/**
-	 * This method initialize a new board with 9*9 tiles. Then it 
-	 * initializes pawns and walls for the players. Finally it sets
-	 * the same thinking time for both players. The white player will
-	 * perform a movement first.
-	 * It returns true if the initiating is successful.
-	 * 
-	 * @author Sun, Gengyi
-	 * @return A flag indicating whether the method successfully launched.
-	 */
-	public static boolean initializeBoard() {
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * This static method set the white player's pawn to initial location(e9).
-	 * It returns true if the initiating is successful.
-	 * 
-	 * @author Sun, Gengyi
-	 * @param whitePlayer
-	 * @return A flag indicating whether the method successfully launched.
-	 */
-	public static boolean initializeWhitePawn(Player whitePlayer) {
-		throw new UnsupportedOperationException();
-	}
-	/**
-	 * This static method sets the black player's pawn to initial position(e1).
-	 * It returns true if the initiating is successful.
-	 * 
-	 * @author Sun, Gengyi
-	 * @param blackPlayer
-	 * @return A flag indicating whether the method successfully launched.
-	 */
-	public static boolean initializedBlackPawn(Player blackPlayer) {
-		throw new UnsupportedOperationException();
-	}
-	/**
-	 * This static method initializes initial number of walls left for the black player, 
-	 * contains all of them in a list.
-	 * It returns true if the initiating is successful.
-	 * 
-	 * @author Sun, Gengyi
-	 * @param blackPlayer
-	 * @return A flag indicating whether the method successfully launched.
-	 */
-	public static boolean initializeBlackWall(Player blackPlayer) {
-		throw new UnsupportedOperationException();
-	}
-	/**
-	 * 
-	 * This static method initializes initial number of walls left for the white player,
-	 * contains all of them in a list.
-	 * It returns true if the initiating is successful.
-	 * 
-	 * @author Sun, Gengyi
-	 * @param whitePlayer
-	 * @return A flag indicating whether the method successfully launched.
-	 */
-	public static boolean initializeWhiteWall(Player whitePlayer) {
-			throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * This method checks the clock of the current player to count down.
-	 * It returns true if the clock is counting down.
-	 * 
-	 * @author Sun, Gengyi
-	 * @param player
-	 * @return A flag indicating whether the method successfully launched.
-	 */	
-	public static boolean clockIsCountingDown(Player player) {
-		throw new UnsupportedOperationException();
 	}
 	
 	/**
@@ -382,6 +287,7 @@ public class QuoridorController{
 	 * This is a static method which link an user u and a player p. It will return a boolean
 	 * value to suggest if it is successful.
 	 * 
+   * @author Pengnan Fan
 	 * @param u The user to link
 	 * @param p The player to link
 	 * @return A boolean value to suggest if it is successful.
