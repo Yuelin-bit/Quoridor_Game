@@ -9,6 +9,34 @@ public class QuoridorController {
 	 * Feature:DropWall
 	 * 
      * @author Yuelin Liu
+	 * @param wallmove WallMove candidate to be check whether it is valid and set it.
+	 * @return boolean
+	 * @exception UnsupportedOperationException
+	 *
+	 */
+	public static boolean verifyWallMoveValid(WallMove wallmove) {
+		throw new UnsupportedOperationException();
+	}
+	
+	
+	/**
+	 * Feature:DropWall
+	 * 
+     * @author Yuelin Liu
+	 * @param wallmove WallMove candidate to be check whether it is invalid and set it
+	 * @return boolean
+	 * @exception UnsupportedOperationException
+	 *
+	 */
+	public static boolean verifyWallMoveInvalid(WallMove wallmove) {
+		throw new UnsupportedOperationException();
+	}
+	
+	
+	/**
+	 * Feature:DropWall
+	 * 
+     * @author Yuelin Liu
 	 * @param wallmove WallMove candidate to be released.
 	 * @return void
 	 * @exception UnsupportedOperationException
