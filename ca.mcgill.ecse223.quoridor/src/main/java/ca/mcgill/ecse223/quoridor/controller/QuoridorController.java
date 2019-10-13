@@ -61,7 +61,7 @@ public class QuoridorController {
 	 * @return (boolean)Whether the wall_candidate exceeds the valid tile;
 	 *
 	 */
-	public static boolean ExceedBoard(int a)
+	public static Tile getNonEdgeTile(String string, Tile tile)
 	{	
 		//TODO: Write logic
 		throw new UnsupportedOperationException();
