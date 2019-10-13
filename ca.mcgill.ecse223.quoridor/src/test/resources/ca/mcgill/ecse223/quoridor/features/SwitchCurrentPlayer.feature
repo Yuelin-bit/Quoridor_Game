@@ -7,7 +7,6 @@ Feature: Switch Current Player
     Given The game is running
 
   Scenario Outline: Switch current player
-
     Given The player to move is "<player>"
     And The clock of "<player>" is running
     And The clock of "<other>" is stopped

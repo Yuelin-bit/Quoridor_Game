@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"ca.mcgill.ecse223.quoridor.controller","l":"QuoridorController"}]

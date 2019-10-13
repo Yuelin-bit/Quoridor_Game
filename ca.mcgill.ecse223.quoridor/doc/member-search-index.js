@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"ca.mcgill.ecse223.quoridor.controller","c":"QuoridorController","l":"MoveWall(String)","url":"MoveWall(java.lang.String)"},{"p":"ca.mcgill.ecse223.quoridor.controller","c":"QuoridorController","l":"QuoridorController()","url":"%3Cinit%3E()"},{"p":"ca.mcgill.ecse223.quoridor.controller","c":"QuoridorController","l":"ReleaseWall()"}]
