@@ -1,7 +1,7 @@
 package ca.mcgill.ecse223.quoridor.controller;
 
 import ca.mcgill.ecse223.quoridor.model.*;
-import static ca.mcgill.ecse223.quoridor.model.Game.GameStatus;
+import ca.mcgill.ecse223.quoridor.model.Game.GameStatus;
 
 
 public class QuoridorController{
