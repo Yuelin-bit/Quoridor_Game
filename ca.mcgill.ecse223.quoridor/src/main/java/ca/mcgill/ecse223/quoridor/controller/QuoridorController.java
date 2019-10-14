@@ -9,6 +9,8 @@ public class QuoridorController {
 	/**
 	 * Feature:DropWall
 	 * 
+	 * I will check whether the WallMove candidate could be set at specified tile.
+	 * 
      * @author Yuelin Liu
 	 * @param wallmove WallMove candidate to be check whether it is valid and set it.
 	 * @return boolean
@@ -23,6 +25,9 @@ public class QuoridorController {
 	/**
 	 * Feature:DropWall
 	 * 
+	 * 
+	 * I will check whether the WallMove candidate could not be set at specified tile.
+	 * 
      * @author Yuelin Liu
 	 * @param wallmove WallMove candidate to be check whether it is invalid and set it
 	 * @return boolean
@@ -36,6 +41,8 @@ public class QuoridorController {
 	
 	/**
 	 * Feature:DropWall
+	 * 
+	 * An action to release the wall, to be more specific, set the wall candidate at certain tile.
 	 * 
      * @author Yuelin Liu
 	 * @param wallmove WallMove candidate to be released.
@@ -55,6 +62,7 @@ public class QuoridorController {
 	/**
 	 * Feature:MoveWall
 	 * 
+	 * An action to move the wall candidate from old position to new position.
 	 * @author Yuelin Liu
 	 * @param string String stands for the direction of the wall that is to be moved.
 	 * @return void
@@ -71,6 +79,7 @@ public class QuoridorController {
 	/**
 	 * Feature:MoveWall
 	 * 
+	 * I will check and make sure the wall candidate is not at the edge of the board in order to guarantee all walls are within the valid board.
 	 * @author Yuelin Liu
 	 * @param  string String stands for direction and tile Tile stands for the targetTile.
 	 * @return Tile that is not at the edge of Tile
@@ -87,6 +96,7 @@ public class QuoridorController {
 	/**
 	 * Feature:MoveWall
 	 * 
+	 * I will check and make sure the wall candidate is at the edge of the board and make sure it wont't go beyond.
 	 * @author Yuelin Liu
 	 * @param  string String stands for direction and tile Tile stands for the targetTile.
 	 * @return Tile that is at the edge of Tile
