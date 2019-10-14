@@ -1009,6 +1009,12 @@ public class CucumberStepDefinitions {
 		// ProvideSelectUserName
 		// ***********************************************
 		// Scenario: Select existing user name
+		@Given("A new game is initializing")
+		public void a_new_game_is_initializing() {
+			assertEquals(GameStatus.Initializing, QuoridorController.getGameStatus(QuoridorApplication.getQuoridor().getCurrentGame()));
+		    throw new cucumber.api.PendingException();
+		}
+		
 		@Given("Next player to set user name is {string}")
 		public void next_player_to_set_user_name_is(String string) {
 		    // Write code here that turns the phrase above into concrete actions
