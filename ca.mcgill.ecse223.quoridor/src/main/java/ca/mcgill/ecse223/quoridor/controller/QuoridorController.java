@@ -108,6 +108,7 @@ public class QuoridorController {
 	 * The wall shall be rotated over the board to {string}
 	 * A wall move candidate shall exist with {string} at position \\({int}, {int})
 	 * 
+	 * @param WallMove
 	 * @author Yujing Yang
 	 * @return boolean
 	 */
@@ -124,6 +125,7 @@ public class QuoridorController {
 	 * I shall have a wall in my hand over the board
 	 * The wall in my hand shall disappear from my stock
 	 * 
+	 * @param Wall
 	 * @author Yujing Yang
 	 * @return boolean
 	 */
@@ -550,5 +552,66 @@ public class QuoridorController {
 	 public static boolean clockIsCountingDown(Player player) {
 	  throw new UnsupportedOperationException();
 	 }
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 /**
+	  * This method checks the clock of the current player to count down.
+	  * It returns true if the clock is counting down.
+	  * 
+	  * @author Non
+	  * @param String string,Tile tile
+	  * @return boolean
+	  */ 
+	 public static boolean verifyPawnPosition(String string,Tile tile) {
+		 throw new UnsupportedOperationException();
+	 }
+	 
+	 /**
+	  * This method checks the clock of the current player to count down.
+	  * It returns true if the clock is counting down.
+	  * 
+	  * @author Non
+	  * @param String string,String string2
+	  * @return boolean
+	  */ 
+	 public static boolean verifythere_are_no_walls_from_the_player(String string,String string2) {
+		 throw new UnsupportedOperationException();
+	 }
 	
+	 
+	 /**
+	  * This method checks the clock of the current player to count down.
+	  * It returns true if the clock is counting down.
+	  * 
+	  * @author Non
+	  * @param String string
+	  * @return boolean
+	  */ 
+	 public static boolean verifytthe_opponent_is_not_from_the_player(String string) {
+		 throw new UnsupportedOperationException();
+	 }
+	 
+	 
+	 /**
+	  * This method checks the clock of the current player to count down.
+	  * It returns true if the clock is counting down.
+	  * 
+	  * @author Non
+	  * @param String string, String string2
+	  * @return boolean
+	  */ 
+	 public static boolean movePlayer(String string, String string2) {
+		 throw new UnsupportedOperationException();
+	 }
+	 
+	 
+	 
 }

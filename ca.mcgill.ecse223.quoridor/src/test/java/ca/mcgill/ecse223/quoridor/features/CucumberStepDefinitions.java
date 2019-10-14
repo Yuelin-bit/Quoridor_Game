@@ -199,8 +199,8 @@ public class CucumberStepDefinitions {
 
 	@Then("It shall not be my turn to move")
 	public void it_shall_not_be_my_turn_to_move() {
-		Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getPlayer();
-		Assert.assertNotEquals(whitePlayer, QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove());
+		Player aPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getPlayer();
+		Assert.assertNotEquals(aPlayer, QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove());
 	    
 	}
 	
@@ -252,8 +252,8 @@ public class CucumberStepDefinitions {
 	public void it_shall_be_my_turn_to_move() {
 		// if this is my turn to move, then it means I have not finished yet, thus there should not be a next player due to unfinished move
 		//Assert.assertEquals(false, QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove().hasNextPlayer());
-		Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getPlayer();
-		Assert.assertEquals(whitePlayer, QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove());
+		Player aPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getPlayer();
+		Assert.assertEquals(aPlayer, QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove());
 	}
 
 	@Then("No wall move shall be registered with {string} at position \\({int}, {int})")
@@ -1730,6 +1730,146 @@ public class CucumberStepDefinitions {
 			throw new cucumber.api.PendingException();
 
 		}
+		
+		
+		
+		
+		
+		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		//----------------------------------------------------------MovePlayer-------------------------------------------------------------------
+		
+		@Given("The player is located at {int}:{int}")
+		public void the_player_is_located_at(Integer int1, Integer int2) {
+			Tile tile = new Tile(int1, int2, QuoridorApplication.getQuoridor().getBoard());
+			Player aPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
+			String string;
+			Wall newWallFromStock;
+			//WallMove wallmove;
+			
+			
+			if(aPlayer.hasGameAsBlack()) {
+				string = "black";
+			}
+			else {
+				string = "white";
+			}	
+			QuoridorController.verifyPawnPosition(string,tile);
+			if(QuoridorController.verifyPawnPosition(string,tile)==false) {
+				Assert.fail();
+			}
+
+		}
+
+		@Given("There are no {string} walls {string} from the player")
+		public void there_are_no_walls_from_the_player(String string, String string2) {
+			
+			QuoridorController.verifythere_are_no_walls_from_the_player(string,string2);
+			if(QuoridorController.verifythere_are_no_walls_from_the_player(string,string2)==false) {
+				Assert.fail();
+			}
+			
+		    
+		}
+
+		@Given("The opponent is not {string} from the player")
+		public void the_opponent_is_not_from_the_player(String string) {
+		    
+			if(QuoridorController.verifytthe_opponent_is_not_from_the_player(string)==false) {
+				Assert.fail();
+			}
+			
+		}
+
+		@When("Player {string} initiates to move {string}")
+		public void player_initiates_to_move(String string, String string2) {
+			QuoridorController.movePlayer(string, string2);
+
+		}
+
+		@Then("The move {string} shall be {string}")
+		public void the_move_shall_be(String string, String string2) {
+			Assert.assertEquals(string, string2);
+		}
+
+		@Then("Player's new position shall be {int}:{int}")
+		public void player_s_new_position_shall_be(Integer int1, Integer int2) {
+			Assert.assertEquals(int1, int2);
+		}
+
+		@Then("The next player to move shall become {string}")
+		public void the_next_player_to_move_shall_become(String string) {
+			Assert.assertEquals(string, QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getWallDirection());
+		}
+
+		@Given("There is a {string} wall {string} from the player")
+		public void there_is_a_wall_from_the_player(String string, String string2) {
+			QuoridorController.verifythere_are_no_walls_from_the_player(string,string2);
+			if(QuoridorController.verifythere_are_no_walls_from_the_player(string,string2)==true) {
+				Assert.fail();
+			}
+		}
+
+		@Given("My opponent is not {string} from the player")
+		public void my_opponent_is_not_from_the_player(String string) {
+			if(QuoridorController.verifytthe_opponent_is_not_from_the_player(string)==true) {
+				Assert.fail();
+			}
+			
+		}
+
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	// ***********************************************
 	// Clean up
 	// ***********************************************
