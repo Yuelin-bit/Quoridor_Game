@@ -31,7 +31,7 @@ Feature: Move Wall
 
     Examples: 
       | dir        | row | col | side  | nrow | ncol |
-      | vertical   |   2 |   1 | left  |    2 |    3 |
+      | vertical   |   2 |   1 | left  |    2 |    1 |
       | horizontal |   2 |   8 | right |    2 |    8 |
       | vertical   |   1 |   6 | up    |    1 |    6 |
       | horizontal |   8 |   6 | down  |    8 |    6 |
