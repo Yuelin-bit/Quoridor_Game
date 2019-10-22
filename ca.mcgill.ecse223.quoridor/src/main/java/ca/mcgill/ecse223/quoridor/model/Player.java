@@ -252,56 +252,68 @@ public class Player
     wasSet = true;
     return wasSet;
   }
-  /* Code from template association_SetOptionalOneToOne */
+  /* Code from template association_SetOptionalOneToOptionalOne */
   public boolean setGameAsWhite(Game aNewGameAsWhite)
   {
     boolean wasSet = false;
-    if (gameAsWhite != null && !gameAsWhite.equals(aNewGameAsWhite) && equals(gameAsWhite.getWhitePlayer()))
+    if (aNewGameAsWhite == null)
     {
-      //Unable to setGameAsWhite, as existing gameAsWhite would become an orphan
+      Game existingGameAsWhite = gameAsWhite;
+      gameAsWhite = null;
+      
+      if (existingGameAsWhite != null && existingGameAsWhite.getWhitePlayer() != null)
+      {
+        existingGameAsWhite.setWhitePlayer(null);
+      }
+      wasSet = true;
       return wasSet;
     }
 
-    gameAsWhite = aNewGameAsWhite;
-    Player anOldWhitePlayer = aNewGameAsWhite != null ? aNewGameAsWhite.getWhitePlayer() : null;
-
-    if (!this.equals(anOldWhitePlayer))
+    Game currentGameAsWhite = getGameAsWhite();
+    if (currentGameAsWhite != null && !currentGameAsWhite.equals(aNewGameAsWhite))
     {
-      if (anOldWhitePlayer != null)
-      {
-        anOldWhitePlayer.gameAsWhite = null;
-      }
-      if (gameAsWhite != null)
-      {
-        gameAsWhite.setWhitePlayer(this);
-      }
+      currentGameAsWhite.setWhitePlayer(null);
+    }
+
+    gameAsWhite = aNewGameAsWhite;
+    Player existingWhitePlayer = aNewGameAsWhite.getWhitePlayer();
+
+    if (!equals(existingWhitePlayer))
+    {
+      aNewGameAsWhite.setWhitePlayer(this);
     }
     wasSet = true;
     return wasSet;
   }
-  /* Code from template association_SetOptionalOneToOne */
+  /* Code from template association_SetOptionalOneToOptionalOne */
   public boolean setGameAsBlack(Game aNewGameAsBlack)
   {
     boolean wasSet = false;
-    if (gameAsBlack != null && !gameAsBlack.equals(aNewGameAsBlack) && equals(gameAsBlack.getBlackPlayer()))
+    if (aNewGameAsBlack == null)
     {
-      //Unable to setGameAsBlack, as existing gameAsBlack would become an orphan
+      Game existingGameAsBlack = gameAsBlack;
+      gameAsBlack = null;
+      
+      if (existingGameAsBlack != null && existingGameAsBlack.getBlackPlayer() != null)
+      {
+        existingGameAsBlack.setBlackPlayer(null);
+      }
+      wasSet = true;
       return wasSet;
     }
 
-    gameAsBlack = aNewGameAsBlack;
-    Player anOldBlackPlayer = aNewGameAsBlack != null ? aNewGameAsBlack.getBlackPlayer() : null;
-
-    if (!this.equals(anOldBlackPlayer))
+    Game currentGameAsBlack = getGameAsBlack();
+    if (currentGameAsBlack != null && !currentGameAsBlack.equals(aNewGameAsBlack))
     {
-      if (anOldBlackPlayer != null)
-      {
-        anOldBlackPlayer.gameAsBlack = null;
-      }
-      if (gameAsBlack != null)
-      {
-        gameAsBlack.setBlackPlayer(this);
-      }
+      currentGameAsBlack.setBlackPlayer(null);
+    }
+
+    gameAsBlack = aNewGameAsBlack;
+    Player existingBlackPlayer = aNewGameAsBlack.getBlackPlayer();
+
+    if (!equals(existingBlackPlayer))
+    {
+      aNewGameAsBlack.setBlackPlayer(this);
     }
     wasSet = true;
     return wasSet;
@@ -324,17 +336,13 @@ public class Player
     }
     
     nextPlayer = null;
-    Game existingGameAsWhite = gameAsWhite;
-    gameAsWhite = null;
-    if (existingGameAsWhite != null)
+    if (gameAsWhite != null)
     {
-      existingGameAsWhite.delete();
+      gameAsWhite.setWhitePlayer(null);
     }
-    Game existingGameAsBlack = gameAsBlack;
-    gameAsBlack = null;
-    if (existingGameAsBlack != null)
+    if (gameAsBlack != null)
     {
-      existingGameAsBlack.delete();
+      gameAsBlack.setBlackPlayer(null);
     }
   }
 
