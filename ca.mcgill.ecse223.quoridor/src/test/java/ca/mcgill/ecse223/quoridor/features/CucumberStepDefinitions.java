@@ -1,7 +1,9 @@
 package ca.mcgill.ecse223.quoridor.features;
+
 import static org.junit.Assert.assertEquals;
 
 //import static org.junit.Assert.assertEquals;
+
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +20,7 @@ import ca.mcgill.ecse223.quoridor.model.GamePosition;
 import ca.mcgill.ecse223.quoridor.model.Player;
 import ca.mcgill.ecse223.quoridor.model.PlayerPosition;
 import ca.mcgill.ecse223.quoridor.model.*;
+import ca.mcgill.ecse223.quoridor.model.Quoridor;
 import ca.mcgill.ecse223.quoridor.model.Tile;
 import ca.mcgill.ecse223.quoridor.model.User;
 import ca.mcgill.ecse223.quoridor.model.Wall;
@@ -28,6 +31,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+
 
 public class CucumberStepDefinitions {
 
@@ -110,18 +114,14 @@ public class CucumberStepDefinitions {
 		// GUI-related feature -- TODO for later
 	}
 	
-	// ***********************************************
-	// Scenario and scenario outline step definitions
-	// ***********************************************
+	@Given("^A new game is initializing$")
+	public void aNewGameIsInitializing() throws Throwable {
+		initQuoridorAndBoard();
+		ArrayList<Player> players = createUsersAndPlayers("user1", "user2");
+		new Game(GameStatus.Initializing, MoveMode.PlayerMove, QuoridorApplication.getQuoridor());
+	}
 
-	/*
-	 * TODO Insert your missing step definitions here
-	 * 
-	 * Call the methods of the controller that will manipulate the model once they
-	 * are implemented
-	 * 
-	 */
-	
+
 	
 	////===============================================================================================================================
 	////*******************************************************************************************************************************
@@ -1869,7 +1869,7 @@ public class CucumberStepDefinitions {
 		
 		
 		
-		
+
 	// ***********************************************
 	// Clean up
 	// ***********************************************
@@ -1957,7 +1957,10 @@ public class CucumberStepDefinitions {
 		Tile player1StartPos = quoridor.getBoard().getTile(36);
 		Tile player2StartPos = quoridor.getBoard().getTile(44);
 		
-		Game game = new Game(GameStatus.Running, MoveMode.PlayerMove, players.get(0), players.get(1), quoridor);
+		Game game = new Game(GameStatus.Running, MoveMode.PlayerMove, quoridor);
+		game.setWhitePlayer(players.get(0));
+		game.setBlackPlayer(players.get(1));
+
 
 		PlayerPosition player1Position = new PlayerPosition(quoridor.getCurrentGame().getWhitePlayer(), player1StartPos);
 		PlayerPosition player2Position = new PlayerPosition(quoridor.getCurrentGame().getBlackPlayer(), player2StartPos);

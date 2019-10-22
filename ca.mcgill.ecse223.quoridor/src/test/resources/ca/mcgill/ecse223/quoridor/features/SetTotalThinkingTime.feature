@@ -5,6 +5,8 @@ Feature: Set Total Thinking Time
 
   Background: 
     Given A new game is initializing
+    And White player chooses a username
+    And Black player chooses a username
 
   Scenario Outline: Set thinking time for players
     When <min>:<sec> is set as the thinking time
