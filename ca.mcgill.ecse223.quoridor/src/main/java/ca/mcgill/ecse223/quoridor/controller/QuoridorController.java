@@ -1,7 +1,15 @@
 package ca.mcgill.ecse223.quoridor.controller;
 
 import ca.mcgill.ecse223.quoridor.model.Player;
-	
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+import ca.mcgill.ecse223.quoridor.QuoridorApplication;
+
+//import org.apache.commons.lang3.time.StopWatch;
+
 import ca.mcgill.ecse223.quoridor.model.*;
 import ca.mcgill.ecse223.quoridor.model.Game.GameStatus;
 
@@ -262,11 +270,35 @@ public class QuoridorController {
 	 * This method load a game by input a filename
 	 * 
 	 * @author Zirui He
-	 * @param name of the file 
-	 * @return void
+	 * @param filename 
+	 * @throws FileNotFoundException 
 	 */
-	public static void loadGame(String filename){ 
+	public static void loadGame(String filename) throws FileNotFoundException{ 
 		//TO-DO: Write logic to load game
+		FileInputStream inputstream = new FileInputStream(filename);
+		Scanner scanner = new Scanner(inputstream);
+		while(scanner.hasNext()) {
+			scanner.useDelimiter(" ");
+			int roundnumber = Integer.parseInt(scanner.next());
+			String move1 = scanner.next();
+			String move2 = scanner.next();
+			if (move1.length() == 3) {
+				if (move1.charAt(0) == 'b') {
+					Player blackplayer = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
+					Tile blacktile = new Tile(Character.digit(move1.charAt(1), 10), Character.digit(move1.charAt(2), 10), QuoridorApplication.getQuoridor().getBoard());
+					PlayerPosition blackposition = new PlayerPosition(blackplayer, blacktile);
+					QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setBlackPosition(blackposition);
+					
+					Player whiteplayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
+					Tile whitetile = new Tile(Character.digit(move2.charAt(1), 10), Character.digit(move2.charAt(2), 10), QuoridorApplication.getQuoridor().getBoard());
+					PlayerPosition whiteposition = new PlayerPosition(whiteplayer, whitetile);
+					QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setBlackPosition(whiteposition);
+				}
+			}
+			
+			
+			
+		}
 		throw new UnsupportedOperationException();
 	}
 	
@@ -305,7 +337,6 @@ public class QuoridorController {
 	 * 
 	 * @author Zirui He
 	 * @param player
-	 * @return void
 	 */
 	public static void makeMove(Player player) {
 		//TO-DO: Write logic to load game
@@ -319,7 +350,6 @@ public class QuoridorController {
 	 * 
 	 * @author Zirui He
 	 * @param player
-	 * @return void
 	 */
 	public static void startClock(Player player) {
 		//TO-DO: Write logic to load game
@@ -336,6 +366,9 @@ public class QuoridorController {
 	 */
 	public static void stopClock(Player player) {
 		//TO-DO: Write logic to load game
+		
+//		StopWatch watch;
+		
 		throw new UnsupportedOperationException();
 	}
 	
