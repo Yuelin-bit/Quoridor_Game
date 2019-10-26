@@ -15,12 +15,7 @@ Feature: Validate Position
       |   1 |   1 | ok     |
       |   9 |   9 | ok     |
       |   4 |   2 | ok     |
-      |   0 |   3 | error  |
-      |  -1 |   4 | error  |
-      |   3 |   0 | error  |
-      |   4 |  -1 | error  |
-      |  10 |   5 | error  |
-      |   5 |  10 | error  |
+      
 
   Scenario Outline: Validate wall position
     Given A game position is supplied with wall coordinate <row>:<col>-"<dir>"
@@ -32,10 +27,7 @@ Feature: Validate Position
       |   1 |   1 | horizontal | ok     |
       |   8 |   8 | vertical   | ok     |
       |   4 |   2 | horizontal | ok     |
-      |   0 |   3 | vertical   | error  |
-      |   3 |   0 | horizontal | error  |
-      |   9 |   5 | vertical   | error  |
-      |   5 |   9 | horizontal | error  |
+      
 
   Scenario: Validate overlapping walls (all valid)
     Given The following walls exist:
