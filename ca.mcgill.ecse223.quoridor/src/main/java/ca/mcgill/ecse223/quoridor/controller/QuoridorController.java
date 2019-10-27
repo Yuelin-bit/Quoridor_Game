@@ -1,7 +1,5 @@
 package ca.mcgill.ecse223.quoridor.controller;
 
-import ca.mcgill.ecse223.quoridor.model.Player;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -274,32 +272,87 @@ public class QuoridorController {
 	 * @throws FileNotFoundException 
 	 */
 	public static void loadGame(String filename) throws FileNotFoundException{ 
-		//TO-DO: Write logic to load game
+		
+		Quoridor quoridor = QuoridorApplication.getQuoridor();
 		FileInputStream inputstream = new FileInputStream(filename);
+		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(inputstream);
-		while(scanner.hasNext()) {
-			scanner.useDelimiter(" ");
-			int roundnumber = Integer.parseInt(scanner.next());
-			String move1 = scanner.next();
-			String move2 = scanner.next();
-			if (move1.length() == 3) {
-				if (move1.charAt(0) == 'b') {
-					Player blackplayer = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
-					Tile blacktile = new Tile(Character.digit(move1.charAt(1), 10), Character.digit(move1.charAt(2), 10), QuoridorApplication.getQuoridor().getBoard());
-					PlayerPosition blackposition = new PlayerPosition(blackplayer, blacktile);
-					QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setBlackPosition(blackposition);
-					
-					Player whiteplayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
-					Tile whitetile = new Tile(Character.digit(move2.charAt(1), 10), Character.digit(move2.charAt(2), 10), QuoridorApplication.getQuoridor().getBoard());
-					PlayerPosition whiteposition = new PlayerPosition(whiteplayer, whitetile);
-					QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setBlackPosition(whiteposition);
+		int wallid = 0;
+		
+		for (int i = 0; i < 2; i++) {
+			String move = scanner.nextLine();
+			String delims = "[ :,]+";
+			String[] split = move.split(delims);
+			
+			if (split[0] == "B") {				
+				for (int j = 1; j < split.length; j++) {
+					int moveNumber = i;
+					int roundNumber = j;
+					String[] s = split[j].split("");
+					Player blackplayer = quoridor.getCurrentGame().getBlackPlayer();
+					Tile tile = quoridor.getBoard().getTile(((rowNum(s[0])-1) * 9 + Integer.parseInt(s[1]) - 1));
+					//Tile tile = new Tile(rowNum(s[0]), Integer.parseInt(s[1]), quoridor.getBoard());
+					if (s.length == 2) {
+						PlayerPosition blackposition = new PlayerPosition(blackplayer, tile);
+						quoridor.getCurrentGame().getCurrentPosition().setBlackPosition(blackposition);
+					}
+					if (s.length == 3) {
+						Direction direction;
+						switch (s[2]) {
+						case "h":
+							direction = Direction.Horizontal;
+							break;
+						case "v":
+							direction = Direction.Vertical;
+							break;
+						default:
+							throw new IllegalArgumentException("Unsupported wall direction was provided");
+						}
+						Wall wall = new Wall(wallid, blackplayer);
+						new WallMove(moveNumber, roundNumber, blackplayer, tile, quoridor.getCurrentGame(), direction, wall);
+						quoridor.getCurrentGame().getCurrentPosition().getBlackWallsInStock().remove(wallid);
+						wallid++;
+					}
+							
 				}
+				
 			}
 			
-			
-			
+			if (split[0] == "W") {				
+				for (int j = 1; j < split.length; j++) {
+					int moveNumber = i;
+					int roundNumber = j;
+					String[] s = split[j].split("");
+					Player whiteplayer = quoridor.getCurrentGame().getWhitePlayer();
+					Tile tile = quoridor.getBoard().getTile(((rowNum(s[0])-1) * 9 + Integer.parseInt(s[1]) - 1));
+					//Tile tile = new Tile(rowNum(s[0]), Integer.parseInt(s[1]), quoridor.getBoard());
+					if (s.length == 2) {
+						PlayerPosition whiteposition = new PlayerPosition(whiteplayer, tile);
+						quoridor.getCurrentGame().getCurrentPosition().setBlackPosition(whiteposition);
+					}
+					if (s.length == 3) {
+						Direction direction;
+						switch (s[2]) {
+						case "h":
+							direction = Direction.Horizontal;
+							break;
+						case "v":
+							direction = Direction.Vertical;
+							break;
+						default:
+							throw new IllegalArgumentException("Unsupported wall direction was provided");
+						}
+						Wall wall = new Wall(wallid, whiteplayer);
+						new WallMove(moveNumber, roundNumber, whiteplayer, tile, quoridor.getCurrentGame(), direction, wall);
+						quoridor.getCurrentGame().getCurrentPosition().getWhiteWallsInStock().remove(wallid);
+						wallid++;
+					}
+							
+				}
+				
+			}
 		}
-		throw new UnsupportedOperationException();
+						
 	}
 	
 	
@@ -654,6 +707,20 @@ public class QuoridorController {
 	  */ 
 	 public static boolean movePlayer(String string, String string2) {
 		 throw new UnsupportedOperationException();
+	 }
+	 
+	 private static int rowNum(String x) {
+		 int result = 0;
+		 if (x == "a")  result = 1;
+		 if (x == "b")  result = 2;
+		 if (x == "c")  result = 3;
+		 if (x == "d")  result = 4;
+		 if (x == "e")  result = 5;
+		 if (x == "f")  result = 6;
+		 if (x == "g")  result = 7;
+		 if (x == "h")  result = 8;
+		 if (x == "i")  result = 9;
+		 return result;
 	 }
 	 
 	 
