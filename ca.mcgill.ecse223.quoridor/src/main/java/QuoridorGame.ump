@@ -94,6 +94,6 @@ class WallMove {
 
 class PlayerPosition {
 	* -> 1 Player player; 
-	* -> 1 Tile tile; 
+	* -> 1 Tile tile;
 }
 

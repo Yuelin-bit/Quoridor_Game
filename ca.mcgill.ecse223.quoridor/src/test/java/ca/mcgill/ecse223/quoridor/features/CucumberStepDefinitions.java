@@ -2,6 +2,8 @@ package ca.mcgill.ecse223.quoridor.features;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.IOException;
+
 //import static org.junit.Assert.assertEquals;
 
 import java.sql.Time;
@@ -34,11 +36,20 @@ import org.junit.Assert;
 
 
 public class CucumberStepDefinitions {
+	
+	private Quoridor quoridor;
+	private Board board;
+	private Player player1;
+	private Player player2;
+	private Player currentPlayer;
+	private Game game;
+	private String newContent ;
+
 
 	// ***********************************************
 	// Background step definitions
 	// ***********************************************
-
+	
 	@Given("^The game is not running$")
 	public void theGameIsNotRunning() {
 		initQuoridorAndBoard();
@@ -718,14 +729,13 @@ public class CucumberStepDefinitions {
 				//delete file
 				QuoridorController.deleteFile(filename);
 			}
-		    throw new cucumber.api.PendingException();
 		}
 
 		@When("The user initiates to save the game with name {string}")
-		public void the_user_initiates_to_save_the_game_with_name(String string){
+		public void the_user_initiates_to_save_the_game_with_name(String string) throws IOException{
 		    // Write code here that turns the phrase above into concrete actions
 			Game game = QuoridorApplication.getQuoridor().getCurrentGame();
-			QuoridorController.saveGame(game , string);
+			newContent = QuoridorController.saveGame(game , string);
 		    throw new cucumber.api.PendingException();
 		}
 
@@ -787,22 +797,22 @@ public class CucumberStepDefinitions {
 				Integer col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getColumn();
 				Integer row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
 				if(row!=int1 || col!=int2) {
-					int aMoveNumber = QuoridorApplication.getQuoridor().getCurrentGame().getMoves().size();
+					int aMoveNumber = QuoridorApplication.getQuoridor().getCurrentGame().getMoves().size()-1;
 					Player currentPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
 					Move oldMove = QuoridorApplication.getQuoridor().getCurrentGame().getMove(aMoveNumber);
 					QuoridorApplication.getQuoridor().getCurrentGame().removeMove(oldMove);
 					///////////////////////////////////////////////////////////////////////
-					Game newGame = QuoridorApplication.getQuoridor().getCurrentGame();
-					Board newBoard = QuoridorApplication.getQuoridor().getBoard();
-					Tile newTargetTile = new Tile(int1 , int2 , newBoard);
-					StepMove newMove = new StepMove(aMoveNumber , (aMoveNumber+1)/2 , currentPlayer , newTargetTile , newGame );
+					Game currentGame = QuoridorApplication.getQuoridor().getCurrentGame();
+					Board currentBoard = QuoridorApplication.getQuoridor().getBoard();
+					Tile newTargetTile = new Tile(int1 , int2 , currentBoard);
+					StepMove newMove = new StepMove(aMoveNumber , (aMoveNumber+1)/2 , currentPlayer , newTargetTile , currentGame );
 					QuoridorApplication.getQuoridor().getCurrentGame().addMove(newMove);
 				}
 			}else {
 				Integer col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
 				Integer row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
 				if(row!=int1 || col!=int2) {
-					int aMoveNumber = QuoridorApplication.getQuoridor().getCurrentGame().getMoves().size();
+					int aMoveNumber = QuoridorApplication.getQuoridor().getCurrentGame().getMoves().size()-1;
 					Player currentPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
 					Move oldMove = QuoridorApplication.getQuoridor().getCurrentGame().getMove(aMoveNumber);
 					QuoridorApplication.getQuoridor().getCurrentGame().removeMove(oldMove);
