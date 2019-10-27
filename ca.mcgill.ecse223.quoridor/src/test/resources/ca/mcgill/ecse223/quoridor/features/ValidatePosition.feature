@@ -16,6 +16,7 @@ Feature: Validate Position
       |   9 |   9 | ok     |
       |   4 |   2 | ok     |
 
+
   Scenario Outline: Validate wall position
     Given A game position is supplied with wall coordinate <row>:<col>-"<dir>"
     When Validation of the position is initiated
@@ -26,6 +27,7 @@ Feature: Validate Position
       |   1 |   1 | horizontal | ok     |
       |   8 |   8 | vertical   | ok     |
       |   4 |   2 | horizontal | ok     |
+
 
   Scenario: Validate overlapping walls (all valid)
     Given The following walls exist:
