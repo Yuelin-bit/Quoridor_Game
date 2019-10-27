@@ -391,9 +391,18 @@ public class QuoridorController {
 	 * @author Zirui He
 	 * @param player
 	 */
-	public static void makeMove(Player player) {
-		//TO-DO: Write logic to load game
-		throw new UnsupportedOperationException();
+	public static void completeMove(Player player) {
+
+		Player white = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
+		Player black = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
+		if (player.hasGameAsBlack()) {
+			player.setNextPlayer(white);
+			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(white);
+		}else {
+			player.setNextPlayer(black);
+			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(black);
+		}
+
 	}
 
 	
