@@ -413,9 +413,10 @@ public class QuoridorController {
 	 * @author Zirui He
 	 * @param player
 	 */
-	public static void startClock(Player player) {
+	public static Long startClock() {
 		//TO-DO: Write logic to load game
-		throw new UnsupportedOperationException();
+		Long startTime = System.nanoTime();
+		return startTime;
 	}
 	
 	/**
@@ -426,12 +427,10 @@ public class QuoridorController {
 	 * @param player
 	 * @return void
 	 */
-	public static void stopClock(Player player) {
+	public static Long stopClock() {
 		//TO-DO: Write logic to load game
-		
-//		StopWatch watch;
-		
-		throw new UnsupportedOperationException();
+		Long endTime = System.nanoTime();
+		return endTime;
 	}
 	
 	/**

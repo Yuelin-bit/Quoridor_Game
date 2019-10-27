@@ -10,6 +10,7 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import ca.mcgill.ecse223.quoridor.QuoridorApplication;
 import ca.mcgill.ecse223.quoridor.controller.QuoridorController;
@@ -37,6 +38,11 @@ import org.junit.Assert;
 public class CucumberStepDefinitions {
 
 	private boolean isPositionValid;
+	private Long blackStartTime;
+	private Long blackEndTime;
+	private Long whiteStartTime;
+	private Long whiteEndTime;
+	
 
 	// ***********************************************
 	// Background step definitions
@@ -1460,35 +1466,43 @@ public class CucumberStepDefinitions {
 
 		@Given("The clock of {string} is running") 
 		public void the_clock_of_is_running(String string) {
-			Player player;
 			if(string == "black") {
-				player = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
+				long nanotime = QuoridorController.startClock();
+				blackStartTime = TimeUnit.SECONDS.convert(nanotime, TimeUnit.NANOSECONDS);
 			}else {
-				player = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
+				long nanotime = QuoridorController.startClock();
+				whiteStartTime = TimeUnit.SECONDS.convert(nanotime, TimeUnit.NANOSECONDS);
 			}
-			QuoridorController.startClock(player);
 		}
 
 		@Given("The clock of {string} is stopped")
 		public void the_clock_of_is_stopped(String string) {
-			Player player;
-			if(string == "black") {
-				player = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
-			}else {
-				player = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
-			}
-			QuoridorController.stopClock(player);
+//			if(string == "black") {
+//				long nanotime = QuoridorController.startClock();
+//				blackEndTime = TimeUnit.SECONDS.convert(nanotime, TimeUnit.NANOSECONDS);
+//			}else {
+//				long nanotime = QuoridorController.startClock();
+//				whiteEndTime = TimeUnit.SECONDS.convert(nanotime, TimeUnit.NANOSECONDS);
+//			}
 		}
 
 		@When("Player {string} completes his move") // how to check one has complete move? just create a move method in controller
 		public void player_completes_his_move(String string) {
-			Player player;
 			if(string == "black") {
-				player = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
+				Player blackPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
+				QuoridorController.completeMove(blackPlayer);
+				long nanotimeBlack = QuoridorController.startClock();
+				blackEndTime = TimeUnit.SECONDS.convert(nanotimeBlack, TimeUnit.NANOSECONDS);
+				long nanotimeWhite = QuoridorController.startClock();
+				whiteStartTime = TimeUnit.SECONDS.convert(nanotimeWhite, TimeUnit.NANOSECONDS);
 			}else {
-				player = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
+				Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
+				QuoridorController.completeMove(whitePlayer);
+				long nanotime = QuoridorController.startClock();
+				whiteEndTime = TimeUnit.SECONDS.convert(nanotime, TimeUnit.NANOSECONDS);
+				long nanotimeBlack = QuoridorController.startClock();
+				blackStartTime = TimeUnit.SECONDS.convert(nanotimeBlack, TimeUnit.NANOSECONDS);
 			}
-		    QuoridorController.completeMove(player);
 		}
 
 		@Then("The user interface shall be showing it is {string} turn")
@@ -1498,24 +1512,27 @@ public class CucumberStepDefinitions {
 		
 		@Then("The clock of {string} shall be stopped")
 		public void the_clock_of_shall_be_stopped(String string) {
-			Player player;
 			if(string == "black") {
-				player = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
+				Boolean isStopped = (blackEndTime != null);
+				assertEquals(true, isStopped);
 			}else {
-				player = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
+				Boolean isStopped = (whiteEndTime != null);
+				assertEquals(true, isStopped);
 			}
-			assertEquals(false, QuoridorController.clockIsRunning(player));
 		}
 
 		@Then("The clock of {string} shall be running")
 		public void the_clock_of_shall_be_running(String string) {
-			Player player;
 			if(string == "black") {
-				player = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
+				Boolean isStarted = (blackStartTime != null);
+				Boolean notStopped = (blackEndTime == null);
+				assertEquals(true, (isStarted && notStopped));
 			}else {
-				player = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
+				Boolean isStarted = (whiteStartTime != null);
+				Boolean notStopped = (whiteEndTime == null);
+				assertEquals(true, (isStarted && notStopped));
 			}
-			assertEquals(true, QuoridorController.clockIsRunning(player));
+
 		}
 
 		@Then("The next player to move shall be {string}")
