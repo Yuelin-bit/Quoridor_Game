@@ -1163,191 +1163,6 @@ public class CucumberStepDefinitions {
 		    
 		}
 
-		/*@When("The position to load is valid")
-		public void the_position_to_load_is_valid() {
-		    assertEquals(true, QuoridorController.validatePosition());
-	    
-		}*/
-
-
-		/*@Then("It shall be {string}'s turn")
-		public void it_shall_be_s_turn(String string) {
-			String toCompare;
-			if(QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove().hasGameAsBlack()) {
-				toCompare = "black";
-			}else {
-				toCompare = "white";
-			}
-			assertEquals(string, toCompare);
-		    
-		}*/
-			
-
-		/*@Then("{string} shall be at {int}:{int}")
-		public void shall_be_at(String string, Integer int1, Integer int2) {
-			Integer row;
-			Integer col;
-			if(string == "black") {
-				row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
-				col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getColumn();
-			}else {
-				row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
-				col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
-			}
-			assertEquals(row, int1);
-			assertEquals(col, int2);
-		    
-		}*/
-
-		/*@Then("{string} shall have a vertical wall at {int}:{int}")
-		public void shall_have_a_vertical_wall_at(String string, Integer int1, Integer int2) {
-			Integer col;
-			Integer row;
-			Direction wallDirection;
-			if(string == "black") {
-				wallDirection = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer().getWall(0).getMove().getWallDirection();
-				col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard(0).getMove().getTargetTile().getColumn();
-				row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard(0).getMove().getTargetTile().getRow();
-			}else {
-				wallDirection = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer().getWall(0).getMove().getWallDirection();
-				col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard(0).getMove().getTargetTile().getColumn();
-				row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard(0).getMove().getTargetTile().getRow();
-			}
-			assertEquals(Direction.Vertical, wallDirection);
-			assertEquals(row, int1);
-			assertEquals(col, int2);
-		    
-		}*/
-
-		/*@Then("{string} shall have a horizontal wall at {int}:{int}")
-		public void shall_have_a_horizontal_wall_at(String string, Integer int1, Integer int2) {
-			Integer col;
-			Integer row;
-			Direction wallDirection;
-			if(string == "black") {
-				wallDirection = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer().getWall(0).getMove().getWallDirection();
-				col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard(0).getMove().getTargetTile().getColumn();
-				row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard(0).getMove().getTargetTile().getRow();
-			}else {
-				wallDirection = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer().getWall(0).getMove().getWallDirection();
-				col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard(0).getMove().getTargetTile().getColumn();
-				row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard(0).getMove().getTargetTile().getRow();
-			}
-			assertEquals(Direction.Horizontal, wallDirection);
-			assertEquals(row, int1);
-			assertEquals(col, int2);
-		    
-		}*/
-
-		/*@Then("Both players shall have {int} in their stacks")
-		public void both_players_shall_have_in_their_stacks(Integer int1) {
-		    Integer blackwall = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer().getWalls().size();
-		    Integer whitewall = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer().getWalls().size();
-		    assertEquals(blackwall, int1);
-		    assertEquals(whitewall, int1);
-		    
-		}*/
-
-		/*@When("The position to load is invalid")
-		public void the_position_to_load_is_invalid() {
-			assertEquals(false, QuoridorController.validatePosition());
-		    
-		}*/
-
-		/*@Then("The load shall return an error") //what is return error
-		public void the_load_shall_return_an_error() {
-		    assertEquals("Failed to load game", QuoridorController.getLoadResult());
-		    
-		}*/
-
-		
-		
-		// ***********************************************
-		// Switch Player
-		// ***********************************************
-		/*@Given("The player to move is {string}")
-		public void the_player_to_move_is_white(String string) {
-			Player player;
-			if (string == "white") {
-				player = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
-				QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(player);
-			}else {
-				player = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
-				QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(player);
-			}
-		}*/
-
-		/*@Given("The clock of {string} is running") 
-		public void the_clock_of_is_running(String string) {
-			Player player;
-			if(string == "black") {
-				player = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
-			}else {
-				player = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
-			}
-			QuoridorController.startClock(player);
-		}*/
-
-		/*@Given("The clock of {string} is stopped")
-		public void the_clock_of_is_stopped(String string) {
-			Player player;
-			if(string == "black") {
-				player = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
-			}else {
-				player = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
-			}
-			QuoridorController.stopClock(player);
-		}*/
-
-		/*@When("Player {string} completes his move") // how to check one has complete move? just create a move method in controller
-		public void player_completes_his_move(String string) {
-			Player player;
-			if(string == "black") {
-				player = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
-			}else {
-				player = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
-			}
-		    QuoridorController.makeMove(player);
-		}*/
-
-		/*@Then("The user interface shall be showing it is {string} turn")
-		public void the_user_interface_shall_be_showing_it_is_turn(String string) {
-		    
-		}*/
-		
-		/*@Then("The clock of {string} shall be stopped")
-		public void the_clock_of_shall_be_stopped(String string) {
-			Player player;
-			if(string == "black") {
-				player = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
-			}else {
-				player = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
-			}
-			assertEquals(false, QuoridorController.clockIsRunning(player));
-		}*/
-
-		/*@Then("The clock of {string} shall be running")
-		public void the_clock_of_shall_be_running(String string) {
-			Player player;
-			if(string == "black") {
-				player = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
-			}else {
-				player = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
-			}
-			assertEquals(true, QuoridorController.clockIsRunning(player));
-		}*/
-
-		/*@Then("The next player to move shall be {string}")
-		public void the_next_player_to_move_shall_be(String string) {
-			String toCompare;	
-			Player player = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove().getNextPlayer();
-			if(player.hasGameAsBlack()) {
-				toCompare = "black";
-			}else {
-				toCompare = "white";
-			}
-			assertEquals(string, toCompare);
-		}*/
 		
 		@When("The position to load is valid")
 		public void the_position_to_load_is_valid() {
@@ -1490,7 +1305,7 @@ public class CucumberStepDefinitions {
 
 		@When("Player {string} completes his move") // how to check one has complete move? just create a move method in controller
 		public void player_completes_his_move(String string) {
-			if(string == "black") {
+			if(string.equals("black")) {
 				Player blackPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
 				QuoridorController.completeMove(blackPlayer);
 				long nanotimeBlack = QuoridorController.startClock();
@@ -1518,7 +1333,7 @@ public class CucumberStepDefinitions {
 		
 		@Then("The clock of {string} shall be stopped")
 		public void the_clock_of_shall_be_stopped(String string) {
-			if(string == "black") {
+			if(string.equals("black")) {
 				Boolean isStopped = (blackEndTime != null);
 				assertEquals(true, isStopped);
 			}else {
@@ -1529,14 +1344,14 @@ public class CucumberStepDefinitions {
 
 		@Then("The clock of {string} shall be running")
 		public void the_clock_of_shall_be_running(String string) {
-			if(string == "black") {
+			if(string.equals("black")) {
 				Boolean isStarted = (blackStartTime != null);
-				//Boolean notStopped = (blackEndTime == null);
-				assertEquals(true, (isStarted));
+				Boolean notStopped = (blackEndTime == null);
+				assertEquals(true, (isStarted && notStopped));
 			}else {
 				Boolean isStarted = (whiteStartTime != null);
-				//Boolean notStopped = (whiteEndTime == null);
-				assertEquals(true, (isStarted));
+				Boolean notStopped = (whiteEndTime == null);
+				assertEquals(true, (isStarted && notStopped));
 			}
 
 		}
