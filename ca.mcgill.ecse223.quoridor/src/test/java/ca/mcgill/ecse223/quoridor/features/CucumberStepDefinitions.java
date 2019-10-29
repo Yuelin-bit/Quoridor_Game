@@ -723,7 +723,7 @@ public class CucumberStepDefinitions {
 		
 			
 		@Given("No file {string} exists in the filesystem")
-		public void no_file_exists_in_the_filesystem(String filename){
+		public void no_file_exists_in_the_filesystem(String filename) throws IOException{
 		    // Write code here that turns the phrase above into concrete actions
 			if(QuoridorController.checkFileExistence(filename)) {
 				//delete file
@@ -734,8 +734,7 @@ public class CucumberStepDefinitions {
 		@When("The user initiates to save the game with name {string}")
 		public void the_user_initiates_to_save_the_game_with_name(String string) throws IOException{
 		    // Write code here that turns the phrase above into concrete actions
-			Game game = QuoridorApplication.getQuoridor().getCurrentGame();
-			newContent = QuoridorController.saveGame(game , string);
+			QuoridorController.saveGame(string);
 		    throw new cucumber.api.PendingException();
 		}
 
@@ -750,7 +749,7 @@ public class CucumberStepDefinitions {
 
 		@Given("File {string} exists in the filesystem")
 		// Make file with filename in the file system
-		public void file_exists_in_the_filesystem(String filename){
+		public void file_exists_in_the_filesystem(String filename) throws IOException{
 		    // Write code here that turns the phrase above into concrete actions
 			if(!QuoridorController.checkFileExistence(filename)) {
 				//create file

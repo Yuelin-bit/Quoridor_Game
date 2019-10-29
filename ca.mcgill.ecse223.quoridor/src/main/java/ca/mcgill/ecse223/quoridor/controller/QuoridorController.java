@@ -1,11 +1,16 @@
 package ca.mcgill.ecse223.quoridor.controller;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
+import ca.mcgill.ecse223.quoridor.QuoridorApplication;
 import ca.mcgill.ecse223.quoridor.model.*;
 import ca.mcgill.ecse223.quoridor.model.Game.GameStatus;
+import ca.mcgill.ecse223.quoridor.model.Game.MoveMode;
 
 public class QuoridorController {
 	
@@ -182,20 +187,106 @@ public class QuoridorController {
 	// 2. Save to file 
 	// 3. Return the computed string 
 	//get content from the game and write them in correct format in filename
-	public static String saveGame(Game game , String filename) throws IOException {
-		BufferedReader br = new BufferedReader(new FileReader(filename));
-		StringBuilder sb = new StringBuilder();
-	    String line = br.readLine();
-
-	    while (line != null) {
-	        sb.append(line);
-	        sb.append(System.lineSeparator());
-	        line = br.readLine();
+	//Should I write all the moves that's been made into the file? If so, how am I supposed to know the move mode of previous moves
+	//I'm supposed to write all the wall moves and pawn position in the file
+	//should I only write the current pawn position or all of them
+	//should I write them in the file following their orders or it doesn't matter
+	public static void saveGame(String filename)throws IOException{
+		
+		Quoridor quoridor = QuoridorApplication.getQuoridor();
+		BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
+		List<Move> listOfAllMoves = quoridor.getCurrentGame().getMoves();
+		List<Move> allBlackMoves = new ArrayList<Move>();
+		List<Move> allWhiteMoves = new ArrayList<Move>();
+		//construct an ArrayList of characters from a to i
+		String characters = new String("abcdefghi");
+	    ArrayList<Character> characterList = new ArrayList<Character>();
+	    for(int i = 0; i<characters.length(); i++){
+	        characterList.add(characters.charAt(i));
 	    }
-	    String everything = sb.toString();
-	    br.close();
-	    return everything ;
 	    
+		for(Move move : listOfAllMoves) {
+			if(move.getPlayer().hasGameAsBlack()) {
+				allBlackMoves.add(move);
+			}else if(move.getPlayer().hasGameAsWhite()){
+				allWhiteMoves.add(move);
+			}
+		}
+		
+		writer.write("B: ");
+		int blackMovesSize = allBlackMoves.size();
+		int whiteMovesSize = allWhiteMoves.size();
+		String thingsToWrite = "";
+		for(Move blackMove : allBlackMoves) {
+			if(blackMovesSize < allBlackMoves.size()) {
+				thingsToWrite = ",";
+			}
+			if(blackMove.getGame().getMoveMode() == MoveMode.valueOf("WALL_MOVE")) {
+				WallMove thisWallMove = (WallMove)blackMove ;
+				int moveColumn = thisWallMove.getTargetTile().getColumn();
+				int moveRow = thisWallMove.getTargetTile().getRow();
+				Direction moveDirection = thisWallMove.getWallDirection();
+				
+				Character columnToWrite = characterList.get(moveColumn);
+				String rowToWrite = Integer.toString(moveRow);
+				String directionToWrite = "";
+				if(moveDirection == Direction.valueOf("VERTICAL")) {
+					directionToWrite = "v";
+				}else if(moveDirection == Direction.valueOf("HORIZONTAL")){
+					directionToWrite = "h";
+				}
+				thingsToWrite = thingsToWrite + columnToWrite + rowToWrite + directionToWrite ;
+				blackMovesSize--;
+				writer.write(thingsToWrite);
+				
+			}else if(blackMove.getGame().getMoveMode() == MoveMode.valueOf("PAWN_MOVE")) {
+				int moveColumn = blackMove.getTargetTile().getColumn();
+				int moveRow = blackMove.getTargetTile().getRow();
+				Character columnToWrite = characterList.get(moveColumn);
+				thingsToWrite = thingsToWrite + columnToWrite + Integer.toString(moveRow) ;
+				blackMovesSize--;
+				writer.write(thingsToWrite);
+			}
+		}
+		
+		writer.newLine();
+		writer.write("W: ");
+		
+		for(Move whiteMove : allWhiteMoves) {
+			if(whiteMovesSize < allWhiteMoves.size()) {
+				thingsToWrite = ",";
+			}
+			if(whiteMove.getGame().getMoveMode() == MoveMode.valueOf("WALL_MOVE")) {
+				WallMove thisWallMove = (WallMove)whiteMove ;
+				int moveColumn = thisWallMove.getTargetTile().getColumn();
+				int moveRow = thisWallMove.getTargetTile().getRow();
+				Direction moveDirection = thisWallMove.getWallDirection();
+			
+				Character columnToWrite = characterList.get(moveColumn);
+				String rowToWrite = Integer.toString(moveRow);
+				String directionToWrite = "";
+				if(moveDirection == Direction.valueOf("VERTICAL")) {
+					directionToWrite = "v";
+				}else if(moveDirection == Direction.valueOf("HORIZONTAL")){
+					directionToWrite = "h";
+				}
+				thingsToWrite = thingsToWrite + columnToWrite + rowToWrite + directionToWrite ;
+				whiteMovesSize--;
+				writer.write(thingsToWrite);
+				
+			}else if(whiteMove.getGame().getMoveMode() == MoveMode.valueOf("PAWN_MOVE")) {
+				int moveColumn = whiteMove.getTargetTile().getColumn();
+				int moveRow = whiteMove.getTargetTile().getRow();
+				Character columnToWrite = characterList.get(moveColumn);
+				thingsToWrite = thingsToWrite + columnToWrite + Integer.toString(moveRow) ;
+				whiteMovesSize--;
+				writer.write(thingsToWrite);
+			}
+		}
+		
+		writer.close();
+		
+		
 	}
 	
 	/**
@@ -250,9 +341,13 @@ public class QuoridorController {
 	 * @author Bozhong Lu
 	 * @param String filename
 	 * @return none
+	 * @throws IOException 
 	 */
-	public static void creatNewFile(String filename) {
-		throw new UnsupportedOperationException();
+	public static void creatNewFile(String filename) throws IOException {
+		File gameFile = new File(filename);
+        if(gameFile.createNewFile()){
+            System.out.println(filename + " File Created in Project root directory");
+        }else System.out.println(filename + " already exists in the project root directory");
 	}
 	
 	/**
@@ -261,9 +356,13 @@ public class QuoridorController {
 	 * @author Bozhong Lu
 	 * @param String filename
 	 * @return none
+	 * @throws IOException 
 	 */
-	public static void deleteFile(String filename) {
-		throw new UnsupportedOperationException();
+	public static void deleteFile(String filename) throws IOException {
+		File gameFile = new File(filename);
+		String filePath = gameFile.getCanonicalPath();
+		File gameFilePath = new File(filePath);
+		gameFilePath.delete();
 	}
 	
 	
@@ -291,16 +390,83 @@ public class QuoridorController {
 	
 	
 	/**
-	 * Feature:laod game, ValidatePosition
+	 * Feature:load game, ValidatePosition
 	 * This method validate if all the pawn and wall position at board 
 	 * is with the board boundary 
 	 * 
-	 * @author Zirui He, Bozhong Lu
+	 * @author Yuelin Liu , Bozhong Lu
 	 * @return boolean
 	 */
 	public static boolean validatePosition() {
-		//TO-DO: Write logic to load game
-		throw new UnsupportedOperationException();
+		//TO-DO: Write logic to validate position
+		boolean isValid = true;
+		Quoridor quoridor = QuoridorApplication.getQuoridor();
+		//Validate WallMove 
+		if(quoridor.getCurrentGame().getMoveMode() == MoveMode.valueOf("WALL_MOVE")) {
+			//check overlapping of current wall with all other walls on board
+			WallMove currentWallMove = quoridor.getCurrentGame().getWallMoveCandidate();
+			int row = currentWallMove.getTargetTile().getRow();
+			int column = currentWallMove.getTargetTile().getColumn();
+			Direction currentWallDirection = currentWallMove.getWallDirection();
+			List<Wall> blackWalls = quoridor.getCurrentGame().getCurrentPosition().getBlackWallsOnBoard();
+			List<Wall> whiteWalls = quoridor.getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard();
+			for(Wall wall : blackWalls) {
+				int thisWallColumn = wall.getMove().getTargetTile().getColumn();
+				int thisWallRow = wall.getMove().getTargetTile().getRow();
+				if(wall.getMove().getWallDirection() == Direction.valueOf("VERTICAL") ) {
+					if(currentWallDirection == Direction.valueOf("VERTICAL")) {
+						if((column == thisWallColumn)&&((row == thisWallRow+1)||(row == thisWallRow-1)||(row == thisWallRow))) {
+							isValid = false;
+						}
+					}else if (currentWallDirection == Direction.valueOf("HORIZONTAL")) {
+						if((column == thisWallColumn)&&(row == thisWallRow)) {
+							isValid = false;
+						}
+					}
+				}else if(wall.getMove().getWallDirection() == Direction.valueOf("HORIZONTAL")) {
+					if(currentWallDirection == Direction.valueOf("VERTICAL")) {
+						if((column == thisWallColumn)&&(row == thisWallRow)) {
+							isValid = false;
+						}
+					}else if (currentWallDirection == Direction.valueOf("HORIZONTAL")) {
+						if ((row == thisWallRow)&&((column == thisWallColumn-1)||(column == thisWallColumn+1)||(column == thisWallColumn))) {
+							isValid = false;
+						}
+					}
+				}
+			}
+			for(Wall wall : whiteWalls) {
+				int thisWallColumn = wall.getMove().getTargetTile().getColumn();
+				int thisWallRow = wall.getMove().getTargetTile().getRow();
+				if(wall.getMove().getWallDirection() == Direction.valueOf("VERTICAL") ) {
+					if(currentWallDirection == Direction.valueOf("VERTICAL")) {
+						if((column == thisWallColumn)&&((row == thisWallRow+1)||(row == thisWallRow-1)||(row == thisWallRow))) {
+							isValid = false;
+						}
+					}else if (currentWallDirection == Direction.valueOf("HORIZONTAL")) {
+						if((column == thisWallColumn)&&(row == thisWallRow)) {
+							isValid = false;
+						}
+					}
+				}else if(wall.getMove().getWallDirection() == Direction.valueOf("HORIZONTAL")) {
+					if(currentWallDirection == Direction.valueOf("VERTICAL")) {
+						if((column == thisWallColumn)&&(row == thisWallRow)) {
+							isValid = false;
+						}
+					}else if (currentWallDirection == Direction.valueOf("HORIZONTAL")) {
+						if ((row == thisWallRow)&&((column == thisWallColumn-1)||(column == thisWallColumn+1)||(column == thisWallColumn))) {
+							isValid = false;
+						}
+					}
+				}
+			}
+			//Next Task : Check if the pawn is surrounded by walls after this WallMove. If it is surrounded, then WallMove invalid
+		//Validate PawnMove	
+		}else if(quoridor.getCurrentGame().getMoveMode() == MoveMode.valueOf("PAWN_MOVE")) {
+			isValid = false;
+			
+		} 
+		return isValid;
 	}
 		
 	
