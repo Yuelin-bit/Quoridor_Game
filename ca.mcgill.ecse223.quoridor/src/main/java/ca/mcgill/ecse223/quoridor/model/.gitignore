@@ -1,3 +1,11 @@
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 *.*
+>>>>>>> yuelin_liu
 !.gitignore
 !Direction.java
+=======
+.gitignore
+*.class
+>>>>>>> 44def2fc5b08d5a323eb542ee1f21808891543f6

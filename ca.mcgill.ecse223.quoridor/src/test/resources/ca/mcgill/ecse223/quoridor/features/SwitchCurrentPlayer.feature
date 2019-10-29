@@ -21,3 +21,4 @@ Feature: Switch Current Player
       | white  | black |
       | black  | white |
       
+      
