@@ -17,7 +17,7 @@ Feature: Load Position
 
     Examples: 
       | filename                 | player | p_row | p_col | opponent | o_row | o_col | pw_row | pw_col | pw_orientation | ow_row | ow_col | ow_orientation | remaining_walls |
-      | quoridor_test_game_1.dat | player |     3 |     3 | white    |     7 |     7 |      5 |      5 | vertical       |      1 |      1 | horizontal     |               9 |
+      | quoridor_test_game_1.dat | black  |     3 |     3 | white    |     7 |     7 |      5 |      5 | vertical       |      1 |      1 | horizontal     |               9 |
 
   Scenario Outline: Load invalid position
     When I initiate to load a saved game "<filename>"
