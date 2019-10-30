@@ -114,12 +114,6 @@ public class CucumberStepDefinitions {
 		// GUI-related feature -- TODO for later
 	}
 	
-	@Given("^A new game is initializing$")
-	public void aNewGameIsInitializing() throws Throwable {
-		initQuoridorAndBoard();
-		ArrayList<Player> players = createUsersAndPlayers("user1", "user2");
-		new Game(GameStatus.Initializing, MoveMode.PlayerMove, QuoridorApplication.getQuoridor());
-	}
 
 
 	
@@ -913,63 +907,63 @@ public class CucumberStepDefinitions {
 		    // Write code here that turns the phrase above into concrete actions
 			List<User> users = QuoridorApplication.getQuoridor().getUsers();
 			QuoridorController.initializeNewGame(users.get(0), users.get(1));
-			throw new cucumber.api.PendingException();
+			
 		}
 
 		@When("White player chooses a username")
 		public void white_player_chooses_a_username() {
 		    // Write code here that turns the phrase above into concrete actions
 			QuoridorController.selectUserName(QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer());
-			throw new cucumber.api.PendingException();
+			
 		}
 
 		@When("Black player chooses a username")
 		public void black_player_chooses_a_username() {
 		    // Write code here that turns the phrase above into concrete actions
 			QuoridorController.selectUserName(QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer());
-			throw new cucumber.api.PendingException();
+			
 		}
 
 		@When("Total thinking time is set")
 		public void total_thinking_time_is_set() {
 		    // Write code here that turns the phrase above into concrete actions
 			QuoridorController.verifyTotalThinkingTime(QuoridorApplication.getQuoridor().getCurrentGame());
-			throw new cucumber.api.PendingException();
+			
 		}
 
 		@Then("The game shall become ready to start")
 		public void the_game_shall_become_ready_to_start() {
 		    // Write code here that turns the phrase above into concrete actions
 			assertEquals(GameStatus.ReadyToStart, QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus());
-		    throw new cucumber.api.PendingException();
+		  
 		}
 		
 		@Given("The game is ready to start")
 		public void the_game_is_ready_to_start() {
 		    // Write code here that turns the phrase above into concrete actions
 			QuoridorController.verifyNewGame(QuoridorApplication.getQuoridor().getCurrentGame());
-			throw new cucumber.api.PendingException();
+
 		}
 
 		@When("I start the clock")
 		public void i_start_the_clock() {
 		    // Write code here that turns the phrase above into concrete actions
 		    QuoridorController.clockIsRunning(QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove());
-			throw new cucumber.api.PendingException();
+			
 		}
 
 		@Then("The game shall be running")
 		public void the_game_shall_be_running() {
 		    // Write code here that turns the phrase above into concrete actions
 			assertEquals(GameStatus.Running, QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus());
-			throw new cucumber.api.PendingException();
+			
 		}
 
 		@Then("The board shall be initialized")
 		public void the_board_shall_be_initialized() {
 		    // Write code here that turns the phrase above into concrete actions
 			QuoridorController.initializeBoard();
-		    throw new cucumber.api.PendingException();
+		    
 		}
 		
 		// ***********************************************
@@ -1115,11 +1109,11 @@ public class CucumberStepDefinitions {
 		// ***********************************************
 		// Load Position
 		// ***********************************************
-		@When("I initiate to load a saved game {string}")
-		public void i_initiate_to_load_a_saved_game(String string) {
-			QuoridorController.loadGame(string);
-		    throw new cucumber.api.PendingException();
-		}
+//		@When("I initiate to load a saved game {string}")
+//		public void i_initiate_to_load_a_saved_game(String string) {
+//			QuoridorController.loadGame(string);
+//		    throw new cucumber.api.PendingException();
+//		}
 
 		/*@When("The position to load is valid")
 		public void the_position_to_load_is_valid() {
@@ -1308,6 +1302,15 @@ public class CucumberStepDefinitions {
 
 		}*/
 		
+		// ***********************************************
+		// Load Position
+		// ***********************************************
+		@When("I initiate to load a saved game {string}")
+		public void i_initiate_to_load_a_saved_game(String string) {
+			QuoridorController.loadGame(string);
+		    throw new cucumber.api.PendingException();
+		}
+
 		@When("The position to load is valid")
 		public void the_position_to_load_is_valid() {
 		    assertEquals(true, QuoridorController.validatePosition());

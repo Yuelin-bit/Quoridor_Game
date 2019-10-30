@@ -1,5 +1,8 @@
 package ca.mcgill.ecse223.quoridor.controller;
 
+import java.sql.Time;
+
+import ca.mcgill.ecse223.quoridor.QuoridorApplication;
 import ca.mcgill.ecse223.quoridor.model.*;
 import ca.mcgill.ecse223.quoridor.model.Game.GameStatus;
 
@@ -365,12 +368,23 @@ public class QuoridorController {
 	 * It returns true if setting is successful.
 	 * 
 	 * @author Sun, Gengyi
-	 * @param min
-	 * @param sec
+	 * @param min minutes
+	 * @param sec seconds
 	 * @return A flag indicating whether the method successfully launched.
 	 */
 	public static boolean setTotalThinkingTime(Integer min, Integer sec) {
-		throw new UnsupportedOperationException();
+		if(min != null && sec != null) {
+		Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
+		Player blackPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
+		long millis = (min*60+sec) * 1000;
+		Time totalTime = new Time(millis);
+		whitePlayer.setRemainingTime(totalTime);
+		blackPlayer.setRemainingTime(totalTime);
+		return true;
+		}
+		else {
+			throw new UnsupportedOperationException();
+		}
 	}
 	/**
 	 * Feature: InitialzeBoard
@@ -384,6 +398,16 @@ public class QuoridorController {
 	 * @return A flag indicating whether the method successfully launched.
 	 */
 	public static boolean initializeBoard() {
+		Board board = new Board(QuoridorApplication.getQuoridor());
+		//boolean status = 
+		QuoridorApplication.getQuoridor().setBoard(board);
+		Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
+		Player blackPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
+		initializeWhitePawn(whitePlayer,board);
+		initializeBlackPawn(blackPlayer, board);
+		initializeWhiteWall(whitePlayer);
+		initializeBlackWall(blackPlayer);
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -396,8 +420,13 @@ public class QuoridorController {
 	 * @param whitePlayer
 	 * @return A flag indicating whether the method successfully launched.
 	 */
-	public static boolean initializeWhitePawn(Player whitePlayer) {
-		throw new UnsupportedOperationException();
+	public static boolean initializeWhitePawn(Player whitePlayer, Board board) {
+		if(whitePlayer!= null && board != null) {
+		Tile init = new Tile('e', 9, board);
+		PlayerPosition initial = new PlayerPosition(whitePlayer, init);
+		QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setWhitePosition(initial);
+		return true;
+		}else throw new UnsupportedOperationException();
 	}
 	/**
 	 * Feature: InitialzeBoard
@@ -408,9 +437,13 @@ public class QuoridorController {
 	 * @param blackPlayer
 	 * @return A flag indicating whether the method successfully launched.
 	 */
-	public static boolean initializedBlackPawn(Player blackPlayer) {
-		throw new UnsupportedOperationException();
-	}
+	public static boolean initializeBlackPawn(Player blackPlayer, Board board) {
+		if(blackPlayer!= null && board != null) {
+			Tile init = new Tile('e', 0, board);
+			PlayerPosition initial = new PlayerPosition(blackPlayer, init);
+			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setWhitePosition(initial);
+			return true;
+			}else throw new UnsupportedOperationException();	}
 	/**
 	 * Feature: InitialzeBoard
 	 * This static method initializes initial number of walls left for the black player, 
@@ -422,6 +455,9 @@ public class QuoridorController {
 	 * @return A flag indicating whether the method successfully launched.
 	 */
 	public static boolean initializeBlackWall(Player blackPlayer) {
+		if(!blackPlayer.hasWalls()) {
+			blackPlayer.addWall(10);
+		}
 		throw new UnsupportedOperationException();
 	}
 	/**
@@ -435,7 +471,10 @@ public class QuoridorController {
 	 * @return A flag indicating whether the method successfully launched.
 	 */
 	public static boolean initializeWhiteWall(Player whitePlayer) {
-			throw new UnsupportedOperationException();
+		if(!whitePlayer.hasWalls()) {
+			whitePlayer.addWall(10);
+		}	
+		throw new UnsupportedOperationException();
 	}
 	
 	/**
