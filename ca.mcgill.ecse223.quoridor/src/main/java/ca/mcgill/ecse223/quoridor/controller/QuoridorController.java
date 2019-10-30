@@ -284,7 +284,7 @@ public class QuoridorController {
 			String delims = "[ :,]+";
 			String[] split = move.split(delims);
 			
-			if (split[0] == "B") {				
+			if (split[0].equals("B")) {				
 				for (int j = 1; j < split.length; j++) {
 					int moveNumber = i;
 					int roundNumber = j;
@@ -318,7 +318,7 @@ public class QuoridorController {
 				
 			}
 			
-			if (split[0] == "W") {				
+			if (split[0].equals("W")) {				
 				for (int j = 1; j < split.length; j++) {
 					int moveNumber = i;
 					int roundNumber = j;
