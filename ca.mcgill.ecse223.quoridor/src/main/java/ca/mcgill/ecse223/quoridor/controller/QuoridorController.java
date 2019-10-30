@@ -2,6 +2,7 @@ package ca.mcgill.ecse223.quoridor.controller;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -274,13 +275,18 @@ public class QuoridorController {
 	 * @param filename 
 	 * @throws FileNotFoundException 
 	 */
-	public static void loadGame(String filename) throws FileNotFoundException{ 
+	public static void loadGame(String filename) throws FileNotFoundException{
+		
+		//start game
+		ArrayList<Player> createUsersAndPlayers = createUsersAndPlayers("user1", "user2");
+		createAndStartGame(createUsersAndPlayers);
 		
 		Quoridor quoridor = QuoridorApplication.getQuoridor();
 		FileInputStream inputstream = new FileInputStream(filename);
 		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(inputstream);
-		int wallid = 0;
+		int blackWallid = 10;
+		int whiteWallid = 0;
 		
 		for (int i = 0; i < 2; i++) {	// i=0 and i=1 represent first two lines in the file
 			String move = scanner.nextLine();	//move store one line of data
@@ -288,11 +294,11 @@ public class QuoridorController {
 			String[] split = move.split(delims);	//parse the string into smaller strings
 			
 			if (split[0].equals("B")) {		//if this line store black player's data
+				Player blackplayer = quoridor.getCurrentGame().getBlackPlayer();
 				for (int j = 1; j < split.length; j++) {	//start from the second argument in the string and loop to the end
 					int moveNumber = i;
 					int roundNumber = j;
 					String[] s = split[j].split("");	//split string by each character
-					Player blackplayer = quoridor.getCurrentGame().getBlackPlayer();
 					Tile tile = quoridor.getBoard().getTile(((rowNum(s[0])-1) * 9 + Integer.parseInt(s[1]) - 1));
 					//Tile tile = new Tile(rowNum(s[0]), Integer.parseInt(s[1]), quoridor.getBoard());
 					if (s.length == 2) {	//check if is pawn move
@@ -311,27 +317,31 @@ public class QuoridorController {
 						default:
 							throw new IllegalArgumentException("Unsupported wall direction was provided");
 						}
-						Wall wall = new Wall(wallid, blackplayer);
+						Wall wall = blackplayer.getWall(0);
+						//Wall wall = new Wall(blackWallid, blackplayer);
 						new WallMove(moveNumber, roundNumber, blackplayer, tile, quoridor.getCurrentGame(), direction, wall); 	//put wall on the board
-						quoridor.getCurrentGame().getCurrentPosition().getBlackWallsInStock().remove(wallid);	//remove wall from the stack
-						wallid++;
+						quoridor.getCurrentGame().getCurrentPosition().addBlackWallsOnBoard(wall);
+						//quoridor.getCurrentGame().getCurrentPosition().getBlackWallsInStock().remove(wall);	//remove wall from the stack
+						blackplayer.removeWall(wall);
+						blackWallid++;
 					}
 							
 				}
+				QuoridorController.completeMove(blackplayer);
 				
 			}
 			
-			if (split[0].equals("W")) {				
+			if (split[0].equals("W")) {
+				Player whiteplayer = quoridor.getCurrentGame().getWhitePlayer();
 				for (int j = 1; j < split.length; j++) {
 					int moveNumber = i;
 					int roundNumber = j;
 					String[] s = split[j].split("");
-					Player whiteplayer = quoridor.getCurrentGame().getWhitePlayer();
 					Tile tile = quoridor.getBoard().getTile(((rowNum(s[0])-1) * 9 + Integer.parseInt(s[1]) - 1));
 					//Tile tile = new Tile(rowNum(s[0]), Integer.parseInt(s[1]), quoridor.getBoard());
 					if (s.length == 2) {
 						PlayerPosition whiteposition = new PlayerPosition(whiteplayer, tile);
-						quoridor.getCurrentGame().getCurrentPosition().setBlackPosition(whiteposition);
+						quoridor.getCurrentGame().getCurrentPosition().setWhitePosition(whiteposition);
 					}
 					if (s.length == 3) {
 						Direction direction;
@@ -345,13 +355,17 @@ public class QuoridorController {
 						default:
 							throw new IllegalArgumentException("Unsupported wall direction was provided");
 						}
-						Wall wall = new Wall(wallid, whiteplayer);
+						//quoridor.getCurrentGame().getCurrentPosition().getWhiteWallsInStock().remove(whiteWallid);
+						//Wall wall = new Wall(whiteWallid, whiteplayer);
+						Wall wall = whiteplayer.getWall(0);
 						new WallMove(moveNumber, roundNumber, whiteplayer, tile, quoridor.getCurrentGame(), direction, wall);
-						quoridor.getCurrentGame().getCurrentPosition().getWhiteWallsInStock().remove(wallid);
-						wallid++;
+						quoridor.getCurrentGame().getCurrentPosition().addWhiteWallsOnBoard(wall);
+						whiteplayer.removeWall(wall);
+						whiteWallid++;
 					}
 							
 				}
+				QuoridorController.completeMove(whiteplayer);
 				
 			}
 		}
@@ -423,6 +437,7 @@ public class QuoridorController {
 				if ((bColumn == wColumn) && (bRow == wRow)) {
 					isValid = false;
 				}
+				
 				return isValid;
 
 	}
@@ -775,19 +790,92 @@ public class QuoridorController {
 		 throw new UnsupportedOperationException();
 	 }
 	 
+	 //helper method
+	 
 	 private static int rowNum(String x) {
 		 int result = 0;
-		 if (x == "a")  result = 1;
-		 if (x == "b")  result = 2;
-		 if (x == "c")  result = 3;
-		 if (x == "d")  result = 4;
-		 if (x == "e")  result = 5;
-		 if (x == "f")  result = 6;
-		 if (x == "g")  result = 7;
-		 if (x == "h")  result = 8;
-		 if (x == "i")  result = 9;
+		 if (x.equals("a"))  result = 1;
+		 if (x.equals("b"))  result = 2;
+		 if (x.equals("c"))  result = 3;
+		 if (x.equals("d"))  result = 4;
+		 if (x.equals("e"))  result = 5;
+		 if (x.equals("f"))  result = 6;
+		 if (x.equals("g"))  result = 7;
+		 if (x.equals("h"))  result = 8;
+		 if (x.equals("i"))  result = 9;
 		 return result;
 	 }
+	 
+	 private static ArrayList<Player> createUsersAndPlayers(String userName1, String userName2) {
+			Quoridor quoridor = QuoridorApplication.getQuoridor();
+			User user1 = quoridor.addUser(userName1);
+			User user2 = quoridor.addUser(userName2);
+
+			int thinkingTime = 180;
+
+			// Players are assumed to start on opposite sides and need to make progress
+			// horizontally to get to the other side
+			//@formatter:off
+			/*
+			 *  __________
+			 * |          |
+			 * |          |
+			 * |x->    <-x|
+			 * |          |
+			 * |__________|
+			 * 
+			 */
+			//@formatter:on
+			Player player1 = new Player(new Time(thinkingTime), user1, 9, Direction.Horizontal);
+			Player player2 = new Player(new Time(thinkingTime), user2, 1, Direction.Horizontal);
+
+			Player[] players = { player1, player2 };
+
+			// Create all walls. Walls with lower ID belong to player1,
+			// while the second half belongs to player 2
+			for (int i = 0; i < 2; i++) {
+				for (int j = 0; j < 10; j++) {
+					new Wall(i * 10 + j, players[i]);
+				}
+			}
+			
+			ArrayList<Player> playersList = new ArrayList<Player>();
+			playersList.add(player1);
+			playersList.add(player2);
+			
+			return playersList;
+		}
+
+		private static void createAndStartGame(ArrayList<Player> players) {
+			Quoridor quoridor = QuoridorApplication.getQuoridor();
+			// There are total 36 tiles in the first four rows and
+			// indexing starts from 0 -> tiles with indices 36 and 36+8=44 are the starting
+			// positions
+			Tile player1StartPos = quoridor.getBoard().getTile(36);
+			Tile player2StartPos = quoridor.getBoard().getTile(44);
+			
+			Game game = new Game(GameStatus.Running, MoveMode.PlayerMove, quoridor);
+			game.setWhitePlayer(players.get(0));
+			game.setBlackPlayer(players.get(1));
+			PlayerPosition player1Position = new PlayerPosition(quoridor.getCurrentGame().getWhitePlayer(), player1StartPos);
+			PlayerPosition player2Position = new PlayerPosition(quoridor.getCurrentGame().getBlackPlayer(), player2StartPos);
+
+			GamePosition gamePosition = new GamePosition(0, player1Position, player2Position, players.get(0), game);
+
+			// Add the walls as in stock for the players
+			for (int j = 0; j < 10; j++) {
+				Wall wall = Wall.getWithId(j);
+				gamePosition.addWhiteWallsInStock(wall);
+			}
+			for (int j = 0; j < 10; j++) {
+				Wall wall = Wall.getWithId(j + 10);
+				gamePosition.addBlackWallsInStock(wall);
+			}
+
+			game.setCurrentPosition(gamePosition);
+		}
+
+	
 	 
 	 
 	 

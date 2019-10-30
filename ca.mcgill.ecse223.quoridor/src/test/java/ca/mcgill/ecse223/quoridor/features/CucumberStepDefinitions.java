@@ -51,7 +51,7 @@ public class CucumberStepDefinitions {
 	@Given("^The game is not running$")
 	public void theGameIsNotRunning() {
 		initQuoridorAndBoard();
-		createUsersAndPlayers("user1", "user2");
+		//createUsersAndPlayers("user1", "user2");
 	}
 
 	@Given("^The game is running$")
@@ -1164,13 +1164,13 @@ public class CucumberStepDefinitions {
 		}
 
 		
-		@When("The position to load is valid")
+		@And("The position to load is valid")
 		public void the_position_to_load_is_valid() {
 			isPositionValid = QuoridorController.validatePosition();		    
 		}
 
 
-		@Then("It shall be {string}'s turn")
+		@And("It shall be {string}'s turn")
 		public void it_shall_be_s_turn(String string) {
 			String toCompare;
 			if(QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove().hasGameAsBlack()) {
@@ -1183,33 +1183,33 @@ public class CucumberStepDefinitions {
 		}
 			
 
-		@Then("{string} shall be at {int}:{int}")
+		@And("{string} shall be at {int}:{int}")
 		public void shall_be_at(String string, Integer int1, Integer int2) {
 			Integer row;
 			Integer col;
-			if(string == "black") {
+			if(string.equals("black")) {
 				row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
 				col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getColumn();
 			}else {
 				row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
 				col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
 			}
-			assertEquals(row, int1);
-			assertEquals(col, int2);
+			assertEquals(int1, row);
+			assertEquals(int2, col);
 		    
 		}
 
-		@Then("{string} shall have a vertical wall at {int}:{int}")
+		@And("{string} shall have a vertical wall at {int}:{int}")
 		public void shall_have_a_vertical_wall_at(String string, Integer int1, Integer int2) {
 			Integer col;
 			Integer row;
 			Direction wallDirection;
-			if(string == "black") {
-				wallDirection = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer().getWall(0).getMove().getWallDirection();
+			if(string.equals("black")) {
+				wallDirection = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard(0).getMove().getWallDirection();
 				col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard(0).getMove().getTargetTile().getColumn();
 				row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard(0).getMove().getTargetTile().getRow();
 			}else {
-				wallDirection = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer().getWall(0).getMove().getWallDirection();
+				wallDirection = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard(0).getMove().getWallDirection();
 				col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard(0).getMove().getTargetTile().getColumn();
 				row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard(0).getMove().getTargetTile().getRow();
 			}
@@ -1219,17 +1219,17 @@ public class CucumberStepDefinitions {
 		    
 		}
 
-		@Then("{string} shall have a horizontal wall at {int}:{int}")
+		@And("{string} shall have a horizontal wall at {int}:{int}")
 		public void shall_have_a_horizontal_wall_at(String string, Integer int1, Integer int2) {
 			Integer col;
 			Integer row;
 			Direction wallDirection;
-			if(string == "black") {
-				wallDirection = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer().getWall(0).getMove().getWallDirection();
+			if(string.equals("black")) {
+				wallDirection = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard(0).getMove().getWallDirection();
 				col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard(0).getMove().getTargetTile().getColumn();
 				row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard(0).getMove().getTargetTile().getRow();
 			}else {
-				wallDirection = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer().getWall(0).getMove().getWallDirection();
+				wallDirection = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard(0).getMove().getWallDirection();
 				col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard(0).getMove().getTargetTile().getColumn();
 				row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard(0).getMove().getTargetTile().getRow();
 			}
@@ -1239,16 +1239,16 @@ public class CucumberStepDefinitions {
 		    
 		}
 
-		@Then("Both players shall have {int} in their stacks")
+		@And("Both players shall have {int} in their stacks")
 		public void both_players_shall_have_in_their_stacks(Integer int1) {
 		    Integer blackwall = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer().getWalls().size();
 		    Integer whitewall = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer().getWalls().size();
-		    assertEquals(blackwall, int1);
-		    assertEquals(whitewall, int1);
+		    assertEquals(int1, blackwall);
+		    assertEquals(int1, whitewall);
 		    
 		}
 
-		@When("The position to load is invalid")
+		@And("The position to load is invalid")
 		public void the_position_to_load_is_invalid() {
 			 isPositionValid = QuoridorController.validatePosition();
 		    }
@@ -1270,7 +1270,7 @@ public class CucumberStepDefinitions {
 		@Given("The player to move is {string}")
 		public void the_player_to_move_is_white(String string) {
 			Player player;
-			if (string == "white") {
+			if (string.equals("white")) {
 				player = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
 				QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(player);
 			}else {
@@ -1281,7 +1281,7 @@ public class CucumberStepDefinitions {
 
 		@Given("The clock of {string} is running") 
 		public void the_clock_of_is_running(String string) {
-			if(string == "black") {
+			if(string.equals("black")) {
 				long nanotime = QuoridorController.startClock();
 				blackStartTime = nanotime;
 				//blackStartTime = TimeUnit.SECONDS.convert(nanotime, TimeUnit.NANOSECONDS);
