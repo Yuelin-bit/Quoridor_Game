@@ -2,6 +2,7 @@ package ca.mcgill.ecse223.quoridor.controller;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -367,76 +368,63 @@ public class QuoridorController {
 	 * @return boolean
 	 */
 	public static boolean validatePosition() {
-//		//TO-DO: Write logic to validate position
-//				boolean isValid = true;
-//				Quoridor quoridor = QuoridorApplication.getQuoridor();
-//				//Validate WallMove 
-//				if(quoridor.getCurrentGame().getMoveMode() == MoveMode.valueOf("WALL_MOVE")) {
-//					//check overlapping of current wall with all other walls on board
-//					WallMove currentWallMove = quoridor.getCurrentGame().getWallMoveCandidate();
-//					int row = currentWallMove.getTargetTile().getRow();
-//					int column = currentWallMove.getTargetTile().getColumn();
-//					Direction currentWallDirection = currentWallMove.getWallDirection();
-//					List<Wall> blackWalls = quoridor.getCurrentGame().getCurrentPosition().getBlackWallsOnBoard();
-//					List<Wall> whiteWalls = quoridor.getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard();
-//					for(Wall wall : blackWalls) {
-//						int thisWallColumn = wall.getMove().getTargetTile().getColumn();
-//						int thisWallRow = wall.getMove().getTargetTile().getRow();
-//						if(wall.getMove().getWallDirection() == Direction.valueOf("VERTICAL") ) {
-//							if(currentWallDirection == Direction.valueOf("VERTICAL")) {
-//								if((column == thisWallColumn)&&((row == thisWallRow+1)||(row == thisWallRow-1)||(row == thisWallRow))) {
-//									isValid = false;
-//								}
-//							}else if (currentWallDirection == Direction.valueOf("HORIZONTAL")) {
-//								if((column == thisWallColumn)&&(row == thisWallRow)) {
-//									isValid = false;
-//								}
-//							}
-//						}else if(wall.getMove().getWallDirection() == Direction.valueOf("HORIZONTAL")) {
-//							if(currentWallDirection == Direction.valueOf("VERTICAL")) {
-//								if((column == thisWallColumn)&&(row == thisWallRow)) {
-//									isValid = false;
-//								}
-//							}else if (currentWallDirection == Direction.valueOf("HORIZONTAL")) {
-//								if ((row == thisWallRow)&&((column == thisWallColumn-1)||(column == thisWallColumn+1)||(column == thisWallColumn))) {
-//									isValid = false;
-//								}
-//							}
-//						}
-//					}
-//					for(Wall wall : whiteWalls) {
-//						int thisWallColumn = wall.getMove().getTargetTile().getColumn();
-//						int thisWallRow = wall.getMove().getTargetTile().getRow();
-//						if(wall.getMove().getWallDirection() == Direction.valueOf("VERTICAL") ) {
-//							if(currentWallDirection == Direction.valueOf("VERTICAL")) {
-//								if((column == thisWallColumn)&&((row == thisWallRow+1)||(row == thisWallRow-1)||(row == thisWallRow))) {
-//									isValid = false;
-//								}
-//							}else if (currentWallDirection == Direction.valueOf("HORIZONTAL")) {
-//								if((column == thisWallColumn)&&(row == thisWallRow)) {
-//									isValid = false;
-//								}
-//							}
-//						}else if(wall.getMove().getWallDirection() == Direction.valueOf("HORIZONTAL")) {
-//							if(currentWallDirection == Direction.valueOf("VERTICAL")) {
-//								if((column == thisWallColumn)&&(row == thisWallRow)) {
-//									isValid = false;
-//								}
-//							}else if (currentWallDirection == Direction.valueOf("HORIZONTAL")) {
-//								if ((row == thisWallRow)&&((column == thisWallColumn-1)||(column == thisWallColumn+1)||(column == thisWallColumn))) {
-//									isValid = false;
-//								}
-//							}
-//						}
-//					}
-//					//Next Task : Check if the pawn is surrounded by walls after this WallMove. If it is surrounded, then WallMove invalid
-//				//Validate PawnMove	
-//				}else if(quoridor.getCurrentGame().getMoveMode() == MoveMode.valueOf("PAWN_MOVE")) {
-//					isValid = false;
-//					
-//				} 
-//				return isValid;
-		throw new UnsupportedOperationException();
+		//TO-DO: Write logic to validate position
+				boolean isValid = true;
+				Quoridor quoridor = QuoridorApplication.getQuoridor();
+				//Validate WallMove 
+				List<Wall> blackWalls = quoridor.getCurrentGame().getCurrentPosition().getBlackWallsOnBoard();
+				List<Wall> whiteWalls = quoridor.getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard();
+				List<Wall> wallList = new ArrayList<Wall>();
+				wallList.addAll(blackWalls);
+				wallList.addAll(whiteWalls);
+				
+				for (int i = 0; i < wallList.size() - 1; i++) {
+					int thisWallColumn = wallList.get(i).getMove().getTargetTile().getColumn();
+					int thisWallRow = wallList.get(i).getMove().getTargetTile().getRow();
+					Direction thisWallDirection = wallList.get(i).getMove().getWallDirection();
+
+					for (int j = i + 1; j < wallList.size(); j++) {
+						int nextWallColumn = wallList.get(j).getMove().getTargetTile().getColumn();
+						int nextWallRow = wallList.get(j).getMove().getTargetTile().getRow();
+						Direction nextWallDirection = wallList.get(j).getMove().getWallDirection();
+						
+						if (thisWallDirection == Direction.Vertical) {
+							if(nextWallDirection == Direction.Vertical) {
+								if((nextWallColumn == thisWallColumn)&&((nextWallRow == thisWallRow+1)||(nextWallRow == thisWallRow-1)||(nextWallRow == thisWallRow))) {
+									isValid = false;
+								}
+							}else {
+								if((nextWallColumn == thisWallColumn)&&(nextWallRow == thisWallRow)) {
+									isValid = false;
+								}
+							}
+						}
+						else {
+							if(nextWallDirection == Direction.Vertical) {
+								if((thisWallColumn == nextWallColumn)&&(thisWallRow == nextWallRow)) {
+									isValid = false;
+								}
+							}else {
+								if ((thisWallRow == nextWallRow)&&((thisWallColumn == nextWallColumn-1)||(thisWallColumn == nextWallColumn+1)||(thisWallColumn == nextWallColumn))) {
+									isValid = false;
+								}
+							}
+						}
+					}
+				}
+				
+				//validate pawn position
+				Tile black = quoridor.getCurrentGame().getCurrentPosition().getBlackPosition().getTile();
+				Tile white = quoridor.getCurrentGame().getCurrentPosition().getWhitePosition().getTile();
+				int bColumn = black.getColumn();
+				int bRow = black.getRow();
+				int wColumn = white.getColumn();
+				int wRow = white.getRow();
+				if ((bColumn == wColumn) && (bRow == wRow)) {
+					isValid = false;
+				}
+				return isValid;
+
 	}
 		
 	
