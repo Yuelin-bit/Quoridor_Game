@@ -36,7 +36,8 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 
 public class CucumberStepDefinitions {
-
+	
+	private boolean loadSucceed;
 	private boolean isPositionValid;
 	private Long blackStartTime;
 	private Long blackEndTime;
@@ -52,6 +53,7 @@ public class CucumberStepDefinitions {
 	public void theGameIsNotRunning() {
 		initQuoridorAndBoard();
 		//createUsersAndPlayers("user1", "user2");
+		
 	}
 
 	@Given("^The game is running$")
@@ -1159,7 +1161,7 @@ public class CucumberStepDefinitions {
 		// ***********************************************
 		@When("I initiate to load a saved game {string}")
 		public void i_initiate_to_load_a_saved_game(String string) throws FileNotFoundException {
-			QuoridorController.loadGame(string);
+			loadSucceed = QuoridorController.loadGame(string);
 		    
 		}
 
@@ -1241,8 +1243,8 @@ public class CucumberStepDefinitions {
 
 		@And("Both players shall have {int} in their stacks")
 		public void both_players_shall_have_in_their_stacks(Integer int1) {
-		    Integer blackwall = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer().getWalls().size();
-		    Integer whitewall = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer().getWalls().size();
+		    Integer blackwall = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsInStock().size();
+		    Integer whitewall = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsInStock().size();
 		    assertEquals(int1, blackwall);
 		    assertEquals(int1, whitewall);
 		    
@@ -1250,13 +1252,15 @@ public class CucumberStepDefinitions {
 
 		@And("The position to load is invalid")
 		public void the_position_to_load_is_invalid() {
-			 isPositionValid = QuoridorController.validatePosition();
-		    }
+			if (loadSucceed) {
+				 isPositionValid = QuoridorController.validatePosition();
+			}
+		}
 
 		@Then("The load shall return an error") //what is return error
 		public void the_load_shall_return_an_error() {
 
-			assertEquals(false, isPositionValid);
+			assertEquals(false, isPositionValid && loadSucceed);
 
 			//assertEquals("Failed to load game", QuoridorController.getLoadResult());
 		    

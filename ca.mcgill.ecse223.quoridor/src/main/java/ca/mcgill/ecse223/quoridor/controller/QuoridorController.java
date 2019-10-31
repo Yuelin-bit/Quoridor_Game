@@ -275,7 +275,7 @@ public class QuoridorController {
 	 * @param filename 
 	 * @throws FileNotFoundException 
 	 */
-	public static void loadGame(String filename) throws FileNotFoundException{
+	public static boolean loadGame(String filename) throws FileNotFoundException{
 		
 		//start game
 		ArrayList<Player> createUsersAndPlayers = createUsersAndPlayers("user1", "user2");
@@ -285,9 +285,7 @@ public class QuoridorController {
 		FileInputStream inputstream = new FileInputStream(filename);
 		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(inputstream);
-		int blackWallid = 10;
-		int whiteWallid = 0;
-		
+
 		for (int i = 0; i < 2; i++) {	// i=0 and i=1 represent first two lines in the file
 			String move = scanner.nextLine();	//move store one line of data
 			String delims = "[ :,]+";	
@@ -295,11 +293,17 @@ public class QuoridorController {
 			
 			if (split[0].equals("B")) {		//if this line store black player's data
 				Player blackplayer = quoridor.getCurrentGame().getBlackPlayer();
+				int blackWallIndex = 0;
 				for (int j = 1; j < split.length; j++) {	//start from the second argument in the string and loop to the end
 					int moveNumber = i;
 					int roundNumber = j;
+					Tile tile = null;
 					String[] s = split[j].split("");	//split string by each character
-					Tile tile = quoridor.getBoard().getTile(((rowNum(s[0])-1) * 9 + Integer.parseInt(s[1]) - 1));
+					try {
+						tile = quoridor.getBoard().getTile((Integer.parseInt(s[1]) - 1) * 9 + columnNum(s[0]) - 1);
+					} catch(Exception e) {
+						return false;
+					}
 					//Tile tile = new Tile(rowNum(s[0]), Integer.parseInt(s[1]), quoridor.getBoard());
 					if (s.length == 2) {	//check if is pawn move
 						PlayerPosition blackposition = new PlayerPosition(blackplayer, tile);
@@ -317,13 +321,14 @@ public class QuoridorController {
 						default:
 							throw new IllegalArgumentException("Unsupported wall direction was provided");
 						}
-						Wall wall = blackplayer.getWall(0);
-						//Wall wall = new Wall(blackWallid, blackplayer);
+						Wall wall = blackplayer.getWall(blackWallIndex);
+						blackWallIndex++;
+						//Wall wall = quoridor.getCurrentGame().getCurrentPosition().getWhiteWallsInStock(0);
 						new WallMove(moveNumber, roundNumber, blackplayer, tile, quoridor.getCurrentGame(), direction, wall); 	//put wall on the board
 						quoridor.getCurrentGame().getCurrentPosition().addBlackWallsOnBoard(wall);
 						//quoridor.getCurrentGame().getCurrentPosition().getBlackWallsInStock().remove(wall);	//remove wall from the stack
-						blackplayer.removeWall(wall);
-						blackWallid++;
+						quoridor.getCurrentGame().getCurrentPosition().removeBlackWallsInStock(wall);
+						//blackplayer.removeWall(wall);
 					}
 							
 				}
@@ -333,11 +338,18 @@ public class QuoridorController {
 			
 			if (split[0].equals("W")) {
 				Player whiteplayer = quoridor.getCurrentGame().getWhitePlayer();
+				int whiteWallIndex = 0;
 				for (int j = 1; j < split.length; j++) {
 					int moveNumber = i;
 					int roundNumber = j;
+					Tile tile = null;
 					String[] s = split[j].split("");
-					Tile tile = quoridor.getBoard().getTile(((rowNum(s[0])-1) * 9 + Integer.parseInt(s[1]) - 1));
+					try {
+						tile = quoridor.getBoard().getTile((Integer.parseInt(s[1]) - 1) * 9 + columnNum(s[0]) - 1);
+					} catch(Exception e) {
+						return false;
+					}
+					//Tile tile = quoridor.getBoard().getTile(((rowNum(s[0])-1) * 9 + Integer.parseInt(s[1]) - 1));
 					//Tile tile = new Tile(rowNum(s[0]), Integer.parseInt(s[1]), quoridor.getBoard());
 					if (s.length == 2) {
 						PlayerPosition whiteposition = new PlayerPosition(whiteplayer, tile);
@@ -355,13 +367,13 @@ public class QuoridorController {
 						default:
 							throw new IllegalArgumentException("Unsupported wall direction was provided");
 						}
-						//quoridor.getCurrentGame().getCurrentPosition().getWhiteWallsInStock().remove(whiteWallid);
-						//Wall wall = new Wall(whiteWallid, whiteplayer);
 						Wall wall = whiteplayer.getWall(0);
+						whiteWallIndex++;
+						//Wall wall = quoridor.getCurrentGame().getCurrentPosition().getWhiteWallsInStock(0);
 						new WallMove(moveNumber, roundNumber, whiteplayer, tile, quoridor.getCurrentGame(), direction, wall);
 						quoridor.getCurrentGame().getCurrentPosition().addWhiteWallsOnBoard(wall);
-						whiteplayer.removeWall(wall);
-						whiteWallid++;
+						//whiteplayer.removeWall(wall);
+						quoridor.getCurrentGame().getCurrentPosition().removeWhiteWallsInStock(wall);
 					}
 							
 				}
@@ -369,6 +381,7 @@ public class QuoridorController {
 				
 			}
 		}
+		return true;
 						
 	}
 	
@@ -392,15 +405,24 @@ public class QuoridorController {
 				wallList.addAll(blackWalls);
 				wallList.addAll(whiteWalls);
 				
-				for (int i = 0; i < wallList.size() - 1; i++) {
+				for (int i = 0; i < wallList.size(); i++) {
 					int thisWallColumn = wallList.get(i).getMove().getTargetTile().getColumn();
 					int thisWallRow = wallList.get(i).getMove().getTargetTile().getRow();
 					Direction thisWallDirection = wallList.get(i).getMove().getWallDirection();
+					if (thisWallColumn < 1 || thisWallRow < 1 || thisWallColumn > 9 || thisWallRow > 9 ) {
+						isValid = false;
+						break;
+					}
+					if (i == (wallList.size() - 1)) break;
 
 					for (int j = i + 1; j < wallList.size(); j++) {
 						int nextWallColumn = wallList.get(j).getMove().getTargetTile().getColumn();
 						int nextWallRow = wallList.get(j).getMove().getTargetTile().getRow();
 						Direction nextWallDirection = wallList.get(j).getMove().getWallDirection();
+						if (nextWallColumn < 1 || nextWallRow < 1 || nextWallColumn > 9 || nextWallRow > 9 ) {
+							isValid = false;
+							break;
+						}
 						
 						if (thisWallDirection == Direction.Vertical) {
 							if(nextWallDirection == Direction.Vertical) {
@@ -792,7 +814,7 @@ public class QuoridorController {
 	 
 	 //helper method
 	 
-	 private static int rowNum(String x) {
+	 private static int columnNum(String x) {
 		 int result = 0;
 		 if (x.equals("a"))  result = 1;
 		 if (x.equals("b"))  result = 2;
