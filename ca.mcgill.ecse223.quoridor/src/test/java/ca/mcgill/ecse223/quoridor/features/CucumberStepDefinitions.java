@@ -1288,23 +1288,21 @@ public class CucumberStepDefinitions {
 			if(string.equals("black")) {
 				long nanotime = QuoridorController.startClock();
 				blackStartTime = nanotime;
-				//blackStartTime = TimeUnit.SECONDS.convert(nanotime, TimeUnit.NANOSECONDS);
+				blackStartTime = TimeUnit.SECONDS.convert(nanotime, TimeUnit.NANOSECONDS);
 			}else {
 				long nanotime = QuoridorController.startClock();
 				whiteStartTime = nanotime;
-				//whiteStartTime = TimeUnit.SECONDS.convert(nanotime, TimeUnit.NANOSECONDS);
+				whiteStartTime = TimeUnit.SECONDS.convert(nanotime, TimeUnit.NANOSECONDS);
 			}
 		}
 
 		@Given("The clock of {string} is stopped")
 		public void the_clock_of_is_stopped(String string) {
-//			if(string == "black") {
-//				long nanotime = QuoridorController.startClock();
-//				blackEndTime = TimeUnit.SECONDS.convert(nanotime, TimeUnit.NANOSECONDS);
-//			}else {
-//				long nanotime = QuoridorController.startClock();
-//				whiteEndTime = TimeUnit.SECONDS.convert(nanotime, TimeUnit.NANOSECONDS);
-//			}
+			if(string == "black") {
+				blackStartTime = null;
+			}else {
+				whiteStartTime = null;
+			}
 		}
 
 		@When("Player {string} completes his move") // how to check one has complete move? just create a move method in controller
@@ -1314,19 +1312,19 @@ public class CucumberStepDefinitions {
 				QuoridorController.completeMove(blackPlayer);
 				long nanotimeBlack = QuoridorController.startClock();
 				blackEndTime = nanotimeBlack;
-				//blackEndTime = TimeUnit.SECONDS.convert(nanotimeBlack, TimeUnit.NANOSECONDS);
+				blackEndTime = TimeUnit.SECONDS.convert(nanotimeBlack, TimeUnit.NANOSECONDS);
 				long nanotimeWhite = QuoridorController.startClock();
 				whiteStartTime = nanotimeWhite;
-				//whiteStartTime = TimeUnit.SECONDS.convert(nanotimeWhite, TimeUnit.NANOSECONDS);
-			}else {
+				whiteStartTime = TimeUnit.SECONDS.convert(nanotimeWhite, TimeUnit.NANOSECONDS);
+			} else {
 				Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
 				QuoridorController.completeMove(whitePlayer);
 				long nanotimeWhite = QuoridorController.startClock();
 				whiteEndTime = nanotimeWhite;
-				//whiteEndTime = TimeUnit.SECONDS.convert(nanotimeWhite, TimeUnit.NANOSECONDS);
+				whiteEndTime = TimeUnit.SECONDS.convert(nanotimeWhite, TimeUnit.NANOSECONDS);
 				long nanotimeBlack = QuoridorController.startClock();
 				blackStartTime = nanotimeBlack;
-				//blackStartTime = TimeUnit.SECONDS.convert(nanotimeBlack, TimeUnit.NANOSECONDS);
+				blackStartTime = TimeUnit.SECONDS.convert(nanotimeBlack, TimeUnit.NANOSECONDS);
 			}
 		}
 

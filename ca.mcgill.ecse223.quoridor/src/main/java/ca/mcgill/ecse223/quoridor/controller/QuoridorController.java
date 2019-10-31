@@ -323,12 +323,10 @@ public class QuoridorController {
 						}
 						Wall wall = blackplayer.getWall(blackWallIndex);
 						blackWallIndex++;
-						//Wall wall = quoridor.getCurrentGame().getCurrentPosition().getWhiteWallsInStock(0);
 						new WallMove(moveNumber, roundNumber, blackplayer, tile, quoridor.getCurrentGame(), direction, wall); 	//put wall on the board
 						quoridor.getCurrentGame().getCurrentPosition().addBlackWallsOnBoard(wall);
 						//quoridor.getCurrentGame().getCurrentPosition().getBlackWallsInStock().remove(wall);	//remove wall from the stack
 						quoridor.getCurrentGame().getCurrentPosition().removeBlackWallsInStock(wall);
-						//blackplayer.removeWall(wall);
 					}
 							
 				}
@@ -349,7 +347,6 @@ public class QuoridorController {
 					} catch(Exception e) {
 						return false;
 					}
-					//Tile tile = quoridor.getBoard().getTile(((rowNum(s[0])-1) * 9 + Integer.parseInt(s[1]) - 1));
 					//Tile tile = new Tile(rowNum(s[0]), Integer.parseInt(s[1]), quoridor.getBoard());
 					if (s.length == 2) {
 						PlayerPosition whiteposition = new PlayerPosition(whiteplayer, tile);
@@ -367,12 +364,10 @@ public class QuoridorController {
 						default:
 							throw new IllegalArgumentException("Unsupported wall direction was provided");
 						}
-						Wall wall = whiteplayer.getWall(0);
+						Wall wall = whiteplayer.getWall(1);
 						whiteWallIndex++;
-						//Wall wall = quoridor.getCurrentGame().getCurrentPosition().getWhiteWallsInStock(0);
 						new WallMove(moveNumber, roundNumber, whiteplayer, tile, quoridor.getCurrentGame(), direction, wall);
 						quoridor.getCurrentGame().getCurrentPosition().addWhiteWallsOnBoard(wall);
-						//whiteplayer.removeWall(wall);
 						quoridor.getCurrentGame().getCurrentPosition().removeWhiteWallsInStock(wall);
 					}
 							
