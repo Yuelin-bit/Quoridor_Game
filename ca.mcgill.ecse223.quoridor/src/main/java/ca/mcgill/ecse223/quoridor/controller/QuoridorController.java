@@ -65,218 +65,7 @@ public class QuoridorController {
 		throw new UnsupportedOperationException();
 	}
 	
-	/**
-	 * Feature: switch player
-	 * This method stop a clock the player
-	 * 
-	 * @author Zirui He
-	 * @param player
-	 * @return void
-	 */
-	public static void stopClock(Player player) {
-		//TO-DO: Write logic to load game
-		throw new UnsupportedOperationException();
-	}
 	
-	/**
-	 * Feature: switch player
-	 * This method test if the clock of the player is still running
-	 * 
-	 * @author Zirui He
-	 * @param player
-	 * @return boolean
-	 */
-	public static boolean clockIsRunning(Player player) {
-		//TO-DO: Write logic to load game
-		throw new UnsupportedOperationException();
-	}
-
-
-
-	/**
-	 * This static method sets a player's total thinking time by taking two inputs
-	 * in the form (min:sec).
-	 * It returns true if setting is successful.
-	 * 
-	 * @author Sun, Gengyi
-	 * @param min
-	 * @param sec
-	 * @return A flag indicating whether the method successfully launched.
-	 */
-	public static boolean setTotalThinkingTime(Integer min, Integer sec) {
-		throw new UnsupportedOperationException();
-	}
-	/**
-	 * This method initialize a new board with 9*9 tiles. Then it 
-	 * initializes pawns and walls for the players. Finally it sets
-	 * the same thinking time for both players. The white player will
-	 * perform a movement first.
-	 * It returns true if the initiating is successful.
-	 * 
-	 * @author Sun, Gengyi
-	 * @return A flag indicating whether the method successfully launched.
-	 */
-	public static boolean initializeBoard() {
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * This static method set the white player's pawn to initial location(e9).
-	 * It returns true if the initiating is successful.
-	 * 
-	 * @author Sun, Gengyi
-	 * @param whitePlayer
-	 * @return A flag indicating whether the method successfully launched.
-	 */
-	public static boolean initializeWhitePawn(Player whitePlayer) {
-		throw new UnsupportedOperationException();
-	}
-	/**
-	 * This static method sets the black player's pawn to initial position(e1).
-	 * It returns true if the initiating is successful.
-	 * 
-	 * @author Sun, Gengyi
-	 * @param blackPlayer
-	 * @return A flag indicating whether the method successfully launched.
-	 */
-	public static boolean initializedBlackPawn(Player blackPlayer) {
-		throw new UnsupportedOperationException();
-	}
-	/**
-	 * This static method initializes initial number of walls left for the black player, 
-	 * contains all of them in a list.
-	 * It returns true if the initiating is successful.
-	 * 
-	 * @author Sun, Gengyi
-	 * @param blackPlayer
-	 * @return A flag indicating whether the method successfully launched.
-	 */
-	public static boolean initializeBlackWall(Player blackPlayer) {
-		throw new UnsupportedOperationException();
-	}
-	/**
-	 * 
-	 * This static method initializes initial number of walls left for the white player,
-	 * contains all of them in a list.
-	 * It returns true if the initiating is successful.
-	 * 
-	 * @author Sun, Gengyi
-	 * @param whitePlayer
-	 * @return A flag indicating whether the method successfully launched.
-	 */
-	public static boolean initializeWhiteWall(Player whitePlayer) {
-			throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * This method checks the clock of the current player to count down.
-	 * It returns true if the clock is counting down.
-	 * 
-	 * @author Sun, Gengyi
-	 * @param player
-	 * @return A flag indicating whether the method successfully launched.
-	 */	
-	public static boolean clockIsCountingDown(Player player) {
-		throw new UnsupportedOperationException();
-	}
-	
-	/**
-	 * This method verify if the total thinking time of a give game is correctly 
-	 * set. It will return a boolean variable to suggest if it is valid. 
-	 * 
-	 * @author Sun, Gengyi
-	 * @param g
-	 * @return A flag indicating whether the thinking time is valid.
-	 */
-	public static boolean verifyTotalThinkingTime(Game g) {
-		throw new UnsupportedOperationException();
-	}
-	
-	/**
-	 * This is a static method which takes two User parameters to initialize a new game. 
-	 * It will return a boolean value to indicate if a new game is successfully initialized.
-	 * 
-	 * @author Pengnan Fan
-	 * @param user1 The first player who will join in the game
-	 * @param user2 The second player who will join in the game
-	 * @return A boolean value to indicate if a new game is initialized successfully
-	 * 
-	 */
-	public static boolean initializeNewGame(User user1, User user2) {
-		//TODO: To be implemented
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * This is a static method which takes a player and a new name, then set the latter as 
-	 * the name of the former. It will return a boolean value to indicate if the 
-	 * name is updated successfully.
-	 * 
-	 * @author Pengnan Fan
-	 * @param game The game of the specific white player
-	 * @param name The new name 
-	 * @return A boolean value to indicate if the name of the user has been updated
-	 */
-	public static boolean setUserName(Player player, String name) {
-		//TODO: To be implemented
-		throw new UnsupportedOperationException();
-	}
-	
-	/**
-	 * This is a static method which takes a player. Then it will allows the player to select
-	 * his/her user name. It will return a boolean value to indicate if the name is updated 
-	 * successfully.
-	 * 
-	 * @author Pengnan Fan
-	 * @param game The game of the specific white player
-	 * @param name The new name 
-	 * @return A boolean value to indicate if the name of the user has been updated
-	 */
-	public static boolean selectUserName(Player player) {
-		//TODO: To be implemented
-		throw new UnsupportedOperationException();
-	}
-	
-	/**
-	 * This is a static method which check the status of a game. It will return a GameStatus
-	 * value of the status of a certain status.
-	 * 
-	 * @author Pengnan Fan
-	 * @param game The game to be checked
-	 * @return A GameStatus value of the status of the game to be checked
-	 */
-	public static GameStatus getGameStatus(Game game) {
-		//TODO: To be implemented
-		throw new UnsupportedOperationException();
-	}
-	
-	/**
-	 * This is a static method which link an user u and a player p. It will return a boolean
-	 * value to suggest if it is successful.
-	 * 
-	 * @param u The user to link
-	 * @param p The player to link
-	 * @return A boolean value to suggest if it is successful.
-	 */
-	public static boolean linkUserAndPlayer(User u, Player p) {
-		//TODO: To be implemented
-		throw new UnsupportedOperationException();
-	}
-	
-	/**
-	 * This is a static method which takes two inputs, a game and a player. It will set
-	 * the player to be the next one to play of the game. It will return a boolean to
-	 * suggest it is successful.
-	 * 
-	 * @author Pengnan Fan
-	 * @param g The game to change the player
-	 * @param p The player to be set as the next player
-	 * @return A boolean variable to suggest if it is successful
-	 */
-	public static boolean setNextPlayer(Game g, Player p) {
-		//TODO: To be implemented
-		throw new UnsupportedOperationException();
-	}
 	
 	/**
 	 * Feature:MoveWall
@@ -379,10 +168,91 @@ public class QuoridorController {
 	 * @return whether the file with the specified name exists
 	 */
 	public static boolean checkFileExistence(String filename) {
-		throw new UnsupportedOperationException();
+		File tempFile = new File(filename);
+		boolean exists = tempFile.exists();
+		return exists ;
 	}
 	
 	
+	
+	
+	// Helper method that writes pawn position and wall positions for Black player (For saveGame)
+	private static void saveBlackPlayerPosition(String filename , BufferedWriter writer) throws IOException {
+				
+		Quoridor quoridor = QuoridorApplication.getQuoridor();
+		String characters = new String("abcdefghi");
+		ArrayList<Character> characterList = new ArrayList<Character>();
+		for(int i = 0; i<characters.length(); i++){
+			characterList.add(characters.charAt(i));
+		}
+				
+		writer.write("B: ");
+		String blackPositionToWrite = "" ;
+		int playerColumn = quoridor.getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getColumn();
+		int playerRow = quoridor.getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
+		Character blackColumnToWrite = characterList.get(playerColumn-1);
+		String blackRowToWrite = Integer.toString(playerRow) ;
+		blackPositionToWrite = blackPositionToWrite + blackColumnToWrite + blackRowToWrite ;
+		writer.write(blackPositionToWrite);
+				
+		List<Wall> blackWallsOnBoard = quoridor.getCurrentGame().getCurrentPosition().getBlackWallsOnBoard();
+		for(Wall wall : blackWallsOnBoard) {
+			String blackWallPositionToWrite = "," ;
+			int wallColumn = wall.getMove().getTargetTile().getColumn();
+			int wallRow = wall.getMove().getTargetTile().getRow();
+			Direction wallDirection = wall.getMove().getWallDirection();
+					
+			Character wallColumnToWrite = characterList.get(wallColumn);
+			String wallRowToWrite = Integer.toString(wallRow);
+			String wallDirectionToWrite = "" ;
+			if(wallDirection == Direction.valueOf("VERTICAL")) {
+				wallDirectionToWrite = "v";
+			}else if(wallDirection == Direction.valueOf("HORIZONTAL")){
+						wallDirectionToWrite = "h";
+			}
+			blackWallPositionToWrite = blackWallPositionToWrite + wallColumnToWrite + wallRowToWrite + wallDirectionToWrite ;
+			writer.write(blackWallPositionToWrite);
+		}
+	}
+	
+	// Helper method that writes pawn position and wall positions for White player(For saveGame)
+	private static void saveWhitePlayerPosition(String filename , BufferedWriter writer) throws IOException {
+		
+		Quoridor quoridor = QuoridorApplication.getQuoridor();
+		String characters = new String("abcdefghi");
+		ArrayList<Character> characterList = new ArrayList<Character>();
+		for(int i = 0; i<characters.length(); i++){
+			characterList.add(characters.charAt(i));
+		}
+		writer.write("W: ");
+		String whitePositionToWrite = "" ;
+		int playerColumn = quoridor.getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
+		int playerRow = quoridor.getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
+		Character whiteColumnToWrite = characterList.get(playerColumn-1);
+		String whiteRowToWrite = Integer.toString(playerRow) ;
+		whitePositionToWrite = whitePositionToWrite + whiteColumnToWrite + whiteRowToWrite ;
+		writer.write(whitePositionToWrite);
+		
+		List<Wall> whiteWallsOnBoard = quoridor.getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard();
+		for(Wall wall : whiteWallsOnBoard) {
+			String whiteWallPositionToWrite = "," ;
+			int wallColumn = wall.getMove().getTargetTile().getColumn();
+			int wallRow = wall.getMove().getTargetTile().getRow();
+			Direction wallDirection = wall.getMove().getWallDirection();
+			
+			Character wallColumnToWrite = characterList.get(wallColumn);
+			String wallRowToWrite = Integer.toString(wallRow);
+			String wallDirectionToWrite = "" ;
+			if(wallDirection == Direction.valueOf("VERTICAL")) {
+				wallDirectionToWrite = "v";
+			}else if(wallDirection == Direction.valueOf("HORIZONTAL")){
+				wallDirectionToWrite = "h";
+			}
+			whiteWallPositionToWrite = whiteWallPositionToWrite + wallColumnToWrite + wallRowToWrite + wallDirectionToWrite ;
+			writer.write(whiteWallPositionToWrite);
+			
+		}
+	}
 	/**
 	 * Feature:SavePosition
 	 * 
@@ -394,106 +264,31 @@ public class QuoridorController {
 	// 1. Compute the string to be saved
 	// 2. Save to file 
 	// 3. Return the computed string 
-	//get content from the game and write them in correct format in filename
-	//Should I write all the moves that's been made into the file? If so, how am I supposed to know the move mode of previous moves
-	//I'm supposed to write all the wall moves and pawn position in the file
-	//should I only write the current pawn position or all of them
-	//should I write them in the file following their orders or it doesn't matter
 	public static void saveGame(String filename)throws IOException{
 		
 		Quoridor quoridor = QuoridorApplication.getQuoridor();
 		BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
-		List<Move> listOfAllMoves = quoridor.getCurrentGame().getMoves();
-		List<Move> allBlackMoves = new ArrayList<Move>();
-		List<Move> allWhiteMoves = new ArrayList<Move>();
-		//construct an ArrayList of characters from a to i
-		String characters = new String("abcdefghi");
-	    ArrayList<Character> characterList = new ArrayList<Character>();
-	    for(int i = 0; i<characters.length(); i++){
-	        characterList.add(characters.charAt(i));
-	    }
-	    
-		for(Move move : listOfAllMoves) {
-			if(move.getPlayer().hasGameAsBlack()) {
-				allBlackMoves.add(move);
-			}else if(move.getPlayer().hasGameAsWhite()){
-				allWhiteMoves.add(move);
-			}
-		}
 		
-		writer.write("B: ");
-		int blackMovesSize = allBlackMoves.size();
-		int whiteMovesSize = allWhiteMoves.size();
-		String thingsToWrite = "";
-		for(Move blackMove : allBlackMoves) {
-			if(blackMovesSize < allBlackMoves.size()) {
-				thingsToWrite = ",";
-			}
-			if(blackMove.getGame().getMoveMode() == MoveMode.valueOf("WALL_MOVE")) {
-				WallMove thisWallMove = (WallMove)blackMove ;
-				int moveColumn = thisWallMove.getTargetTile().getColumn();
-				int moveRow = thisWallMove.getTargetTile().getRow();
-				Direction moveDirection = thisWallMove.getWallDirection();
-				
-				Character columnToWrite = characterList.get(moveColumn);
-				String rowToWrite = Integer.toString(moveRow);
-				String directionToWrite = "";
-				if(moveDirection == Direction.valueOf("VERTICAL")) {
-					directionToWrite = "v";
-				}else if(moveDirection == Direction.valueOf("HORIZONTAL")){
-					directionToWrite = "h";
-				}
-				thingsToWrite = thingsToWrite + columnToWrite + rowToWrite + directionToWrite ;
-				blackMovesSize--;
-				writer.write(thingsToWrite);
-				
-			}else if(blackMove.getGame().getMoveMode() == MoveMode.valueOf("PAWN_MOVE")) {
-				int moveColumn = blackMove.getTargetTile().getColumn();
-				int moveRow = blackMove.getTargetTile().getRow();
-				Character columnToWrite = characterList.get(moveColumn);
-				thingsToWrite = thingsToWrite + columnToWrite + Integer.toString(moveRow) ;
-				blackMovesSize--;
-				writer.write(thingsToWrite);
-			}
-		}
-		
-		writer.newLine();
-		writer.write("W: ");
-		
-		for(Move whiteMove : allWhiteMoves) {
-			if(whiteMovesSize < allWhiteMoves.size()) {
-				thingsToWrite = ",";
-			}
-			if(whiteMove.getGame().getMoveMode() == MoveMode.valueOf("WALL_MOVE")) {
-				WallMove thisWallMove = (WallMove)whiteMove ;
-				int moveColumn = thisWallMove.getTargetTile().getColumn();
-				int moveRow = thisWallMove.getTargetTile().getRow();
-				Direction moveDirection = thisWallMove.getWallDirection();
+		//check the current player of the game, write the player in the front line
+		if(quoridor.getCurrentGame().getCurrentPosition().getPlayerToMove().hasGameAsBlack()) {
 			
-				Character columnToWrite = characterList.get(moveColumn);
-				String rowToWrite = Integer.toString(moveRow);
-				String directionToWrite = "";
-				if(moveDirection == Direction.valueOf("VERTICAL")) {
-					directionToWrite = "v";
-				}else if(moveDirection == Direction.valueOf("HORIZONTAL")){
-					directionToWrite = "h";
-				}
-				thingsToWrite = thingsToWrite + columnToWrite + rowToWrite + directionToWrite ;
-				whiteMovesSize--;
-				writer.write(thingsToWrite);
-				
-			}else if(whiteMove.getGame().getMoveMode() == MoveMode.valueOf("PAWN_MOVE")) {
-				int moveColumn = whiteMove.getTargetTile().getColumn();
-				int moveRow = whiteMove.getTargetTile().getRow();
-				Character columnToWrite = characterList.get(moveColumn);
-				thingsToWrite = thingsToWrite + columnToWrite + Integer.toString(moveRow) ;
-				whiteMovesSize--;
-				writer.write(thingsToWrite);
-			}
+			saveBlackPlayerPosition(filename , writer);
+			
+			writer.newLine();
+			
+			saveWhitePlayerPosition(filename , writer);
+			
+		}else if(quoridor.getCurrentGame().getCurrentPosition().getPlayerToMove().hasGameAsWhite()) {
+			
+			saveWhitePlayerPosition(filename , writer);
+			
+			writer.newLine();
+			
+			saveBlackPlayerPosition(filename , writer);
+			
 		}
 		
 		writer.close();
-		
 		
 	}
 	
@@ -602,7 +397,7 @@ public class QuoridorController {
 	 * This method validate if all the pawn and wall position at board 
 	 * is with the board boundary 
 	 * 
-	 * @author Yuelin Liu , Bozhong Lu
+	 * @author Bozhong Lu, Yuelin Liu
 	 * @return boolean
 	 */
 	public static boolean validatePosition() {

@@ -735,7 +735,6 @@ public class CucumberStepDefinitions {
 		public void the_user_initiates_to_save_the_game_with_name(String string) throws IOException{
 		    // Write code here that turns the phrase above into concrete actions
 			QuoridorController.saveGame(string);
-		    throw new cucumber.api.PendingException();
 		}
 
 		@Then("A file with {string} shall be created in the filesystem")
@@ -744,7 +743,6 @@ public class CucumberStepDefinitions {
 		    // Write code here that turns the phrase above into concrete actions
 			// Insert Code here that checks that there is a file with name: "filename"
 			Assert.assertEquals(true , QuoridorController.checkFileExistence(filename));
-		    throw new cucumber.api.PendingException();
 		}
 
 		@Given("File {string} exists in the filesystem")
@@ -755,7 +753,6 @@ public class CucumberStepDefinitions {
 				//create file
 				QuoridorController.creatNewFile(filename);
 			}
-		    throw new cucumber.api.PendingException();
 		}
 
 		@When("The user confirms to overwrite existing file")
@@ -803,7 +800,7 @@ public class CucumberStepDefinitions {
 					///////////////////////////////////////////////////////////////////////
 					Game currentGame = QuoridorApplication.getQuoridor().getCurrentGame();
 					Board currentBoard = QuoridorApplication.getQuoridor().getBoard();
-					Tile newTargetTile = new Tile(int1 , int2 , currentBoard);
+					Tile newTargetTile = QuoridorApplication.getQuoridor().getBoard().getTile();
 					StepMove newMove = new StepMove(aMoveNumber , (aMoveNumber+1)/2 , currentPlayer , newTargetTile , currentGame );
 					QuoridorApplication.getQuoridor().getCurrentGame().addMove(newMove);
 				}
@@ -818,7 +815,7 @@ public class CucumberStepDefinitions {
 					///////////////////////////////////////////////////////////////////////
 					Game newGame = QuoridorApplication.getQuoridor().getCurrentGame();
 					Board newBoard = QuoridorApplication.getQuoridor().getBoard();
-					Tile newTargetTile = new Tile(int1 , int2 , newBoard);
+					Tile newTargetTile = QuoridorApplication.getQuoridor().getBoard().getTile();
 					StepMove newMove = new StepMove(aMoveNumber , (aMoveNumber+1)/2 , currentPlayer , newTargetTile , newGame );
 					QuoridorApplication.getQuoridor().getCurrentGame().addMove(newMove);
 				}
@@ -831,7 +828,6 @@ public class CucumberStepDefinitions {
 		public void validation_of_the_position_is_initiated() {
 		    // Write code here that turns the phrase above into concrete actions
 			QuoridorController.validatePosition();
-		    throw new cucumber.api.PendingException();
 		}
 
 		@Then("The position shall be {string}")
@@ -842,7 +838,6 @@ public class CucumberStepDefinitions {
 			}else {
 				Assert.assertEquals("error" , string);
 			}
-		    throw new cucumber.api.PendingException();
 		}
 
 		@Given("A game position is supplied with wall coordinate {int}:{int}-{string}")
@@ -852,45 +847,35 @@ public class CucumberStepDefinitions {
 			Integer wrow = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getRow();
 			Integer wcol = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getColumn();
 			if(wrow!=int1 || wcol!=int2 || di!=direction) {
-				int aMoveNumber = QuoridorApplication.getQuoridor().getCurrentGame().getMoves().size();
+				int aMoveNumber = QuoridorApplication.getQuoridor().getCurrentGame().getMoves().size()-1;
 				Player currentPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
 				WallMove oldMove = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate();
 				QuoridorApplication.getQuoridor().getCurrentGame().removeMove(oldMove);
 				////////////////////////////////////////////////////////////////////////
 				Game newGame = QuoridorApplication.getQuoridor().getCurrentGame();
 				Board newBoard = QuoridorApplication.getQuoridor().getBoard();
-				Tile newTargetTile = new Tile(int1 , int2 , newBoard);
-				int WallID = 100 ;
-				for(Wall wall : QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard()) {
-					while (wall.hasWithId(WallID)){
-						WallID++;
-					}
+				Tile newTargetTile = QuoridorApplication.getQuoridor().getBoard().getTile();
+				Wall aNewWall = null ;
+				if(currentPlayer.hasGameAsBlack()) {
+					aNewWall = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsInStock(0);
+				}else if(currentPlayer.hasGameAsWhite()) {
+					aNewWall = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsInStock(0);
 				}
-				for(Wall wall : QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard()) {
-					while (wall.hasWithId(WallID)){
-						WallID++;
-					}
-				}
-				Wall aNewWall = new Wall(WallID , currentPlayer);
-				
 				WallMove newWallmove = new WallMove(aMoveNumber,(aMoveNumber+1)/2,currentPlayer,newTargetTile,newGame,Direction.valueOf(direction),aNewWall);
 				QuoridorApplication.getQuoridor().getCurrentGame().addMove(newWallmove);
 			}
-		    throw new cucumber.api.PendingException();
 		}
 
 		@Then("The position shall be valid")
 		public void the_position_shall_be_valid() {
 		    // Write code here that turns the phrase above into concrete actions
 			Assert.assertEquals(true , QuoridorController.validatePosition());
-		    throw new cucumber.api.PendingException();
 		}
 
 		@Then("The position shall be invalid")
 		public void the_position_shall_be_invalid() {
 		    // Write code here that turns the phrase above into concrete actions
 			Assert.assertEquals(false , QuoridorController.validatePosition());
-		    throw new cucumber.api.PendingException();
 		}
 		
 		
