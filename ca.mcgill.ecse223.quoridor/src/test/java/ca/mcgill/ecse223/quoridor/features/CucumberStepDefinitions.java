@@ -43,7 +43,7 @@ public class CucumberStepDefinitions {
 	private Player player2;
 	private Player currentPlayer;
 	private Game game;
-	private String newContent ;
+	private String newContent;
 
 
 	// ***********************************************

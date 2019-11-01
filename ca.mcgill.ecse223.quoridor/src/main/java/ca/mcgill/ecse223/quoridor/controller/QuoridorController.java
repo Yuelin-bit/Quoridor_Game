@@ -647,9 +647,7 @@ public class QuoridorController {
 	 */
 	public static boolean initializeNewGame() {
 		//TODO: To be implemented
-		Quoridor q = QuoridorApplication.getQuoridor();
-		Game g = new Game(GameStatus.Initializing, MoveMode.PlayerMove, q);
-		q.setCurrentGame(g);
+		new Game(GameStatus.Initializing, MoveMode.PlayerMove, QuoridorApplication.getQuoridor());
 		return true;
 	}
 
