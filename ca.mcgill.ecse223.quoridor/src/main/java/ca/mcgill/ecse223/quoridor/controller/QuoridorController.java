@@ -648,9 +648,12 @@ public class QuoridorController {
 	 * @return A boolean value to indicate if a new game is initialized successfully
 	 * 
 	 */
-	public static boolean initializeNewGame(User user1, User user2) {
+	public static boolean initializeNewGame() {
 		//TODO: To be implemented
-		throw new UnsupportedOperationException();
+		Quoridor q = QuoridorApplication.getQuoridor();
+		Game g = new Game(GameStatus.Initializing, MoveMode.PlayerMove, q);
+		q.setCurrentGame(g);
+		return true;
 	}
 
 	/**
@@ -691,9 +694,13 @@ public class QuoridorController {
 	 * @param game The game to be checked
 	 * @return A GameStatus value of the status of the game to be checked
 	 */
-	public static GameStatus getGameStatus(Game game) {
+	public static GameStatus getGameStatus() {
 		//TODO: To be implemented
-		throw new UnsupportedOperationException();
+		Game game = QuoridorApplication.getQuoridor().getCurrentGame();
+		if (game == null) {
+			throw new IllegalArgumentException("There is no game avaliable");
+		}
+		return game.getGameStatus();
 	}
 	
 	/**
