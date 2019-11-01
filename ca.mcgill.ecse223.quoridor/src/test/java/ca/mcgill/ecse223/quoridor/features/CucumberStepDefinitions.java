@@ -920,8 +920,7 @@ public class CucumberStepDefinitions {
 		@When("A new game is being initialized")
 		public void a_new_game_is_being_initialized() {
 		    // Write code here that turns the phrase above into concrete actions
-			List<User> users = QuoridorApplication.getQuoridor().getUsers();
-			QuoridorController.initializeNewGame(users.get(0), users.get(1));
+			QuoridorController.initializeNewGame();
 			throw new cucumber.api.PendingException();
 		}
 
@@ -987,7 +986,7 @@ public class CucumberStepDefinitions {
 		// Scenario: Select existing user name
 		@Given("A new game is initializing")
 		public void a_new_game_is_initializing() {
-			assertEquals(GameStatus.Initializing, QuoridorController.getGameStatus(QuoridorApplication.getQuoridor().getCurrentGame()));
+			assertEquals(GameStatus.Initializing, QuoridorController.getGameStatus());
 		    throw new cucumber.api.PendingException();
 		}
 		
