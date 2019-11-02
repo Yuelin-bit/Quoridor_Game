@@ -37,5 +37,5 @@ Feature: Drop Wall
       | vertical 	 |   1 |   1 |
       | horizontal |   1 |   2 |
   	  | horizontal |   7 |   4 |
-      | vertical 	 |   6 |   6 |
+      | vertical 	 |   6 |   4 |
   	
