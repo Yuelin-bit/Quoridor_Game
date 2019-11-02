@@ -35,4 +35,3 @@ Feature: Move Wall
       | horizontal |   2 |   8 | right |    2 |    8 |
       | vertical   |   1 |   6 | up    |    1 |    6 |
       | horizontal |   8 |   6 | down  |    8 |    6 |
-      
