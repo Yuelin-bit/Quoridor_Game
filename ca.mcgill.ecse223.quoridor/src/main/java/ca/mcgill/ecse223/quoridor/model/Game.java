@@ -36,22 +36,12 @@ public class Game
   // CONSTRUCTOR
   //------------------------
 
-  public Game(GameStatus aGameStatus, MoveMode aMoveMode, Player aWhitePlayer, Player aBlackPlayer, Quoridor aQuoridor)
+  public Game(GameStatus aGameStatus, MoveMode aMoveMode, Quoridor aQuoridor)
   {
     gameStatus = aGameStatus;
     moveMode = aMoveMode;
     moves = new ArrayList<Move>();
     positions = new ArrayList<GamePosition>();
-    boolean didAddWhitePlayer = setWhitePlayer(aWhitePlayer);
-    if (!didAddWhitePlayer)
-    {
-      throw new RuntimeException("Unable to create gameAsWhite due to whitePlayer");
-    }
-    boolean didAddBlackPlayer = setBlackPlayer(aBlackPlayer);
-    if (!didAddBlackPlayer)
-    {
-      throw new RuntimeException("Unable to create gameAsBlack due to blackPlayer");
-    }
     boolean didAddQuoridor = setQuoridor(aQuoridor);
     if (!didAddQuoridor)
     {
@@ -175,10 +165,22 @@ public class Game
   {
     return whitePlayer;
   }
+
+  public boolean hasWhitePlayer()
+  {
+    boolean has = whitePlayer != null;
+    return has;
+  }
   /* Code from template association_GetOne */
   public Player getBlackPlayer()
   {
     return blackPlayer;
+  }
+
+  public boolean hasBlackPlayer()
+  {
+    boolean has = blackPlayer != null;
+    return has;
   }
   /* Code from template association_GetOne */
   public Quoridor getQuoridor()
@@ -367,58 +369,68 @@ public class Game
     wasSet = true;
     return wasSet;
   }
-  /* Code from template association_SetOneToOptionalOne */
+  /* Code from template association_SetOptionalOneToOptionalOne */
   public boolean setWhitePlayer(Player aNewWhitePlayer)
   {
     boolean wasSet = false;
     if (aNewWhitePlayer == null)
     {
-      //Unable to setWhitePlayer to null, as gameAsWhite must always be associated to a whitePlayer
+      Player existingWhitePlayer = whitePlayer;
+      whitePlayer = null;
+      
+      if (existingWhitePlayer != null && existingWhitePlayer.getGameAsWhite() != null)
+      {
+        existingWhitePlayer.setGameAsWhite(null);
+      }
+      wasSet = true;
       return wasSet;
     }
-    
-    Game existingGameAsWhite = aNewWhitePlayer.getGameAsWhite();
-    if (existingGameAsWhite != null && !equals(existingGameAsWhite))
-    {
-      //Unable to setWhitePlayer, the current whitePlayer already has a gameAsWhite, which would be orphaned if it were re-assigned
-      return wasSet;
-    }
-    
-    Player anOldWhitePlayer = whitePlayer;
-    whitePlayer = aNewWhitePlayer;
-    whitePlayer.setGameAsWhite(this);
 
-    if (anOldWhitePlayer != null)
+    Player currentWhitePlayer = getWhitePlayer();
+    if (currentWhitePlayer != null && !currentWhitePlayer.equals(aNewWhitePlayer))
     {
-      anOldWhitePlayer.setGameAsWhite(null);
+      currentWhitePlayer.setGameAsWhite(null);
+    }
+
+    whitePlayer = aNewWhitePlayer;
+    Game existingGameAsWhite = aNewWhitePlayer.getGameAsWhite();
+
+    if (!equals(existingGameAsWhite))
+    {
+      aNewWhitePlayer.setGameAsWhite(this);
     }
     wasSet = true;
     return wasSet;
   }
-  /* Code from template association_SetOneToOptionalOne */
+  /* Code from template association_SetOptionalOneToOptionalOne */
   public boolean setBlackPlayer(Player aNewBlackPlayer)
   {
     boolean wasSet = false;
     if (aNewBlackPlayer == null)
     {
-      //Unable to setBlackPlayer to null, as gameAsBlack must always be associated to a blackPlayer
+      Player existingBlackPlayer = blackPlayer;
+      blackPlayer = null;
+      
+      if (existingBlackPlayer != null && existingBlackPlayer.getGameAsBlack() != null)
+      {
+        existingBlackPlayer.setGameAsBlack(null);
+      }
+      wasSet = true;
       return wasSet;
     }
-    
-    Game existingGameAsBlack = aNewBlackPlayer.getGameAsBlack();
-    if (existingGameAsBlack != null && !equals(existingGameAsBlack))
-    {
-      //Unable to setBlackPlayer, the current blackPlayer already has a gameAsBlack, which would be orphaned if it were re-assigned
-      return wasSet;
-    }
-    
-    Player anOldBlackPlayer = blackPlayer;
-    blackPlayer = aNewBlackPlayer;
-    blackPlayer.setGameAsBlack(this);
 
-    if (anOldBlackPlayer != null)
+    Player currentBlackPlayer = getBlackPlayer();
+    if (currentBlackPlayer != null && !currentBlackPlayer.equals(aNewBlackPlayer))
     {
-      anOldBlackPlayer.setGameAsBlack(null);
+      currentBlackPlayer.setGameAsBlack(null);
+    }
+
+    blackPlayer = aNewBlackPlayer;
+    Game existingGameAsBlack = aNewBlackPlayer.getGameAsBlack();
+
+    if (!equals(existingGameAsBlack))
+    {
+      aNewBlackPlayer.setGameAsBlack(this);
     }
     wasSet = true;
     return wasSet;
@@ -481,12 +493,14 @@ public class Game
     if (existingWhitePlayer != null)
     {
       existingWhitePlayer.delete();
+      existingWhitePlayer.setGameAsWhite(null);
     }
     Player existingBlackPlayer = blackPlayer;
     blackPlayer = null;
     if (existingBlackPlayer != null)
     {
       existingBlackPlayer.delete();
+      existingBlackPlayer.setGameAsBlack(null);
     }
     Quoridor existingQuoridor = quoridor;
     quoridor = null;

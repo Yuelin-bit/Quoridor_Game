@@ -18,7 +18,7 @@ Feature: Switch Current Player
 
     Examples: 
       | player | other |
+			| black  | white |
       | white  | black |
       | black  | white |
-      
-      
+
