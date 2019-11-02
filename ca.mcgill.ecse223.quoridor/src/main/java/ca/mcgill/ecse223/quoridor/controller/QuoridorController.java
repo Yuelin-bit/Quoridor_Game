@@ -840,23 +840,23 @@ public class QuoridorController {
 //		throw new UnsupportedOperationException();
 //	}
 	
-	/**
-	 * This is a static method which verify if a game is ready to start. If so, it 
-	 * will set the status as ReadyToStart. It will return a boolean value to suggest
-	 * if it is successful.
-	 * 
-	 * @author Pengnan Fan
-	 * @param g The game to be verified.
-	 * @return A boolean variable to suggest if it is successful
-	 */
-	public static boolean verifyNewGame() {
-		//TODO: To be implemented
-		Game g = QuoridorApplication.getQuoridor().getCurrentGame();
-		if (g == null) {
-			throw new IllegalArgumentException("There is no game");
-		}
-		return g.getGameStatus().equals(GameStatus.ReadyToStart);
-	}
+//	/**
+//	 * This is a static method which verify if a game is ready to start. If so, it 
+//	 * will set the status as ReadyToStart. It will return a boolean value to suggest
+//	 * if it is successful.
+//	 * 
+//	 * @author Pengnan Fan
+//	 * @param g The game to be verified.
+//	 * @return A boolean variable to suggest if it is successful
+//	 */
+//	public static boolean verifyNewGame() {
+//		//TODO: To be implemented
+//		Game g = QuoridorApplication.getQuoridor().getCurrentGame();
+//		if (g == null) {
+//			throw new IllegalArgumentException("There is no game");
+//		}
+//		return g.getGameStatus().equals(GameStatus.ReadyToStart);
+//	}
 	
 	/**
 	  * This method checks the clock of the current player to count down.

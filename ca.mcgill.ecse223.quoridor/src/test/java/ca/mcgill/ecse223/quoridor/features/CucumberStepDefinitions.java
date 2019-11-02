@@ -744,10 +744,10 @@ public class CucumberStepDefinitions {
 		}
 
 		@When("The user initiates to save the game with name {string}")
-		public void the_user_initiates_to_save_the_game_with_name(String string){
+		public void the_user_initiates_to_save_the_game_with_name(String string) throws IOException{
 		    // Write code here that turns the phrase above into concrete actions
 			Game game = QuoridorApplication.getQuoridor().getCurrentGame();
-			QuoridorController.saveGame(game , string);
+			QuoridorController.saveGame(string);
 		}
 
 		@Then("A file with {string} shall be created in the filesystem")
@@ -760,7 +760,7 @@ public class CucumberStepDefinitions {
 
 		@Given("File {string} exists in the filesystem")
 		// Make file with filename in the file system
-		public void file_exists_in_the_filesystem(String filename){
+		public void file_exists_in_the_filesystem(String filename) throws IOException{
 		    // Write code here that turns the phrase above into concrete actions
 			if(!QuoridorController.checkFileExistence(filename)) {
 				//create file
@@ -909,6 +909,7 @@ public class CucumberStepDefinitions {
 		public void a_new_game_is_being_initialized() {
 			// quoridor is created
 			// two players are instantiated
+			QuoridorController.initializeBoard();
 			QuoridorController.initializeNewGame();
 			this.quoridor = QuoridorApplication.getQuoridor();
 			this.game = quoridor.getCurrentGame();
@@ -961,8 +962,8 @@ public class CucumberStepDefinitions {
 		@When("I start the clock")
 		public void i_start_the_clock() {
 		    // Write code here that turns the phrase above into concrete actions
-		    QuoridorController.clockIsRunning(QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove());
-			  throw new cucumber.api.PendingException();
+		    whiteStartTime = QuoridorController.startClock();
+		    game.setGameStatus(GameStatus.Running);
 		}
 
 		@Then("The game shall be running")
