@@ -16,7 +16,7 @@ public class QuoridorController {
 	 * @exception UnsupportedOperationException
 	 *
 	 */
-	public static boolean verifyWallMoveValid(WallMove wallmove) {
+	public static boolean verifyOverlapped(WallMove wallmove) {
 		int currentRow = wallmove.getTargetTile().getRow();
 		int currentColumn = wallmove.getTargetTile().getColumn();
 		QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard();
@@ -29,12 +29,12 @@ public class QuoridorController {
 				int newColumn = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard().get(i).getMove().getTargetTile().getColumn();
 				if(QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard().get(i).getMove().getWallDirection()==Direction.Vertical) {
 					if((newColumn==currentColumn)&&(newRow<=currentRow+1)&&(newRow>=currentRow-1)) {
-						return false;
+						return true;
 					}
 				}
 				if(QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard().get(i).getMove().getWallDirection()==Direction.Horizontal) {
 					if((newColumn==currentColumn)&&(currentRow==newRow)) {
-						return false;
+						return true;
 					}
 				}	
 			}
@@ -43,12 +43,12 @@ public class QuoridorController {
 				int newColumn = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard().get(i).getMove().getTargetTile().getColumn();
 				if(QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard().get(i).getMove().getWallDirection()==Direction.Vertical) {
 					if((newColumn==currentColumn)&&(newRow<=currentRow+1)&&(newRow>=currentRow-1)) {
-						return false;
+						return true;
 					}
 				}
 				if(QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard().get(i).getMove().getWallDirection()==Direction.Horizontal) {
 					if((newColumn==currentColumn)&&(currentRow==newRow)) {
-						return false;
+						return true;
 					}
 				}	
 			}
@@ -60,12 +60,12 @@ public class QuoridorController {
 				int newColumn = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard().get(i).getMove().getTargetTile().getColumn();
 				if(QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard().get(i).getMove().getWallDirection()==Direction.Horizontal) {
 					if((newRow==currentRow)&&(newColumn<=currentColumn+1)&&(newColumn>=currentColumn-1)) {
-						return false;
+						return true;
 					}
 				}
 				if(QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard().get(i).getMove().getWallDirection()==Direction.Vertical) {
 					if((newColumn==currentColumn)&&(currentRow==newRow)) {
-						return false;
+						return true;
 					}
 				}	
 			}
@@ -74,18 +74,18 @@ public class QuoridorController {
 				int newColumn = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard().get(i).getMove().getTargetTile().getColumn();
 				if(QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard().get(i).getMove().getWallDirection()==Direction.Horizontal) {
 					if((newRow==currentRow)&&(newColumn<=currentColumn+1)&&(newColumn>=currentColumn-1)) {
-						return false;
+						return true;
 					}
 				}
 				if(QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard().get(i).getMove().getWallDirection()==Direction.Vertical) {
 					if((newColumn==currentColumn)&&(currentRow==newRow)) {
-						return false;
+						return true;
 					}
 				}	
 			}
 			
 		}
-		return true;
+		return false;
 	}
 	
 	
