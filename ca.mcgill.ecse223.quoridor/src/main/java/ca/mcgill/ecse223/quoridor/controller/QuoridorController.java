@@ -372,7 +372,7 @@ public class QuoridorController {
 	 * @param sec seconds
 	 * @return A flag indicating whether the method successfully launched.
 	 */
-	public static boolean setTotalThinkingTime(Integer min, Integer sec) {
+	public static void setTotalThinkingTime(Integer min, Integer sec) {
 		if(min != null && sec != null) {
 		Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
 		Player blackPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
@@ -380,11 +380,8 @@ public class QuoridorController {
 		Time totalTime = new Time(millis);
 		whitePlayer.setRemainingTime(totalTime);
 		blackPlayer.setRemainingTime(totalTime);
-		return true;
 		}
-		else {
-			throw new UnsupportedOperationException();
-		}
+		
 	}
 	/**
 	 * Feature: InitialzeBoard
@@ -397,18 +394,16 @@ public class QuoridorController {
 	 * @author Sun, Gengyi
 	 * @return A flag indicating whether the method successfully launched.
 	 */
-	public static boolean initializeBoard() {
+	public static void initializeBoard() {
+		//TODO GUI
 		Board board = new Board(QuoridorApplication.getQuoridor());
-		//boolean status = 
-		QuoridorApplication.getQuoridor().setBoard(board);
 		Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
 		Player blackPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
 		initializeWhitePawn(whitePlayer,board);
 		initializeBlackPawn(blackPlayer, board);
 		initializeWhiteWall(whitePlayer);
 		initializeBlackWall(blackPlayer);
-
-		throw new UnsupportedOperationException();
+		QuoridorApplication.getQuoridor().setBoard(board);
 	}
 
 	/**
@@ -420,13 +415,13 @@ public class QuoridorController {
 	 * @param whitePlayer
 	 * @return A flag indicating whether the method successfully launched.
 	 */
-	public static boolean initializeWhitePawn(Player whitePlayer, Board board) {
+	public static void initializeWhitePawn(Player whitePlayer, Board board) {
+		//TODO GUI
 		if(whitePlayer!= null && board != null) {
 		Tile init = new Tile('e', 9, board);
 		PlayerPosition initial = new PlayerPosition(whitePlayer, init);
 		QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setWhitePosition(initial);
-		return true;
-		}else throw new UnsupportedOperationException();
+		}
 	}
 	/**
 	 * Feature: InitialzeBoard
@@ -437,13 +432,14 @@ public class QuoridorController {
 	 * @param blackPlayer
 	 * @return A flag indicating whether the method successfully launched.
 	 */
-	public static boolean initializeBlackPawn(Player blackPlayer, Board board) {
+	public static void initializeBlackPawn(Player blackPlayer, Board board) {
+		//TODO GUI
 		if(blackPlayer!= null && board != null) {
 			Tile init = new Tile('e', 0, board);
 			PlayerPosition initial = new PlayerPosition(blackPlayer, init);
 			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setWhitePosition(initial);
-			return true;
-			}else throw new UnsupportedOperationException();	}
+			}
+		}
 	/**
 	 * Feature: InitialzeBoard
 	 * This static method initializes initial number of walls left for the black player, 
@@ -455,10 +451,12 @@ public class QuoridorController {
 	 * @return A flag indicating whether the method successfully launched.
 	 */
 	public static boolean initializeBlackWall(Player blackPlayer) {
+		//TODO GUI
 		if(!blackPlayer.hasWalls()) {
 			blackPlayer.addWall(10);
+			return true;
 		}
-		throw new UnsupportedOperationException();
+		else return false;
 	}
 	/**
 	 * Feature: InitialzeBoard
@@ -471,10 +469,13 @@ public class QuoridorController {
 	 * @return A flag indicating whether the method successfully launched.
 	 */
 	public static boolean initializeWhiteWall(Player whitePlayer) {
+		//TODO GUI
+
 		if(!whitePlayer.hasWalls()) {
 			whitePlayer.addWall(10);
+			return true;
 		}	
-		throw new UnsupportedOperationException();
+		else return false;
 	}
 	
 	/**
