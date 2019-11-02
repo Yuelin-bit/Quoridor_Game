@@ -2,15 +2,19 @@ package ca.mcgill.ecse223.quoridor.controller;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.sql.Time;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
-
-import ca.mcgill.ecse223.quoridor.QuoridorApplication;
 
 //import org.apache.commons.lang3.time.StopWatch;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
+
+import ca.mcgill.ecse223.quoridor.QuoridorApplication;
 import ca.mcgill.ecse223.quoridor.model.*;
 import ca.mcgill.ecse223.quoridor.model.Game.GameStatus;
 import ca.mcgill.ecse223.quoridor.model.Game.MoveMode;
@@ -187,12 +191,108 @@ public class QuoridorController {
 	// 1. Compute the string to be saved
 	// 2. Save to file 
 	// 3. Return the computed string 
-	public static String saveGame(Game game , String filename){
-		throw new UnsupportedOperationException() ;
+	//get content from the game and write them in correct format in filename
+	//Should I write all the moves that's been made into the file? If so, how am I supposed to know the move mode of previous moves
+	//I'm supposed to write all the wall moves and pawn position in the file
+	//should I only write the current pawn position or all of them
+	//should I write them in the file following their orders or it doesn't matter
+	public static void saveGame(String filename)throws IOException{
+		
+		Quoridor quoridor = QuoridorApplication.getQuoridor();
+		BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
+		List<Move> listOfAllMoves = quoridor.getCurrentGame().getMoves();
+		List<Move> allBlackMoves = new ArrayList<Move>();
+		List<Move> allWhiteMoves = new ArrayList<Move>();
+		//construct an ArrayList of characters from a to i
+		String characters = new String("abcdefghi");
+	    ArrayList<Character> characterList = new ArrayList<Character>();
+	    for(int i = 0; i<characters.length(); i++){
+	        characterList.add(characters.charAt(i));
+	    }
 	    
+		for(Move move : listOfAllMoves) {
+			if(move.getPlayer().hasGameAsBlack()) {
+				allBlackMoves.add(move);
+			}else if(move.getPlayer().hasGameAsWhite()){
+				allWhiteMoves.add(move);
+			}
+		}
+		
+		writer.write("B: ");
+		int blackMovesSize = allBlackMoves.size();
+		int whiteMovesSize = allWhiteMoves.size();
+		String thingsToWrite = "";
+		for(Move blackMove : allBlackMoves) {
+			if(blackMovesSize < allBlackMoves.size()) {
+				thingsToWrite = ",";
+			}
+			if(blackMove.getGame().getMoveMode() == MoveMode.valueOf("WALL_MOVE")) {
+				WallMove thisWallMove = (WallMove)blackMove ;
+				int moveColumn = thisWallMove.getTargetTile().getColumn();
+				int moveRow = thisWallMove.getTargetTile().getRow();
+				Direction moveDirection = thisWallMove.getWallDirection();
+				
+				Character columnToWrite = characterList.get(moveColumn);
+				String rowToWrite = Integer.toString(moveRow);
+				String directionToWrite = "";
+				if(moveDirection == Direction.valueOf("VERTICAL")) {
+					directionToWrite = "v";
+				}else if(moveDirection == Direction.valueOf("HORIZONTAL")){
+					directionToWrite = "h";
+				}
+				thingsToWrite = thingsToWrite + columnToWrite + rowToWrite + directionToWrite ;
+				blackMovesSize--;
+				writer.write(thingsToWrite);
+				
+			}else if(blackMove.getGame().getMoveMode() == MoveMode.valueOf("PAWN_MOVE")) {
+				int moveColumn = blackMove.getTargetTile().getColumn();
+				int moveRow = blackMove.getTargetTile().getRow();
+				Character columnToWrite = characterList.get(moveColumn);
+				thingsToWrite = thingsToWrite + columnToWrite + Integer.toString(moveRow) ;
+				blackMovesSize--;
+				writer.write(thingsToWrite);
+			}
+		}
+		
+		writer.newLine();
+		writer.write("W: ");
+		
+		for(Move whiteMove : allWhiteMoves) {
+			if(whiteMovesSize < allWhiteMoves.size()) {
+				thingsToWrite = ",";
+			}
+			if(whiteMove.getGame().getMoveMode() == MoveMode.valueOf("WALL_MOVE")) {
+				WallMove thisWallMove = (WallMove)whiteMove ;
+				int moveColumn = thisWallMove.getTargetTile().getColumn();
+				int moveRow = thisWallMove.getTargetTile().getRow();
+				Direction moveDirection = thisWallMove.getWallDirection();
+			
+				Character columnToWrite = characterList.get(moveColumn);
+				String rowToWrite = Integer.toString(moveRow);
+				String directionToWrite = "";
+				if(moveDirection == Direction.valueOf("VERTICAL")) {
+					directionToWrite = "v";
+				}else if(moveDirection == Direction.valueOf("HORIZONTAL")){
+					directionToWrite = "h";
+				}
+				thingsToWrite = thingsToWrite + columnToWrite + rowToWrite + directionToWrite ;
+				whiteMovesSize--;
+				writer.write(thingsToWrite);
+				
+			}else if(whiteMove.getGame().getMoveMode() == MoveMode.valueOf("PAWN_MOVE")) {
+				int moveColumn = whiteMove.getTargetTile().getColumn();
+				int moveRow = whiteMove.getTargetTile().getRow();
+				Character columnToWrite = characterList.get(moveColumn);
+				thingsToWrite = thingsToWrite + columnToWrite + Integer.toString(moveRow) ;
+				whiteMovesSize--;
+				writer.write(thingsToWrite);
+			}
+		}
+		
+		writer.close();
+		
+		
 	}
-	
-	
 	/**
 	 * Feature:SavePosition
 	 * 
@@ -243,9 +343,13 @@ public class QuoridorController {
 	 * @author Bozhong Lu
 	 * @param String filename
 	 * @return none
+	 * @throws IOException 
 	 */
-	public static void creatNewFile(String filename) {
-		throw new UnsupportedOperationException();
+	public static void creatNewFile(String filename) throws IOException {
+		File gameFile = new File(filename);
+        if(gameFile.createNewFile()){
+            System.out.println(filename + " File Created in Project root directory");
+        }else System.out.println(filename + " already exists in the project root directory");
 	}
 	
 	/**
@@ -254,9 +358,13 @@ public class QuoridorController {
 	 * @author Bozhong Lu
 	 * @param String filename
 	 * @return none
+	 * @throws IOException 
 	 */
-	public static void deleteFile(String filename) {
-		throw new UnsupportedOperationException();
+	public static void deleteFile(String filename) throws IOException {
+		File gameFile = new File(filename);
+		String filePath = gameFile.getCanonicalPath();
+		File gameFilePath = new File(filePath);
+		gameFilePath.delete();
 	}
 	
 	
@@ -426,16 +534,16 @@ public class QuoridorController {
 		}
 						
 		return true;
-						
+
 	}
 	
 	
 	/**
-	 * Feature:laod game
+	 * Feature:load game, ValidatePosition
 	 * This method validate if all the pawn and wall position at board 
 	 * is with the board boundary 
 	 * 
-	 * @author Zirui He, Bozhong Lu
+	 * @author Yuelin Liu , Bozhong Lu
 	 * @return boolean
 	 */
 	public static boolean validatePosition() {
@@ -503,8 +611,7 @@ public class QuoridorController {
 				return isValid;
 
 	}
-		
-	
+
 	/**
 	 * Feature:laod game
 	 * This method return the result of loading game by showing a string
@@ -537,7 +644,6 @@ public class QuoridorController {
 			player.setNextPlayer(black);
 			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(black);
 		}
-
 	}
 
 	
@@ -562,6 +668,7 @@ public class QuoridorController {
 	 * @param player
 	 * @return void
 	 */
+  
 	public static Long stopClock() {
 		//TO-DO: Write logic to load game
 		Long endTime = System.nanoTime();
@@ -591,12 +698,22 @@ public class QuoridorController {
 	 * It returns true if setting is successful.
 	 * 
 	 * @author Sun, Gengyi
-	 * @param min
-	 * @param sec
+	 * @param min minutes
+	 * @param sec seconds
 	 * @return A flag indicating whether the method successfully launched.
 	 */
 	public static boolean setTotalThinkingTime(Integer min, Integer sec) {
-		throw new UnsupportedOperationException();
+		if(min != null && sec != null) {
+			Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
+			Player blackPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
+			long millis = (min*60+sec) * 1000;
+			Time totalTime = new Time(millis);
+			whitePlayer.setRemainingTime(totalTime);
+			blackPlayer.setRemainingTime(totalTime);
+			return true;
+		} else {
+			throw new UnsupportedOperationException();
+		}
 	}
 	
 	/**
@@ -626,7 +743,7 @@ public class QuoridorController {
 	public static boolean initializeWhitePawn(Player whitePlayer) {
 		throw new UnsupportedOperationException();
 	}
-	
+
 	/**
 	 * Feature: InitialzeBoard
 	 * This static method sets the black player's pawn to initial position(e1).
@@ -640,7 +757,6 @@ public class QuoridorController {
 		throw new UnsupportedOperationException();
 	}
 	/**
-
 	 * Feature: InitialzeBoard
 	 * This static method initializes initial number of walls left for the black player, 
 	 * contains all of them in a list.
@@ -672,26 +788,27 @@ public class QuoridorController {
 	 * set. It will return a boolean variable to suggest if it is valid. 
 	 * 
 	 * @author Sun, Gengyi
-	 * @param g
 	 * @return A flag indicating whether the thinking time is valid.
 	 */
-	public static boolean verifyTotalThinkingTime(Game g) {
+	public static boolean verifyTotalThinkingTime() {
+		Game g = QuoridorApplication.getQuoridor().getCurrentGame();
+		if (g == null) {
+			throw new IllegalArgumentException("No game avaliable");
+		}
 		throw new UnsupportedOperationException();
 	}
 	
 	/**
-	 * This is a static method which takes two User parameters to initialize a new game. 
+	 * This is a static method which initializes a new game. 
 	 * It will return a boolean value to indicate if a new game is successfully initialized.
 	 * 
 	 * @author Pengnan Fan
-	 * @param user1 The first player who will join in the game
-	 * @param user2 The second player who will join in the game
 	 * @return A boolean value to indicate if a new game is initialized successfully
 	 * 
 	 */
-	public static boolean initializeNewGame(User user1, User user2) {
-		//TODO: To be implemented
-		throw new UnsupportedOperationException();
+	public static boolean initializeNewGame() {
+		new Game(GameStatus.Initializing, MoveMode.WallMove, QuoridorApplication.getQuoridor());
+		return QuoridorApplication.getQuoridor().hasCurrentGame();
 	}
 
 	/**
@@ -705,8 +822,17 @@ public class QuoridorController {
 	 * @return A boolean value to indicate if the name of the user has been updated
 	 */
 	public static boolean setUserName(Player player, String name) {
-		//TODO: To be implemented
-		throw new UnsupportedOperationException();
+		if (player == null) {
+			throw new IllegalArgumentException("Player is invalid");
+		}
+		if (name == null || name.trim().length() == 0) {
+			throw new IllegalArgumentException("Invalid name");
+		}
+		User u = User.getWithName(name);
+		if (u == null) {
+			u = new User(name, QuoridorApplication.getQuoridor());
+		}
+		return player.setUser(u);
 	}
 	
 	/**
@@ -720,51 +846,44 @@ public class QuoridorController {
 	 * @return A boolean value to indicate if the name of the user has been updated
 	 */
 	public static boolean selectUserName(Player player) {
-		//TODO: To be implemented
-		throw new UnsupportedOperationException();
+		//TODO: Need support from front end
+		if (player == null) {
+			throw new IllegalArgumentException("Player is invalid");
+		}
+		//Receive a name from front end
+		return setUserName(player, "name");
+		//throw new UnsupportedOperationException();
 	}
 	
-	/**
-	 * This is a static method which check the status of a game. It will return a GameStatus
-	 * value of the status of a certain status.
-	 * 
-	 * @author Pengnan Fan
-	 * @param game The game to be checked
-	 * @return A GameStatus value of the status of the game to be checked
-	 */
-	public static GameStatus getGameStatus(Game game) {
-		//TODO: To be implemented
-		throw new UnsupportedOperationException();
-	}
+//	/**
+//	 * This is a static method which link an user u and a player p. It will return a boolean
+//	 * value to suggest if it is successful.
+//	 * 
+//   * @author Pengnan Fan
+//	 * @param u The user to link
+//	 * @param p The player to link
+//	 * @return A boolean value to suggest if it is successful.
+//	 */
+//	public static boolean linkUserAndPlayer(User u, Player p) {
+//		//TODO: To be implemented
+//		p.setUser(u);
+//		throw new UnsupportedOperationException();
+//	}
 	
-	/**
-	 * This is a static method which link an user u and a player p. It will return a boolean
-	 * value to suggest if it is successful.
-	 * 
-   * @author Pengnan Fan
-	 * @param u The user to link
-	 * @param p The player to link
-	 * @return A boolean value to suggest if it is successful.
-	 */
-	public static boolean linkUserAndPlayer(User u, Player p) {
-		//TODO: To be implemented
-		throw new UnsupportedOperationException();
-	}
-	
-	/**
-	 * This is a static method which takes two inputs, a game and a player. It will set
-	 * the player to be the next one to play of the game. It will return a boolean to
-	 * suggest it is successful.
-	 * 
-	 * @author Pengnan Fan
-	 * @param g The game to change the player
-	 * @param p The player to be set as the next player
-	 * @return A boolean variable to suggest if it is successful
-	 */
-	public static boolean setNextPlayer(Game g, Player p) {
-		//TODO: To be implemented
-		throw new UnsupportedOperationException();
-	}
+//	/**
+//	 * This is a static method which takes two inputs, a game and a player. It will set
+//	 * the player to be the next one to play of the game. It will return a boolean to
+//	 * suggest it is successful.
+//	 * 
+//	 * @author Pengnan Fan
+//	 * @param g The game to change the player
+//	 * @param p The player to be set as the next player
+//	 * @return A boolean variable to suggest if it is successful
+//	 */
+//	public static boolean setNextPlayer(Game g, Player p) {
+//		//TODO: To be implemented
+//		throw new UnsupportedOperationException();
+//	}
 	
 	/**
 	 * This is a static method which verify if a game is ready to start. If so, it 
@@ -775,12 +894,15 @@ public class QuoridorController {
 	 * @param g The game to be verified.
 	 * @return A boolean variable to suggest if it is successful
 	 */
-	public static boolean verifyNewGame(Game g) {
+	public static boolean verifyNewGame() {
 		//TODO: To be implemented
-		throw new UnsupportedOperationException();
+		Game g = QuoridorApplication.getQuoridor().getCurrentGame();
+		if (g == null) {
+			throw new IllegalArgumentException("There is no game");
+		}
+		return g.getGameStatus().equals(GameStatus.ReadyToStart);
 	}
 	
-
 	/**
 	  * This method checks the clock of the current player to count down.
 	  * It returns true if the clock is counting down.
@@ -790,7 +912,7 @@ public class QuoridorController {
 	  * @return A flag indicating whether the method successfully launched.
 	  */ 
 	 public static boolean clockIsCountingDown(Player player) {
-	  throw new UnsupportedOperationException();
+	   throw new UnsupportedOperationException();
 	 }
 	 
 	 
@@ -936,9 +1058,6 @@ public class QuoridorController {
 
 			game.setCurrentPosition(gamePosition);
 		}
-
-	
-	 
 	 
 	 
 }
