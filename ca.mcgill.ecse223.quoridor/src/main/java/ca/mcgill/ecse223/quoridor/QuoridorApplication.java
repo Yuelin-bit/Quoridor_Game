@@ -2,6 +2,7 @@ package ca.mcgill.ecse223.quoridor;
 
 import ca.mcgill.ecse223.quoridor.model.Quoridor;
 import ca.mcgill.ecse223.quoridor.view.Board;
+import ca.mcgill.ecse223.quoridor.view.MainMenu;
 
 public class QuoridorApplication {
 
@@ -11,7 +12,7 @@ public class QuoridorApplication {
 		// start UI
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Board().setVisible(true);
+                new MainMenu().setVisible(true);
             }
         });
 	}
