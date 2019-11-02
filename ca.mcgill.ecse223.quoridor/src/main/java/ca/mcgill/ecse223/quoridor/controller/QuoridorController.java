@@ -74,7 +74,6 @@ public class QuoridorController {
 	
 	
 	
-	
 	/**
 	 * Feature:MoveWall
 	 * 
@@ -104,10 +103,8 @@ public class QuoridorController {
 	public static Tile getNonEdgeTile(String string, Tile tile)
 	{	
 		//TODO: Write logic
-		throw new UnsupportedOperationException();
-	}
-	
-	
+    throw new UnsupportedOperationException();
+  }
 	
 	/**
 	 * Feature:MoveWall
@@ -178,9 +175,92 @@ public class QuoridorController {
 	 * @return whether the file with the specified name exists
 	 */
 	public static boolean checkFileExistence(String filename) {
-		throw new UnsupportedOperationException();
+		File tempFile = new File(filename);
+		boolean exists = tempFile.exists();
+		return exists ;
 	}
 	
+	
+	
+	
+	// Helper method that writes pawn position and wall positions for Black player (For saveGame)
+	private static void saveBlackPlayerPosition(String filename , BufferedWriter writer) throws IOException {
+				
+		Quoridor quoridor = QuoridorApplication.getQuoridor();
+		String characters = new String("abcdefghi");
+		ArrayList<Character> characterList = new ArrayList<Character>();
+		for(int i = 0; i<characters.length(); i++){
+			characterList.add(characters.charAt(i));
+		}
+				
+		writer.write("B: ");
+		String blackPositionToWrite = "" ;
+		int playerColumn = quoridor.getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getColumn();
+		int playerRow = quoridor.getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
+		Character blackColumnToWrite = characterList.get(playerColumn-1);
+		String blackRowToWrite = Integer.toString(playerRow) ;
+		blackPositionToWrite = blackPositionToWrite + blackColumnToWrite + blackRowToWrite ;
+		writer.write(blackPositionToWrite);
+				
+		List<Wall> blackWallsOnBoard = quoridor.getCurrentGame().getCurrentPosition().getBlackWallsOnBoard();
+		for(Wall wall : blackWallsOnBoard) {
+			String blackWallPositionToWrite = "," ;
+			int wallColumn = wall.getMove().getTargetTile().getColumn();
+			int wallRow = wall.getMove().getTargetTile().getRow();
+			Direction wallDirection = wall.getMove().getWallDirection();
+					
+			Character wallColumnToWrite = characterList.get(wallColumn);
+			String wallRowToWrite = Integer.toString(wallRow);
+			String wallDirectionToWrite = "" ;
+			if(wallDirection == Direction.valueOf("VERTICAL")) {
+				wallDirectionToWrite = "v";
+			}else if(wallDirection == Direction.valueOf("HORIZONTAL")){
+						wallDirectionToWrite = "h";
+			}
+			blackWallPositionToWrite = blackWallPositionToWrite + wallColumnToWrite + wallRowToWrite + wallDirectionToWrite ;
+			writer.write(blackWallPositionToWrite);
+		}
+	}
+	
+	// Helper method that writes pawn position and wall positions for White player(For saveGame)
+	private static void saveWhitePlayerPosition(String filename , BufferedWriter writer) throws IOException {
+		
+		Quoridor quoridor = QuoridorApplication.getQuoridor();
+		String characters = new String("abcdefghi");
+		ArrayList<Character> characterList = new ArrayList<Character>();
+		for(int i = 0; i<characters.length(); i++){
+			characterList.add(characters.charAt(i));
+		}
+		writer.write("W: ");
+		String whitePositionToWrite = "" ;
+		int playerColumn = quoridor.getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
+		int playerRow = quoridor.getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
+		Character whiteColumnToWrite = characterList.get(playerColumn-1);
+		String whiteRowToWrite = Integer.toString(playerRow) ;
+		whitePositionToWrite = whitePositionToWrite + whiteColumnToWrite + whiteRowToWrite ;
+		writer.write(whitePositionToWrite);
+		
+		List<Wall> whiteWallsOnBoard = quoridor.getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard();
+		for(Wall wall : whiteWallsOnBoard) {
+			String whiteWallPositionToWrite = "," ;
+			int wallColumn = wall.getMove().getTargetTile().getColumn();
+			int wallRow = wall.getMove().getTargetTile().getRow();
+			Direction wallDirection = wall.getMove().getWallDirection();
+			
+			Character wallColumnToWrite = characterList.get(wallColumn);
+			String wallRowToWrite = Integer.toString(wallRow);
+			String wallDirectionToWrite = "" ;
+			if(wallDirection == Direction.valueOf("VERTICAL")) {
+				wallDirectionToWrite = "v";
+			}else if(wallDirection == Direction.valueOf("HORIZONTAL")){
+				wallDirectionToWrite = "h";
+			}
+			whiteWallPositionToWrite = whiteWallPositionToWrite + wallColumnToWrite + wallRowToWrite + wallDirectionToWrite ;
+			writer.write(whiteWallPositionToWrite);
+			
+		}
+	}
+
 	/**
 	 * Feature:SavePosition
 	 * 
@@ -191,106 +271,31 @@ public class QuoridorController {
 	// 1. Compute the string to be saved
 	// 2. Save to file 
 	// 3. Return the computed string 
-	//get content from the game and write them in correct format in filename
-	//Should I write all the moves that's been made into the file? If so, how am I supposed to know the move mode of previous moves
-	//I'm supposed to write all the wall moves and pawn position in the file
-	//should I only write the current pawn position or all of them
-	//should I write them in the file following their orders or it doesn't matter
 	public static void saveGame(String filename)throws IOException{
 		
 		Quoridor quoridor = QuoridorApplication.getQuoridor();
 		BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
-		List<Move> listOfAllMoves = quoridor.getCurrentGame().getMoves();
-		List<Move> allBlackMoves = new ArrayList<Move>();
-		List<Move> allWhiteMoves = new ArrayList<Move>();
-		//construct an ArrayList of characters from a to i
-		String characters = new String("abcdefghi");
-	    ArrayList<Character> characterList = new ArrayList<Character>();
-	    for(int i = 0; i<characters.length(); i++){
-	        characterList.add(characters.charAt(i));
-	    }
-	    
-		for(Move move : listOfAllMoves) {
-			if(move.getPlayer().hasGameAsBlack()) {
-				allBlackMoves.add(move);
-			}else if(move.getPlayer().hasGameAsWhite()){
-				allWhiteMoves.add(move);
-			}
-		}
 		
-		writer.write("B: ");
-		int blackMovesSize = allBlackMoves.size();
-		int whiteMovesSize = allWhiteMoves.size();
-		String thingsToWrite = "";
-		for(Move blackMove : allBlackMoves) {
-			if(blackMovesSize < allBlackMoves.size()) {
-				thingsToWrite = ",";
-			}
-			if(blackMove.getGame().getMoveMode() == MoveMode.valueOf("WALL_MOVE")) {
-				WallMove thisWallMove = (WallMove)blackMove ;
-				int moveColumn = thisWallMove.getTargetTile().getColumn();
-				int moveRow = thisWallMove.getTargetTile().getRow();
-				Direction moveDirection = thisWallMove.getWallDirection();
-				
-				Character columnToWrite = characterList.get(moveColumn);
-				String rowToWrite = Integer.toString(moveRow);
-				String directionToWrite = "";
-				if(moveDirection == Direction.valueOf("VERTICAL")) {
-					directionToWrite = "v";
-				}else if(moveDirection == Direction.valueOf("HORIZONTAL")){
-					directionToWrite = "h";
-				}
-				thingsToWrite = thingsToWrite + columnToWrite + rowToWrite + directionToWrite ;
-				blackMovesSize--;
-				writer.write(thingsToWrite);
-				
-			}else if(blackMove.getGame().getMoveMode() == MoveMode.valueOf("PAWN_MOVE")) {
-				int moveColumn = blackMove.getTargetTile().getColumn();
-				int moveRow = blackMove.getTargetTile().getRow();
-				Character columnToWrite = characterList.get(moveColumn);
-				thingsToWrite = thingsToWrite + columnToWrite + Integer.toString(moveRow) ;
-				blackMovesSize--;
-				writer.write(thingsToWrite);
-			}
-		}
-		
-		writer.newLine();
-		writer.write("W: ");
-		
-		for(Move whiteMove : allWhiteMoves) {
-			if(whiteMovesSize < allWhiteMoves.size()) {
-				thingsToWrite = ",";
-			}
-			if(whiteMove.getGame().getMoveMode() == MoveMode.valueOf("WALL_MOVE")) {
-				WallMove thisWallMove = (WallMove)whiteMove ;
-				int moveColumn = thisWallMove.getTargetTile().getColumn();
-				int moveRow = thisWallMove.getTargetTile().getRow();
-				Direction moveDirection = thisWallMove.getWallDirection();
+		//check the current player of the game, write the player in the front line
+		if(quoridor.getCurrentGame().getCurrentPosition().getPlayerToMove().hasGameAsBlack()) {
 			
-				Character columnToWrite = characterList.get(moveColumn);
-				String rowToWrite = Integer.toString(moveRow);
-				String directionToWrite = "";
-				if(moveDirection == Direction.valueOf("VERTICAL")) {
-					directionToWrite = "v";
-				}else if(moveDirection == Direction.valueOf("HORIZONTAL")){
-					directionToWrite = "h";
-				}
-				thingsToWrite = thingsToWrite + columnToWrite + rowToWrite + directionToWrite ;
-				whiteMovesSize--;
-				writer.write(thingsToWrite);
-				
-			}else if(whiteMove.getGame().getMoveMode() == MoveMode.valueOf("PAWN_MOVE")) {
-				int moveColumn = whiteMove.getTargetTile().getColumn();
-				int moveRow = whiteMove.getTargetTile().getRow();
-				Character columnToWrite = characterList.get(moveColumn);
-				thingsToWrite = thingsToWrite + columnToWrite + Integer.toString(moveRow) ;
-				whiteMovesSize--;
-				writer.write(thingsToWrite);
-			}
+			saveBlackPlayerPosition(filename , writer);
+			
+			writer.newLine();
+			
+			saveWhitePlayerPosition(filename , writer);
+			
+		}else if(quoridor.getCurrentGame().getCurrentPosition().getPlayerToMove().hasGameAsWhite()) {
+			
+			saveWhitePlayerPosition(filename , writer);
+			
+			writer.newLine();
+			
+			saveBlackPlayerPosition(filename , writer);
+			
 		}
 		
 		writer.close();
-		
 		
 	}
 	/**
@@ -494,7 +499,7 @@ public class QuoridorController {
 	 * This method validate if all the pawn and wall position at board 
 	 * is with the board boundary 
 	 * 
-	 * @author Yuelin Liu , Bozhong Lu
+	 * @author Bozhong Lu, Yuelin Liu
 	 * @return boolean
 	 */
 	public static boolean validatePosition() {

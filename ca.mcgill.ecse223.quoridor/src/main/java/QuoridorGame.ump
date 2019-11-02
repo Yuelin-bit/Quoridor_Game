@@ -96,4 +96,3 @@ class PlayerPosition {
 	* -> 1 Player player; 
 	* -> 1 Tile tile;
 }
-

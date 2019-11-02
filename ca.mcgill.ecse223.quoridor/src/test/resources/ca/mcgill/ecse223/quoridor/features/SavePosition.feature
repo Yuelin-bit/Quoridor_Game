@@ -32,4 +32,3 @@ Feature: Save Position
     Examples: 
       | filename           |
       | save_game_test.dat |
-      
