@@ -89,22 +89,37 @@ public class Board extends JFrame {
 		JLabel lblRotateWallPress = new JLabel("Rotate Wall: Press R");
 		JLabel lblMoveWallPress = new JLabel("Move Wall: Press W,A,S,D");
 		JLabel lblDropWallPress = new JLabel("Drop Wall: Press T");
+		
+		JButton btnNewButton = new JButton("Back");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new MainMenu().setVisible(true);// I am not sure!!!
+				setVisible(false);
+			}
+		});
 		GroupLayout gl_tile = new GroupLayout(tile);
 		gl_tile.setHorizontalGroup(
-			gl_tile.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_tile.createSequentialGroup()
-					.addContainerGap(690, Short.MAX_VALUE)
-					.addGroup(gl_tile.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(lblGrabWallPress)
-						.addComponent(lblRotateWallPress)
-						.addComponent(lblMoveWallPress, GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
-						.addComponent(lblDropWallPress, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-					.addGap(178))
+			gl_tile.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_tile.createSequentialGroup()
+					.addContainerGap(638, Short.MAX_VALUE)
+					.addGroup(gl_tile.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_tile.createSequentialGroup()
+							.addGroup(gl_tile.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(lblGrabWallPress)
+								.addComponent(lblRotateWallPress)
+								.addComponent(lblMoveWallPress, GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+								.addComponent(lblDropWallPress, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+							.addGap(178))
+						.addGroup(Alignment.TRAILING, gl_tile.createSequentialGroup()
+							.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
+							.addGap(68))))
 		);
 		gl_tile.setVerticalGroup(
 			gl_tile.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_tile.createSequentialGroup()
-					.addGap(121)
+					.addGap(38)
+					.addComponent(btnNewButton)
+					.addGap(54)
 					.addComponent(lblGrabWallPress)
 					.addGap(32)
 					.addComponent(lblRotateWallPress)

@@ -98,8 +98,24 @@ public class QuoridorController {
 	 * @exception UnsupportedOperationException
 	 *
 	 */
-	public static boolean verifyWallMoveInvalid(WallMove wallmove) {
-		throw new UnsupportedOperationException();
+	public static boolean verifyOutsideTheBoard(WallMove wallmove) {
+		
+		int currentRow = wallmove.getTargetTile().getRow();
+		int currentColumn = wallmove.getTargetTile().getColumn();
+		if((currentColumn<=1)) {
+			return true;
+		}
+		if((currentColumn>=8)) {
+			return true;
+		}
+		if((currentRow<=1)) {
+			return true;
+		}
+		if((currentRow==8)) {
+			return true;
+		}
+		
+		return false;
 	}
 	
 	
@@ -137,6 +153,42 @@ public class QuoridorController {
 		}
 		
 	
+	}
+	
+	/**
+	 * Feature:DropWall
+	 * 
+     * @author Yuelin Liu
+	 * @param wallmove WallMove candidate to be check whether it is invalid and set it
+	 * @return boolean
+	 * @exception UnsupportedOperationException
+	 *
+	 */
+	public static boolean verifyOnEdge(String string) {
+		
+		int currentRow = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getRow();
+		int currentColumn = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getColumn();
+		if(string.equalsIgnoreCase("left")) {
+			if((currentColumn==1)) {
+				return true;
+			}
+		}
+		if(string.equalsIgnoreCase("right")) {
+			if((currentColumn==8)) {
+				return true;
+			}
+		}
+		if(string.equalsIgnoreCase("up")) {
+			if((currentRow==1)) {
+				return true;
+			}
+		}
+		if(string.equalsIgnoreCase("down")) {
+			if((currentRow==8)) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	
