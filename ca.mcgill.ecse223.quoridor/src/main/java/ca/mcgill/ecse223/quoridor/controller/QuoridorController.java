@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -550,13 +551,24 @@ public class QuoridorController {
 	 * It returns true if setting is successful.
 	 * 
 	 * @author Sun, Gengyi
-	 * @param min
-	 * @param sec
+	 * @param min minutes
+	 * @param sec seconds
 	 * @return A flag indicating whether the method successfully launched.
 	 */
 	public static boolean setTotalThinkingTime(Integer min, Integer sec) {
-		throw new UnsupportedOperationException();
+		if(min != null && sec != null) {
+			Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
+			Player blackPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
+			long millis = (min*60+sec) * 1000;
+			Time totalTime = new Time(millis);
+			whitePlayer.setRemainingTime(totalTime);
+			blackPlayer.setRemainingTime(totalTime);
+			return true;
+		} else {
+			throw new UnsupportedOperationException();
+		}
 	}
+	
 	/**
 	 * Feature: InitialzeBoard
 	 * This method initialize a new board with 9*9 tiles. Then it 
@@ -628,27 +640,27 @@ public class QuoridorController {
 	 * set. It will return a boolean variable to suggest if it is valid. 
 	 * 
 	 * @author Sun, Gengyi
-	 * @param g
 	 * @return A flag indicating whether the thinking time is valid.
 	 */
-	public static boolean verifyTotalThinkingTime(Game g) {
+	public static boolean verifyTotalThinkingTime() {
+		Game g = QuoridorApplication.getQuoridor().getCurrentGame();
+		if (g == null) {
+			throw new IllegalArgumentException("No game avaliable");
+		}
 		throw new UnsupportedOperationException();
 	}
 	
 	/**
-	 * This is a static method which takes two User parameters to initialize a new game. 
+	 * This is a static method which initializes a new game. 
 	 * It will return a boolean value to indicate if a new game is successfully initialized.
 	 * 
 	 * @author Pengnan Fan
-	 * @param user1 The first player who will join in the game
-	 * @param user2 The second player who will join in the game
 	 * @return A boolean value to indicate if a new game is initialized successfully
 	 * 
 	 */
 	public static boolean initializeNewGame() {
-		//TODO: To be implemented
-		new Game(GameStatus.Initializing, MoveMode.PlayerMove, QuoridorApplication.getQuoridor());
-		return true;
+		new Game(GameStatus.Initializing, MoveMode.WallMove, QuoridorApplication.getQuoridor());
+		return QuoridorApplication.getQuoridor().hasCurrentGame();
 	}
 
 	/**
@@ -662,8 +674,17 @@ public class QuoridorController {
 	 * @return A boolean value to indicate if the name of the user has been updated
 	 */
 	public static boolean setUserName(Player player, String name) {
-		//TODO: To be implemented
-		throw new UnsupportedOperationException();
+		if (player == null) {
+			throw new IllegalArgumentException("Player is invalid");
+		}
+		if (name == null || name.trim().length() == 0) {
+			throw new IllegalArgumentException("Invalid name");
+		}
+		User u = User.getWithName(name);
+		if (u == null) {
+			u = new User(name, QuoridorApplication.getQuoridor());
+		}
+		return player.setUser(u);
 	}
 	
 	/**
@@ -677,55 +698,44 @@ public class QuoridorController {
 	 * @return A boolean value to indicate if the name of the user has been updated
 	 */
 	public static boolean selectUserName(Player player) {
-		//TODO: To be implemented
-		throw new UnsupportedOperationException();
-	}
-	
-	/**
-	 * This is a static method which check the status of a game. It will return a GameStatus
-	 * value of the status of a certain status.
-	 * 
-	 * @author Pengnan Fan
-	 * @param game The game to be checked
-	 * @return A GameStatus value of the status of the game to be checked
-	 */
-	public static GameStatus getGameStatus() {
-		//TODO: To be implemented
-		Game game = QuoridorApplication.getQuoridor().getCurrentGame();
-		if (game == null) {
-			throw new IllegalArgumentException("There is no game avaliable");
+		//TODO: Need support from front end
+		if (player == null) {
+			throw new IllegalArgumentException("Player is invalid");
 		}
-		return game.getGameStatus();
+		//Receive a name from front end
+		return setUserName(player, "name");
+		//throw new UnsupportedOperationException();
 	}
 	
-	/**
-	 * This is a static method which link an user u and a player p. It will return a boolean
-	 * value to suggest if it is successful.
-	 * 
-   * @author Pengnan Fan
-	 * @param u The user to link
-	 * @param p The player to link
-	 * @return A boolean value to suggest if it is successful.
-	 */
-	public static boolean linkUserAndPlayer(User u, Player p) {
-		//TODO: To be implemented
-		throw new UnsupportedOperationException();
-	}
+//	/**
+//	 * This is a static method which link an user u and a player p. It will return a boolean
+//	 * value to suggest if it is successful.
+//	 * 
+//   * @author Pengnan Fan
+//	 * @param u The user to link
+//	 * @param p The player to link
+//	 * @return A boolean value to suggest if it is successful.
+//	 */
+//	public static boolean linkUserAndPlayer(User u, Player p) {
+//		//TODO: To be implemented
+//		p.setUser(u);
+//		throw new UnsupportedOperationException();
+//	}
 	
-	/**
-	 * This is a static method which takes two inputs, a game and a player. It will set
-	 * the player to be the next one to play of the game. It will return a boolean to
-	 * suggest it is successful.
-	 * 
-	 * @author Pengnan Fan
-	 * @param g The game to change the player
-	 * @param p The player to be set as the next player
-	 * @return A boolean variable to suggest if it is successful
-	 */
-	public static boolean setNextPlayer(Game g, Player p) {
-		//TODO: To be implemented
-		throw new UnsupportedOperationException();
-	}
+//	/**
+//	 * This is a static method which takes two inputs, a game and a player. It will set
+//	 * the player to be the next one to play of the game. It will return a boolean to
+//	 * suggest it is successful.
+//	 * 
+//	 * @author Pengnan Fan
+//	 * @param g The game to change the player
+//	 * @param p The player to be set as the next player
+//	 * @return A boolean variable to suggest if it is successful
+//	 */
+//	public static boolean setNextPlayer(Game g, Player p) {
+//		//TODO: To be implemented
+//		throw new UnsupportedOperationException();
+//	}
 	
 	/**
 	 * This is a static method which verify if a game is ready to start. If so, it 
@@ -736,9 +746,13 @@ public class QuoridorController {
 	 * @param g The game to be verified.
 	 * @return A boolean variable to suggest if it is successful
 	 */
-	public static boolean verifyNewGame(Game g) {
+	public static boolean verifyNewGame() {
 		//TODO: To be implemented
-		throw new UnsupportedOperationException();
+		Game g = QuoridorApplication.getQuoridor().getCurrentGame();
+		if (g == null) {
+			throw new IllegalArgumentException("There is no game");
+		}
+		return g.getGameStatus().equals(GameStatus.ReadyToStart);
 	}
 	
 	/**
@@ -750,7 +764,7 @@ public class QuoridorController {
 	  * @return A flag indicating whether the method successfully launched.
 	  */ 
 	 public static boolean clockIsCountingDown(Player player) {
-	  throw new UnsupportedOperationException();
+		 throw new UnsupportedOperationException();
 	 }
 	 
 	 
