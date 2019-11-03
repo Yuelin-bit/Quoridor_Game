@@ -1123,7 +1123,7 @@ public class CucumberStepDefinitions {
 		
 		@And("The position to load is valid")
 		public void the_position_to_load_is_valid() {
-			isPositionValid = QuoridorController.validatePosition();		    
+			isPositionValid = QuoridorController.validation();		    
 		}
 
 
@@ -1208,7 +1208,7 @@ public class CucumberStepDefinitions {
 		@And("The position to load is invalid")
 		public void the_position_to_load_is_invalid() {
 			if (loadSucceed) {
-				 isPositionValid = QuoridorController.validatePosition();
+				 isPositionValid = QuoridorController.validation();
 			}
 		}
 
