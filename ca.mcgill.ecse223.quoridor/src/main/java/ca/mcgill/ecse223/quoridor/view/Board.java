@@ -137,7 +137,7 @@ public class Board extends JFrame {
 		//add KeyBoard listener!
 		addKeyListener(new KeyAdapter() {
 			@Override
-			public void keyTyped(KeyEvent e) {
+			public void keyPressed(KeyEvent e) {
 				if (e.getKeyChar()=='g') {					
 					mainLayerPanel.add(wall);
 					wall.setBackground(Color.GRAY);
@@ -145,22 +145,22 @@ public class Board extends JFrame {
 					wall.setVisible(true);
 					System.out.println("yes");
 				}
-				if (e.getKeyChar()=='w') {
+				if ((e.getKeyChar()=='w')||(e.getKeyCode() == KeyEvent.VK_UP)) {
 					int x = wall.getLocation().x;
 					int y = wall.getLocation().y;
 					wall.setLocation(x, y-60);
 				}
-				if (e.getKeyChar()=='a') {
+				if ((e.getKeyChar()=='a')||(e.getKeyCode() == KeyEvent.VK_LEFT)) {
 					int x = wall.getLocation().x;
 					int y = wall.getLocation().y;
 					wall.setLocation(x-60, y);
 				}
-				if (e.getKeyChar()=='s') {
+				if ((e.getKeyChar()=='s')||(e.getKeyCode() == KeyEvent.VK_DOWN)) {
 					int x = wall.getLocation().x;
 					int y = wall.getLocation().y;
 					wall.setLocation(x, y+60);
 				}
-				if (e.getKeyChar()=='d') {
+				if ((e.getKeyChar()=='d')||(e.getKeyCode() == KeyEvent.VK_RIGHT)) {
 					int x = wall.getLocation().x;
 					int y = wall.getLocation().y;
 					wall.setLocation(x+60, y);
