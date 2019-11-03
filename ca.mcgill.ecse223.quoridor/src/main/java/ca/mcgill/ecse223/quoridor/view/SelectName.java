@@ -133,6 +133,7 @@ public class SelectName extends JFrame {
 					sec = Integer.parseInt(textField_1.getText());
 				}
 			//	QuoridorController.setTotalThinkingTime(min, sec);
+			//  QuoridorController.initializeBoard();
 				Board board = new Board();
 				board.setVisible(true);
 				setVisible(false);
