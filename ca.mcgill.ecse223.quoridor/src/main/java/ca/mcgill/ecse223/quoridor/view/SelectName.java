@@ -12,6 +12,9 @@ import javax.swing.border.EmptyBorder;
 
 import ca.mcgill.ecse223.quoridor.QuoridorApplication;
 import ca.mcgill.ecse223.quoridor.controller.QuoridorController;
+import ca.mcgill.ecse223.quoridor.model.Direction;
+import ca.mcgill.ecse223.quoridor.model.Player;
+import ca.mcgill.ecse223.quoridor.model.Quoridor;
 import ca.mcgill.ecse223.quoridor.model.User;
 
 import java.awt.Color;
@@ -130,30 +133,50 @@ public class SelectName extends JFrame {
 				lblUserNameDne.setVisible(false);
 				String white = String.valueOf(comboBox.getSelectedItem());
 				String black = String.valueOf(comboBox_1.getSelectedItem());
-				boolean wdne = !User.hasWithName(white);
-				boolean bdne = !User.hasWithName(black);
-				if (wdne) {
-					lblNewLabel.setText("Invalid White User Selection: "+ white + " does NOT exist");
+				boolean tok = true;
+				QuoridorController.initializeNewGame();
+				boolean result = false;
+				try {
+					result = QuoridorController.setUserName("w", white);
+				} catch (IllegalArgumentException ex) {
+					lblNewLabel.setText(ex.getMessage());
 					lblNewLabel.setVisible(true);
-				}
-				if (bdne) {
-					lblUserNameDne.setText("Invalid Black User Selection: "+ black + " does NOT exist");
-					lblUserNameDne.setVisible(true);
-				}
-				if(wdne || bdne) {
 					return;
 				}
-				Integer min = 3;
-				Integer sec = 0; 
-				if(!textField.getText().equals("")) {
-					min = Integer.parseInt(textField.getText());
+				if(result) {
+					lblNewLabel.setText("White player name has been changed");
+					lblNewLabel.setVisible(true);
 				}
-				if(!textField_1.getText().equals("")) {
-					sec = Integer.parseInt(textField_1.getText());
+				result = false;
+				try {
+					result = QuoridorController.setUserName("b", black);
+				} catch (IllegalArgumentException ex) {
+					lblUserNameDne.setText(ex.getMessage());
+					lblUserNameDne.setVisible(true);
+					return;
 				}
-			//	QuoridorController.setTotalThinkingTime(min, sec);
-			//  QuoridorController.initializeBoard();
-				QuoridorApplication.getQuoridor();
+				if(result) {
+					lblUserNameDne.setText("Black player name has been changed");
+					lblUserNameDne.setVisible(true);
+				}
+				
+//				Quoridor q = QuoridorApplication.getQuoridor();
+//				QuoridorController.initializeNewGame();
+//				Player p = q.getCurrentGame().getBlackPlayer();
+//				if (p == null) {
+//					p = new Player(new Time(0), User.getWithName(black), 9, Direction.Horizontal);
+//				}
+//				Integer min = 3;
+//				Integer sec = 0; 
+//				if(!textField.getText().equals("")) {
+//					min = Integer.parseInt(textField.getText());
+//				}
+//				if(!textField_1.getText().equals("")) {
+//					sec = Integer.parseInt(textField_1.getText());
+//				}
+//				QuoridorController.setTotalThinkingTime(min, sec);
+//				QuoridorController.initializeBoard();
+//				QuoridorApplication.getQuoridor();
 			}
 		});
 
