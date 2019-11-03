@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 
 import ca.mcgill.ecse223.quoridor.QuoridorApplication;
 import ca.mcgill.ecse223.quoridor.controller.QuoridorController;
+import ca.mcgill.ecse223.quoridor.controller.Stopwatch;
 import ca.mcgill.ecse223.quoridor.model.Game.GameStatus;
 import ca.mcgill.ecse223.quoridor.model.Game.MoveMode;
 import ca.mcgill.ecse223.quoridor.model.*;
@@ -37,6 +38,8 @@ public class CucumberStepDefinitions {
 	private Long blackEndTime;
 	private Long whiteStartTime;
 	private Long whiteEndTime;
+//	private Stopwatch blackWatch;
+//	private Stopwatch whiteWatch;
 	
 	private Quoridor quoridor;
 	private Board board;
@@ -1227,11 +1230,18 @@ public class CucumberStepDefinitions {
 
 		@Given("The clock of {string} is running") 
 		public void the_clock_of_is_running(String string) {
+			
 			if(string.equals("black")) {
+//				blackWatch = new Stopwatch(QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer());
+//				whiteWatch = new Stopwatch(QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer());
+//				blackWatch.start();
 				long nanotime = QuoridorController.startClock();
 				blackStartTime = nanotime;
 				blackStartTime = TimeUnit.SECONDS.convert(nanotime, TimeUnit.NANOSECONDS);
 			}else {
+//				whiteWatch = new Stopwatch(QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer());
+//				blackWatch = new Stopwatch(QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer());
+//				whiteWatch.start();
 				long nanotime = QuoridorController.startClock();
 				whiteStartTime = nanotime;
 				whiteStartTime = TimeUnit.SECONDS.convert(nanotime, TimeUnit.NANOSECONDS);
@@ -1241,8 +1251,10 @@ public class CucumberStepDefinitions {
 		@Given("The clock of {string} is stopped")
 		public void the_clock_of_is_stopped(String string) {
 			if(string == "black") {
+//				blackWatch.stop();
 				blackStartTime = null;
 			}else {
+//				whiteWatch.stop();
 				whiteStartTime = null;
 			}
 		}
@@ -1252,6 +1264,8 @@ public class CucumberStepDefinitions {
 			if(string.equals("black")) {
 				Player blackPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
 				QuoridorController.completeMove(blackPlayer);
+//				blackWatch.suspend();
+//				whiteWatch.start();
 				long nanotimeBlack = QuoridorController.startClock();
 				blackEndTime = nanotimeBlack;
 				blackEndTime = TimeUnit.SECONDS.convert(nanotimeBlack, TimeUnit.NANOSECONDS);
@@ -1261,6 +1275,8 @@ public class CucumberStepDefinitions {
 			} else {
 				Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
 				QuoridorController.completeMove(whitePlayer);
+//				whiteWatch.suspend();
+//				blackWatch.start();
 				long nanotimeWhite = QuoridorController.startClock();
 				whiteEndTime = nanotimeWhite;
 				whiteEndTime = TimeUnit.SECONDS.convert(nanotimeWhite, TimeUnit.NANOSECONDS);
@@ -1278,9 +1294,11 @@ public class CucumberStepDefinitions {
 		@Then("The clock of {string} shall be stopped")
 		public void the_clock_of_shall_be_stopped(String string) {
 			if(string.equals("black")) {
+//				assertEquals(false, blackWatch.isAlive());
 				Boolean isStopped = (blackEndTime != null);
 				assertEquals(true, isStopped);
 			}else {
+//				assertEquals(false, whiteWatch.isAlive());
 				Boolean isStopped = (whiteEndTime != null);
 				assertEquals(true, isStopped);
 			}
@@ -1289,10 +1307,12 @@ public class CucumberStepDefinitions {
 		@Then("The clock of {string} shall be running")
 		public void the_clock_of_shall_be_running(String string) {
 			if(string.equals("black")) {
+//				assertEquals(true, blackWatch.isAlive());
 				Boolean isStarted = (blackStartTime != null);
 				Boolean notStopped = (blackEndTime == null);
 				assertEquals(true, (isStarted && notStopped));
 			}else {
+//				assertEquals(true, whiteWatch.isAlive());
 				Boolean isStarted = (whiteStartTime != null);
 				Boolean notStopped = (whiteEndTime == null);
 				assertEquals(true, (isStarted && notStopped));
