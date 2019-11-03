@@ -20,6 +20,7 @@ public class Stopwatch extends Thread{
 	private long totalInMilli;
 	private Player player;
 
+	@SuppressWarnings("deprecation")
 	public Stopwatch(Player player) {
 		this.minute = player.getRemainingTime().getMinutes();
 		this.second = player.getRemainingTime().getSeconds();
