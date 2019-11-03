@@ -768,6 +768,7 @@ public class CucumberStepDefinitions {
 
 		@When("The user confirms to overwrite existing file")
 		public void the_user_confirms_to_overwrite_existing_file() throws IOException{
+
 		    // Write code here that turns the phrase above into concrete actions
 			QuoridorController.overwriteExistingFile();
 			Assert.assertEquals(true , QuoridorController.getOverwriteBoolean());
@@ -1125,7 +1126,7 @@ public class CucumberStepDefinitions {
 		
 		@And("The position to load is valid")
 		public void the_position_to_load_is_valid() {
-			isPositionValid = QuoridorController.validatePosition();		    
+			isPositionValid = QuoridorController.validation();		    
 		}
 
 
@@ -1210,7 +1211,7 @@ public class CucumberStepDefinitions {
 		@And("The position to load is invalid")
 		public void the_position_to_load_is_invalid() {
 			if (loadSucceed) {
-				 isPositionValid = QuoridorController.validatePosition();
+				 isPositionValid = QuoridorController.validation();
 			}
 		}
 
