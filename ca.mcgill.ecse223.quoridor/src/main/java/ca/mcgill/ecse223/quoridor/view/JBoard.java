@@ -20,6 +20,7 @@ import javax.swing.border.EmptyBorder;
 
 import ca.mcgill.ecse223.quoridor.controller.QuoridorController;
 import ca.mcgill.ecse223.quoridor.model.WallMove;
+import ca.mcgill.ecse223.quoridor.view.Pawn.PawnColor;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -103,6 +104,17 @@ public class JBoard extends JFrame {
 		tile.setOpaque(false);
 		mainLayerPanel.add(tile);
 		
+		Pawn whitePawn = new Pawn(PawnColor.WHITE);
+		whitePawn.setBounds(310, 540, 50, 50);
+		whitePawn.setVisible(true);
+		mainLayerPanel.add(whitePawn);
+		
+
+		Pawn blackPawn = new Pawn(PawnColor.BLACK);
+		blackPawn.setBounds(310, 60, 50, 50);
+		blackPawn.setVisible(true);
+		mainLayerPanel.add(blackPawn);
+		
 		
 		
 		//create four labels to specify the operation and set the layout for tile
@@ -122,6 +134,20 @@ public class JBoard extends JFrame {
 		playerToMove1.setBounds(700, 550, 100, 50);
 		mainLayerPanel.add(playerToMove1);
 		playerToMove1.setVisible(true);
+		
+		Pawn whitePawnMove = new Pawn(PawnColor.WHITE);
+		whitePawnMove.setBounds(650, 500, 50, 50);
+		//TODO 
+		whitePawnMove.setVisible(true);
+		mainLayerPanel.add(whitePawnMove);
+		
+		Pawn blackPawnMove = new Pawn(PawnColor.BLACK);
+		blackPawnMove.setBounds(700, 500, 50, 50);
+		//TODO
+		blackPawnMove.setVisible(false);
+
+		//blackPawnMove.setVisible(true);
+		mainLayerPanel.add(blackPawnMove);
 
 		
 		JButton btnNewButton = new JButton("Back");
