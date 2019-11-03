@@ -45,8 +45,9 @@ public class MainMenu extends JFrame {
 		JButton btnNewButton = new JButton("New Game");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//Board board = new Board();
-				//board.setVisible(true);
+				Page page = new Page();
+				page.setVisible(true);
+				setVisible(false);
 			}
 		});
 		

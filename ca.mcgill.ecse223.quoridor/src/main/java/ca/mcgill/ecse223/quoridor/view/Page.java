@@ -1,16 +1,25 @@
 package ca.mcgill.ecse223.quoridor.view;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import ca.mcgill.ecse223.quoridor.QuoridorApplication;
+import ca.mcgill.ecse223.quoridor.model.User;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
+import javax.swing.DefaultComboBoxModel;
 
 public class Page extends JFrame {
 
@@ -52,19 +61,59 @@ public class Page extends JFrame {
 		
 		JComboBox comboBox = new JComboBox();
 		
+		List<User> us = QuoridorApplication.getQuoridor().getUsers();
+		String[] names = new String[us.size()];
+		int idx = 0;
+		for(User u : us) {
+			names[idx++] = u.getName();
+		}
+		
+		comboBox.setModel(new DefaultComboBoxModel(names));
+		
 		JComboBox comboBox_1 = new JComboBox();
+		
+		comboBox_1.setModel(new DefaultComboBoxModel(names));
 		
 		JButton btnConfirm = new JButton("Confirm");
 		
+		btnConfirm.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.print(String.valueOf(comboBox.getSelectedItem()));
+			}
+		});
+		
 		JButton btnConfirm_1 = new JButton("Confirm");
+		
+		btnConfirm_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.print(String.valueOf(comboBox_1.getSelectedItem()));
+			}
+		});
 		
 		JButton btnBack = new JButton("Back");
 		
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MainMenu m = new MainMenu();
+				m.setVisible(true);
+				setVisible(false);
+			}
+		});
+		
 		JButton btnStart = new JButton("Start");
+		
+		btnStart.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Board board = new Board();
+				board.setVisible(true);
+				setVisible(false);
+			}
+		});
 		
 		JLabel lblThinkingTime = new JLabel("Thinking Time");
 		
 		JComboBox comboBox_2 = new JComboBox();
+		comboBox_2.setModel(new DefaultComboBoxModel(new String[] {"1 min", "2 min", "3 min", "4 min", "5 min", "10 min", "15 min", "20 min"}));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
