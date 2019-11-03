@@ -3,6 +3,7 @@ package ca.mcgill.ecse223.quoridor.controller;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 //import org.apache.commons.lang3.time.StopWatch;
 
@@ -10,6 +11,9 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
@@ -516,6 +520,18 @@ public class QuoridorController {
 		overwriteBoolean = true ;
 	}
 	
+	/**
+	 * Feature:SavePosition
+	 * 
+	 * @author Bozhong Lu
+	 * @param none
+	 * @return boolean that indicates the user cancels to overwrite existing File
+	 */
+	//GUI
+	public static void cancelOverwriteExistingFile() {
+		overwriteBoolean = false ;
+	}
+	
 	
 	
 	/**
@@ -524,15 +540,17 @@ public class QuoridorController {
 	 * @author Bozhong Lu
 	 * @param filename
 	 * @return boolean
+	 * @throws IOException 
 	 */
-	public static boolean fileIsUpdated(String filename) {
+	public static boolean fileIsUpdated(String filename) throws IOException {
 		boolean isUpdated = false ;
 		File gameFile = new File(filename); 
-		long lastChangedTime = gameFile.lastModified();
+		//long lastChangedTime = gameFile.lastModified();
 		long currentTime = System.currentTimeMillis();
-		System.out.println(currentTime);
-		System.out.println(lastChangedTime);
-		if(((currentTime - lastChangedTime)/1000) >= 60) {
+		Path gameFilePath = gameFile.toPath();
+	    BasicFileAttributes basicAttribs = Files.readAttributes(gameFilePath, BasicFileAttributes.class);
+		
+		if(((currentTime - basicAttribs.lastModifiedTime().to(TimeUnit.MILLISECONDS))/1000) >= 60) {
 			isUpdated = true ;
 		}
 		

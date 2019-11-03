@@ -115,7 +115,12 @@ public class JBoard extends JFrame {
 		JButton btnNewButton = new JButton("Back");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new MainMenu().setVisible(true);// I am not sure!!!
+				
+				SaveGameDialoge s = new SaveGameDialoge();
+				s.setVisible(true);
+				
+				
+				//new MainMenu().setVisible(true);// I am not sure!!!
 				setVisible(false);
 			}
 		});
