@@ -54,7 +54,10 @@ public class Board extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
+	
 	public Board() {
+		
 		setFocusable(true);
 		
 		//Init
@@ -79,7 +82,7 @@ public class Board extends JFrame {
 		Tile tile = new Tile();
 		tile.setBackground(Color.WHITE);
 		tile.setBounds(0, 0, 1000, 800);
-		tile.setOpaque(false);//透明
+		tile.setOpaque(false);
 		mainLayerPanel.add(tile);
 		
 		
