@@ -1224,30 +1224,30 @@ public class QuoridorController {
 	  */
 	 public static boolean verifyGameIsReady() {
 		 Game g = QuoridorApplication.getQuoridor().getCurrentGame();
-		 if (g == null) {
-			 return false;
-		 }
+//		 if (g == null) {
+//			 return false;
+//		 }
 		 if (!g.hasBlackPlayer()) {
 			 return false;
 		 }
 		 if(!g.hasWhitePlayer()) {
 			 return false;
 		 }
-		 if(!g.getMoveMode().equals(MoveMode.WallMove)) {
-			return false;
-		 }
-		 if(g.hasMoves()) {
-			 return false;
-		 }
-		 if(g.hasPositions()) {
-			 return false;
-		 }
-		 if(g.hasCurrentPosition()) {
-			 return false;
-		 }
-		 if(!QuoridorApplication.getQuoridor().hasBoard()) {
-			 return false;
-		 }
+//		 if(!g.getMoveMode().equals(MoveMode.WallMove)) {
+//			return false;
+//		 }
+//		 if(g.hasMoves()) {
+//			 return false;
+//		 }
+//		 if(g.hasPositions()) {
+//			 return false;
+//		 }
+//		 if(g.hasCurrentPosition()) {
+//			 return false;
+//		 }
+//		 if(!QuoridorApplication.getQuoridor().hasBoard()) {
+//			 return false;
+//		 }
 		 g.setGameStatus(GameStatus.ReadyToStart);
 		 return true;
 	 }
