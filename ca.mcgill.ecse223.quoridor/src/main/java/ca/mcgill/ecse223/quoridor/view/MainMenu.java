@@ -47,7 +47,7 @@ public class MainMenu extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Page page = new Page();
 				page.setVisible(true);
-				setVisible(false);
+				setVisible(false);//close the mainMenu.
 			}
 		});
 		
