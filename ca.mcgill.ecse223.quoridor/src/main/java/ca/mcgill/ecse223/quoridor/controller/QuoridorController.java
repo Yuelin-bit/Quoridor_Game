@@ -1081,7 +1081,7 @@ public class QuoridorController {
 	 * 
 	 */
 	public static boolean initializeNewGame() {
-		new Game(GameStatus.Initializing, MoveMode.WallMove, QuoridorApplication.getQuoridor());
+		Game g =new Game(GameStatus.Initializing, MoveMode.WallMove, QuoridorApplication.getQuoridor());
 		return QuoridorApplication.getQuoridor().hasCurrentGame();
 	}
 
@@ -1095,57 +1095,64 @@ public class QuoridorController {
 	 * @param name The new name 
 	 * @return A boolean value to indicate if the name of the user has been updated
 	 */
-	public static boolean setUserName(String player, String name) {
-		if (player == null || player.trim().isEmpty()) {
+	public static boolean setUserName(String player, String name, boolean create) {
+		if (!player.equals("black") && !player.equals("white")) {
 			throw new IllegalArgumentException("Player is invalid");
 		}
 		if (name == null || name.trim().length() == 0) {
 			throw new IllegalArgumentException("Invalid name");
 		}
 		User u = User.getWithName(name);
-		if (u == null) {
+		if (u == null && !create) {
 			throw new IllegalArgumentException("User: " + name + " does NOT exist");
+		} else if(u == null && create) {
+			u = new User(name, QuoridorApplication.getQuoridor());
 		}
-		if (player == "b") {
-			if (QuoridorApplication.getQuoridor().getCurrentGame().hasBlackPlayer()) {
-				return setUserName(QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer(), name);
+		Player p;
+		if (player.equals("black")) {
+			p = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
+			if (p==null) {
+				p = new Player(new Time(0), u, 9, Direction.Horizontal);
+			} else {
+				p.setUser(u);
 			}
-		} else {
-			if (QuoridorApplication.getQuoridor().getCurrentGame().hasWhitePlayer()) {
-				return setUserName(QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer(), name);
-			}
-		}
-		Player p = new Player(new Time(0), u, 9, Direction.Horizontal);
-		if (player == "b") {
 			return QuoridorApplication.getQuoridor().getCurrentGame().setBlackPlayer(p);
-		} else {
+		} else if (player.equals("white")) {
+			p = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
+			if (p==null) {
+				p = new Player(new Time(0), u, 1, Direction.Horizontal);
+			} else {
+				p.setUser(u);
+			}
 			return QuoridorApplication.getQuoridor().getCurrentGame().setWhitePlayer(p);
+		} else {
+			throw new RuntimeException();
 		}
 	}
 	
-	/**
-	 * This is a static method which takes a player and a new name, then set the latter as 
-	 * the name of the former. It will return a boolean value to indicate if the 
-	 * name is updated successfully.
-	 * 
-	 * @author Pengnan Fan
-	 * @param game The game of the specific white player
-	 * @param name The new name 
-	 * @return A boolean value to indicate if the name of the user has been updated
-	 */
-	public static boolean setUserName(Player player, String name) {
-		if (player == null) {
-			throw new IllegalArgumentException("Player is invalid");
-		}
-		if (name == null || name.trim().length() == 0) {
-			throw new IllegalArgumentException("Invalid name");
-		}
-		User u = User.getWithName(name);
-		if (u == null) {
-			throw new IllegalArgumentException("User: " + name + " does NOT exist");
-		}
-		return player.setUser(u);
-	}
+//	/**
+//	 * This is a static method which takes a player and a new name, then set the latter as 
+//	 * the name of the former. It will return a boolean value to indicate if the 
+//	 * name is updated successfully.
+//	 * 
+//	 * @author Pengnan Fan
+//	 * @param game The game of the specific white player
+//	 * @param name The new name 
+//	 * @return A boolean value to indicate if the name of the user has been updated
+//	 */
+//	public static boolean setUserName(Player player, String name) {
+//		if (player == null) {
+//			throw new IllegalArgumentException("Player is invalid");
+//		}
+//		if (name == null || name.trim().length() == 0) {
+//			throw new IllegalArgumentException("Invalid name");
+//		}
+//		User u = User.getWithName(name);
+//		if (u == null) {
+//			u = new User(name, QuoridorApplication.getQuoridor());
+//		}
+//		return player.setUser(u);
+//	}
 	
 //	/**
 //	 * This is a static method which takes a player. Then it will allows the player to select
