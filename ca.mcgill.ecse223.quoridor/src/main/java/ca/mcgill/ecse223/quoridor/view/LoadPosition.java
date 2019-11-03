@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-public class LoadGame extends JFrame {
+public class LoadPosition extends JFrame {
 
 	private JPanel contentPane;
 
@@ -24,7 +24,7 @@ public class LoadGame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					LoadGame frame = new LoadGame();
+					LoadPosition frame = new LoadPosition();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -36,7 +36,7 @@ public class LoadGame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public LoadGame() {
+	public LoadPosition() {
 		setBackground(Color.PINK);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 1080, 720);

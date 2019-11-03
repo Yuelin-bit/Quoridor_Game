@@ -51,7 +51,14 @@ public class MainMenu extends JFrame {
 			}
 		});
 		
-		JButton btnNewButton_1 = new JButton("New button");
+		JButton btnNewButton_1 = new JButton("Laod Position");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				LoadPosition loadposition = new LoadPosition();
+				loadposition.setVisible(true);
+				setVisible(false);
+			}
+		});
 		
 		JButton btnNewButton_2 = new JButton("New button");
 		
