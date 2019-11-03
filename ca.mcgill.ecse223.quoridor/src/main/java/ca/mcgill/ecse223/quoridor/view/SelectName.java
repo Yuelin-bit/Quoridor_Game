@@ -121,6 +121,8 @@ public class SelectName extends JFrame {
 		
 		JLabel lblUserNameDne = new JLabel();
 		lblUserNameDne.setForeground(Color.RED);
+		JLabel lblInputMustBe = new JLabel();
+		lblInputMustBe.setForeground(Color.RED);
 		
 		JButton btnConfirm = new JButton("Confirm");
 		btnConfirm.addActionListener(new ActionListener() {
@@ -128,6 +130,7 @@ public class SelectName extends JFrame {
 				//Check if two names are not equal
 				lblNewLabel.setVisible(false);
 				lblUserNameDne.setVisible(false);
+				lblInputMustBe.setVisible(false);
 				String white = String.valueOf(comboBox.getSelectedItem());
 				String black = String.valueOf(comboBox_1.getSelectedItem());
 				boolean wdne = !User.hasWithName(white);
@@ -140,22 +143,28 @@ public class SelectName extends JFrame {
 					lblUserNameDne.setText("Invalid Black User Selection: "+ black + " does NOT exist");
 					lblUserNameDne.setVisible(true);
 				}
-				if(wdne || bdne) {
-					return;
-				}
+			
 				Integer min = 3;
 				Integer sec = 0; 
-				if(!textField.getText().equals("")) {
-					min = Integer.parseInt(textField.getText());
+				
+				try {
+						min = Integer.parseInt(textField.getText());
+						sec = Integer.parseInt(textField_1.getText());
+				}catch(Exception ex){
+					lblInputMustBe.setText("Input must be number!");
+					lblInputMustBe.setVisible(true);
 				}
-				if(!textField_1.getText().equals("")) {
-					sec = Integer.parseInt(textField_1.getText());
-				}
+				System.out.println(min+"min");
+
 			//	QuoridorController.setTotalThinkingTime(min, sec);
 			//  QuoridorController.initializeBoard();
 				QuoridorApplication.getQuoridor();
+				if(wdne || bdne) {
+					return;
+				}
 			}
 		});
+		
 
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
@@ -171,27 +180,31 @@ public class SelectName extends JFrame {
 							.addComponent(btnConfirm, GroupLayout.PREFERRED_SIZE, 157, GroupLayout.PREFERRED_SIZE))
 						.addComponent(lblThinkingTime))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(lblUserNameDne, GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
-							.addGap(235))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblNewLabel)
-								.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, 280, GroupLayout.PREFERRED_SIZE)
-								.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 280, GroupLayout.PREFERRED_SIZE)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(textField, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-										.addComponent(btnStart, GroupLayout.PREFERRED_SIZE, 222, GroupLayout.PREFERRED_SIZE)
-										.addGroup(gl_contentPane.createSequentialGroup()
-											.addComponent(lblMin)
-											.addPreferredGap(ComponentPlacement.UNRELATED)
-											.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.UNRELATED)
-											.addComponent(lblSec)))))
-							.addContainerGap(121, Short.MAX_VALUE))))
+							.addComponent(lblInputMustBe)
+							.addContainerGap())
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+							.addGroup(gl_contentPane.createSequentialGroup()
+								.addComponent(lblUserNameDne, GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+								.addGap(235))
+							.addGroup(gl_contentPane.createSequentialGroup()
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+									.addComponent(lblNewLabel)
+									.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, 280, GroupLayout.PREFERRED_SIZE)
+									.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 280, GroupLayout.PREFERRED_SIZE)
+									.addGroup(gl_contentPane.createSequentialGroup()
+										.addComponent(textField, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.UNRELATED)
+										.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+											.addComponent(btnStart, GroupLayout.PREFERRED_SIZE, 222, GroupLayout.PREFERRED_SIZE)
+											.addGroup(gl_contentPane.createSequentialGroup()
+												.addComponent(lblMin)
+												.addPreferredGap(ComponentPlacement.UNRELATED)
+												.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.UNRELATED)
+												.addComponent(lblSec)))))
+								.addContainerGap(102, Short.MAX_VALUE)))))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -208,7 +221,9 @@ public class SelectName extends JFrame {
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addComponent(lblBlackplayer)
 						.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(52)
+					.addGap(22)
+					.addComponent(lblInputMustBe)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblThinkingTime)
 						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -220,7 +235,7 @@ public class SelectName extends JFrame {
 						.addComponent(btnBack)
 						.addComponent(btnConfirm)
 						.addComponent(btnStart))
-					.addContainerGap(80, Short.MAX_VALUE))
+					.addContainerGap(84, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
