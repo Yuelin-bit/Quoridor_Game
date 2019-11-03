@@ -205,7 +205,7 @@ public class Player
   {
     boolean wasRemoved = false;
     //Unable to remove aWall, as it must always have a owner
-    if (!this.equals(aWall.getOwner()))  //Is here a problem?
+    if (!this.equals(aWall.getOwner()))
     {
       walls.remove(aWall);
       wasRemoved = true;
