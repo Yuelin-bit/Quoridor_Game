@@ -14,6 +14,7 @@ import javax.swing.border.EmptyBorder;
 import ca.mcgill.ecse223.quoridor.QuoridorApplication;
 import ca.mcgill.ecse223.quoridor.controller.QuoridorController;
 import ca.mcgill.ecse223.quoridor.model.Direction;
+import ca.mcgill.ecse223.quoridor.model.Game.GameStatus;
 import ca.mcgill.ecse223.quoridor.model.Player;
 import ca.mcgill.ecse223.quoridor.model.Quoridor;
 import ca.mcgill.ecse223.quoridor.model.User;
@@ -34,7 +35,6 @@ public class SelectName extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
-	private boolean checked = false;
 
 	/**
 	 * Launch the application.
@@ -106,20 +106,12 @@ public class SelectName extends JFrame {
 		
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (checked) {
+				if (QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus().equals(GameStatus.ReadyToStart)) {
 					JBoard board = new JBoard();
 					board.setVisible(true);
 					setVisible(false);
+					dispose();
 				}
-
-				if(!textField_1.getText().equals("")) {
-					//sec = Integer.parseInt(textField_1.getText());
-				}
-			//	QuoridorController.setTotalThinkingTime(min, sec);
-			//  QuoridorController.initializeBoard();
-				JBoard board = new JBoard();
-				board.setVisible(true);
-				setVisible(false);
 			}
 		});
 		
@@ -144,7 +136,7 @@ public class SelectName extends JFrame {
 		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Check if two names are not equal
-				checked = false;
+				QuoridorApplication.getQuoridor().getCurrentGame().setGameStatus(GameStatus.Initializing);
 				lblNewLabel.setVisible(false);
 				lblUserNameDne.setVisible(false);
 				String white = String.valueOf(comboBox.getSelectedItem());
@@ -187,6 +179,7 @@ public class SelectName extends JFrame {
 				
 //				QuoridorController.setTotalThinkingTime(min, sec);
 //				QuoridorController.initializeBoard();
+				QuoridorApplication.getQuoridor().getCurrentGame().setGameStatus(GameStatus.ReadyToStart);
 			}
 		});
 		
