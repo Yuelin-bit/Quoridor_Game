@@ -1047,13 +1047,20 @@ public class QuoridorController {
 	public static void initializeBoard() {
 		//TODO GUI
 		Board board = new Board(QuoridorApplication.getQuoridor());
+		Game game = QuoridorApplication.getQuoridor().getCurrentGame();
+		QuoridorApplication.getQuoridor().setBoard(board);
 		Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
 		Player blackPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
-		initializeWhitePawn(whitePlayer,board);
-		initializeBlackPawn(blackPlayer, board);
-		initializeWhiteWall(whitePlayer);
-		initializeBlackWall(blackPlayer);
-		QuoridorApplication.getQuoridor().setBoard(board);
+		Tile initWhite = new Tile(5, 9, board);
+		Tile initBlack = new Tile(5, 1, board);
+		PlayerPosition initialWhite = new PlayerPosition(whitePlayer, initWhite);
+		PlayerPosition initialBlack = new PlayerPosition(whitePlayer, initBlack);
+		
+		GamePosition g = new GamePosition(0, initialWhite, initialBlack, whitePlayer, game);
+		game.setCurrentPosition(g);
+		initializeWhiteWall(g,whitePlayer);
+		initializeBlackWall(g,blackPlayer);
+		g.setPlayerToMove(whitePlayer);
 	}
 
 	/**
@@ -1066,12 +1073,7 @@ public class QuoridorController {
 	 * @return A flag indicating whether the method successfully launched.
 	 */
 	public static void initializeWhitePawn(Player whitePlayer, Board board) {
-		//TODO GUI
-		if(whitePlayer!= null && board != null) {
-		Tile init = new Tile('e', 9, board);
-		PlayerPosition initial = new PlayerPosition(whitePlayer, init);
-		QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setWhitePosition(initial);
-		}
+		
 	}
 
 	/**
@@ -1084,12 +1086,7 @@ public class QuoridorController {
 	 * @return A flag indicating whether the method successfully launched.
 	 */
 	public static void initializeBlackPawn(Player blackPlayer, Board board) {
-		//TODO GUI
-		if(blackPlayer!= null && board != null) {
-			Tile init = new Tile('e', 0, board);
-			PlayerPosition initial = new PlayerPosition(blackPlayer, init);
-			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setWhitePosition(initial);
-			}
+		
 		}
 	/**
 	 * Feature: InitialzeBoard
@@ -1101,13 +1098,18 @@ public class QuoridorController {
 	 * @param blackPlayer
 	 * @return A flag indicating whether the method successfully launched.
 	 */
-	public static boolean initializeBlackWall(Player blackPlayer) {
+	public static List<Wall> initializeBlackWall(GamePosition g,Player blackPlayer) {
 		//TODO GUI
+		List<Wall> whiteWallsInStock = new ArrayList<Wall>();
+		int blackIndex = 0;
 		if(!blackPlayer.hasWalls()) {
-			blackPlayer.addWall(10);
-			return true;
+			for(int i = 0; i<10;i++) {
+				Wall wall = new Wall(blackIndex+i, blackPlayer);
+				g.addBlackWallsInStock(wall);
+			}
 		}
-		else return false;
+		return whiteWallsInStock;
+
 	}
 	/**
 	 * Feature: InitialzeBoard
@@ -1119,14 +1121,17 @@ public class QuoridorController {
 	 * @param whitePlayer
 	 * @return A flag indicating whether the method successfully launched.
 	 */
-	public static boolean initializeWhiteWall(Player whitePlayer) {
-		//TODO GUI
-
+	public static void initializeWhiteWall(GamePosition g,Player whitePlayer) {
+		//TODO GUIint blackIndex = 0;
+		int whiteIndex = 10;
+		List<Wall> blackWallsInStock= new ArrayList<Wall>();
 		if(!whitePlayer.hasWalls()) {
-			whitePlayer.addWall(10);
-			return true;
-		}	
-		else return false;
+			for(int i = 0; i<10;i++) {
+				Wall wall = new Wall(whiteIndex+i, whitePlayer);		
+				g.addWhiteWallsInStock(wall);
+				}
+		}
+
 	}
 	
 	/**
