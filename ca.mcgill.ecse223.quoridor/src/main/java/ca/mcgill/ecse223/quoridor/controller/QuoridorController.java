@@ -856,11 +856,11 @@ public class QuoridorController {
 	
 	
 	/**
-	 * Feature:load game, ValidatePosition
+	 * Feature:ValidatePosition
 	 * This method validate if all the pawn and wall position at board 
 	 * is with the board boundary 
 	 * 
-	 * @author Bozhong Lu, Yuelin Liu
+	 * @author Bozhong Lu
 	 * @return boolean
 	 */
 	public static boolean validatePosition() {
