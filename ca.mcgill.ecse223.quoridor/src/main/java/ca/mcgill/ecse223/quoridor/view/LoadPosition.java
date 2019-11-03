@@ -28,6 +28,7 @@ import java.awt.event.ActionEvent;
 public class LoadPosition extends JFrame {
 
 	private JPanel contentPane;
+	JComboBox<String> comboBox;
 
 	/**
 	 * Launch the application.
@@ -63,7 +64,9 @@ public class LoadPosition extends JFrame {
 		JButton btnNewButton = new JButton("Load");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String filename = (String) comboBox.getSelectedItem();
 			}
+		
 		});
 		
 
