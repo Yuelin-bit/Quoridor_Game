@@ -376,9 +376,9 @@ public class QuoridorController {
      * Feature:SavePosition
      *
 	 * @author Bozhong Lu
-	 * Checks that file with specified name exists in my folder
+	 * Method that checks file with specified name exists in my folder
 	 * @param filename
-	 * @return whether the file with the specified name exists
+	 * @return boolean: whether the file with the specified name exists
 	 */
 	public static boolean checkFileExistence(String filename) {
 		File tempFile = new File(filename);
@@ -466,17 +466,20 @@ public class QuoridorController {
 			
 		}
 	}
+	
+	
 	/**
 	 * Feature:SavePosition
 	 * 
+	 * Method that writes the current Player positions and Wall Positions in a specific file
+	 * The player to move is written at the first line, and the next player to move is written on the second line
+	 * 
 	 * @author Bozhong Lu
-	 * @param filename
-	 * @return String: the content of the new file;
+	 * @param String filename
+	 * @return nothing
 	 * @throws IOException 
 	 */
-	// 1. Compute the string to be saved
-	// 2. Save to file 
-	// 3. Return the computed string 
+	
 	public static void saveGame(String filename)throws IOException{
 		
 		Quoridor quoridor = QuoridorApplication.getQuoridor();
@@ -506,14 +509,21 @@ public class QuoridorController {
 	}
 	
 	
+	//private boolean variable which indicates 
+	//whether the player agrees to overwrite existing file or cancels overwrite existing file
 	private static boolean overwriteBoolean = false;
 	
+	// public getter method for the private overwriteBoolean variable
 	public static boolean getOverwriteBoolean() {
 		return overwriteBoolean ;
 	}
 	
 	/**
 	 * Feature:SavePosition
+	 * 
+	 * Method that is connected to the User Interface
+	 * If the user click the "Yes" Button, this method will return a boolean "true"
+	 * which indicates the user agrees to overwrite existing file
 	 * 
 	 * @author Bozhong Lu
 	 * @param none
@@ -526,6 +536,10 @@ public class QuoridorController {
 	
 	/**
 	 * Feature:SavePosition
+	 * 
+	 * Method that is connected to the User Interface
+	 * If the user click the "No" Button, this method will return a boolean "false"
+	 * which indicates the user cancels to overwrite existing file
 	 * 
 	 * @author Bozhong Lu
 	 * @param none
@@ -541,9 +555,13 @@ public class QuoridorController {
 	/**
 	 * Feature:SavePosition
 	 * 
+	 * Method that check the last modified time of the specified file 
+	 * If the file was updated within the past 30s, it means that it was succesfully updated
+	 * Otherwise, it was not successfully updated 
+	 * 
 	 * @author Bozhong Lu
 	 * @param filename
-	 * @return boolean
+	 * @return boolean which indicates whether the specified file has been updated or not
 	 * @throws IOException 
 	 */
 	public static boolean fileIsUpdated(String filename) throws IOException {
@@ -564,6 +582,8 @@ public class QuoridorController {
 	/**
 	 * Feature:SavePosition
 	 * 
+	 * Method that creats a new file with name filename
+	 * 
 	 * @author Bozhong Lu
 	 * @param String filename
 	 * @return none
@@ -578,6 +598,8 @@ public class QuoridorController {
 	
 	/**
 	 * Feature:SavePosition
+	 * 
+	 * Method that deletes file filename from file system
 	 * 
 	 * @author Bozhong Lu
 	 * @param String filename
@@ -597,6 +619,7 @@ public class QuoridorController {
 	
 	/**
 	 * Feature:load position
+	 * 
 	 * This method load a game position by input a filename
 	 * 
 	 * @param filename
