@@ -1,3 +1,4 @@
+
 package ca.mcgill.ecse223.quoridor.view;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
