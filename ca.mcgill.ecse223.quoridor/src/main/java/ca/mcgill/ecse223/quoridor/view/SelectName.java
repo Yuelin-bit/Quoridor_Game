@@ -107,7 +107,7 @@ public class SelectName extends JFrame {
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (checked) {
-					JBoard board = new JBoard();
+					JBoard board = QuoridorApplication.getJboard();
 					board.setVisible(true);
 					setVisible(false);
 				}

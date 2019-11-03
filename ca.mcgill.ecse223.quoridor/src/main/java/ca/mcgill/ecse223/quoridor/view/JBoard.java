@@ -54,6 +54,24 @@ public class JBoard extends JFrame {
 	private JWall jwall;
 	private JTextField textField;
 	private JTextField textField_1;
+	private JOptionPane errorHint;
+	private String error = null;
+	public String getError() {
+		return error;
+	}
+	public void setError(String error) {
+		this.error = error;
+	}
+	public JOptionPane getErrorHint() {
+		return errorHint;
+	}
+	public void setErrorHint(JOptionPane errorHint) {
+		this.errorHint = errorHint;
+	}
+	public void notifyIllegal(String string) {
+		this.setError(string);
+		this.errorHint.showMessageDialog(null, error);
+	}
 	/**
 	 * Launch the application.
 	 */
