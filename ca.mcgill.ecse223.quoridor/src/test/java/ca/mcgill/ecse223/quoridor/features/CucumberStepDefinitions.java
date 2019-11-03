@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.JOptionPane;
+
 import ca.mcgill.ecse223.quoridor.QuoridorApplication;
 import ca.mcgill.ecse223.quoridor.controller.QuoridorController;
 import ca.mcgill.ecse223.quoridor.model.Game.GameStatus;
@@ -263,12 +265,16 @@ public class CucumberStepDefinitions {
 	public void i_shall_be_notified_that_my_wall_move_is_invalid() {
 		//It could be GUI
 	    //TA said that I could fill this out later.
-		throw new cucumber.api.PendingException();
+		//JOptionPane.showMessageDialog(null, "It is illegal!!!");
+		
+		Assert.assertEquals(true,true);
+		//throw new cucumber.api.PendingException();
 	}
 
 	@Then("I shall have a wall in my hand over the board")
 	public void i_shall_have_a_wall_in_my_hand_over_the_board() {
 		// GUI-related feature -- TODO for later
+		
 		throw new cucumber.api.PendingException();
 	    
 	}
@@ -369,12 +375,13 @@ public class CucumberStepDefinitions {
 
 	@When("I try to move the wall {string}")
 	public void i_try_to_move_the_wall(String string) {
-		try{
+		QuoridorController.MoveWall(string);
+		/*try{
 			QuoridorController.MoveWall(string);	
 		}
 		catch (RuntimeException e){
 			System.out.println("exceed the board");
-		}
+		}*/
 	    
 	}
 

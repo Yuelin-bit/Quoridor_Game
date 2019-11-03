@@ -16,6 +16,10 @@ import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import ca.mcgill.ecse223.quoridor.controller.QuoridorController;
+import ca.mcgill.ecse223.quoridor.model.WallMove;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
@@ -25,6 +29,8 @@ import java.awt.event.MouseMotionAdapter;
 import java.io.File;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -141,29 +147,39 @@ public class Board extends JFrame {
 				if (e.getKeyChar()=='g') {					
 					mainLayerPanel.add(wall);
 					wall.setBackground(Color.GRAY);
-					wall.setBounds(120, 60, 10, 110);
+					wall.setBounds(360, 300, 10, 110);
 					wall.setVisible(true);
 					System.out.println("yes");
 				}
 				if ((e.getKeyChar()=='w')||(e.getKeyCode() == KeyEvent.VK_UP)) {
+					QuoridorController.MoveWall("up");
 					int x = wall.getLocation().x;
 					int y = wall.getLocation().y;
-					wall.setLocation(x, y-60);
+					if(((x)>=120)&&((x)<=540)&&((y-60)>=120)&&((y-60)<=540))
+						wall.setLocation(x, y-60);
 				}
 				if ((e.getKeyChar()=='a')||(e.getKeyCode() == KeyEvent.VK_LEFT)) {
+					QuoridorController.MoveWall("left");
 					int x = wall.getLocation().x;
 					int y = wall.getLocation().y;
-					wall.setLocation(x-60, y);
+					if(((x-60)>=120)&&((x-60)<=540)&&((y)>=120)&&((y)<=540))
+						wall.setLocation(x-60, y);
 				}
 				if ((e.getKeyChar()=='s')||(e.getKeyCode() == KeyEvent.VK_DOWN)) {
+					QuoridorController.MoveWall("down");
 					int x = wall.getLocation().x;
 					int y = wall.getLocation().y;
-					wall.setLocation(x, y+60);
+					if(((x)>=120)&&((x)<=540)&&((y+60)>=120)&&((y+60)<=540))
+						wall.setLocation(x, y+60);
 				}
 				if ((e.getKeyChar()=='d')||(e.getKeyCode() == KeyEvent.VK_RIGHT)) {
+					
+					QuoridorController.MoveWall("right");
 					int x = wall.getLocation().x;
 					int y = wall.getLocation().y;
-					wall.setLocation(x+60, y);
+					if(((x+60)>=120)&&((x+60)<=540)&&((y)>=120)&&((y)<=540))
+						wall.setLocation(x+60, y);
+					
 				}
 				if (e.getKeyChar()=='r') {
 					int x = wall.getLocation().x;
@@ -171,11 +187,15 @@ public class Board extends JFrame {
 					int old_h = wall.getBounds().height;
 					int old_w = wall.getBounds().width;
 					if (old_h==10) {
-						wall.setBounds(x, y, 10, 110);
-					}
-					else {
-						wall.setBounds(x, y, 110, 10);
-					}
+					      // horizontal
+					      wall.setBounds(x, y, 10, 110);
+					      wall.setLocation(wall.getLocation().x+50 , wall.getLocation().y-50);
+					     }
+					     else {
+					      // vertical
+					      wall.setBounds(x, y, 110, 10);
+					      wall.setLocation(wall.getLocation().x-50 , wall.getLocation().y+50);        
+					     }
 				}
 				if (e.getKeyChar()=='t') {
 					wall.setBackground(Color.red);
@@ -203,5 +223,13 @@ public class Board extends JFrame {
 		/*Image image=null;
 		image=ImageIO.read(new File("H:\\aa.jpg"));*/
 		
+		
 	}
+	
+
+	
+	
+	
+	
+	
 }

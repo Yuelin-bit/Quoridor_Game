@@ -7,12 +7,12 @@ import ca.mcgill.ecse223.quoridor.view.MainMenu;
 public class QuoridorApplication {
 
 	private static Quoridor quoridor;
-
+	static MainMenu mainMenu;
 	public static void main(String[] args) {
 		// start UI
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainMenu().setVisible(true);
+                mainMenu.setVisible(true);
             }
         });
 	}

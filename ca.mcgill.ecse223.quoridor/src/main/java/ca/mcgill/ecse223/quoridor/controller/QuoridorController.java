@@ -1,5 +1,7 @@
 package ca.mcgill.ecse223.quoridor.controller;
 
+import javax.swing.JOptionPane;
+
 import ca.mcgill.ecse223.quoridor.QuoridorApplication;
 import ca.mcgill.ecse223.quoridor.model.*;
 import ca.mcgill.ecse223.quoridor.model.Game.GameStatus;
@@ -11,9 +13,9 @@ public class QuoridorController {
 	 * Feature:DropWall
 	 * 
      * @author Yuelin Liu
-	 * @param wallmove WallMove candidate to be check whether it is valid and set it.
-	 * @return boolean
-	 * @exception UnsupportedOperationException
+	 * @param wallmove WallMove candidate to be check whether it is valid(to avoid overlapping).
+	 * @return boolean whether there is a wall in the same position.
+	 * @exception nothing
 	 *
 	 */
 	public static boolean verifyOverlapped(WallMove wallmove) {
@@ -93,9 +95,9 @@ public class QuoridorController {
 	 * Feature:DropWall
 	 * 
      * @author Yuelin Liu
-	 * @param wallmove WallMove candidate to be check whether it is invalid and set it
-	 * @return boolean
-	 * @exception UnsupportedOperationException
+	 * @param wallmove WallMove candidate to be check whether it is valid to avoid exceeding the board.
+	 * @return boolean whether the Wallmove candidate is outside the board
+	 * @exception nothing
 	 *
 	 */
 	public static boolean verifyOutsideTheBoard(WallMove wallmove) {
@@ -125,7 +127,7 @@ public class QuoridorController {
      * @author Yuelin Liu
 	 * @param wallmove WallMove candidate to be released.
 	 * @return void
-	 * @exception UnsupportedOperationException
+	 * @exception nothing
 	 *
 	 */
 	public static void ReleaseWall(WallMove wallmove) 
@@ -156,12 +158,12 @@ public class QuoridorController {
 	}
 	
 	/**
-	 * Feature:DropWall
+	 * Feature:MoveWall
 	 * 
      * @author Yuelin Liu
-	 * @param wallmove WallMove candidate to be check whether it is invalid and set it
-	 * @return boolean
-	 * @exception UnsupportedOperationException
+	 * @param wallmove WallMove candidate to be check whether its target tile is on the specific edge
+	 * @return boolean whether its target tile is on the specific edge
+	 * @exception nothing
 	 *
 	 */
 	public static boolean verifyOnEdge(String string) {
@@ -198,71 +200,47 @@ public class QuoridorController {
 	 * @author Yuelin Liu
 	 * @param string String stands for the direction of the wall that is to be moved.
 	 * @return void
-	 * @exception UnsupportedOperationException
+	 * @exception nothing 
 	 */
 	public static void MoveWall(String string)
 	{	
-		if(string.equalsIgnoreCase("left")) {
+		try {
+			if(string.equalsIgnoreCase("left")) {
 				Tile tileLeft = new Tile(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getRow()
 						,QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getColumn()-1,QuoridorApplication.getQuoridor().getBoard());
 				
 				QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().setTargetTile(tileLeft);	
-		}
-		
-		if(string.equalsIgnoreCase("right")) {
+			}
+			
+			if(string.equalsIgnoreCase("right")) {
 				Tile tileRight = new Tile(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getRow()
 						,QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getColumn()+1,QuoridorApplication.getQuoridor().getBoard());
 				
 				QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().setTargetTile(tileRight);
-		}
+			}
 		
-		if(string.equalsIgnoreCase("up")) {
+			if(string.equalsIgnoreCase("up")) {
 				Tile tileUp = new Tile(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getRow()-1
 						,QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getColumn(),QuoridorApplication.getQuoridor().getBoard());
 				
 				QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().setTargetTile(tileUp);
-		}
+			}
 		
-		if(string.equalsIgnoreCase("down")) {
+			if(string.equalsIgnoreCase("down")) {
 				Tile tileDown = new Tile(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getRow()+1
 						,QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getColumn(),QuoridorApplication.getQuoridor().getBoard());
 				
 				QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().setTargetTile(tileDown);
+			}
 		}
-		//TODO: Write logic
-		//throw new UnsupportedOperationException();
+		catch(RuntimeException e){
+			JOptionPane.showMessageDialog(null, "It is illegal!!!");
+			
+		}
+		
 	}
 	
 	
-	
-	/**
-	 * Feature:MoveWall
-	 * 
-	 * @author Yuelin Liu
-	 * @param  string String stands for direction and tile Tile stands for the targetTile.
-	 * @return Tile that is not at the edge of Tile
-	 *
-	 */
-	public static Tile getNonEdgeTile(String string, Tile tile)
-	{	
-		//TODO: Write logic
-		throw new UnsupportedOperationException();
-	}
-	
-	
-	
-	/**
-	 * Feature:MoveWall
-	 * 
-	 * @author Yuelin Liu
-	 * @param  string String stands for direction and tile Tile stands for the targetTile.
-	 * @return Tile that is at the edge of Tile
-	 *
-	 */
-	public static Tile getEdgeTile(String string,Tile tile) {
-		//TODO: Write logic
-				throw new UnsupportedOperationException();
-	}
 	
 	
 	

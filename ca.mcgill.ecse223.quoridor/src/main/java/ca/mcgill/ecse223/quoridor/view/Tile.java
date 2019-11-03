@@ -1,5 +1,6 @@
 package ca.mcgill.ecse223.quoridor.view;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 
@@ -19,6 +20,8 @@ public void paint(Graphics g){
 		Font f=new Font("微软雅黑",Font.BOLD,30);
 		g.setFont(f);
 		int length=60;
+		
+		
 		g.drawRect(60, 50,550, 560); //外圈
 		//g.drawRect(70, 60, 480, 540);
 		
@@ -63,6 +66,12 @@ public void paint(Graphics g){
 		//Graphics2D g2d = (Graphics2D) g;
         //g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         //g2d.fillArc(200,500,100,200,0,100);
-		
+		//g.fillRect(70, 60, 50, 50);
+		//g.setColor(Color.GREEN);
 	}
+//	public void paintComponent(Graphics g)
+//	{
+//		g.fill
+//	}
 }
+
