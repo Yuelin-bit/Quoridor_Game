@@ -993,7 +993,6 @@ public class CucumberStepDefinitions {
 		@When("A new game is being initialized")
 		public void a_new_game_is_being_initialized() {
 			QuoridorController.initializeNewGame();
-			//QuoridorController.initializeBoard();
 			this.quoridor = QuoridorApplication.getQuoridor();
 			this.game = quoridor.getCurrentGame();
 		}
@@ -1003,6 +1002,7 @@ public class CucumberStepDefinitions {
 			this.player1 = playerList.get(0);
 			//QuoridorController.selectUserName(this.player1);
 			this.game.setWhitePlayer(this.player1);
+			QuoridorController.setUserName("white", "test_white", true);
 			//throw new cucumber.api.PendingException();
 		}
 
@@ -1012,6 +1012,7 @@ public class CucumberStepDefinitions {
 			this.player2 = playerList.get(1);
 			//QuoridorController.selectUserName(this.player2);
 			this.game.setBlackPlayer(this.player2);
+			QuoridorController.setUserName("black", "test_black", true);
 			//throw new cucumber.api.PendingException();
 		}
 
