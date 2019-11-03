@@ -44,7 +44,6 @@ public class MainMenu extends JFrame {
 		setContentPane(contentPane);
 		
 		JButton btnNewButton = new JButton("New Game");
-		MainMenu m = this;
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				SelectName page = new SelectName();

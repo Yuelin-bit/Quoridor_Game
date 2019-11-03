@@ -1140,7 +1140,7 @@ public class CucumberStepDefinitions {
 
 			Player white = playerList.get(0);
 			Player black = playerList.get(1);
-			loadSucceed = QuoridorController.loadPosition(string, white, black);		    
+			//loadSucceed = QuoridorController.loadPosition(string, white, black);		    
 		}
 
 		
