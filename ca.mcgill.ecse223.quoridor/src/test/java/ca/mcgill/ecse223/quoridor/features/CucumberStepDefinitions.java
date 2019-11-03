@@ -489,273 +489,252 @@ public class CucumberStepDefinitions {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-////===============================================================================================================================
-    ////*******************************************************************************************************************************
-	////*******************************************************************************************************************************
-	////   
-    ////                                      The following is GrabWall
+	//// *******************************************************************************************************************************
+	//// *******************************************************************************************************************************
 	////
-	////*******************************************************************************************************************************
-	////*******************************************************************************************************************************
-	
+	//// The following is GrabWall
+	////
+	//// *******************************************************************************************************************************
+	//// *******************************************************************************************************************************
+
 	// Scenario: Start wall placement
-		@Given("I have more walls on stock") 
-		
-		// if current player does not have walls in stock, then add walls to their list of walls in stock
-		// firstly, check whether this is black game or white game, then check whether there is more walls in stock, if not, add one
-		
-		public void i_have_more_walls_on_stock() {
-			Player currentPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
-			// initialize a new wall with a different id, so it does not conflict with existed walls
-			int WallID = 100;
-			while (Wall.hasWithId(WallID)) {
-				WallID++;
-			}
-			Wall wallAdded = Wall.getWithId(WallID);
-			// check game is black or white
-			// if setGameAsBlack returns true, then it is black game
-			if(currentPlayer.hasGameAsBlack()) {
-				if (!QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().hasBlackWallsInStock()) {
-					// if there is no black walls in stock, then add one
-					QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().addBlackWallsInStock(wallAdded);	
-				}			
-			}else {
-				// this is white game
-				if (!QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().hasWhiteWallsInStock()) {
-					// if there is no white walls in stock, then add one
-					QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().addWhiteWallsInStock(wallAdded);	
-				}			
-			}
+	@Given("I have more walls on stock")
 
-		}
+	// if current player does not have walls in stock, then add walls to their list
+	// of walls in stock
+	// firstly, check whether this is black game or white game, then check whether
+	// there is more walls in stock, if not, add one
+
+	public void i_have_more_walls_on_stock() {
+		Player currentPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
 		
-		@When("I try to grab a wall from my stock")
-		public void i_try_to_grab_a_wall_from_my_stock() {	
-			Player currentPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();			
-			if(currentPlayer.hasGameAsBlack()) {
-				// this is a black game
-				// check if that Wall is in stock, remove it from stock, and grab it using grab method
-				for(int i = 0; i < 20; i++) {
-					if (QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsInStock(i) != null) {
-						QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsInStock().remove(i);
-						Wall GrabbedWall = Wall.getWithId(i);
-						// use the controller method
-						QuoridorController.GrabWall(GrabbedWall);
-						break;
-					}
-				}					
-			}else {
-				// this is a white game
-				// check if that Wall is in stock, remove it from stock, and grab it using grab method
-				for(int i = 0; i < 20; i++) {
-					if (QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsInStock(i) != null) {
-						QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsInStock().remove(i);
-						Wall GrabbedWall = Wall.getWithId(i);
-						// use the controller method
-						QuoridorController.GrabWall(GrabbedWall);
-						break;
-					}			
-				}				
+		int WallID = 100;
+		while (Wall.hasWithId(WallID)) {
+			WallID++;
+		}
+		Wall wallAdded = Wall.getWithId(WallID);
+		if (currentPlayer.hasGameAsBlack()) {
+			if (!QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().hasBlackWallsInStock()) {
+				Wall newWall = new Wall(WallID, currentPlayer);
+				QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().addBlackWallsInStock(newWall);
+			}
+		} else {
+			if (!QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().hasWhiteWallsInStock()) {
+				Wall newWall = new Wall(WallID, currentPlayer);
+				QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().addWhiteWallsInStock(newWall);
 			}
 		}
-			
-		
-		@Then("A wall move candidate shall be created at initial position")
-		public void a_wall_move_candidate_shall_be_created_at_initial_position(){
-			Assert.assertEquals(true,QuoridorApplication.getQuoridor().getCurrentGame().hasWallMoveCandidate());
-			
+	}
+
+	@When("I try to grab a wall from my stock")
+	public void i_try_to_grab_a_wall_from_my_stock() {
+		QuoridorController.grabWall();
+	}
+
+	@Then("A wall move candidate shall be created at initial position")
+	public void a_wall_move_candidate_shall_be_created_at_initial_position() {
+		Assert.assertEquals(true, QuoridorApplication.getQuoridor().getCurrentGame().hasWallMoveCandidate());
+	}
+
+	// the same one is in feature DropWall
+
+	@And("I shall have a wall in my hand over the board")
+	public void i_shall_have_a_wall_in_my_hand_over_the_board() {
+		// Assert.assertEquals(true,
+		// QuoridorApplication.getQuoridor().getCurrentGame().hasWallMoveCandidate() );
+		// This is GUI related part
+	}
+
+	@And("The wall in my hand shall disappear from my stock")
+	public void the_wall_in_my_hand_shall_disappear_from_my_stock() {
+		Player aPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
+		Wall newWallFromStock;
+		if (aPlayer.hasGameAsBlack()) {
+			newWallFromStock = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition()
+					.getBlackWallsInStock().get(0);
+		} else {
+			newWallFromStock = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition()
+					.getWhiteWallsInStock().get(0);
 		}
-		
-		// the same one is in feature DropWall
-		
-//		@And("I shall have a wall in my hand over the board")
-//		public void i_shall_have_a_wall_in_my_hand_over_the_board() {
-//			// Assert.assertEquals(true, QuoridorApplication.getQuoridor().getCurrentGame().hasWallMoveCandidate() );
-//		    // This is GUI related part
-//		}	
-		
-		@And("The wall in my hand shall disappear from my stock")
-		public void the_wall_in_my_hand_shall_disappear_from_my_stock() {
-			Player aPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
-			Wall newWallFromStock;
-			if(aPlayer.hasGameAsBlack()) {
-			    newWallFromStock = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsInStock().get(0);
-			   }
-			   else {
-			    newWallFromStock = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsInStock().get(0);
-			   }
-			Assert.assertEquals(null,newWallFromStock);
-		}
-		
+		Assert.assertEquals(null, newWallFromStock);
+	}
+
 	// Scenario: No more walls in stock
-		@Given ("I have no more walls on stock")
-		// this should remove all walls on stock
-		public void i_have_no_more_walls_on_stock() {
-			Player currentPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
-			// check whether this is black game or white game
-			if (currentPlayer.hasGameAsBlack() ) {
-				// if this is black game, remove all walls in black stock
-				if (QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().hasBlackWallsInStock()) {
-					QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsInStock().clear();
-				}
-			}else {
-				// if this is white game, remove all walls in white stock
-				if (QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().hasWhiteWallsInStock()) {
-					QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsInStock().clear();
+	@Given("I have no more walls on stock")
+	// this should remove all walls on stock
+	public void i_have_no_more_walls_on_stock() {
+		Player currentPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition()
+				.getPlayerToMove();
+		// check whether this is black game or white game
+		if (currentPlayer.hasGameAsBlack()) {
+			// if this is black game, remove all walls in black stock
+			if (QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().hasBlackWallsInStock()) {
+				//QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsInStock().clear();
+				for(int n = 19; n >=10; n--) {
+					if (QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsInStock(n) != null) {
+						QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().removeBlackWallsInStock(Wall.getWithId(n));
+					}
 				}
 			}
+		} else {
+			// if this is white game, remove all walls in white stock
+			if (QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().hasWhiteWallsInStock()) {
+				//QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsInStock().clear();
+				for(int n = 9; n >=0; n--) {
+					if (QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsInStock(n) != null) {
+						QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().removeWhiteWallsInStock(Wall.getWithId(n));
+					}
+				}
+			}
+		}
 
-		}
+	}
+
+	// what does it mean by notify? Do I need to print a message?
+	@Then("I shall be notified that I have no more walls")
+	public void i_shall_be_notified_that_I_have_no_more_walls() {
+		// ui
+		// the TA said that I could fill this out later.
+	}
+
+	@And("I shall have no walls in my hand")
+	public void i_shall_have_no_walls_in_my_hand() {
+//		boolean actural = QuoridorApplication.getQuoridor().getCurrentGame().hasWallMoveCandidate();
+//		Assert.assertEquals(false, actural);
+	//	throw new cucumber.api.PendingException();
+	}
+
+	//// *******************************************************************************************************************************
+	//// *******************************************************************************************************************************
+	////
+	//// The above is GrabWall
+	////
+	//// *******************************************************************************************************************************
+	//// *******************************************************************************************************************************
+	//// ===============================================================================================================================
+
+	//// ===============================================================================================================================
+	//// *******************************************************************************************************************************
+	//// *******************************************************************************************************************************
+	////
+	//// The following is RotateWall
+	////
+	//// *******************************************************************************************************************************
+	//// *******************************************************************************************************************************
+	
+	@Given("A wall move candidate exists with {string} at position \\({int}, {int})")
+	public void a_wall_move_candidate_exists_with_at_position(String string, Integer int1, Integer int2) {
 		
-		// what does it mean by notify? Do I need to print a message?
-		@Then ("I shall be notified that I have no more walls")
-		public void i_shall_be_notified_that_I_have_no_more_walls() {	   
-			// ui
-			// the TA said that I could fill this out later.
-		}
-		@And ("I shall have no walls in my hand")
-		public void i_shall_have_no_walls_in_my_hand(){
-			Assert.assertEquals(false, QuoridorApplication.getQuoridor().getCurrentGame().hasWallMoveCandidate() );
-			throw new cucumber.api.PendingException();
+		Player currentPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition()
+				.getPlayerToMove();
+		Tile WallTile = new Tile(int1, int2, QuoridorApplication.getQuoridor().getBoard());
+
+		if (currentPlayer.hasGameAsBlack()) {
+			
+			Wall newWallFromStock = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition()
+					.getBlackWallsInStock().get(1);
+			
+			if (string.equals("vertical")) {
+				int a = QuoridorApplication.getQuoridor().getCurrentGame().getMoves().size();
+				WallMove WallMove = new WallMove(a, (a + 1) / 2, currentPlayer, WallTile,
+						QuoridorApplication.getQuoridor().getCurrentGame(), Direction.Vertical, newWallFromStock);
+				QuoridorApplication.getQuoridor().getCurrentGame().setWallMoveCandidate(WallMove);
+			} 
+			
+			if (string.equals("horizontal")) {
+				int a = QuoridorApplication.getQuoridor().getCurrentGame().getMoves().size();
+				WallMove WallMove = new WallMove(a, (a + 1) / 2, currentPlayer, WallTile,
+						QuoridorApplication.getQuoridor().getCurrentGame(), Direction.Horizontal, newWallFromStock);
+				QuoridorApplication.getQuoridor().getCurrentGame().setWallMoveCandidate(WallMove);
+			}
+			
 		} 
 		
-	
-    ////*******************************************************************************************************************************
-	////*******************************************************************************************************************************
-	////   
-	////                                      The above is GrabWall
-	////
-	////*******************************************************************************************************************************
-	////*******************************************************************************************************************************
-	////===============================================================================================================================
-		
-		
-		
-		
-	////===============================================================================================================================
-    ////*******************************************************************************************************************************
-	////*******************************************************************************************************************************
-	////   
-    ////                                      The following is RotateWall
-	////
-	////*******************************************************************************************************************************
-	////*******************************************************************************************************************************
-		@Given("A wall move candidate exists with {string} at position \\({int}, {int})")
-		public void a_wall_move_candidate_exists_with_at_position(String string, Integer int1, Integer int2) {			
-			Player currentPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
-			Tile WallTile = new Tile (int1, int2, QuoridorApplication.getQuoridor().getBoard() );
-						
-			if(currentPlayer.hasGameAsBlack()) {
-				// this is a black game
-				// initialize a new wall
-				Wall newWallFromStock = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsInStock().get(1);				
-					
-					if(string.equals("vertical")) {
-						
-						// initialize a vertical WallMove
-						int a = QuoridorApplication.getQuoridor().getCurrentGame().getMoves().size();
-						
-						WallMove WallMove = new WallMove(a, (a+1)/2, currentPlayer, WallTile, 
-								QuoridorApplication.getQuoridor().getCurrentGame(), Direction.Vertical, newWallFromStock );
-						
-						// set it to WallMoveCandidate
-						QuoridorApplication.getQuoridor().getCurrentGame().setWallMoveCandidate(WallMove);	
-					}else {
-						// initialize a horizontal WallMove
-						int a = QuoridorApplication.getQuoridor().getCurrentGame().getMoves().size();
-						WallMove WallMove = new WallMove(a, (a+1)/2, currentPlayer, WallTile, 
-								QuoridorApplication.getQuoridor().getCurrentGame(), Direction.Horizontal, newWallFromStock );
-						// set it to WallMoveCandidate
-						QuoridorApplication.getQuoridor().getCurrentGame().setWallMoveCandidate(WallMove);	
-					}					
-			}else {
-				// this is a white game,
-				// initialize a new wall
-				Wall newWallFromStock = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsInStock().get(1);				
-					
-					if(string.equals("vertical")) {
-						// initialize a vertical WallMove
-						int a = QuoridorApplication.getQuoridor().getCurrentGame().getMoves().size();
-						WallMove WallMove = new WallMove(a, (a+1)/2, currentPlayer, WallTile, 
-								QuoridorApplication.getQuoridor().getCurrentGame(), Direction.Vertical, newWallFromStock );
-						// set it to WallMoveCandidate
-						QuoridorApplication.getQuoridor().getCurrentGame().setWallMoveCandidate(WallMove);	
-					}else {
-						// initialize a horizontal WallMove
-						int a = QuoridorApplication.getQuoridor().getCurrentGame().getMoves().size();
-						WallMove WallMove = new WallMove(a, (a+1)/2, currentPlayer, WallTile, 
-								QuoridorApplication.getQuoridor().getCurrentGame(), Direction.Horizontal, newWallFromStock );
-						// set it to WallMoveCandidate
-						QuoridorApplication.getQuoridor().getCurrentGame().setWallMoveCandidate(WallMove);	
-					}					
-			}
+		if (currentPlayer.hasGameAsWhite()) {
 			
+			Wall newWallFromStock = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition()
+					.getWhiteWallsInStock().get(1);
+			
+			if (string.equals("vertical")) {
+				int a = QuoridorApplication.getQuoridor().getCurrentGame().getMoves().size();
+				WallMove WallMove = new WallMove(a, (a + 1) / 2, currentPlayer, WallTile,
+						QuoridorApplication.getQuoridor().getCurrentGame(), Direction.Vertical, newWallFromStock);
+				QuoridorApplication.getQuoridor().getCurrentGame().setWallMoveCandidate(WallMove);
+			} 
+			
+			if (string.equals("horizontal")) {
+				int a = QuoridorApplication.getQuoridor().getCurrentGame().getMoves().size();
+				WallMove WallMove = new WallMove(a, (a + 1) / 2, currentPlayer, WallTile,
+						QuoridorApplication.getQuoridor().getCurrentGame(), Direction.Horizontal, newWallFromStock);
+				QuoridorApplication.getQuoridor().getCurrentGame().setWallMoveCandidate(WallMove);
+			}
 		}
-		
-		
-		@When("I try to flip the wall")
-		public void i_try_to_flip_the_wall() {
-		   WallMove wallmove = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate();
-		   QuoridorController.FlipWall(wallmove);	    
-		}
-		
 
-		@Then("The wall shall be rotated over the board to {string}")
-		public void the_wall_shall_be_rotated_over_the_board_to(String string) {
-			if(string.equals("vertical")){
-				 Assert.assertEquals(Direction.Vertical,QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getWallDirection());
-			}else {
-				 Assert.assertEquals(Direction.Horizontal,QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getWallDirection());
-			}	   
+	}
+
+	@When("I try to flip the wall")
+	public void i_try_to_flip_the_wall() {
+		// WallMove wallmove = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate();
+		QuoridorController.flipWall();
+	}
+
+	@Then("The wall shall be rotated over the board to {string}")
+	public void the_wall_shall_be_rotated_over_the_board_to(String string) {
+		Direction expectedDirection = null;
+		if (string.equals("vertical")) {
+			expectedDirection = Direction.Vertical;					
+		} else {
+			expectedDirection = Direction.Horizontal;
 		}
-		
-		//// the same one is in feature 
-		
-//		@Then("A wall move candidate shall exist with {string} at position \\({int}, {int})")
-//		public void a_wall_move_candidate_shall_exist_with_at_position(String string, Integer int1, Integer int2) {
-//			Direction dir;
-//			if(string.equalsIgnoreCase("vertical")) {
-//				   dir = Direction.Vertical;
-//				  }
-//				  else {
-//				   dir = Direction.Horizontal;
-//				  }
-//			Tile ExpectedTile = new Tile(int1, int2, QuoridorApplication.getQuoridor().getBoard());
-//			Assert.assertEquals( dir ,QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getWallDirection());
-//			Assert.assertEquals( ExpectedTile ,QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile());			
-//		}
-	////*******************************************************************************************************************************
-	////*******************************************************************************************************************************
-	////   
-	////                                      The above is RotateWall
+		Direction acturalDirection = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getWallDirection();
+		Assert.assertEquals(expectedDirection, acturalDirection);
+	}
+
+	//the same one is in feature
+
+		@Then("A wall move candidate shall exist with {string} at position \\({int}, {int})")
+		public void a_wall_move_candidate_shall_exist_with_at_position(String string, Integer int1, Integer int2) {
+			Direction dir;
+			if(string.equalsIgnoreCase("vertical")) {
+				   dir = Direction.Vertical;
+				  }
+				  else {
+				   dir = Direction.Horizontal;
+				  }
+			Tile ExpectedTile = new Tile(int1, int2, QuoridorApplication.getQuoridor().getBoard());
+			int ExpectedRow = ExpectedTile.getRow();
+			int ExpectedColume =  ExpectedTile.getColumn();
+			Tile ActuralTile = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile();
+			int ActuralRow = ActuralTile.getRow();
+			int ActuralColumn = ActuralTile.getColumn();
+			Assert.assertEquals(ExpectedRow,ActuralRow );
+			Assert.assertEquals(ExpectedColume,ActuralColumn);			
+		}
+	//// *******************************************************************************************************************************
+	//// *******************************************************************************************************************************
 	////
-	////*******************************************************************************************************************************
-	////*******************************************************************************************************************************
-	////===============================================================================================================================	
+	//// The above is RotateWall
+	////
+	//// *******************************************************************************************************************************
+	//// *******************************************************************************************************************************
+	//// ===============================================================================================================================
+
 	
-		
-		
-		
-		
-		
-		
-		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 		
 		
 		
