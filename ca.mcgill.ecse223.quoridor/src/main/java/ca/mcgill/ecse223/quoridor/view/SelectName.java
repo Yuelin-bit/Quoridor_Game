@@ -152,7 +152,7 @@ public class SelectName extends JFrame {
 				QuoridorController.initializeNewGame();
 				boolean result = false;
 				try {
-					result = QuoridorController.setUserName("w", white, false);
+					result = QuoridorController.setUserName("white", white, false);
 				} catch (IllegalArgumentException ex) {
 					lblNewLabel.setText(ex.getMessage());
 					lblNewLabel.setVisible(true);
@@ -164,7 +164,7 @@ public class SelectName extends JFrame {
 				}
 				result = false;
 				try {
-					result = QuoridorController.setUserName("b", black, false);
+					result = QuoridorController.setUserName("black", black, false);
 				} catch (IllegalArgumentException ex) {
 					lblUserNameDne.setText(ex.getMessage());
 					lblUserNameDne.setVisible(true);
@@ -173,6 +173,7 @@ public class SelectName extends JFrame {
 				if(result) {
 					lblUserNameDne.setText("Black player name has been changed");
 					lblUserNameDne.setVisible(true);
+				}
 				Integer min = 3;
 				Integer sec = 0; 
 				
@@ -182,9 +183,8 @@ public class SelectName extends JFrame {
 				}catch(Exception ex){
 					lblInputMustBe.setText("Input must be number!");
 					lblInputMustBe.setVisible(true);
-        }
-
-//				
+				}
+				
 //				QuoridorController.setTotalThinkingTime(min, sec);
 //				QuoridorController.initializeBoard();
 			}

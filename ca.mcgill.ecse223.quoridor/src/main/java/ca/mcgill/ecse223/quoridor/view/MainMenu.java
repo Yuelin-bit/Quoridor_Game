@@ -48,6 +48,7 @@ public class MainMenu extends JFrame {
 				SelectName page = new SelectName();
 				page.setVisible(true);
 				setVisible(false);//close the mainMenu.
+				dispose();
 			}
 		});
 		
@@ -57,10 +58,17 @@ public class MainMenu extends JFrame {
 				LoadPosition loadposition = new LoadPosition();
 				loadposition.setVisible(true);
 				setVisible(false);
+				dispose();
 			}
 		});
 		
-		JButton btnNewButton_2 = new JButton("New button");
+		JButton btnNewButton_2 = new JButton("Registeration");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Registeration r = new Registeration();
+				r.setVisible(true);
+			}
+		});
 		
 		JButton btnNewButton_3 = new JButton("New button");
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
