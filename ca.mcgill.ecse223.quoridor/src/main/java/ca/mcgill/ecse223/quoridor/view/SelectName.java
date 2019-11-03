@@ -142,7 +142,37 @@ public class SelectName extends JFrame {
 
 		JButton btnConfirm = new JButton("Confirm");
 		btnConfirm.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {		
+			public void actionPerformed(ActionEvent e) {
+				//Check if two names are not equal
+				checked = false;
+				lblNewLabel.setVisible(false);
+				lblUserNameDne.setVisible(false);
+				String white = String.valueOf(comboBox.getSelectedItem());
+				String black = String.valueOf(comboBox_1.getSelectedItem());
+				QuoridorController.initializeNewGame();
+				boolean result = false;
+				try {
+					result = QuoridorController.setUserName("w", white, false);
+				} catch (IllegalArgumentException ex) {
+					lblNewLabel.setText(ex.getMessage());
+					lblNewLabel.setVisible(true);
+					return;
+				}
+				if(result) {
+					lblNewLabel.setText("White player name has been changed");
+					lblNewLabel.setVisible(true);
+				}
+				result = false;
+				try {
+					result = QuoridorController.setUserName("b", black, false);
+				} catch (IllegalArgumentException ex) {
+					lblUserNameDne.setText(ex.getMessage());
+					lblUserNameDne.setVisible(true);
+					return;
+				}
+				if(result) {
+					lblUserNameDne.setText("Black player name has been changed");
+					lblUserNameDne.setVisible(true);
 				Integer min = 3;
 				Integer sec = 0; 
 				
@@ -152,7 +182,7 @@ public class SelectName extends JFrame {
 				}catch(Exception ex){
 					lblInputMustBe.setText("Input must be number!");
 					lblInputMustBe.setVisible(true);
-				}
+        }
 
 //				
 //				QuoridorController.setTotalThinkingTime(min, sec);
@@ -238,3 +268,4 @@ public class SelectName extends JFrame {
 		contentPane.setLayout(gl_contentPane);
 	}
 }
+
