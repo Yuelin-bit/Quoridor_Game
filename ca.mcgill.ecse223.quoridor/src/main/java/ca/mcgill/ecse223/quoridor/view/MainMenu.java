@@ -72,6 +72,7 @@ public class MainMenu extends JFrame {
 				//Page page = new Page();
 				page.setVisible(true);
 				setVisible(false);//close the mainMenu.
+				dispose();
 			}
 		});
 		
@@ -81,6 +82,7 @@ public class MainMenu extends JFrame {
 				LoadPosition loadposition = new LoadPosition();
 				loadposition.setVisible(true);
 				setVisible(false);
+				dispose();
 			}
 		});
 		
