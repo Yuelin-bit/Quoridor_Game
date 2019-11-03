@@ -1378,7 +1378,7 @@ public class QuoridorController {
 		 return result;
 	 }
 	 
-	 private static ArrayList<Player> createUsersAndPlayers(String userName1, String userName2) {
+	 public static ArrayList<Player> createUsersAndPlayers(String userName1, String userName2) {
 			Quoridor quoridor = QuoridorApplication.getQuoridor();
 			User user1 = quoridor.addUser(userName1);
 			User user2 = quoridor.addUser(userName2);
@@ -1418,7 +1418,7 @@ public class QuoridorController {
 			return playersList;
 		}
 
-		private static void createAndStartGame(ArrayList<Player> players) {
+		public static void createAndStartGame(ArrayList<Player> players) {
 			Quoridor quoridor = QuoridorApplication.getQuoridor();
 			// There are total 36 tiles in the first four rows and
 			// indexing starts from 0 -> tiles with indices 36 and 36+8=44 are the starting
