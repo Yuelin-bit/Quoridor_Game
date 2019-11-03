@@ -664,7 +664,7 @@ public class QuoridorController {
 	 * This method validate if all the pawn and wall position at board 
 	 * is with the board boundary 
 	 * 
-	 * @author Bozhong Lu, Yuelin Liu
+	 * @author Bozhong Lu, Yuelin Liu， Zirui He
 	 * @return boolean
 	 */
 	public static boolean validatePosition() {
