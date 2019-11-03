@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import ca.mcgill.ecse223.quoridor.QuoridorApplication;
+import ca.mcgill.ecse223.quoridor.controller.QuoridorController;
 import ca.mcgill.ecse223.quoridor.model.User;
 
 import java.awt.Color;
@@ -20,10 +21,14 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
-public class Page extends JFrame {
+public class SelectName extends JFrame {
 
 	private JPanel contentPane;
+	private JTextField textField;
+	private JTextField textField_1;
 
 	/**
 	 * Launch the application.
@@ -32,7 +37,7 @@ public class Page extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Page frame = new Page();
+					SelectName frame = new SelectName();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -44,7 +49,7 @@ public class Page extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Page() {
+	public SelectName() {
 		setBackground(Color.PINK);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 1080, 720);
@@ -60,6 +65,7 @@ public class Page extends JFrame {
 		JLabel lblBlackplayer = new JLabel("Blackplayer");
 		
 		JComboBox comboBox = new JComboBox();
+		comboBox.setEditable(true);
 		
 		List<User> us = QuoridorApplication.getQuoridor().getUsers();
 		String[] names = new String[us.size()];
@@ -71,6 +77,8 @@ public class Page extends JFrame {
 		comboBox.setModel(new DefaultComboBoxModel(names));
 		
 		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setEditable(true);
+
 		
 		comboBox_1.setModel(new DefaultComboBoxModel(names));
 		
@@ -99,45 +107,66 @@ public class Page extends JFrame {
 				setVisible(false);
 			}
 		});
+
+		JLabel lblThinkingTime = new JLabel("Thinking Time");
 		
+		textField = new JTextField();
+		textField.setColumns(10);
+		String minStr = textField.getText();
+		Integer min = Integer.parseInt(minStr);
+
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		String secStr = textField_1.getText();
+		Integer sec = Integer.parseInt(secStr);
+		
+		JLabel lblMin = new JLabel("Minute");		
+		JLabel lblSec = new JLabel("Second");
 		JButton btnStart = new JButton("Start");
 		
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//QuoridorController.setTotalThinkingTime((int)min, sec);
 				Board board = new Board();
 				board.setVisible(true);
 				setVisible(false);
 			}
 		});
+
 		
-		JLabel lblThinkingTime = new JLabel("Thinking Time");
-		
-		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setModel(new DefaultComboBoxModel(new String[] {"1 min", "2 min", "3 min", "4 min", "5 min", "10 min", "15 min", "20 min"}));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(452)
 					.addComponent(lblSelectPlayerName)
 					.addContainerGap(434, Short.MAX_VALUE))
-				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-					.addGap(443)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(375)
 					.addComponent(btnStart)
 					.addGap(36)
 					.addComponent(btnBack)
-					.addContainerGap(423, Short.MAX_VALUE))
+					.addContainerGap(491, Short.MAX_VALUE))
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(272, Short.MAX_VALUE)
+					.addContainerGap(217, Short.MAX_VALUE)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addComponent(lblWhiteplayer)
 						.addComponent(lblBlackplayer)
 						.addComponent(lblThinkingTime))
 					.addGap(38)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(comboBox_2, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(comboBox_1, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(comboBox, 0, 222, Short.MAX_VALUE))
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblMin)
+							.addPreferredGap(ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+							.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblSec)
+							.addGap(4))
+						.addComponent(comboBox_1, 0, 277, Short.MAX_VALUE)
+						.addComponent(comboBox, 0, 277, Short.MAX_VALUE))
 					.addGap(51)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addComponent(btnConfirm_1)
@@ -162,12 +191,15 @@ public class Page extends JFrame {
 					.addGap(46)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblThinkingTime)
-						.addComponent(comboBox_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblMin)
+						.addComponent(lblSec)
+						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(66)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnStart)
 						.addComponent(btnBack))
-					.addContainerGap(253, Short.MAX_VALUE))
+					.addContainerGap(226, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
