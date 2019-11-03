@@ -1311,7 +1311,6 @@ public class QuoridorController {
 	 
 	 
 	 
-	 
 	 /**
 	  * This method checks the clock of the current player to count down.
 	  * It returns true if the clock is counting down.
