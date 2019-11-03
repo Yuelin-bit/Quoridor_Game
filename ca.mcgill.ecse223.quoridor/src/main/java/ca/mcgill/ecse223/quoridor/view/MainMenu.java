@@ -35,6 +35,7 @@ public class MainMenu extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
 	public MainMenu() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 1000, 800);
@@ -43,17 +44,25 @@ public class MainMenu extends JFrame {
 		setContentPane(contentPane);
 		
 		JButton btnNewButton = new JButton("New Game");
+		MainMenu m = this;
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Page page = new Page();
-				page.setVisible(true);
+				Page p = new Page();
+				p.setVisible(true);
 				setVisible(false);
 			}
 		});
 		
-		JButton btnNewButton_1 = new JButton("New button");
+		JButton btnNewButton_1 = new JButton("");
 		
-		JButton btnNewButton_2 = new JButton("New button");
+		JButton btnNewButton_2 = new JButton("Register");
+		
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Registeration r = new Registeration();
+				r.setVisible(true);
+			}
+		});
 		
 		JButton btnNewButton_3 = new JButton("New button");
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
