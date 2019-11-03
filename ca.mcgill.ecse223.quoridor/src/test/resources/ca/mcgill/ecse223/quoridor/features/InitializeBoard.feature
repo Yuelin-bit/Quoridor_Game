@@ -1,3 +1,4 @@
+    
 Feature: Initialize Board
   As a player, I want to see the Quoridor board in its initial position and 
   my stock of walls and my clock is counting down 
