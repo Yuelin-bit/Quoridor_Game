@@ -1106,6 +1106,15 @@ public class QuoridorController {
 		if (u == null) {
 			throw new IllegalArgumentException("User: " + name + " does NOT exist");
 		}
+		if (player == "b") {
+			if (QuoridorApplication.getQuoridor().getCurrentGame().hasBlackPlayer()) {
+				return setUserName(QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer(), name);
+			}
+		} else {
+			if (QuoridorApplication.getQuoridor().getCurrentGame().hasWhitePlayer()) {
+				return setUserName(QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer(), name);
+			}
+		}
 		Player p = new Player(new Time(0), u, 9, Direction.Horizontal);
 		if (player == "b") {
 			return QuoridorApplication.getQuoridor().getCurrentGame().setBlackPlayer(p);
@@ -1138,25 +1147,25 @@ public class QuoridorController {
 		return player.setUser(u);
 	}
 	
-	/**
-	 * This is a static method which takes a player. Then it will allows the player to select
-	 * his/her user name. It will return a boolean value to indicate if the name is updated 
-	 * successfully.
-	 * 
-	 * @author Pengnan Fan
-	 * @param game The game of the specific white player
-	 * @param name The new name 
-	 * @return A boolean value to indicate if the name of the user has been updated
-	 */
-	public static boolean selectUserName(Player player) {
-		//TODO: Need support from front end
-		if (player == null) {
-			throw new IllegalArgumentException("Player is invalid");
-		}
-		//Receive a name from front end
-		return setUserName(player, "name");
-		//throw new UnsupportedOperationException();
-	}
+//	/**
+//	 * This is a static method which takes a player. Then it will allows the player to select
+//	 * his/her user name. It will return a boolean value to indicate if the name is updated 
+//	 * successfully.
+//	 * 
+//	 * @author Pengnan Fan
+//	 * @param game The game of the specific white player
+//	 * @param name The new name 
+//	 * @return A boolean value to indicate if the name of the user has been updated
+//	 */
+//	public static boolean selectUserName(Player player) {
+//		//TODO: Need support from front end
+//		if (player == null) {
+//			throw new IllegalArgumentException("Player is invalid");
+//		}
+//		//Receive a name from front end
+//		return setUserName(player, "name");
+//		//throw new UnsupportedOperationException();
+//	}
 	
 //	/**
 //	 * This is a static method which link an user u and a player p. It will return a boolean
