@@ -497,6 +497,13 @@ public class QuoridorController {
 		
 	}
 	
+	
+	private static boolean overwriteBoolean = false;
+	
+	public static boolean getOverwriteBoolean() {
+		return overwriteBoolean ;
+	}
+	
 	/**
 	 * Feature:SavePosition
 	 * 
@@ -505,32 +512,11 @@ public class QuoridorController {
 	 * @return boolean that indicates the user confirms to overwrite existing File
 	 */
 	//GUI
-	public static boolean overwriteExistingFile() {
-		return true;
+	public static void overwriteExistingFile() {
+		overwriteBoolean = true ;
 	}
 	
-	/**
-	 * Feature:SavePosition
-	 * 
-	 * @author Bozhong Lu
-	 * @param none
-	 * @return boolean that indicates the user cancels to overwrite existing File
-	 */
-	//GUI
-	public static boolean cancelOverwriteExistingFile() {
-		return true;
-	}
 	
-//	/**
-//	 * Feature:ValidatePosition
-//	 * 
-//	 * @author Bozhong Lu
-//	 * @param none
-//	 * @return boolean
-//	 */
-//	public static boolean validatePosition() {
-//		throw new UnsupportedOperationException();
-//	}
 	
 	/**
 	 * Feature:SavePosition
@@ -581,18 +567,14 @@ public class QuoridorController {
 		String filePath = gameFile.getCanonicalPath();
 		File gameFilePath = new File(filePath);
 		gameFilePath.delete();
-	}
-	
-	
-	
-	
+	}	
 	
 	
 	
 	
 	
 	/**
-	 * Feature:laod position
+	 * Feature:load position
 	 * This method load a game position by input a filename
 	 * 
 	 * @param filename

@@ -761,18 +761,19 @@ public class CucumberStepDefinitions {
 		}
 
 		@When("The user confirms to overwrite existing file")
-		public void the_user_confirms_to_overwrite_existing_file() {
+		public void the_user_confirms_to_overwrite_existing_file() throws IOException{
 		    // Write code here that turns the phrase above into concrete actions
-			if(QuoridorController.overwriteExistingFile()) {
-				String filename = "save_game_test.dat" ;
-				if(QuoridorController.checkFileExistence(filename)) {
-					QuoridorController.deleteFile(filename);
-					QuoridorController.creatNewFile(filename);
-					QuoridorController.saveGame(filename);
-				}else if(!QuoridorController.checkFileExistence(filename)) {
-					QuoridorController.creatNewFile(filename);
-					QuoridorController.saveGame(filename);
-				}
+			QuoridorController.overwriteExistingFile();
+			Assert.assertEquals(true , QuoridorController.getOverwriteBoolean());
+			
+			String filename = "save_game_test.dat" ;
+			if(QuoridorController.checkFileExistence(filename)) {
+				QuoridorController.deleteFile(filename);
+				QuoridorController.creatNewFile(filename);
+				QuoridorController.saveGame(filename);
+			}else if(!QuoridorController.checkFileExistence(filename)) {
+				QuoridorController.creatNewFile(filename);
+				QuoridorController.saveGame(filename);
 			}
 		    
 		}
@@ -790,7 +791,7 @@ public class CucumberStepDefinitions {
 		@When("The user cancels to overwrite existing file")
 		public void the_user_cancels_to_overwrite_existing_file() {
 		    // Write code here that turns the phrase above into concrete actions
-			Assert.assertEquals(true , QuoridorController.cancelOverwriteExistingFile());
+			Assert.assertEquals(false , QuoridorController.getOverwriteBoolean());
 		}
 
 		@Then("File {string} shall not be changed in the filesystem")
