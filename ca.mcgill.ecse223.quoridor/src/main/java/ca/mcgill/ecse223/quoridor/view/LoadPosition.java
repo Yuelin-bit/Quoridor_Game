@@ -59,6 +59,17 @@ public class LoadPosition extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
+		
+		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MainMenu m = new MainMenu();
+				m.setVisible(true);
+				setVisible(false);
+				dispose();
+			}
+		});
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -68,12 +79,14 @@ public class LoadPosition extends JFrame {
 							.addGap(420)
 							.addComponent(lblChooseGameTo))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(460)
-							.addComponent(btnNewButton))
-						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(378)
-							.addComponent(list, GroupLayout.PREFERRED_SIZE, 249, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(443, Short.MAX_VALUE))
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(btnNewButton)
+									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(btnBack, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE))
+								.addComponent(list, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 249, GroupLayout.PREFERRED_SIZE))))
+					.addContainerGap(425, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -83,8 +96,10 @@ public class LoadPosition extends JFrame {
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(list, GroupLayout.PREFERRED_SIZE, 314, GroupLayout.PREFERRED_SIZE)
 					.addGap(36)
-					.addComponent(btnNewButton)
-					.addContainerGap(155, Short.MAX_VALUE))
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnBack)
+						.addComponent(btnNewButton))
+					.addContainerGap(133, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}

@@ -49,6 +49,7 @@ public class MainMenu extends JFrame {
 				SelectName page = new SelectName();
 				page.setVisible(true);
 				setVisible(false);//close the mainMenu.
+				dispose();
 			}
 		});
 		
@@ -58,6 +59,7 @@ public class MainMenu extends JFrame {
 				LoadPosition loadposition = new LoadPosition();
 				loadposition.setVisible(true);
 				setVisible(false);
+				dispose();
 			}
 		});
 		
