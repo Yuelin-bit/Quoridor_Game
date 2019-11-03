@@ -1081,10 +1081,39 @@ public class QuoridorController {
 	 * 
 	 */
 	public static boolean initializeNewGame() {
-		Game g = new Game(GameStatus.Initializing, MoveMode.WallMove, QuoridorApplication.getQuoridor());
+		new Game(GameStatus.Initializing, MoveMode.WallMove, QuoridorApplication.getQuoridor());
 		return QuoridorApplication.getQuoridor().hasCurrentGame();
 	}
 
+	/**
+	 * This is a static method which takes a player and a new name, then set the latter as 
+	 * the name of the former. It will return a boolean value to indicate if the 
+	 * name is updated successfully.
+	 * 
+	 * @author Pengnan Fan
+	 * @param game The game of the specific white player
+	 * @param name The new name 
+	 * @return A boolean value to indicate if the name of the user has been updated
+	 */
+	public static boolean setUserName(String player, String name) {
+		if (player == null || player.trim().isEmpty()) {
+			throw new IllegalArgumentException("Player is invalid");
+		}
+		if (name == null || name.trim().length() == 0) {
+			throw new IllegalArgumentException("Invalid name");
+		}
+		User u = User.getWithName(name);
+		if (u == null) {
+			throw new IllegalArgumentException("User: " + name + " does NOT exist");
+		}
+		Player p = new Player(new Time(0), u, 9, Direction.Horizontal);
+		if (player == "b") {
+			return QuoridorApplication.getQuoridor().getCurrentGame().setBlackPlayer(p);
+		} else {
+			return QuoridorApplication.getQuoridor().getCurrentGame().setWhitePlayer(p);
+		}
+	}
+	
 	/**
 	 * This is a static method which takes a player and a new name, then set the latter as 
 	 * the name of the former. It will return a boolean value to indicate if the 
@@ -1104,7 +1133,7 @@ public class QuoridorController {
 		}
 		User u = User.getWithName(name);
 		if (u == null) {
-			u = new User(name, QuoridorApplication.getQuoridor());
+			throw new IllegalArgumentException("User: " + name + " does NOT exist");
 		}
 		return player.setUser(u);
 	}
