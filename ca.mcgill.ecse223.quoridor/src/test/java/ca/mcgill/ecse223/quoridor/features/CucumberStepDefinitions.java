@@ -131,8 +131,13 @@ public class CucumberStepDefinitions {
 	@Given("^A new game is initializing$")
 	public void aNewGameIsInitializing() throws Throwable {
 		initQuoridorAndBoard();
-		ArrayList<Player> players = createUsersAndPlayers("user1", "user2");
-		new Game(GameStatus.Initializing, MoveMode.PlayerMove, QuoridorApplication.getQuoridor());
+		QuoridorController.initializeNewGame();
+		quoridor = QuoridorApplication.getQuoridor();
+		this.playerList = createUsersAndPlayers("default_black", "default_white");
+		
+		game = quoridor.getCurrentGame();
+		game.setBlackPlayer(this.playerList.get(0));
+		game.setWhitePlayer(this.playerList.get(1));
 	}
 	
 
@@ -990,14 +995,7 @@ public class CucumberStepDefinitions {
 
 		@Then("The game shall become ready to start")
 		public void the_game_shall_become_ready_to_start() {
-			assertEquals(true, this.quoridor.hasCurrentGame());
-			assertEquals(true, this.game.hasBlackPlayer());
-			assertEquals(true, this.game.hasWhitePlayer());
-			assertEquals(MoveMode.WallMove, this.game.getMoveMode());
-			assertEquals(false, this.game.hasMoves());
-			assertEquals(false, this.game.hasPositions());
-			assertEquals(false, this.game.hasCurrentPosition());
-			//assertEquals(true, this.quoridor.hasBoard());
+			assertEquals(true, QuoridorController.verifyGameIsReady());
 		}
 		
 		@Given("The game is ready to start")
@@ -1028,15 +1026,15 @@ public class CucumberStepDefinitions {
 		// ProvideSelectUserName
 		// ***********************************************
 		// Scenario: Select existing user name
-		@Given("A new game is initializing")
-		public void a_new_game_is_initializing() {
-			QuoridorController.initializeNewGame();
-			quoridor = QuoridorApplication.getQuoridor();
-			this.playerList = createUsersAndPlayers("default_black", "default_white");
-			game = quoridor.getCurrentGame();
-			game.setBlackPlayer(this.playerList.get(0));
-			game.setWhitePlayer(this.playerList.get(1));
-		}
+//		@Given("A new game is initializing")
+//		public void a_new_game_is_initializing() {
+//			QuoridorController.initializeNewGame();
+//			quoridor = QuoridorApplication.getQuoridor();
+//			this.playerList = createUsersAndPlayers("default_black", "default_white");
+//			game = quoridor.getCurrentGame();
+//			game.setBlackPlayer(this.playerList.get(0));
+//			game.setWhitePlayer(this.playerList.get(1));
+//		}
 		
 		@Given("Next player to set user name is {string}")
 		public void next_player_to_set_user_name_is(String string) {
