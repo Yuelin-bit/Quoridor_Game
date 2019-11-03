@@ -7,7 +7,9 @@ import ca.mcgill.ecse223.quoridor.view.MainMenu;
 public class QuoridorApplication {
 
 	private static Quoridor quoridor;
-	static MainMenu mainMenu;
+
+	private static MainMenu mainMenu;
+
 	public static void main(String[] args) {
 		// start UI
 		mainMenu = new MainMenu();
@@ -24,5 +26,14 @@ public class QuoridorApplication {
 		}
  		return quoridor;
 	}
+	
+	/*public static void mainMenu() {
+		setAllInvisable();
+		mainMenu.setVisible(true);
+	}
+	
+	private static void setAllInvisable() {
+		
+	}*/
 
 }

@@ -15,7 +15,15 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
 
 public class LoadPosition extends JFrame {
 
@@ -60,6 +68,23 @@ public class LoadPosition extends JFrame {
 			}
 		});
 		
+
+		JComboBox<String> FileName = new JComboBox<String>();
+
+				try (Stream<Path> walk = Files.walk(Paths.get(""))) {
+
+					List<String> result = walk.map(x -> x.toString())
+							.filter(f -> f.endsWith(".dat")).collect(Collectors.toList());
+
+					for (String file : result) {
+						FileName.addItem(file);
+					}
+
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}	
+
+
 		JButton btnBack = new JButton("Back");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -69,7 +94,7 @@ public class LoadPosition extends JFrame {
 				dispose();
 			}
 		});
-		
+
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)

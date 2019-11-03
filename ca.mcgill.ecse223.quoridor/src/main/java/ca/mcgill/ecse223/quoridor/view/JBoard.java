@@ -199,7 +199,7 @@ public class JBoard extends JFrame {
 				}
 				if ((e.getKeyChar()=='w')||(e.getKeyCode() == KeyEvent.VK_UP)) {
 
-					QuoridorController.MoveWall("up");
+					//QuoridorController.MoveWall("up");
 					int x = jwall.getLocation().x;
 					int y = jwall.getLocation().y;
 					if(((x)>=120)&&((x)<=540)&&((y-60)>=60)&&((y-60)<=480))
@@ -207,7 +207,7 @@ public class JBoard extends JFrame {
 				}
 				if ((e.getKeyChar()=='a')||(e.getKeyCode() == KeyEvent.VK_LEFT)) {
 
-					QuoridorController.MoveWall("left");
+					//QuoridorController.MoveWall("left");
 					int x = jwall.getLocation().x;
 					int y = jwall.getLocation().y;
 					if(((x-60)>=120)&&((x-60)<=540)&&((y)>=60)&&((y)<=480))
@@ -215,7 +215,7 @@ public class JBoard extends JFrame {
 				}
 				if ((e.getKeyChar()=='s')||(e.getKeyCode() == KeyEvent.VK_DOWN)) {
 
-					QuoridorController.MoveWall("down");
+					//QuoridorController.MoveWall("down");
 					int x = jwall.getLocation().x;
 					int y = jwall.getLocation().y;
 					if(((x)>=120)&&((x)<=540)&&((y+60)>=60)&&((y+60)<=480))
@@ -223,7 +223,7 @@ public class JBoard extends JFrame {
 				}
 				if ((e.getKeyChar()=='d')||(e.getKeyCode() == KeyEvent.VK_RIGHT)) {
 	
-					QuoridorController.MoveWall("right");
+					//QuoridorController.MoveWall("right");
 					int x = jwall.getLocation().x;
 					int y = jwall.getLocation().y;
 					if(((x+60)>=120)&&((x+60)<=540)&&((y)>=60)&&((y)<=480))
