@@ -1202,98 +1202,6 @@ public class QuoridorController {
 		}
 	}
 	
-//	/**
-//	 * This is a static method which takes a player and a new name, then set the latter as 
-//	 * the name of the former. It will return a boolean value to indicate if the 
-//	 * name is updated successfully.
-//	 * 
-//	 * @author Pengnan Fan
-//	 * @param game The game of the specific white player
-//	 * @param name The new name 
-//	 * @return A boolean value to indicate if the name of the user has been updated
-//	 */
-//	public static boolean setUserName(Player player, String name) {
-//		if (player == null) {
-//			throw new IllegalArgumentException("Player is invalid");
-//		}
-//		if (name == null || name.trim().length() == 0) {
-//			throw new IllegalArgumentException("Invalid name");
-//		}
-//		User u = User.getWithName(name);
-//		if (u == null) {
-//			u = new User(name, QuoridorApplication.getQuoridor());
-//		}
-//		return player.setUser(u);
-//	}
-	
-//	/**
-//	 * This is a static method which takes a player. Then it will allows the player to select
-//	 * his/her user name. It will return a boolean value to indicate if the name is updated 
-//	 * successfully.
-//	 * 
-//	 * @author Pengnan Fan
-//	 * @param game The game of the specific white player
-//	 * @param name The new name 
-//	 * @return A boolean value to indicate if the name of the user has been updated
-//	 */
-//	public static boolean selectUserName(Player player) {
-//		//TODO: Need support from front end
-//		if (player == null) {
-//			throw new IllegalArgumentException("Player is invalid");
-//		}
-//		//Receive a name from front end
-//		return setUserName(player, "name");
-//		//throw new UnsupportedOperationException();
-//	}
-	
-//	/**
-//	 * This is a static method which link an user u and a player p. It will return a boolean
-//	 * value to suggest if it is successful.
-//	 * 
-//   * @author Pengnan Fan
-//	 * @param u The user to link
-//	 * @param p The player to link
-//	 * @return A boolean value to suggest if it is successful.
-//	 */
-//	public static boolean linkUserAndPlayer(User u, Player p) {
-//		//TODO: To be implemented
-//		p.setUser(u);
-//		throw new UnsupportedOperationException();
-//	}
-	
-//	/**
-//	 * This is a static method which takes two inputs, a game and a player. It will set
-//	 * the player to be the next one to play of the game. It will return a boolean to
-//	 * suggest it is successful.
-//	 * 
-//	 * @author Pengnan Fan
-//	 * @param g The game to change the player
-//	 * @param p The player to be set as the next player
-//	 * @return A boolean variable to suggest if it is successful
-//	 */
-//	public static boolean setNextPlayer(Game g, Player p) {
-//		//TODO: To be implemented
-//		throw new UnsupportedOperationException();
-//	}
-	
-//	/**
-//	 * This is a static method which verify if a game is ready to start. If so, it 
-//	 * will set the status as ReadyToStart. It will return a boolean value to suggest
-//	 * if it is successful.
-//	 * 
-//	 * @author Pengnan Fan
-//	 * @param g The game to be verified.
-//	 * @return A boolean variable to suggest if it is successful
-//	 */
-//	public static boolean verifyNewGame() {
-//		//TODO: To be implemented
-//		Game g = QuoridorApplication.getQuoridor().getCurrentGame();
-//		if (g == null) {
-//			throw new IllegalArgumentException("There is no game");
-//		}
-//		return g.getGameStatus().equals(GameStatus.ReadyToStart);
-//	}
-	
 	/**
 	  * This method checks the clock of the current player to count down.
 	  * It returns true if the clock is counting down.
@@ -1304,6 +1212,44 @@ public class QuoridorController {
 	  */ 
 	 public static boolean clockIsCountingDown(Player player) {
 	   throw new UnsupportedOperationException();
+	 }
+	 
+	 /**
+	  * This is a method that tells if the game is ready to start.
+	  * If so, the GameStatus will be changed to ready to start
+	  * and return true
+	  * 
+	  * @author Pengnan Fan
+	  * @return A flag indicating if the game is read to start
+	  */
+	 public static boolean verifyGameIsReady() {
+		 Game g = QuoridorApplication.getQuoridor().getCurrentGame();
+		 if (g == null) {
+			 return false;
+		 }
+		 if (!g.hasBlackPlayer()) {
+			 return false;
+		 }
+		 if(!g.hasWhitePlayer()) {
+			 return false;
+		 }
+		 if(!g.getMoveMode().equals(MoveMode.WallMove)) {
+			return false;
+		 }
+		 if(g.hasMoves()) {
+			 return false;
+		 }
+		 if(g.hasPositions()) {
+			 return false;
+		 }
+		 if(g.hasCurrentPosition()) {
+			 return false;
+		 }
+		 if(!QuoridorApplication.getQuoridor().hasBoard()) {
+			 return false;
+		 }
+		 g.setGameStatus(GameStatus.ReadyToStart);
+		 return true;
 	 }
 	 
 	 
