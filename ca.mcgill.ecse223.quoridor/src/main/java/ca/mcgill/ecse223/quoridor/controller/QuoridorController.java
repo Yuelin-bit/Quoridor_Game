@@ -272,38 +272,89 @@ public class QuoridorController {
 	
 	
 	/**
-	 * Feature: RotateWall
-	 * 
-	 * After this method, these two actions should be done
-	 * The wall shall be rotated over the board to {string}
-	 * A wall move candidate shall exist with {string} at position \\({int}, {int})
-	 * 
-	 * @param WallMove
-	 * @author Yujing Yang
-	 * @return boolean
-	 */
+	  * Feature: RotateWall
+	  * 
+	  * After this method, these two actions should be done
+	  * The wall shall be rotated over the board to {string}
+	  * A wall move candidate shall exist with {string} at position \\({int}, {int})
+	  * 
+	  * @param WallMove
+	  * @author Yujing Yang
+	  * @return boolean
+	  */
 
-	public static boolean FlipWall(WallMove wallmove) {	
-		throw new UnsupportedOperationException();
-	}
+	 public static boolean flipWall() { 
+	  //Player currentPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
+	  Game currentGame = QuoridorApplication.getQuoridor().getCurrentGame();
+	  Tile originalTail = currentGame.getWallMoveCandidate().getTargetTile();
+	  if (currentGame.getWallMoveCandidate().getWallDirection()==Direction.Horizontal) {
+	   QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().setWallDirection(Direction.Vertical);
+	   QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().setTargetTile(originalTail);
+	   return false;
+	  }
+	  if (currentGame.getWallMoveCandidate().getWallDirection()==Direction.Vertical) {
+	   QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().setWallDirection(Direction.Horizontal);
+	   QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().setTargetTile(originalTail);
+	   return true;
+	  }  
+	  return false;
+	 }
 
-	/**
-	 * Feature: GrabWall
-	 * 
-	 * After this method, these two actions should be done
-	 * A wall move candidate shall be created at initial position
-	 * I shall have a wall in my hand over the board
-	 * The wall in my hand shall disappear from my stock
-	 * 
-	 * @param Wall
-	 * @author Yujing Yang
-	 * @return boolean
-	 */
-	
-	public static boolean GrabWall(Wall GrabbedWall) {	
-		throw new UnsupportedOperationException();
-	}
+	 /**
+	  * Feature: GrabWall
+	  * 
+	  * After this method, these two actions should be done
+	  * A wall move candidate shall be created at initial position
+	  * I shall have a wall in my hand over the board
+	  * The wall in my hand shall disappear from my stock
+	  * 
+	  * @param Wall
+	  * @author Yujing Yang
+	  * @return boolean
+	  */
+	 
+	 public static boolean grabWall() { 
+	  
+	  Player currentPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove(); 
+	  
+	  if(currentPlayer.hasGameAsBlack()) {
+	   
+	   List<Wall> inStock = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsInStock();
+	   Wall grabbedWall = inStock.get(0);
+	//   QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().removeBlackWallsInStock(grabbedWall);
+	 
+	     Tile WallTile = new Tile(5, 5, QuoridorApplication.getQuoridor().getBoard());
+	     int a = QuoridorApplication.getQuoridor().getCurrentGame().getMoves().size();
+	     WallMove WallMove = new WallMove(a, (a + 1) / 2, currentPlayer, WallTile,
+	       QuoridorApplication.getQuoridor().getCurrentGame(), Direction.Vertical, grabbedWall); 
+	     QuoridorApplication.getQuoridor().getCurrentGame().setWallMoveCandidate(WallMove);
+	     QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().removeBlackWallsInStock(grabbedWall);
+	     return QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().setWallPlaced(grabbedWall);
+	    }
+	//   }     
+	//  }
+	  if(currentPlayer.hasGameAsWhite()) {
+	   
+	   
+	   List<Wall> inStock = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsInStock();
+	   Wall grabbedWall = inStock.get(0);
 
+	   QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().removeWhiteWallsInStock(grabbedWall);
+
+	     Tile WallTile = new Tile(5, 5, QuoridorApplication.getQuoridor().getBoard());
+	     int a = QuoridorApplication.getQuoridor().getCurrentGame().getMoves().size();
+	     WallMove WallMove = new WallMove(a+1, (a + 3) / 2, currentPlayer, WallTile,
+	       QuoridorApplication.getQuoridor().getCurrentGame(), Direction.Vertical, grabbedWall);
+	     QuoridorApplication.getQuoridor().getCurrentGame().setWallMoveCandidate(WallMove);
+	     return QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().setWallPlaced(grabbedWall);
+	    }   
+	//   }    
+	//  }
+	 // return QuoridorApplication.getQuoridor().getCurrentGame().setWallMoveCandidate(GrabbedWall.getMove());
+	  return false;
+	  
+	 // throw new UnsupportedOperationException();
+	 }
 	
 	
 	
