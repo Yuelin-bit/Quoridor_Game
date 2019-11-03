@@ -15,6 +15,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import javax.swing.JOptionPane;
+
 import ca.mcgill.ecse223.quoridor.QuoridorApplication;
 import ca.mcgill.ecse223.quoridor.controller.QuoridorController;
 import ca.mcgill.ecse223.quoridor.model.Game.GameStatus;
@@ -175,7 +177,9 @@ public class CucumberStepDefinitions {
 				}	
 		}
 		boolean b = QuoridorController.verifyOverlapped(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate());
-		Assert.assertEquals(false,b);
+		boolean c = QuoridorController.verifyOutsideTheBoard(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate());
+		boolean d = c||b;
+		Assert.assertEquals(false,d);
 	}
 
 	
@@ -258,7 +262,9 @@ public class CucumberStepDefinitions {
 				}	
 		}
 		boolean b = QuoridorController.verifyOverlapped(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate());
-		Assert.assertEquals(true,b);
+		boolean c = QuoridorController.verifyOutsideTheBoard(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate());
+		boolean d = c||b;
+		Assert.assertEquals(true,d);
 }
 	    
 	
@@ -267,12 +273,16 @@ public class CucumberStepDefinitions {
 	public void i_shall_be_notified_that_my_wall_move_is_invalid() {
 		//It could be GUI
 	    //TA said that I could fill this out later.
-		throw new cucumber.api.PendingException();
+		//JOptionPane.showMessageDialog(null, "It is illegal!!!");
+		
+		Assert.assertEquals(true,true);
+		//throw new cucumber.api.PendingException();
 	}
 
 	@Then("I shall have a wall in my hand over the board")
 	public void i_shall_have_a_wall_in_my_hand_over_the_board() {
 		// GUI-related feature -- TODO for later
+		
 		throw new cucumber.api.PendingException();
 	    
 	}
@@ -336,8 +346,9 @@ public class CucumberStepDefinitions {
 	@Given("The wall candidate is not at the {string} edge of the board")
 	public void the_wall_candidate_is_not_at_the_edge_of_the_board(String string) {
 		
-		int currentRow = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getRow();
+		/*int currentRow = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getRow();
 		int currentColumn = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getColumn();
+		
 		
 		if(string.equalsIgnoreCase("left")) {
 			if((currentColumn==1)) {
@@ -362,25 +373,22 @@ public class CucumberStepDefinitions {
 				Tile tileDown = new Tile(7,QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getColumn(),QuoridorApplication.getQuoridor().getBoard());
 				QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().setTargetTile(tileDown);
 			}
-		}
-		/*if((currentColumn<=1)||(currentColumn>=8)||(currentRow<=1)||(currentRow>=8))
-			 {
-				//  use the exist string and tile to create a new tile that is not at the edge, using method from controller method
-				Tile a = QuoridorController.getNonEdgeTile( string ,  QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile());
-				QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().setTargetTile(a);
-			 }	*/
+		}*/
+		boolean b = QuoridorController.verifyOnEdge(string);
+		Assert.assertEquals(false,b);
 		
 		
 	}
 
 	@When("I try to move the wall {string}")
 	public void i_try_to_move_the_wall(String string) {
-		try{
+		QuoridorController.MoveWall(string);
+		/*try{
 			QuoridorController.MoveWall(string);	
 		}
 		catch (RuntimeException e){
 			System.out.println("exceed the board");
-		}
+		}*/
 	    
 	}
 
@@ -398,7 +406,6 @@ public class CucumberStepDefinitions {
 
 	@Then("A wall move candidate shall exist with {string} at position \\({int}, {int})")
 	public void a_wall_move_candidate_shall_exist_with_at_position(String string, Integer int1, Integer int2) {
-		//Tile tile = new Tile(int1, int2, QuoridorApplication.getQuoridor().getBoard());
 		Direction dir;
 		if(string.equalsIgnoreCase("vertical")) {
 			dir = Direction.Vertical;
@@ -406,7 +413,6 @@ public class CucumberStepDefinitions {
 		else {
 			dir = Direction.Horizontal;
 		}
-		//Assert.assertEquals(tile, QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile());
 		Assert.assertEquals(int1,Integer.valueOf(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getRow()));
 		Assert.assertEquals(int2,Integer.valueOf(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getColumn()));
 		Assert.assertEquals(dir, QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getWallDirection());    
@@ -416,7 +422,7 @@ public class CucumberStepDefinitions {
 
 	@Given("The wall candidate is at the {string} edge of the board")
 	public void the_wall_candidate_is_at_the_edge_of_the_board(String string) {
-		int currentRow = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getRow();
+		/*int currentRow = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getRow();
 		int currentColumn = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getColumn();
 
 		
@@ -443,7 +449,9 @@ public class CucumberStepDefinitions {
 				Tile tileDown = new Tile(8,QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getColumn(),QuoridorApplication.getQuoridor().getBoard());
 				QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().setTargetTile(tileDown);
 			}
-		}
+		}*/
+		boolean b = QuoridorController.verifyOnEdge(string);
+		Assert.assertEquals(true,b);
 	}
 	
 	@Then("I shall be notified that my move is illegal")

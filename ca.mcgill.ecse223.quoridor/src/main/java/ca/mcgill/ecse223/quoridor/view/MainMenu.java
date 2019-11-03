@@ -1,16 +1,24 @@
 package ca.mcgill.ecse223.quoridor.view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Graphics;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.Icon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
+import javax.swing.JSeparator;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class MainMenu extends JFrame {
 
@@ -43,10 +51,25 @@ public class MainMenu extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
+		
+		
+		
+		/*JPanel pnlMain=new JPanel(); //创建面板pnlMain。 
+		pnlMain.add(contentPane);
+		Icon i =new ImageIcon(MainMenu.class.getResource("/ca/mcgill/ecse223/quoridor/resources/timg.jpeg"));
+		JLabel lb = new JLabel(i);
+		this.getLayeredPane().add(lb, new Integer(Integer.MIN_VALUE)); 
+		lb.setBounds(0, 0,i.getIconWidth(),i.getIconHeight()); 
+		contentPane.setOpaque(false);
+		pnlMain.add(lb);*/
+		
+		
+		
 		JButton btnNewButton = new JButton("New Game");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				SelectName page = new SelectName();
+				//Page page = new Page();
 				page.setVisible(true);
 				setVisible(false);//close the mainMenu.
 			}
@@ -62,6 +85,13 @@ public class MainMenu extends JFrame {
 		});
 		
 		JButton btnNewButton_2 = new JButton("Register");
+
+		
+		
+		
+		
+		
+		//JButton btnNewButton_1 = new JButton("New button");
 		
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -97,6 +127,15 @@ public class MainMenu extends JFrame {
 					.addContainerGap(128, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
+		
+	
 	}
-
+	
+	 public void paintComponent(Graphics g) {
+		   int x = 0, y = 0;
+		   ImageIcon icon = new ImageIcon("/ca.mcgill.ecse223.quoridor/src/main/java/ca/mcgill/ecse223/quoridor/resources/tmg.jpeg");// 003.jpg是测试图片在项目的根目录下
+		   g.drawImage(icon.getImage(), x, y, getSize().width,
+		     getSize().height, this);// 图片会自动缩放
+//		    g.drawImage(icon.getImage(), x, y,this);//图片不会自动缩放
+		  }
 }
