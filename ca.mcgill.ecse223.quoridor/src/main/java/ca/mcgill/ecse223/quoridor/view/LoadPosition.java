@@ -12,6 +12,10 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JButton;
+import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class LoadPosition extends JFrame {
 
@@ -46,8 +50,15 @@ public class LoadPosition extends JFrame {
 		setContentPane(contentPane);
 		
 		JLabel lblChooseGameTo = new JLabel("Choose Game to Load");
+		lblChooseGameTo.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JList list = new JList();
+		
+		JButton btnNewButton = new JButton("Load");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -57,9 +68,12 @@ public class LoadPosition extends JFrame {
 							.addGap(420)
 							.addComponent(lblChooseGameTo))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(384)
+							.addGap(460)
+							.addComponent(btnNewButton))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(378)
 							.addComponent(list, GroupLayout.PREFERRED_SIZE, 249, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(415, Short.MAX_VALUE))
+					.addContainerGap(443, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -68,7 +82,9 @@ public class LoadPosition extends JFrame {
 					.addComponent(lblChooseGameTo)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(list, GroupLayout.PREFERRED_SIZE, 314, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(178, Short.MAX_VALUE))
+					.addGap(36)
+					.addComponent(btnNewButton)
+					.addContainerGap(155, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}

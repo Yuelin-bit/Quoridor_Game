@@ -35,6 +35,7 @@ public class MainMenu extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
 	public MainMenu() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 1000, 800);
@@ -60,7 +61,14 @@ public class MainMenu extends JFrame {
 			}
 		});
 		
-		JButton btnNewButton_2 = new JButton("New button");
+		JButton btnNewButton_2 = new JButton("Register");
+		
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Registeration r = new Registeration();
+				r.setVisible(true);
+			}
+		});
 		
 		JButton btnNewButton_3 = new JButton("New button");
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
