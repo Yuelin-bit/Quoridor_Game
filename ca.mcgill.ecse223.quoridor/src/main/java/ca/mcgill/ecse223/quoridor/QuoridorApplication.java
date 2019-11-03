@@ -7,6 +7,7 @@ import ca.mcgill.ecse223.quoridor.view.MainMenu;
 public class QuoridorApplication {
 
 	private static Quoridor quoridor;
+
 	private static MainMenu mainMenu;
 
 	public static void main(String[] args) {

@@ -1,4 +1,3 @@
-
 package ca.mcgill.ecse223.quoridor.view;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -24,6 +23,7 @@ import javax.swing.JButton;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.Font;
 
 public class SelectName extends JFrame {
 
@@ -51,22 +51,20 @@ public class SelectName extends JFrame {
 	 * Create the frame.
 	 */
 	public SelectName() {
+		setTitle("New Game");
 		setBackground(Color.PINK);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(0, 0, 1080, 720);
+		setBounds(0, 0, 760, 612);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.PINK);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		JLabel lblSelectPlayerName = new JLabel("Select Player Name");
+		JLabel lblWhiteplayer = new JLabel("White Player");
+		lblWhiteplayer.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
-		JLabel lblWhiteplayer = new JLabel("Whiteplayer");
-		
-		JLabel lblBlackplayer = new JLabel("Blackplayer");
-		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setEditable(true);
+		JLabel lblBlackplayer = new JLabel("Black Player");
+		lblBlackplayer.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
 		List<User> us = QuoridorApplication.getQuoridor().getUsers();
 		String[] names = new String[us.size()];
@@ -75,30 +73,6 @@ public class SelectName extends JFrame {
 			names[idx++] = u.getName();
 		}
 		
-		comboBox.setModel(new DefaultComboBoxModel(names));
-		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setEditable(true);
-
-		
-		comboBox_1.setModel(new DefaultComboBoxModel(names));
-		
-		JButton btnConfirm = new JButton("Confirm");
-		
-		btnConfirm.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.print(String.valueOf(comboBox.getSelectedItem()));
-			}
-		});
-		
-		JButton btnConfirm_1 = new JButton("Confirm");
-		
-		btnConfirm_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.print(String.valueOf(comboBox_1.getSelectedItem()));
-			}
-		});
-		
 		JButton btnBack = new JButton("Back");
 		
 		btnBack.addActionListener(new ActionListener() {
@@ -106,10 +80,12 @@ public class SelectName extends JFrame {
 				MainMenu m = new MainMenu();
 				m.setVisible(true);
 				setVisible(false);
+				dispose();
 			}
 		});
 
 		JLabel lblThinkingTime = new JLabel("Thinking Time");
+		lblThinkingTime.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
 		textField = new JTextField();
 		textField.setColumns(10);
@@ -121,9 +97,52 @@ public class SelectName extends JFrame {
 		JLabel lblMin = new JLabel("Minute");		
 		JLabel lblSec = new JLabel("Second");
 		JButton btnStart = new JButton("Start");
+		btnStart.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Board board = new Board();
+				board.setVisible(true);
+				setVisible(false);
+			}
+		});
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(names));
+		comboBox.setToolTipText("");
+		comboBox.setEditable(true);
+		
+		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setEditable(true);
+		comboBox_1.setModel(new DefaultComboBoxModel(names));
+		
+		JLabel lblNewLabel = new JLabel();
+		lblNewLabel.setForeground(Color.RED);
+		
+		JLabel lblUserNameDne = new JLabel();
+		lblUserNameDne.setForeground(Color.RED);
+		
+		JButton btnConfirm = new JButton("Confirm");
+		btnConfirm.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//Check if two names are not equal
+				lblNewLabel.setVisible(false);
+				lblUserNameDne.setVisible(false);
+				String white = String.valueOf(comboBox.getSelectedItem());
+				String black = String.valueOf(comboBox_1.getSelectedItem());
+				boolean wdne = !User.hasWithName(white);
+				boolean bdne = !User.hasWithName(black);
+				if (wdne) {
+					lblNewLabel.setText("Invalid White User Selection: "+ white + " does NOT exist");
+					lblNewLabel.setVisible(true);
+				}
+				if (bdne) {
+					lblUserNameDne.setText("Invalid Black User Selection: "+ black + " does NOT exist");
+					lblUserNameDne.setVisible(true);
+				}
+				if(wdne || bdne) {
+					return;
+				}
 				Integer min = 3;
 				Integer sec = 0; 
 				if(!textField.getText().equals("")) {
@@ -134,79 +153,74 @@ public class SelectName extends JFrame {
 				}
 			//	QuoridorController.setTotalThinkingTime(min, sec);
 			//  QuoridorController.initializeBoard();
-				Board board = new Board();
-				board.setVisible(true);
-				setVisible(false);
+				QuoridorApplication.getQuoridor();
 			}
 		});
 
-		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(452)
-					.addComponent(lblSelectPlayerName)
-					.addContainerGap(434, Short.MAX_VALUE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(375)
-					.addComponent(btnStart)
-					.addGap(36)
-					.addComponent(btnBack)
-					.addContainerGap(491, Short.MAX_VALUE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(217, Short.MAX_VALUE)
+					.addGap(56)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addComponent(lblWhiteplayer)
 						.addComponent(lblBlackplayer)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(btnBack)
+							.addGap(32)
+							.addComponent(btnConfirm, GroupLayout.PREFERRED_SIZE, 157, GroupLayout.PREFERRED_SIZE))
 						.addComponent(lblThinkingTime))
-					.addGap(38)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblMin)
-							.addPreferredGap(ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-							.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblSec)
-							.addGap(4))
-						.addComponent(comboBox_1, 0, 277, Short.MAX_VALUE)
-						.addComponent(comboBox, 0, 277, Short.MAX_VALUE))
-					.addGap(51)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnConfirm_1)
-						.addComponent(btnConfirm))
-					.addGap(253))
+							.addComponent(lblUserNameDne, GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+							.addGap(235))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblNewLabel)
+								.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, 280, GroupLayout.PREFERRED_SIZE)
+								.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 280, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(textField, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+										.addComponent(btnStart, GroupLayout.PREFERRED_SIZE, 222, GroupLayout.PREFERRED_SIZE)
+										.addGroup(gl_contentPane.createSequentialGroup()
+											.addComponent(lblMin)
+											.addPreferredGap(ComponentPlacement.UNRELATED)
+											.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
+											.addPreferredGap(ComponentPlacement.UNRELATED)
+											.addComponent(lblSec)))))
+							.addContainerGap(121, Short.MAX_VALUE))))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(44)
-					.addComponent(lblSelectPlayerName)
-					.addGap(64)
+					.addGap(122)
+					.addComponent(lblNewLabel)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblWhiteplayer)
-						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnConfirm))
+						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(29)
+					.addComponent(lblUserNameDne)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblBlackplayer)
+						.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(52)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblBlackplayer)
-						.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnConfirm_1))
-					.addGap(46)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblThinkingTime)
-						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblMin)
-						.addComponent(lblSec)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(66)
+						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblSec))
+					.addGap(115)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnStart)
-						.addComponent(btnBack))
-					.addContainerGap(226, Short.MAX_VALUE))
+						.addComponent(btnBack)
+						.addComponent(btnConfirm)
+						.addComponent(btnStart))
+					.addContainerGap(80, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
