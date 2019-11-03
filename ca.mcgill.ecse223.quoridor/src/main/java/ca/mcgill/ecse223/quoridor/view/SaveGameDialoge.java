@@ -57,13 +57,15 @@ public class SaveGameDialoge extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				QuoridorController.overwriteExistingFile();
+				setVisible(false);
+				new MainMenu().setVisible(true);
 			}
 		});
 		
 		JButton btnNewButton_1 = new JButton("No");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
+				QuoridorController.cancelOverwriteExistingFile();
 			}
 		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);

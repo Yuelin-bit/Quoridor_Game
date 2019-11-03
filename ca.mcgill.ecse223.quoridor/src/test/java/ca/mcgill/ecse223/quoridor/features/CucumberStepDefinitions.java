@@ -797,6 +797,7 @@ public class CucumberStepDefinitions {
 		@When("The user cancels to overwrite existing file")
 		public void the_user_cancels_to_overwrite_existing_file() {
 		    // Write code here that turns the phrase above into concrete actions
+			QuoridorController.cancelOverwriteExistingFile();
 			Assert.assertEquals(false , QuoridorController.getOverwriteBoolean());
 		}
 
