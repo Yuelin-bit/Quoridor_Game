@@ -858,7 +858,7 @@ public class QuoridorController {
 	/**
 	 * Feature:ValidatePosition
 	 * This method validate if all the pawn and wall position at board 
-	 * is with the board boundary 
+	 * is within the board boundary 
 	 * 
 	 * @author Bozhong Lu
 	 * @return boolean
@@ -927,7 +927,23 @@ public class QuoridorController {
 					}
 				}
 			}
-			//Next Task : Check if the pawn is surrounded by walls after this WallMove. If it is surrounded, then WallMove invalid
+			//Check if the wall is within the boundary
+			int currentWallColumn = quoridor.getCurrentGame().getWallMoveCandidate().getTargetTile().getColumn();
+			int currentWallRow = quoridor.getCurrentGame().getWallMoveCandidate().getTargetTile().getRow();
+
+			if((currentWallColumn<1)) {
+				wallIsValid = false;
+			}
+			if((currentWallColumn>8)) {
+				wallIsValid = false;
+			}
+			if((currentWallRow<1)) {
+				wallIsValid = false;
+			}
+			if((currentWallRow>8)) {
+				wallIsValid = false;
+			}
+		//Next Task : Check if the pawn is surrounded by walls after this WallMove. If it is surrounded, then WallMove invalid
 		//Validate PawnMove	
 		}else if(quoridor.getCurrentGame().getMoveMode() == MoveMode.PlayerMove) {
 			
@@ -935,9 +951,22 @@ public class QuoridorController {
 			int blackPlayerRow = quoridor.getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
 			int whitePlayerColumn = quoridor.getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
 			int whitePlayerRow = quoridor.getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
-			
+			//check whether the position is already occupied by another player
 			if((blackPlayerColumn == whitePlayerColumn) && (blackPlayerRow == whitePlayerRow)) {
 				pawnIsValid = false ;
+			}
+			//check whether the position is within the boundary of the board
+			if((blackPlayerColumn<1)||(blackPlayerColumn>8)) {
+				pawnIsValid = false;
+			}
+			if((blackPlayerRow<1)||(blackPlayerRow>8)) {
+				pawnIsValid = false;
+			}
+			if((whitePlayerRow<1)||(whitePlayerRow>8)) {
+				pawnIsValid = false;
+			}
+			if((whitePlayerColumn<1)||(whitePlayerColumn>8)) {
+				pawnIsValid = false;
 			}
 			
 		} 
