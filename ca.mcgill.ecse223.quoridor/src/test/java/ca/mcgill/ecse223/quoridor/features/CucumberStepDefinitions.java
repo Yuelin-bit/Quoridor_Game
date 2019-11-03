@@ -767,7 +767,7 @@ public class CucumberStepDefinitions {
 		}
 
 		@When("The user confirms to overwrite existing file")
-		public void the_user_confirms_to_overwrite_existing_file() {
+		public void the_user_confirms_to_overwrite_existing_file() throws IOException {
 		    // Write code here that turns the phrase above into concrete actions
 			if(QuoridorController.overwriteExistingFile()) {
 				String filename = "save_game_test.dat" ;
