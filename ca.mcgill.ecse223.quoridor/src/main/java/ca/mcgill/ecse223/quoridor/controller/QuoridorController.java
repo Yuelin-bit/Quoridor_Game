@@ -502,7 +502,7 @@ public class QuoridorController {
 	 * 
 	 * @author Bozhong Lu
 	 * @param none
-	 * @return void
+	 * @return boolean that indicates the user confirms to overwrite existing File
 	 */
 	//GUI
 	public static boolean overwriteExistingFile() {
@@ -514,7 +514,7 @@ public class QuoridorController {
 	 * 
 	 * @author Bozhong Lu
 	 * @param none
-	 * @return void
+	 * @return boolean that indicates the user cancels to overwrite existing File
 	 */
 	//GUI
 	public static boolean cancelOverwriteExistingFile() {
