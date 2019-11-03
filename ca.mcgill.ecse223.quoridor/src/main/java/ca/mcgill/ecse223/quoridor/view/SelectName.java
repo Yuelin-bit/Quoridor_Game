@@ -101,16 +101,6 @@ public class SelectName extends JFrame {
 		
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Integer min = 3;
-				Integer sec = 0; 
-				if(!textField.getText().equals("")) {
-					min = Integer.parseInt(textField.getText());
-				}
-				if(!textField_1.getText().equals("")) {
-					sec = Integer.parseInt(textField_1.getText());
-				}
-			//	QuoridorController.setTotalThinkingTime(min, sec);
-			//  QuoridorController.initializeBoard();
 				Board board = new Board();
 				board.setVisible(true);
 				setVisible(false);
@@ -153,11 +143,16 @@ public class SelectName extends JFrame {
 				if(wdne || bdne) {
 					return;
 				}
-				//Time check
-//				if () {
-//					
-//				}
-				
+				Integer min = 3;
+				Integer sec = 0; 
+				if(!textField.getText().equals("")) {
+					min = Integer.parseInt(textField.getText());
+				}
+				if(!textField_1.getText().equals("")) {
+					sec = Integer.parseInt(textField_1.getText());
+				}
+			//	QuoridorController.setTotalThinkingTime(min, sec);
+			//  QuoridorController.initializeBoard();
 				QuoridorApplication.getQuoridor();
 			}
 		});
