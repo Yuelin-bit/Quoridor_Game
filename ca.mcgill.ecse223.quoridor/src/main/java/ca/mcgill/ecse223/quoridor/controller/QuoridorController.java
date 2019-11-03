@@ -21,6 +21,7 @@ import ca.mcgill.ecse223.quoridor.QuoridorApplication;
 import ca.mcgill.ecse223.quoridor.model.*;
 import ca.mcgill.ecse223.quoridor.model.Game.GameStatus;
 import ca.mcgill.ecse223.quoridor.model.Game.MoveMode;
+import ca.mcgill.ecse223.quoridor.view.JBoard;
 
 public class QuoridorController {
 	
@@ -157,6 +158,15 @@ public class QuoridorController {
 	{	
 		Tile t = wallmove.getTargetTile();
 		Player currentPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
+		
+		if(currentPlayer.hasGameAsBlack()) {
+			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().addBlackWallsOnBoard(wallmove.getWallPlaced());
+		}
+		
+		if(currentPlayer.hasGameAsWhite()) {
+			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().addWhiteWallsOnBoard(wallmove.getWallPlaced());
+		}
+		
 		if(currentPlayer.hasGameAsBlack()) {
 			Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
 			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(whitePlayer);
@@ -169,13 +179,7 @@ public class QuoridorController {
 		}
 	
 		
-		if(currentPlayer.hasGameAsBlack()) {
-			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().addBlackWallsOnBoard(wallmove.getWallPlaced());
-		}
-		
-		if(currentPlayer.hasGameAsWhite()) {
-			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().addWhiteWallsOnBoard(wallmove.getWallPlaced());
-		}
+	
 		
 	
 	}
@@ -229,28 +233,27 @@ public class QuoridorController {
 	public static void MoveWall(String string)
 	{	
 		try {
-			if(string.equalsIgnoreCase("left")) {
+			if((string.equalsIgnoreCase("left"))&&(QuoridorController.verifyOnEdge(string)==false)) {
 				Tile tileLeft = new Tile(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getRow()
 						,QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getColumn()-1,QuoridorApplication.getQuoridor().getBoard());
-				
+
 				QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().setTargetTile(tileLeft);	
 			}
 			
-			if(string.equalsIgnoreCase("right")) {
+			if((string.equalsIgnoreCase("right"))&&(QuoridorController.verifyOnEdge(string)==false)) {
 				Tile tileRight = new Tile(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getRow()
 						,QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getColumn()+1,QuoridorApplication.getQuoridor().getBoard());
-				
-				QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().setTargetTile(tileRight);
+					QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().setTargetTile(tileRight);
 			}
 		
-			if(string.equalsIgnoreCase("up")) {
+			if((string.equalsIgnoreCase("up"))&&(QuoridorController.verifyOnEdge(string)==false)) {
 				Tile tileUp = new Tile(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getRow()-1
 						,QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getColumn(),QuoridorApplication.getQuoridor().getBoard());
-				
+	
 				QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().setTargetTile(tileUp);
 			}
 		
-			if(string.equalsIgnoreCase("down")) {
+			if((string.equalsIgnoreCase("down"))&&(QuoridorController.verifyOnEdge(string)==false)) {
 				Tile tileDown = new Tile(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getRow()+1
 						,QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getColumn(),QuoridorApplication.getQuoridor().getBoard());
 				
@@ -258,7 +261,8 @@ public class QuoridorController {
 			}
 		}
 		catch(RuntimeException e){
-			JOptionPane.showMessageDialog(null, "It is illegal!!!");
+			QuoridorApplication.getJboard().notifyIllegal("It is illegal!");
+			//JOptionPane.showMessageDialog(null, "It is illegal!!!");
 			
 		}
 		

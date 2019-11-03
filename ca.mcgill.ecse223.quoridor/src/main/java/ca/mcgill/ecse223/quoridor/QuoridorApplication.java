@@ -8,6 +8,11 @@ public class QuoridorApplication {
 
 	private static Quoridor quoridor;
 	static MainMenu mainMenu;
+	private static JBoard jboard;
+	public static JBoard getJboard() {
+		return jboard;
+	}
+
 	public static void main(String[] args) {
 		// start UI
 		mainMenu = new MainMenu();

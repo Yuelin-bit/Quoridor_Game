@@ -51,9 +51,28 @@ public class JBoard extends JFrame {
 	private int WALL_INDEX = 0;
 	private static final int MAX_WALL =20;
 	private List <JWall> WallList = new ArrayList<JWall>(); 
+	private List <WallInStockT> WallInStockTList = new ArrayList<WallInStockT>(); 
 	private JWall jwall;
 	private JTextField textField;
 	private JTextField textField_1;
+	private JOptionPane errorHint;
+	private String error = null;
+	public String getError() {
+		return error;
+	}
+	public void setError(String error) {
+		this.error = error;
+	}
+	public JOptionPane getErrorHint() {
+		return errorHint;
+	}
+	public void setErrorHint(JOptionPane errorHint) {
+		this.errorHint = errorHint;
+	}
+	public void notifyIllegal(String string) {
+		this.setError(string);
+		this.errorHint.showMessageDialog(null, error);
+	}
 	/**
 	 * Launch the application.
 	 */
@@ -190,7 +209,8 @@ public class JBoard extends JFrame {
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if (e.getKeyChar()=='g') {					
+				if (e.getKeyChar()=='g') {	
+					//QuoridorController.grabWall();
 					mainLayerPanel.add(jwall);
 					jwall.setBackground(Color.GRAY);
 					jwall.setBounds(360, 300, 10, 110);
@@ -199,34 +219,34 @@ public class JBoard extends JFrame {
 				}
 				if ((e.getKeyChar()=='w')||(e.getKeyCode() == KeyEvent.VK_UP)) {
 
-					QuoridorController.MoveWall("up");
+					//QuoridorController.MoveWall("up");
 					int x = jwall.getLocation().x;
 					int y = jwall.getLocation().y;
-					if(((x)>=120)&&((x)<=540)&&((y-60)>=120)&&((y-60)<=540))
+					if(((x)>=120)&&((x)<=540)&&((y-60)>=60)&&((y-60)<=480))
 						jwall.setLocation(x, y-60);
 				}
 				if ((e.getKeyChar()=='a')||(e.getKeyCode() == KeyEvent.VK_LEFT)) {
 
-					QuoridorController.MoveWall("left");
+					//QuoridorController.MoveWall("left");
 					int x = jwall.getLocation().x;
 					int y = jwall.getLocation().y;
-					if(((x-60)>=120)&&((x-60)<=540)&&((y)>=120)&&((y)<=540))
+					if(((x-60)>=120)&&((x-60)<=540)&&((y)>=60)&&((y)<=480))
 						jwall.setLocation(x-60, y);
 				}
 				if ((e.getKeyChar()=='s')||(e.getKeyCode() == KeyEvent.VK_DOWN)) {
 
-					QuoridorController.MoveWall("down");
+					//QuoridorController.MoveWall("down");
 					int x = jwall.getLocation().x;
 					int y = jwall.getLocation().y;
-					if(((x)>=120)&&((x)<=540)&&((y+60)>=120)&&((y+60)<=540))
+					if(((x)>=120)&&((x)<=540)&&((y+60)>=60)&&((y+60)<=480))
 						jwall.setLocation(x, y+60);
 				}
 				if ((e.getKeyChar()=='d')||(e.getKeyCode() == KeyEvent.VK_RIGHT)) {
 	
-					QuoridorController.MoveWall("right");
+					//QuoridorController.MoveWall("right");
 					int x = jwall.getLocation().x;
 					int y = jwall.getLocation().y;
-					if(((x+60)>=120)&&((x+60)<=540)&&((y)>=120)&&((y)<=540))
+					if(((x+60)>=120)&&((x+60)<=540)&&((y)>=60)&&((y)<=480))
 						jwall.setLocation(x+60, y);
 					
 				}
@@ -246,16 +266,26 @@ public class JBoard extends JFrame {
 					      jwall.setLocation(jwall.getLocation().x-50 , jwall.getLocation().y+50);        
 					     }
 				}
-				if (e.getKeyChar()=='t') if (e.getKeyChar()=='t') {
-				     if(WALL_INDEX<MAX_WALL) {
+				if (e.getKeyChar()=='t') {
+					/*boolean overlapped = false;
+					for(int i=0; i<WallInStockTList.size();i++) {
+						if((jwall.getX()==WallInStockTList.get(i).getX())&&(jwall.getY()==WallInStockTList.get(i).getY()))
+							overlapped = true;
+						System.out.println("ee");
+					}*/
+				     if((WALL_INDEX<MAX_WALL)) {
 				         jwall.setBackground(Color.MAGENTA);
 				         mainLayerPanel.remove(jwall);
 				         mainLayerPanel.add(jwall);
 				         WALL_INDEX++;
 				         jwall = WallList.get(WALL_INDEX);
-		
-				        }
-				       }
+				         
+				         WallInStockT w = new WallInStockT();
+				         w.setX(jwall.getX());
+				         w.setY(jwall.getY());
+				         WallInStockTList.add(w);
+				      }
+				 }
 				
 			}
 		});

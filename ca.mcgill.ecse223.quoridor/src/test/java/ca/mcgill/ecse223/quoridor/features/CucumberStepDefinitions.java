@@ -18,6 +18,7 @@ import ca.mcgill.ecse223.quoridor.model.Direction;
 import ca.mcgill.ecse223.quoridor.model.Game;
 import ca.mcgill.ecse223.quoridor.model.Game.GameStatus;
 import ca.mcgill.ecse223.quoridor.model.Game.MoveMode;
+import ca.mcgill.ecse223.quoridor.view.JBoard;
 import ca.mcgill.ecse223.quoridor.model.GamePosition;
 import ca.mcgill.ecse223.quoridor.model.Player;
 import ca.mcgill.ecse223.quoridor.model.PlayerPosition;
@@ -491,8 +492,9 @@ public class CucumberStepDefinitions {
 	@Then("I shall be notified that my move is illegal")
 	public void i_shall_be_notified_that_my_move_is_illegal() {
 		// GUI-related feature -- TODO for later
-		throw new cucumber.api.PendingException();
-	   
+		
+		//Assert.assertEquals("It is illegal!",QuoridorApplication.getJboard().getError());
+		//throw new cucumber.api.PendingException();
 	}
 
 	////*******************************************************************************************************************************
