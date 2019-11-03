@@ -57,6 +57,8 @@ public class SaveGameDialoge extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				QuoridorController.overwriteExistingFile();
+				setVisible(false);
+				new MainMenu().setVisible(true);
 			}
 		});
 		

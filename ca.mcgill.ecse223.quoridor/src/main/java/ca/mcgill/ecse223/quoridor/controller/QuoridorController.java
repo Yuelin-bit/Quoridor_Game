@@ -3,6 +3,7 @@ package ca.mcgill.ecse223.quoridor.controller;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 //import org.apache.commons.lang3.time.StopWatch;
 
@@ -10,6 +11,9 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
@@ -497,6 +501,13 @@ public class QuoridorController {
 		
 	}
 	
+	
+	private static boolean overwriteBoolean = false;
+	
+	public static boolean getOverwriteBoolean() {
+		return overwriteBoolean ;
+	}
+	
 	/**
 	 * Feature:SavePosition
 	 * 
@@ -505,8 +516,8 @@ public class QuoridorController {
 	 * @return boolean that indicates the user confirms to overwrite existing File
 	 */
 	//GUI
-	public static boolean overwriteExistingFile() {
-		return true;
+	public static void overwriteExistingFile() {
+		overwriteBoolean = true ;
 	}
 	
 	/**
@@ -517,20 +528,11 @@ public class QuoridorController {
 	 * @return boolean that indicates the user cancels to overwrite existing File
 	 */
 	//GUI
-	public static boolean cancelOverwriteExistingFile() {
-		return true;
+	public static void cancelOverwriteExistingFile() {
+		overwriteBoolean = false ;
 	}
 	
-//	/**
-//	 * Feature:ValidatePosition
-//	 * 
-//	 * @author Bozhong Lu
-//	 * @param none
-//	 * @return boolean
-//	 */
-//	public static boolean validatePosition() {
-//		throw new UnsupportedOperationException();
-//	}
+	
 	
 	/**
 	 * Feature:SavePosition
@@ -538,15 +540,17 @@ public class QuoridorController {
 	 * @author Bozhong Lu
 	 * @param filename
 	 * @return boolean
+	 * @throws IOException 
 	 */
-	public static boolean fileIsUpdated(String filename) {
+	public static boolean fileIsUpdated(String filename) throws IOException {
 		boolean isUpdated = false ;
 		File gameFile = new File(filename); 
-		long lastChangedTime = gameFile.lastModified();
+		//long lastChangedTime = gameFile.lastModified();
 		long currentTime = System.currentTimeMillis();
-		System.out.println(currentTime);
-		System.out.println(lastChangedTime);
-		if(((currentTime - lastChangedTime)/1000) >= 60) {
+		Path gameFilePath = gameFile.toPath();
+	    BasicFileAttributes basicAttribs = Files.readAttributes(gameFilePath, BasicFileAttributes.class);
+		
+		if(((currentTime - basicAttribs.lastModifiedTime().to(TimeUnit.MILLISECONDS))/1000) <= 30) {
 			isUpdated = true ;
 		}
 		
@@ -581,18 +585,14 @@ public class QuoridorController {
 		String filePath = gameFile.getCanonicalPath();
 		File gameFilePath = new File(filePath);
 		gameFilePath.delete();
-	}
-	
-	
-	
-	
+	}	
 	
 	
 	
 	
 	
 	/**
-	 * Feature:laod position
+	 * Feature:load position
 	 * This method load a game position by input a filename
 	 * 
 	 * @param filename
@@ -759,13 +759,81 @@ public class QuoridorController {
 	}
 	
 	
+	/**
+	 * Feature:load Position
+	 * This method validate if all the pawn and wall position at board 
+	 * are not overlapping 
+	 * 
+	 * @author Zirui He
+	 * @return boolean
+	 */
+	public static boolean validation() {
+		boolean isValid = true;
+			Quoridor quoridor = QuoridorApplication.getQuoridor();
+			//Validate WallMove 
+			List<Wall> blackWalls = quoridor.getCurrentGame().getCurrentPosition().getBlackWallsOnBoard();
+			List<Wall> whiteWalls = quoridor.getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard();
+			List<Wall> wallList = new ArrayList<Wall>();
+			wallList.addAll(blackWalls);
+			wallList.addAll(whiteWalls);
+
+			for (int i = 0; i < wallList.size() - 1; i++) {
+				int thisWallColumn = wallList.get(i).getMove().getTargetTile().getColumn();
+				int thisWallRow = wallList.get(i).getMove().getTargetTile().getRow();
+				Direction thisWallDirection = wallList.get(i).getMove().getWallDirection();
+
+				for (int j = i + 1; j < wallList.size(); j++) {
+					int nextWallColumn = wallList.get(j).getMove().getTargetTile().getColumn();
+					int nextWallRow = wallList.get(j).getMove().getTargetTile().getRow();
+					Direction nextWallDirection = wallList.get(j).getMove().getWallDirection();
+
+					if (thisWallDirection == Direction.Vertical) {
+						if(nextWallDirection == Direction.Vertical) {
+							if((nextWallColumn == thisWallColumn)&&((nextWallRow == thisWallRow+1)||(nextWallRow == thisWallRow-1)||(nextWallRow == thisWallRow))) {
+								isValid = false;
+							}
+						}else {
+							if((nextWallColumn == thisWallColumn)&&(nextWallRow == thisWallRow)) {
+								isValid = false;
+							}
+						}
+					}
+					else {
+						if(nextWallDirection == Direction.Vertical) {
+							if((thisWallColumn == nextWallColumn)&&(thisWallRow == nextWallRow)) {
+								isValid = false;
+							}
+						}else {
+							if ((thisWallRow == nextWallRow)&&((thisWallColumn == nextWallColumn-1)||(thisWallColumn == nextWallColumn+1)||(thisWallColumn == nextWallColumn))) {
+								isValid = false;
+							}
+						}
+					}
+				}
+			}
+
+			//validate pawn position
+			Tile black = quoridor.getCurrentGame().getCurrentPosition().getBlackPosition().getTile();
+			Tile white = quoridor.getCurrentGame().getCurrentPosition().getWhitePosition().getTile();
+			int bColumn = black.getColumn();
+			int bRow = black.getRow();
+			int wColumn = white.getColumn();
+			int wRow = white.getRow();
+			if ((bColumn == wColumn) && (bRow == wRow)) {
+				isValid = false;
+			}
+			return isValid;
+
+	}
+
+	
 	
 	/**
 	 * Feature:load game, ValidatePosition
 	 * This method validate if all the pawn and wall position at board 
 	 * is with the board boundary 
 	 * 
-	 * @author Bozhong Lu, Yuelin Liu, Zirui He
+	 * @author Bozhong Lu, Yuelin Liu
 	 * @return boolean
 	 */
 	public static boolean validatePosition() {

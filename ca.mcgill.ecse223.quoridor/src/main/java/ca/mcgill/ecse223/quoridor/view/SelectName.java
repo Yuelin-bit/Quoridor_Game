@@ -3,6 +3,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -106,10 +107,19 @@ public class SelectName extends JFrame {
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (checked) {
-					Board board = new Board();
+					JBoard board = new JBoard();
 					board.setVisible(true);
 					setVisible(false);
 				}
+
+				if(!textField_1.getText().equals("")) {
+					//sec = Integer.parseInt(textField_1.getText());
+				}
+			//	QuoridorController.setTotalThinkingTime(min, sec);
+			//  QuoridorController.initializeBoard();
+				JBoard board = new JBoard();
+				board.setVisible(true);
+				setVisible(false);
 			}
 		});
 		
@@ -127,7 +137,9 @@ public class SelectName extends JFrame {
 		
 		JLabel lblUserNameDne = new JLabel();
 		lblUserNameDne.setForeground(Color.RED);
-		
+		JLabel lblInputMustBe = new JLabel();
+		lblInputMustBe.setForeground(Color.RED);
+
 		JButton btnConfirm = new JButton("Confirm");
 		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -161,28 +173,23 @@ public class SelectName extends JFrame {
 				if(result) {
 					lblUserNameDne.setText("Black player name has been changed");
 					lblUserNameDne.setVisible(true);
-				}
+				Integer min = 3;
+				Integer sec = 0; 
 				
-//				Quoridor q = QuoridorApplication.getQuoridor();
-//				QuoridorController.initializeNewGame();
-//				Player p = q.getCurrentGame().getBlackPlayer();
-//				if (p == null) {
-//					p = new Player(new Time(0), User.getWithName(black), 9, Direction.Horizontal);
-//				}
-//				Integer min = 3;
-//				Integer sec = 0; 
-//				if(!textField.getText().equals("")) {
-//					min = Integer.parseInt(textField.getText());
-//				}
-//				if(!textField_1.getText().equals("")) {
-//					sec = Integer.parseInt(textField_1.getText());
-//				}
+				try {
+						min = Integer.parseInt(textField.getText());
+						sec = Integer.parseInt(textField_1.getText());
+				}catch(Exception ex){
+					lblInputMustBe.setText("Input must be number!");
+					lblInputMustBe.setVisible(true);
+        }
+
+//				
 //				QuoridorController.setTotalThinkingTime(min, sec);
 //				QuoridorController.initializeBoard();
-//				QuoridorApplication.getQuoridor();
-				checked = true;
 			}
 		});
+		
 
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
@@ -198,27 +205,34 @@ public class SelectName extends JFrame {
 							.addComponent(btnConfirm, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE))
 						.addComponent(lblThinkingTime))
 					.addGap(61)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(lblUserNameDne, GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
-							.addGap(235))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblNewLabel)
-								.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, 280, GroupLayout.PREFERRED_SIZE)
-								.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 280, GroupLayout.PREFERRED_SIZE)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(textField, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-										.addComponent(btnStart, GroupLayout.PREFERRED_SIZE, 222, GroupLayout.PREFERRED_SIZE)
-										.addGroup(gl_contentPane.createSequentialGroup()
-											.addComponent(lblMin)
-											.addPreferredGap(ComponentPlacement.UNRELATED)
-											.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.UNRELATED)
-											.addComponent(lblSec)))))
-							.addContainerGap(121, Short.MAX_VALUE))))
+							.addComponent(lblInputMustBe)
+							.addContainerGap())
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+							.addGroup(gl_contentPane.createSequentialGroup()
+								.addComponent(lblUserNameDne, GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+								.addGap(235))
+							.addGroup(gl_contentPane.createSequentialGroup()
+								.addComponent(lblUserNameDne, GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+								.addGap(235))
+							.addGroup(gl_contentPane.createSequentialGroup()
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+									.addComponent(lblNewLabel)
+									.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, 280, GroupLayout.PREFERRED_SIZE)
+									.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 280, GroupLayout.PREFERRED_SIZE)
+									.addGroup(gl_contentPane.createSequentialGroup()
+										.addComponent(textField, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.UNRELATED)
+										.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+											.addComponent(btnStart, GroupLayout.PREFERRED_SIZE, 222, GroupLayout.PREFERRED_SIZE)
+											.addGroup(gl_contentPane.createSequentialGroup()
+												.addComponent(lblMin)
+												.addPreferredGap(ComponentPlacement.UNRELATED)
+												.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.UNRELATED)
+												.addComponent(lblSec)))))
+								.addContainerGap(111, Short.MAX_VALUE)))))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -235,7 +249,9 @@ public class SelectName extends JFrame {
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addComponent(lblBlackplayer)
 						.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(52)
+					.addGap(22)
+					.addComponent(lblInputMustBe)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblThinkingTime)
 						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -247,8 +263,9 @@ public class SelectName extends JFrame {
 						.addComponent(btnBack)
 						.addComponent(btnStart)
 						.addComponent(btnConfirm))
-					.addContainerGap(101, Short.MAX_VALUE))
+					.addContainerGap(84, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
 }
+

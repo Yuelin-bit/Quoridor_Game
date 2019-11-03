@@ -62,8 +62,7 @@ public class CucumberStepDefinitions {
 	@Given("^The game is running$")
 	public void theGameIsRunning() {
 		initQuoridorAndBoard();
-		ArrayList<Player> createUsersAndPlayers = createUsersAndPlayers("user1", "user2"); 
-		// Automating setting player names 
+		ArrayList<Player> createUsersAndPlayers = createUsersAndPlayers("user1", "user2");
 		createAndStartGame(createUsersAndPlayers);
 	}
 
@@ -127,6 +126,13 @@ public class CucumberStepDefinitions {
 	@And("^I have a wall in my hand over the board$")
 	public void iHaveAWallInMyHandOverTheBoard() throws Throwable {
 		// GUI-related feature -- TODO for later
+	}
+	
+	@Given("^A new game is initializing$")
+	public void aNewGameIsInitializing() throws Throwable {
+		initQuoridorAndBoard();
+		ArrayList<Player> players = createUsersAndPlayers("user1", "user2");
+		new Game(GameStatus.Initializing, MoveMode.PlayerMove, QuoridorApplication.getQuoridor());
 	}
 	
 
@@ -762,18 +768,20 @@ public class CucumberStepDefinitions {
 		}
 
 		@When("The user confirms to overwrite existing file")
-		public void the_user_confirms_to_overwrite_existing_file() {
+		public void the_user_confirms_to_overwrite_existing_file() throws IOException{
+
 		    // Write code here that turns the phrase above into concrete actions
-			if(QuoridorController.overwriteExistingFile()) {
-				String filename = "save_game_test.dat" ;
-//				if(QuoridorController.checkFileExistence(filename)) {
-//					QuoridorController.deleteFile(filename);
-//					QuoridorController.creatNewFile(filename);
-//					QuoridorController.saveGame(filename);
-//				}else if(!QuoridorController.checkFileExistence(filename)) {
-//					QuoridorController.creatNewFile(filename);
-//					QuoridorController.saveGame(filename);
-//				}
+			QuoridorController.overwriteExistingFile();
+			Assert.assertEquals(true , QuoridorController.getOverwriteBoolean());
+			
+			String filename = "save_game_test.dat" ;
+			if(QuoridorController.checkFileExistence(filename)) {
+				QuoridorController.deleteFile(filename);
+				QuoridorController.creatNewFile(filename);
+				QuoridorController.saveGame(filename);
+			}else if(!QuoridorController.checkFileExistence(filename)) {
+				QuoridorController.creatNewFile(filename);
+				QuoridorController.saveGame(filename);
 			}
 		    
 		}
@@ -782,7 +790,7 @@ public class CucumberStepDefinitions {
 		// After: "d, e, f, g"
 		// I know my new addition is "d, e, f, g"; - you just need to check file contains that string
 		@Then("File with {string} shall be updated in the filesystem")
-		public void file_with_shall_be_updated_in_the_filesystem(String filename){
+		public void file_with_shall_be_updated_in_the_filesystem(String filename) throws IOException{
 		    // Write code here that turns the phrase above into concrete actions
 			Assert.assertEquals(true , QuoridorController.fileIsUpdated(filename));
 
@@ -791,11 +799,12 @@ public class CucumberStepDefinitions {
 		@When("The user cancels to overwrite existing file")
 		public void the_user_cancels_to_overwrite_existing_file() {
 		    // Write code here that turns the phrase above into concrete actions
-			Assert.assertEquals(true , QuoridorController.cancelOverwriteExistingFile());
+			QuoridorController.cancelOverwriteExistingFile();
+			Assert.assertEquals(false , QuoridorController.getOverwriteBoolean());
 		}
 
 		@Then("File {string} shall not be changed in the filesystem")
-		public void file_shall_not_be_changed_in_the_filesystem(String filename){
+		public void file_shall_not_be_changed_in_the_filesystem(String filename) throws IOException{
 		    // Write code here that turns the phrase above into concrete actions
 			Assert.assertEquals(false , QuoridorController.fileIsUpdated(filename));
 		}
@@ -1103,7 +1112,7 @@ public class CucumberStepDefinitions {
 		
 		@And("The position to load is valid")
 		public void the_position_to_load_is_valid() {
-			isPositionValid = QuoridorController.validatePosition();		    
+			isPositionValid = QuoridorController.validation();		    
 		}
 
 
@@ -1188,7 +1197,7 @@ public class CucumberStepDefinitions {
 		@And("The position to load is invalid")
 		public void the_position_to_load_is_invalid() {
 			if (loadSucceed) {
-				 isPositionValid = QuoridorController.validatePosition();
+				 isPositionValid = QuoridorController.validation();
 			}
 		}
 
@@ -1581,8 +1590,18 @@ public class CucumberStepDefinitions {
 
 			PlayerPosition player1Position = new PlayerPosition(quoridor.getCurrentGame().getWhitePlayer(), player1StartPos);
 			PlayerPosition player2Position = new PlayerPosition(quoridor.getCurrentGame().getBlackPlayer(), player2StartPos);
+		GamePosition gamePosition = new GamePosition(0, player1Position, player2Position, players.get(0), game);
+		
 
-			GamePosition gamePosition = new GamePosition(0, player1Position, player2Position, players.get(0), game);
+		// Add the walls as in stock for the players
+		for (int j = 0; j < 10; j++) {
+			Wall wall = Wall.getWithId(j);
+			gamePosition.addWhiteWallsInStock(wall);
+		}
+		for (int j = 0; j < 10; j++) {
+			Wall wall = Wall.getWithId(j + 10);
+			gamePosition.addBlackWallsInStock(wall);
+		}
 
 			game.setCurrentPosition(gamePosition);
 		}

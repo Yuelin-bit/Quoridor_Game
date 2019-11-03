@@ -1,7 +1,7 @@
 package ca.mcgill.ecse223.quoridor;
 
 import ca.mcgill.ecse223.quoridor.model.Quoridor;
-import ca.mcgill.ecse223.quoridor.view.Board;
+import ca.mcgill.ecse223.quoridor.view.JBoard;
 import ca.mcgill.ecse223.quoridor.view.MainMenu;
 
 public class QuoridorApplication {
@@ -10,12 +10,12 @@ public class QuoridorApplication {
 
 	private static MainMenu mainMenu;
 
+
 	public static void main(String[] args) {
 		// start UI
-		mainMenu = new MainMenu();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                mainMenu.setVisible(true);
+                new MainMenu().setVisible(true);
             }
         });
 	}
@@ -26,14 +26,5 @@ public class QuoridorApplication {
 		}
  		return quoridor;
 	}
-	
-	/*public static void mainMenu() {
-		setAllInvisable();
-		mainMenu.setVisible(true);
-	}
-	
-	private static void setAllInvisable() {
-		
-	}*/
 
 }
