@@ -550,7 +550,7 @@ public class QuoridorController {
 		Path gameFilePath = gameFile.toPath();
 	    BasicFileAttributes basicAttribs = Files.readAttributes(gameFilePath, BasicFileAttributes.class);
 		
-		if(((currentTime - basicAttribs.lastModifiedTime().to(TimeUnit.MILLISECONDS))/1000) >= 60) {
+		if(((currentTime - basicAttribs.lastModifiedTime().to(TimeUnit.MILLISECONDS))/1000) <= 30) {
 			isUpdated = true ;
 		}
 		

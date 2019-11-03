@@ -788,7 +788,7 @@ public class CucumberStepDefinitions {
 		// After: "d, e, f, g"
 		// I know my new addition is "d, e, f, g"; - you just need to check file contains that string
 		@Then("File with {string} shall be updated in the filesystem")
-		public void file_with_shall_be_updated_in_the_filesystem(String filename){
+		public void file_with_shall_be_updated_in_the_filesystem(String filename) throws IOException{
 		    // Write code here that turns the phrase above into concrete actions
 			Assert.assertEquals(true , QuoridorController.fileIsUpdated(filename));
 
@@ -802,7 +802,7 @@ public class CucumberStepDefinitions {
 		}
 
 		@Then("File {string} shall not be changed in the filesystem")
-		public void file_shall_not_be_changed_in_the_filesystem(String filename){
+		public void file_shall_not_be_changed_in_the_filesystem(String filename) throws IOException{
 		    // Write code here that turns the phrase above into concrete actions
 			Assert.assertEquals(false , QuoridorController.fileIsUpdated(filename));
 		}
