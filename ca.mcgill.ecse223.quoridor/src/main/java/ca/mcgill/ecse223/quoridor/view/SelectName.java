@@ -33,6 +33,7 @@ public class SelectName extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
+	private boolean checked = false;
 
 	/**
 	 * Launch the application.
@@ -104,9 +105,11 @@ public class SelectName extends JFrame {
 		
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Board board = new Board();
-				board.setVisible(true);
-				setVisible(false);
+				if (checked) {
+					Board board = new Board();
+					board.setVisible(true);
+					setVisible(false);
+				}
 			}
 		});
 		
@@ -129,11 +132,11 @@ public class SelectName extends JFrame {
 		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Check if two names are not equal
+				checked = false;
 				lblNewLabel.setVisible(false);
 				lblUserNameDne.setVisible(false);
 				String white = String.valueOf(comboBox.getSelectedItem());
 				String black = String.valueOf(comboBox_1.getSelectedItem());
-				boolean tok = true;
 				QuoridorController.initializeNewGame();
 				boolean result = false;
 				try {
@@ -177,6 +180,7 @@ public class SelectName extends JFrame {
 //				QuoridorController.setTotalThinkingTime(min, sec);
 //				QuoridorController.initializeBoard();
 //				QuoridorApplication.getQuoridor();
+				checked = true;
 			}
 		});
 

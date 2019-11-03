@@ -953,7 +953,7 @@ public class CucumberStepDefinitions {
 		public void white_player_chooses_a_username() {
 		    // Write code here that turns the phrase above into concrete actions
 			this.player1 = playerList.get(0);
-			QuoridorController.selectUserName(this.player1);
+			//QuoridorController.selectUserName(this.player1);
 			this.game.setWhitePlayer(this.player1);
 			throw new cucumber.api.PendingException();
 		}
@@ -962,7 +962,7 @@ public class CucumberStepDefinitions {
 		public void black_player_chooses_a_username() {
 		    // Write code here that turns the phrase above into concrete actions
 			this.player2 = playerList.get(1);
-			QuoridorController.selectUserName(this.player2);
+			//QuoridorController.selectUserName(this.player2);
 			this.game.setBlackPlayer(this.player2);
 			throw new cucumber.api.PendingException();
 		}
