@@ -10,12 +10,12 @@ public class QuoridorApplication {
 
 	private static MainMenu mainMenu;
 
+
 	public static void main(String[] args) {
 		// start UI
-		mainMenu = new MainMenu();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                mainMenu.setVisible(true);
+                new MainMenu().setVisible(true);
             }
         });
 	}
@@ -26,14 +26,5 @@ public class QuoridorApplication {
 		}
  		return quoridor;
 	}
-	
-	/*public static void mainMenu() {
-		setAllInvisable();
-		mainMenu.setVisible(true);
-	}
-	
-	private static void setAllInvisable() {
-		
-	}*/
 
 }
