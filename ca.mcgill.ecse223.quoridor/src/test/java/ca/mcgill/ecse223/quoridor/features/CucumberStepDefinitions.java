@@ -1027,7 +1027,18 @@ public class CucumberStepDefinitions {
 		
 		@Given("The game is ready to start")
 		public void the_game_is_ready_to_start() {
-			this.game.setGameStatus(GameStatus.ReadyToStart);
+			quoridor = QuoridorApplication.getQuoridor();
+			QuoridorController.initializeNewGame();
+			game = QuoridorApplication.getQuoridor().getCurrentGame();
+			
+			User u1 = quoridor.addUser("lufthansa");
+			User u2 = quoridor.addUser("swissair");
+			Player p1 = new Player(new Time(180), u1, 9, Direction.Horizontal);
+			Player p2 = new Player(new Time(180), u2, 1, Direction.Horizontal);
+			game.setBlackPlayer(p1);
+			game.setWhitePlayer(p2);
+			
+			assertEquals(true, QuoridorController.verifyGameIsReady());
 		}
 
 		@When("I start the clock")
