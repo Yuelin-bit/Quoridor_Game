@@ -111,7 +111,7 @@ public class SelectName extends JFrame {
 				}
 			//	QuoridorController.setTotalThinkingTime(min, sec);
 			//  QuoridorController.initializeBoard();
-				Board board = new Board();
+				JBoard board = new JBoard();
 				board.setVisible(true);
 				setVisible(false);
 			}
