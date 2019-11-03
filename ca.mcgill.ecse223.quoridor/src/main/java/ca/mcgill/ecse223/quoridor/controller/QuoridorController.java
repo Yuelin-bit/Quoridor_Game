@@ -505,8 +505,8 @@ public class QuoridorController {
 	 * @return void
 	 */
 	//GUI
-	public static void overwriteExistingFile() {
-		throw new UnsupportedOperationException();
+	public static boolean overwriteExistingFile() {
+		return true;
 	}
 	
 	/**
@@ -517,8 +517,8 @@ public class QuoridorController {
 	 * @return void
 	 */
 	//GUI
-	public static void cancelOverwriteExistingFile() {
-		throw new UnsupportedOperationException();
+	public static boolean cancelOverwriteExistingFile() {
+		return true;
 	}
 	
 //	/**
