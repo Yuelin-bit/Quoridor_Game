@@ -284,15 +284,7 @@ public class CucumberStepDefinitions {
 		Assert.assertEquals(true,true);
 		//throw new cucumber.api.PendingException();
 	}
-
-	@Then("I shall have a wall in my hand over the board")
-	public void i_shall_have_a_wall_in_my_hand_over_the_board() {
-		// GUI-related feature -- TODO for later
-		
-		throw new cucumber.api.PendingException();
-	    
-	}
-
+	
 	@Then("It shall be my turn to move")
 	public void it_shall_be_my_turn_to_move() {
 		Player aPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getPlayer();
@@ -408,23 +400,6 @@ public class CucumberStepDefinitions {
 		//Assert.assertEquals(true,QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().setTargetTile(tile));  
 		
 	}
-	
-
-	@Then("A wall move candidate shall exist with {string} at position \\({int}, {int})")
-	public void a_wall_move_candidate_shall_exist_with_at_position(String string, Integer int1, Integer int2) {
-		Direction dir;
-		if(string.equalsIgnoreCase("vertical")) {
-			dir = Direction.Vertical;
-		}
-		else {
-			dir = Direction.Horizontal;
-		}
-		Assert.assertEquals(int1,Integer.valueOf(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getRow()));
-		Assert.assertEquals(int2,Integer.valueOf(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getColumn()));
-		Assert.assertEquals(dir, QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getWallDirection());    
-	}
-	
-	
 
 	@Given("The wall candidate is at the {string} edge of the board")
 	public void the_wall_candidate_is_at_the_edge_of_the_board(String string) {
@@ -794,8 +769,18 @@ public class CucumberStepDefinitions {
 		@When("The user confirms to overwrite existing file")
 		public void the_user_confirms_to_overwrite_existing_file() {
 		    // Write code here that turns the phrase above into concrete actions
-			QuoridorController.overwriteExistingFile();
-		    throw new cucumber.api.PendingException();
+			if(QuoridorController.overwriteExistingFile()) {
+				String filename = "save_game_test.dat" ;
+				if(QuoridorController.checkFileExistence(filename)) {
+					QuoridorController.deleteFile(filename);
+					QuoridorController.creatNewFile(filename);
+					QuoridorController.saveGame(filename);
+				}else if(!QuoridorController.checkFileExistence(filename)) {
+					QuoridorController.creatNewFile(filename);
+					QuoridorController.saveGame(filename);
+				}
+			}
+		    
 		}
 
 		// Before: "a, b, c"
@@ -811,8 +796,7 @@ public class CucumberStepDefinitions {
 		@When("The user cancels to overwrite existing file")
 		public void the_user_cancels_to_overwrite_existing_file() {
 		    // Write code here that turns the phrase above into concrete actions
-			QuoridorController.cancelOverwriteExistingFile();
-		    throw new cucumber.api.PendingException();
+			Assert.assertEquals(true , QuoridorController.cancelOverwriteExistingFile());
 		}
 
 		@Then("File {string} shall not be changed in the filesystem")
@@ -984,7 +968,7 @@ public class CucumberStepDefinitions {
 		public void white_player_chooses_a_username() {
 		    // Write code here that turns the phrase above into concrete actions
 			this.player1 = playerList.get(0);
-			QuoridorController.selectUserName(this.player1);
+			//QuoridorController.selectUserName(this.player1);
 			this.game.setWhitePlayer(this.player1);
 			throw new cucumber.api.PendingException();
 		}
@@ -993,7 +977,7 @@ public class CucumberStepDefinitions {
 		public void black_player_chooses_a_username() {
 		    // Write code here that turns the phrase above into concrete actions
 			this.player2 = playerList.get(1);
-			QuoridorController.selectUserName(this.player2);
+			//QuoridorController.selectUserName(this.player2);
 			this.game.setBlackPlayer(this.player2);
 			throw new cucumber.api.PendingException();
 		}

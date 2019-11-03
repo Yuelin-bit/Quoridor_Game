@@ -502,11 +502,11 @@ public class QuoridorController {
 	 * 
 	 * @author Bozhong Lu
 	 * @param none
-	 * @return void
+	 * @return boolean that indicates the user confirms to overwrite existing File
 	 */
 	//GUI
-	public static void overwriteExistingFile() {
-		throw new UnsupportedOperationException();
+	public static boolean overwriteExistingFile() {
+		return true;
 	}
 	
 	/**
@@ -514,11 +514,11 @@ public class QuoridorController {
 	 * 
 	 * @author Bozhong Lu
 	 * @param none
-	 * @return void
+	 * @return boolean that indicates the user cancels to overwrite existing File
 	 */
 	//GUI
-	public static void cancelOverwriteExistingFile() {
-		throw new UnsupportedOperationException();
+	public static boolean cancelOverwriteExistingFile() {
+		return true;
 	}
 	
 //	/**
@@ -1081,10 +1081,48 @@ public class QuoridorController {
 	 * 
 	 */
 	public static boolean initializeNewGame() {
-		Game g = new Game(GameStatus.Initializing, MoveMode.WallMove, QuoridorApplication.getQuoridor());
+		new Game(GameStatus.Initializing, MoveMode.WallMove, QuoridorApplication.getQuoridor());
 		return QuoridorApplication.getQuoridor().hasCurrentGame();
 	}
 
+	/**
+	 * This is a static method which takes a player and a new name, then set the latter as 
+	 * the name of the former. It will return a boolean value to indicate if the 
+	 * name is updated successfully.
+	 * 
+	 * @author Pengnan Fan
+	 * @param game The game of the specific white player
+	 * @param name The new name 
+	 * @return A boolean value to indicate if the name of the user has been updated
+	 */
+	public static boolean setUserName(String player, String name) {
+		if (player == null || player.trim().isEmpty()) {
+			throw new IllegalArgumentException("Player is invalid");
+		}
+		if (name == null || name.trim().length() == 0) {
+			throw new IllegalArgumentException("Invalid name");
+		}
+		User u = User.getWithName(name);
+		if (u == null) {
+			throw new IllegalArgumentException("User: " + name + " does NOT exist");
+		}
+		if (player == "b") {
+			if (QuoridorApplication.getQuoridor().getCurrentGame().hasBlackPlayer()) {
+				return setUserName(QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer(), name);
+			}
+		} else {
+			if (QuoridorApplication.getQuoridor().getCurrentGame().hasWhitePlayer()) {
+				return setUserName(QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer(), name);
+			}
+		}
+		Player p = new Player(new Time(0), u, 9, Direction.Horizontal);
+		if (player == "b") {
+			return QuoridorApplication.getQuoridor().getCurrentGame().setBlackPlayer(p);
+		} else {
+			return QuoridorApplication.getQuoridor().getCurrentGame().setWhitePlayer(p);
+		}
+	}
+	
 	/**
 	 * This is a static method which takes a player and a new name, then set the latter as 
 	 * the name of the former. It will return a boolean value to indicate if the 
@@ -1104,30 +1142,30 @@ public class QuoridorController {
 		}
 		User u = User.getWithName(name);
 		if (u == null) {
-			u = new User(name, QuoridorApplication.getQuoridor());
+			throw new IllegalArgumentException("User: " + name + " does NOT exist");
 		}
 		return player.setUser(u);
 	}
 	
-	/**
-	 * This is a static method which takes a player. Then it will allows the player to select
-	 * his/her user name. It will return a boolean value to indicate if the name is updated 
-	 * successfully.
-	 * 
-	 * @author Pengnan Fan
-	 * @param game The game of the specific white player
-	 * @param name The new name 
-	 * @return A boolean value to indicate if the name of the user has been updated
-	 */
-	public static boolean selectUserName(Player player) {
-		//TODO: Need support from front end
-		if (player == null) {
-			throw new IllegalArgumentException("Player is invalid");
-		}
-		//Receive a name from front end
-		return setUserName(player, "name");
-		//throw new UnsupportedOperationException();
-	}
+//	/**
+//	 * This is a static method which takes a player. Then it will allows the player to select
+//	 * his/her user name. It will return a boolean value to indicate if the name is updated 
+//	 * successfully.
+//	 * 
+//	 * @author Pengnan Fan
+//	 * @param game The game of the specific white player
+//	 * @param name The new name 
+//	 * @return A boolean value to indicate if the name of the user has been updated
+//	 */
+//	public static boolean selectUserName(Player player) {
+//		//TODO: Need support from front end
+//		if (player == null) {
+//			throw new IllegalArgumentException("Player is invalid");
+//		}
+//		//Receive a name from front end
+//		return setUserName(player, "name");
+//		//throw new UnsupportedOperationException();
+//	}
 	
 //	/**
 //	 * This is a static method which link an user u and a player p. It will return a boolean
