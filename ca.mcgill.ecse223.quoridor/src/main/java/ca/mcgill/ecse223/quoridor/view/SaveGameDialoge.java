@@ -53,8 +53,8 @@ public class SaveGameDialoge extends JFrame {
 		
 		JLabel label = new JLabel("Would you like to save and overwrite your previous game ?");
 		
-		JButton btnNewButton = new JButton("Yes!");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton SaveGameButton = new JButton("Yes!");
+		SaveGameButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				QuoridorController.overwriteExistingFile();
 				setVisible(false);
@@ -62,10 +62,12 @@ public class SaveGameDialoge extends JFrame {
 			}
 		});
 		
-		JButton btnNewButton_1 = new JButton("No");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton SaveGameButton_1 = new JButton("No");
+		SaveGameButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				QuoridorController.cancelOverwriteExistingFile();
+				setVisible(false);
+				new MainMenu().setVisible(true);
 			}
 		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
@@ -73,9 +75,9 @@ public class SaveGameDialoge extends JFrame {
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
 					.addGap(87)
-					.addComponent(btnNewButton)
+					.addComponent(SaveGameButton)
 					.addPreferredGap(ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
-					.addComponent(btnNewButton_1)
+					.addComponent(SaveGameButton_1)
 					.addGap(84))
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(35)
@@ -89,8 +91,8 @@ public class SaveGameDialoge extends JFrame {
 					.addComponent(label)
 					.addGap(69)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnNewButton_1)
-						.addComponent(btnNewButton))
+						.addComponent(SaveGameButton_1)
+						.addComponent(SaveGameButton))
 					.addContainerGap())
 		);
 		contentPane.setLayout(gl_contentPane);

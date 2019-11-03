@@ -54,6 +54,24 @@ public class JBoard extends JFrame {
 	private JWall jwall;
 	private JTextField textField;
 	private JTextField textField_1;
+	private JOptionPane errorHint;
+	private String error = null;
+	public String getError() {
+		return error;
+	}
+	public void setError(String error) {
+		this.error = error;
+	}
+	public JOptionPane getErrorHint() {
+		return errorHint;
+	}
+	public void setErrorHint(JOptionPane errorHint) {
+		this.errorHint = errorHint;
+	}
+	public void notifyIllegal(String string) {
+		this.setError(string);
+		this.errorHint.showMessageDialog(null, error);
+	}
 	/**
 	 * Launch the application.
 	 */
@@ -110,10 +128,22 @@ public class JBoard extends JFrame {
 		JLabel lblRotateWallPress = new JLabel("Rotate Wall: Press R");
 		JLabel lblMoveWallPress = new JLabel("Move Wall: Press W,A,S,D");
 		JLabel lblDropWallPress = new JLabel("Drop Wall: Press T");
-		
 
-		JButton btnNewButton = new JButton("Back");
-		btnNewButton.addActionListener(new ActionListener() {
+		//Add two pawns over here
+		//Set the one's turn is visible
+		JLabel playerToMove = new JLabel("WHITE");
+		playerToMove.setBounds(650, 550, 100, 50);
+		mainLayerPanel.add(playerToMove);
+		playerToMove.setVisible(true);	
+		
+		JLabel playerToMove1 = new JLabel("BLACK");
+		playerToMove1.setBounds(700, 550, 100, 50);
+		mainLayerPanel.add(playerToMove1);
+		playerToMove1.setVisible(true);
+
+		JButton SaveGameButton = new JButton("Save and Back");
+		SaveGameButton.addActionListener(new ActionListener() {
+
 			public void actionPerformed(ActionEvent e) {
 				
 				SaveGameDialoge s = new SaveGameDialoge();
@@ -138,8 +168,8 @@ public class JBoard extends JFrame {
 		gl_tile.setHorizontalGroup(
 			gl_tile.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_tile.createSequentialGroup()
-					.addContainerGap(638, Short.MAX_VALUE)
-					.addGroup(gl_tile.createParallelGroup(Alignment.TRAILING)
+					.addContainerGap(651, Short.MAX_VALUE)
+					.addGroup(gl_tile.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_tile.createSequentialGroup()
 							.addGroup(gl_tile.createParallelGroup(Alignment.LEADING, false)
 								.addComponent(lblGrabWallPress)
@@ -155,16 +185,16 @@ public class JBoard extends JFrame {
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 							.addGap(165))
-						.addGroup(gl_tile.createSequentialGroup()
-							.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
-							.addGap(68))))
+						.addGroup(Alignment.TRAILING, gl_tile.createSequentialGroup()
+							.addComponent(SaveGameButton)
+							.addGap(44))))
 		);
 		gl_tile.setVerticalGroup(
 			gl_tile.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_tile.createSequentialGroup()
-					.addGap(38)
-					.addComponent(btnNewButton)
-					.addGap(54)
+					.addGap(33)
+					.addComponent(SaveGameButton)
+					.addGap(59)
 					.addComponent(lblGrabWallPress)
 					.addGap(32)
 					.addComponent(lblRotateWallPress)
@@ -180,7 +210,7 @@ public class JBoard extends JFrame {
 					.addGroup(gl_tile.createParallelGroup(Alignment.TRAILING)
 						.addComponent(lblNewLabel_1)
 						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(363, Short.MAX_VALUE))
+					.addContainerGap(353, Short.MAX_VALUE))
 		);
 		tile.setLayout(gl_tile);
 		
