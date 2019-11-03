@@ -117,12 +117,11 @@ public class SelectName extends JFrame {
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(names));
-		comboBox.setToolTipText("");
-		comboBox.setEditable(true);
+		comboBox.setEditable(false);
 		
 		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setEditable(true);
 		comboBox_1.setModel(new DefaultComboBoxModel(names));
+		comboBox_1.setEditable(false);
 		
 		JLabel lblNewLabel = new JLabel();
 		lblNewLabel.setForeground(Color.RED);
@@ -133,24 +132,38 @@ public class SelectName extends JFrame {
 		lblInputMustBe.setForeground(Color.RED);
 
 		JButton btnConfirm = new JButton("Confirm");
+		QuoridorController.initializeNewGame();
 		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Check if two names are not equal
-				QuoridorApplication.getQuoridor().getCurrentGame().setGameStatus(GameStatus.Initializing);
 				lblNewLabel.setVisible(false);
 				lblUserNameDne.setVisible(false);
 				String white = String.valueOf(comboBox.getSelectedItem());
 				String black = String.valueOf(comboBox_1.getSelectedItem());
-				QuoridorController.initializeNewGame();
+				if(white == null || black == null) {
+					return;
+				}
+				if (white.equals(black)) {
+					lblUserNameDne.setForeground(Color.RED);
+					lblNewLabel.setForeground(Color.RED);
+					lblNewLabel.setText("White player CANNOT be the same as black player");
+					lblNewLabel.setVisible(true);
+					lblUserNameDne.setText("Black player CANNOT be the same as white player");
+					lblUserNameDne.setVisible(true);
+					return;
+				}
+				QuoridorApplication.getQuoridor().getCurrentGame().setGameStatus(GameStatus.Initializing);
 				boolean result = false;
 				try {
 					result = QuoridorController.setUserName("white", white, false);
 				} catch (IllegalArgumentException ex) {
+					lblNewLabel.setForeground(Color.RED);
 					lblNewLabel.setText(ex.getMessage());
 					lblNewLabel.setVisible(true);
 					return;
 				}
 				if(result) {
+					lblNewLabel.setForeground(Color.BLACK);
 					lblNewLabel.setText("White player name has been changed");
 					lblNewLabel.setVisible(true);
 				}
@@ -158,11 +171,13 @@ public class SelectName extends JFrame {
 				try {
 					result = QuoridorController.setUserName("black", black, false);
 				} catch (IllegalArgumentException ex) {
+					lblUserNameDne.setForeground(Color.RED);
 					lblUserNameDne.setText(ex.getMessage());
 					lblUserNameDne.setVisible(true);
 					return;
 				}
 				if(result) {
+					lblUserNameDne.setForeground(Color.BLACK);
 					lblUserNameDne.setText("Black player name has been changed");
 					lblUserNameDne.setVisible(true);
 				}
@@ -179,7 +194,7 @@ public class SelectName extends JFrame {
 				
 //				QuoridorController.setTotalThinkingTime(min, sec);
 //				QuoridorController.initializeBoard();
-				QuoridorApplication.getQuoridor().getCurrentGame().setGameStatus(GameStatus.ReadyToStart);
+				QuoridorController.verifyGameIsReady();
 			}
 		});
 		
