@@ -110,10 +110,22 @@ public class JBoard extends JFrame {
 		JLabel lblRotateWallPress = new JLabel("Rotate Wall: Press R");
 		JLabel lblMoveWallPress = new JLabel("Move Wall: Press W,A,S,D");
 		JLabel lblDropWallPress = new JLabel("Drop Wall: Press T");
+
+		//Add two pawns over here
+		//Set the one's turn is visible
+		JLabel playerToMove = new JLabel("WHITE");
+		playerToMove.setBounds(650, 550, 100, 50);
+		mainLayerPanel.add(playerToMove);
+		playerToMove.setVisible(true);	
 		
+		JLabel playerToMove1 = new JLabel("BLACK");
+		playerToMove1.setBounds(700, 550, 100, 50);
+		mainLayerPanel.add(playerToMove1);
+		playerToMove1.setVisible(true);
 
 		JButton SaveGameButton = new JButton("Save and Back");
 		SaveGameButton.addActionListener(new ActionListener() {
+
 			public void actionPerformed(ActionEvent e) {
 				
 				SaveGameDialoge s = new SaveGameDialoge();
