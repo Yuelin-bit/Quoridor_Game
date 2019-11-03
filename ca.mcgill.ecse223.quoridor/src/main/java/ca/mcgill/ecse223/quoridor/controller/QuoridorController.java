@@ -376,9 +376,9 @@ public class QuoridorController {
      * Feature:SavePosition
      *
 	 * @author Bozhong Lu
-	 * Checks that file with specified name exists in my folder
+	 * Method that checks file with specified name exists in my folder
 	 * @param filename
-	 * @return whether the file with the specified name exists
+	 * @return boolean: whether the file with the specified name exists
 	 */
 	public static boolean checkFileExistence(String filename) {
 		File tempFile = new File(filename);
@@ -466,17 +466,20 @@ public class QuoridorController {
 			
 		}
 	}
+	
+	
 	/**
 	 * Feature:SavePosition
 	 * 
+	 * Method that writes the current Player positions and Wall Positions in a specific file
+	 * The player to move is written at the first line, and the next player to move is written on the second line
+	 * 
 	 * @author Bozhong Lu
-	 * @param filename
-	 * @return String: the content of the new file;
+	 * @param String filename
+	 * @return nothing
 	 * @throws IOException 
 	 */
-	// 1. Compute the string to be saved
-	// 2. Save to file 
-	// 3. Return the computed string 
+	
 	public static void saveGame(String filename)throws IOException{
 		
 		Quoridor quoridor = QuoridorApplication.getQuoridor();
@@ -506,14 +509,21 @@ public class QuoridorController {
 	}
 	
 	
+	//private boolean variable which indicates 
+	//whether the player agrees to overwrite existing file or cancels overwrite existing file
 	private static boolean overwriteBoolean = false;
 	
+	// public getter method for the private overwriteBoolean variable
 	public static boolean getOverwriteBoolean() {
 		return overwriteBoolean ;
 	}
 	
 	/**
 	 * Feature:SavePosition
+	 * 
+	 * Method that is connected to the User Interface
+	 * If the user click the "Yes" Button, this method will return a boolean "true"
+	 * which indicates the user agrees to overwrite existing file
 	 * 
 	 * @author Bozhong Lu
 	 * @param none
@@ -526,6 +536,10 @@ public class QuoridorController {
 	
 	/**
 	 * Feature:SavePosition
+	 * 
+	 * Method that is connected to the User Interface
+	 * If the user click the "No" Button, this method will return a boolean "false"
+	 * which indicates the user cancels to overwrite existing file
 	 * 
 	 * @author Bozhong Lu
 	 * @param none
@@ -541,9 +555,13 @@ public class QuoridorController {
 	/**
 	 * Feature:SavePosition
 	 * 
+	 * Method that check the last modified time of the specified file 
+	 * If the file was updated within the past 30s, it means that it was succesfully updated
+	 * Otherwise, it was not successfully updated 
+	 * 
 	 * @author Bozhong Lu
 	 * @param filename
-	 * @return boolean
+	 * @return boolean which indicates whether the specified file has been updated or not
 	 * @throws IOException 
 	 */
 	public static boolean fileIsUpdated(String filename) throws IOException {
@@ -564,6 +582,8 @@ public class QuoridorController {
 	/**
 	 * Feature:SavePosition
 	 * 
+	 * Method that creats a new file with name filename
+	 * 
 	 * @author Bozhong Lu
 	 * @param String filename
 	 * @return none
@@ -579,6 +599,8 @@ public class QuoridorController {
 	/**
 	 * Feature:SavePosition
 	 * 
+	 * Method that deletes file filename from file system
+	 * 
 	 * @author Bozhong Lu
 	 * @param String filename
 	 * @return none
@@ -589,7 +611,132 @@ public class QuoridorController {
 		String filePath = gameFile.getCanonicalPath();
 		File gameFilePath = new File(filePath);
 		gameFilePath.delete();
-	}	
+	}
+	
+	
+	/**
+	 * Feature: ValidatePosition
+	 * This method validate if all the pawn and wall position at board 
+	 * is within the board boundary 
+	 * 
+	 * @author Bozhong Lu
+	 * @return boolean
+	 */
+	public static boolean validatePosition() {
+		//TO-DO: Write logic to validate position
+		boolean wallIsValid = true;
+		boolean pawnIsValid = true;
+		Quoridor quoridor = QuoridorApplication.getQuoridor();
+		//Validate WallMove 
+		if(quoridor.getCurrentGame().getMoveMode() == MoveMode.WallMove) {
+			//check overlapping of current wall with all other walls on board
+			WallMove currentWallMove = quoridor.getCurrentGame().getWallMoveCandidate();
+			int row = currentWallMove.getTargetTile().getRow();
+			int column = currentWallMove.getTargetTile().getColumn();
+			Direction currentWallDirection = currentWallMove.getWallDirection();
+			List<Wall> blackWalls = quoridor.getCurrentGame().getCurrentPosition().getBlackWallsOnBoard();
+			List<Wall> whiteWalls = quoridor.getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard();
+			for(Wall wall : blackWalls) {
+				int thisWallColumn = wall.getMove().getTargetTile().getColumn();
+				int thisWallRow = wall.getMove().getTargetTile().getRow();
+				if(wall.getMove().getWallDirection() == Direction.Vertical ) {
+					if(currentWallDirection == Direction.Vertical) {
+						if((column == thisWallColumn)&&((row == thisWallRow+1)||(row == thisWallRow-1)||(row == thisWallRow))) {
+							wallIsValid = false;
+						}
+					}else if (currentWallDirection == Direction.Horizontal) {
+						if((column == thisWallColumn)&&(row == thisWallRow)) {
+							wallIsValid = false;
+						}
+					}
+				}else if(wall.getMove().getWallDirection() == Direction.Horizontal) {
+					if(currentWallDirection == Direction.Vertical) {
+						if((column == thisWallColumn)&&(row == thisWallRow)) {
+							wallIsValid = false;
+						}
+					}else if (currentWallDirection == Direction.Horizontal) {
+						if ((row == thisWallRow)&&((column == thisWallColumn-1)||(column == thisWallColumn+1)||(column == thisWallColumn))) {
+							wallIsValid = false;
+						}
+					}
+				}
+			}
+			for(Wall wall : whiteWalls) {
+				int thisWallColumn = wall.getMove().getTargetTile().getColumn();
+				int thisWallRow = wall.getMove().getTargetTile().getRow();
+				if(wall.getMove().getWallDirection() == Direction.Vertical ) {
+					if(currentWallDirection == Direction.Vertical) {
+						if((column == thisWallColumn)&&((row == thisWallRow+1)||(row == thisWallRow-1)||(row == thisWallRow))) {
+							wallIsValid = false;
+						}
+					}else if (currentWallDirection == Direction.Horizontal) {
+						if((column == thisWallColumn)&&(row == thisWallRow)) {
+							wallIsValid = false;
+						}
+					}
+				}else if(wall.getMove().getWallDirection() == Direction.Horizontal) {
+					if(currentWallDirection == Direction.Vertical) {
+						if((column == thisWallColumn)&&(row == thisWallRow)) {
+							wallIsValid = false;
+						}
+					}else if (currentWallDirection == Direction.Horizontal) {
+						if ((row == thisWallRow)&&((column == thisWallColumn-1)||(column == thisWallColumn+1)||(column == thisWallColumn))) {
+							wallIsValid = false;
+						}
+					}
+				}
+			}
+			//Check if the wall is within the boundary
+			int currentWallColumn = quoridor.getCurrentGame().getWallMoveCandidate().getTargetTile().getColumn();
+			int currentWallRow = quoridor.getCurrentGame().getWallMoveCandidate().getTargetTile().getRow();
+
+			if((currentWallColumn<1)) {
+				wallIsValid = false;
+			}
+			if((currentWallColumn>8)) {
+				wallIsValid = false;
+			}
+			if((currentWallRow<1)) {
+				wallIsValid = false;
+			}
+			if((currentWallRow>8)) {
+				wallIsValid = false;
+			}
+		//Next Task : Check if the pawn is surrounded by walls after this WallMove. If it is surrounded, then WallMove invalid
+		//Validate PawnMove	
+		}else if(quoridor.getCurrentGame().getMoveMode() == MoveMode.PlayerMove) {
+			
+			int blackPlayerColumn = quoridor.getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getColumn();
+			int blackPlayerRow = quoridor.getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
+			int whitePlayerColumn = quoridor.getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
+			int whitePlayerRow = quoridor.getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
+			//check whether the position is already occupied by another player
+			if((blackPlayerColumn == whitePlayerColumn) && (blackPlayerRow == whitePlayerRow)) {
+				pawnIsValid = false ;
+			}
+			//check whether the position is within the boundary of the board
+			if((blackPlayerColumn<1)||(blackPlayerColumn>8)) {
+				pawnIsValid = false;
+			}
+			if((blackPlayerRow<1)||(blackPlayerRow>8)) {
+				pawnIsValid = false;
+			}
+			if((whitePlayerRow<1)||(whitePlayerRow>8)) {
+				pawnIsValid = false;
+			}
+			if((whitePlayerColumn<1)||(whitePlayerColumn>8)) {
+				pawnIsValid = false;
+			}
+			
+		} 
+		
+		if(quoridor.getCurrentGame().getMoveMode() == MoveMode.WallMove) {
+			return wallIsValid;
+		}else{
+			return pawnIsValid;
+		}
+	}
+		
 	
 	
 	
@@ -597,6 +744,7 @@ public class QuoridorController {
 	
 	/**
 	 * Feature:load position
+	 * 
 	 * This method load a game position by input a filename
 	 * 
 	 * @param filename
@@ -829,108 +977,11 @@ public class QuoridorController {
 			return isValid;
 
 	}
-
-	
-	
-	/**
-	 * Feature:load game, ValidatePosition
-	 * This method validate if all the pawn and wall position at board 
-	 * is with the board boundary 
-	 * 
-	 * @author Bozhong Lu, Yuelin Liu
-	 * @return boolean
-	 */
-	public static boolean validatePosition() {
-		//TO-DO: Write logic to validate position
-		boolean wallIsValid = true;
-		boolean pawnIsValid = true;
-		Quoridor quoridor = QuoridorApplication.getQuoridor();
-		//Validate WallMove 
-		if(quoridor.getCurrentGame().getMoveMode() == MoveMode.WallMove) {
-			//check overlapping of current wall with all other walls on board
-			WallMove currentWallMove = quoridor.getCurrentGame().getWallMoveCandidate();
-			int row = currentWallMove.getTargetTile().getRow();
-			int column = currentWallMove.getTargetTile().getColumn();
-			Direction currentWallDirection = currentWallMove.getWallDirection();
-			List<Wall> blackWalls = quoridor.getCurrentGame().getCurrentPosition().getBlackWallsOnBoard();
-			List<Wall> whiteWalls = quoridor.getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard();
-			for(Wall wall : blackWalls) {
-				int thisWallColumn = wall.getMove().getTargetTile().getColumn();
-				int thisWallRow = wall.getMove().getTargetTile().getRow();
-				if(wall.getMove().getWallDirection() == Direction.Vertical ) {
-					if(currentWallDirection == Direction.Vertical) {
-						if((column == thisWallColumn)&&((row == thisWallRow+1)||(row == thisWallRow-1)||(row == thisWallRow))) {
-							wallIsValid = false;
-						}
-					}else if (currentWallDirection == Direction.Horizontal) {
-						if((column == thisWallColumn)&&(row == thisWallRow)) {
-							wallIsValid = false;
-						}
-					}
-				}else if(wall.getMove().getWallDirection() == Direction.Horizontal) {
-					if(currentWallDirection == Direction.Vertical) {
-						if((column == thisWallColumn)&&(row == thisWallRow)) {
-							wallIsValid = false;
-						}
-					}else if (currentWallDirection == Direction.Horizontal) {
-						if ((row == thisWallRow)&&((column == thisWallColumn-1)||(column == thisWallColumn+1)||(column == thisWallColumn))) {
-							wallIsValid = false;
-						}
-					}
-				}
-			}
-			for(Wall wall : whiteWalls) {
-				int thisWallColumn = wall.getMove().getTargetTile().getColumn();
-				int thisWallRow = wall.getMove().getTargetTile().getRow();
-				if(wall.getMove().getWallDirection() == Direction.Vertical ) {
-					if(currentWallDirection == Direction.Vertical) {
-						if((column == thisWallColumn)&&((row == thisWallRow+1)||(row == thisWallRow-1)||(row == thisWallRow))) {
-							wallIsValid = false;
-						}
-					}else if (currentWallDirection == Direction.Horizontal) {
-						if((column == thisWallColumn)&&(row == thisWallRow)) {
-							wallIsValid = false;
-						}
-					}
-				}else if(wall.getMove().getWallDirection() == Direction.Horizontal) {
-					if(currentWallDirection == Direction.Vertical) {
-						if((column == thisWallColumn)&&(row == thisWallRow)) {
-							wallIsValid = false;
-						}
-					}else if (currentWallDirection == Direction.Horizontal) {
-						if ((row == thisWallRow)&&((column == thisWallColumn-1)||(column == thisWallColumn+1)||(column == thisWallColumn))) {
-							wallIsValid = false;
-						}
-					}
-				}
-			}
-			//Next Task : Check if the pawn is surrounded by walls after this WallMove. If it is surrounded, then WallMove invalid
-		//Validate PawnMove	
-		}else if(quoridor.getCurrentGame().getMoveMode() == MoveMode.PlayerMove) {
-			
-			int blackPlayerColumn = quoridor.getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getColumn();
-			int blackPlayerRow = quoridor.getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
-			int whitePlayerColumn = quoridor.getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
-			int whitePlayerRow = quoridor.getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
-			
-			if((blackPlayerColumn == whitePlayerColumn) && (blackPlayerRow == whitePlayerRow)) {
-				pawnIsValid = false ;
-			}
-			
-		} 
-		
-		if(quoridor.getCurrentGame().getMoveMode() == MoveMode.WallMove) {
-			return wallIsValid;
-		}else{
-			return pawnIsValid;
-		}
-	}
-		
 	
 	
 	
 	/**
-	 * Feature:laod game
+	 * Feature:load game
 	 * This method return the result of loading game by showing a string
 	 * "Failed to load game" or "Successfully load game!"
 	 * 
@@ -1256,7 +1307,6 @@ public class QuoridorController {
 		 g.setGameStatus(GameStatus.ReadyToStart);
 		 return true;
 	 }
-	 
 	 
 	 
 	 

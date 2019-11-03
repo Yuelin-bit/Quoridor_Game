@@ -2,7 +2,10 @@ package ca.mcgill.ecse223.quoridor.controller;
 
 import java.sql.Time;
 
+import ca.mcgill.ecse223.quoridor.QuoridorApplication;
+import ca.mcgill.ecse223.quoridor.model.Direction;
 import ca.mcgill.ecse223.quoridor.model.Player;
+import ca.mcgill.ecse223.quoridor.model.User;
 
 public class Stopwatch extends Thread{
 	public int minute;
@@ -169,32 +172,34 @@ public class Stopwatch extends Thread{
 	}
 
 	public static void main (String [] args) {
-//		Stopwatch stopwatch = new Stopwatch(0,10);
-//		stopwatch.start();
-//		int index = 0;
-//		while(!stopwatch.timeIsEnd) {
-//			if(stopwatch.timeLeftInSec == 7) {
-//					stopwatch.suspend();
-//				
-//				index++;
-//				System.out.println(index);
-//
-//			}
-//			if(index==2) {
-//				stopwatch.resume();
-//				System.out.println("resume");
-//
-//			}
-//			try {
-//				Thread.sleep(500);
-//			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			System.out.println("total:"+stopwatch.timeLeftInSec);		
-//		}
-//		System.out.println(stopwatch.timeIsEnd);
-//
+		User user1 = QuoridorApplication.getQuoridor().addUser("LOL");
+		Player player = new Player(new Time(3000), user1, 9, Direction.Horizontal);
+		Stopwatch stopwatch = new Stopwatch(player);
+		stopwatch.start();
+		int index = 0;
+		while(!stopwatch.timeIsEnd) {
+			if(stopwatch.timeLeftInSec == 7) {
+					stopwatch.suspend();
+				
+				index++;
+				System.out.println(index);
+
+			}
+			if(index==2) {
+				stopwatch.resume();
+				System.out.println("resume");
+
+			}
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println("total:"+stopwatch.timeLeftInSec);		
+		}
+		System.out.println(stopwatch.timeIsEnd);
+
 		
 	}
 
