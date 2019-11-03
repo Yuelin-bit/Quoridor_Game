@@ -139,31 +139,10 @@ public class SelectName extends JFrame {
 		lblUserNameDne.setForeground(Color.RED);
 		JLabel lblInputMustBe = new JLabel();
 		lblInputMustBe.setForeground(Color.RED);
-		
+
 		JButton btnConfirm = new JButton("Confirm");
 		btnConfirm.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//Check if two names are not equal
-				checked = false;
-				lblNewLabel.setVisible(false);
-				lblUserNameDne.setVisible(false);
-				lblInputMustBe.setVisible(false);
-				String white = String.valueOf(comboBox.getSelectedItem());
-				String black = String.valueOf(comboBox_1.getSelectedItem());
-				QuoridorController.initializeNewGame();
-				boolean result = false;
-				try {
-					result = QuoridorController.setUserName("w", white);
-				} catch (IllegalArgumentException ex) {
-					lblNewLabel.setText(ex.getMessage());
-					lblNewLabel.setVisible(true);
-					return;
-				}
-				if(result) {
-					lblNewLabel.setText("White player name has been changed");
-					lblNewLabel.setVisible(true);
-				}
-			
+			public void actionPerformed(ActionEvent e) {		
 				Integer min = 3;
 				Integer sec = 0; 
 				
@@ -174,38 +153,10 @@ public class SelectName extends JFrame {
 					lblInputMustBe.setText("Input must be number!");
 					lblInputMustBe.setVisible(true);
 				}
-				System.out.println(min+"min");
 
-			//	QuoridorController.setTotalThinkingTime(min, sec);
-			//  QuoridorController.initializeBoard();
-				
-				QuoridorApplication.getQuoridor();
-		
-				result = false;
-				try {
-					result = QuoridorController.setUserName("b", black);
-				} catch (IllegalArgumentException ex) {
-					lblUserNameDne.setText(ex.getMessage());
-					lblUserNameDne.setVisible(true);
-					return;
-				}
-				if(result) {
-					lblUserNameDne.setText("Black player name has been changed");
-					lblUserNameDne.setVisible(true);
-				}
-				
-				Quoridor q = QuoridorApplication.getQuoridor();
-				QuoridorController.initializeNewGame();
-				Player p = q.getCurrentGame().getBlackPlayer();
-				if (p == null) {
-					p = new Player(new Time(0), User.getWithName(black), 9, Direction.Horizontal);
-				}
-		
 //				
 //				QuoridorController.setTotalThinkingTime(min, sec);
 //				QuoridorController.initializeBoard();
-				QuoridorApplication.getQuoridor();
-				checked = true;
 			}
 		});
 		
@@ -223,18 +174,17 @@ public class SelectName extends JFrame {
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(btnConfirm, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE))
 						.addComponent(lblThinkingTime))
-
 					.addGap(61)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(lblUserNameDne, GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
-							.addGap(235))
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(lblInputMustBe)
 							.addContainerGap())
 						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 							.addGroup(gl_contentPane.createSequentialGroup()
-								.addComponent(lblUserNameDne, GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+								.addComponent(lblUserNameDne, GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+								.addGap(235))
+							.addGroup(gl_contentPane.createSequentialGroup()
+								.addComponent(lblUserNameDne, GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
 								.addGap(235))
 							.addGroup(gl_contentPane.createSequentialGroup()
 								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -252,7 +202,7 @@ public class SelectName extends JFrame {
 												.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
 												.addPreferredGap(ComponentPlacement.UNRELATED)
 												.addComponent(lblSec)))))
-								.addContainerGap(102, Short.MAX_VALUE)))))
+								.addContainerGap(111, Short.MAX_VALUE)))))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -281,10 +231,9 @@ public class SelectName extends JFrame {
 					.addGap(115)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnBack)
-
 						.addComponent(btnStart)
 						.addComponent(btnConfirm))
-					.addContainerGap(101, Short.MAX_VALUE))
+					.addContainerGap(84, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
