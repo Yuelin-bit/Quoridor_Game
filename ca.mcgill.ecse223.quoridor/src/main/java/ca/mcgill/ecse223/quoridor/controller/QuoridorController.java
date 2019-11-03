@@ -1030,7 +1030,7 @@ public class QuoridorController {
 	 * 
 	 */
 	public static boolean initializeNewGame() {
-		new Game(GameStatus.Initializing, MoveMode.WallMove, QuoridorApplication.getQuoridor());
+		Game g = new Game(GameStatus.Initializing, MoveMode.WallMove, QuoridorApplication.getQuoridor());
 		return QuoridorApplication.getQuoridor().hasCurrentGame();
 	}
 
