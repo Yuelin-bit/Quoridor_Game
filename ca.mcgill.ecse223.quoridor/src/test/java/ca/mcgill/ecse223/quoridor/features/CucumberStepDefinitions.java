@@ -1365,7 +1365,11 @@ public class CucumberStepDefinitions {
 
 		@Then("The user interface shall be showing it is {string} turn")
 		public void the_user_interface_shall_be_showing_it_is_turn(String string) {
-		    //no need to do anything according to our clock implementation
+			if (string.equals("black")) {
+				Assert.assertEquals("It is black player's turn", QuoridorApplication.getJboard().getTurn());
+			} else {
+				Assert.assertEquals("It is white player's turn", QuoridorApplication.getJboard().getTurn());
+			}
 		}
 		
 		@Then("The clock of {string} shall be stopped")
@@ -1410,6 +1414,12 @@ public class CucumberStepDefinitions {
 		}
 		
 
+		
+		
+		
+		
+		
+		
 		@When ("{int}:{int} is set as the thinking time")
 		public void is_set_as_the_thinking_time(Integer int1, Integer int2) {
 			QuoridorController.setTotalThinkingTime(int1, int2);

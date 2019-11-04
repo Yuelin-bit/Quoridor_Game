@@ -121,7 +121,7 @@ public class LoadPosition extends JFrame {
 						QuoridorController.validation();
 					} catch (Exception e1) {
 						errorHint.showMessageDialog(null, "failed to load game");
-
+						
 					}
 				}
 				
