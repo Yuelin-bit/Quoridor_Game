@@ -55,16 +55,22 @@ public class JBoard extends JFrame {
 	private static final int MAX_WALL =20;
 	private List <JWall> WallList = new ArrayList<JWall>(); 
 	private JWall jwall;
+
+	private JLabel lblNewLabel;
+	private JButton SaveGameButton;
+	private JLabel lblNewLabel_1;
 	public JWall getJwall() {
 		return jwall;
 	}
 	public void setJwall(JWall jwall) {
 		this.jwall = jwall;
 	}
+	private JPanel mainLayerPanel;
 	private JTextField textField;
 	private JTextField textField_1;
 	public Pawn blackPawnMove;
 	public Pawn whitePawnMove;
+	private Tile tile;
 
 	private JOptionPane errorHint;
 	private String error = null;
@@ -120,7 +126,7 @@ public class JBoard extends JFrame {
 
 
 		//Create new panel to control layers
-		JPanel mainLayerPanel = new JPanel();		  
+		mainLayerPanel = new JPanel();		  
 		contentPane.add(mainLayerPanel, BorderLayout.CENTER);		 
 		mainLayerPanel.setBorder(BorderFactory.createLineBorder(Color.orange, 2));
 		mainLayerPanel.setLayout(null);
@@ -128,7 +134,7 @@ public class JBoard extends JFrame {
 
 
 		//add tile(with GroupLayout) to the mainLayerPanel
-		Tile tile = new Tile();
+		tile = new Tile();
 		tile.setBackground(Color.WHITE);
 		tile.setBounds(0, 0, 1000, 800);
 		tile.setOpaque(false);
@@ -179,7 +185,7 @@ public class JBoard extends JFrame {
 		//blackPawnMove.setVisible(true);
 		mainLayerPanel.add(blackPawnMove);
 
-		JButton SaveGameButton = new JButton("Save and Back");
+		SaveGameButton = new JButton("Save and Back");
 		SaveGameButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -193,9 +199,9 @@ public class JBoard extends JFrame {
 			}
 		});
 
-		JLabel lblNewLabel = new JLabel("Black S");
+		lblNewLabel = new JLabel("Black S");
 
-		JLabel lblNewLabel_1 = new JLabel("White S");
+		lblNewLabel_1 = new JLabel("White S");
 
 		textField = new JTextField();
 		textField.setColumns(10);

@@ -26,10 +26,8 @@ import ca.mcgill.ecse223.quoridor.model.*;
 import ca.mcgill.ecse223.quoridor.model.Game.GameStatus;
 import ca.mcgill.ecse223.quoridor.model.Game.MoveMode;
 import ca.mcgill.ecse223.quoridor.view.JBoard;
-<<<<<<< HEAD
-=======
 import ca.mcgill.ecse223.quoridor.view.JWall;
->>>>>>> 842f7e902ef71f5593b9e701604c8d249d30bb19
+
 
 public class QuoridorController {
 	
@@ -171,7 +169,7 @@ public class QuoridorController {
 		if((QuoridorController.verifyOverlapped(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate()))
 				||(QuoridorController.verifyOutsideTheBoard(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate())))
 		{
-						QuoridorApplication.setJboard(new JBoard());
+						QuoridorApplication.setJBoard(new JBoard());
 						QuoridorApplication.getJboard().setJwall(new JWall());
 				}
 		
@@ -206,7 +204,7 @@ public class QuoridorController {
 		
 		if(QuoridorController.verifyOverlapped(wallmove)==true) 
 		{
-			QuoridorApplication.setJboard(new JBoard());
+			QuoridorApplication.setJBoard(new JBoard());
 		QuoridorApplication.getJboard().notifyIllegal();
 		}
 	
@@ -291,7 +289,7 @@ public class QuoridorController {
 		
 			if(QuoridorController.verifyOnEdge(string)==true) 
 			{
-				QuoridorApplication.setJboard(new JBoard());
+				QuoridorApplication.setJBoard(new JBoard());
 			QuoridorApplication.getJboard().notifyIllegal();
 			}
 			//JOptionPane.showMessageDialog(null, "It is illegal!!!");
