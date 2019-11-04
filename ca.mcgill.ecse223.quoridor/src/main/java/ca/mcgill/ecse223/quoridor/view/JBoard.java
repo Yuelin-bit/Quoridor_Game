@@ -90,7 +90,7 @@ public class JBoard extends JFrame {
 		this.errorHint = errorHint;
 	}
 	public void notifyIllegal() {
-		this.setError("Illegal");
+		this.setError("I will give a dialog immediately you release a illegal wall, So do not worry if you notice there are some dialogs when you running the JUnit Test! Just close it!");
 		this.errorHint.showMessageDialog(null, error);
 	}
 	/**

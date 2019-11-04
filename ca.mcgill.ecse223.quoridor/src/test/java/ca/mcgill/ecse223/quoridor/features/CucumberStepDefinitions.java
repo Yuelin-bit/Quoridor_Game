@@ -244,7 +244,7 @@ public class CucumberStepDefinitions {
 	public void my_move_shall_be_completed() {
 		
 		//Assert.assertEquals(true, QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove().hasNextPlayer());
-		//Assert.assertEquals(true, QuoridorApplication.getQuoridor().getCurrentGame().hasWallMoveCandidate());
+		Assert.assertEquals(true, QuoridorApplication.getQuoridor().getCurrentGame().hasWallMoveCandidate());
 	}
 
 	@Then("It shall not be my turn to move")
@@ -307,7 +307,7 @@ public class CucumberStepDefinitions {
 		//It could be GUI
 	    //TA said that I could fill this out later.
 		//JOptionPane.showMessageDialog(null, "It is illegal!!!");
-		Assert.assertEquals("Illegal",QuoridorApplication.getJboard().getError());
+		Assert.assertEquals("I will give a dialog immediately you release a illegal wall, So do not worry if you notice there are some dialogs when you running the JUnit Test! Just close it!",QuoridorApplication.getJboard().getError());
 		//throw new cucumber.api.PendingException();
 	}
 
@@ -490,7 +490,7 @@ public class CucumberStepDefinitions {
 	@Then("I shall be notified that my move is illegal")
 	public void i_shall_be_notified_that_my_move_is_illegal() {
 		// GUI-related feature -- TODO for later
-		Assert.assertEquals("Illegal",QuoridorApplication.getJboard().getError());
+		Assert.assertEquals("I will give a dialog immediately you release a illegal wall, So do not worry if you notice there are some dialogs when you running the JUnit Test! Just close it!",QuoridorApplication.getJboard().getError());
 		//throw new cucumber.api.PendingException();
 	}
 
