@@ -169,7 +169,7 @@ public class QuoridorController {
 		if((QuoridorController.verifyOverlapped(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate()))
 				||(QuoridorController.verifyOutsideTheBoard(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate())))
 		{
-						QuoridorApplication.setJBoard(new JBoard());
+						QuoridorApplication.setJboard(new JBoard());
 						QuoridorApplication.getJboard().setJwall(new JWall());
 				}
 		
@@ -203,7 +203,7 @@ public class QuoridorController {
 		
 		if(QuoridorController.verifyOverlapped(wallmove)==true) 
 		{
-			QuoridorApplication.setJBoard(new JBoard());
+			QuoridorApplication.setJboard(new JBoard());
 		QuoridorApplication.getJboard().notifyIllegal();
 		}
 	
@@ -288,7 +288,7 @@ public class QuoridorController {
 		
 			if(QuoridorController.verifyOnEdge(string)==true) 
 			{
-				QuoridorApplication.setJBoard(new JBoard());
+				QuoridorApplication.setJboard(new JBoard());
 			QuoridorApplication.getJboard().notifyIllegal();
 			}
 			//JOptionPane.showMessageDialog(null, "It is illegal!!!");

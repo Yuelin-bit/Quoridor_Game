@@ -396,15 +396,14 @@ public class JBoard extends JFrame {
 					}
 				}
 				if (e.getKeyChar()=='t') if (e.getKeyChar()=='t') {
-<<<<<<< HEAD
+
 					//QuoridorController.initializeNewGame();
 					//QuoridorController.initializeBlackWall(g, blackPlayer)
 				//	QuoridorController.ReleaseWall(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate());
-=======
+
 //					QuoridorController.initializeNewGame();
 //					QuoridorController.ReleaseWall(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate());
 
->>>>>>> 55ab2b15b9cfb08172678fbb781b910ba3ff97fe
 					if(WALL_INDEX<MAX_WALL&&grab) {
 						jwall.setBackground(Color.MAGENTA);
 						mainLayerPanel.remove(jwall);

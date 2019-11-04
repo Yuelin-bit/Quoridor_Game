@@ -296,7 +296,7 @@ public class CucumberStepDefinitions {
 		boolean c = QuoridorController.verifyOutsideTheBoard(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate());
 		boolean d = c||b;
 		Assert.assertEquals(true,d);
-		QuoridorApplication.setJBoard(new JBoard());
+		QuoridorApplication.setJboard(new JBoard());
 		
 }
 	    
