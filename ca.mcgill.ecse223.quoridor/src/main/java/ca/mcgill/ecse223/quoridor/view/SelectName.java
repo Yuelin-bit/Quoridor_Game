@@ -82,6 +82,7 @@ public class SelectName extends JFrame {
 		
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				QuoridorApplication.getQuoridor().getCurrentGame().delete();
 				MainMenu m = new MainMenu();
 				m.setVisible(true);
 				setVisible(false);
