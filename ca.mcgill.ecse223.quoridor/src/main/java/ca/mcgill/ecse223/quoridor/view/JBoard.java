@@ -55,7 +55,7 @@ public class JBoard extends JFrame {
 	private static final int MAX_WALL =20;
 	private List <JWall> WallList = new ArrayList<JWall>(); 
 	private JWall jwall;
-
+	public boolean whiteTurn;
 	private JLabel lblNewLabel;
 	private JButton SaveGameButton;
 	private JLabel lblNewLabel_1;
@@ -65,7 +65,7 @@ public class JBoard extends JFrame {
 	public void setJwall(JWall jwall) {
 		this.jwall = jwall;
 	}
-	public JPanel mainLayerPanel;
+	private JPanel mainLayerPanel;
 	private JTextField textField;
 	private JTextField textField_1;
 	public Pawn blackPawnMove;
@@ -121,11 +121,8 @@ public class JBoard extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
-		try {
 		getContentPane().add(contentPane);
-		}catch(Exception e) {
-			
-		}
+
 
 
 		//Create new panel to control layers
@@ -167,26 +164,20 @@ public class JBoard extends JFrame {
 		JLabel playerToMove = new JLabel("WHITE");
 		playerToMove.setBounds(650, 550, 100, 50);
 		mainLayerPanel.add(playerToMove);
-		playerToMove.setVisible(true);	
+		
 
 		JLabel playerToMove1 = new JLabel("BLACK");
 		playerToMove1.setBounds(700, 550, 100, 50);
 		mainLayerPanel.add(playerToMove1);
-		playerToMove1.setVisible(true);
 
 		whitePawnMove = new Pawn(PawnColor.WHITE);
 		whitePawnMove.setBounds(650, 500, 50, 50);
-		//TODO 
-		//whitePawnMove.setVisible(true);
-		mainLayerPanel.add(whitePawnMove);
-
+	
 		blackPawnMove = new Pawn(PawnColor.BLACK);
 		blackPawnMove.setBounds(700, 500, 50, 50);
-		//TODO
-		//blackPawnMove.setVisible(false);
-
-		//blackPawnMove.setVisible(true);
-		mainLayerPanel.add(blackPawnMove);
+		blackPawnMove.setVisible(false);
+		blackPawnMove.setVisible(false);
+		
 
 		SaveGameButton = new JButton("Save and Back");
 		SaveGameButton.addActionListener(new ActionListener() {
@@ -269,6 +260,9 @@ public class JBoard extends JFrame {
 		}
 		jwall = WallList.get(WALL_INDEX);
 
+		whiteTurn = true;
+		mainLayerPanel.add(whitePawnMove);
+		whitePawnMove.setVisible(whiteTurn);	
 
 		//add KeyBoard listener!
 		addKeyListener(new KeyAdapter() {
@@ -288,8 +282,15 @@ public class JBoard extends JFrame {
 						//QuoridorController.MoveWall("up");
 						int x = jwall.getLocation().x;
 						int y = jwall.getLocation().y;
+						
+						if(jwall.getHeight()==110) {
 						if(((x)>=120)&&((x)<=540)&&((y-60)>=60)&&((y-60)<=480))
-							jwall.setLocation(x, y-60);
+							jwall.setLocation(x, y-60);}
+						
+						if(jwall.getHeight()==10) {
+							if(((x)>=60)&&((x)<=540)&&((y-60)>=60)&&((y-60)<=540))
+								jwall.setLocation(x, y-60);}
+						
 					}
 				}
 				if ((e.getKeyChar()=='a')||(e.getKeyCode() == KeyEvent.VK_LEFT)) {
@@ -297,8 +298,14 @@ public class JBoard extends JFrame {
 						//QuoridorController.MoveWall("left");
 						int x = jwall.getLocation().x;
 						int y = jwall.getLocation().y;
+						
+						if(jwall.getHeight()==110) {
 						if(((x-60)>=120)&&((x-60)<=540)&&((y)>=60)&&((y)<=480))
-							jwall.setLocation(x-60, y);
+							jwall.setLocation(x-60, y);}
+						
+						if(jwall.getHeight()==10) {
+							if(((x-60)>=60)&&((x-60)<=540)&&((y)>=60)&&((y)<=540))
+								jwall.setLocation(x-60, y);}
 					}
 				}
 				if ((e.getKeyChar()=='s')||(e.getKeyCode() == KeyEvent.VK_DOWN)) {
@@ -306,8 +313,13 @@ public class JBoard extends JFrame {
 						//QuoridorController.MoveWall("down");
 						int x = jwall.getLocation().x;
 						int y = jwall.getLocation().y;
+						if(jwall.getHeight()==110) {
 						if(((x)>=120)&&((x)<=540)&&((y+60)>=60)&&((y+60)<=480))
-							jwall.setLocation(x, y+60);
+							jwall.setLocation(x, y+60);}
+						if(jwall.getHeight()==10) {
+							if(((x)>=60)&&((x)<=540)&&((y+60)>=60)&&((y+60)<=540))
+								jwall.setLocation(x, y+60);}
+						
 					}
 				}
 				if ((e.getKeyChar()=='d')||(e.getKeyCode() == KeyEvent.VK_RIGHT)) {
@@ -315,8 +327,12 @@ public class JBoard extends JFrame {
 						//QuoridorController.MoveWall("right");
 						int x = jwall.getLocation().x;
 						int y = jwall.getLocation().y;
+						if(jwall.getHeight()==110) {
 						if(((x+60)>=120)&&((x+60)<=540)&&((y)>=60)&&((y)<=480))
-							jwall.setLocation(x+60, y);
+							jwall.setLocation(x+60, y);}
+						if(jwall.getHeight()==10) {
+							if(((x+60)>=60)&&((x+60)<=540)&&((y)>=60)&&((y)<=540))
+								jwall.setLocation(x+60, y);}
 					}
 				}
 				if (e.getKeyChar()=='r'&&grab) {
@@ -338,6 +354,8 @@ public class JBoard extends JFrame {
 					}
 				}
 				if (e.getKeyChar()=='t') if (e.getKeyChar()=='t') {
+//					QuoridorController.initializeNewGame();
+//					QuoridorController.ReleaseWall(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate());
 					if(WALL_INDEX<MAX_WALL&&grab) {
 						jwall.setBackground(Color.MAGENTA);
 						mainLayerPanel.remove(jwall);
@@ -347,6 +365,12 @@ public class JBoard extends JFrame {
 							jwall = WallList.get(WALL_INDEX);
 						}
 						grab = false;
+						whiteTurn = !whiteTurn;
+						mainLayerPanel.add(blackPawnMove);
+						mainLayerPanel.add(whitePawnMove);
+						whitePawnMove.setVisible(whiteTurn);	
+						blackPawnMove.setVisible(!whiteTurn);	
+								
 					}
 				}
 
@@ -357,197 +381,5 @@ public class JBoard extends JFrame {
 		image=ImageIO.read(new File("H:\\aa.jpg"));*/
 
 
-	}
-	/**
-	 * @return the serialversionuid
-	 */
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-	/**
-	 * @return the contentPane
-	 */
-	public JPanel getContentPane() {
-		return contentPane;
-	}
-	/**
-	 * @return the display_number_black_stock
-	 */
-	public JTextField getDisplay_number_black_stock() {
-		return display_number_black_stock;
-	}
-	/**
-	 * @return the display_number_white_stock
-	 */
-	public JTextField getDisplay_number_white_stock() {
-		return display_number_white_stock;
-	}
-	/**
-	 * @return the wALL_INDEX
-	 */
-	public int getWALL_INDEX() {
-		return WALL_INDEX;
-	}
-	/**
-	 * @return the maxWall
-	 */
-	public static int getMaxWall() {
-		return MAX_WALL;
-	}
-	/**
-	 * @return the wallList
-	 */
-	public List<JWall> getWallList() {
-		return WallList;
-	}
-	/**
-	 * @return the lblNewLabel
-	 */
-	public JLabel getLblNewLabel() {
-		return lblNewLabel;
-	}
-	/**
-	 * @return the saveGameButton
-	 */
-	public JButton getSaveGameButton() {
-		return SaveGameButton;
-	}
-	/**
-	 * @return the lblNewLabel_1
-	 */
-	public JLabel getLblNewLabel_1() {
-		return lblNewLabel_1;
-	}
-	/**
-	 * @return the mainLayerPanel
-	 */
-	public JPanel getMainLayerPanel() {
-		return mainLayerPanel;
-	}
-	/**
-	 * @return the textField
-	 */
-	public JTextField getTextField() {
-		return textField;
-	}
-	/**
-	 * @return the textField_1
-	 */
-	public JTextField getTextField_1() {
-		return textField_1;
-	}
-	/**
-	 * @return the blackPawnMove
-	 */
-	public Pawn getBlackPawnMove() {
-		return blackPawnMove;
-	}
-	/**
-	 * @return the whitePawnMove
-	 */
-	public Pawn getWhitePawnMove() {
-		return whitePawnMove;
-	}
-	/**
-	 * @return the tile
-	 */
-	public Tile getTile() {
-		return tile;
-	}
-	/**
-	 * @return the grab
-	 */
-	public boolean isGrab() {
-		return grab;
-	}
-	/**
-	 * @param contentPane the contentPane to set
-	 */
-	public void setContentPane(JPanel contentPane) {
-		this.contentPane = contentPane;
-	}
-	/**
-	 * @param display_number_black_stock the display_number_black_stock to set
-	 */
-	public void setDisplay_number_black_stock(JTextField display_number_black_stock) {
-		this.display_number_black_stock = display_number_black_stock;
-	}
-	/**
-	 * @param display_number_white_stock the display_number_white_stock to set
-	 */
-	public void setDisplay_number_white_stock(JTextField display_number_white_stock) {
-		this.display_number_white_stock = display_number_white_stock;
-	}
-	/**
-	 * @param wALL_INDEX the wALL_INDEX to set
-	 */
-	public void setWALL_INDEX(int wALL_INDEX) {
-		WALL_INDEX = wALL_INDEX;
-	}
-	/**
-	 * @param wallList the wallList to set
-	 */
-	public void setWallList(List<JWall> wallList) {
-		WallList = wallList;
-	}
-	/**
-	 * @param lblNewLabel the lblNewLabel to set
-	 */
-	public void setLblNewLabel(JLabel lblNewLabel) {
-		this.lblNewLabel = lblNewLabel;
-	}
-	/**
-	 * @param saveGameButton the saveGameButton to set
-	 */
-	public void setSaveGameButton(JButton saveGameButton) {
-		SaveGameButton = saveGameButton;
-	}
-	/**
-	 * @param lblNewLabel_1 the lblNewLabel_1 to set
-	 */
-	public void setLblNewLabel_1(JLabel lblNewLabel_1) {
-		this.lblNewLabel_1 = lblNewLabel_1;
-	}
-	/**
-	 * @param mainLayerPanel the mainLayerPanel to set
-	 */
-	public void setMainLayerPanel(JPanel mainLayerPanel) {
-		this.mainLayerPanel = mainLayerPanel;
-	}
-	/**
-	 * @param textField the textField to set
-	 */
-	public void setTextField(JTextField textField) {
-		this.textField = textField;
-	}
-	/**
-	 * @param textField_1 the textField_1 to set
-	 */
-	public void setTextField_1(JTextField textField_1) {
-		this.textField_1 = textField_1;
-	}
-	/**
-	 * @param blackPawnMove the blackPawnMove to set
-	 */
-	public void setBlackPawnMove(Pawn blackPawnMove) {
-		this.blackPawnMove = blackPawnMove;
-	}
-	/**
-	 * @param whitePawnMove the whitePawnMove to set
-	 */
-	public void setWhitePawnMove(Pawn whitePawnMove) {
-		this.whitePawnMove = whitePawnMove;
-	}
-	/**
-	 * @param tile the tile to set
-	 */
-	public void setTile(Tile tile) {
-		this.tile = tile;
-	}
-	/**
-	 * @param grab the grab to set
-	 */
-	public void setGrab(boolean grab) {
-		this.grab = grab;
 	}
 }
