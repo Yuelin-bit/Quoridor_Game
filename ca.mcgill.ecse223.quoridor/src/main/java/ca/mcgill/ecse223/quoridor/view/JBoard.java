@@ -55,7 +55,7 @@ public class JBoard extends JFrame {
 	private static final int MAX_WALL =20;
 	private List <JWall> WallList = new ArrayList<JWall>(); 
 	private JWall jwall;
-
+	public boolean whiteTurn;
 	private JLabel lblNewLabel;
 	private JButton SaveGameButton;
 	private JLabel lblNewLabel_1;
@@ -166,26 +166,20 @@ public class JBoard extends JFrame {
 		JLabel playerToMove = new JLabel("WHITE");
 		playerToMove.setBounds(650, 550, 100, 50);
 		mainLayerPanel.add(playerToMove);
-		playerToMove.setVisible(true);	
+		
 
 		JLabel playerToMove1 = new JLabel("BLACK");
 		playerToMove1.setBounds(700, 550, 100, 50);
 		mainLayerPanel.add(playerToMove1);
-		playerToMove1.setVisible(true);
 
 		whitePawnMove = new Pawn(PawnColor.WHITE);
 		whitePawnMove.setBounds(650, 500, 50, 50);
-		//TODO 
-		//whitePawnMove.setVisible(true);
-		mainLayerPanel.add(whitePawnMove);
-
+	
 		blackPawnMove = new Pawn(PawnColor.BLACK);
 		blackPawnMove.setBounds(700, 500, 50, 50);
-		//TODO
-		//blackPawnMove.setVisible(false);
-
-		//blackPawnMove.setVisible(true);
-		mainLayerPanel.add(blackPawnMove);
+		blackPawnMove.setVisible(false);
+		blackPawnMove.setVisible(false);
+		
 
 		SaveGameButton = new JButton("Save and Back");
 		SaveGameButton.addActionListener(new ActionListener() {
@@ -308,6 +302,9 @@ public class JBoard extends JFrame {
 		     }
 		jwall = WallList.get(WALL_INDEX);
 
+		whiteTurn = true;
+		mainLayerPanel.add(whitePawnMove);
+		whitePawnMove.setVisible(whiteTurn);	
 
 		//add KeyBoard listener!
 		addKeyListener(new KeyAdapter() {
@@ -399,9 +396,15 @@ public class JBoard extends JFrame {
 					}
 				}
 				if (e.getKeyChar()=='t') if (e.getKeyChar()=='t') {
+<<<<<<< HEAD
 					//QuoridorController.initializeNewGame();
 					//QuoridorController.initializeBlackWall(g, blackPlayer)
 				//	QuoridorController.ReleaseWall(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate());
+=======
+//					QuoridorController.initializeNewGame();
+//					QuoridorController.ReleaseWall(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate());
+
+>>>>>>> 55ab2b15b9cfb08172678fbb781b910ba3ff97fe
 					if(WALL_INDEX<MAX_WALL&&grab) {
 						jwall.setBackground(Color.MAGENTA);
 						mainLayerPanel.remove(jwall);
@@ -411,6 +414,12 @@ public class JBoard extends JFrame {
 							jwall = WallList.get(WALL_INDEX);
 						}
 						grab = false;
+						whiteTurn = !whiteTurn;
+						mainLayerPanel.add(blackPawnMove);
+						mainLayerPanel.add(whitePawnMove);
+						whitePawnMove.setVisible(whiteTurn);	
+						blackPawnMove.setVisible(!whiteTurn);	
+								
 					}
 				}
 

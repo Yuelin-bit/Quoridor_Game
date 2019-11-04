@@ -1240,9 +1240,14 @@ public class QuoridorController {
 	 * @return A flag indicating whether the method successfully launched.
 	 */
 	public static void initializeBoard() {
-//		QuoridorApplication app = new QuoridorApplication();
-//		JBoard jboard = new JBoard(app);
+//		QuoridorApplication.setJBoard(new JBoard());
 		Board board = new Board(QuoridorApplication.getQuoridor());
+		for(int i = 1; i<= 9; i++) {
+			for(int j = 1; j<=9; j++) {
+				Tile tile = new Tile(i, j, board);
+				board.addTile(tile);
+			}
+		}
 		Game game = QuoridorApplication.getQuoridor().getCurrentGame();
 		QuoridorApplication.getQuoridor().setBoard(board);
 		Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
@@ -1257,6 +1262,7 @@ public class QuoridorController {
 		initializeWhiteWall(g,whitePlayer);
 		initializeBlackWall(g,blackPlayer);
 		g.setPlayerToMove(whitePlayer);
+//		QuoridorApplication.getJboard().mainLayerPanel.setVisible(true);
 //		QuoridorApplication.getJboard().whitePawnMove.setVisible(false);
 //		QuoridorApplication.getJboard().whitePawnMove.setVisible(true);
 	}
