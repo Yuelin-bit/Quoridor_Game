@@ -47,6 +47,7 @@ public class JBoard extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 5127583580230421217L;
+//	private QuoridorApplication Application;
 	private JPanel contentPane;
 	private JTextField display_number_black_stock;
 	private JTextField display_number_white_stock;
@@ -54,14 +55,23 @@ public class JBoard extends JFrame {
 	private static final int MAX_WALL =20;
 	private List <JWall> WallList = new ArrayList<JWall>(); 
 	private JWall jwall;
+
+	private JLabel lblNewLabel;
+	private JButton SaveGameButton;
+	private JLabel lblNewLabel_1;
 	public JWall getJwall() {
 		return jwall;
 	}
 	public void setJwall(JWall jwall) {
 		this.jwall = jwall;
 	}
+	private JPanel mainLayerPanel;
 	private JTextField textField;
 	private JTextField textField_1;
+	public Pawn blackPawnMove;
+	public Pawn whitePawnMove;
+	private Tile tile;
+
 	private JOptionPane errorHint;
 	private String error = null;
 	private boolean grab = false;
@@ -102,7 +112,7 @@ public class JBoard extends JFrame {
 
 
 	public JBoard() {
-
+//		this.Application = Application;
 		setFocusable(true);
 
 		//Init
@@ -116,7 +126,7 @@ public class JBoard extends JFrame {
 
 
 		//Create new panel to control layers
-		JPanel mainLayerPanel = new JPanel();		  
+		mainLayerPanel = new JPanel();		  
 		contentPane.add(mainLayerPanel, BorderLayout.CENTER);		 
 		mainLayerPanel.setBorder(BorderFactory.createLineBorder(Color.orange, 2));
 		mainLayerPanel.setLayout(null);
@@ -124,7 +134,7 @@ public class JBoard extends JFrame {
 
 
 		//add tile(with GroupLayout) to the mainLayerPanel
-		Tile tile = new Tile();
+		tile = new Tile();
 		tile.setBackground(Color.WHITE);
 		tile.setBounds(0, 0, 1000, 800);
 		tile.setOpaque(false);
@@ -161,21 +171,21 @@ public class JBoard extends JFrame {
 		mainLayerPanel.add(playerToMove1);
 		playerToMove1.setVisible(true);
 
-		Pawn whitePawnMove = new Pawn(PawnColor.WHITE);
+		whitePawnMove = new Pawn(PawnColor.WHITE);
 		whitePawnMove.setBounds(650, 500, 50, 50);
 		//TODO 
-		whitePawnMove.setVisible(true);
+		//whitePawnMove.setVisible(true);
 		mainLayerPanel.add(whitePawnMove);
 
-		Pawn blackPawnMove = new Pawn(PawnColor.BLACK);
+		blackPawnMove = new Pawn(PawnColor.BLACK);
 		blackPawnMove.setBounds(700, 500, 50, 50);
 		//TODO
-		blackPawnMove.setVisible(false);
+		//blackPawnMove.setVisible(false);
 
 		//blackPawnMove.setVisible(true);
 		mainLayerPanel.add(blackPawnMove);
 
-		JButton SaveGameButton = new JButton("Save and Back");
+		SaveGameButton = new JButton("Save and Back");
 		SaveGameButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -189,9 +199,9 @@ public class JBoard extends JFrame {
 			}
 		});
 
-		JLabel lblNewLabel = new JLabel("Black S");
+		lblNewLabel = new JLabel("Black S");
 
-		JLabel lblNewLabel_1 = new JLabel("White S");
+		lblNewLabel_1 = new JLabel("White S");
 
 		textField = new JTextField();
 		textField.setColumns(10);
