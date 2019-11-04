@@ -1388,19 +1388,6 @@ public class QuoridorController {
 			throw new RuntimeException();
 		}
 	}
-	
-	/**
-	  * This method checks the clock of the current player to count down.
-	  * It returns true if the clock is counting down.
-	  * 
-	  * @author Sun, Gengyi
-	  * @param player
-	  * @return A flag indicating whether the method successfully launched.
-	  */ 
-	 public static boolean clockIsCountingDown(Player player) {
-	   throw new UnsupportedOperationException();
-	 }
-	 
 	 /**
 	  * This is a method that tells if the game is ready to start.
 	  * If so, the GameStatus will be changed to ready to start
@@ -1439,10 +1426,10 @@ public class QuoridorController {
 //			 System.out.println("has current pos");
 //			 return false;
 //		 }
-		 if(!QuoridorApplication.getQuoridor().hasBoard()) {
-			 System.out.println("no board");
-			 return false;
-		 }
+//		 if(!QuoridorApplication.getQuoridor().hasBoard()) {
+//			 System.out.println("no board");
+//			 return false;
+//		 }
 		 
 		 
 		 
