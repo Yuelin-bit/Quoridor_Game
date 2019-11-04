@@ -1404,23 +1404,27 @@ public class CucumberStepDefinitions {
 		@When ("The initialization of the board is initiated")
 		public void the_initialization_of_the_board_is_initiated() {
 			QuoridorController.initializeBoard();
+			whiteStartTime = System.currentTimeMillis();
 		}
 
 		@Then("It shall be white player to move")
 		public void it_shall_be_white_player_to_move() {		
 			boolean whiteToMove = false;
-			if(QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove().equals(QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer())) {
+			Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
+			GamePosition g = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition();
+			
+			Player currentPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
+			if(whitePlayer.equals(currentPlayer)) {
 				whiteToMove = true;
 			}
 			assertEquals(true,whiteToMove);
-
 		}
 
 		@Then("White's pawn shall be in its initial position")
 		public void white_s_pawn_shall_be_in_its_initial_position() {
 			//white starts from e9
-			int whiteRow = 9;
-			int whiteColumn = 'e';
+			int whiteRow = 5;
+			int whiteColumn = 9;
 			int whiteCurrentRow = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
 			int whiteCurrentColumn = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
 			assertEquals(whiteRow,whiteCurrentRow);
@@ -1431,8 +1435,8 @@ public class CucumberStepDefinitions {
 		@Then("Black's pawn shall be in its initial position")
 		public void black_s_pawn_shall_be_in_its_initial_position() {
 			//black starts from e1, e is column and 1 is row
-			int blackRow = 1;
-			int blackColumn = 'e';
+			int blackRow = 5;
+			int blackColumn = 1;
 			int blackCurrentRow = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
 			int blackCurrentColumn = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getColumn();
 			assertEquals(blackRow,blackCurrentRow);
@@ -1455,8 +1459,7 @@ public class CucumberStepDefinitions {
 		//TODO: Duplicate controller method needed
 		@Then("White's clock shall be counting down")
 		public void white_s_clock_shall_be_counting_down() {
-			boolean clockIsRunning = 
-					QuoridorController.clockIsCountingDown(QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer());
+			boolean clockIsRunning = whiteStartTime!=null;
 			assertEquals(true, clockIsRunning);
 
 		}

@@ -632,7 +632,132 @@ public class QuoridorController {
 		String filePath = gameFile.getCanonicalPath();
 		File gameFilePath = new File(filePath);
 		gameFilePath.delete();
-	}	
+	}
+	
+	
+	/**
+	 * Feature: ValidatePosition
+	 * This method validate if all the pawn and wall position at board 
+	 * is within the board boundary 
+	 * 
+	 * @author Bozhong Lu
+	 * @return boolean
+	 */
+	public static boolean validatePosition() {
+		//TO-DO: Write logic to validate position
+		boolean wallIsValid = true;
+		boolean pawnIsValid = true;
+		Quoridor quoridor = QuoridorApplication.getQuoridor();
+		//Validate WallMove 
+		if(quoridor.getCurrentGame().getMoveMode() == MoveMode.WallMove) {
+			//check overlapping of current wall with all other walls on board
+			WallMove currentWallMove = quoridor.getCurrentGame().getWallMoveCandidate();
+			int row = currentWallMove.getTargetTile().getRow();
+			int column = currentWallMove.getTargetTile().getColumn();
+			Direction currentWallDirection = currentWallMove.getWallDirection();
+			List<Wall> blackWalls = quoridor.getCurrentGame().getCurrentPosition().getBlackWallsOnBoard();
+			List<Wall> whiteWalls = quoridor.getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard();
+			for(Wall wall : blackWalls) {
+				int thisWallColumn = wall.getMove().getTargetTile().getColumn();
+				int thisWallRow = wall.getMove().getTargetTile().getRow();
+				if(wall.getMove().getWallDirection() == Direction.Vertical ) {
+					if(currentWallDirection == Direction.Vertical) {
+						if((column == thisWallColumn)&&((row == thisWallRow+1)||(row == thisWallRow-1)||(row == thisWallRow))) {
+							wallIsValid = false;
+						}
+					}else if (currentWallDirection == Direction.Horizontal) {
+						if((column == thisWallColumn)&&(row == thisWallRow)) {
+							wallIsValid = false;
+						}
+					}
+				}else if(wall.getMove().getWallDirection() == Direction.Horizontal) {
+					if(currentWallDirection == Direction.Vertical) {
+						if((column == thisWallColumn)&&(row == thisWallRow)) {
+							wallIsValid = false;
+						}
+					}else if (currentWallDirection == Direction.Horizontal) {
+						if ((row == thisWallRow)&&((column == thisWallColumn-1)||(column == thisWallColumn+1)||(column == thisWallColumn))) {
+							wallIsValid = false;
+						}
+					}
+				}
+			}
+			for(Wall wall : whiteWalls) {
+				int thisWallColumn = wall.getMove().getTargetTile().getColumn();
+				int thisWallRow = wall.getMove().getTargetTile().getRow();
+				if(wall.getMove().getWallDirection() == Direction.Vertical ) {
+					if(currentWallDirection == Direction.Vertical) {
+						if((column == thisWallColumn)&&((row == thisWallRow+1)||(row == thisWallRow-1)||(row == thisWallRow))) {
+							wallIsValid = false;
+						}
+					}else if (currentWallDirection == Direction.Horizontal) {
+						if((column == thisWallColumn)&&(row == thisWallRow)) {
+							wallIsValid = false;
+						}
+					}
+				}else if(wall.getMove().getWallDirection() == Direction.Horizontal) {
+					if(currentWallDirection == Direction.Vertical) {
+						if((column == thisWallColumn)&&(row == thisWallRow)) {
+							wallIsValid = false;
+						}
+					}else if (currentWallDirection == Direction.Horizontal) {
+						if ((row == thisWallRow)&&((column == thisWallColumn-1)||(column == thisWallColumn+1)||(column == thisWallColumn))) {
+							wallIsValid = false;
+						}
+					}
+				}
+			}
+			//Check if the wall is within the boundary
+			int currentWallColumn = quoridor.getCurrentGame().getWallMoveCandidate().getTargetTile().getColumn();
+			int currentWallRow = quoridor.getCurrentGame().getWallMoveCandidate().getTargetTile().getRow();
+
+			if((currentWallColumn<1)) {
+				wallIsValid = false;
+			}
+			if((currentWallColumn>8)) {
+				wallIsValid = false;
+			}
+			if((currentWallRow<1)) {
+				wallIsValid = false;
+			}
+			if((currentWallRow>8)) {
+				wallIsValid = false;
+			}
+		//Next Task : Check if the pawn is surrounded by walls after this WallMove. If it is surrounded, then WallMove invalid
+		//Validate PawnMove	
+		}else if(quoridor.getCurrentGame().getMoveMode() == MoveMode.PlayerMove) {
+			
+			int blackPlayerColumn = quoridor.getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getColumn();
+			int blackPlayerRow = quoridor.getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
+			int whitePlayerColumn = quoridor.getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
+			int whitePlayerRow = quoridor.getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
+			//check whether the position is already occupied by another player
+			if((blackPlayerColumn == whitePlayerColumn) && (blackPlayerRow == whitePlayerRow)) {
+				pawnIsValid = false ;
+			}
+			//check whether the position is within the boundary of the board
+			if((blackPlayerColumn<1)||(blackPlayerColumn>8)) {
+				pawnIsValid = false;
+			}
+			if((blackPlayerRow<1)||(blackPlayerRow>8)) {
+				pawnIsValid = false;
+			}
+			if((whitePlayerRow<1)||(whitePlayerRow>8)) {
+				pawnIsValid = false;
+			}
+			if((whitePlayerColumn<1)||(whitePlayerColumn>8)) {
+				pawnIsValid = false;
+			}
+			
+		} 
+		
+		if(quoridor.getCurrentGame().getMoveMode() == MoveMode.WallMove) {
+			return wallIsValid;
+		}else{
+			return pawnIsValid;
+		}
+	}
+		
 	
 	
 	
@@ -873,6 +998,7 @@ public class QuoridorController {
 			return isValid;
 
 	}
+<<<<<<< HEAD
 
 	
 	
@@ -999,11 +1125,13 @@ public class QuoridorController {
 		}
 	}
 		
+=======
+>>>>>>> d1822e653e4cae328c409ebe2ba3e77cb3db04c8
 	
 	
 	
 	/**
-	 * Feature:laod game
+	 * Feature:load game
 	 * This method return the result of loading game by showing a string
 	 * "Failed to load game" or "Successfully load game!"
 	 * 
@@ -1120,13 +1248,20 @@ public class QuoridorController {
 	public static void initializeBoard() {
 		//TODO GUI
 		Board board = new Board(QuoridorApplication.getQuoridor());
+		Game game = QuoridorApplication.getQuoridor().getCurrentGame();
+		QuoridorApplication.getQuoridor().setBoard(board);
 		Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
 		Player blackPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
-		initializeWhitePawn(whitePlayer,board);
-		initializeBlackPawn(blackPlayer, board);
-		initializeWhiteWall(whitePlayer);
-		initializeBlackWall(blackPlayer);
-		QuoridorApplication.getQuoridor().setBoard(board);
+		Tile initWhite = new Tile(5, 9, board);
+		Tile initBlack = new Tile(5, 1, board);
+		PlayerPosition initialWhite = new PlayerPosition(whitePlayer, initWhite);
+		PlayerPosition initialBlack = new PlayerPosition(whitePlayer, initBlack);
+		
+		GamePosition g = new GamePosition(0, initialWhite, initialBlack, whitePlayer, game);
+		game.setCurrentPosition(g);
+		initializeWhiteWall(g,whitePlayer);
+		initializeBlackWall(g,blackPlayer);
+		g.setPlayerToMove(whitePlayer);
 	}
 
 	/**
@@ -1139,12 +1274,7 @@ public class QuoridorController {
 	 * @return A flag indicating whether the method successfully launched.
 	 */
 	public static void initializeWhitePawn(Player whitePlayer, Board board) {
-		//TODO GUI
-		if(whitePlayer!= null && board != null) {
-		Tile init = new Tile('e', 9, board);
-		PlayerPosition initial = new PlayerPosition(whitePlayer, init);
-		QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setWhitePosition(initial);
-		}
+		
 	}
 
 	/**
@@ -1157,12 +1287,7 @@ public class QuoridorController {
 	 * @return A flag indicating whether the method successfully launched.
 	 */
 	public static void initializeBlackPawn(Player blackPlayer, Board board) {
-		//TODO GUI
-		if(blackPlayer!= null && board != null) {
-			Tile init = new Tile('e', 0, board);
-			PlayerPosition initial = new PlayerPosition(blackPlayer, init);
-			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setWhitePosition(initial);
-			}
+		
 		}
 	/**
 	 * Feature: InitialzeBoard
@@ -1174,13 +1299,18 @@ public class QuoridorController {
 	 * @param blackPlayer
 	 * @return A flag indicating whether the method successfully launched.
 	 */
-	public static boolean initializeBlackWall(Player blackPlayer) {
+	public static List<Wall> initializeBlackWall(GamePosition g,Player blackPlayer) {
 		//TODO GUI
+		List<Wall> whiteWallsInStock = new ArrayList<Wall>();
+		int blackIndex = 0;
 		if(!blackPlayer.hasWalls()) {
-			blackPlayer.addWall(10);
-			return true;
+			for(int i = 0; i<10;i++) {
+				Wall wall = new Wall(blackIndex+i, blackPlayer);
+				g.addBlackWallsInStock(wall);
+			}
 		}
-		else return false;
+		return whiteWallsInStock;
+
 	}
 	/**
 	 * Feature: InitialzeBoard
@@ -1192,14 +1322,17 @@ public class QuoridorController {
 	 * @param whitePlayer
 	 * @return A flag indicating whether the method successfully launched.
 	 */
-	public static boolean initializeWhiteWall(Player whitePlayer) {
-		//TODO GUI
-
+	public static void initializeWhiteWall(GamePosition g,Player whitePlayer) {
+		//TODO GUIint blackIndex = 0;
+		int whiteIndex = 10;
+		List<Wall> blackWallsInStock= new ArrayList<Wall>();
 		if(!whitePlayer.hasWalls()) {
-			whitePlayer.addWall(10);
-			return true;
-		}	
-		else return false;
+			for(int i = 0; i<10;i++) {
+				Wall wall = new Wall(whiteIndex+i, whitePlayer);		
+				g.addWhiteWallsInStock(wall);
+				}
+		}
+
 	}
 	
 	/**
