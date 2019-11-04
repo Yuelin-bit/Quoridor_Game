@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import ca.mcgill.ecse223.quoridor.QuoridorApplication;
 import ca.mcgill.ecse223.quoridor.controller.QuoridorController;
 import ca.mcgill.ecse223.quoridor.model.WallMove;
 import ca.mcgill.ecse223.quoridor.view.Pawn.PawnColor;
@@ -274,8 +275,15 @@ public class JBoard extends JFrame {
 						//QuoridorController.MoveWall("up");
 						int x = jwall.getLocation().x;
 						int y = jwall.getLocation().y;
+						
+						if(jwall.getHeight()==110) {
 						if(((x)>=120)&&((x)<=540)&&((y-60)>=60)&&((y-60)<=480))
-							jwall.setLocation(x, y-60);
+							jwall.setLocation(x, y-60);}
+						
+						if(jwall.getHeight()==10) {
+							if(((x)>=60)&&((x)<=540)&&((y-60)>=60)&&((y-60)<=540))
+								jwall.setLocation(x, y-60);}
+						
 					}
 				}
 				if ((e.getKeyChar()=='a')||(e.getKeyCode() == KeyEvent.VK_LEFT)) {
@@ -283,8 +291,14 @@ public class JBoard extends JFrame {
 						//QuoridorController.MoveWall("left");
 						int x = jwall.getLocation().x;
 						int y = jwall.getLocation().y;
+						
+						if(jwall.getHeight()==110) {
 						if(((x-60)>=120)&&((x-60)<=540)&&((y)>=60)&&((y)<=480))
-							jwall.setLocation(x-60, y);
+							jwall.setLocation(x-60, y);}
+						
+						if(jwall.getHeight()==10) {
+							if(((x-60)>=60)&&((x-60)<=540)&&((y)>=60)&&((y)<=540))
+								jwall.setLocation(x-60, y);}
 					}
 				}
 				if ((e.getKeyChar()=='s')||(e.getKeyCode() == KeyEvent.VK_DOWN)) {
@@ -292,8 +306,13 @@ public class JBoard extends JFrame {
 						//QuoridorController.MoveWall("down");
 						int x = jwall.getLocation().x;
 						int y = jwall.getLocation().y;
+						if(jwall.getHeight()==110) {
 						if(((x)>=120)&&((x)<=540)&&((y+60)>=60)&&((y+60)<=480))
-							jwall.setLocation(x, y+60);
+							jwall.setLocation(x, y+60);}
+						if(jwall.getHeight()==10) {
+							if(((x)>=60)&&((x)<=540)&&((y+60)>=60)&&((y+60)<=540))
+								jwall.setLocation(x, y+60);}
+						
 					}
 				}
 				if ((e.getKeyChar()=='d')||(e.getKeyCode() == KeyEvent.VK_RIGHT)) {
@@ -301,8 +320,12 @@ public class JBoard extends JFrame {
 						//QuoridorController.MoveWall("right");
 						int x = jwall.getLocation().x;
 						int y = jwall.getLocation().y;
+						if(jwall.getHeight()==110) {
 						if(((x+60)>=120)&&((x+60)<=540)&&((y)>=60)&&((y)<=480))
-							jwall.setLocation(x+60, y);
+							jwall.setLocation(x+60, y);}
+						if(jwall.getHeight()==10) {
+							if(((x+60)>=60)&&((x+60)<=540)&&((y)>=60)&&((y)<=540))
+								jwall.setLocation(x+60, y);}
 					}
 				}
 				if (e.getKeyChar()=='r'&&grab) {
@@ -324,6 +347,7 @@ public class JBoard extends JFrame {
 					}
 				}
 				if (e.getKeyChar()=='t') if (e.getKeyChar()=='t') {
+					QuoridorController.ReleaseWall(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate());
 					if(WALL_INDEX<MAX_WALL&&grab) {
 						jwall.setBackground(Color.MAGENTA);
 						mainLayerPanel.remove(jwall);
