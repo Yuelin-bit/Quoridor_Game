@@ -399,10 +399,12 @@ public class JBoard extends JFrame {
 
 					//QuoridorController.initializeNewGame();
 					//QuoridorController.initializeBlackWall(g, blackPlayer)
+
 				//	QuoridorController.ReleaseWall(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate());
 
 //					QuoridorController.initializeNewGame();
 //					QuoridorController.ReleaseWall(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate());
+
 
 					if(WALL_INDEX<MAX_WALL&&grab) {
 						jwall.setBackground(Color.MAGENTA);
