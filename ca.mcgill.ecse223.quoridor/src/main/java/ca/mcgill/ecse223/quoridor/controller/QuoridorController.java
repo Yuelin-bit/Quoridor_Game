@@ -1244,6 +1244,12 @@ public class QuoridorController {
 	public static void initializeBoard() {
 //		QuoridorApplication.setJBoard(new JBoard());
 		Board board = new Board(QuoridorApplication.getQuoridor());
+		for(int i = 1; i<= 9; i++) {
+			for(int j = 1; j<=9; j++) {
+				Tile tile = new Tile(i, j, board);
+				board.addTile(tile);
+			}
+		}
 		Game game = QuoridorApplication.getQuoridor().getCurrentGame();
 		QuoridorApplication.getQuoridor().setBoard(board);
 		Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
