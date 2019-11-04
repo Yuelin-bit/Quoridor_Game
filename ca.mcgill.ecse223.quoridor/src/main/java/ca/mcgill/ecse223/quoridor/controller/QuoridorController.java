@@ -768,13 +768,14 @@ public class QuoridorController {
 	 * 
 	 * This method load a game position by input a filename
 	 * 
+	 * @author Zirui He
 	 * @param filename
 	 * @param white
 	 * @param black
 	 * @return
-	 * @throws FileNotFoundException
+	 * @throws Exception 
 	 */
-	public static boolean loadPosition(String filename, Player white, Player black) throws FileNotFoundException{
+	public static boolean loadPosition(String filename, Player white, Player black) throws Exception{
 		
 		Quoridor quoridor = QuoridorApplication.getQuoridor();
 		
@@ -816,7 +817,7 @@ public class QuoridorController {
 					try {
 						tile = quoridor.getBoard().getTile((Integer.parseInt(s[1]) - 1) * 9 + columnNum(s[0]) - 1);
 					} catch(Exception e) {
-						return false;
+						throw(new Exception("Out of boundary!"));
 					}
 					if (s.length == 2) {	//check if is pawn move
 						blackposition = new PlayerPosition(black, tile);
@@ -854,8 +855,8 @@ public class QuoridorController {
 					try {
 						tile = quoridor.getBoard().getTile((Integer.parseInt(s[1]) - 1) * 9 + columnNum(s[0]) - 1);
 					} catch(Exception e) {
-						//throw new IllegalArgumentException("Out of the board boundary");
-						return false;
+						throw(new Exception("Out of boundary!"));
+
 					}
 					
 					if (s.length == 2) {
@@ -941,8 +942,9 @@ public class QuoridorController {
 	 * 
 	 * @author Zirui He
 	 * @return boolean
+	 * @throws Exception 
 	 */
-	public static boolean validation() {
+	public static boolean validation() throws Exception {
 		boolean isValid = true;
 			Quoridor quoridor = QuoridorApplication.getQuoridor();
 			//Validate WallMove 
@@ -965,22 +967,22 @@ public class QuoridorController {
 					if (thisWallDirection == Direction.Vertical) {
 						if(nextWallDirection == Direction.Vertical) {
 							if((nextWallColumn == thisWallColumn)&&((nextWallRow == thisWallRow+1)||(nextWallRow == thisWallRow-1)||(nextWallRow == thisWallRow))) {
-								isValid = false;
+								throw(new Exception("Wall Overlapping!"));
 							}
 						}else {
 							if((nextWallColumn == thisWallColumn)&&(nextWallRow == thisWallRow)) {
-								isValid = false;
+								throw(new Exception("Wall Overlapping!"));
 							}
 						}
 					}
 					else {
 						if(nextWallDirection == Direction.Vertical) {
 							if((thisWallColumn == nextWallColumn)&&(thisWallRow == nextWallRow)) {
-								isValid = false;
+								throw(new Exception("Wall Overlapping!"));
 							}
 						}else {
 							if ((thisWallRow == nextWallRow)&&((thisWallColumn == nextWallColumn-1)||(thisWallColumn == nextWallColumn+1)||(thisWallColumn == nextWallColumn))) {
-								isValid = false;
+								throw(new Exception("Wall Overlapping!"));
 							}
 						}
 					}
@@ -995,30 +997,13 @@ public class QuoridorController {
 			int wColumn = white.getColumn();
 			int wRow = white.getRow();
 			if ((bColumn == wColumn) && (bRow == wRow)) {
-				isValid = false;
+				throw(new Exception("Invalid Pawn!"));
 			}
 			return isValid;
 
 	}
 
 	
-	
-
-	
-	
-	
-	/**
-	 * Feature:load game
-	 * This method return the result of loading game by showing a string
-	 * "Failed to load game" or "Successfully load game!"
-	 * 
-	 * @author Zirui He
-	 * @return the string shown on the UI
-	 */
-	public static String getLoadResult() {
-		//TO-DO: Write logic to load game
-		throw new UnsupportedOperationException();
-	}
 	
 	
 	/**
@@ -1050,7 +1035,6 @@ public class QuoridorController {
 	 * @param player
 	 */
 	public static Long startClock() {
-		//TO-DO: Write logic to load game
 		Long startTime = System.nanoTime();
 		return startTime;
 	}
@@ -1065,24 +1049,10 @@ public class QuoridorController {
 	 */
   
 	public static Long stopClock() {
-		//TO-DO: Write logic to load game
 		Long endTime = System.nanoTime();
 		return endTime;
 	}
 	
-	/**
-	 * Feature: switch player
-	 * This method test if the clock of the player is still running
-	 * 
-	 * @author Zirui He & Gengyi
-	 * @param player
-	 * @return boolean
-	 * Feature: switch player & InitialzeBoard
-	 */
-	public static boolean clockIsRunning(Player player) {
-		//TO-DO: Write logic to load game
-		throw new UnsupportedOperationException();
-	}
 
 
 
