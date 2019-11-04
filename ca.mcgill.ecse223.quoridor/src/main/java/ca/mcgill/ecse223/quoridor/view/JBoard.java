@@ -65,7 +65,7 @@ public class JBoard extends JFrame {
 	public void setJwall(JWall jwall) {
 		this.jwall = jwall;
 	}
-	private JPanel mainLayerPanel;
+	public JPanel mainLayerPanel;
 	private JTextField textField;
 	private JTextField textField_1;
 	public Pawn blackPawnMove;
@@ -121,8 +121,11 @@ public class JBoard extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
+		try {
 		getContentPane().add(contentPane);
-
+		}catch(Exception e) {
+			
+		}
 
 
 		//Create new panel to control layers
@@ -354,5 +357,197 @@ public class JBoard extends JFrame {
 		image=ImageIO.read(new File("H:\\aa.jpg"));*/
 
 
+	}
+	/**
+	 * @return the serialversionuid
+	 */
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	/**
+	 * @return the contentPane
+	 */
+	public JPanel getContentPane() {
+		return contentPane;
+	}
+	/**
+	 * @return the display_number_black_stock
+	 */
+	public JTextField getDisplay_number_black_stock() {
+		return display_number_black_stock;
+	}
+	/**
+	 * @return the display_number_white_stock
+	 */
+	public JTextField getDisplay_number_white_stock() {
+		return display_number_white_stock;
+	}
+	/**
+	 * @return the wALL_INDEX
+	 */
+	public int getWALL_INDEX() {
+		return WALL_INDEX;
+	}
+	/**
+	 * @return the maxWall
+	 */
+	public static int getMaxWall() {
+		return MAX_WALL;
+	}
+	/**
+	 * @return the wallList
+	 */
+	public List<JWall> getWallList() {
+		return WallList;
+	}
+	/**
+	 * @return the lblNewLabel
+	 */
+	public JLabel getLblNewLabel() {
+		return lblNewLabel;
+	}
+	/**
+	 * @return the saveGameButton
+	 */
+	public JButton getSaveGameButton() {
+		return SaveGameButton;
+	}
+	/**
+	 * @return the lblNewLabel_1
+	 */
+	public JLabel getLblNewLabel_1() {
+		return lblNewLabel_1;
+	}
+	/**
+	 * @return the mainLayerPanel
+	 */
+	public JPanel getMainLayerPanel() {
+		return mainLayerPanel;
+	}
+	/**
+	 * @return the textField
+	 */
+	public JTextField getTextField() {
+		return textField;
+	}
+	/**
+	 * @return the textField_1
+	 */
+	public JTextField getTextField_1() {
+		return textField_1;
+	}
+	/**
+	 * @return the blackPawnMove
+	 */
+	public Pawn getBlackPawnMove() {
+		return blackPawnMove;
+	}
+	/**
+	 * @return the whitePawnMove
+	 */
+	public Pawn getWhitePawnMove() {
+		return whitePawnMove;
+	}
+	/**
+	 * @return the tile
+	 */
+	public Tile getTile() {
+		return tile;
+	}
+	/**
+	 * @return the grab
+	 */
+	public boolean isGrab() {
+		return grab;
+	}
+	/**
+	 * @param contentPane the contentPane to set
+	 */
+	public void setContentPane(JPanel contentPane) {
+		this.contentPane = contentPane;
+	}
+	/**
+	 * @param display_number_black_stock the display_number_black_stock to set
+	 */
+	public void setDisplay_number_black_stock(JTextField display_number_black_stock) {
+		this.display_number_black_stock = display_number_black_stock;
+	}
+	/**
+	 * @param display_number_white_stock the display_number_white_stock to set
+	 */
+	public void setDisplay_number_white_stock(JTextField display_number_white_stock) {
+		this.display_number_white_stock = display_number_white_stock;
+	}
+	/**
+	 * @param wALL_INDEX the wALL_INDEX to set
+	 */
+	public void setWALL_INDEX(int wALL_INDEX) {
+		WALL_INDEX = wALL_INDEX;
+	}
+	/**
+	 * @param wallList the wallList to set
+	 */
+	public void setWallList(List<JWall> wallList) {
+		WallList = wallList;
+	}
+	/**
+	 * @param lblNewLabel the lblNewLabel to set
+	 */
+	public void setLblNewLabel(JLabel lblNewLabel) {
+		this.lblNewLabel = lblNewLabel;
+	}
+	/**
+	 * @param saveGameButton the saveGameButton to set
+	 */
+	public void setSaveGameButton(JButton saveGameButton) {
+		SaveGameButton = saveGameButton;
+	}
+	/**
+	 * @param lblNewLabel_1 the lblNewLabel_1 to set
+	 */
+	public void setLblNewLabel_1(JLabel lblNewLabel_1) {
+		this.lblNewLabel_1 = lblNewLabel_1;
+	}
+	/**
+	 * @param mainLayerPanel the mainLayerPanel to set
+	 */
+	public void setMainLayerPanel(JPanel mainLayerPanel) {
+		this.mainLayerPanel = mainLayerPanel;
+	}
+	/**
+	 * @param textField the textField to set
+	 */
+	public void setTextField(JTextField textField) {
+		this.textField = textField;
+	}
+	/**
+	 * @param textField_1 the textField_1 to set
+	 */
+	public void setTextField_1(JTextField textField_1) {
+		this.textField_1 = textField_1;
+	}
+	/**
+	 * @param blackPawnMove the blackPawnMove to set
+	 */
+	public void setBlackPawnMove(Pawn blackPawnMove) {
+		this.blackPawnMove = blackPawnMove;
+	}
+	/**
+	 * @param whitePawnMove the whitePawnMove to set
+	 */
+	public void setWhitePawnMove(Pawn whitePawnMove) {
+		this.whitePawnMove = whitePawnMove;
+	}
+	/**
+	 * @param tile the tile to set
+	 */
+	public void setTile(Tile tile) {
+		this.tile = tile;
+	}
+	/**
+	 * @param grab the grab to set
+	 */
+	public void setGrab(boolean grab) {
+		this.grab = grab;
 	}
 }
