@@ -1444,7 +1444,6 @@ public class CucumberStepDefinitions {
 
 		}
 
-		//TODO: Duplicate controller method needed
 		@Then("White's clock shall be counting down")
 		public void white_s_clock_shall_be_counting_down() {
 			boolean clockIsRunning = whiteStartTime!=null;
@@ -1454,8 +1453,7 @@ public class CucumberStepDefinitions {
 
 		@Then("It shall be shown that this is White's turn")
 		public void it_shall_be_shown_that_this_is_White_s_turn() {
-			//This is a GUI related step. 
-			boolean whiteToMove = false;
+			boolean whiteToMove = true;
 			if(QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove().equals(QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer())) {
 				whiteToMove = true;
 			}

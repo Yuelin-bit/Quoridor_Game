@@ -25,6 +25,7 @@ import ca.mcgill.ecse223.quoridor.QuoridorApplication;
 import ca.mcgill.ecse223.quoridor.model.*;
 import ca.mcgill.ecse223.quoridor.model.Game.GameStatus;
 import ca.mcgill.ecse223.quoridor.model.Game.MoveMode;
+import ca.mcgill.ecse223.quoridor.view.JBoard;
 
 public class QuoridorController {
 	
@@ -1096,7 +1097,8 @@ public class QuoridorController {
 	 * @return A flag indicating whether the method successfully launched.
 	 */
 	public static void initializeBoard() {
-		//TODO GUI
+//		QuoridorApplication app = new QuoridorApplication();
+//		JBoard jboard = new JBoard(app);
 		Board board = new Board(QuoridorApplication.getQuoridor());
 		Game game = QuoridorApplication.getQuoridor().getCurrentGame();
 		QuoridorApplication.getQuoridor().setBoard(board);
@@ -1112,33 +1114,10 @@ public class QuoridorController {
 		initializeWhiteWall(g,whitePlayer);
 		initializeBlackWall(g,blackPlayer);
 		g.setPlayerToMove(whitePlayer);
+//		QuoridorApplication.getJboard().whitePawnMove.setVisible(false);
+//		QuoridorApplication.getJboard().whitePawnMove.setVisible(true);
 	}
 
-	/**
-	 * Feature: InitialzeBoard
-	 * This static method set the white player's pawn to initial location(e9).
-	 * It returns true if the initiating is successful.
-	 * 
-	 * @author Sun, Gengyi
-	 * @param whitePlayer
-	 * @return A flag indicating whether the method successfully launched.
-	 */
-	public static void initializeWhitePawn(Player whitePlayer, Board board) {
-		
-	}
-
-	/**
-	 * Feature: InitialzeBoard
-	 * This static method sets the black player's pawn to initial position(e1).
-	 * It returns true if the initiating is successful.
-	 * 
-	 * @author Sun, Gengyi
-	 * @param blackPlayer
-	 * @return A flag indicating whether the method successfully launched.
-	 */
-	public static void initializeBlackPawn(Player blackPlayer, Board board) {
-		
-		}
 	/**
 	 * Feature: InitialzeBoard
 	 * This static method initializes initial number of walls left for the black player, 
