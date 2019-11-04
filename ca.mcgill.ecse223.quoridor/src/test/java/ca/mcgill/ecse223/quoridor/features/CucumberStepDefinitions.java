@@ -2,6 +2,7 @@ package ca.mcgill.ecse223.quoridor.features;
 
 import static org.junit.Assert.assertEquals;
 
+import java.awt.Color;
 import java.io.FileNotFoundException;
 import static org.junit.Assert.assertNotEquals;
 
@@ -203,7 +204,8 @@ public class CucumberStepDefinitions {
 	
 	@When("I release the wall in my hand")
 	public void i_release_the_wall_in_my_hand() {
-		QuoridorController.ReleaseWall(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate());
+		WallMove a = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate();
+		QuoridorController.ReleaseWall(a);
 	}
 
 	@Then("A wall move shall be registered with {string} at position \\({int}, {int})")
@@ -224,6 +226,9 @@ public class CucumberStepDefinitions {
 
 	@Then("I shall not have a wall in my hand")
 	public void i_shall_not_have_a_wall_in_my_hand() {
+		
+		Color actual = QuoridorApplication.getJboard().getJwallColor();
+		Assert.assertNotEquals(Color.blue, actual);
 		// GUI-related feature -- TODO for later
 		//to refresh
 //		Wall ww = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getWallPlaced();
@@ -311,15 +316,15 @@ public class CucumberStepDefinitions {
 		//throw new cucumber.api.PendingException();
 	}
 
-	@Then("I shall have a wall in my hand over the board")
-	public void i_shall_have_a_wall_in_my_hand_over_the_board() {
-		// GUI-related feature -- TODO for later
-		boolean haveAWall = false;
-		if(QuoridorApplication.getJboard().getJwall()!=null) {
-			haveAWall = true;
-		}
-		Assert.assertEquals(true,haveAWall);
-	}
+//	@Then("I shall have a wall in my hand over the board")
+//	public void i_shall_have_a_wall_in_my_hand_over_the_board() {
+//		// GUI-related feature -- TODO for later
+//		boolean haveAWall = false;
+//		if(QuoridorApplication.getJboard().getJwall()!=null) {
+//			haveAWall = true;
+//		}
+//		Assert.assertEquals(true,haveAWall);
+//	}
 
 	@Then("It shall be my turn to move")
 	public void it_shall_be_my_turn_to_move() {
@@ -572,14 +577,17 @@ public class CucumberStepDefinitions {
 
 	// the same one is in feature DropWall
 
-//	@And("I shall have a wall in my hand over the board")
-//	public void i_shall_have_a_wall_in_my_hand_over_the_board() {
-//		// Assert.assertEquals(true,
-//		// QuoridorApplication.getQuoridor().getCurrentGame().hasWallMoveCandidate() );
-//		// This is GUI related part
-//	}
+	@Then("I shall have a wall in my hand over the board")
+	public void i_shall_have_a_wall_in_my_hand_over_the_board() {
+//		JBoard newb = new JBoard();
+//		QuoridorApplication.setJboard(newb);
+//		Wall jwall = 
+//		newb.setJwall(jwall);
+		Color actual = QuoridorApplication.getJboard().getJwallColor();
+		Assert.assertNotEquals(Color.MAGENTA, actual);
+	}
 
-	@And("The wall in my hand shall disappear from my stock")
+	@Then("The wall in my hand shall disappear from my stock")
 	public void the_wall_in_my_hand_shall_disappear_from_my_stock() {
 		Player aPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
 		Wall newWallFromStock;

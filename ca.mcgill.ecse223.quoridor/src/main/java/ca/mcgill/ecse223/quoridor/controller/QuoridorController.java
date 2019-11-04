@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
+import java.awt.Color;
 
 //import org.apache.commons.lang3.time.StopWatch;
 
@@ -165,6 +166,8 @@ public class QuoridorController {
 		Tile t = wallmove.getTargetTile();
 		Player currentPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
 		
+		JBoard newb = new JBoard();
+		QuoridorApplication.setJboard(newb);
 	    
 		if((QuoridorController.verifyOverlapped(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate()))
 				||(QuoridorController.verifyOutsideTheBoard(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate())))
@@ -176,6 +179,7 @@ public class QuoridorController {
 		
 		if(currentPlayer.hasGameAsBlack()) {
 			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().addBlackWallsOnBoard(wallmove.getWallPlaced());
+			QuoridorApplication.getJboard().ChangeDropWall();
 		}
 		
 		//QuoridorApplication.setJboard(new JBoard());
@@ -183,6 +187,9 @@ public class QuoridorController {
 		
 		if(currentPlayer.hasGameAsWhite()) {
 			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().addWhiteWallsOnBoard(wallmove.getWallPlaced());
+			Color haha = QuoridorApplication.getJboard().getJwallColor();
+			QuoridorApplication.getJboard().ChangeGrabWall();
+			Color xixi = QuoridorApplication.getJboard().getJwallColor();
 		}
 		
 		if(currentPlayer.hasGameAsBlack()) {
@@ -310,7 +317,7 @@ public class QuoridorController {
 	 * 
 	 * @param WallMove
 	 * @author Yujing Yang
-	 * @return boolean
+	 * @return boolean		return true if flipWall successfully; return false if don't
 	 */
 
 	public static boolean flipWall() {	
@@ -338,26 +345,28 @@ public class QuoridorController {
 	 * I shall have a wall in my hand over the board
 	 * The wall in my hand shall disappear from my stock
 	 * 
-	 * @param Wall
+	 * @param void 
 	 * @author Yujing Yang
-	 * @return boolean
+	 * @return boolean		return true if grabWall successfully; return false if don't
 	 */
 	
 	public static boolean grabWall() {	
 		
 		Player currentPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();	
 		
+		JBoard newb = new JBoard();
+		QuoridorApplication.setJboard(newb);
+		
+		
 		if(currentPlayer.hasGameAsBlack()) {
 			
 			List<Wall> inStock = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsInStock();
 			Wall grabbedWall = inStock.get(0);
-//			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().removeBlackWallsInStock(grabbedWall);
-	
-					Tile WallTile = new Tile(5, 5, QuoridorApplication.getQuoridor().getBoard());
-					int a = QuoridorApplication.getQuoridor().getCurrentGame().getMoves().size();
-					WallMove WallMove = new WallMove(a, (a + 1) / 2, currentPlayer, WallTile,
-							QuoridorApplication.getQuoridor().getCurrentGame(), Direction.Vertical, grabbedWall);	
-					QuoridorApplication.getQuoridor().getCurrentGame().setWallMoveCandidate(WallMove);
+			Tile WallTile = new Tile(5, 5, QuoridorApplication.getQuoridor().getBoard());
+			int a = QuoridorApplication.getQuoridor().getCurrentGame().getMoves().size();
+			WallMove WallMove = new WallMove(a, (a + 1) / 2, currentPlayer, WallTile,QuoridorApplication.getQuoridor().getCurrentGame(), Direction.Vertical, grabbedWall);	
+			QuoridorApplication.getQuoridor().getCurrentGame().setWallMoveCandidate(WallMove);
+					QuoridorApplication.getJboard().ChangeGrabWall();
 					QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().removeBlackWallsInStock(grabbedWall);
 					return QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().setWallPlaced(grabbedWall);
 				}
@@ -375,9 +384,14 @@ public class QuoridorController {
 					int a = QuoridorApplication.getQuoridor().getCurrentGame().getMoves().size();
 					WallMove WallMove = new WallMove(a+1, (a + 3) / 2, currentPlayer, WallTile,
 							QuoridorApplication.getQuoridor().getCurrentGame(), Direction.Vertical, grabbedWall);
+					//Color actual1 = QuoridorApplication.getJboard().getJwallColor();
+					QuoridorApplication.getJboard().ChangeGrabWall();
+					//Color actual2 = QuoridorApplication.getJboard().getJwallColor();
 					QuoridorApplication.getQuoridor().getCurrentGame().setWallMoveCandidate(WallMove);
 					return QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().setWallPlaced(grabbedWall);
-				}			
+				}
+		
+
 //			}				
 //		}
 	//	return QuoridorApplication.getQuoridor().getCurrentGame().setWallMoveCandidate(GrabbedWall.getMove());
