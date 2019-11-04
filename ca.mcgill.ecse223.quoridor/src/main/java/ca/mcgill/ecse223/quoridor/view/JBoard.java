@@ -318,7 +318,7 @@ public class JBoard extends JFrame {
 						jwall.setBounds(360, 300, 10, 110);
 						jwall.setVisible(true);						
 					}
-					//QuoridorController.grabWall();
+					QuoridorController.grabWall();
 					ChangeGrabWall();
 				}
 				if ((e.getKeyChar()=='w')||(e.getKeyCode() == KeyEvent.VK_UP)) {

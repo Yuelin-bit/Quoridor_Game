@@ -32,6 +32,52 @@ import ca.mcgill.ecse223.quoridor.view.JWall;
 
 public class QuoridorController {
 	
+	
+	
+	/**
+	 * 
+	 * Get the white walls on board, and transfer it
+	 * 
+     * @author Yuelin Liu
+	 * @param wallmove WallMove candidate to be check whether it is valid(to avoid overlapping).
+	 * @return boolean whether there is a wall in the same position.
+	 * @exception nothing
+	 *
+	 */
+	public static ArrayList<TOWall> getWhiteWallsOnBoard(){
+		ArrayList<TOWall> w = new ArrayList<TOWall>();
+		for(Wall wall : QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard()) {
+			TOWall temp = null;
+			temp.setRow(wall.getMove().getTargetTile().getRow());
+			temp.setColumn(wall.getMove().getTargetTile().getColumn());
+			temp.setDir(Direction.Vertical);
+			w.add(temp);
+		}
+		return w;
+	}
+	
+	/**
+	 * 
+	 * Get the white walls on board, and transfer it
+	 * 
+     * @author Yuelin Liu
+	 * @param wallmove WallMove candidate to be check whether it is valid(to avoid overlapping).
+	 * @return boolean whether there is a wall in the same position.
+	 * @exception nothing
+	 *
+	 */
+	public static ArrayList<TOWall> getBlackWallsOnBoard(){
+		ArrayList<TOWall> w = new ArrayList<TOWall>();
+		for(Wall wall : QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard()) {
+			TOWall temp = null;
+			temp.setRow(wall.getMove().getTargetTile().getRow());
+			temp.setColumn(wall.getMove().getTargetTile().getColumn());
+			temp.setDir(wall.getMove().getWallDirection());
+			w.add(temp);
+		}
+		return w;
+	}
+	
 	/**
 	 * Feature:DropWall
 	 * 
@@ -298,11 +344,10 @@ public class QuoridorController {
 				QuoridorApplication.setJboard(new JBoard());
 			QuoridorApplication.getJboard().notifyIllegal();
 			}
-			//JOptionPane.showMessageDialog(null, "It is illegal!!!");
-			
-		
-		
+			//JOptionPane.showMessageDialog(null, "It is illegal!!!");	
 	}
+	
+	
 	
 	
 	
