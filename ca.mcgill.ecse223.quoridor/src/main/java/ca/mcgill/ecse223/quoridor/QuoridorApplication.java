@@ -9,6 +9,10 @@ public class QuoridorApplication {
 	private static Quoridor quoridor;
 	static MainMenu mainMenu;
 	private static JBoard jboard;
+	public static void setJboard(JBoard jboard) {
+		QuoridorApplication.jboard = jboard;
+	}
+
 	public static JBoard getJboard() {
 		return jboard;
 	}

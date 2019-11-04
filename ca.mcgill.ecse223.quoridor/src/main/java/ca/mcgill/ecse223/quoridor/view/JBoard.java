@@ -53,6 +53,12 @@ public class JBoard extends JFrame {
 	private static final int MAX_WALL =20;
 	private List <JWall> WallList = new ArrayList<JWall>(); 
 	private JWall jwall;
+	public JWall getJwall() {
+		return jwall;
+	}
+	public void setJwall(JWall jwall) {
+		this.jwall = jwall;
+	}
 	private JTextField textField;
 	private JTextField textField_1;
 	private JOptionPane errorHint;
@@ -70,8 +76,8 @@ public class JBoard extends JFrame {
 	public void setErrorHint(JOptionPane errorHint) {
 		this.errorHint = errorHint;
 	}
-	public void notifyIllegal(String string) {
-		this.setError(string);
+	public void notifyIllegal() {
+		this.setError("Illegal");
 		this.errorHint.showMessageDialog(null, error);
 	}
 	/**

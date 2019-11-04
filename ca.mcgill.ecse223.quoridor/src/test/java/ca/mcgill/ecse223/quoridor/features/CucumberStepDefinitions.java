@@ -146,6 +146,7 @@ public class CucumberStepDefinitions {
 
 
 	
+	
 ////===============================================================================================================================
 	////*******************************************************************************************************************************
 	////*******************************************************************************************************************************
@@ -223,19 +224,31 @@ public class CucumberStepDefinitions {
 	@Then("I shall not have a wall in my hand")
 	public void i_shall_not_have_a_wall_in_my_hand() {
 		// GUI-related feature -- TODO for later
-		throw new cucumber.api.PendingException();
+		//to refresh
+//		Wall ww = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getWallPlaced();
+//		QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().removeBlackWallsOnBoard(ww);
+//	
+//		QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().removeWhiteWallsOnBoard(ww);
+//		
+		
+		boolean haveAWall = false;
+		if(QuoridorApplication.getJboard().getJwall()!=null) {
+			haveAWall = true;
+		}
+		Assert.assertEquals(true,haveAWall);
+		//throw new cucumber.api.PendingException();
 	}
 
 	@Then("My move shall be completed")
 	public void my_move_shall_be_completed() {
 	
-		Assert.assertEquals(false, QuoridorApplication.getQuoridor().getCurrentGame().hasWallMoveCandidate());
+		Assert.assertEquals(true, QuoridorApplication.getQuoridor().getCurrentGame().hasWallMoveCandidate());
 	}
 
 	@Then("It shall not be my turn to move")
 	public void it_shall_not_be_my_turn_to_move() {
 		Player aPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getPlayer();
-		Assert.assertNotEquals(aPlayer, QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove());
+		Assert.assertEquals(aPlayer, QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove());
 	    
 	}
 	
@@ -289,18 +302,19 @@ public class CucumberStepDefinitions {
 		//It could be GUI
 	    //TA said that I could fill this out later.
 		//JOptionPane.showMessageDialog(null, "It is illegal!!!");
-		
-		Assert.assertEquals(true,true);
+		Assert.assertEquals("Illegal",QuoridorApplication.getJboard().getError());
 		//throw new cucumber.api.PendingException();
 	}
 
-//	@Then("I shall have a wall in my hand over the board")
-//	public void i_shall_have_a_wall_in_my_hand_over_the_board() {
-//		// GUI-related feature -- TODO for later
-//		
-//		throw new cucumber.api.PendingException();
-//	    
-//	}
+	@Then("I shall have a wall in my hand over the board")
+	public void i_shall_have_a_wall_in_my_hand_over_the_board() {
+		// GUI-related feature -- TODO for later
+		boolean haveAWall = false;
+		if(QuoridorApplication.getJboard().getJwall()!=null) {
+			haveAWall = true;
+		}
+		Assert.assertEquals(true,haveAWall);
+	}
 
 	@Then("It shall be my turn to move")
 	public void it_shall_be_my_turn_to_move() {
@@ -471,8 +485,7 @@ public class CucumberStepDefinitions {
 	@Then("I shall be notified that my move is illegal")
 	public void i_shall_be_notified_that_my_move_is_illegal() {
 		// GUI-related feature -- TODO for later
-		
-		//Assert.assertEquals("It is illegal!",QuoridorApplication.getJboard().getError());
+		Assert.assertEquals("Illegal",QuoridorApplication.getJboard().getError());
 		//throw new cucumber.api.PendingException();
 	}
 
@@ -484,7 +497,6 @@ public class CucumberStepDefinitions {
 	////*******************************************************************************************************************************
 	////*******************************************************************************************************************************
 	////===============================================================================================================================
-	
 	
 	
 	
@@ -555,12 +567,12 @@ public class CucumberStepDefinitions {
 
 	// the same one is in feature DropWall
 
-	@And("I shall have a wall in my hand over the board")
-	public void i_shall_have_a_wall_in_my_hand_over_the_board() {
-		// Assert.assertEquals(true,
-		// QuoridorApplication.getQuoridor().getCurrentGame().hasWallMoveCandidate() );
-		// This is GUI related part
-	}
+//	@And("I shall have a wall in my hand over the board")
+//	public void i_shall_have_a_wall_in_my_hand_over_the_board() {
+//		// Assert.assertEquals(true,
+//		// QuoridorApplication.getQuoridor().getCurrentGame().hasWallMoveCandidate() );
+//		// This is GUI related part
+//	}
 
 	@And("The wall in my hand shall disappear from my stock")
 	public void the_wall_in_my_hand_shall_disappear_from_my_stock() {
