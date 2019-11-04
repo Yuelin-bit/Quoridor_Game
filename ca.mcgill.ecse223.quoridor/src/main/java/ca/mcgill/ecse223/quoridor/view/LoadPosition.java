@@ -6,29 +6,54 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import ca.mcgill.ecse223.quoridor.controller.QuoridorController;
+import ca.mcgill.ecse223.quoridor.model.Player;
+
 import java.awt.Color;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.awt.event.ActionEvent;
 
 public class LoadPosition extends JFrame {
-
+	
+	private JLabel errorLabel;
+	private String error = null;
 	private JPanel contentPane;
+	private JOptionPane errorHint;
+	JComboBox<String> comboBox;
+	
 
+	public String getError() {
+		return error;
+	}
+	public void setError(String error) {
+		this.error = error;
+	}
+	public JOptionPane getErrorHint() {
+		return errorHint;
+	}
+	public void notifyIllegal() {
+		this.setError("Illegal");
+		this.errorHint.showMessageDialog(null, error);
+	}
 	/**
 	 * Launch the application.
 	 */
@@ -60,10 +85,24 @@ public class LoadPosition extends JFrame {
 		JLabel lblChooseGameTo = new JLabel("Choose Game to Load");
 		lblChooseGameTo.setHorizontalAlignment(SwingConstants.CENTER);
 		
+		errorLabel = new JLabel("");
+		errorLabel.setVisible(false);
+		
 		JButton btnNewButton = new JButton("Load");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String filename = (String) comboBox.getSelectedItem();
+				ArrayList<Player> playersList = QuoridorController.createUsersAndPlayers("Quintus", "Bozhong");
+				try {
+					QuoridorController.loadPosition(filename, playersList.get(0), playersList.get(1));
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					errorLabel.setText(e1.getMessage());
+					errorLabel.setVisible(true);
+				}
+				
 			}
+		
 		});
 		
 
@@ -83,15 +122,15 @@ public class LoadPosition extends JFrame {
 //				}	
 
 
-		JButton btnBack = new JButton("Back");
-		btnBack.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				MainMenu m = new MainMenu();
-				m.setVisible(true);
-				setVisible(false);
-				dispose();
-			}
-		});
+//		JButton btnBack = new JButton("Back");
+//		btnBack.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				MainMenu m = new MainMenu();
+//				m.setVisible(true);
+//				setVisible(false);
+//				dispose();
+//			}
+//		});
 		
 		JComboBox<String> comboBox = new JComboBox<String>();
 		try (Stream<Path> walk = Files.walk(Paths.get(""))) {

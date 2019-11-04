@@ -854,8 +854,10 @@ public class QuoridorController {
 					try {
 						tile = quoridor.getBoard().getTile((Integer.parseInt(s[1]) - 1) * 9 + columnNum(s[0]) - 1);
 					} catch(Exception e) {
+						//throw new IllegalArgumentException("Out of the board boundary");
 						return false;
 					}
+					
 					if (s.length == 2) {
 						whiteposition = new PlayerPosition(white, tile);
 					}
@@ -1124,6 +1126,7 @@ public class QuoridorController {
 //		}
 //	}
 //	
+
 	/**
 	 * Feature:load game
 	 * This method return the result of loading game by showing a string

@@ -1262,6 +1262,7 @@ public class CucumberStepDefinitions {
 		public void the_load_shall_return_an_error() {
 
 			assertEquals(false, isPositionValid && loadSucceed);
+			//Assert.assertEquals("Illegal" ,QuoridorApplication.getJboard().getError());
 		    
 		}
 
