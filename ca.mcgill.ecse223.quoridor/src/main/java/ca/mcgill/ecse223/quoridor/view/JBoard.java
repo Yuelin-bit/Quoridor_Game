@@ -75,6 +75,8 @@ public class JBoard extends JFrame {
 	private JOptionPane errorHint;
 	private String error = null;
 	private boolean grab = false;
+	private JLabel lblBlackStock;
+	private JLabel lblWhiteBlock;
 	public String getError() {
 		return error;
 	}
@@ -198,6 +200,10 @@ public class JBoard extends JFrame {
 				setVisible(false);
 			}
 		});
+		
+//		JLabel lblNewLabel = new JLabel("Black Stock");
+		  
+//		 JLabel lblNewLabel_1 = new JLabel("White Stock");
 
 		lblNewLabel = new JLabel("Black S");
 
@@ -208,62 +214,98 @@ public class JBoard extends JFrame {
 
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
+		
+		lblBlackStock = new JLabel("black stock");
+		
+		lblWhiteBlock = new JLabel("white stock");
 		GroupLayout gl_tile = new GroupLayout(tile);
 		gl_tile.setHorizontalGroup(
-				gl_tile.createParallelGroup(Alignment.TRAILING)
+			gl_tile.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_tile.createSequentialGroup()
-						.addContainerGap(651, Short.MAX_VALUE)
-						.addGroup(gl_tile.createParallelGroup(Alignment.LEADING)
+					.addContainerGap(651, Short.MAX_VALUE)
+					.addGroup(gl_tile.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_tile.createSequentialGroup()
+							.addGroup(gl_tile.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(lblGrabWallPress)
+								.addComponent(lblRotateWallPress)
+								.addComponent(lblMoveWallPress, GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+								.addComponent(lblDropWallPress, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 								.addGroup(gl_tile.createSequentialGroup()
-										.addGroup(gl_tile.createParallelGroup(Alignment.LEADING, false)
-												.addComponent(lblGrabWallPress)
-												.addComponent(lblRotateWallPress)
-												.addComponent(lblMoveWallPress, GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
-												.addComponent(lblDropWallPress, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-												.addGroup(gl_tile.createSequentialGroup()
-														.addComponent(lblNewLabel)
-														.addPreferredGap(ComponentPlacement.RELATED)
-														.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-												.addGroup(gl_tile.createSequentialGroup()
-														.addComponent(lblNewLabel_1)
-														.addPreferredGap(ComponentPlacement.RELATED)
-														.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-										.addGap(165))
-								.addGroup(Alignment.TRAILING, gl_tile.createSequentialGroup()
-										.addComponent(SaveGameButton)
-										.addGap(44))))
-				);
+									.addComponent(lblNewLabel)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_tile.createSequentialGroup()
+									.addComponent(lblNewLabel_1)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+							.addGap(165))
+						.addGroup(gl_tile.createSequentialGroup()
+							.addComponent(SaveGameButton)
+							.addGap(44))))
+				.addGroup(Alignment.LEADING, gl_tile.createSequentialGroup()
+					.addGap(174)
+					.addComponent(lblBlackStock)
+					.addPreferredGap(ComponentPlacement.RELATED, 383, Short.MAX_VALUE)
+					.addComponent(lblWhiteBlock)
+					.addGap(321))
+		);
 		gl_tile.setVerticalGroup(
-				gl_tile.createParallelGroup(Alignment.LEADING)
+			gl_tile.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_tile.createSequentialGroup()
-						.addGap(33)
-						.addComponent(SaveGameButton)
-						.addGap(59)
-						.addComponent(lblGrabWallPress)
-						.addGap(32)
-						.addComponent(lblRotateWallPress)
-						.addGap(34)
-						.addComponent(lblMoveWallPress)
-						.addGap(37)
-						.addComponent(lblDropWallPress)
-						.addGap(69)
-						.addGroup(gl_tile.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblNewLabel)
-								.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addGap(38)
-						.addGroup(gl_tile.createParallelGroup(Alignment.TRAILING)
-								.addComponent(lblNewLabel_1)
-								.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addContainerGap(353, Short.MAX_VALUE))
-				);
+					.addGap(33)
+					.addComponent(SaveGameButton)
+					.addGap(59)
+					.addComponent(lblGrabWallPress)
+					.addGap(32)
+					.addComponent(lblRotateWallPress)
+					.addGap(34)
+					.addComponent(lblMoveWallPress)
+					.addGap(37)
+					.addComponent(lblDropWallPress)
+					.addGap(69)
+					.addGroup(gl_tile.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblNewLabel)
+						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(38)
+					.addGroup(gl_tile.createParallelGroup(Alignment.TRAILING)
+						.addComponent(lblNewLabel_1)
+						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGroup(gl_tile.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_tile.createSequentialGroup()
+							.addGap(183)
+							.addComponent(lblBlackStock)
+							.addContainerGap(154, Short.MAX_VALUE))
+						.addGroup(Alignment.TRAILING, gl_tile.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblWhiteBlock)
+							.addGap(155))))
+		);
 		tile.setLayout(gl_tile);
 
-
+		
 
 		for (int i = 0; i < MAX_WALL; i++) {
-			JWall jwall = new JWall();
-			WallList.add(jwall);
-		}
+		      JWall jwall = new JWall();
+		      WallList.add(jwall);      
+		      mainLayerPanel.add(WallList.get(i));
+		      WallList.get(i).setBackground(Color.GRAY);
+		      
+		      if (i==0) {
+		       WallList.get(i).setBounds(50, 650, 10, 110);
+		      }
+		      if (0<i && i<10) {
+		       WallList.get(i).setBounds(50+35*i, 650, 10, 110);
+		      }
+		      if(i==10) {
+		       WallList.get(i).setBounds(600, 650, 10, 110);
+		      }
+		      if(i>10) {
+		       WallList.get(i).setBounds(600+35*(i-10), 650, 10, 110);
+		      }
+		      
+		      WallList.get(i).setVisible(true);
+		    System.out.println(i + "yes");
+		     }
 		jwall = WallList.get(WALL_INDEX);
 
 
@@ -357,7 +399,9 @@ public class JBoard extends JFrame {
 					}
 				}
 				if (e.getKeyChar()=='t') if (e.getKeyChar()=='t') {
-					QuoridorController.ReleaseWall(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate());
+					//QuoridorController.initializeNewGame();
+					//QuoridorController.initializeBlackWall(g, blackPlayer)
+				//	QuoridorController.ReleaseWall(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate());
 					if(WALL_INDEX<MAX_WALL&&grab) {
 						jwall.setBackground(Color.MAGENTA);
 						mainLayerPanel.remove(jwall);

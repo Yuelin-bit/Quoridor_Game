@@ -22,6 +22,7 @@ import ca.mcgill.ecse223.quoridor.controller.QuoridorController;
 import ca.mcgill.ecse223.quoridor.controller.Stopwatch;
 import ca.mcgill.ecse223.quoridor.model.Game.GameStatus;
 import ca.mcgill.ecse223.quoridor.model.Game.MoveMode;
+import ca.mcgill.ecse223.quoridor.view.JBoard;
 import ca.mcgill.ecse223.quoridor.model.*;
 import io.cucumber.java.After;
 import io.cucumber.java.en.And;
@@ -288,12 +289,15 @@ public class CucumberStepDefinitions {
 							QuoridorApplication.getQuoridor().getCurrentGame(), Direction.Horizontal, newWallFromStock );
 					
 					QuoridorApplication.getQuoridor().getCurrentGame().setWallMoveCandidate(WallMove);	
+					
 				}	
 		}
 		boolean b = QuoridorController.verifyOverlapped(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate());
 		boolean c = QuoridorController.verifyOutsideTheBoard(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate());
 		boolean d = c||b;
 		Assert.assertEquals(true,d);
+		QuoridorApplication.setJBoard(new JBoard());
+		
 }
 	    
 	

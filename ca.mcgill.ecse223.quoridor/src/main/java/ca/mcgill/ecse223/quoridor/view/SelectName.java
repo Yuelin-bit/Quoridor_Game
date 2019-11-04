@@ -193,8 +193,8 @@ public class SelectName extends JFrame {
 					lblInputMustBe.setVisible(true);
 				}
 				
-//				QuoridorController.setTotalThinkingTime(min, sec);
-//				QuoridorController.initializeBoard();
+				QuoridorController.setTotalThinkingTime(min, sec);
+				QuoridorController.initializeBoard();
 				QuoridorController.verifyGameIsReady();
 			}
 		});

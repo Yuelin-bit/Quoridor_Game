@@ -201,8 +201,6 @@ public class QuoridorController {
 		
 			
 		
-		
-		
 		if(QuoridorController.verifyOverlapped(wallmove)==true) 
 		{
 			QuoridorApplication.setJBoard(new JBoard());
@@ -1404,30 +1402,41 @@ public class QuoridorController {
 	  */
 	 public static boolean verifyGameIsReady() {
 		 Game g = QuoridorApplication.getQuoridor().getCurrentGame();
-//		 if (g == null) {
-//			 return false;
-//		 }
+		 if (g == null) {
+			 System.out.println("no game");
+			 return false;
+		 }
 		 if (!g.hasBlackPlayer()) {
+			 System.out.println("no black");
 			 return false;
 		 }
 		 if(!g.hasWhitePlayer()) {
+			 System.out.println("no white");
 			 return false;
 		 }
-//		 if(!g.getMoveMode().equals(MoveMode.WallMove)) {
-//			return false;
-//		 }
-//		 if(g.hasMoves()) {
-//			 return false;
-//		 }
-//		 if(g.hasPositions()) {
-//			 return false;
-//		 }
-//		 if(g.hasCurrentPosition()) {
-//			 return false;
-//		 }
-//		 if(!QuoridorApplication.getQuoridor().hasBoard()) {
-//			 return false;
-//		 }
+		 if(!g.getMoveMode().equals(MoveMode.WallMove)) {
+			 System.out.println("wrong move mode");
+			return false;
+		 }
+		 if(g.hasMoves()) {
+			 System.out.println("has move");
+			 return false;
+		 }
+		 if(g.hasPositions()) {
+			 System.out.println("has position");
+			 return false;
+		 }
+		 if(g.hasCurrentPosition()) {
+			 System.out.println("has current pos");
+			 return false;
+		 }
+		 if(!QuoridorApplication.getQuoridor().hasBoard()) {
+			 System.out.println("no board");
+			 return false;
+		 }
+		 
+		 
+		 
 		 g.setGameStatus(GameStatus.ReadyToStart);
 		 return true;
 	 }
