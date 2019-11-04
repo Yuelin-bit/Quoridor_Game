@@ -7,15 +7,22 @@ import ca.mcgill.ecse223.quoridor.view.MainMenu;
 public class QuoridorApplication {
 
 	private static Quoridor quoridor;
+	static MainMenu mainMenu;
+	private static JBoard jboard;
+	public static void setJboard(JBoard jboard) {
+		QuoridorApplication.jboard = jboard;
+	}
 
-	private static MainMenu mainMenu;
-
+	public static JBoard getJboard() {
+		return jboard;
+	}
 
 	public static void main(String[] args) {
 		// start UI
+		mainMenu = new MainMenu();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainMenu().setVisible(true);
+                mainMenu.setVisible(true);
             }
         });
 	}
