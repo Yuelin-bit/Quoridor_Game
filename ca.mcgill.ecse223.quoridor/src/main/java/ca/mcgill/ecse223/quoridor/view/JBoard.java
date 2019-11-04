@@ -356,6 +356,7 @@ public class JBoard extends JFrame {
 				if (e.getKeyChar()=='t') if (e.getKeyChar()=='t') {
 //					QuoridorController.initializeNewGame();
 //					QuoridorController.ReleaseWall(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate());
+
 					if(WALL_INDEX<MAX_WALL&&grab) {
 						jwall.setBackground(Color.MAGENTA);
 						mainLayerPanel.remove(jwall);

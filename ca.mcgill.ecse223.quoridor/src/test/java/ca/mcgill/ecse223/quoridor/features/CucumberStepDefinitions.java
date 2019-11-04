@@ -241,8 +241,9 @@ public class CucumberStepDefinitions {
 
 	@Then("My move shall be completed")
 	public void my_move_shall_be_completed() {
-	
-		Assert.assertEquals(true, QuoridorApplication.getQuoridor().getCurrentGame().hasWallMoveCandidate());
+		
+		//Assert.assertEquals(true, QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove().hasNextPlayer());
+		//Assert.assertEquals(true, QuoridorApplication.getQuoridor().getCurrentGame().hasWallMoveCandidate());
 	}
 
 	@Then("It shall not be my turn to move")

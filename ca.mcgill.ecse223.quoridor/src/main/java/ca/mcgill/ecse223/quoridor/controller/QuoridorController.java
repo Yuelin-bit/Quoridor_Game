@@ -188,6 +188,7 @@ public class QuoridorController {
 		if(currentPlayer.hasGameAsBlack()) {
 			Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
 			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(whitePlayer);
+			
 			//QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove().setGameAsBlack(aNewGameAsBlack)
 		}
 		if(currentPlayer.hasGameAsBlack()) {
@@ -208,7 +209,7 @@ public class QuoridorController {
 		QuoridorApplication.getJboard().notifyIllegal();
 		}
 	
-		
+		//QuoridorController.completeMove(currentPlayer);
 	
 	}
 	
