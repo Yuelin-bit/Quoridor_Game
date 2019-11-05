@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.awt.Color;
 import java.io.FileNotFoundException;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 
@@ -34,14 +35,12 @@ import org.junit.Assert;
 
 public class CucumberStepDefinitions {
 	
-	private boolean loadSucceed;
-	private boolean isPositionValid;
 	private Long blackStartTime;
 	private Long blackEndTime;
 	private Long whiteStartTime;
 	private Long whiteEndTime;
-//	private Stopwatch blackWatch;
-//	private Stopwatch whiteWatch;
+	private String error = "";
+
 	
 	private Quoridor quoridor;
 	private Board board;
@@ -1143,13 +1142,24 @@ public class CucumberStepDefinitions {
 
 			Player white = playerList.get(0);
 			Player black = playerList.get(1);
-			loadSucceed = QuoridorController.loadPosition(string, white, black);		    
+			try {
+				QuoridorController.loadPosition(string, white, black);	
+			} catch(Exception e) {
+				error = e.getMessage();
+			}	
 		}
 
 		
 		@And("The position to load is valid")
 		public void the_position_to_load_is_valid() {
-			isPositionValid = QuoridorController.validation();		    
+			if (error.equals("")) {
+				try {
+					QuoridorController.validation(); 
+				} catch(Exception e) {
+					error = e.getMessage();
+				}	
+			}
+				    
 		}
 
 
@@ -1233,16 +1243,20 @@ public class CucumberStepDefinitions {
 
 		@And("The position to load is invalid")
 		public void the_position_to_load_is_invalid() {
-			if (loadSucceed) {
-				 isPositionValid = QuoridorController.validation();
+
+			if (error.equals("")) {
+				try {
+					QuoridorController.validation(); 
+				} catch(Exception e) {
+					error = e.getMessage();
+				}	
 			}
 		}
 
 		@Then("The load shall return an error") //what is return error
 		public void the_load_shall_return_an_error() {
-
-			assertEquals(false, isPositionValid && loadSucceed);
-			//Assert.assertEquals("Illegal" ,QuoridorApplication.getJboard().getError());
+			
+		assertTrue(error.equals("Out of boundary!") || error.equals("Wall Overlapping!") || error.equals("Invalid Pawn!"));
 		    
 		}
 
@@ -1323,7 +1337,11 @@ public class CucumberStepDefinitions {
 
 		@Then("The user interface shall be showing it is {string} turn")
 		public void the_user_interface_shall_be_showing_it_is_turn(String string) {
-		    //no need to do anything according to our clock implementation
+			if (string.equals("black")) {
+				Assert.assertEquals("It is black player's turn", QuoridorApplication.getJboard().getTurn());
+			} else {
+				Assert.assertEquals("It is white player's turn", QuoridorApplication.getJboard().getTurn());
+			}
 		}
 		
 		@Then("The clock of {string} shall be stopped")
@@ -1368,6 +1386,12 @@ public class CucumberStepDefinitions {
 		}
 		
 
+		
+		
+		
+		
+		
+		
 		@When ("{int}:{int} is set as the thinking time")
 		public void is_set_as_the_thinking_time(Integer int1, Integer int2) {
 			QuoridorController.setTotalThinkingTime(int1, int2);

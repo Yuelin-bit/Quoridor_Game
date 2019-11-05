@@ -34,6 +34,7 @@ import java.awt.event.ActionEvent;
 
 public class LoadPosition extends JFrame {
 	
+	private int loadNum = 0;
 	private JLabel errorLabel;
 	private String error = null;
 	private JPanel contentPane;
@@ -41,19 +42,19 @@ public class LoadPosition extends JFrame {
 	JComboBox<String> comboBox;
 	
 
-	public String getError() {
-		return error;
-	}
-	public void setError(String error) {
-		this.error = error;
-	}
-	public JOptionPane getErrorHint() {
-		return errorHint;
-	}
-	public void notifyIllegal() {
-		this.setError("Illegal");
-		this.errorHint.showMessageDialog(null, error);
-	}
+//	public String getError() {
+//		return error;
+//	}
+//	public void setError(String error) {
+//		this.error = error;
+//	}
+//	public JOptionPane getErrorHint() {
+//		return errorHint;
+//	}
+//	public void notifyIllegal() {
+//		this.setError("Illegal");
+//		this.errorHint.showMessageDialog(null, error);
+//	}
 	/**
 	 * Launch the application.
 	 */
@@ -88,51 +89,10 @@ public class LoadPosition extends JFrame {
 		errorLabel = new JLabel("");
 		errorLabel.setVisible(false);
 		
-		JButton btnNewButton = new JButton("Load");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String filename = (String) comboBox.getSelectedItem();
-				ArrayList<Player> playersList = QuoridorController.createUsersAndPlayers("Quintus", "Bozhong");
-				try {
-					QuoridorController.loadPosition(filename, playersList.get(0), playersList.get(1));
-				} catch (FileNotFoundException e1) {
-					// TODO Auto-generated catch block
-					errorLabel.setText(e1.getMessage());
-					errorLabel.setVisible(true);
-				}
-				
-			}
-		
-		});
 		
 
-		//JComboBox<String> FileName = new JComboBox<String>();
-
-//				try (Stream<Path> walk = Files.walk(Paths.get(""))) {
-//
-//					List<String> result = walk.map(x -> x.toString())
-//							.filter(f -> f.endsWith(".dat")).collect(Collectors.toList());
-//
-//					for (String file : result) {
-//						FileName.addItem(file);
-//					}
-//
-//				} catch (IOException e1) {
-//					e1.printStackTrace();
-//				}	
-
-
-//		JButton btnBack = new JButton("Back");
-//		btnBack.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				MainMenu m = new MainMenu();
-//				m.setVisible(true);
-//				setVisible(false);
-//				dispose();
-//			}
-//		});
 		
-		JComboBox<String> comboBox = new JComboBox<String>();
+		comboBox = new JComboBox<String>();
 		try (Stream<Path> walk = Files.walk(Paths.get(""))) {
 
 			List<String> result = walk.map(x -> x.toString())
@@ -144,7 +104,32 @@ public class LoadPosition extends JFrame {
 
 		} catch (IOException e1) {
 			e1.printStackTrace();
-		}	
+		}
+		comboBox.setSelectedIndex(0);
+		
+		JButton btnNewButton = new JButton("Load");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (loadNum == 1) {
+					errorHint.showMessageDialog(null, "Can't load position twice");
+				} else {
+					String filename = (String) comboBox.getSelectedItem();
+					ArrayList<Player> playersList = QuoridorController.createUsersAndPlayers("Quintus", "Bozhong");
+					loadNum = 1;
+					try {
+						QuoridorController.loadPosition(filename, playersList.get(0), playersList.get(1));
+						QuoridorController.validation();
+					} catch (Exception e1) {
+						errorHint.showMessageDialog(null, "failed to load game");
+						
+					}
+				}
+				
+				
+			}
+		
+		});
+		
 		
 		JButton btnNewButton_1 = new JButton("Back");
 		btnNewButton_1.addActionListener(new ActionListener() {

@@ -83,6 +83,7 @@ public class JBoard extends JFrame {
 
 	private JOptionPane errorHint;
 	private String error = null;
+	private String showTurn = null;
 	private boolean grab = false;
 	private JLabel lblBlackStock;
 	private JLabel lblWhiteBlock;
@@ -101,6 +102,21 @@ public class JBoard extends JFrame {
 	public void notifyIllegal() {
 		this.setError("I will give a dialog immediately you release a illegal wall, So do not worry if you notice there are some dialogs when you running the JUnit Test! Just close it!");
 		this.errorHint.showMessageDialog(null, error);
+	}
+	
+	public String getTurn() {
+		return showTurn;
+	}
+	public void setTurn(String showTurn) {
+		this.showTurn = showTurn;
+	}
+	public void whiteTurn() {
+		this.setTurn("It is white player's turn");
+		this.errorHint.showMessageDialog(null, showTurn);
+	}
+	public void blackTurn() {
+		this.setTurn("It is black player's turn");
+		this.errorHint.showMessageDialog(null, showTurn);
 	}
 	/**
 	 * Launch the application.
