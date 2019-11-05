@@ -1431,6 +1431,7 @@ public class QuoridorController {
 			 System.out.println("has move");
 			 return false;
 		 }
+		 
 //		 if(g.hasPositions()) {
 //			 System.out.println("has position");
 //			 return false;
@@ -1439,6 +1440,7 @@ public class QuoridorController {
 //			 System.out.println("has current pos");
 //			 return false;
 //		 }
+		 
 		 if(!QuoridorApplication.getQuoridor().hasBoard()) {
 			 System.out.println("no board");
 			 return false;
