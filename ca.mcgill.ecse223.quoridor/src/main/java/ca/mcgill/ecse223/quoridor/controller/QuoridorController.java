@@ -45,6 +45,22 @@ public class QuoridorController {
 	 *
 	 */
 	public static void refreshAndSet() {
+		QuoridorApplication.getQuoridor().setBoard(null);
+	     QuoridorApplication.getQuoridor().setCurrentGame(null);
+	     QuoridorApplication.setJboard(null);
+	     QuoridorApplication.getQuoridor().getUsers().remove(0);
+	     QuoridorApplication.getQuoridor().getUsers().remove(1);
+	     GamePosition oldGamePosition = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition();
+	     for (int j = 0; j < 10; j++) {
+	      Wall wall = Wall.getWithId(j);
+	      oldGamePosition.removeWhiteWallsInStock(wall);
+	     }
+	     for (int j = 0; j < 10; j++) {
+	      Wall wall = Wall.getWithId(j + 10);
+	      oldGamePosition.removeBlackWallsInStock(wall);
+	     }
+	     
+	     
 		Quoridor quoridor = QuoridorApplication.getQuoridor();
 		  Board b = new Board(quoridor);
 		  Board board = QuoridorApplication.getQuoridor().getBoard();

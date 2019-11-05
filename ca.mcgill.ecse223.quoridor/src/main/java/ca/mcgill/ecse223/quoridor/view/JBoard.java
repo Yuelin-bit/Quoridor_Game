@@ -328,7 +328,7 @@ public class JBoard extends JFrame {
 		      }
 		      
 		      WallList.get(i).setVisible(true);
-		    System.out.println(i + "yes");
+		   // System.out.println(i + "yes");
 		     }
 		jwall = WallList.get(WALL_INDEX);
 
@@ -451,13 +451,16 @@ public class JBoard extends JFrame {
 					}
 				}
 				if (e.getKeyChar()=='t') if (e.getKeyChar()=='t') {
+					boolean overlapped = true;
+					if(QuoridorController.verifyOverlapped(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate())==false) 
+					{
+						overlapped = false;
+						System.out.println("Not overlapped!");
+					}
 					
-							QuoridorController.releaseWall();
-						if(WALL_INDEX<MAX_WALL&&grab) {
-//							jwall.setBackground(Color.MAGENTA);
-//							mainLayerPanel.remove(jwall);
-//							mainLayerPanel.add(jwall);
-//							WALL_INDEX++;
+					QuoridorController.releaseWall();
+					if((WALL_INDEX<MAX_WALL&&grab)&&(overlapped==false)) {
+
 							ChangeDropWall();
 							WALL_INDEX++;
 							if(WALL_INDEX<MAX_WALL) {
@@ -471,35 +474,11 @@ public class JBoard extends JFrame {
 							blackPawnMove.setVisible(!whiteTurn);						
 						}
 					
+					}
 
-					//QuoridorController.initializeNewGame();
-					//QuoridorController.initializeBlackWall(g, blackPlayer)
-
-				//	QuoridorController.ReleaseWall(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate());
-
-//					QuoridorController.initializeNewGame();
-//					QuoridorController.ReleaseWall(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate());
-
-
-//					if(WALL_INDEX<MAX_WALL&&grab) {
-//						jwall.setBackground(Color.MAGENTA);
-//						mainLayerPanel.remove(jwall);
-//						mainLayerPanel.add(jwall);
-//						WALL_INDEX++;
-//						if(WALL_INDEX<MAX_WALL) {
-//							jwall = WallList.get(WALL_INDEX);
-//						}
-//						grab = false;
-//						whiteTurn = !whiteTurn;
-//						mainLayerPanel.add(blackPawnMove);
-//						mainLayerPanel.add(whitePawnMove);
-//						whitePawnMove.setVisible(whiteTurn);	
-//						blackPawnMove.setVisible(!whiteTurn);	
-//								
-//					}
 				}
 
-			}
+			
 		});
 
 		/*Image image=null;
@@ -507,10 +486,5 @@ public class JBoard extends JFrame {
 
 
 	}
-	
 
-	
-	public Color getJwallColor() {
-		return this.jwall.getBackground();
-	}
 }

@@ -550,12 +550,11 @@ public class CucumberStepDefinitions {
 
 	@Then("I shall have a wall in my hand over the board")
 	public void i_shall_have_a_wall_in_my_hand_over_the_board() {
-//		JBoard newb = new JBoard();
-//		QuoridorApplication.setJboard(newb);
-//		Wall jwall = 
-//		newb.setJwall(jwall);
-		Color actual = QuoridorApplication.getJboard().getJwallColor();
-		Assert.assertNotEquals(Color.MAGENTA, actual);
+		boolean haveAWall = false;
+		if(QuoridorApplication.getJboard().getJwall()!=null) {
+			haveAWall = true;
+		}
+		Assert.assertEquals(true,haveAWall);
 	}
 
 	@Then("The wall in my hand shall disappear from my stock")
