@@ -1507,8 +1507,29 @@ public class QuoridorController {
 	 
 	 public static ArrayList<Player> createUsersAndPlayers(String userName1, String userName2) {
 			Quoridor quoridor = QuoridorApplication.getQuoridor();
-			User user1 = quoridor.addUser(userName1);
-			User user2 = quoridor.addUser(userName2);
+//			User user1 = quoridor.addUser(userName1);
+//			User user2 = quoridor.addUser(userName2);
+			User user1 = null;
+			User user2 = null;
+			
+			for(User user: quoridor.getUsers()) {
+				
+				if(userName1.equals(user.getName())) {
+					user1 = user;
+					break;
+				}
+			}
+			
+			for(User user: quoridor.getUsers()) {
+				
+				if(userName2.equals(user.getName())) {
+					user2 = user;
+					break;
+				}
+			}
+			
+			
+
 
 			int thinkingTime = 180;
 
