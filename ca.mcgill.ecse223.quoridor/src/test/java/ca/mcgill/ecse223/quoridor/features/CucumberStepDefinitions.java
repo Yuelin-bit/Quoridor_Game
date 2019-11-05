@@ -613,10 +613,15 @@ public class CucumberStepDefinitions {
 	
 	@Then("I shall have no walls in my hand")
 	public void i_shall_have_no_walls_in_my_hand() {
-		int w = QuoridorApplication.getJboard().getWhiteWallList().size();
-		int b = QuoridorApplication.getJboard().getBlackWallList().size();
-		Assert.assertEquals(10,w);
-		Assert.assertEquals(10,b);	
+//		int w = QuoridorApplication.getJboard().getWhiteWallList().size();
+//		int b = QuoridorApplication.getJboard().getBlackWallList().size();
+//		Assert.assertEquals(10,w);
+//		Assert.assertEquals(10,b);	
+		boolean noWall = false;
+		if(QuoridorApplication.getJboard().getJwall()!=null) {
+			noWall = true;
+		}
+		Assert.assertEquals(true,noWall);
 	}
 
 	//// *******************************************************************************************************************************
