@@ -19,6 +19,7 @@ public class Stopwatch extends Thread{
 	private long numConversion = 1000;
 	private long totalInMilli;
 	private Player player;
+	private Time timeRemaining;
 
 	@SuppressWarnings("deprecation")
 	public Stopwatch(Player player) {
@@ -33,6 +34,8 @@ public class Stopwatch extends Thread{
 		stopTime = startTime +totalInMilli;
 		while(System.currentTimeMillis()<=stopTime) {
 			timeLeft = stopTime - System.currentTimeMillis();
+			timeRemaining = new Time(timeLeft);
+			player.setRemainingTime(timeRemaining);
 			timeLeftInSec = (int) (timeLeft/numConversion);
 		}
 		timeIsEnd = true;
