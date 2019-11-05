@@ -308,6 +308,7 @@ public class QuoridorController {
 		{
 			
 		QuoridorApplication.getJboard().notifyIllegal();
+		return;
 		}
 		
 		
