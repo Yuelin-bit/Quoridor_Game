@@ -204,8 +204,8 @@ public class CucumberStepDefinitions {
 	
 	@When("I release the wall in my hand")
 	public void i_release_the_wall_in_my_hand() {
-		WallMove a = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate();
-		QuoridorController.ReleaseWall(a);
+		//WallMove a = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate();
+		QuoridorController.releaseWall();
 	}
 
 	@Then("A wall move shall be registered with {string} at position \\({int}, {int})")
@@ -226,17 +226,7 @@ public class CucumberStepDefinitions {
 
 	@Then("I shall not have a wall in my hand")
 	public void i_shall_not_have_a_wall_in_my_hand() {
-		
-		Color actual = QuoridorApplication.getJboard().getJwallColor();
-		Assert.assertNotEquals(Color.blue, actual);
 		// GUI-related feature -- TODO for later
-		//to refresh
-//		Wall ww = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getWallPlaced();
-//		QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().removeBlackWallsOnBoard(ww);
-//	
-//		QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().removeWhiteWallsOnBoard(ww);
-//		
-		
 		boolean haveAWall = false;
 		if(QuoridorApplication.getJboard().getJwall()!=null) {
 			haveAWall = true;
@@ -247,9 +237,18 @@ public class CucumberStepDefinitions {
 
 	@Then("My move shall be completed")
 	public void my_move_shall_be_completed() {
-		
-		//Assert.assertEquals(true, QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove().hasNextPlayer());
-		Assert.assertEquals(true, QuoridorApplication.getQuoridor().getCurrentGame().hasWallMoveCandidate());
+		//   0:white         1:black
+		int player = 0;
+		int game = 0;
+		Player blackPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
+		Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
+		if(QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove()==blackPlayer) {
+			player = 1;
+		}
+		if(QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove().hasGameAsWhite()) {
+			game = 1;
+		}
+		Assert.assertNotEquals(player, game);
 	}
 
 	@Then("It shall not be my turn to move")
@@ -301,7 +300,6 @@ public class CucumberStepDefinitions {
 		boolean c = QuoridorController.verifyOutsideTheBoard(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate());
 		boolean d = c||b;
 		Assert.assertEquals(true,d);
-		QuoridorApplication.setJboard(new JBoard());
 		
 }
 	    
@@ -461,36 +459,10 @@ public class CucumberStepDefinitions {
 
 	@Given("The wall candidate is at the {string} edge of the board")
 	public void the_wall_candidate_is_at_the_edge_of_the_board(String string) {
-		/*int currentRow = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getRow();
-		int currentColumn = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getColumn();
-		
-		if(string.equalsIgnoreCase("left")) {
-			if(!(currentColumn==1)) {
-				Tile tileLeft = new Tile(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getRow(),1,QuoridorApplication.getQuoridor().getBoard());
-				QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().setTargetTile(tileLeft);
-			}
-		}
-		if(string.equalsIgnoreCase("right")) {
-			if(!(currentColumn==8)) {
-				Tile tileRight = new Tile(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getRow(),8,QuoridorApplication.getQuoridor().getBoard());
-				QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().setTargetTile(tileRight);
-			}
-		}
-		if(string.equalsIgnoreCase("up")) {
-			if(!(currentRow==1)) {
-				Tile tileUp = new Tile(1,QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getColumn(),QuoridorApplication.getQuoridor().getBoard());
-				QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().setTargetTile(tileUp);
-			}
-		}
-		if(string.equalsIgnoreCase("down")) {
-			if(!(currentRow==8)) {
-				Tile tileDown = new Tile(8,QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getColumn(),QuoridorApplication.getQuoridor().getBoard());
-				QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().setTargetTile(tileDown);
-			}
-		}*/
 		boolean b = QuoridorController.verifyOnEdge(string);
 		Assert.assertEquals(true,b);
 	}
+	
 	
 	@Then("I shall be notified that my move is illegal")
 	public void i_shall_be_notified_that_my_move_is_illegal() {
@@ -1647,8 +1619,8 @@ public class CucumberStepDefinitions {
 			// There are total 36 tiles in the first four rows and
 			// indexing starts from 0 -> tiles with indices 36 and 36+8=44 are the starting
 			// positions
-			Tile player1StartPos = quoridor.getBoard().getTile(36);
-			Tile player2StartPos = quoridor.getBoard().getTile(44);
+			Tile player1StartPos = quoridor.getBoard().getTile(4);
+			Tile player2StartPos = quoridor.getBoard().getTile(76);
 		
 			Game game = new Game(GameStatus.Running, MoveMode.PlayerMove, quoridor);
 			game.setWhitePlayer(players.get(0));
