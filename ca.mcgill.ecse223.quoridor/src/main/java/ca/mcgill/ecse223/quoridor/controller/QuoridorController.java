@@ -483,7 +483,9 @@ public class QuoridorController {
 	
 	public static boolean grabWall() {	
 		
-		Player currentPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();	
+		Player currentPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
+		
+	
 		try {
 			if(currentPlayer.hasGameAsBlack()) {			
 				List<Wall> inStock = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsInStock();		
@@ -516,7 +518,7 @@ public class QuoridorController {
 			}
 		}
 		catch(Exception e) {
-			QuoridorApplication.getJboard().notifyIllegal();
+			QuoridorApplication.getJboard().notifyIllegal2();
 		}
 
 		return false;

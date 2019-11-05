@@ -222,17 +222,18 @@ public class CucumberStepDefinitions {
 	}
 	
 	
+	// the same one is in feature GrabWall
 
-	@Then("I shall not have a wall in my hand")
-	public void i_shall_not_have_a_wall_in_my_hand() {
-		// GUI-related feature -- TODO for later
+	@Then("I shall have a wall in my hand over the board")
+	public void i_shall_have_a_wall_in_my_hand_over_the_board() {
 		boolean haveAWall = false;
 		if(QuoridorApplication.getJboard().getJwall()!=null) {
 			haveAWall = true;
 		}
 		Assert.assertEquals(true,haveAWall);
-		//throw new cucumber.api.PendingException();
 	}
+	
+	
 
 	@Then("My move shall be completed")
 	public void my_move_shall_be_completed() {
@@ -546,16 +547,7 @@ public class CucumberStepDefinitions {
 		Assert.assertEquals(true, QuoridorApplication.getQuoridor().getCurrentGame().hasWallMoveCandidate());
 	}
 
-	// the same one is in feature DropWall
 
-	@Then("I shall have a wall in my hand over the board")
-	public void i_shall_have_a_wall_in_my_hand_over_the_board() {
-		boolean haveAWall = false;
-		if(QuoridorApplication.getJboard().getJwall()!=null) {
-			haveAWall = true;
-		}
-		Assert.assertEquals(true,haveAWall);
-	}
 
 	@Then("The wall in my hand shall disappear from my stock")
 	public void the_wall_in_my_hand_shall_disappear_from_my_stock() {
@@ -605,15 +597,26 @@ public class CucumberStepDefinitions {
 	// what does it mean by notify? Do I need to print a message?
 	@Then("I shall be notified that I have no more walls")
 	public void i_shall_be_notified_that_I_have_no_more_walls() {
-		// ui
-		// the TA said that I could fill this out later.
+		Assert.assertEquals("No more walls in hand!",QuoridorApplication.getJboard().getError());
 	}
 
-	@And("I shall have no walls in my hand")
+	@Then("I shall not have a wall in my hand")
+	public void i_shall_not_have_a_wall_in_my_hand() {
+		// GUI-related feature -- TODO for later
+		boolean noWall = false;
+		if(QuoridorApplication.getJboard().getJwall()!=null) {
+			noWall = true;
+		}
+		Assert.assertEquals(true,noWall);
+		//throw new cucumber.api.PendingException();
+	}
+	
+	@Then("I shall have no walls in my hand")
 	public void i_shall_have_no_walls_in_my_hand() {
-//		boolean actural = QuoridorApplication.getQuoridor().getCurrentGame().hasWallMoveCandidate();
-//		Assert.assertEquals(false, actural);
-	//	throw new cucumber.api.PendingException();
+		int w = QuoridorApplication.getJboard().getWhiteWallList().size();
+		int b = QuoridorApplication.getJboard().getBlackWallList().size();
+		Assert.assertEquals(10,w);
+		Assert.assertEquals(10,b);	
 	}
 
 	//// *******************************************************************************************************************************
