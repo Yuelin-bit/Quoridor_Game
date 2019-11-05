@@ -65,8 +65,11 @@ public class JBoard extends JFrame {
 	private JTextField display_number_black_stock;
 	private JTextField display_number_white_stock;
 	private int WALL_INDEX = 0;
+	private int BLACK_WALL_INDEX = -1;
+	private int WHITE_WALL_INDEX = 0;
 	private static final int MAX_WALL =20;
-	private List <JWall> WallList = new ArrayList<JWall>(); 
+	private List <JWall> WhiteWallList = new ArrayList<JWall>(); 
+	private List <JWall> BlackWallList = new ArrayList<JWall>();
 	private JWall jwall;
 	public boolean whiteTurn;
 	private JButton SaveGameButton;
@@ -322,32 +325,51 @@ public class JBoard extends JFrame {
 							.addGap(155))))
 		);
 		tile.setLayout(gl_tile);
-
 		
-
-		for (int i = 0; i < MAX_WALL; i++) {
-		      JWall jwall = new JWall();
-		      WallList.add(jwall);      
-		      mainLayerPanel.add(WallList.get(i));
-		      WallList.get(i).setBackground(Color.GRAY);
-		      
-		      if (i==0) {
-		       WallList.get(i).setBounds(50, 650, 10, 110);
-		      }
-		      if (0<i && i<10) {
-		       WallList.get(i).setBounds(50+35*i, 650, 10, 110);
-		      }
-		      if(i==10) {
-		       WallList.get(i).setBounds(600, 650, 10, 110);
-		      }
-		      if(i>10) {
-		       WallList.get(i).setBounds(600+35*(i-10), 650, 10, 110);
-		      }
-		      
-		      WallList.get(i).setVisible(true);
-		   // System.out.println(i + "yes");
-		     }
-		jwall = WallList.get(WALL_INDEX);
+		for (int i = 0; i < 10; i++) {
+	         JWall jwall = new JWall();        
+	         BlackWallList.add(jwall);      
+	         mainLayerPanel.add(BlackWallList.get(i));
+	         BlackWallList.get(i).setBackground(Color.GRAY);
+	         BlackWallList.get(i).setBounds(50+35*i,650,10,110);
+	         BlackWallList.get(i).setVisible(true);
+	         System.out.println(i + "black");
+	    }
+	   for (int i = 0; i < 10; i++) {        
+	      JWall jwall = new JWall();        
+	         WhiteWallList.add(jwall);      
+	         mainLayerPanel.add(WhiteWallList.get(i));
+	         WhiteWallList.get(i).setBackground(Color.GRAY);
+	         WhiteWallList.get(i).setBounds (600+35*i,650,10,110);
+	         WhiteWallList.get(i).setVisible(true);
+	         System.out.println(i + "white");
+	   }
+		
+//
+//		for (int i = 0; i < MAX_WALL; i++) {
+//		      JWall jwall = new JWall();
+//		      WallList.add(jwall);      
+//		      mainLayerPanel.add(WallList.get(i));
+//		      WallList.get(i).setBackground(Color.GRAY);
+//		      
+//		      if (i==0) {
+//		       WallList.get(i).setBounds(50, 650, 10, 110);
+//		      }
+//		      if (0<i && i<10) {
+//		       WallList.get(i).setBounds(50+35*i, 650, 10, 110);
+//		      }
+//		      if(i==10) {
+//		       WallList.get(i).setBounds(600, 650, 10, 110);
+//		      }
+//		      if(i>10) {
+//		       WallList.get(i).setBounds(600+35*(i-10), 650, 10, 110);
+//		      }
+//		      
+//		      WallList.get(i).setVisible(true);
+//		   // System.out.println(i + "yes");
+//		     }
+		
+		
 
 		whiteTurn = true;
 		mainLayerPanel.add(whitePawnMove);
@@ -373,7 +395,7 @@ public class JBoard extends JFrame {
 		
 		
 		
-		
+		jwall = WhiteWallList.get(WHITE_WALL_INDEX);
 		
 		
 		addKeyListener(new KeyAdapter() {
@@ -480,15 +502,33 @@ public class JBoard extends JFrame {
 
 							ChangeDropWall();
 							WALL_INDEX++;
-							if(WALL_INDEX<MAX_WALL) {
-								jwall = WallList.get(WALL_INDEX);
-							}
+//							if(WALL_INDEX<MAX_WALL) {
+//								jwall = WallList.get(WALL_INDEX);
+//							}
 							grab = false;
 							whiteTurn = !whiteTurn;
 							mainLayerPanel.add(blackPawnMove);
 							mainLayerPanel.add(whitePawnMove);
 							whitePawnMove.setVisible(whiteTurn);	
-							blackPawnMove.setVisible(!whiteTurn);						
+							blackPawnMove.setVisible(!whiteTurn);	
+							
+							
+							if(WALL_INDEX<MAX_WALL) {
+						         if (BLACK_WALL_INDEX+1<WHITE_WALL_INDEX) {
+						 
+						           BLACK_WALL_INDEX++;
+						           jwall=BlackWallList.get(BLACK_WALL_INDEX);
+						          }else if (BLACK_WALL_INDEX+1>WHITE_WALL_INDEX){
+						           WHITE_WALL_INDEX++;
+						           jwall=WhiteWallList.get(WHITE_WALL_INDEX);
+						          }else {
+						           BLACK_WALL_INDEX++;
+						           jwall=BlackWallList.get(BLACK_WALL_INDEX);
+						          }
+						         
+						        }
+							
+							
 						}
 					
 					}
