@@ -120,10 +120,11 @@ public class LoadPosition extends JFrame {
 					ArrayList<Player> playersList = QuoridorController.createUsersAndPlayers(textField.getText(), textField_1.getText());
 					loadNum = 1;
 					try {
+						
 						QuoridorController.loadPosition(filename, playersList.get(0), playersList.get(1));
 						QuoridorController.validation();
 					} catch (Exception e1) {
-						errorHint.showMessageDialog(null, "failed to load game");
+						errorHint.showMessageDialog(null, e1.getMessage());
 						
 					}
 				}

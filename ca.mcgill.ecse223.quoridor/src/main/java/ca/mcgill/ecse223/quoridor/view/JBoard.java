@@ -152,7 +152,7 @@ public class JBoard extends JFrame {
 				try {
 					JBoard frame = new JBoard();
 					frame.setVisible(true);
-				    QuoridorController.refreshAndSet();
+				   // QuoridorController.refreshAndSet();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

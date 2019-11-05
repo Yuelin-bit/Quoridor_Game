@@ -956,7 +956,7 @@ public class QuoridorController {
 					try {
 						tile = quoridor.getBoard().getTile((Integer.parseInt(s[1]) - 1) * 9 + columnNum(s[0]) - 1);
 					} catch(Exception e) {
-						throw(new Exception("Out of boundary!"));
+						throw(new Exception("Out of boundary!", e));
 					}
 					if (s.length == 2) {	//check if is pawn move
 						blackposition = new PlayerPosition(black, tile);
@@ -1596,6 +1596,18 @@ public class QuoridorController {
 			}
 
 			game.setCurrentPosition(gamePosition);
+		}
+		
+		public static void initQuoridorAndBoard() {
+			Quoridor quoridor = QuoridorApplication.getQuoridor();
+			Board board = new Board(quoridor);
+			// Creating tiles by rows, i.e., the column index changes with every tile
+			// creation
+			for (int i = 1; i <= 9; i++) { // rows
+				for (int j = 1; j <= 9; j++) { // columns
+					board.addTile(i, j);
+				}
+			}
 		}
 	 
 	 

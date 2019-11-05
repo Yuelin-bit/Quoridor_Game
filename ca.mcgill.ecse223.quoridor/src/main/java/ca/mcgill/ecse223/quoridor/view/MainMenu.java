@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import ca.mcgill.ecse223.quoridor.controller.QuoridorController;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
@@ -25,6 +28,7 @@ public class MainMenu extends JFrame {
 				try {
 					MainMenu frame = new MainMenu();
 					frame.setVisible(true);
+					QuoridorController.initQuoridorAndBoard();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
