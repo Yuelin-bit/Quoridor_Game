@@ -1,0 +1,23 @@
+namespace ca.mcgill.ecse223.quoridor.controller;  
+
+use ca.mcgill.ecse223.quoridor.model.Direction;
+// Due to a bug in Umple, this enum has been added manually to the ca.mcgill.ecse223.quoridor.model package
+// public enum Direction { Horizontal, Vertical }
+
+
+class TOQuoridor {
+
+}
+
+class TOBoard {
+
+}
+
+class TOWall {
+	enum Direction2 {Horizontal, Vertical};
+	Integer row;
+	Integer column;
+	Direction2 dir;
+}
+
+

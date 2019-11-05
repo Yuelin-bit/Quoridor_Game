@@ -26,7 +26,7 @@ public class Board
     boolean didAddQuoridor = setQuoridor(aQuoridor);
     if (!didAddQuoridor)
     {
-      throw new RuntimeException("Unable to create board due to quoridor");
+      //throw new RuntimeException("Unable to create board due to quoridor");
     }
   }
 

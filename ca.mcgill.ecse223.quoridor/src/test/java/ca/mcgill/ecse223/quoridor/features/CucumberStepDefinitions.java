@@ -2,8 +2,10 @@ package ca.mcgill.ecse223.quoridor.features;
 
 import static org.junit.Assert.assertEquals;
 
+import java.awt.Color;
 import java.io.FileNotFoundException;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 
@@ -33,14 +35,12 @@ import org.junit.Assert;
 
 public class CucumberStepDefinitions {
 	
-	private boolean loadSucceed;
-	private boolean isPositionValid;
 	private Long blackStartTime;
 	private Long blackEndTime;
 	private Long whiteStartTime;
 	private Long whiteEndTime;
-//	private Stopwatch blackWatch;
-//	private Stopwatch whiteWatch;
+	private String error = "";
+
 	
 	private Quoridor quoridor;
 	private Board board;
@@ -203,7 +203,8 @@ public class CucumberStepDefinitions {
 	
 	@When("I release the wall in my hand")
 	public void i_release_the_wall_in_my_hand() {
-		QuoridorController.ReleaseWall(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate());
+		//WallMove a = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate();
+		QuoridorController.releaseWall();
 	}
 
 	@Then("A wall move shall be registered with {string} at position \\({int}, {int})")
@@ -221,30 +222,33 @@ public class CucumberStepDefinitions {
 	}
 	
 	
+	// the same one is in feature GrabWall
 
-	@Then("I shall not have a wall in my hand")
-	public void i_shall_not_have_a_wall_in_my_hand() {
-		// GUI-related feature -- TODO for later
-		//to refresh
-//		Wall ww = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getWallPlaced();
-//		QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().removeBlackWallsOnBoard(ww);
-//	
-//		QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().removeWhiteWallsOnBoard(ww);
-//		
-		
+	@Then("I shall have a wall in my hand over the board")
+	public void i_shall_have_a_wall_in_my_hand_over_the_board() {
 		boolean haveAWall = false;
 		if(QuoridorApplication.getJboard().getJwall()!=null) {
 			haveAWall = true;
 		}
 		Assert.assertEquals(true,haveAWall);
-		//throw new cucumber.api.PendingException();
 	}
+	
+	
 
 	@Then("My move shall be completed")
 	public void my_move_shall_be_completed() {
-		
-		//Assert.assertEquals(true, QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove().hasNextPlayer());
-		//Assert.assertEquals(true, QuoridorApplication.getQuoridor().getCurrentGame().hasWallMoveCandidate());
+		//   0:white         1:black
+		int player = 0;
+		int game = 0;
+		Player blackPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
+		Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
+		if(QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove()==blackPlayer) {
+			player = 1;
+		}
+		if(QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove().hasGameAsWhite()) {
+			game = 1;
+		}
+		Assert.assertNotEquals(player, game);
 	}
 
 	@Then("It shall not be my turn to move")
@@ -296,7 +300,6 @@ public class CucumberStepDefinitions {
 		boolean c = QuoridorController.verifyOutsideTheBoard(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate());
 		boolean d = c||b;
 		Assert.assertEquals(true,d);
-		QuoridorApplication.setJboard(new JBoard());
 		
 }
 	    
@@ -307,19 +310,19 @@ public class CucumberStepDefinitions {
 		//It could be GUI
 	    //TA said that I could fill this out later.
 		//JOptionPane.showMessageDialog(null, "It is illegal!!!");
-		Assert.assertEquals("Illegal",QuoridorApplication.getJboard().getError());
+		Assert.assertEquals("I will give a dialog immediately you release a illegal wall, So do not worry if you notice there are some dialogs when you running the JUnit Test! Just close it!",QuoridorApplication.getJboard().getError());
 		//throw new cucumber.api.PendingException();
 	}
 
-	@Then("I shall have a wall in my hand over the board")
-	public void i_shall_have_a_wall_in_my_hand_over_the_board() {
-		// GUI-related feature -- TODO for later
-		boolean haveAWall = false;
-		if(QuoridorApplication.getJboard().getJwall()!=null) {
-			haveAWall = true;
-		}
-		Assert.assertEquals(true,haveAWall);
-	}
+//	@Then("I shall have a wall in my hand over the board")
+//	public void i_shall_have_a_wall_in_my_hand_over_the_board() {
+//		// GUI-related feature -- TODO for later
+//		boolean haveAWall = false;
+//		if(QuoridorApplication.getJboard().getJwall()!=null) {
+//			haveAWall = true;
+//		}
+//		Assert.assertEquals(true,haveAWall);
+//	}
 
 	@Then("It shall be my turn to move")
 	public void it_shall_be_my_turn_to_move() {
@@ -456,41 +459,15 @@ public class CucumberStepDefinitions {
 
 	@Given("The wall candidate is at the {string} edge of the board")
 	public void the_wall_candidate_is_at_the_edge_of_the_board(String string) {
-		/*int currentRow = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getRow();
-		int currentColumn = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getColumn();
-		
-		if(string.equalsIgnoreCase("left")) {
-			if(!(currentColumn==1)) {
-				Tile tileLeft = new Tile(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getRow(),1,QuoridorApplication.getQuoridor().getBoard());
-				QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().setTargetTile(tileLeft);
-			}
-		}
-		if(string.equalsIgnoreCase("right")) {
-			if(!(currentColumn==8)) {
-				Tile tileRight = new Tile(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getRow(),8,QuoridorApplication.getQuoridor().getBoard());
-				QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().setTargetTile(tileRight);
-			}
-		}
-		if(string.equalsIgnoreCase("up")) {
-			if(!(currentRow==1)) {
-				Tile tileUp = new Tile(1,QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getColumn(),QuoridorApplication.getQuoridor().getBoard());
-				QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().setTargetTile(tileUp);
-			}
-		}
-		if(string.equalsIgnoreCase("down")) {
-			if(!(currentRow==8)) {
-				Tile tileDown = new Tile(8,QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getColumn(),QuoridorApplication.getQuoridor().getBoard());
-				QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().setTargetTile(tileDown);
-			}
-		}*/
 		boolean b = QuoridorController.verifyOnEdge(string);
 		Assert.assertEquals(true,b);
 	}
 	
+	
 	@Then("I shall be notified that my move is illegal")
 	public void i_shall_be_notified_that_my_move_is_illegal() {
 		// GUI-related feature -- TODO for later
-		Assert.assertEquals("Illegal",QuoridorApplication.getJboard().getError());
+		Assert.assertEquals("I will give a dialog immediately you release a illegal wall, So do not worry if you notice there are some dialogs when you running the JUnit Test! Just close it!",QuoridorApplication.getJboard().getError());
 		//throw new cucumber.api.PendingException();
 	}
 
@@ -570,16 +547,9 @@ public class CucumberStepDefinitions {
 		Assert.assertEquals(true, QuoridorApplication.getQuoridor().getCurrentGame().hasWallMoveCandidate());
 	}
 
-	// the same one is in feature DropWall
 
-//	@And("I shall have a wall in my hand over the board")
-//	public void i_shall_have_a_wall_in_my_hand_over_the_board() {
-//		// Assert.assertEquals(true,
-//		// QuoridorApplication.getQuoridor().getCurrentGame().hasWallMoveCandidate() );
-//		// This is GUI related part
-//	}
 
-	@And("The wall in my hand shall disappear from my stock")
+	@Then("The wall in my hand shall disappear from my stock")
 	public void the_wall_in_my_hand_shall_disappear_from_my_stock() {
 		Player aPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
 		Wall newWallFromStock;
@@ -627,15 +597,31 @@ public class CucumberStepDefinitions {
 	// what does it mean by notify? Do I need to print a message?
 	@Then("I shall be notified that I have no more walls")
 	public void i_shall_be_notified_that_I_have_no_more_walls() {
-		// ui
-		// the TA said that I could fill this out later.
+		Assert.assertEquals("No more walls in hand!",QuoridorApplication.getJboard().getError());
 	}
 
-	@And("I shall have no walls in my hand")
+	@Then("I shall not have a wall in my hand")
+	public void i_shall_not_have_a_wall_in_my_hand() {
+		// GUI-related feature -- TODO for later
+		boolean noWall = false;
+		if(QuoridorApplication.getJboard().getJwall()!=null) {
+			noWall = true;
+		}
+		Assert.assertEquals(true,noWall);
+		//throw new cucumber.api.PendingException();
+	}
+	
+	@Then("I shall have no walls in my hand")
 	public void i_shall_have_no_walls_in_my_hand() {
-//		boolean actural = QuoridorApplication.getQuoridor().getCurrentGame().hasWallMoveCandidate();
-//		Assert.assertEquals(false, actural);
-	//	throw new cucumber.api.PendingException();
+//		int w = QuoridorApplication.getJboard().getWhiteWallList().size();
+//		int b = QuoridorApplication.getJboard().getBlackWallList().size();
+//		Assert.assertEquals(10,w);
+//		Assert.assertEquals(10,b);	
+		boolean noWall = false;
+		if(QuoridorApplication.getJboard().getJwall()!=null) {
+			noWall = true;
+		}
+		Assert.assertEquals(true,noWall);
 	}
 
 	//// *******************************************************************************************************************************
@@ -1162,13 +1148,24 @@ public class CucumberStepDefinitions {
 
 			Player white = playerList.get(0);
 			Player black = playerList.get(1);
-			loadSucceed = QuoridorController.loadPosition(string, white, black);		    
+			try {
+				QuoridorController.loadPosition(string, white, black);	
+			} catch(Exception e) {
+				error = e.getMessage();
+			}	
 		}
 
 		
 		@And("The position to load is valid")
 		public void the_position_to_load_is_valid() {
-			isPositionValid = QuoridorController.validation();		    
+			if (error.equals("")) {
+				try {
+					QuoridorController.validation(); 
+				} catch(Exception e) {
+					error = e.getMessage();
+				}	
+			}
+				    
 		}
 
 
@@ -1252,16 +1249,20 @@ public class CucumberStepDefinitions {
 
 		@And("The position to load is invalid")
 		public void the_position_to_load_is_invalid() {
-			if (loadSucceed) {
-				 isPositionValid = QuoridorController.validation();
+
+			if (error.equals("")) {
+				try {
+					QuoridorController.validation(); 
+				} catch(Exception e) {
+					error = e.getMessage();
+				}	
 			}
 		}
 
 		@Then("The load shall return an error") //what is return error
 		public void the_load_shall_return_an_error() {
-
-			assertEquals(false, isPositionValid && loadSucceed);
-			//Assert.assertEquals("Illegal" ,QuoridorApplication.getJboard().getError());
+			
+		assertTrue(error.equals("Out of boundary!") || error.equals("Wall Overlapping!") || error.equals("Invalid Pawn!"));
 		    
 		}
 
@@ -1342,7 +1343,11 @@ public class CucumberStepDefinitions {
 
 		@Then("The user interface shall be showing it is {string} turn")
 		public void the_user_interface_shall_be_showing_it_is_turn(String string) {
-		    //no need to do anything according to our clock implementation
+			if (string.equals("black")) {
+				Assert.assertEquals("It is black player's turn", QuoridorApplication.getJboard().getTurn());
+			} else {
+				Assert.assertEquals("It is white player's turn", QuoridorApplication.getJboard().getTurn());
+			}
 		}
 		
 		@Then("The clock of {string} shall be stopped")
@@ -1387,6 +1392,12 @@ public class CucumberStepDefinitions {
 		}
 		
 
+		
+		
+		
+		
+		
+		
 		@When ("{int}:{int} is set as the thinking time")
 		public void is_set_as_the_thinking_time(Integer int1, Integer int2) {
 			QuoridorController.setTotalThinkingTime(int1, int2);
@@ -1639,8 +1650,8 @@ public class CucumberStepDefinitions {
 			// There are total 36 tiles in the first four rows and
 			// indexing starts from 0 -> tiles with indices 36 and 36+8=44 are the starting
 			// positions
-			Tile player1StartPos = quoridor.getBoard().getTile(36);
-			Tile player2StartPos = quoridor.getBoard().getTile(44);
+			Tile player1StartPos = quoridor.getBoard().getTile(4);
+			Tile player2StartPos = quoridor.getBoard().getTile(76);
 		
 			Game game = new Game(GameStatus.Running, MoveMode.PlayerMove, quoridor);
 			game.setWhitePlayer(players.get(0));

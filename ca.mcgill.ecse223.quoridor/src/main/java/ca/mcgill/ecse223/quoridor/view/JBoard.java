@@ -20,7 +20,19 @@ import javax.swing.border.EmptyBorder;
 
 import ca.mcgill.ecse223.quoridor.QuoridorApplication;
 import ca.mcgill.ecse223.quoridor.controller.QuoridorController;
+import ca.mcgill.ecse223.quoridor.model.Board;
+import ca.mcgill.ecse223.quoridor.model.Direction;
+import ca.mcgill.ecse223.quoridor.model.Game;
+import ca.mcgill.ecse223.quoridor.model.GamePosition;
+import ca.mcgill.ecse223.quoridor.model.Player;
+import ca.mcgill.ecse223.quoridor.model.PlayerPosition;
+import ca.mcgill.ecse223.quoridor.model.Quoridor;
+import ca.mcgill.ecse223.quoridor.model.Tile;
+import ca.mcgill.ecse223.quoridor.model.User;
+import ca.mcgill.ecse223.quoridor.model.Wall;
 import ca.mcgill.ecse223.quoridor.model.WallMove;
+import ca.mcgill.ecse223.quoridor.model.Game.GameStatus;
+import ca.mcgill.ecse223.quoridor.model.Game.MoveMode;
 import ca.mcgill.ecse223.quoridor.view.Pawn.PawnColor;
 
 import javax.swing.GroupLayout;
@@ -30,6 +42,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.io.File;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,13 +65,31 @@ public class JBoard extends JFrame {
 	private JTextField display_number_black_stock;
 	private JTextField display_number_white_stock;
 	private int WALL_INDEX = 0;
+	private int BLACK_WALL_INDEX = -1;
+	private int WHITE_WALL_INDEX = 0;
 	private static final int MAX_WALL =20;
-	private List <JWall> WallList = new ArrayList<JWall>(); 
+	private List <JWall> WhiteWallList = new ArrayList<JWall>(); 
+	public void setWhiteWallList(List<JWall> whiteWallList) {
+		WhiteWallList = whiteWallList;
+	}
+	public void setBlackWallList(List<JWall> blackWallList) {
+		BlackWallList = blackWallList;
+	}
+	public void GrabAllWalls() {
+		WhiteWallList.removeAll(WhiteWallList);
+		BlackWallList.removeAll(BlackWallList);
+	}
+	public List<JWall> getWhiteWallList() {
+		return WhiteWallList;
+	}
+	public List<JWall> getBlackWallList() {
+		return BlackWallList;
+	}
+	private List <JWall> BlackWallList = new ArrayList<JWall>();
 	private JWall jwall;
 	public boolean whiteTurn;
-	private JLabel lblNewLabel;
 	private JButton SaveGameButton;
-	private JLabel lblNewLabel_1;
+	private Player whitePlayer, blackPlayer;
 	public JWall getJwall() {
 		return jwall;
 	}
@@ -66,14 +97,13 @@ public class JBoard extends JFrame {
 		this.jwall = jwall;
 	}
 	private JPanel mainLayerPanel;
-	private JTextField textField;
-	private JTextField textField_1;
 	public Pawn blackPawnMove;
 	public Pawn whitePawnMove;
-	private Tile tile;
+	private JTile tile;
 
 	private JOptionPane errorHint;
 	private String error = null;
+	private String showTurn = null;
 	private boolean grab = false;
 	private JLabel lblBlackStock;
 	private JLabel lblWhiteBlock;
@@ -90,8 +120,28 @@ public class JBoard extends JFrame {
 		this.errorHint = errorHint;
 	}
 	public void notifyIllegal() {
-		this.setError("Illegal");
+		this.setError("I will give a dialog immediately you release a illegal wall, So do not worry if you notice there are some dialogs when you running the JUnit Test! Just close it!");
 		this.errorHint.showMessageDialog(null, error);
+	}
+	
+	public void notifyIllegal2() {
+		this.setError("No more walls in hand!");
+		this.errorHint.showMessageDialog(null, error);
+	}
+	
+	public String getTurn() {
+		return showTurn;
+	}
+	public void setTurn(String showTurn) {
+		this.showTurn = showTurn;
+	}
+	public void whiteTurn() {
+		this.setTurn("It is white player's turn");
+		this.errorHint.showMessageDialog(null, showTurn);
+	}
+	public void blackTurn() {
+		this.setTurn("It is black player's turn");
+		this.errorHint.showMessageDialog(null, showTurn);
 	}
 	/**
 	 * Launch the application.
@@ -102,6 +152,7 @@ public class JBoard extends JFrame {
 				try {
 					JBoard frame = new JBoard();
 					frame.setVisible(true);
+				    QuoridorController.refreshAndSet();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -111,6 +162,38 @@ public class JBoard extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
+	public void ChangeGrabWall() {
+	//	if (QuoridorApplication.getQuoridor().getCurrentGame().hasWallMoveCandidate()) {
+			jwall.setBounds(360, 300, 10, 110);
+			jwall.setBackground(Color.blue);
+	//	}
+	}
+	
+	public void ChangeDropWall() {
+		mainLayerPanel.remove(jwall);
+		mainLayerPanel.add(jwall);
+		jwall.setBackground(Color.MAGENTA);
+	}
+	
+//	public void ChangeDropWall() {
+//		if(WALL_INDEX<MAX_WALL&&grab) {
+////			jwall.setBackground(Color.MAGENTA);
+////			mainLayerPanel.remove(jwall);
+////			mainLayerPanel.add(jwall);
+////			WALL_INDEX++;
+//			ChangeDropWall();
+//			if(WALL_INDEX<MAX_WALL) {
+//				jwall = WallList.get(WALL_INDEX);
+//			}
+//			grab = false;
+//			whiteTurn = !whiteTurn;
+//			mainLayerPanel.add(blackPawnMove);
+//			mainLayerPanel.add(whitePawnMove);
+//			whitePawnMove.setVisible(whiteTurn);	
+//			blackPawnMove.setVisible(!whiteTurn);						
+//		}
+//	}
 
 
 	public JBoard() {
@@ -136,7 +219,7 @@ public class JBoard extends JFrame {
 
 
 		//add tile(with GroupLayout) to the mainLayerPanel
-		tile = new Tile();
+		tile = new JTile();
 		tile.setBackground(Color.WHITE);
 		tile.setBounds(0, 0, 1000, 800);
 		tile.setOpaque(false);
@@ -161,6 +244,9 @@ public class JBoard extends JFrame {
 		JLabel lblMoveWallPress = new JLabel("Move Wall: Press W,A,S,D");
 		JLabel lblDropWallPress = new JLabel("Drop Wall: Press T");
 
+//		QuoridorController.initializeBoard();
+//		whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
+//		blackPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
 		//Add two pawns over here
 		//Set the one's turn is visible
 		JLabel playerToMove = new JLabel("WHITE");
@@ -171,6 +257,19 @@ public class JBoard extends JFrame {
 		JLabel playerToMove1 = new JLabel("BLACK");
 		playerToMove1.setBounds(700, 550, 100, 50);
 		mainLayerPanel.add(playerToMove1);
+		
+		JLabel whiteTime = new JLabel("3:00");
+//		JLabel whiteTime = new JLabel(whitePlayer.getRemainingTime().getMinutes()+
+//				":"+ whitePlayer.getRemainingTime().getSeconds());
+		whiteTime.setBounds(650, 570, 100, 50);
+		mainLayerPanel.add(whiteTime);
+		
+
+		JLabel blackTime = new JLabel("3:00");
+//		JLabel blackTime = new JLabel(whitePlayer.getRemainingTime().getMinutes()+
+//				":"+ whitePlayer.getRemainingTime().getSeconds());
+		blackTime.setBounds(700, 570, 100, 50);
+		mainLayerPanel.add(blackTime);
 
 		whitePawnMove = new Pawn(PawnColor.WHITE);
 		whitePawnMove.setBounds(650, 500, 50, 50);
@@ -195,26 +294,13 @@ public class JBoard extends JFrame {
 			}
 		});
 		
-//		JLabel lblNewLabel = new JLabel("Black Stock");
-		  
-//		 JLabel lblNewLabel_1 = new JLabel("White Stock");
-
-		lblNewLabel = new JLabel("Black S");
-
-		lblNewLabel_1 = new JLabel("White S");
-
-		textField = new JTextField();
-		textField.setColumns(10);
-
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		
 		lblBlackStock = new JLabel("black stock");
 		
 		lblWhiteBlock = new JLabel("white stock");
+		
 		GroupLayout gl_tile = new GroupLayout(tile);
 		gl_tile.setHorizontalGroup(
-			gl_tile.createParallelGroup(Alignment.TRAILING)
+			gl_tile.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_tile.createSequentialGroup()
 					.addContainerGap(651, Short.MAX_VALUE)
 					.addGroup(gl_tile.createParallelGroup(Alignment.TRAILING)
@@ -223,23 +309,15 @@ public class JBoard extends JFrame {
 								.addComponent(lblGrabWallPress)
 								.addComponent(lblRotateWallPress)
 								.addComponent(lblMoveWallPress, GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
-								.addComponent(lblDropWallPress, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addGroup(gl_tile.createSequentialGroup()
-									.addComponent(lblNewLabel)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_tile.createSequentialGroup()
-									.addComponent(lblNewLabel_1)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+								.addComponent(lblDropWallPress, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 							.addGap(165))
 						.addGroup(gl_tile.createSequentialGroup()
 							.addComponent(SaveGameButton)
 							.addGap(44))))
-				.addGroup(Alignment.LEADING, gl_tile.createSequentialGroup()
+				.addGroup(gl_tile.createSequentialGroup()
 					.addGap(174)
 					.addComponent(lblBlackStock)
-					.addPreferredGap(ComponentPlacement.RELATED, 383, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 359, Short.MAX_VALUE)
 					.addComponent(lblWhiteBlock)
 					.addGap(321))
 		);
@@ -256,57 +334,91 @@ public class JBoard extends JFrame {
 					.addComponent(lblMoveWallPress)
 					.addGap(37)
 					.addComponent(lblDropWallPress)
-					.addGap(69)
-					.addGroup(gl_tile.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(38)
+					.addGap(159)
 					.addGroup(gl_tile.createParallelGroup(Alignment.TRAILING)
-						.addComponent(lblNewLabel_1)
-						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGroup(gl_tile.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_tile.createSequentialGroup()
 							.addGap(183)
 							.addComponent(lblBlackStock)
 							.addContainerGap(154, Short.MAX_VALUE))
-						.addGroup(Alignment.TRAILING, gl_tile.createSequentialGroup()
+						.addGroup(gl_tile.createSequentialGroup()
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(lblWhiteBlock)
 							.addGap(155))))
 		);
 		tile.setLayout(gl_tile);
-
 		
-
-		for (int i = 0; i < MAX_WALL; i++) {
-		      JWall jwall = new JWall();
-		      WallList.add(jwall);      
-		      mainLayerPanel.add(WallList.get(i));
-		      WallList.get(i).setBackground(Color.GRAY);
-		      
-		      if (i==0) {
-		       WallList.get(i).setBounds(50, 650, 10, 110);
-		      }
-		      if (0<i && i<10) {
-		       WallList.get(i).setBounds(50+35*i, 650, 10, 110);
-		      }
-		      if(i==10) {
-		       WallList.get(i).setBounds(600, 650, 10, 110);
-		      }
-		      if(i>10) {
-		       WallList.get(i).setBounds(600+35*(i-10), 650, 10, 110);
-		      }
-		      
-		      WallList.get(i).setVisible(true);
-		    System.out.println(i + "yes");
-		     }
-		jwall = WallList.get(WALL_INDEX);
+		for (int i = 0; i < 10; i++) {
+	         JWall jwall = new JWall();        
+	         BlackWallList.add(jwall);      
+	         mainLayerPanel.add(BlackWallList.get(i));
+	         BlackWallList.get(i).setBackground(Color.GRAY);
+	         BlackWallList.get(i).setBounds(50+35*i,650,10,110);
+	         BlackWallList.get(i).setVisible(true);
+	         System.out.println(i + "black");
+	    }
+	   for (int i = 0; i < 10; i++) {        
+	      JWall jwall = new JWall();        
+	         WhiteWallList.add(jwall);      
+	         mainLayerPanel.add(WhiteWallList.get(i));
+	         WhiteWallList.get(i).setBackground(Color.GRAY);
+	         WhiteWallList.get(i).setBounds (600+35*i,650,10,110);
+	         WhiteWallList.get(i).setVisible(true);
+	         System.out.println(i + "white");
+	   }
+		
+//
+//		for (int i = 0; i < MAX_WALL; i++) {
+//		      JWall jwall = new JWall();
+//		      WallList.add(jwall);      
+//		      mainLayerPanel.add(WallList.get(i));
+//		      WallList.get(i).setBackground(Color.GRAY);
+//		      
+//		      if (i==0) {
+//		       WallList.get(i).setBounds(50, 650, 10, 110);
+//		      }
+//		      if (0<i && i<10) {
+//		       WallList.get(i).setBounds(50+35*i, 650, 10, 110);
+//		      }
+//		      if(i==10) {
+//		       WallList.get(i).setBounds(600, 650, 10, 110);
+//		      }
+//		      if(i>10) {
+//		       WallList.get(i).setBounds(600+35*(i-10), 650, 10, 110);
+//		      }
+//		      
+//		      WallList.get(i).setVisible(true);
+//		   // System.out.println(i + "yes");
+//		     }
+		
+		
 
 		whiteTurn = true;
 		mainLayerPanel.add(whitePawnMove);
 		whitePawnMove.setVisible(whiteTurn);	
 
 		//add KeyBoard listener!
+		
+		
+//		QuoridorApplication.getQuoridor().setBoard(null);
+//		QuoridorApplication.getQuoridor().setCurrentGame(null);
+//		QuoridorApplication.setJboard(null);
+		//QuoridorApplication.getQuoridor().getUsers().remove(0);
+		//QuoridorApplication.getQuoridor().getUsers().remove(1);
+//		GamePosition oldGamePosition = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition();
+//		for (int j = 0; j < 10; j++) {
+//			Wall wall = Wall.getWithId(j);
+//			oldGamePosition.removeWhiteWallsInStock(wall);
+//		}
+//		for (int j = 0; j < 10; j++) {
+//			Wall wall = Wall.getWithId(j + 10);
+//			oldGamePosition.removeBlackWallsInStock(wall);
+//		}
+		
+		
+		
+		jwall = WhiteWallList.get(WHITE_WALL_INDEX);
+		
+		
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -318,10 +430,12 @@ public class JBoard extends JFrame {
 						jwall.setBounds(360, 300, 10, 110);
 						jwall.setVisible(true);						
 					}
+					QuoridorController.grabWall();
+					ChangeGrabWall();
 				}
 				if ((e.getKeyChar()=='w')||(e.getKeyCode() == KeyEvent.VK_UP)) {
 					if(WALL_INDEX<MAX_WALL&&grab) {
-						//QuoridorController.MoveWall("up");
+						QuoridorController.MoveWall("up");
 						int x = jwall.getLocation().x;
 						int y = jwall.getLocation().y;
 						
@@ -337,7 +451,7 @@ public class JBoard extends JFrame {
 				}
 				if ((e.getKeyChar()=='a')||(e.getKeyCode() == KeyEvent.VK_LEFT)) {
 					if(WALL_INDEX<MAX_WALL&&grab) {
-						//QuoridorController.MoveWall("left");
+						QuoridorController.MoveWall("left");
 						int x = jwall.getLocation().x;
 						int y = jwall.getLocation().y;
 						
@@ -352,7 +466,7 @@ public class JBoard extends JFrame {
 				}
 				if ((e.getKeyChar()=='s')||(e.getKeyCode() == KeyEvent.VK_DOWN)) {
 					if(WALL_INDEX<MAX_WALL&&grab) {
-						//QuoridorController.MoveWall("down");
+						QuoridorController.MoveWall("down");
 						int x = jwall.getLocation().x;
 						int y = jwall.getLocation().y;
 						if(jwall.getHeight()==110) {
@@ -366,7 +480,7 @@ public class JBoard extends JFrame {
 				}
 				if ((e.getKeyChar()=='d')||(e.getKeyCode() == KeyEvent.VK_RIGHT)) {
 					if(WALL_INDEX<MAX_WALL&&grab) {
-						//QuoridorController.MoveWall("right");
+						QuoridorController.MoveWall("right");
 						int x = jwall.getLocation().x;
 						int y = jwall.getLocation().y;
 						if(jwall.getHeight()==110) {
@@ -378,6 +492,7 @@ public class JBoard extends JFrame {
 					}
 				}
 				if (e.getKeyChar()=='r'&&grab) {
+					QuoridorController.flipWall();
 					if(WALL_INDEX<MAX_WALL) {
 						int x = jwall.getLocation().x;
 						int y = jwall.getLocation().y;
@@ -396,29 +511,52 @@ public class JBoard extends JFrame {
 					}
 				}
 				if (e.getKeyChar()=='t') if (e.getKeyChar()=='t') {
-
-					//QuoridorController.initializeNewGame();
-					//QuoridorController.initializeBlackWall(g, blackPlayer)
-					//	QuoridorController.ReleaseWall(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate());
-					if(WALL_INDEX<MAX_WALL&&grab) {
-						jwall.setBackground(Color.MAGENTA);
-						mainLayerPanel.remove(jwall);
-						mainLayerPanel.add(jwall);
-						WALL_INDEX++;
-						if(WALL_INDEX<MAX_WALL) {
-							jwall = WallList.get(WALL_INDEX);
-						}
-						grab = false;
-						whiteTurn = !whiteTurn;
-						mainLayerPanel.add(blackPawnMove);
-						mainLayerPanel.add(whitePawnMove);
-						whitePawnMove.setVisible(whiteTurn);	
-						blackPawnMove.setVisible(!whiteTurn);	
-								
+					boolean overlapped = true;
+					if(QuoridorController.verifyOverlapped(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate())==false) 
+					{
+						overlapped = false;
+						System.out.println("Not overlapped!");
 					}
+					
+					QuoridorController.releaseWall();
+					if((WALL_INDEX<MAX_WALL&&grab)&&(overlapped==false)) {
+
+							ChangeDropWall();
+							WALL_INDEX++;
+//							if(WALL_INDEX<MAX_WALL) {
+//								jwall = WallList.get(WALL_INDEX);
+//							}
+							grab = false;
+							whiteTurn = !whiteTurn;
+							mainLayerPanel.add(blackPawnMove);
+							mainLayerPanel.add(whitePawnMove);
+							whitePawnMove.setVisible(whiteTurn);	
+							blackPawnMove.setVisible(!whiteTurn);	
+							
+							
+							if(WALL_INDEX<MAX_WALL) {
+						         if (BLACK_WALL_INDEX+1<WHITE_WALL_INDEX) {
+						 
+						           BLACK_WALL_INDEX++;
+						           jwall=BlackWallList.get(BLACK_WALL_INDEX);
+						          }else if (BLACK_WALL_INDEX+1>WHITE_WALL_INDEX){
+						           WHITE_WALL_INDEX++;
+						           jwall=WhiteWallList.get(WHITE_WALL_INDEX);
+						          }else {
+						           BLACK_WALL_INDEX++;
+						           jwall=BlackWallList.get(BLACK_WALL_INDEX);
+						          }
+						         
+						        }
+							
+							
+						}
+					
+					}
+
 				}
 
-			}
+			
 		});
 
 		/*Image image=null;
@@ -426,4 +564,5 @@ public class JBoard extends JFrame {
 
 
 	}
+
 }

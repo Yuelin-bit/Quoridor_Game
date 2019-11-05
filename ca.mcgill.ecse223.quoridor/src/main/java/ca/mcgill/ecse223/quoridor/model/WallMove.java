@@ -85,7 +85,7 @@ public class WallMove extends Move
     Wall anOldWallPlaced = wallPlaced;
     wallPlaced = aNewWallPlaced;
     wallPlaced.setMove(this);
-
+   
     if (anOldWallPlaced != null)
     {
       anOldWallPlaced.setMove(null);
