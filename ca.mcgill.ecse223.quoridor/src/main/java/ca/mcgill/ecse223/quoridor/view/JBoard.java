@@ -70,6 +70,7 @@ public class JBoard extends JFrame {
 	private JWall jwall;
 	public boolean whiteTurn;
 	private JButton SaveGameButton;
+	private Player whitePlayer, blackPlayer;
 	public JWall getJwall() {
 		return jwall;
 	}
@@ -219,6 +220,9 @@ public class JBoard extends JFrame {
 		JLabel lblMoveWallPress = new JLabel("Move Wall: Press W,A,S,D");
 		JLabel lblDropWallPress = new JLabel("Drop Wall: Press T");
 
+//		QuoridorController.initializeBoard();
+//		whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
+//		blackPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
 		//Add two pawns over here
 		//Set the one's turn is visible
 		JLabel playerToMove = new JLabel("WHITE");
@@ -229,6 +233,19 @@ public class JBoard extends JFrame {
 		JLabel playerToMove1 = new JLabel("BLACK");
 		playerToMove1.setBounds(700, 550, 100, 50);
 		mainLayerPanel.add(playerToMove1);
+		
+		JLabel whiteTime = new JLabel("3:00");
+//		JLabel whiteTime = new JLabel(whitePlayer.getRemainingTime().getMinutes()+
+//				":"+ whitePlayer.getRemainingTime().getSeconds());
+		whiteTime.setBounds(650, 570, 100, 50);
+		mainLayerPanel.add(whiteTime);
+		
+
+		JLabel blackTime = new JLabel("3:00");
+//		JLabel blackTime = new JLabel(whitePlayer.getRemainingTime().getMinutes()+
+//				":"+ whitePlayer.getRemainingTime().getSeconds());
+		blackTime.setBounds(700, 570, 100, 50);
+		mainLayerPanel.add(blackTime);
 
 		whitePawnMove = new Pawn(PawnColor.WHITE);
 		whitePawnMove.setBounds(650, 500, 50, 50);
