@@ -9,7 +9,7 @@ Feature: Jump Pawn
   Scenario Outline: Jump over opponent
     Given The player to move is "<player>"
     And The player is located at <prow>:<pcol>
-    And The opponent is located at <prow>:<ocol>
+    And The opponent is located at <orow>:<ocol>
     And There are no "<dir>" walls "<side>" from the player nearby
     When Player "<player>" initiates to move "<side>"
     Then The move "<side>" shall be "<status>"
@@ -30,20 +30,20 @@ Feature: Jump Pawn
   Scenario Outline: Move of player blocked by wall
     Given The player to move is "<player>"
     And The player is located at <row>:<col>
-    And The opponent is located at <prow>:<ocol>
+    And The opponent is located at <orow>:<ocol>
     And There is a "<dir>" wall at <wrow>:<wcol>
     When Player "<player>" initiates to move "<side>"
     Then The move "<side>" shall be "<status>"
     And Player's new position shall be <nrow>:<ncol>
-    And The next player to move shall become "<nplayer>"
+    And The next player to move shall become "<player>"
 
     Examples: 
-      | player | row | col | orow | ocol | dir      | wrow | wcol | side  | status  | nrow | ncol | player |
-      | white  |   3 |   3 |    3 |    2 | vertical |    2 |    2 | left  | illegal |    3 |    3 | black  |
-      | black  |   3 |   3 |    3 |    2 | vertical |    3 |    1 | left  | illegal |    3 |    3 | black  |
-      | white  |   3 |   3 |    3 |    4 | vertical |    2 |    4 | right | illegal |    3 |    3 | black  |
-      | black  |   3 |   3 |    3 |    4 | vertical |    3 |    3 | right | illegal |    3 |    3 | black  |
-      | white  |   3 |   3 |    2 |    3 | vertical |    2 |    2 | up    | illegal |    3 |    3 | black  |
-      | black  |   3 |   3 |    2 |    3 | vertical |    1 |    3 | up    | illegal |    3 |    3 | black  |
-      | white  |   3 |   3 |    4 |    3 | vertical |    4 |    2 | down  | illegal |    3 |    3 | black  |
-      | black  |   3 |   3 |    4 |    3 | vertical |    3 |    3 | down  | illegal |    3 |    3 | black  |
+      | player | row | col | orow | ocol | dir      | wrow | wcol | side  | status  | nrow | ncol |
+      | white  |   3 |   3 |    3 |    2 | vertical |    2 |    2 | left  | illegal |    3 |    3 |
+      | black  |   3 |   3 |    3 |    2 | vertical |    3 |    1 | left  | illegal |    3 |    3 |
+      | white  |   3 |   3 |    3 |    4 | vertical |    2 |    4 | right | illegal |    3 |    3 |
+      | black  |   3 |   3 |    3 |    4 | vertical |    3 |    3 | right | illegal |    3 |    3 |
+      | white  |   3 |   3 |    2 |    3 | vertical |    2 |    2 | up    | illegal |    3 |    3 |
+      | black  |   3 |   3 |    2 |    3 | vertical |    1 |    3 | up    | illegal |    3 |    3 |
+      | white  |   3 |   3 |    4 |    3 | vertical |    4 |    2 | down  | illegal |    3 |    3 |
+      | black  |   3 |   3 |    4 |    3 | vertical |    3 |    3 | down  | illegal |    3 |    3 |
