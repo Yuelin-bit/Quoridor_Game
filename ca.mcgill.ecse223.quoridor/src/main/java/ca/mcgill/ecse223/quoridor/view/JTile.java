@@ -6,12 +6,12 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
-public class Tile extends JPanel {
+public class JTile extends JPanel {
 
 	/**
 	 * Create the panel.
 	 */
-	public Tile() {
+	public JTile() {
 
 	}
 public void paint(Graphics g){

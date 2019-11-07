@@ -6,21 +6,58 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import ca.mcgill.ecse223.quoridor.controller.QuoridorController;
+import ca.mcgill.ecse223.quoridor.model.Player;
+
 import java.awt.Color;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
 
 public class LoadPosition extends JFrame {
-
+	
+	private int loadNum = 0;
+	private JLabel errorLabel;
+	private String error = null;
 	private JPanel contentPane;
+	private JOptionPane errorHint;
+	JComboBox<String> comboBox;
+	private JTextField textField;
+	private JTextField textField_1;
+	
 
+//	public String getError() {
+//		return error;
+//	}
+//	public void setError(String error) {
+//		this.error = error;
+//	}
+//	public JOptionPane getErrorHint() {
+//		return errorHint;
+//	}
+//	public void notifyIllegal() {
+//		this.setError("Illegal");
+//		this.errorHint.showMessageDialog(null, error);
+//	}
 	/**
 	 * Launch the application.
 	 */
@@ -52,16 +89,54 @@ public class LoadPosition extends JFrame {
 		JLabel lblChooseGameTo = new JLabel("Choose Game to Load");
 		lblChooseGameTo.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		JList list = new JList();
+		errorLabel = new JLabel("");
+		errorLabel.setVisible(false);
+		
+		
+
+		
+		comboBox = new JComboBox<String>();
+		try (Stream<Path> walk = Files.walk(Paths.get(""))) {
+
+			List<String> result = walk.map(x -> x.toString())
+					.filter(f -> f.endsWith(".dat")).collect(Collectors.toList());
+
+			for (String file : result) {
+				comboBox.addItem(file);
+			}
+
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		comboBox.setSelectedIndex(0);
 		
 		JButton btnNewButton = new JButton("Load");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (loadNum == 1) {
+					errorHint.showMessageDialog(null, "Can't load position twice");
+				} else {
+					String filename = (String) comboBox.getSelectedItem();
+					ArrayList<Player> playersList = QuoridorController.createUsersAndPlayers(textField.getText(), textField_1.getText());
+					loadNum = 1;
+					try {
+						
+						QuoridorController.loadPosition(filename, playersList.get(0), playersList.get(1));
+						QuoridorController.validation();
+					} catch (Exception e1) {
+						errorHint.showMessageDialog(null, e1.getMessage());
+						
+					}
+				}
+				
+				
 			}
+		
 		});
 		
-		JButton btnBack = new JButton("Back");
-		btnBack.addActionListener(new ActionListener() {
+		
+		JButton btnNewButton_1 = new JButton("Back");
+		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainMenu m = new MainMenu();
 				m.setVisible(true);
@@ -70,36 +145,71 @@ public class LoadPosition extends JFrame {
 			}
 		});
 		
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setText("");
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setText("");
+		
+		JLabel lblNewLabel = new JLabel("Enter user name");
+		
+		JLabel lblNewLabel_1 = new JLabel("Enter user name");
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(38)
+					.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(943, Short.MAX_VALUE))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(405)
+					.addComponent(lblChooseGameTo, GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+					.addGap(495))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(447)
+					.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+					.addGap(535))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(328)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(420)
-							.addComponent(lblChooseGameTo))
+							.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addGap(68)
+							.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addGap(414))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(378)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(btnNewButton)
-									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-									.addComponent(btnBack, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE))
-								.addComponent(list, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 249, GroupLayout.PREFERRED_SIZE))))
-					.addContainerGap(425, Short.MAX_VALUE))
+							.addComponent(comboBox, 0, 342, Short.MAX_VALUE)
+							.addGap(400))))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(337)
+					.addComponent(lblNewLabel)
+					.addGap(98)
+					.addComponent(lblNewLabel_1)
+					.addContainerGap(433, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(126)
-					.addComponent(lblChooseGameTo)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(list, GroupLayout.PREFERRED_SIZE, 314, GroupLayout.PREFERRED_SIZE)
-					.addGap(36)
+					.addGap(38)
+					.addComponent(btnNewButton_1)
+					.addGap(59)
+					.addComponent(lblChooseGameTo, GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+					.addGap(43)
+					.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(79)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnBack)
-						.addComponent(btnNewButton))
-					.addContainerGap(133, Short.MAX_VALUE))
+						.addComponent(lblNewLabel)
+						.addComponent(lblNewLabel_1))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(128)
+					.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+					.addGap(151))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
