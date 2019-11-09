@@ -3,6 +3,8 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
@@ -105,32 +107,39 @@ public class SelectName extends JFrame {
 
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
-
 		
 		JLabel lblMin = new JLabel("Minute");		
 		JLabel lblSec = new JLabel("Second");
 		JButton btnStart = new JButton("Start");
 		btnStart.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		
-		btnStart.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus().equals(GameStatus.ReadyToStart)) {
-					
-					JBoard jboard = new JBoard();
-					jboard.setVisible(true);
-					setVisible(false);
-					dispose();
-				}
-			}
-		});
-		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(names));
 		comboBox.setEditable(false);
+//		comboBox.addMouseListener(new MouseAdapter(){
+//			@Override
+//			public void mouseEntered(MouseEvent e) {
+//				comboBox.setModel(new DefaultComboBoxModel(names));
+//			}
+//		});
 		
 		JComboBox comboBox_1 = new JComboBox();
 		comboBox_1.setModel(new DefaultComboBoxModel(names));
 		comboBox_1.setEditable(false);
+//		comboBox_1.addMouseListener(new MouseAdapter(){
+//			@Override
+//			public void mouseEntered(MouseEvent e) {
+//				comboBox_1.setModel(new DefaultComboBoxModel(names));
+//			}
+//		});
+		
+		JButton btnRegisterNewUser = new JButton("Register New User Name");
+		btnRegisterNewUser.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Registeration r = new Registeration();
+				r.setVisible(true);
+			}
+		});
 		
 		JLabel lblNewLabel = new JLabel();
 		lblNewLabel.setForeground(Color.RED);
@@ -139,12 +148,10 @@ public class SelectName extends JFrame {
 		lblUserNameDne.setForeground(Color.RED);
 		JLabel lblInputMustBe = new JLabel();
 		lblInputMustBe.setForeground(Color.RED);
-
-		JButton btnConfirm = new JButton("Confirm");
-		QuoridorController.initializeNewGame();
-		btnConfirm.addActionListener(new ActionListener() {
+		
+		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//Check if two names are not equal
+				
 				lblNewLabel.setVisible(false);
 				lblUserNameDne.setVisible(false);
 				String white = String.valueOf(comboBox.getSelectedItem());
@@ -204,8 +211,16 @@ public class SelectName extends JFrame {
 				QuoridorController.setTotalThinkingTime(min, sec);
 				QuoridorController.initializeBoard();
 				QuoridorController.verifyGameIsReady();
+				
+				if (QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus().equals(GameStatus.ReadyToStart)) {
+					JBoard jboard = new JBoard();
+					jboard.setVisible(true);
+					setVisible(false);
+					dispose();
+				}
 			}
 		});
+		QuoridorController.initializeNewGame();
 		
 
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
@@ -219,19 +234,19 @@ public class SelectName extends JFrame {
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(btnBack, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(btnConfirm, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE))
+							.addComponent(btnRegisterNewUser, GroupLayout.PREFERRED_SIZE, 186, GroupLayout.PREFERRED_SIZE))
 						.addComponent(lblThinkingTime))
-					.addGap(61)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(lblInputMustBe)
 							.addContainerGap())
 						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 							.addGroup(gl_contentPane.createSequentialGroup()
-								.addComponent(lblUserNameDne, GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+								.addComponent(lblUserNameDne, GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
 								.addGap(235))
 							.addGroup(gl_contentPane.createSequentialGroup()
-								.addComponent(lblUserNameDne, GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+								.addComponent(lblUserNameDne, GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
 								.addGap(235))
 							.addGroup(gl_contentPane.createSequentialGroup()
 								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -249,7 +264,7 @@ public class SelectName extends JFrame {
 												.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
 												.addPreferredGap(ComponentPlacement.UNRELATED)
 												.addComponent(lblSec)))))
-								.addContainerGap(111, Short.MAX_VALUE)))))
+								.addContainerGap(121, Short.MAX_VALUE)))))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -279,8 +294,8 @@ public class SelectName extends JFrame {
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnBack)
 						.addComponent(btnStart)
-						.addComponent(btnConfirm))
-					.addContainerGap(84, Short.MAX_VALUE))
+						.addComponent(btnRegisterNewUser))
+					.addContainerGap(124, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
