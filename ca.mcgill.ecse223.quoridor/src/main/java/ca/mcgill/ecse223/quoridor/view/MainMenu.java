@@ -28,7 +28,7 @@ public class MainMenu extends JFrame {
 				try {
 					MainMenu frame = new MainMenu();
 					frame.setVisible(true);
-					QuoridorController.initQuoridorAndBoard();
+					//QuoridorController.initQuoridorAndBoard();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

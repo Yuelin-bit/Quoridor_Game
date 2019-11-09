@@ -3,6 +3,7 @@ package ca.mcgill.ecse223.quoridor;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import ca.mcgill.ecse223.quoridor.controller.QuoridorController;
 import ca.mcgill.ecse223.quoridor.model.Quoridor;
 import ca.mcgill.ecse223.quoridor.view.JBoard;
 import ca.mcgill.ecse223.quoridor.view.LoadPosition;
@@ -50,6 +51,7 @@ public class QuoridorApplication {
 		mainMenu = new MainMenu();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+            	QuoridorController.initQuoridorAndBoard();
                 mainMenu.setVisible(true);
             }
         });
