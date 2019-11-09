@@ -69,6 +69,22 @@ public class JBoard extends JFrame {
 	private int WHITE_WALL_INDEX = 0;
 	private static final int MAX_WALL =20;
 	private List <JWall> WhiteWallList = new ArrayList<JWall>(); 
+	public void setWhiteWallList(List<JWall> whiteWallList) {
+		WhiteWallList = whiteWallList;
+	}
+	public void setBlackWallList(List<JWall> blackWallList) {
+		BlackWallList = blackWallList;
+	}
+	public void GrabAllWalls() {
+		WhiteWallList.removeAll(WhiteWallList);
+		BlackWallList.removeAll(BlackWallList);
+	}
+	public List<JWall> getWhiteWallList() {
+		return WhiteWallList;
+	}
+	public List<JWall> getBlackWallList() {
+		return BlackWallList;
+	}
 	private List <JWall> BlackWallList = new ArrayList<JWall>();
 	private JWall jwall;
 	public boolean whiteTurn;
@@ -108,6 +124,11 @@ public class JBoard extends JFrame {
 		this.errorHint.showMessageDialog(null, error);
 	}
 	
+	public void notifyIllegal2() {
+		this.setError("No more walls in hand!");
+		this.errorHint.showMessageDialog(null, error);
+	}
+	
 	public String getTurn() {
 		return showTurn;
 	}
@@ -131,7 +152,7 @@ public class JBoard extends JFrame {
 				try {
 					JBoard frame = new JBoard();
 					frame.setVisible(true);
-				    QuoridorController.refreshAndSet();
+				   // QuoridorController.refreshAndSet();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
