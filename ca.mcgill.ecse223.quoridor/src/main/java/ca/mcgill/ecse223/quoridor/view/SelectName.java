@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
@@ -141,6 +143,8 @@ public class SelectName extends JFrame {
 			}
 		});
 		
+		
+		
 		JLabel lblNewLabel = new JLabel();
 		lblNewLabel.setForeground(Color.RED);
 		
@@ -222,6 +226,17 @@ public class SelectName extends JFrame {
 		});
 		QuoridorController.initializeNewGame();
 		
+		JButton btnRefresh = new JButton("Refresh");
+		btnRefresh.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				QuoridorApplication.getQuoridor().getCurrentGame().delete();
+				SelectName sn = new SelectName();
+				setVisible(false);
+				dispose();
+				sn.setVisible(true);
+			}
+		});
+		
 
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
@@ -229,42 +244,47 @@ public class SelectName extends JFrame {
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(56)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblWhiteplayer)
-						.addComponent(lblBlackplayer)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(btnBack, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(btnRegisterNewUser, GroupLayout.PREFERRED_SIZE, 186, GroupLayout.PREFERRED_SIZE))
-						.addComponent(lblThinkingTime))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(lblInputMustBe)
+							.addComponent(btnRefresh, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
 							.addContainerGap())
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-							.addGroup(gl_contentPane.createSequentialGroup()
-								.addComponent(lblUserNameDne, GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
-								.addGap(235))
-							.addGroup(gl_contentPane.createSequentialGroup()
-								.addComponent(lblUserNameDne, GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
-								.addGap(235))
-							.addGroup(gl_contentPane.createSequentialGroup()
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-									.addComponent(lblNewLabel)
-									.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, 280, GroupLayout.PREFERRED_SIZE)
-									.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 280, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblWhiteplayer)
+								.addComponent(lblBlackplayer)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(btnBack, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(btnRegisterNewUser, GroupLayout.PREFERRED_SIZE, 186, GroupLayout.PREFERRED_SIZE))
+								.addComponent(lblThinkingTime))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(lblInputMustBe)
+									.addContainerGap())
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 									.addGroup(gl_contentPane.createSequentialGroup()
-										.addComponent(textField, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.UNRELATED)
+										.addComponent(lblUserNameDne, GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+										.addGap(235))
+									.addGroup(gl_contentPane.createSequentialGroup()
+										.addComponent(lblUserNameDne, GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+										.addGap(235))
+									.addGroup(gl_contentPane.createSequentialGroup()
 										.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-											.addComponent(btnStart, GroupLayout.PREFERRED_SIZE, 222, GroupLayout.PREFERRED_SIZE)
+											.addComponent(lblNewLabel)
+											.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, 280, GroupLayout.PREFERRED_SIZE)
+											.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 280, GroupLayout.PREFERRED_SIZE)
 											.addGroup(gl_contentPane.createSequentialGroup()
-												.addComponent(lblMin)
+												.addComponent(textField, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
 												.addPreferredGap(ComponentPlacement.UNRELATED)
-												.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
-												.addPreferredGap(ComponentPlacement.UNRELATED)
-												.addComponent(lblSec)))))
-								.addContainerGap(121, Short.MAX_VALUE)))))
+												.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+													.addComponent(btnStart, GroupLayout.PREFERRED_SIZE, 222, GroupLayout.PREFERRED_SIZE)
+													.addGroup(gl_contentPane.createSequentialGroup()
+														.addComponent(lblMin)
+														.addPreferredGap(ComponentPlacement.UNRELATED)
+														.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
+														.addPreferredGap(ComponentPlacement.UNRELATED)
+														.addComponent(lblSec)))))
+										.addContainerGap(86, Short.MAX_VALUE)))))))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -295,7 +315,9 @@ public class SelectName extends JFrame {
 						.addComponent(btnBack)
 						.addComponent(btnStart)
 						.addComponent(btnRegisterNewUser))
-					.addContainerGap(124, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnRefresh)
+					.addContainerGap(92, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
