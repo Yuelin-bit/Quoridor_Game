@@ -1260,6 +1260,9 @@ public class QuoridorController {
 		initializeWhiteWall(g,whitePlayer);
 		initializeBlackWall(g,blackPlayer);
 		g.setPlayerToMove(whitePlayer);
+		Stopwatch whiteWatch = new Stopwatch(whitePlayer);
+		Stopwatch blackWatch = new Stopwatch(blackPlayer);
+		whiteWatch.start();
 		//QuoridorApplication.getJboard().mainLayerPanel.setVisible(true);
 //		QuoridorApplication.getJboard().whitePawnMove.setVisible();
 //		QuoridorApplication.getJboard().whitePawnMove.setVisible(true);
