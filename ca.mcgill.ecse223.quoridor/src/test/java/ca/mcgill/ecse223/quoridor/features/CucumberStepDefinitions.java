@@ -1044,7 +1044,6 @@ public class CucumberStepDefinitions {
 			Player p2 = new Player(new Time(180), u2, 1, Direction.Horizontal);
 			game.setBlackPlayer(p1);
 			game.setWhitePlayer(p2);
-			
 			assertEquals(true, QuoridorController.verifyGameIsReady());
 		}
 
@@ -1603,6 +1602,7 @@ public class CucumberStepDefinitions {
 					board.addTile(i, j);
 				}
 			}
+			
 		}
 
 		private ArrayList<Player> createUsersAndPlayers(String userName1, String userName2) {

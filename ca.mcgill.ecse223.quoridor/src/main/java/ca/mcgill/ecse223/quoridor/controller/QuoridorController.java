@@ -1340,7 +1340,7 @@ public class QuoridorController {
 	 * 
 	 */
 	public static boolean initializeNewGame() {
-		Game g =new Game(GameStatus.Initializing, MoveMode.WallMove, QuoridorApplication.getQuoridor());
+		new Game(GameStatus.Initializing, MoveMode.WallMove, QuoridorApplication.getQuoridor());
 		return QuoridorApplication.getQuoridor().hasCurrentGame();
 	}
 
@@ -1418,6 +1418,7 @@ public class QuoridorController {
 			 System.out.println("has move");
 			 return false;
 		 }
+		 
 //		 if(g.hasPositions()) {
 //			 System.out.println("has position");
 //			 return false;
@@ -1426,10 +1427,11 @@ public class QuoridorController {
 //			 System.out.println("has current pos");
 //			 return false;
 //		 }
-//		 if(!QuoridorApplication.getQuoridor().hasBoard()) {
-//			 System.out.println("no board");
-//			 return false;
-//		 }
+		 
+		 if(!QuoridorApplication.getQuoridor().hasBoard()) {
+			 System.out.println("no board");
+			 return false;
+		 }
 		 
 		 
 		 
