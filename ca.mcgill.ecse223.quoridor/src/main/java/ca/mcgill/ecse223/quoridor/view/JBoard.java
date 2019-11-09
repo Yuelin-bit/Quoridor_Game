@@ -221,7 +221,7 @@ public class JBoard extends JFrame {
 		//add tile(with GroupLayout) to the mainLayerPanel
 		tile = new JTile();
 		tile.setBackground(Color.WHITE);
-		tile.setBounds(0, 0, 1000, 800);
+		tile.setBounds(0, 6, 1000, 800);
 		tile.setOpaque(false);
 		mainLayerPanel.add(tile);
 
@@ -298,22 +298,27 @@ public class JBoard extends JFrame {
 		
 		lblWhiteBlock = new JLabel("white stock");
 		
+		JButton btnTest = new JButton("test");
+		btnTest.setForeground(Color.ORANGE);
+		btnTest.setBackground(Color.ORANGE);
+		
 		GroupLayout gl_tile = new GroupLayout(tile);
 		gl_tile.setHorizontalGroup(
 			gl_tile.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_tile.createSequentialGroup()
+				.addGroup(Alignment.TRAILING, gl_tile.createSequentialGroup()
+					.addGap(69)
+					.addComponent(btnTest, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 702, Short.MAX_VALUE)
+					.addComponent(SaveGameButton)
+					.addGap(44))
+				.addGroup(Alignment.TRAILING, gl_tile.createSequentialGroup()
 					.addContainerGap(651, Short.MAX_VALUE)
-					.addGroup(gl_tile.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_tile.createSequentialGroup()
-							.addGroup(gl_tile.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(lblGrabWallPress)
-								.addComponent(lblRotateWallPress)
-								.addComponent(lblMoveWallPress, GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
-								.addComponent(lblDropWallPress, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-							.addGap(165))
-						.addGroup(gl_tile.createSequentialGroup()
-							.addComponent(SaveGameButton)
-							.addGap(44))))
+					.addGroup(gl_tile.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(lblGrabWallPress)
+						.addComponent(lblRotateWallPress)
+						.addComponent(lblMoveWallPress, GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+						.addComponent(lblDropWallPress, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addGap(165))
 				.addGroup(gl_tile.createSequentialGroup()
 					.addGap(174)
 					.addComponent(lblBlackStock)
@@ -344,6 +349,10 @@ public class JBoard extends JFrame {
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(lblWhiteBlock)
 							.addGap(155))))
+				.addGroup(gl_tile.createSequentialGroup()
+					.addGap(59)
+					.addComponent(btnTest, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(686, Short.MAX_VALUE))
 		);
 		tile.setLayout(gl_tile);
 		
@@ -564,5 +573,4 @@ public class JBoard extends JFrame {
 
 
 	}
-
 }
