@@ -298,18 +298,20 @@ public class JBoard extends JFrame {
 		
 		lblWhiteBlock = new JLabel("white stock");
 		
-//		String player = "";
-//		if (currentPlayer.hasGameAsBlack()) {
-//			player = "Black";
-//		} else {
-//			player = "white";
-//		}
-		JLabel lblNewLabel = new JLabel("It is white's turn");
+		String player = "";
+		currentPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
+		if (currentPlayer.hasGameAsBlack()) {
+			player = "Black";
+		} else {
+			player = "white";
+		}
+		JLabel lblNewLabel = new JLabel("It is " + player + "'s turn");
 //		Player currentPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
 
 		Stopwatch watch = new Stopwatch(whitePlayer);
 		watch.start();
-		JLabel lblNewLabel_1 = new JLabel("Remaining Time:" + watch.timeLeftInSec);
+		Time time = currentPlayer.getRemainingTime();
+		JLabel lblNewLabel_1 = new JLabel("Remaining Time:" + time);
 		
 		
 		GroupLayout gl_tile = new GroupLayout(tile);
