@@ -20,6 +20,7 @@ import javax.swing.border.EmptyBorder;
 
 import ca.mcgill.ecse223.quoridor.QuoridorApplication;
 import ca.mcgill.ecse223.quoridor.controller.QuoridorController;
+import ca.mcgill.ecse223.quoridor.controller.Stopwatch;
 import ca.mcgill.ecse223.quoridor.model.Board;
 import ca.mcgill.ecse223.quoridor.model.Direction;
 import ca.mcgill.ecse223.quoridor.model.Game;
@@ -89,7 +90,7 @@ public class JBoard extends JFrame {
 	private JWall jwall;
 	public boolean whiteTurn;
 	private JButton SaveGameButton;
-	private Player whitePlayer, blackPlayer;
+	private Player whitePlayer, blackPlayer, currentPlayer;
 	public JWall getJwall() {
 		return jwall;
 	}
@@ -297,22 +298,39 @@ public class JBoard extends JFrame {
 		
 		lblWhiteBlock = new JLabel("white stock");
 		
+//		String player = "";
+//		if (currentPlayer.hasGameAsBlack()) {
+//			player = "Black";
+//		} else {
+//			player = "white";
+//		}
+		JLabel lblNewLabel = new JLabel("It is white's turn");
+//		Player currentPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
+
+		Stopwatch watch = new Stopwatch(whitePlayer);
+		watch.start();
+		JLabel lblNewLabel_1 = new JLabel("Remaining Time:" + watch.timeLeftInSec);
+		
+		
 		GroupLayout gl_tile = new GroupLayout(tile);
 		gl_tile.setHorizontalGroup(
 			gl_tile.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_tile.createSequentialGroup()
+				.addGroup(Alignment.TRAILING, gl_tile.createSequentialGroup()
+					.addGap(59)
+					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 117, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 183, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 447, Short.MAX_VALUE)
+					.addComponent(SaveGameButton)
+					.addGap(44))
+				.addGroup(Alignment.TRAILING, gl_tile.createSequentialGroup()
 					.addContainerGap(651, Short.MAX_VALUE)
-					.addGroup(gl_tile.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_tile.createSequentialGroup()
-							.addGroup(gl_tile.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(lblGrabWallPress)
-								.addComponent(lblRotateWallPress)
-								.addComponent(lblMoveWallPress, GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
-								.addComponent(lblDropWallPress, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-							.addGap(165))
-						.addGroup(gl_tile.createSequentialGroup()
-							.addComponent(SaveGameButton)
-							.addGap(44))))
+					.addGroup(gl_tile.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(lblGrabWallPress)
+						.addComponent(lblRotateWallPress)
+						.addComponent(lblMoveWallPress, GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+						.addComponent(lblDropWallPress, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addGap(165))
 				.addGroup(gl_tile.createSequentialGroup()
 					.addGap(174)
 					.addComponent(lblBlackStock)
@@ -323,16 +341,23 @@ public class JBoard extends JFrame {
 		gl_tile.setVerticalGroup(
 			gl_tile.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_tile.createSequentialGroup()
-					.addGap(33)
-					.addComponent(SaveGameButton)
-					.addGap(59)
-					.addComponent(lblGrabWallPress)
-					.addGap(32)
-					.addComponent(lblRotateWallPress)
-					.addGap(34)
-					.addComponent(lblMoveWallPress)
-					.addGap(37)
-					.addComponent(lblDropWallPress)
+					.addGroup(gl_tile.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_tile.createSequentialGroup()
+							.addGap(33)
+							.addComponent(SaveGameButton)
+							.addGap(59)
+							.addComponent(lblGrabWallPress)
+							.addGap(32)
+							.addComponent(lblRotateWallPress)
+							.addGap(34)
+							.addComponent(lblMoveWallPress)
+							.addGap(37)
+							.addComponent(lblDropWallPress))
+						.addGroup(gl_tile.createSequentialGroup()
+							.addGap(11)
+							.addGroup(gl_tile.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))))
 					.addGap(159)
 					.addGroup(gl_tile.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_tile.createSequentialGroup()
@@ -563,5 +588,4 @@ public class JBoard extends JFrame {
 
 
 	}
-
 }
