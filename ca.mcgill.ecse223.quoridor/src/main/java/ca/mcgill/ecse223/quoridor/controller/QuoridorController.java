@@ -32,7 +32,13 @@ import ca.mcgill.ecse223.quoridor.view.JWall;
 
 
 public class QuoridorController {
-	
+	/**
+	 * This method establish a thread that reset board data every second.
+	 */
+	public static void refreshData() {
+		RefreshData refresh = new RefreshData(QuoridorApplication.getJboard());
+		refresh.start();
+	}
 	
 	/**
 	 * 
