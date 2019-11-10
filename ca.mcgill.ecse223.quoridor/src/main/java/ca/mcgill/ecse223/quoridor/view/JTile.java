@@ -24,17 +24,22 @@ public void paint(Graphics g){
 		g.setFont(f);
 		
 		
-		int a = 160;
-		int b = 150;
-		int tileLength = 50;
-		int wallLength = 10;
+		int a = 20;
+		int b = 230;
+		int tileLength = 58;
+		int wallLength = 13;
 		int c = (tileLength+wallLength)*9 + wallLength;
 		int d = c;
 		
 		int length=b+wallLength;
+		Color  brown0  = new Color(139, 69, 19);
+		g.setColor(brown0);
+		g.drawRect(a, b,c, d); 
+		g.drawRect(a-1, b-1,c+2, d+2); 
+		//g.drawRect(a, b,c, d); 
+		Color  brown  = new Color(139, 105, 20);
 		
-		g.drawRect(a, b,c, d); //外圈
-		//g.drawRect(70, 60, 480, 540);
+		g.setColor(brown);
 		
 		for(int j=0;j<9;j++) {
 			int ini70 = a+wallLength;
