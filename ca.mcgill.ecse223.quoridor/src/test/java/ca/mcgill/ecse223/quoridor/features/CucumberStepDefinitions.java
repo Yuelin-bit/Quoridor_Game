@@ -228,9 +228,9 @@ public class CucumberStepDefinitions {
 	@Then("I shall have a wall in my hand over the board")
 	public void i_shall_have_a_wall_in_my_hand_over_the_board() {
 		boolean haveAWall = false;
-		if(QuoridorApplication.getJboard().getJwall()!=null) {
-			haveAWall = true;
-		}
+//		if(QuoridorApplication.getJboard().getJwall()!=null) {
+//			haveAWall = true;
+//		}
 		Assert.assertEquals(true,haveAWall);
 	}
 	
