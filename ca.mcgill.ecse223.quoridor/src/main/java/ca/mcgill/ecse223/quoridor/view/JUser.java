@@ -30,6 +30,10 @@ public void paint(Graphics g){
 		g.setColor(Color.black);
 		g.drawLine(290, 105, 388, 105);
 		
+		g.setColor(Color.DARK_GRAY);
+		g.fill3DRect(14, 14, 243, 185, false);
+		g.fill3DRect(430, 14, 243, 185, false);
+		
 		
 		
 		
