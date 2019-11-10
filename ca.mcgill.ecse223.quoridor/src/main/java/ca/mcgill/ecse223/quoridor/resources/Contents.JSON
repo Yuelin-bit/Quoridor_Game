@@ -1,12 +1,8 @@
 {
   "images" : [
     {
-      "size" : "16x16",
-      "filename" : "16x16_1x.png"
-    },
-    {
-      "size" : "128x128",
-      "filename" : "32x32_1x.png"
+      "size" : "30x30",
+      "filename" : "30—setting.png"
     }
   ]
 }
