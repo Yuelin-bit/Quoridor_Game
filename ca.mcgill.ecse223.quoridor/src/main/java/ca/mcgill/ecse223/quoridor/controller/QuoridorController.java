@@ -399,7 +399,7 @@ public class QuoridorController {
 		if(QuoridorController.verifyOnEdge(string)==true) 
 		{
 			QuoridorApplication.setJboard(new JBoard());
-		QuoridorApplication.getJboard().notifyIllegal();
+			QuoridorApplication.getJboard().notifyIllegal();
 		}
 		
 			if((string.equalsIgnoreCase("left"))&&(QuoridorController.verifyOnEdge(string)==false)) {

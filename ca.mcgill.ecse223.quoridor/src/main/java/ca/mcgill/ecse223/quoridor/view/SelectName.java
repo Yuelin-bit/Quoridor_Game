@@ -322,4 +322,3 @@ public class SelectName extends JFrame {
 		contentPane.setLayout(gl_contentPane);
 	}
 }
-
