@@ -89,6 +89,9 @@ public class NewJBoard extends JFrame {
 	private JButton setting;
 	private JLabel whitePawn;
 	private JLabel blackPawn;
+	
+
+	private JLabel bigTime;
 
 	/**
 	 * Launch the application.
@@ -135,10 +138,10 @@ public class NewJBoard extends JFrame {
 		txtrSeconds.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 		txtrSeconds.setText("Seconds");
 		
-		JLabel lblNewLabel = new JLabel("New label");
+		JLabel lblNewLabel = new JLabel();
 		lblNewLabel.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/monkey_128.png")));
 		
-		JLabel label = new JLabel("New label");
+		JLabel label = new JLabel();
 		label.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/cat_128.png")));
 		
 		setting = new JButton("");
@@ -150,7 +153,7 @@ public class NewJBoard extends JFrame {
 		blackUser = new JLabel("black");
 		blackUser.setForeground(Color.WHITE);
 		
-		JLabel bigTime = new JLabel("bigTime");
+		bigTime = new JLabel("bigTime");
 		bigTime.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 		
 		whiteStock = new JTextArea();
@@ -334,5 +337,46 @@ public class NewJBoard extends JFrame {
 
 	public void setblackPawn(JLabel blackPawn) {
 		this.blackPawn = blackPawn;
+	}
+
+	/**
+	 * @param bigTime the bigTime to set
+	 */
+	public void setBigTime(JLabel bigTime) {
+		this.bigTime = bigTime;
+	}
+	/**
+	 * @return the whiteUser
+	 */
+	public JLabel getWhiteUser() {
+		return whiteUser;
+	}
+
+	/**
+	 * @return the whiteStock
+	 */
+	public JTextArea getWhiteStock() {
+		return whiteStock;
+	}
+
+	/**
+	 * @return the whiteTime
+	 */
+	public JLabel getWhiteTime() {
+		return whiteTime;
+	}
+
+	/**
+	 * @return the whitePawn
+	 */
+	public JLabel getWhitePawn() {
+		return whitePawn;
+	}
+
+	/**
+	 * @return the bigTime
+	 */
+	public JLabel getBigTime() {
+		return bigTime;
 	}
 }
