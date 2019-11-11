@@ -104,10 +104,10 @@ public class SelectName extends JFrame {
 		JLabel lblThinkingTime = new JLabel("Thinking Time");
 		lblThinkingTime.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
-		textField = new JTextField();
+		textField = new JTextField("3");
 		textField.setColumns(10);
 
-		textField_1 = new JTextField();
+		textField_1 = new JTextField("0");
 		textField_1.setColumns(10);
 		
 		JLabel lblMin = new JLabel("Minute");		
@@ -218,10 +218,12 @@ public class SelectName extends JFrame {
 				
 				if (QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus().equals(GameStatus.ReadyToStart)) {
 					NewJBoard jboard = new NewJBoard();
+					QuoridorApplication.setJboard(jboard);
 					jboard.setVisible(true);
 					setVisible(false);
 					dispose();
 				}
+				QuoridorController.refreshData();
 			}
 		});
 		QuoridorController.initializeNewGame();

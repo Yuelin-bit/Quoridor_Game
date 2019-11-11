@@ -8,6 +8,9 @@ import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import ca.mcgill.ecse223.quoridor.controller.QuoridorController;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextArea;
@@ -79,7 +82,7 @@ public class NewJBoard extends JFrame {
 		this.blackStock = blackStock;
 	}
 
-	private JTextArea txtrSeconds;
+	private JLabel txtrSeconds;
 	private JLabel whiteUser;
 	private JLabel blackUser;
 	private JTextArea whiteStock;
@@ -133,7 +136,7 @@ public class NewJBoard extends JFrame {
 		tile.setOpaque(false);
 		mainLayerPanel.add(tile);
 		
-		txtrSeconds = new JTextArea();
+		txtrSeconds = new JLabel();
 		txtrSeconds.setBackground(new Color(245, 245, 220));
 		txtrSeconds.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 		txtrSeconds.setText("Seconds");
@@ -147,34 +150,34 @@ public class NewJBoard extends JFrame {
 		setting = new JButton("");
 		setting.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/30—setting.png")));
 		
-		whiteUser = new JLabel("white");
+		whiteUser = new JLabel(QuoridorController.getWhiteName());
 		whiteUser.setForeground(Color.WHITE);
 		
-		blackUser = new JLabel("black");
+		blackUser = new JLabel(QuoridorController.getBlackName());
 		blackUser.setForeground(Color.WHITE);
 		
-		bigTime = new JLabel("bigTime");
+		bigTime = new JLabel(QuoridorController.getWhiteRemainingTime());
 		bigTime.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 		
 		whiteStock = new JTextArea();
-		whiteStock.setText("Stock1");
+		whiteStock.setText(QuoridorController.getWhiteStocks());
 		
 		blackStock = new JTextArea();
-		blackStock.setText("Stock2");
+		blackStock.setText(QuoridorController.getBlackStocks());
 		
-		whiteTime = new JLabel("Time1");
+		whiteTime = new JLabel(QuoridorController.getWhiteRemainingTime());
 		whiteTime.setForeground(Color.WHITE);
 		
-		blackTime = new JLabel("Time2");
+		blackTime = new JLabel(QuoridorController.getBlackRemainingTime());
 		blackTime.setForeground(Color.WHITE);
 		
 		whitePawn = new JLabel("");
 		whitePawn.setForeground(Color.YELLOW);
 		whitePawn.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/32—wqueen.png")));
-		whitePawn.setVisible(false);
+		whitePawn.setVisible(true);
 		blackPawn = new JLabel("");
 		blackPawn.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/32—wqueen.png")));
-		blackPawn.setVisible(true);
+		blackPawn.setVisible(false);
 		
 		GroupLayout gl_tile = new GroupLayout(tile);
 		gl_tile.setHorizontalGroup(

@@ -17,25 +17,32 @@ public class RefreshData extends Thread{
 	}
 	public void run() {
 		while(true) {
-			boolean whiteTurn = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer().hasGameAsWhite();
-			boolean blackTurn = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer().hasGameAsBlack();
-			int whiteInStock = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer().getWalls().size();
-			int blackInStock = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer().getWalls().size();
+			boolean whiteTurn = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer().equals(
+					QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove());
+			
+			boolean blackTurn = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer().equals(
+					QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove());
+		
+			if(board == null) {
+				System.out.println("no board");
+			}
+			else if (whiteTurn) {
+				System.out.println("is white");
+			}else {
+				System.out.println("not");
+			}
 			board.getwhitePawn().setVisible(whiteTurn);
 			board.getblackPawn().setVisible(blackTurn);
-			board.getwhiteStock().setText(whiteInStock+"left");
-			board.getblackStock().setText(blackInStock+"left");
-			int min,sec;
+			board.getwhiteStock().setText(QuoridorController.getWhiteStocks());
+			board.getblackStock().setText(QuoridorController.getBlackStocks());	
 			if(whiteTurn) {
-				min = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer().getRemainingTime().getMinutes();
-				sec = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer().getRemainingTime().getSeconds();
-				board.getwhiteTime().setText(min+":"+sec);
-				board.getBigTime().setText(min+":"+sec);
+				String time = QuoridorController.getWhiteRemainingTime();
+				board.getwhiteTime().setText(time);
+				board.getBigTime().setText(time);
 			}else{
-				min = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer().getRemainingTime().getMinutes();
-				sec = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer().getRemainingTime().getSeconds();
-				board.getblackTime().setText(min+":"+sec);
-				board.getBigTime().setText(min+":"+sec);
+				String time = QuoridorController.getBlackRemainingTime();
+				board.getblackTime().setText(time);
+				board.getBigTime().setText(time);
 				
 			}
 			try {

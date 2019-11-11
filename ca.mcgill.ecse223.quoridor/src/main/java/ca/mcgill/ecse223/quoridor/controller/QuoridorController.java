@@ -32,12 +32,68 @@ import ca.mcgill.ecse223.quoridor.view.JWall;
 
 
 public class QuoridorController {
+	private static Stopwatch whiteWatch;
+	private static Stopwatch blackWatch;
 	/**
 	 * This method establish a thread that reset board data every second.
 	 */
 	public static void refreshData() {
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		RefreshData refresh = new RefreshData(QuoridorApplication.getJboard());
 		refresh.start();
+	}
+	/**
+	 * This method helps communicating through model and UI.
+	 * @return A string of white user's time
+	 */
+	public static String getWhiteName() {
+		return QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer().getUser().getName();
+	}
+	/**
+	 * This method helps communicating through model and UI.
+	 * @return A string of black user's time
+	 */
+	public static String getBlackName() {
+		return QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer().getUser().getName();
+	}
+	/**
+	 * This method helps communicating through model and UI.
+	 * @return A string of white remaining time
+	 */
+	public static String getWhiteRemainingTime() {
+		int min = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer().getRemainingTime().getMinutes();
+		int sec = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer().getRemainingTime().getSeconds();
+		return min+":"+sec;
+	}
+	/**
+	 * This method helps communicating through model and UI.
+	 * @return A string of black remaining time
+	 */
+	public static String getBlackRemainingTime() {
+		int min = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer().getRemainingTime().getMinutes();
+		int sec = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer().getRemainingTime().getSeconds();
+		return min+":"+sec;
+	}
+	/**
+	 * This method helps communicating through model and UI.
+	 * @return A string of white remaining wall
+	 */
+	public static String getWhiteStocks() {
+		int num = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer().getWalls().size();
+		return num+"";
+	}
+	/**
+	 * This method helps communicating through model and UI.
+	 * @return A string of black remaining wall
+	 */
+	public static String getBlackStocks() {
+		int num = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer().getWalls().size();
+		return num+"";
 	}
 	
 	/**
@@ -1164,12 +1220,16 @@ public class QuoridorController {
 		Player black = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
 		String message;
 		if (player.hasGameAsBlack()) {
+			whiteWatch.suspend();
+			blackWatch.resume();
 			player.setNextPlayer(white);
 			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(white);
 			message = "It is white player's turn";
 			QuoridorApplication.setJboard(new JBoard());
 			QuoridorApplication.getJboard().whiteTurn();
 		}else {
+			whiteWatch.resume();
+			blackWatch.suspend();
 			player.setNextPlayer(black);
 			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(black);
 			message = "It is black player's turn";
@@ -1204,6 +1264,10 @@ public class QuoridorController {
 	public static Long stopClock() {
 		Long endTime = System.nanoTime();
 		return endTime;
+	}
+	
+	public static void resumeWhiteClock() {
+		
 	}
 	
 
@@ -1258,22 +1322,26 @@ public class QuoridorController {
 		QuoridorApplication.getQuoridor().setBoard(board);
 		Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
 		Player blackPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
+		whitePlayer.setGameAsWhite(game);
 		Tile initWhite = new Tile(5, 9, board);
 		Tile initBlack = new Tile(5, 1, board);
 		PlayerPosition initialWhite = new PlayerPosition(whitePlayer, initWhite);
 		PlayerPosition initialBlack = new PlayerPosition(whitePlayer, initBlack);
 		
 		GamePosition g = new GamePosition(0, initialWhite, initialBlack, whitePlayer, game);
+		g.setPlayerToMove(whitePlayer);
 		game.setCurrentPosition(g);
+		
 		initializeWhiteWall(g,whitePlayer);
 		initializeBlackWall(g,blackPlayer);
 		g.setPlayerToMove(whitePlayer);
-		Stopwatch whiteWatch = new Stopwatch(whitePlayer);
-		Stopwatch blackWatch = new Stopwatch(blackPlayer);
+		Stopwatch white = new Stopwatch(whitePlayer);
+		whiteWatch = white;
+		Stopwatch black = new Stopwatch(blackPlayer);
+		blackWatch = black;
 		whiteWatch.start();
-		//QuoridorApplication.getJboard().mainLayerPanel.setVisible(true);
-//		QuoridorApplication.getJboard().whitePawnMove.setVisible();
-//		QuoridorApplication.getJboard().whitePawnMove.setVisible(true);
+		blackWatch.start();
+		blackWatch.suspend();
 	}
 
 	/**
