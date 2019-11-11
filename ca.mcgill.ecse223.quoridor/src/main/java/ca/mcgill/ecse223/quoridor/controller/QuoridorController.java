@@ -1156,18 +1156,13 @@ public class QuoridorController {
 
 		Player white = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
 		Player black = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
-		String message;
 		if (player.hasGameAsBlack()) {
 			player.setNextPlayer(white);
 			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(white);
-			message = "It is white player's turn";
-			QuoridorApplication.setJboard(new JBoard());
 			QuoridorApplication.getJboard().whiteTurn();
 		}else {
 			player.setNextPlayer(black);
 			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(black);
-			message = "It is black player's turn";
-			QuoridorApplication.setJboard(new JBoard());
 			QuoridorApplication.getJboard().blackTurn();
 		}
 		
