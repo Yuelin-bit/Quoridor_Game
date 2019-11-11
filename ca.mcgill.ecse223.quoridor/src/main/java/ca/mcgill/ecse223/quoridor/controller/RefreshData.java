@@ -23,14 +23,6 @@ public class RefreshData extends Thread{
 			boolean blackTurn = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer().equals(
 					QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove());
 		
-			if(board == null) {
-				System.out.println("no board");
-			}
-			else if (whiteTurn) {
-				System.out.println("is white");
-			}else {
-				System.out.println("not");
-			}
 			board.getwhitePawn().setVisible(whiteTurn);
 			board.getblackPawn().setVisible(blackTurn);
 			board.getwhiteStock().setText(QuoridorController.getWhiteStocks());

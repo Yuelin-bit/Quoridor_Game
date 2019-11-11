@@ -58,11 +58,11 @@ public class NewJBoard extends JFrame {
 		this.whiteTime = whiteTime;
 	}
 
-	public JTextArea getTxtrSeconds() {
+	public JLabel getTxtrSeconds() {
 		return txtrSeconds;
 	}
 
-	public void setTxtrSeconds(JTextArea txtrSeconds) {
+	public void setTxtrSeconds(JLabel txtrSeconds) {
 		this.txtrSeconds = txtrSeconds;
 	}
 
