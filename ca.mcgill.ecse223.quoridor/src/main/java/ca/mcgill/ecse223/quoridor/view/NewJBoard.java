@@ -266,6 +266,12 @@ public class NewJBoard extends JFrame {
 		users.setOpaque(false);
 		mainLayerPanel.add(users);
 		
+		JWall jwall = new JWall();            
+        jwall.setBackground(Color.GRAY);
+        jwall.setBounds(50+35,650,10,110);
+        jwall.setVisible(true);
+        mainLayerPanel.add(jwall);
+		
 		
 		
 	}
