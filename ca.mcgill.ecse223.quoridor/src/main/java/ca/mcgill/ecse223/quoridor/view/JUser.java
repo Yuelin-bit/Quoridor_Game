@@ -18,21 +18,21 @@ public void paint(Graphics g){
 		super.paint(g);
 		
 		
-		g.drawRect(10, 10,100, 20); 
+		g.drawRect(8, 8,80, 16); 
 		g.setColor(Color.gray);
-		g.fillRect(10, 10, 670, 200);
+		g.fillRect(8, 8, 536, 160);
 		
 		
 		Color  wheat  = new Color(245, 245, 220);
 	    g.setColor(wheat);
-		g.fillOval(270, 15, 135, 135);
+		g.fillOval(216, 12, 108, 108);
 		
 		g.setColor(Color.black);
-		g.drawLine(290, 105, 388, 105);
+		g.drawLine(232, 84, 310, 84);
 		
 		g.setColor(Color.DARK_GRAY);
-		g.fill3DRect(14, 14, 243, 185, false);
-		g.fill3DRect(430, 14, 243, 185, false);
+		g.fill3DRect(11, 11, 194, 148, false);
+		g.fill3DRect(344, 11, 194, 148, false);
 		
 		
 		

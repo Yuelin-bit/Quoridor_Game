@@ -24,10 +24,10 @@ public void paint(Graphics g){
 		g.setFont(f);
 		
 		
-		int a = 20;
-		int b = 230;
-		int tileLength = 58;
-		int wallLength = 13;
+		int a = 16;
+		int b = 184;
+		int tileLength = 46;
+		int wallLength = 10;
 		int c = (tileLength+wallLength)*9 + wallLength;
 		int d = c;
 		
