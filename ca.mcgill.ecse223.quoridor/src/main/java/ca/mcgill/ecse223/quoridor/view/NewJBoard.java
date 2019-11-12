@@ -117,7 +117,7 @@ public class NewJBoard extends JFrame {
 	 */
 	public NewJBoard() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(0, 0, 700, 1000);
+		setBounds(0, 0, 560, 800);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -132,7 +132,7 @@ public class NewJBoard extends JFrame {
 		
 		tile = new JTile();
 		tile.setBackground(Color.WHITE);
-		tile.setBounds(0, 0, 700, 1000);
+		tile.setBounds(0, 0, 560, 800);
 		tile.setOpaque(false);
 		mainLayerPanel.add(tile);
 		
@@ -262,7 +262,7 @@ public class NewJBoard extends JFrame {
 		tile.setLayout(gl_tile);
 		
 		users = new JUser();
-		users.setBounds(0, 0, 700, 1000);
+		users.setBounds(0, 0, 560, 800);
 		users.setOpaque(false);
 		mainLayerPanel.add(users);
 		
