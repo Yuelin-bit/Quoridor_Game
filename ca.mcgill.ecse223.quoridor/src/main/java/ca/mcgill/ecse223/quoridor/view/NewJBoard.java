@@ -21,6 +21,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.UIManager;
 
 public class NewJBoard extends JFrame {
 
@@ -102,6 +103,11 @@ public class NewJBoard extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		try {
+			UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -181,18 +187,11 @@ public class NewJBoard extends JFrame {
 		blackPawn.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/32—wqueen.png")));
 		blackPawn.setVisible(false);
 		
-		JButton reference = new JButton("New button");
-		reference.addActionListener(new ActionListener() {
-		
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		
 		GroupLayout gl_tile = new GroupLayout(tile);
 		gl_tile.setHorizontalGroup(
 			gl_tile.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_tile.createSequentialGroup()
-					.addContainerGap(29, Short.MAX_VALUE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addGroup(gl_tile.createParallelGroup(Alignment.TRAILING, false)
 						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE)
 						.addGroup(gl_tile.createSequentialGroup()
@@ -215,12 +214,12 @@ public class NewJBoard extends JFrame {
 							.addGroup(gl_tile.createParallelGroup(Alignment.TRAILING)
 								.addGroup(gl_tile.createSequentialGroup()
 									.addComponent(whitePawn)
-									.addPreferredGap(ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+									.addPreferredGap(ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
 									.addComponent(txtrSeconds)
 									.addGap(93))
 								.addGroup(gl_tile.createSequentialGroup()
 									.addComponent(whiteTime)
-									.addPreferredGap(ComponentPlacement.RELATED, 164, Short.MAX_VALUE)))))
+									.addPreferredGap(ComponentPlacement.RELATED, 171, Short.MAX_VALUE)))))
 					.addGroup(gl_tile.createParallelGroup(Alignment.LEADING)
 						.addComponent(blackStock, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
 						.addComponent(blackTime, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
@@ -233,10 +232,6 @@ public class NewJBoard extends JFrame {
 							.addGap(68)
 							.addComponent(blackUser, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)))
 					.addGap(37))
-				.addGroup(gl_tile.createSequentialGroup()
-					.addGap(24)
-					.addComponent(reference, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		gl_tile.setVerticalGroup(
 			gl_tile.createParallelGroup(Alignment.LEADING)
@@ -268,9 +263,7 @@ public class NewJBoard extends JFrame {
 						.addGroup(gl_tile.createSequentialGroup()
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(blackUser)))
-					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addComponent(reference, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE)
-					.addGap(275))
+					.addContainerGap(608, Short.MAX_VALUE))
 		);
 		tile.setLayout(gl_tile);
 		

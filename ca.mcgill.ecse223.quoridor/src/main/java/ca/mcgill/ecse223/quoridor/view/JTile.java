@@ -294,6 +294,94 @@ public class JTile extends JPanel {
 		
 		JButton[][] allButton = new JButton[9][9];
 		allButton[1][1] = NewButton11;
+		allButton[1][2] = NewButton12;
+		allButton[1][3] = NewButton13;
+		allButton[1][4] = NewButton14;
+		allButton[1][5] = NewButton15;
+		allButton[1][6] = NewButton16;
+		allButton[1][7] = NewButton17;
+		allButton[1][8] = NewButton18;
+		allButton[1][9] = NewButton19;
+		
+		allButton[2][1] = NewButton21;
+		allButton[2][2] = NewButton22;
+		allButton[2][3] = NewButton23;
+		allButton[2][4] = NewButton24;
+		allButton[2][5] = NewButton25;
+		allButton[2][6] = NewButton26;
+		allButton[2][7] = NewButton27;
+		allButton[2][8] = NewButton28;
+		allButton[2][9] = NewButton29;
+		
+		allButton[3][1] = NewButton31;
+		allButton[3][2] = NewButton32;
+		allButton[3][3] = NewButton33;
+		allButton[3][4] = NewButton34;
+		allButton[3][5] = NewButton35;
+		allButton[3][6] = NewButton36;
+		allButton[3][7] = NewButton37;
+		allButton[3][8] = NewButton38;
+		allButton[3][9] = NewButton39;
+		
+		allButton[4][1] = NewButton41;
+		allButton[4][2] = NewButton42;
+		allButton[4][3] = NewButton43;
+		allButton[4][4] = NewButton44;
+		allButton[4][5] = NewButton45;
+		allButton[4][6] = NewButton46;
+		allButton[4][7] = NewButton47;
+		allButton[4][8] = NewButton48;
+		allButton[4][9] = NewButton49;
+		
+		allButton[5][1] = NewButton51;
+		allButton[5][2] = NewButton52;
+		allButton[5][3] = NewButton53;
+		allButton[5][4] = NewButton54;
+		allButton[5][5] = NewButton55;
+		allButton[5][6] = NewButton56;
+		allButton[5][7] = NewButton57;
+		allButton[5][8] = NewButton58;
+		allButton[5][9] = NewButton59;
+		
+		allButton[6][1] = NewButton61;
+		allButton[6][2] = NewButton62;
+		allButton[6][3] = NewButton63;
+		allButton[6][4] = NewButton64;
+		allButton[6][5] = NewButton65;
+		allButton[6][6] = NewButton66;
+		allButton[6][7] = NewButton67;
+		allButton[6][8] = NewButton68;
+		allButton[6][9] = NewButton69;
+		
+		allButton[7][1] = NewButton71;
+		allButton[7][2] = NewButton72;
+		allButton[7][3] = NewButton73;
+		allButton[7][4] = NewButton74;
+		allButton[7][5] = NewButton75;
+		allButton[7][6] = NewButton76;
+		allButton[7][7] = NewButton77;
+		allButton[7][8] = NewButton78;
+		allButton[7][9] = NewButton79;
+		
+		allButton[8][1] = NewButton81;
+		allButton[8][2] = NewButton82;
+		allButton[8][3] = NewButton83;
+		allButton[8][4] = NewButton84;
+		allButton[8][5] = NewButton85;
+		allButton[8][6] = NewButton86;
+		allButton[8][7] = NewButton87;
+		allButton[8][8] = NewButton88;
+		allButton[8][9] = NewButton89;
+		
+		allButton[9][1] = NewButton91;
+		allButton[9][2] = NewButton92;
+		allButton[9][3] = NewButton93;
+		allButton[9][4] = NewButton94;
+		allButton[9][5] = NewButton95;
+		allButton[9][6] = NewButton96;
+		allButton[9][7] = NewButton97;
+		allButton[9][8] = NewButton98;
+		allButton[9][9] = NewButton99;
 	}
 	
 	
