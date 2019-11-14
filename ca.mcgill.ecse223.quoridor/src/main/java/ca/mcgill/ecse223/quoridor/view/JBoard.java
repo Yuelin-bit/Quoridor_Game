@@ -222,7 +222,7 @@ public class JBoard extends JFrame {
 		//add tile(with GroupLayout) to the mainLayerPanel
 		tile = new JTile();
 		tile.setBackground(Color.WHITE);
-		tile.setBounds(0, 0, 1000, 800);
+		tile.setBounds(0, 6, 1000, 800);
 		tile.setOpaque(false);
 		mainLayerPanel.add(tile);
 
@@ -298,31 +298,39 @@ public class JBoard extends JFrame {
 		
 		lblWhiteBlock = new JLabel("white stock");
 		
-		String player = "";
-		currentPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
-		if (currentPlayer.hasGameAsBlack()) {
-			player = "Black";
-		} else {
-			player = "white";
-		}
-		JLabel lblNewLabel = new JLabel("It is " + player + "'s turn");
-//		Player currentPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
-
-		Stopwatch watch = new Stopwatch(whitePlayer);
-		watch.start();
-		Time time = currentPlayer.getRemainingTime();
-		JLabel lblNewLabel_1 = new JLabel("Remaining Time:" + time);
+//		String player = "";
+//		currentPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
+//		if (currentPlayer.hasGameAsBlack()) {
+//			player = "Black";
+//		} else {
+//			player = "white";
+//		}
+//		JLabel lblNewLabel = new JLabel("It is " + player + "'s turn");
+////		Player currentPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
+//
+//		Stopwatch watch = new Stopwatch(whitePlayer);
+//		watch.start();
+//		Time time = currentPlayer.getRemainingTime();
+//		JLabel lblNewLabel_1 = new JLabel("Remaining Time:" + time);
 		
+		JButton btnTest = new JButton("test");
+		btnTest.setForeground(Color.ORANGE);
+		btnTest.setBackground(Color.ORANGE);
 		
 		GroupLayout gl_tile = new GroupLayout(tile);
 		gl_tile.setHorizontalGroup(
 			gl_tile.createParallelGroup(Alignment.LEADING)
 				.addGroup(Alignment.TRAILING, gl_tile.createSequentialGroup()
-					.addGap(59)
-					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 117, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 183, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 447, Short.MAX_VALUE)
+						
+//					.addGap(59)
+//					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 117, GroupLayout.PREFERRED_SIZE)
+//					.addGap(18)
+//					.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 183, GroupLayout.PREFERRED_SIZE)
+						
+//					.addPreferredGap(ComponentPlacement.RELATED, 447, Short.MAX_VALUE)
+					.addGap(69)
+					.addComponent(btnTest, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 702, Short.MAX_VALUE)
 					.addComponent(SaveGameButton)
 					.addGap(44))
 				.addGroup(Alignment.TRAILING, gl_tile.createSequentialGroup()
@@ -370,6 +378,10 @@ public class JBoard extends JFrame {
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(lblWhiteBlock)
 							.addGap(155))))
+				.addGroup(gl_tile.createSequentialGroup()
+					.addGap(59)
+					.addComponent(btnTest, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(686, Short.MAX_VALUE))
 		);
 		tile.setLayout(gl_tile);
 		

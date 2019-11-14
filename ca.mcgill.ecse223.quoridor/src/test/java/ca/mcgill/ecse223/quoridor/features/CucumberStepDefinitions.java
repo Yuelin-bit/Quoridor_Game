@@ -205,6 +205,7 @@ public class CucumberStepDefinitions {
 	public void i_release_the_wall_in_my_hand() {
 		//WallMove a = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate();
 		QuoridorController.releaseWall();
+		QuoridorApplication.getJboard().dispose();
 	}
 
 	@Then("A wall move shall be registered with {string} at position \\({int}, {int})")
@@ -227,9 +228,9 @@ public class CucumberStepDefinitions {
 	@Then("I shall have a wall in my hand over the board")
 	public void i_shall_have_a_wall_in_my_hand_over_the_board() {
 		boolean haveAWall = false;
-		if(QuoridorApplication.getJboard().getJwall()!=null) {
-			haveAWall = true;
-		}
+//		if(QuoridorApplication.getJboard().getJwall()!=null) {
+//			haveAWall = true;
+//		}
 		Assert.assertEquals(true,haveAWall);
 	}
 	
@@ -312,6 +313,8 @@ public class CucumberStepDefinitions {
 		//JOptionPane.showMessageDialog(null, "It is illegal!!!");
 		Assert.assertEquals("I will give a dialog immediately you release a illegal wall, So do not worry if you notice there are some dialogs when you running the JUnit Test! Just close it!",QuoridorApplication.getJboard().getError());
 		//throw new cucumber.api.PendingException();
+		
+		
 	}
 
 //	@Then("I shall have a wall in my hand over the board")
@@ -1579,7 +1582,7 @@ public class CucumberStepDefinitions {
 				quoridor = null;
 			}
 			for (int i = 0; i < 20; i++) {
-				Wall wall = Wall.getWithId(i);
+				Wall wall = Wall.getWithId(i+1);
 				if(wall != null) {
 					wall.delete();
 				}
@@ -1634,7 +1637,7 @@ public class CucumberStepDefinitions {
 			// while the second half belongs to player 2
 			for (int i = 0; i < 2; i++) {
 				for (int j = 0; j < 10; j++) {
-					new Wall(i * 10 + j, players[i]);
+					new Wall(i * 10 + j+1, players[i]);
 				}
 			}
 			
@@ -1664,11 +1667,11 @@ public class CucumberStepDefinitions {
 
 		// Add the walls as in stock for the players
 		for (int j = 0; j < 10; j++) {
-			Wall wall = Wall.getWithId(j);
+			Wall wall = Wall.getWithId(j+1);
 			gamePosition.addWhiteWallsInStock(wall);
 		}
 		for (int j = 0; j < 10; j++) {
-			Wall wall = Wall.getWithId(j + 10);
+			Wall wall = Wall.getWithId(j + 10+1);
 			gamePosition.addBlackWallsInStock(wall);
 		}
 
