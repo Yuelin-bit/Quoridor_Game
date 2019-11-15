@@ -1607,13 +1607,23 @@ public class CucumberStepDefinitions {
 				prow = quoridor.getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
 				pcol = quoridor.getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getColumn();
 				orow = quoridor.getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
-				orow = quoridor.getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
+				ocol = quoridor.getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
 				opponent = quoridor.getCurrentGame().getWhitePlayer();
+				boolean cmp1 = string.equals("left") && (orow == prow) && (ocol == pcol - 1);
+				boolean cmp2 = string.equals("right") && (orow == prow) && (ocol == pcol + 1);
+				boolean cmp3 = string.equals("up") && (orow == prow - 1) && (ocol == pcol);
+				boolean cmp4 = string.equals("down") && (orow == prow + 1) && (ocol == pcol);
+				if (cmp1 && cmp2 && cmp3 && cmp4) {
+					Tile player1StartPos = quoridor.getBoard().getTile(4);
+					PlayerPosition whitePosition = new PlayerPosition(quoridor.getCurrentGame().getWhitePlayer(), player1StartPos);
+					quoridor.getCurrentGame().getCurrentPosition().setWhitePosition(whitePosition);
+				}
+				
 			}else {
 				orow = quoridor.getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
 				ocol = quoridor.getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getColumn();
 				prow = quoridor.getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
-				prow = quoridor.getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
+				pcol = quoridor.getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
 				opponent = quoridor.getCurrentGame().getBlackPlayer();
 			}		
 			
@@ -1658,22 +1668,38 @@ public class CucumberStepDefinitions {
 			}
 			assertEquals(string, toCompare);
 		}
-
-		@Given("There is a {string} wall {string} from the player")
-		public void there_is_a_wall_from_the_player(String string, String string2) {
-			QuoridorController.verifythere_are_no_walls_from_the_player(string,string2);
-			if(QuoridorController.verifythere_are_no_walls_from_the_player(string,string2)==true) {
-				Assert.fail();
-			}
+		
+		@Given("There is a {string} wall at {int}:{int}")
+		public void there_is_a_wall_at(String string, Integer int1, Integer int2) {
+			Direction wallDirection;
+		    if (string.equals("vertical")) {
+		    	wallDirection = Direction.Vertical;
+		    } else {
+		    	wallDirection = Direction.Horizontal;
+		    }
+		    
+		    Player black = quoridor.getCurrentGame().getBlackPlayer();
+		    Wall wall = black.getWall(0);
+		    Tile tile = quoridor.getBoard().getTile((int1 - 1) * 9 + int2 - 1);
+		    new WallMove(1, 1, black, tile, quoridor.getCurrentGame(), wallDirection, wall);
+		    quoridor.getCurrentGame().getCurrentPosition().addBlackWallsOnBoard(wall);
 		}
 
 		@Given("My opponent is not {string} from the player")
 		public void my_opponent_is_not_from_the_player(String string) {
-			if(QuoridorController.verifytthe_opponent_is_not_from_the_player(string)==true) {
-				Assert.fail();
+			Player me = quoridor.getCurrentGame().getCurrentPosition().getPlayerToMove();
+			Player opponent = null;
+			if (me.hasGameAsBlack()) {
+				opponent = quoridor.getCurrentGame().getWhitePlayer();
+				int row = quoridor.getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
+				int col = quoridor.getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
+				if (string.equals("left") && row == ) {
+					
+				}
 			}
-			
 		}
+		
+		
 	// After each scenario, the test model is discarded
 		@After
 		public void tearDown() {
