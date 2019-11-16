@@ -132,7 +132,7 @@ public class NewJBoard extends JFrame {
 		txtrSeconds.setText("Seconds");
 		
 		JLabel lblNewLabel = new JLabel();
-		lblNewLabel.setBounds(12, 44, 127, 120);
+		lblNewLabel.setBounds(19, 20, 127, 120);
 		lblNewLabel.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/monkey_128.png")));
 		
 		JLabel label = new JLabel();
@@ -140,11 +140,11 @@ public class NewJBoard extends JFrame {
 		label.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/cat_128.png")));
 		
 		setting = new JButton("");
-		setting.setBounds(296, 164, 30, 28);
+		setting.setBounds(296, 135, 30, 28);
 		setting.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/30—setting.png")));
 		
 		whiteUser = new JLabel(QuoridorController.getWhiteName());
-		whiteUser.setBounds(19, 164, 72, 15);
+		whiteUser.setBounds(29, 135, 72, 15);
 		whiteUser.setForeground(Color.WHITE);
 		
 		blackUser = new JLabel(QuoridorController.getBlackName());
@@ -152,11 +152,11 @@ public class NewJBoard extends JFrame {
 		blackUser.setForeground(Color.WHITE);
 		
 		bigTime = new JLabel(QuoridorController.getWhiteRemainingTime());
-		bigTime.setBounds(297, 66, 91, 20);
+		bigTime.setBounds(235, 49, 91, 20);
 		bigTime.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 		
 		whiteStock = new JTextArea();
-		whiteStock.setBounds(157, 164, 69, 15);
+		whiteStock.setBounds(143, 118, 69, 15);
 		whiteStock.setText(QuoridorController.getWhiteStocks());
 		
 		blackStock = new JTextArea();
@@ -172,7 +172,7 @@ public class NewJBoard extends JFrame {
 		blackTime.setForeground(Color.WHITE);
 		
 		whitePawn = new JLabel("");
-		whitePawn.setBounds(157, 115, 32, 32);
+		whitePawn.setBounds(167, 66, 32, 32);
 		whitePawn.setForeground(Color.YELLOW);
 		whitePawn.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/32—wqueen.png")));
 		whitePawn.setVisible(true);
