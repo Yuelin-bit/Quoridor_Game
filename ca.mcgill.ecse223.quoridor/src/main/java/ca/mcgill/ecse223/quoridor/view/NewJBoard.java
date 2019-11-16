@@ -145,127 +145,74 @@ public class NewJBoard extends JFrame {
 		mainLayerPanel.add(tile);
 		
 		txtrSeconds = new JLabel();
+		txtrSeconds.setBounds(243, 115, 64, 20);
 		txtrSeconds.setBackground(new Color(245, 245, 220));
 		txtrSeconds.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 		txtrSeconds.setText("Seconds");
 		
 		JLabel lblNewLabel = new JLabel();
+		lblNewLabel.setBounds(12, 44, 127, 120);
 		lblNewLabel.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/monkey_128.png")));
 		
 		JLabel label = new JLabel();
+		label.setBounds(472, 44, 127, 120);
 		label.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/cat_128.png")));
 		
 		setting = new JButton("");
-		setting.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/30--setting.png")));
+		setting.setBounds(296, 164, 30, 28);
+		setting.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/30—setting.png")));
 		
 		whiteUser = new JLabel(QuoridorController.getWhiteName());
+		whiteUser.setBounds(19, 164, 72, 15);
 		whiteUser.setForeground(Color.WHITE);
 		
 		blackUser = new JLabel(QuoridorController.getBlackName());
+		blackUser.setBounds(512, 176, 36, 15);
 		blackUser.setForeground(Color.WHITE);
 		
 		bigTime = new JLabel(QuoridorController.getWhiteRemainingTime());
+		bigTime.setBounds(297, 66, 91, 20);
 		bigTime.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 		
 		whiteStock = new JTextArea();
+		whiteStock.setBounds(157, 164, 69, 15);
 		whiteStock.setText(QuoridorController.getWhiteStocks());
 		
 		blackStock = new JTextArea();
+		blackStock.setBounds(400, 164, 44, 15);
 		blackStock.setText(QuoridorController.getBlackStocks());
 		
 		whiteTime = new JLabel(QuoridorController.getWhiteRemainingTime());
+		whiteTime.setBounds(157, 38, 72, 15);
 		whiteTime.setForeground(Color.WHITE);
 		
 		blackTime = new JLabel(QuoridorController.getBlackRemainingTime());
+		blackTime.setBounds(400, 38, 39, 15);
 		blackTime.setForeground(Color.WHITE);
 		
 		whitePawn = new JLabel("");
+		whitePawn.setBounds(157, 115, 32, 32);
 		whitePawn.setForeground(Color.YELLOW);
 		whitePawn.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/32—wqueen.png")));
 		whitePawn.setVisible(true);
 		blackPawn = new JLabel("");
+		blackPawn.setBounds(400, 115, 32, 32);
 		blackPawn.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/32—wqueen.png")));
 		blackPawn.setVisible(false);
-		
-		GroupLayout gl_tile = new GroupLayout(tile);
-		gl_tile.setHorizontalGroup(
-			gl_tile.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_tile.createSequentialGroup()
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addGroup(gl_tile.createParallelGroup(Alignment.TRAILING, false)
-						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_tile.createSequentialGroup()
-							.addComponent(whiteUser)
-							.addGap(48)))
-					.addGroup(gl_tile.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_tile.createSequentialGroup()
-							.addGroup(gl_tile.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_tile.createSequentialGroup()
-									.addGap(158)
-									.addComponent(bigTime))
-								.addGroup(gl_tile.createSequentialGroup()
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(whiteStock, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-									.addGap(70)
-									.addComponent(setting, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)))
-							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-						.addGroup(gl_tile.createSequentialGroup()
-							.addGap(18)
-							.addGroup(gl_tile.createParallelGroup(Alignment.TRAILING)
-								.addGroup(gl_tile.createSequentialGroup()
-									.addComponent(whitePawn)
-									.addPreferredGap(ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-									.addComponent(txtrSeconds)
-									.addGap(93))
-								.addGroup(gl_tile.createSequentialGroup()
-									.addComponent(whiteTime)
-									.addPreferredGap(ComponentPlacement.RELATED, 171, Short.MAX_VALUE)))))
-					.addGroup(gl_tile.createParallelGroup(Alignment.LEADING)
-						.addComponent(blackStock, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
-						.addComponent(blackTime, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
-						.addComponent(blackPawn))
-					.addGroup(gl_tile.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_tile.createSequentialGroup()
-							.addGap(28)
-							.addComponent(label, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_tile.createSequentialGroup()
-							.addGap(68)
-							.addComponent(blackUser, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)))
-					.addGap(37))
-		);
-		gl_tile.setVerticalGroup(
-			gl_tile.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_tile.createSequentialGroup()
-					.addGap(38)
-					.addGroup(gl_tile.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_tile.createSequentialGroup()
-							.addGroup(gl_tile.createParallelGroup(Alignment.BASELINE)
-								.addComponent(whiteTime)
-								.addComponent(blackTime))
-							.addGap(13)
-							.addComponent(bigTime)
-							.addGap(29)
-							.addGroup(gl_tile.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_tile.createParallelGroup(Alignment.BASELINE)
-									.addComponent(blackPawn)
-									.addComponent(txtrSeconds))
-								.addComponent(whitePawn))
-							.addGap(17))
-						.addGroup(gl_tile.createParallelGroup(Alignment.LEADING)
-							.addComponent(label, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
-							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)))
-					.addGroup(gl_tile.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_tile.createParallelGroup(Alignment.BASELINE)
-							.addComponent(whiteStock, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addComponent(blackStock, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addComponent(whiteUser))
-						.addComponent(setting, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_tile.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(blackUser)))
-					.addContainerGap(608, Short.MAX_VALUE))
-		);
-		tile.setLayout(gl_tile);
+		tile.setLayout(null);
+		tile.add(lblNewLabel);
+		tile.add(whiteUser);
+		tile.add(bigTime);
+		tile.add(whiteStock);
+		tile.add(setting);
+		tile.add(whitePawn);
+		tile.add(txtrSeconds);
+		tile.add(whiteTime);
+		tile.add(blackStock);
+		tile.add(blackTime);
+		tile.add(blackPawn);
+		tile.add(label);
+		tile.add(blackUser);
 		
 		users = new JUser();
 		users.setBounds(0, 0, 560, 800);

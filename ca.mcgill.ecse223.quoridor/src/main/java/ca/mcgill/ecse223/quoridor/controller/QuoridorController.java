@@ -1250,7 +1250,8 @@ public class QuoridorController {
 	 */
 	public static void initializeBoard() {
 //		QuoridorApplication.setJBoard(new JBoard());
-		Board board = new Board(QuoridorApplication.getQuoridor());
+		//Board board = new Board(QuoridorApplication.getQuoridor());
+		Board board = QuoridorApplication.getQuoridor().getBoard();
 		for(int i = 1; i<= 9; i++) {
 			for(int j = 1; j<=9; j++) {
 				Tile tile = new Tile(i, j, board);
