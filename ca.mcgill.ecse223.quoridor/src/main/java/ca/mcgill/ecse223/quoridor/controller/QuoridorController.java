@@ -177,57 +177,6 @@ public class QuoridorController {
 	}
 	
 	
-	/**
-	 * 
-	 * Get the white walls on board, and transfer it
-	 * 
-     * @author Yuelin Liu
-	 * @param wallmove WallMove candidate to be check whether it is valid(to avoid overlapping).
-	 * @return boolean whether there is a wall in the same position.
-	 * @exception nothing
-	 *
-	 */
-	public static ArrayList<TOWall> getWhiteWallsOnBoard(){
-		ArrayList<TOWall> w = new ArrayList<TOWall>();
-		for(Wall wall : QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard()) {
-			TOWall temp = null;
-			temp.setRow(wall.getMove().getTargetTile().getRow());
-			temp.setColumn(wall.getMove().getTargetTile().getColumn());
-			if(wall.getMove().getWallDirection()==Direction.Horizontal)
-				temp.setDir(Direction2.Horizontal);
-			else{
-				temp.setDir(Direction2.Vertical);
-			}
-			w.add(temp);
-		}
-		return w;
-	}
-	
-	/**
-	 * 
-	 * Get the white walls on board, and transfer it
-	 * 
-     * @author Yuelin Liu
-	 * @param wallmove WallMove candidate to be check whether it is valid(to avoid overlapping).
-	 * @return boolean whether there is a wall in the same position.
-	 * @exception nothing
-	 *
-	 */
-	public static ArrayList<TOWall> getBlackWallsOnBoard(){
-		ArrayList<TOWall> w = new ArrayList<TOWall>();
-		for(Wall wall : QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard()) {
-			TOWall temp = null;
-			temp.setRow(wall.getMove().getTargetTile().getRow());
-			temp.setColumn(wall.getMove().getTargetTile().getColumn());
-			if(wall.getMove().getWallDirection()==Direction.Horizontal)
-				temp.setDir(Direction2.Horizontal);
-			else{
-				temp.setDir(Direction2.Vertical);
-			}
-			w.add(temp);
-		}
-		return w;
-	}
 	
 	/**
 	 * Feature:DropWall
@@ -1304,7 +1253,8 @@ public class QuoridorController {
 	 */
 	public static void initializeBoard() {
 //		QuoridorApplication.setJBoard(new JBoard());
-		Board board = new Board(QuoridorApplication.getQuoridor());
+		//Board board = new Board(QuoridorApplication.getQuoridor());
+		Board board = QuoridorApplication.getQuoridor().getBoard();
 		for(int i = 1; i<= 9; i++) {
 			for(int j = 1; j<=9; j++) {
 				Tile tile = new Tile(i, j, board);

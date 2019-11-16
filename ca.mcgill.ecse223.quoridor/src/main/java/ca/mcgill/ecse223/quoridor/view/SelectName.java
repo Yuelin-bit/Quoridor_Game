@@ -211,7 +211,7 @@ public class SelectName extends JFrame {
 					lblInputMustBe.setText("Input must be number!");
 					lblInputMustBe.setVisible(true);
 				}
-				
+
 				QuoridorController.setTotalThinkingTime(min, sec);
 				QuoridorController.initializeBoard();
 				QuoridorController.verifyGameIsReady();
@@ -226,7 +226,6 @@ public class SelectName extends JFrame {
 				QuoridorController.refreshData();
 			}
 		});
-		QuoridorController.initializeNewGame();
 		
 		JButton btnRefresh = new JButton("Refresh");
 		btnRefresh.addActionListener(new ActionListener() {
