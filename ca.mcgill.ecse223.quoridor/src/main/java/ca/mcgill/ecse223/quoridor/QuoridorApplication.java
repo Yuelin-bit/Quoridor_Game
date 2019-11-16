@@ -5,7 +5,6 @@ import javax.swing.JOptionPane;
 
 import ca.mcgill.ecse223.quoridor.controller.QuoridorController;
 import ca.mcgill.ecse223.quoridor.model.Quoridor;
-import ca.mcgill.ecse223.quoridor.view.JBoard;
 import ca.mcgill.ecse223.quoridor.view.LoadPosition;
 import ca.mcgill.ecse223.quoridor.view.MainMenu;
 import ca.mcgill.ecse223.quoridor.view.NewJBoard;
