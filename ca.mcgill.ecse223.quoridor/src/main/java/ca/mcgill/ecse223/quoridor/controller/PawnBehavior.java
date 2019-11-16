@@ -930,17 +930,17 @@ public class PawnBehavior
 	  int yDiff = playerCoord[1] - opponentCoord[1];
 	  
 	  //Check if it is applicable to jump
-	  if (xDiff != 1 && xDiff != -1) {
+	  if (xDiff != 1 && xDiff != -1 && yDiff == 0) {
 		  return false;
-	  } else if (yDiff != 1 && yDiff != -1) {
+	  } else if (yDiff != 1 && yDiff != -1 && xDiff == 0) {
 		  return false;
 	  } else {
 		  //Check if it is out of index
-		  if (dir.equals(MoveDirection.North) && playerCoord[1]>=8) {
+		  if (dir.equals(MoveDirection.North) && playerCoord[1]<=2) {
 			  return false;
-		  } else if (dir.equals(MoveDirection.South) && playerCoord[1]<=1) {
+		  } else if (dir.equals(MoveDirection.South) && playerCoord[1]>=8) {
 			  return false;
-		  } else if (dir.equals(MoveDirection.West) && playerCoord[0]<=1) {
+		  } else if (dir.equals(MoveDirection.West) && playerCoord[0]<=2) {
 			  return false;
 		  } else if (dir.equals(MoveDirection.East) && playerCoord[0]>=8) {
 			  return false;
@@ -948,14 +948,39 @@ public class PawnBehavior
 			  //Check if there is wall blocking
 			  int bWallSize = blackWalls.size();
 			  int wWallSize = whiteWalls.size();
+			  WallMove currentWallMove;
+			  Tile currentWallTile;
+			  Direction currentWallDirection;
 			  for(int i = 0; i<bWallSize; i++) {
-				  
+				  currentWallMove = blackWalls.get(i).getMove();
+				  currentWallTile = currentWallMove.getTargetTile();
+				  currentWallDirection = currentWallMove.getWallDirection();
+				  if (dir.equals(MoveDirection.North)&&currentWallDirection.equals(Direction.Horizontal)&&currentWallTile.getRow()==playerCoord[1]) {
+					  return false;
+				  } else if (dir.equals(MoveDirection.South)&&currentWallDirection.equals(Direction.Horizontal)&&currentWallTile.getRow()==playerCoord[1]+1) {
+					  return false;
+				  } else if (dir.equals(MoveDirection.West)&&currentWallDirection.equals(Direction.Vertical)&&currentWallTile.getColumn()==playerCoord[1]) {
+					  return false;
+				  } else if (dir.equals(MoveDirection.East)&&currentWallDirection.equals(Direction.Vertical)&&currentWallTile.getColumn()==playerCoord[1]+1) {
+					  return false;
+				  }
 			  }
 			  for(int i = 0; i<wWallSize; i++) {
-				  
+				  currentWallMove = whiteWalls.get(i).getMove();
+				  currentWallTile = currentWallMove.getTargetTile();
+				  currentWallDirection = currentWallMove.getWallDirection();
+				  if (dir.equals(MoveDirection.North)&&currentWallDirection.equals(Direction.Horizontal)&&currentWallTile.getRow()==playerCoord[1]) {
+					  return false;
+				  } else if (dir.equals(MoveDirection.South)&&currentWallDirection.equals(Direction.Horizontal)&&currentWallTile.getRow()==playerCoord[1]+1) {
+					  return false;
+				  } else if (dir.equals(MoveDirection.West)&&currentWallDirection.equals(Direction.Vertical)&&currentWallTile.getColumn()==playerCoord[1]) {
+					  return false;
+				  } else if (dir.equals(MoveDirection.East)&&currentWallDirection.equals(Direction.Vertical)&&currentWallTile.getColumn()==playerCoord[1]+1) {
+					  return false;
+				  }
 			  }
 		  }
-		  return false;
+		  return true;
 	  }
   }
 
