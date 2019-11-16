@@ -238,10 +238,10 @@ public class NewJBoard extends JFrame {
 		mainLayerPanel.add(users);
 		
 		
-//		mainLayerPanel.add(jWallCandidate);
-//		jWallCandidate.setVisible(true);
-//		jWallCandidate.setBackground(Color.BLACK);
-//		jWallCandidate.setBounds(297, 418, 9, 103);
+		mainLayerPanel.add(jWallCandidate);
+		jWallCandidate.setVisible(true);
+		jWallCandidate.setBackground(Color.BLACK);
+		jWallCandidate.setBounds(297, 418, 9, 103);
         tile.setFocusable(true);
 		tile.addKeyListener(new KeyAdapter() {
 			@Override
@@ -274,12 +274,12 @@ public class NewJBoard extends JFrame {
 					int x = jWallCandidate.getLocation().x;
 					int y = jWallCandidate.getLocation().y;
 					if(jWallCandidate.getHeight()==103) {
-						if(((x)>=120)&&((x)<=540)&&((y-60)>=60)&&((y-60)<=480)) {
+						if(y>=250) {
 							jWallCandidate.setLocation(x, y-56);
 						}
 					}
 					else{
-						if(((x)>=60)&&((x)<=540)&&((y-60)>=60)&&((y-60)<=540)) {
+						if(y<=131) {
 							jWallCandidate.setLocation(x, y-56);
 							}
 						}
@@ -289,7 +289,7 @@ public class NewJBoard extends JFrame {
 					int x = jWallCandidate.getLocation().x;
 					int y = jWallCandidate.getLocation().y;
 					if(jWallCandidate.getHeight()==103) {
-						if(((x)>=120)&&((x)<=540)&&((y-60)>=60)&&((y-60)<=480)) {
+						if(x>=129) {
 							jWallCandidate.setLocation(x-56, y);
 						}
 					}
@@ -304,7 +304,7 @@ public class NewJBoard extends JFrame {
 					int x = jWallCandidate.getLocation().x;
 					int y = jWallCandidate.getLocation().y;
 					if(jWallCandidate.getHeight()==103) {
-						if(((x)>=120)&&((x)<=540)&&((y-60)>=60)&&((y-60)<=480)) {
+						if(y<=530) {
 							jWallCandidate.setLocation(x, y+56);
 						}
 					}
@@ -319,7 +319,7 @@ public class NewJBoard extends JFrame {
 					int x = jWallCandidate.getLocation().x;
 					int y = jWallCandidate.getLocation().y;
 					if(jWallCandidate.getHeight()==103) {
-						if(((x)>=120)&&((x)<=540)&&((y-60)>=60)&&((y-60)<=480)) {
+						if(x<=409) {
 							jWallCandidate.setLocation(x+56, y);
 						}
 					}
