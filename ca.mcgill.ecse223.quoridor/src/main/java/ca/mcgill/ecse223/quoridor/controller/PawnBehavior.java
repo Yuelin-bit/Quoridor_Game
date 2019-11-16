@@ -114,7 +114,7 @@ public class PawnBehavior
     switch (aPawnSMPlayingNorthSouthNorthSouth)
     {
       case Setup:
-        if (getPlayer().getGameAsWhite.equals(getCurrentGame()))
+        if (getPlayer().getGameAsWhite().equals(getCurrentGame()))
         {
           exitPawnSMPlayingNorthSouthNorthSouth();
           setPawnSMPlayingNorthSouthNorthSouth(PawnSMPlayingNorthSouthNorthSouth.SouthEdge);
@@ -148,7 +148,7 @@ public class PawnBehavior
     switch (aPawnSMPlayingNorthSouthNorthSouth)
     {
       case SouthEdge:
-        if (isLegalMove(MoveDirection.North))
+        if ())
         {
           exitPawnSMPlayingNorthSouthNorthSouth();
           setPawnSMPlayingNorthSouthNorthSouth(PawnSMPlayingNorthSouthNorthSouth.SouthBorder);
@@ -415,6 +415,7 @@ public class PawnBehavior
         }
         break;
       default:
+        // Other states do respond to this event
     }
 
     return wasEventProcessed;
@@ -508,7 +509,7 @@ public class PawnBehavior
         }
         break;
       case EastBorder:
-        if (isLegalMove(MoveDirection.West))
+        if (isLegalMove(MoveDirction.West))
         {
           exitPawnSMPlayingEastWestEastWest();
           setPawnSMPlayingEastWestEastWest(PawnSMPlayingEastWestEastWest.MiddleEW);
@@ -772,7 +773,7 @@ public class PawnBehavior
   /**
    * Returns the current row number of the pawn
    */
-  // line 116 "../../../../../StateMachine.ump"
+  // line 117 "../../../../../StateMachine.ump"
   public int getCurrentPawnRow(){
     return 0;
   }
@@ -781,7 +782,7 @@ public class PawnBehavior
   /**
    * Returns the current column number of the pawn
    */
-  // line 118 "../../../../../StateMachine.ump"
+  // line 119 "../../../../../StateMachine.ump"
   public int getCurrentPawnColumn(){
     return 0;
   }
@@ -790,7 +791,7 @@ public class PawnBehavior
   /**
    * Returns if it is legal to step in the given direction
    */
-  // line 120 "../../../../../StateMachine.ump"
+  // line 121 "../../../../../StateMachine.ump"
   public boolean isLegalStep(MoveDirection dir){
     return false;
   }
@@ -799,7 +800,7 @@ public class PawnBehavior
   /**
    * Returns if it is legal to jump in the given direction
    */
-  // line 122 "../../../../../StateMachine.ump"
+  // line 123 "../../../../../StateMachine.ump"
   public boolean isLegalJump(MoveDirection dir){
     return false;
   }
@@ -808,7 +809,7 @@ public class PawnBehavior
   /**
    * Action to be called when an illegal move is attempted
    */
-  // line 125 "../../../../../StateMachine.ump"
+  // line 126 "../../../../../StateMachine.ump"
   public void illegalMove(){
     
   }

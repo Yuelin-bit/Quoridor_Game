@@ -50,6 +50,7 @@ public class CucumberStepDefinitions {
 	private String newContent;
 	private ArrayList<Player> playerList;
 	private String toEdit;
+	private boolean movePawnSuccess;
 
 
 	// ***********************************************
@@ -1630,13 +1631,16 @@ public class CucumberStepDefinitions {
 
 		@When("Player {string} initiates to move {string}")
 		public void player_initiates_to_move(String string, String string2) {
-			QuoridorController.movePlayer(string, string2);
-
+			movePawnSuccess = QuoridorController.movePlayer(string, string2);
+			//Assert.assertEquals(string, string2);
 		}
 
 		@Then("The move {string} shall be {string}")
 		public void the_move_shall_be(String string, String string2) {
-			Assert.assertEquals(string, string2);
+			String status = movePawnSuccess?"success":"illegal";
+			Assert.assertEquals(string2, status);
+			
+
 		}
 
 		@Then("Player's new position shall be {int}:{int}")
