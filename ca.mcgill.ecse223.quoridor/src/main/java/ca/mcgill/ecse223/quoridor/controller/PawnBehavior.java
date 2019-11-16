@@ -2,6 +2,7 @@
 /*This code was generated using the UMPLE 1.29.0.4181.a593105a9 modeling language!*/
 
 package ca.mcgill.ecse223.quoridor.controller;
+import ca.mcgill.ecse223.quoridor.QuoridorApplication;
 import ca.mcgill.ecse223.quoridor.model.*;
 
 // line 5 "../../../../../StateMachine.ump"
@@ -33,7 +34,7 @@ public class PawnBehavior
   //PawnBehavior Associations
   private Game currentGame;
   private Player player;
-
+  
   //------------------------
   // CONSTRUCTOR
   //------------------------
@@ -774,7 +775,15 @@ public class PawnBehavior
    */
   // line 116 "../../../../../StateMachine.ump"
   public int getCurrentPawnRow(){
-    return 0;
+	  currentGame = QuoridorApplication.getQuoridor().getCurrentGame();
+	  Player player = currentGame.getCurrentPosition().getPlayerToMove();
+	  int row;
+	  if (player.hasGameAsBlack()) {
+		  row = currentGame.getCurrentPosition().getBlackPosition().getTile().getRow();
+	  } else {
+		  row = currentGame.getCurrentPosition().getWhitePosition().getTile().getRow();
+	  }
+    return row;
   }
 
 
@@ -783,7 +792,15 @@ public class PawnBehavior
    */
   // line 118 "../../../../../StateMachine.ump"
   public int getCurrentPawnColumn(){
-    return 0;
+	  currentGame = QuoridorApplication.getQuoridor().getCurrentGame();
+	  Player player = currentGame.getCurrentPosition().getPlayerToMove();
+	  int col;
+	  if (player.hasGameAsBlack()) {
+		  col = currentGame.getCurrentPosition().getBlackPosition().getTile().getColumn();
+	  } else {
+		  col = currentGame.getCurrentPosition().getWhitePosition().getTile().getColumn();
+	  }
+    return col;
   }
 
 
@@ -792,6 +809,9 @@ public class PawnBehavior
    */
   // line 120 "../../../../../StateMachine.ump"
   public boolean isLegalStep(MoveDirection dir){
+	  currentGame = QuoridorApplication.getQuoridor().getCurrentGame();
+	  Player player = currentGame.getCurrentPosition().getPlayerToMove();
+	  Player opponent = player.getNextPlayer();
     return false;
   }
 
