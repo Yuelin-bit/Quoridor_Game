@@ -1442,10 +1442,10 @@ public class QuoridorController {
 //			 return false;
 //		 }
 		 
-		 if(!QuoridorApplication.getQuoridor().hasBoard()) {
-			 System.out.println("no board");
-			 return false;
-		 }
+//		 if(!QuoridorApplication.getQuoridor().hasBoard()) {
+//			 System.out.println("no board");
+//			 return false;
+//		 }
 		 
 		 
 		 
