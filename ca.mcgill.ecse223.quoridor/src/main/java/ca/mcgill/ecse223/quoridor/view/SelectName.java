@@ -152,7 +152,7 @@ public class SelectName extends JFrame {
 		lblUserNameDne.setForeground(Color.RED);
 		JLabel lblInputMustBe = new JLabel();
 		lblInputMustBe.setForeground(Color.RED);
-		
+		QuoridorController.initializeNewGame();
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
