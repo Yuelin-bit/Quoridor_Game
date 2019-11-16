@@ -1588,6 +1588,8 @@ public class QuoridorController {
 				}
 			}
 			if(row<=0||column<=0) {
+				QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(player);
+
 				return false;
 			}
 
@@ -1645,6 +1647,8 @@ public class QuoridorController {
 				}
 			}
 			if(row<=0||column<=0) {
+				QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(player);
+
 				return false;
 			}
 			Tile newTile = QuoridorApplication.getQuoridor().getBoard().getTile((row-1)*9+column);
@@ -1654,7 +1658,11 @@ public class QuoridorController {
 			QuoridorApplication.getQuoridor().getCurrentGame().addPosition(currentGamePosition);
 			QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(currentGamePosition);
 		}
-		else return false;
+		else { 
+			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(player);
+
+			return false;
+			}
 		return true;
 
 	}
@@ -1667,6 +1675,7 @@ public class QuoridorController {
 	 * @return boolean
 	 */ 
 	public static boolean movePlayer(String string, String string2) {
+
 
 		Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
 		Player blackPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
@@ -1685,43 +1694,54 @@ public class QuoridorController {
 			tile = whitePosition.getTile();
 			int row = tile.getRow();
 			int column = tile.getColumn();
+			System.out.println("White Before Tile:"+row+","+column+"=======================================================");
 
-				switch(string2) {
-				case "up":
-					row = pawnStepUp(row);
-					break;
-				case "down":
-					row = pawnStepDown(row);
-					break;
-				case "left":
-					column = pawnStepLeft(column);
-					break;
-				case "right":
-					column = pawnStepRight(column);	
-					break;
-				default:
-					row = -1;
-					column = -1;
 
-				}
-			
+			switch(string2) {
+			case "up":
+				row = pawnStepUp(row);
+				break;
+			case "down":
+				row = pawnStepDown(row);
+				break;
+			case "left":
+				column = pawnStepLeft(column);
+				break;
+			case "right":
+				column = pawnStepRight(column);	
+				break;
+			default:
+				row = -1;
+				column = -1;
+
+
+			}
+
 			if(row<=0||column<=0) {
+				QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(whitePlayer);
 				return false;
 			}
 
-			Tile newTile = QuoridorApplication.getQuoridor().getBoard().getTile(9*(row-1)+column);
+			Tile newTile = QuoridorApplication.getQuoridor().getBoard().getTile(9*(row-1)+(column-1));
 			PlayerPosition newWhitePosition = new PlayerPosition(whitePlayer,newTile);		
 			PlayerPosition newBlackPosition = new PlayerPosition(blackPlayer,blackTile);			
 
 			GamePosition currentGamePosition = new GamePosition(id, newWhitePosition, newBlackPosition, blackPlayer,game);
 			QuoridorApplication.getQuoridor().getCurrentGame().addPosition(currentGamePosition);
 			QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(currentGamePosition);
+			int x = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
+			int y = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
+
+			System.out.println("White After Tile:"+x+","+y+"=======================================================");
+
 		}
 		else if (string.equals("black")){
 
 			tile = blackPosition.getTile();
 			int row = tile.getRow();
 			int column = tile.getColumn();
+			System.out.println("Black Before Tile:"+row+","+column+"=======================================================");
+
 			switch(string2) {
 			case "up":
 				row = pawnStepUp(row);
@@ -1740,18 +1760,27 @@ public class QuoridorController {
 				column = -1;
 
 			}
-		
-		if(row<=0||column<=0) {
-			return false;
-		}
+
+			if(row<=0||column<=0) {
+				QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(whitePlayer);
+
+				return false;
+			}
 			Tile newTile = QuoridorApplication.getQuoridor().getBoard().getTile((row-1)*9+column);
 			PlayerPosition newBlackPosition = new PlayerPosition(blackPlayer,newTile);		
 			PlayerPosition newWhitePosition = new PlayerPosition(whitePlayer,whiteTile);			
 			GamePosition currentGamePosition = new GamePosition(id, newBlackPosition, newWhitePosition, whitePlayer,game);
 			QuoridorApplication.getQuoridor().getCurrentGame().addPosition(currentGamePosition);
 			QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(currentGamePosition);
+			int x = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
+			int y = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getColumn();
+
+			System.out.println("Black After Tile:"+x+","+y+"=======================================================");
+
 		}
-		else return false;
+		else {
+			return false;
+		}
 		return true;
 
 	}

@@ -1642,23 +1642,34 @@ public class CucumberStepDefinitions {
 		public void the_move_shall_be(String string, String string2) {
 			String status = movePawnSuccess?"success":"illegal";
 			//Assert.assertEquals(string, string);
-
 			Assert.assertEquals(string2, status);
-			
-
 		}
 
 		@Then("Player's new position shall be {int}:{int}")
 		public void player_s_new_position_shall_be(Integer int1, Integer int2) {
 			Player aPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
+			Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
+			Player blackPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
+
 			Integer row;
 			Integer col;
-			if(aPlayer.hasGameAsBlack()) {
+
+			if(movePawnSuccess&&!aPlayer.equals(blackPlayer)) {
 				row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
 				col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getColumn();
-			}else {
+			}else if(movePawnSuccess&&!aPlayer.equals(whitePlayer)){
 				row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
 				col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
+			}
+			else if(!movePawnSuccess&&aPlayer.equals(blackPlayer)) {
+				row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
+				col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getColumn();
+			}else if(!movePawnSuccess&&aPlayer.equals(whitePlayer)){
+				row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
+				col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
+			}else {
+				col = -1;
+				row = -1;
 			}
 			Assert.assertEquals(int2, col);
 
