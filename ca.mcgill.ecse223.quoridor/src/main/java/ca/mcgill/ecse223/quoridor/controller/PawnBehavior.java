@@ -2,6 +2,9 @@
 /*This code was generated using the UMPLE 1.29.0.4181.a593105a9 modeling language!*/
 
 package ca.mcgill.ecse223.quoridor.controller;
+import java.util.ArrayList;
+import java.util.List;
+
 import ca.mcgill.ecse223.quoridor.QuoridorApplication;
 import ca.mcgill.ecse223.quoridor.model.*;
 
@@ -812,10 +815,93 @@ public class PawnBehavior
    */
   // line 121 "../../../../../StateMachine.ump"
   public boolean isLegalStep(MoveDirection dir){
+	  boolean result = true;
 	  currentGame = QuoridorApplication.getQuoridor().getCurrentGame();
 	  Player player = currentGame.getCurrentPosition().getPlayerToMove();
-	  Player opponent = player.getNextPlayer();
-    return false;
+	  List<Wall> blackWalls = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard();
+	  List<Wall> whiteWalls = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard();
+	  List<Wall> wallList = new ArrayList<Wall>();
+	  wallList.addAll(blackWalls);
+	  wallList.addAll(whiteWalls);
+	  int prow = getCurrentPawnRow();
+	  int pcol = getCurrentPawnColumn();
+	  int orow;
+	  int ocol;
+	  
+	  if (player.hasGameAsBlack()) {
+		  orow = currentGame.getCurrentPosition().getWhitePosition().getTile().getRow();
+		  ocol = currentGame.getCurrentPosition().getWhitePosition().getTile().getColumn();
+	  } else {
+		  orow = currentGame.getCurrentPosition().getBlackPosition().getTile().getRow();
+		  ocol = currentGame.getCurrentPosition().getBlackPosition().getTile().getColumn();
+	  }
+	  
+	  if (dir == MoveDirection.West) {
+		  if ((ocol == pcol-1) && (orow == prow)) {
+			  result = false;
+		  }
+	  }
+	  
+	  if (dir == MoveDirection.East) {
+		  if ((ocol == pcol+1) && (orow == prow)) {
+			  result = false;
+		  }
+	  }
+	  
+	  if (dir == MoveDirection.North) {
+		  if ((ocol == pcol) && (orow == prow-1)) {
+			  result = false;
+		  }
+	  }
+
+	  if (dir == MoveDirection.South) {
+		  if ((ocol == pcol) && (orow == prow+1)) {
+			  result = false;
+		  }
+	  }
+	  
+		for (Wall wall : wallList) {
+			int wallColumn = wall.getMove().getTargetTile().getColumn();
+			int wallRow = wall.getMove().getTargetTile().getRow();
+			Direction wallDirection = wall.getMove().getWallDirection();
+			
+			if (dir == MoveDirection.West) {
+				if ((wallDirection == Direction.Horizontal) && (wallColumn == prow-1) && 
+						((wallRow == prow-1) || (wallRow == prow+1) || (wallRow == prow))) {
+					result = false;
+					break;
+				}
+			}
+			
+			if (dir == MoveDirection.East) {
+				if ((wallDirection == Direction.Horizontal) && (wallColumn == pcol+1) && 
+						((wallRow == prow-1) || (wallRow == prow+1) || (wallRow == prow))) {
+					result = false;
+					break;
+				}
+			}
+			
+			if (dir == MoveDirection.North) {
+				if ((wallDirection == Direction.Vertical) && (wallRow == prow-1) && 
+						((wallColumn== pcol-1) || (wallColumn == pcol+1) || (wallColumn == pcol))) {
+					result = false;
+					break;
+				}
+			}
+			
+			if (dir == MoveDirection.South) {
+				if ((wallDirection == Direction.Vertical) && (wallRow == prow+1) && 
+						((wallColumn== pcol-1) || (wallColumn == pcol+1) || (wallColumn == pcol))) {
+					result = false;
+					break;
+				}
+			}
+				
+				
+			
+		}
+		
+    return result;
   }
 
 
