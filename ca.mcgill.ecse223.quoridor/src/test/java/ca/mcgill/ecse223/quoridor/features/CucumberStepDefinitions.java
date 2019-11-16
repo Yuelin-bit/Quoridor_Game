@@ -1422,7 +1422,6 @@ public class CucumberStepDefinitions {
 		 */
 		@When ("The initialization of the board is initiated")
 		public void the_initialization_of_the_board_is_initiated() {
-			QuoridorApplication.getQuoridor().getBoard().delete();
 			QuoridorController.initializeBoard();
 			whiteStartTime = System.currentTimeMillis();
 		}
@@ -1621,11 +1620,11 @@ public class CucumberStepDefinitions {
 				}
 				
 			}else {
-				orow = quoridor.getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
-				ocol = quoridor.getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getColumn();
-				prow = quoridor.getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
-				pcol = quoridor.getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
-				opponent = quoridor.getCurrentGame().getBlackPlayer();
+				orow = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
+				ocol = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getColumn();
+				prow = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
+				pcol = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
+				opponent = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
 				boolean cmp1 = string.equals("left") && (orow == prow) && (ocol == pcol - 1);
 				boolean cmp2 = string.equals("right") && (orow == prow) && (ocol == pcol + 1);
 				boolean cmp3 = string.equals("up") && (orow == prow - 1) && (ocol == pcol);
@@ -1637,12 +1636,13 @@ public class CucumberStepDefinitions {
 		@When("Player {string} initiates to move {string}")
 		public void player_initiates_to_move(String string, String string2) {
 			movePawnSuccess = QuoridorController.movePlayer(string, string2);
-			//Assert.assertEquals(string, string2);
 		}
 
 		@Then("The move {string} shall be {string}")
 		public void the_move_shall_be(String string, String string2) {
 			String status = movePawnSuccess?"success":"illegal";
+			//Assert.assertEquals(string, string);
+
 			Assert.assertEquals(string2, status);
 			
 
@@ -1660,8 +1660,9 @@ public class CucumberStepDefinitions {
 				row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
 				col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
 			}
-			Assert.assertEquals(int1, row);
 			Assert.assertEquals(int2, col);
+
+			Assert.assertEquals(int1, row);
 			
 		}
 

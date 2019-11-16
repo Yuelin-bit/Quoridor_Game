@@ -1483,6 +1483,41 @@ public class QuoridorController {
 		throw new UnsupportedOperationException();
 	}
 
+	public static int pawnStepUp(int row) {
+		if(row>1) return row-1; 
+		else return -1;	
+	}
+	public static int pawnStepDown(int row) {
+		if(row<9) return row+1; 
+		else return -2;	
+	}
+	public static int pawnStepLeft(int column) {
+		if(column>1) return column-1; 
+		else return -3;	
+	}
+	public static int pawnStepRight(int column) {
+		if(column<9) return column+1; 
+		else return -3;	
+	}
+	public static int pawnJumpUp(int row) {
+		if(row>2) return row-2; 
+		else return -5;	
+	}
+	public static int pawnJumpDown(int row) {
+		if(row<8) return row+2; 
+		else return -6;	
+	}
+	public static int pawnJumpLeft(int column) {
+		if(column>2) return column-2; 
+		else return -7;	
+	}
+	public static int pawnJumpRight(int column) {
+		if(column<8) return column+2; 
+		else return -8;	
+	}
+
+
+
 
 	/**
 	 * This method checks the clock of the current player to count down.
@@ -1492,11 +1527,13 @@ public class QuoridorController {
 	 * @param String string, String string2
 	 * @return boolean
 	 */ 
-	public static boolean movePlayer(String string, String string2) {
+	public static boolean movePawn(String moveMode, String moveDir) {
+
+		Player player = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
 		Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
 		Player blackPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
 
-		PlayerPosition whitePosition = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition();
+		PlayerPosition whitePosition = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition();
 		PlayerPosition blackPosition = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition();
 
 		int id = 1 + QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getId();
@@ -1505,27 +1542,55 @@ public class QuoridorController {
 		Tile blackTile = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile();
 
 		Tile tile;
-
-		if(string.equals("white")) {
+		if(player.equals(whitePlayer)) {
 
 			tile = whitePosition.getTile();
 			int row = tile.getRow();
 			int column = tile.getColumn();
-			if(string2.equals("left")) {
+			if(moveMode.equals("step")) {
 
-				if(row>1) row-=1; 
-				else return false;			
+				switch(moveDir) {
+				case "up":
+					row = pawnStepUp(row);
+					break;
+				case "down":
+					row = pawnStepDown(row);
+					break;
+				case "left":
+					column = pawnStepLeft(column);
+					break;
+				case "right":
+					column = pawnStepRight(column);	
+					break;
+				default:
+					row = -1;
+					column = -1;
 
-			}else if(string2.equals("right")) {
+				}
+			}else if(moveMode.equals("jump")){
+				switch(moveDir) {
+				case "up":
+					row = pawnJumpUp(row);
+					break;
+				case "down":
+					row = pawnJumpDown(row);
+					break;
+				case "left":
+					column = pawnJumpLeft(column);
+					break;
+				case "right":
+					column = pawnJumpRight(column);	
+					break;
+				default:
+					row = -1;
+					column = -1;
 
-				if(row<9) row+=1; 
-				else return false;		
-
-				
-			}else {
+				}
+			}
+			if(row<=0||column<=0) {
 				return false;
 			}
-			
+
 			Tile newTile = QuoridorApplication.getQuoridor().getBoard().getTile((row-1)*9+column);
 			PlayerPosition newWhitePosition = new PlayerPosition(whitePlayer,newTile);		
 			PlayerPosition newBlackPosition = new PlayerPosition(blackPlayer,blackTile);			
@@ -1533,40 +1598,160 @@ public class QuoridorController {
 			GamePosition currentGamePosition = new GamePosition(id, newWhitePosition, newBlackPosition, blackPlayer,game);
 			QuoridorApplication.getQuoridor().getCurrentGame().addPosition(currentGamePosition);
 			QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(currentGamePosition);
-
 		}
-		else if (string.equals("black")){
-
+		else if (player.equals(blackPlayer)){
 
 			tile = blackPosition.getTile();
 			int row = tile.getRow();
 			int column = tile.getColumn();
-			if(string2.equals("left")) {
+			if(moveMode.equals("step")) {
 
-				if(row>1) row-=1; 
-				else return false;			
+				switch(moveDir) {
+				case "up":
+					row = pawnStepUp(row);
+					break;
+				case "down":
+					row = pawnStepDown(row);
+					break;
+				case "left":
+					column = pawnStepLeft(column);
+					break;
+				case "right":
+					column = pawnStepRight(column);	
+					break;
+				default:
+					row = -1;
+					column = -1;
 
-			}else if(string2.equals("right")) {
+				}
+			}else if(moveMode.equals("jump")){
+				switch(moveDir) {
+				case "up":
+					row = pawnJumpUp(row);
+					break;
+				case "down":
+					row = pawnJumpDown(row);
+					break;
+				case "left":
+					column = pawnJumpLeft(column);
+					break;
+				case "right":
+					column = pawnJumpRight(column);	
+					break;
+				default:
+					row = -1;
+					column = -1;
 
-				if(row<9) row+=1; 
-				else return false;		
-				
-			}else {
+				}
+			}
+			if(row<=0||column<=0) {
 				return false;
 			}
-			
 			Tile newTile = QuoridorApplication.getQuoridor().getBoard().getTile((row-1)*9+column);
 			PlayerPosition newBlackPosition = new PlayerPosition(blackPlayer,newTile);		
 			PlayerPosition newWhitePosition = new PlayerPosition(whitePlayer,whiteTile);			
 			GamePosition currentGamePosition = new GamePosition(id, newBlackPosition, newWhitePosition, whitePlayer,game);
 			QuoridorApplication.getQuoridor().getCurrentGame().addPosition(currentGamePosition);
 			QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(currentGamePosition);
-
 		}
-		else {
+		else return false;
+		return true;
+
+	}
+	/**
+	 * This method checks the clock of the current player to count down.
+	 * It returns true if the clock is counting down.
+	 * 
+	 * @author Non
+	 * @param String string, String string2
+	 * @return boolean
+	 */ 
+	public static boolean movePlayer(String string, String string2) {
+
+		Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
+		Player blackPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
+
+		PlayerPosition whitePosition = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition();
+		PlayerPosition blackPosition = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition();
+
+		int id = 1 + QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getId();
+		Game game = QuoridorApplication.getQuoridor().getCurrentGame();
+		Tile whiteTile = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile();
+		Tile blackTile = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile();
+
+		Tile tile;
+		if(string.equals("white")) {
+
+			tile = whitePosition.getTile();
+			int row = tile.getRow();
+			int column = tile.getColumn();
+
+				switch(string2) {
+				case "up":
+					row = pawnStepUp(row);
+					break;
+				case "down":
+					row = pawnStepDown(row);
+					break;
+				case "left":
+					column = pawnStepLeft(column);
+					break;
+				case "right":
+					column = pawnStepRight(column);	
+					break;
+				default:
+					row = -1;
+					column = -1;
+
+				}
+			
+			if(row<=0||column<=0) {
+				return false;
+			}
+
+			Tile newTile = QuoridorApplication.getQuoridor().getBoard().getTile(9*(row-1)+column);
+			PlayerPosition newWhitePosition = new PlayerPosition(whitePlayer,newTile);		
+			PlayerPosition newBlackPosition = new PlayerPosition(blackPlayer,blackTile);			
+
+			GamePosition currentGamePosition = new GamePosition(id, newWhitePosition, newBlackPosition, blackPlayer,game);
+			QuoridorApplication.getQuoridor().getCurrentGame().addPosition(currentGamePosition);
+			QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(currentGamePosition);
+		}
+		else if (string.equals("black")){
+
+			tile = blackPosition.getTile();
+			int row = tile.getRow();
+			int column = tile.getColumn();
+			switch(string2) {
+			case "up":
+				row = pawnStepUp(row);
+				break;
+			case "down":
+				row = pawnStepDown(row);
+				break;
+			case "left":
+				column = pawnStepLeft(column);
+				break;
+			case "right":
+				column = pawnStepRight(column);	
+				break;
+			default:
+				row = -1;
+				column = -1;
+
+			}
+		
+		if(row<=0||column<=0) {
 			return false;
 		}
-
+			Tile newTile = QuoridorApplication.getQuoridor().getBoard().getTile((row-1)*9+column);
+			PlayerPosition newBlackPosition = new PlayerPosition(blackPlayer,newTile);		
+			PlayerPosition newWhitePosition = new PlayerPosition(whitePlayer,whiteTile);			
+			GamePosition currentGamePosition = new GamePosition(id, newBlackPosition, newWhitePosition, whitePlayer,game);
+			QuoridorApplication.getQuoridor().getCurrentGame().addPosition(currentGamePosition);
+			QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(currentGamePosition);
+		}
+		else return false;
 		return true;
 
 	}
