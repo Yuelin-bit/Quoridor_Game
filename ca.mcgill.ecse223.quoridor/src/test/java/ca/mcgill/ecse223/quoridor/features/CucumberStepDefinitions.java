@@ -1620,11 +1620,15 @@ public class CucumberStepDefinitions {
 				}
 				
 			}else {
-				orow = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
-				ocol = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getColumn();
-				prow = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
-				pcol = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
-				opponent = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
+				orow = quoridor.getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
+				ocol = quoridor.getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getColumn();
+				prow = quoridor.getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
+				pcol = quoridor.getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
+				opponent = quoridor.getCurrentGame().getBlackPlayer();
+				boolean cmp1 = string.equals("left") && (orow == prow) && (ocol == pcol - 1);
+				boolean cmp2 = string.equals("right") && (orow == prow) && (ocol == pcol + 1);
+				boolean cmp3 = string.equals("up") && (orow == prow - 1) && (ocol == pcol);
+				boolean cmp4 = string.equals("down") && (orow == prow + 1) && (ocol == pcol);
 			}		
 			
 		}
@@ -1686,20 +1690,6 @@ public class CucumberStepDefinitions {
 		    Tile tile = QuoridorApplication.getQuoridor().getBoard().getTile((int1 - 1) * 9 + int2 - 1);
 		    new WallMove(1, 1, black, tile, QuoridorApplication.getQuoridor().getCurrentGame(), wallDirection, wall);
 		    QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().addBlackWallsOnBoard(wall);
-		}
-
-		@Given("My opponent is not {string} from the player")
-		public void my_opponent_is_not_from_the_player(String string) {
-//			Player me = quoridor.getCurrentGame().getCurrentPosition().getPlayerToMove();
-//			Player opponent = null;
-//			if (me.hasGameAsBlack()) {
-//				opponent = quoridor.getCurrentGame().getWhitePlayer();
-//				int row = quoridor.getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
-//				int col = quoridor.getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
-//				if (string.equals("left") && row == ) {
-//					
-//				}
-//			}
 		}
 		
 		
