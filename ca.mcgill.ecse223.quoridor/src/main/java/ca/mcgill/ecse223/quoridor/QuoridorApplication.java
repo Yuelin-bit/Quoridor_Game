@@ -3,16 +3,18 @@ package ca.mcgill.ecse223.quoridor;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import ca.mcgill.ecse223.quoridor.controller.QuoridorController;
 import ca.mcgill.ecse223.quoridor.model.Quoridor;
 import ca.mcgill.ecse223.quoridor.view.JBoard;
 import ca.mcgill.ecse223.quoridor.view.LoadPosition;
 import ca.mcgill.ecse223.quoridor.view.MainMenu;
+import ca.mcgill.ecse223.quoridor.view.NewJBoard;
 
 public class QuoridorApplication {
 
 	private static Quoridor quoridor;
 	static MainMenu mainMenu;
-	private static JBoard jboard;
+	private static NewJBoard jboard;
 	private static LoadPosition loadposition;
 	private JOptionPane errorHint;
 	private String error = null;
@@ -32,12 +34,12 @@ public class QuoridorApplication {
 		this.errorHint = errorHint;
 	}
 	
-	public static void setJboard(JBoard jboard) {
+	public static void setJboard(NewJBoard jboard) {
 
 		QuoridorApplication.jboard = jboard;
 	}
 
-	public static JBoard getJboard() {
+	public static NewJBoard getJboard() {
 		return jboard;
 	}
 	
@@ -50,6 +52,7 @@ public class QuoridorApplication {
 		mainMenu = new MainMenu();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+            	QuoridorController.initQuoridorAndBoard();
                 mainMenu.setVisible(true);
             }
         });
