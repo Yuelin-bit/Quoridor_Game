@@ -810,7 +810,7 @@ public class PawnBehavior
    */
   // line 125 "../../../../../StateMachine.ump"
   public void illegalMove(){
-    
+	 
   }
 
 }
