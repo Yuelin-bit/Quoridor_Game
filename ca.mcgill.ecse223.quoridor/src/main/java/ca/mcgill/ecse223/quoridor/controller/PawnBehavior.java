@@ -910,7 +910,78 @@ public class PawnBehavior
    */
   // line 123 "../../../../../StateMachine.ump"
   public boolean isLegalJump(MoveDirection dir){
-    return false;
+	  currentGame = QuoridorApplication.getQuoridor().getCurrentGame();
+	  GamePosition currentPosition = currentGame.getCurrentPosition();
+	  Player player = currentGame.getCurrentPosition().getPlayerToMove();
+	  Player opponent = player.getNextPlayer();
+	  List<Wall> blackWalls = currentPosition.getBlackWallsOnBoard();
+	  List<Wall> whiteWalls = currentPosition.getWhiteWallsOnBoard();
+	  PlayerPosition playerPosition, opponentPosition;
+	  if (player.hasGameAsBlack()) {
+		  playerPosition = currentPosition.getBlackPosition();
+		  opponentPosition = currentPosition.getWhitePosition();
+	  } else {
+		  playerPosition = currentPosition.getWhitePosition();
+		  opponentPosition = currentPosition.getBlackPosition();
+	  }
+	  int[] playerCoord = new int[]{playerPosition.getTile().getColumn(), playerPosition.getTile().getRow()};
+	  int[] opponentCoord = new int[]{opponentPosition.getTile().getColumn(), opponentPosition.getTile().getRow()};
+	  int xDiff = playerCoord[0] - opponentCoord[0];
+	  int yDiff = playerCoord[1] - opponentCoord[1];
+	  
+	  //Check if it is applicable to jump
+	  if (xDiff != 1 && xDiff != -1 && yDiff == 0) {
+		  return false;
+	  } else if (yDiff != 1 && yDiff != -1 && xDiff == 0) {
+		  return false;
+	  } else {
+		  //Check if it is out of index
+		  if (dir.equals(MoveDirection.North) && playerCoord[1]<=2) {
+			  return false;
+		  } else if (dir.equals(MoveDirection.South) && playerCoord[1]>=8) {
+			  return false;
+		  } else if (dir.equals(MoveDirection.West) && playerCoord[0]<=2) {
+			  return false;
+		  } else if (dir.equals(MoveDirection.East) && playerCoord[0]>=8) {
+			  return false;
+		  } else {
+			  //Check if there is wall blocking
+			  int bWallSize = blackWalls.size();
+			  int wWallSize = whiteWalls.size();
+			  WallMove currentWallMove;
+			  Tile currentWallTile;
+			  Direction currentWallDirection;
+			  for(int i = 0; i<bWallSize; i++) {
+				  currentWallMove = blackWalls.get(i).getMove();
+				  currentWallTile = currentWallMove.getTargetTile();
+				  currentWallDirection = currentWallMove.getWallDirection();
+				  if (dir.equals(MoveDirection.North)&&currentWallDirection.equals(Direction.Horizontal)&&currentWallTile.getRow()==playerCoord[1]) {
+					  return false;
+				  } else if (dir.equals(MoveDirection.South)&&currentWallDirection.equals(Direction.Horizontal)&&currentWallTile.getRow()==playerCoord[1]+1) {
+					  return false;
+				  } else if (dir.equals(MoveDirection.West)&&currentWallDirection.equals(Direction.Vertical)&&currentWallTile.getColumn()==playerCoord[1]) {
+					  return false;
+				  } else if (dir.equals(MoveDirection.East)&&currentWallDirection.equals(Direction.Vertical)&&currentWallTile.getColumn()==playerCoord[1]+1) {
+					  return false;
+				  }
+			  }
+			  for(int i = 0; i<wWallSize; i++) {
+				  currentWallMove = whiteWalls.get(i).getMove();
+				  currentWallTile = currentWallMove.getTargetTile();
+				  currentWallDirection = currentWallMove.getWallDirection();
+				  if (dir.equals(MoveDirection.North)&&currentWallDirection.equals(Direction.Horizontal)&&currentWallTile.getRow()==playerCoord[1]) {
+					  return false;
+				  } else if (dir.equals(MoveDirection.South)&&currentWallDirection.equals(Direction.Horizontal)&&currentWallTile.getRow()==playerCoord[1]+1) {
+					  return false;
+				  } else if (dir.equals(MoveDirection.West)&&currentWallDirection.equals(Direction.Vertical)&&currentWallTile.getColumn()==playerCoord[1]) {
+					  return false;
+				  } else if (dir.equals(MoveDirection.East)&&currentWallDirection.equals(Direction.Vertical)&&currentWallTile.getColumn()==playerCoord[1]+1) {
+					  return false;
+				  }
+			  }
+		  }
+		  return true;
+	  }
   }
 
 
@@ -919,7 +990,7 @@ public class PawnBehavior
    */
   // line 126 "../../../../../StateMachine.ump"
   public void illegalMove(){
-    
+	 
   }
 
 }
