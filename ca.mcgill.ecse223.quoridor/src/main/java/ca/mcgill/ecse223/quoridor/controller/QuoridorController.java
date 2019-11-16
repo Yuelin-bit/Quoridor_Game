@@ -1520,6 +1520,7 @@ public class QuoridorController {
 
 				if(row<9) row+=1; 
 				else return false;		
+
 				
 			}else {
 				return false;
