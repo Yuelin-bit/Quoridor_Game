@@ -149,7 +149,7 @@ public class PawnBehavior
     switch (aPawnSMPlayingNorthSouthNorthSouth)
     {
       case SouthEdge:
-        if (isLegalMove(MoveDirection.North))
+        if (isLegalStep(MoveDirection.North))
         {
           exitPawnSMPlayingNorthSouthNorthSouth();
           setPawnSMPlayingNorthSouthNorthSouth(PawnSMPlayingNorthSouthNorthSouth.SouthBorder);
@@ -158,7 +158,7 @@ public class PawnBehavior
         }
         break;
       case SouthBorder:
-        if (isLegalMove(MoveDirection.North))
+        if (isLegalStep(MoveDirection.North))
         {
           exitPawnSMPlayingNorthSouthNorthSouth();
           setPawnSMPlayingNorthSouthNorthSouth(PawnSMPlayingNorthSouthNorthSouth.MiddleNS);
@@ -167,14 +167,14 @@ public class PawnBehavior
         }
         break;
       case MiddleNS:
-        if (isLegalMove(MoveDirection.North)&&getCurrentPawnRow()==3)
+        if (isLegalStep(MoveDirection.North)&&getCurrentPawnRow()==3)
         {
           exitPawnSMPlayingNorthSouthNorthSouth();
           setPawnSMPlayingNorthSouthNorthSouth(PawnSMPlayingNorthSouthNorthSouth.NorthBorder);
           wasEventProcessed = true;
           break;
         }
-        if (isLegalMove(MoveDirection.North)&&getCurrentPawnRow()>=4&&getCurrentPawnRow()<=7)
+        if (isLegalStep(MoveDirection.North)&&getCurrentPawnRow()>=4&&getCurrentPawnRow()<=7)
         {
           exitPawnSMPlayingNorthSouthNorthSouth();
           setPawnSMPlayingNorthSouthNorthSouth(PawnSMPlayingNorthSouthNorthSouth.MiddleNS);
@@ -183,7 +183,7 @@ public class PawnBehavior
         }
         break;
       case NorthBorder:
-        if (isLegalMove(MoveDirection.North))
+        if (isLegalStep(MoveDirection.North))
         {
           exitPawnSMPlayingNorthSouthNorthSouth();
           setPawnSMPlayingNorthSouthNorthSouth(PawnSMPlayingNorthSouthNorthSouth.NorthEdge);
@@ -261,7 +261,7 @@ public class PawnBehavior
     switch (aPawnSMPlayingNorthSouthNorthSouth)
     {
       case SouthBorder:
-        if (isLegalMove(MoveDirection.South))
+        if (isLegalStep(MoveDirection.South))
         {
           exitPawnSMPlayingNorthSouthNorthSouth();
           setPawnSMPlayingNorthSouthNorthSouth(PawnSMPlayingNorthSouthNorthSouth.SouthEdge);
@@ -270,14 +270,14 @@ public class PawnBehavior
         }
         break;
       case MiddleNS:
-        if (isLegalMove(MoveDirection.South)&&getCurrentPawnRow()==7)
+        if (isLegalStep(MoveDirection.South)&&getCurrentPawnRow()==7)
         {
           exitPawnSMPlayingNorthSouthNorthSouth();
           setPawnSMPlayingNorthSouthNorthSouth(PawnSMPlayingNorthSouthNorthSouth.SouthBorder);
           wasEventProcessed = true;
           break;
         }
-        if (isLegalMove(MoveDirection.South)&&getCurrentPawnRow()>=3&&getCurrentPawnRow()<=6)
+        if (isLegalStep(MoveDirection.South)&&getCurrentPawnRow()>=3&&getCurrentPawnRow()<=6)
         {
           exitPawnSMPlayingNorthSouthNorthSouth();
           setPawnSMPlayingNorthSouthNorthSouth(PawnSMPlayingNorthSouthNorthSouth.MiddleNS);
@@ -286,7 +286,7 @@ public class PawnBehavior
         }
         break;
       case NorthBorder:
-        if (isLegalMove(MoveDirection.South))
+        if (isLegalStep(MoveDirection.South))
         {
           exitPawnSMPlayingNorthSouthNorthSouth();
           setPawnSMPlayingNorthSouthNorthSouth(PawnSMPlayingNorthSouthNorthSouth.MiddleNS);
@@ -295,7 +295,7 @@ public class PawnBehavior
         }
         break;
       case NorthEdge:
-        if (isLegalMove(MoveDirection.South))
+        if (isLegalStep(MoveDirection.South))
         {
           exitPawnSMPlayingNorthSouthNorthSouth();
           setPawnSMPlayingNorthSouthNorthSouth(PawnSMPlayingNorthSouthNorthSouth.NorthBorder);
@@ -373,7 +373,7 @@ public class PawnBehavior
     switch (aPawnSMPlayingEastWestEastWest)
     {
       case WestEdge:
-        if (isLegalMove(MoveDirection.East))
+        if (isLegalStep(MoveDirection.East))
         {
           exitPawnSMPlayingEastWestEastWest();
           setPawnSMPlayingEastWestEastWest(PawnSMPlayingEastWestEastWest.WestBorder);
@@ -382,7 +382,7 @@ public class PawnBehavior
         }
         break;
       case WestBorder:
-        if (isLegalMove(MoveDirection.East))
+        if (isLegalStep(MoveDirection.East))
         {
           exitPawnSMPlayingEastWestEastWest();
           setPawnSMPlayingEastWestEastWest(PawnSMPlayingEastWestEastWest.MiddleEW);
@@ -391,14 +391,14 @@ public class PawnBehavior
         }
         break;
       case MiddleEW:
-        if (isLegalMove(MoveDirection.East)&&getCurrentPawnColumn()==7)
+        if (isLegalStep(MoveDirection.East)&&getCurrentPawnColumn()==7)
         {
           exitPawnSMPlayingEastWestEastWest();
           setPawnSMPlayingEastWestEastWest(PawnSMPlayingEastWestEastWest.EastBorder);
           wasEventProcessed = true;
           break;
         }
-        if (isLegalMove(MoveDirection.East)&&getCurrentPawnColumn()>=3&&Column()<=6)
+        if (isLegalStep(MoveDirection.East)&&getCurrentPawnColumn()>=3&&Column()<=6)
         {
           exitPawnSMPlayingEastWestEastWest();
           setPawnSMPlayingEastWestEastWest(PawnSMPlayingEastWestEastWest.MiddleEW);
@@ -407,7 +407,7 @@ public class PawnBehavior
         }
         break;
       case EastBorder:
-        if (isLegalMove(MoveDirection.East))
+        if (isLegalStep(MoveDirection.East))
         {
           exitPawnSMPlayingEastWestEastWest();
           setPawnSMPlayingEastWestEastWest(PawnSMPlayingEastWestEastWest.EastEdge);
@@ -484,7 +484,7 @@ public class PawnBehavior
     switch (aPawnSMPlayingEastWestEastWest)
     {
       case WestBorder:
-        if (isLegalMove(MoveDirection.West))
+        if (isLegalStep(MoveDirection.West))
         {
           exitPawnSMPlayingEastWestEastWest();
           setPawnSMPlayingEastWestEastWest(PawnSMPlayingEastWestEastWest.WestEdge);
@@ -493,14 +493,14 @@ public class PawnBehavior
         }
         break;
       case MiddleEW:
-        if (isLegalMove(MoveDirection.West)&&getCurrentPawnColumn()==3)
+        if (isLegalStep(MoveDirection.West)&&getCurrentPawnColumn()==3)
         {
           exitPawnSMPlayingEastWestEastWest();
           setPawnSMPlayingEastWestEastWest(PawnSMPlayingEastWestEastWest.WestBorder);
           wasEventProcessed = true;
           break;
         }
-        if (isLegalMove(MoveDirection.West)&&getCurrentPawnColumn()>=4&&getCurrentPawnColumn()<=7)
+        if (isLegalStep(MoveDirection.West)&&getCurrentPawnColumn()>=4&&getCurrentPawnColumn()<=7)
         {
           exitPawnSMPlayingEastWestEastWest();
           setPawnSMPlayingEastWestEastWest(PawnSMPlayingEastWestEastWest.MiddleEW);
@@ -509,7 +509,7 @@ public class PawnBehavior
         }
         break;
       case EastBorder:
-        if (isLegalMove(MoveDirection.West))
+        if (isLegalStep(MoveDirection.West))
         {
           exitPawnSMPlayingEastWestEastWest();
           setPawnSMPlayingEastWestEastWest(PawnSMPlayingEastWestEastWest.MiddleEW);
@@ -518,7 +518,7 @@ public class PawnBehavior
         }
         break;
       case EastEdge:
-        if (isLegalMove(MoveDirection.West))
+        if (isLegalStep(MoveDirection.West))
         {
           exitPawnSMPlayingEastWestEastWest();
           setPawnSMPlayingEastWestEastWest(PawnSMPlayingEastWestEastWest.EastBorder);
