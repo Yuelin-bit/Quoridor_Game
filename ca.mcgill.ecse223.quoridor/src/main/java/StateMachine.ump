@@ -6,15 +6,14 @@ class PawnBehavior {
 
    0..1 -> 0..1 Game currentGame;
    0..1 -> 0..1 Player player;
-
+	
  
   // TODO implement state machine of pawn
  PawnSM{
    
     Playing{
        finishGame -> Finished;
-      
-      
+           
        NorthSouth{
       
           Setup{
@@ -111,7 +110,6 @@ class PawnBehavior {
 
 
 
- 
     // Returns the current row number of the pawn
     int getCurrentPawnRow() { 
     
