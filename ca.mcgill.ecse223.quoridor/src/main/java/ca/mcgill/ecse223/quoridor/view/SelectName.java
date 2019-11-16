@@ -152,7 +152,7 @@ public class SelectName extends JFrame {
 		lblUserNameDne.setForeground(Color.RED);
 		JLabel lblInputMustBe = new JLabel();
 		lblInputMustBe.setForeground(Color.RED);
-		
+		QuoridorController.initializeNewGame();
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -211,7 +211,7 @@ public class SelectName extends JFrame {
 					lblInputMustBe.setText("Input must be number!");
 					lblInputMustBe.setVisible(true);
 				}
-				
+
 				QuoridorController.setTotalThinkingTime(min, sec);
 				QuoridorController.initializeBoard();
 				QuoridorController.verifyGameIsReady();
@@ -226,7 +226,6 @@ public class SelectName extends JFrame {
 				QuoridorController.refreshData();
 			}
 		});
-		QuoridorController.initializeNewGame();
 		
 		JButton btnRefresh = new JButton("Refresh");
 		btnRefresh.addActionListener(new ActionListener() {
