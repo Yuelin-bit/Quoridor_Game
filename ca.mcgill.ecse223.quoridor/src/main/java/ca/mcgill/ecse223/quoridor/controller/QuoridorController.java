@@ -99,7 +99,6 @@ public class QuoridorController {
 	 * 
 	 * Refresh and set the environment up.
 	 * 
-     * @author Yuelin Liu
 	 * @return 
 	 * @return void
 	 * @exception nothing
