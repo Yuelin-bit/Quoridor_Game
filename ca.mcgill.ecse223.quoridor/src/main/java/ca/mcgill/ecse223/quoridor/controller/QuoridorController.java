@@ -1253,8 +1253,8 @@ public class QuoridorController {
 	 */
 	public static void initializeBoard() {
 //		QuoridorApplication.setJBoard(new JBoard());
-		//Board board = new Board(QuoridorApplication.getQuoridor());
-		Board board = QuoridorApplication.getQuoridor().getBoard();
+		Board board = new Board(QuoridorApplication.getQuoridor());
+		//Board board = QuoridorApplication.getQuoridor().getBoard();
 		for(int i = 1; i<= 9; i++) {
 			for(int j = 1; j<=9; j++) {
 				Tile tile = new Tile(i, j, board);
@@ -1436,22 +1436,7 @@ public class QuoridorController {
 			 return false;
 		 }
 		 
-//		 if(g.hasPositions()) {
-//			 System.out.println("has position");
-//			 return false;
-//		 }
-//		 if(g.hasCurrentPosition()) {
-//			 System.out.println("has current pos");
-//			 return false;
-//		 }
-		 
-		 if(!QuoridorApplication.getQuoridor().hasBoard()) {
-			 System.out.println("no board");
-			 return false;
-		 }
-		 
-		 
-		 
+
 		 g.setGameStatus(GameStatus.ReadyToStart);
 		 return true;
 	 }
@@ -1511,7 +1496,11 @@ public class QuoridorController {
 	  * @return boolean
 	  */ 
 	 public static boolean movePlayer(String string, String string2) {
-		 throw new UnsupportedOperationException();
+		 Player player = string.equals("white")?
+				 QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer()
+				 :QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
+		 return true;
+		 
 	 }
 	 
 	 //helper method
@@ -1622,14 +1611,14 @@ public class QuoridorController {
 		
 		public static void initQuoridorAndBoard() {
 			Quoridor quoridor = QuoridorApplication.getQuoridor();
-			Board board = new Board(quoridor);
+			//Board board = new Board(quoridor);
 			// Creating tiles by rows, i.e., the column index changes with every tile
 			// creation
-			for (int i = 1; i <= 9; i++) { // rows
-				for (int j = 1; j <= 9; j++) { // columns
-					board.addTile(i, j);
-				}
-			}
+//			for (int i = 1; i <= 9; i++) { // rows
+//				for (int j = 1; j <= 9; j++) { // columns
+//					board.addTile(i, j);
+//				}
+//			}
 		}
 	 
 	 
