@@ -2,6 +2,8 @@
 /*This code was generated using the UMPLE 1.29.0.4181.a593105a9 modeling language!*/
 
 package ca.mcgill.ecse223.quoridor.controller;
+import java.util.List;
+
 import ca.mcgill.ecse223.quoridor.QuoridorApplication;
 import ca.mcgill.ecse223.quoridor.model.*;
 
@@ -115,7 +117,7 @@ public class PawnBehavior
     switch (aPawnSMPlayingNorthSouthNorthSouth)
     {
       case Setup:
-        if (getPlayer().getGameAsWhite.equals(getCurrentGame()))
+        if (getPlayer().getGameAsWhite().equals(getCurrentGame()))
         {
           exitPawnSMPlayingNorthSouthNorthSouth();
           setPawnSMPlayingNorthSouthNorthSouth(PawnSMPlayingNorthSouthNorthSouth.SouthEdge);
@@ -821,7 +823,52 @@ public class PawnBehavior
    */
   // line 122 "../../../../../StateMachine.ump"
   public boolean isLegalJump(MoveDirection dir){
-    return false;
+	  currentGame = QuoridorApplication.getQuoridor().getCurrentGame();
+	  GamePosition currentPosition = currentGame.getCurrentPosition();
+	  Player player = currentGame.getCurrentPosition().getPlayerToMove();
+	  Player opponent = player.getNextPlayer();
+	  List<Wall> blackWalls = currentPosition.getBlackWallsOnBoard();
+	  List<Wall> whiteWalls = currentPosition.getWhiteWallsOnBoard();
+	  PlayerPosition playerPosition, opponentPosition;
+	  if (player.hasGameAsBlack()) {
+		  playerPosition = currentPosition.getBlackPosition();
+		  opponentPosition = currentPosition.getWhitePosition();
+	  } else {
+		  playerPosition = currentPosition.getWhitePosition();
+		  opponentPosition = currentPosition.getBlackPosition();
+	  }
+	  int[] playerCoord = new int[]{playerPosition.getTile().getColumn(), playerPosition.getTile().getRow()};
+	  int[] opponentCoord = new int[]{opponentPosition.getTile().getColumn(), opponentPosition.getTile().getRow()};
+	  int xDiff = playerCoord[0] - opponentCoord[0];
+	  int yDiff = playerCoord[1] - opponentCoord[1];
+	  
+	  //Check if it is applicable to jump
+	  if (xDiff != 1 && xDiff != -1) {
+		  return false;
+	  } else if (yDiff != 1 && yDiff != -1) {
+		  return false;
+	  } else {
+		  //Check if it is out of index
+		  if (dir.equals(MoveDirection.North) && playerCoord[1]>=8) {
+			  return false;
+		  } else if (dir.equals(MoveDirection.South) && playerCoord[1]<=1) {
+			  return false;
+		  } else if (dir.equals(MoveDirection.West) && playerCoord[0]<=1) {
+			  return false;
+		  } else if (dir.equals(MoveDirection.East) && playerCoord[0]>=8) {
+			  return false;
+		  } else {
+			  //Check if there is wall blocking
+			  int bWallSize = blackWalls.size();
+			  int wWallSize = whiteWalls.size();
+			  for(int i = 0; i<bWallSize; i++) {
+				  
+			  }
+			  for(int i = 0; i<wWallSize; i++) {
+				  
+			  }
+		  }  
+	  }
   }
 
 
