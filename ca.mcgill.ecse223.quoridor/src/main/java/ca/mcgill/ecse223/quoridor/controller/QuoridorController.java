@@ -27,7 +27,6 @@ import ca.mcgill.ecse223.quoridor.controller.TOWall.Direction2;
 import ca.mcgill.ecse223.quoridor.model.*;
 import ca.mcgill.ecse223.quoridor.model.Game.GameStatus;
 import ca.mcgill.ecse223.quoridor.model.Game.MoveMode;
-import ca.mcgill.ecse223.quoridor.view.JBoard;
 import ca.mcgill.ecse223.quoridor.view.JWall;
 
 
@@ -362,14 +361,14 @@ public class QuoridorController {
 	 */
 	public static void releaseWall() 
 	{	
-		QuoridorApplication.setJboard(new JBoard());
+		//QuoridorApplication.setJboard(new JBoard());
 		
 		WallMove wallmove = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate();
 		
 		if(QuoridorController.verifyOverlapped(wallmove)==true) 
 		{
 			
-		QuoridorApplication.getJboard().notifyIllegal();
+		//QuoridorApplication.getJboard().notifyIllegal();
 		return;
 		}
 		
@@ -460,8 +459,8 @@ public class QuoridorController {
 	{	
 		if(QuoridorController.verifyOnEdge(string)==true) 
 		{
-			QuoridorApplication.setJboard(new JBoard());
-			QuoridorApplication.getJboard().notifyIllegal();
+			//QuoridorApplication.setJboard(new JBoard());
+			//QuoridorApplication.getJboard().notifyIllegal();
 		}
 		
 			if((string.equalsIgnoreCase("left"))&&(QuoridorController.verifyOnEdge(string)==false)) {
@@ -580,7 +579,7 @@ public class QuoridorController {
 			}
 		}
 		catch(Exception e) {
-			QuoridorApplication.getJboard().notifyIllegal2();
+			//QuoridorApplication.getJboard().notifyIllegal2();
 		}
 
 		return false;
@@ -1223,13 +1222,13 @@ public class QuoridorController {
 			blackWatch.resume();
 			player.setNextPlayer(white);
 			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(white);
-			QuoridorApplication.getJboard().whiteTurn();
+			//QuoridorApplication.getJboard().whiteTurn();
 		}else {
 			whiteWatch.resume();
 			blackWatch.suspend();
 			player.setNextPlayer(black);
 			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(black);
-			QuoridorApplication.getJboard().blackTurn();
+			//QuoridorApplication.getJboard().blackTurn();
 		}
 		
 	}
