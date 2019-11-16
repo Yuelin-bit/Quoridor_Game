@@ -156,7 +156,7 @@ public class NewJBoard extends JFrame {
 		label.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/cat_128.png")));
 		
 		setting = new JButton("");
-		setting.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/30—setting.png")));
+		setting.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/30--setting.png")));
 		
 		whiteUser = new JLabel(QuoridorController.getWhiteName());
 		whiteUser.setForeground(Color.WHITE);

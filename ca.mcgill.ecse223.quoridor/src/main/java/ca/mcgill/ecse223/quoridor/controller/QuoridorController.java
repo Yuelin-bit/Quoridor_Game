@@ -23,7 +23,6 @@ import java.sql.Time;
 import javax.swing.JOptionPane;
 
 import ca.mcgill.ecse223.quoridor.QuoridorApplication;
-import ca.mcgill.ecse223.quoridor.controller.TOWall.Direction2;
 import ca.mcgill.ecse223.quoridor.model.*;
 import ca.mcgill.ecse223.quoridor.model.Game.GameStatus;
 import ca.mcgill.ecse223.quoridor.model.Game.MoveMode;
@@ -174,59 +173,6 @@ public class QuoridorController {
 
 		  game.setCurrentPosition(gamePosition);
 		
-	}
-	
-	
-	/**
-	 * 
-	 * Get the white walls on board, and transfer it
-	 * 
-     * @author Yuelin Liu
-	 * @param wallmove WallMove candidate to be check whether it is valid(to avoid overlapping).
-	 * @return boolean whether there is a wall in the same position.
-	 * @exception nothing
-	 *
-	 */
-	public static ArrayList<TOWall> getWhiteWallsOnBoard(){
-		ArrayList<TOWall> w = new ArrayList<TOWall>();
-		for(Wall wall : QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard()) {
-			TOWall temp = null;
-			temp.setRow(wall.getMove().getTargetTile().getRow());
-			temp.setColumn(wall.getMove().getTargetTile().getColumn());
-			if(wall.getMove().getWallDirection()==Direction.Horizontal)
-				temp.setDir(Direction2.Horizontal);
-			else{
-				temp.setDir(Direction2.Vertical);
-			}
-			w.add(temp);
-		}
-		return w;
-	}
-	
-	/**
-	 * 
-	 * Get the white walls on board, and transfer it
-	 * 
-     * @author Yuelin Liu
-	 * @param wallmove WallMove candidate to be check whether it is valid(to avoid overlapping).
-	 * @return boolean whether there is a wall in the same position.
-	 * @exception nothing
-	 *
-	 */
-	public static ArrayList<TOWall> getBlackWallsOnBoard(){
-		ArrayList<TOWall> w = new ArrayList<TOWall>();
-		for(Wall wall : QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard()) {
-			TOWall temp = null;
-			temp.setRow(wall.getMove().getTargetTile().getRow());
-			temp.setColumn(wall.getMove().getTargetTile().getColumn());
-			if(wall.getMove().getWallDirection()==Direction.Horizontal)
-				temp.setDir(Direction2.Horizontal);
-			else{
-				temp.setDir(Direction2.Vertical);
-			}
-			w.add(temp);
-		}
-		return w;
 	}
 	
 	/**
