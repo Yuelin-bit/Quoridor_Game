@@ -114,7 +114,7 @@ public class PawnBehavior
     switch (aPawnSMPlayingNorthSouthNorthSouth)
     {
       case Setup:
-        if (getPlayer().getGameAsWhite().equals(getCurrentGame()))
+        if (getPlayer().getGameAsWhite.equals(getCurrentGame()))
         {
           exitPawnSMPlayingNorthSouthNorthSouth();
           setPawnSMPlayingNorthSouthNorthSouth(PawnSMPlayingNorthSouthNorthSouth.SouthEdge);
