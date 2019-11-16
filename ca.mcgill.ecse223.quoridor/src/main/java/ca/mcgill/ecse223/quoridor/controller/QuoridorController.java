@@ -23,7 +23,6 @@ import java.sql.Time;
 import javax.swing.JOptionPane;
 
 import ca.mcgill.ecse223.quoridor.QuoridorApplication;
-import ca.mcgill.ecse223.quoridor.controller.TOWall.Direction2;
 import ca.mcgill.ecse223.quoridor.model.*;
 import ca.mcgill.ecse223.quoridor.model.Game.GameStatus;
 import ca.mcgill.ecse223.quoridor.model.Game.MoveMode;
@@ -175,8 +174,6 @@ public class QuoridorController {
 		  game.setCurrentPosition(gamePosition);
 		
 	}
-	
-	
 	
 	/**
 	 * Feature:DropWall
