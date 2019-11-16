@@ -1,4 +1,6 @@
-namespace ca.mcgill.ecse223.quoridor.model;  
+namespace ca.mcgill.ecse223.quoridor.controller;
+
+use QuoridorGame.ump;
 
 class PawnBehavior {
 

@@ -1,11 +1,17 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.29.0.4181.a593105a9 modeling language!*/
 
+package ca.mcgill.ecse223.quoridor.controller;
 
-
-// line 1 "StateMachine.ump"
+// line 5 "../../../../../StateMachine.ump"
 public class PawnBehavior
 {
+
+  //------------------------
+  // ENUMERATIONS
+  //------------------------
+
+  public enum MoveDirection { East, South, West, North }
 
   //------------------------
   // MEMBER VARIABLES
@@ -98,8 +104,19 @@ public class PawnBehavior
   {
     boolean wasEventProcessed = false;
     
+    PawnSM aPawnSM = pawnSM;
     PawnSMPlayingNorthSouthNorthSouth aPawnSMPlayingNorthSouthNorthSouth = pawnSMPlayingNorthSouthNorthSouth;
     PawnSMPlayingEastWestEastWest aPawnSMPlayingEastWestEastWest = pawnSMPlayingEastWestEastWest;
+    switch (aPawnSM)
+    {
+      case Finished:
+        setPawnSM(PawnSM.Playing);
+        wasEventProcessed = true;
+        break;
+      default:
+        // Other states do respond to this event
+    }
+
     switch (aPawnSMPlayingNorthSouthNorthSouth)
     {
       case Setup:
@@ -145,14 +162,14 @@ public class PawnBehavior
     {
       case AtNorthEdge:
         exitPawnSMPlayingNorthSouthNorthSouth();
-        // line 18 "StateMachine.ump"
+        // line 22 "../../../../../StateMachine.ump"
         illegalMove();
         setPawnSMPlayingNorthSouthNorthSouth(PawnSMPlayingNorthSouthNorthSouth.AtNorthEdge);
         wasEventProcessed = true;
         break;
       case AtNorthBorder:
         exitPawnSMPlayingNorthSouthNorthSouth();
-        // line 24 "StateMachine.ump"
+        // line 28 "../../../../../StateMachine.ump"
         illegalMove();
         setPawnSMPlayingNorthSouthNorthSouth(PawnSMPlayingNorthSouthNorthSouth.AtNorthEdge);
         wasEventProcessed = true;
@@ -250,7 +267,7 @@ public class PawnBehavior
         break;
       case AtSouthEdge:
         exitPawnSMPlayingNorthSouthNorthSouth();
-        // line 29 "StateMachine.ump"
+        // line 33 "../../../../../StateMachine.ump"
         illegalMove();
         setPawnSMPlayingNorthSouthNorthSouth(PawnSMPlayingNorthSouthNorthSouth.AtSouthEdge);
         wasEventProcessed = true;
@@ -515,7 +532,7 @@ public class PawnBehavior
   /**
    * Returns the current row number of the pawn
    */
-  // line 94 "StateMachine.ump"
+  // line 98 "../../../../../StateMachine.ump"
   public int getCurrentPawnRow(){
     return 0;
   }
@@ -524,7 +541,7 @@ public class PawnBehavior
   /**
    * Returns the current column number of the pawn
    */
-  // line 96 "StateMachine.ump"
+  // line 100 "../../../../../StateMachine.ump"
   public int getCurrentPawnColumn(){
     return 0;
   }
@@ -533,7 +550,7 @@ public class PawnBehavior
   /**
    * Returns if it is legal to step in the given direction
    */
-  // line 98 "StateMachine.ump"
+  // line 102 "../../../../../StateMachine.ump"
   public boolean isLegalStep(MoveDirection dir){
     return false;
   }
@@ -542,7 +559,7 @@ public class PawnBehavior
   /**
    * Returns if it is legal to jump in the given direction
    */
-  // line 100 "StateMachine.ump"
+  // line 104 "../../../../../StateMachine.ump"
   public boolean isLegalJump(MoveDirection dir){
     return false;
   }
@@ -551,20 +568,9 @@ public class PawnBehavior
   /**
    * Action to be called when an illegal move is attempted
    */
-  // line 103 "StateMachine.ump"
+  // line 107 "../../../../../StateMachine.ump"
   public void illegalMove(){
     
   }
-  
-  //------------------------
-  // DEVELOPER CODE - PROVIDED AS-IS
-  //------------------------
-  
-  // line 107 "StateMachine.ump"
-  enum MoveDirection 
-  {
-    East, South, West, North;
-  }
 
-  
 }
