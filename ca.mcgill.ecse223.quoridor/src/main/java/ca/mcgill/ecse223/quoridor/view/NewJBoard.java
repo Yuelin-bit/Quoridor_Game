@@ -238,10 +238,10 @@ public class NewJBoard extends JFrame {
 		mainLayerPanel.add(users);
 		
 		
-		mainLayerPanel.add(jWallCandidate);
-		jWallCandidate.setVisible(true);
-		jWallCandidate.setBackground(Color.BLACK);
-		jWallCandidate.setBounds(297, 418, 9, 103);
+//		mainLayerPanel.add(jWallCandidate);
+//		jWallCandidate.setVisible(true);
+//		jWallCandidate.setBackground(Color.BLACK);
+//		jWallCandidate.setBounds(297, 418, 9, 103);
         tile.setFocusable(true);
 		tile.addKeyListener(new KeyAdapter() {
 			@Override
@@ -269,6 +269,7 @@ public class NewJBoard extends JFrame {
 					}
 					QuoridorController.grabWall();		
 				}
+				// up
 				if ((e.getKeyChar()=='w')||(e.getKeyCode() == KeyEvent.VK_UP)) {
 					QuoridorController.MoveWall("up");
 					int x = jWallCandidate.getLocation().x;
@@ -279,7 +280,7 @@ public class NewJBoard extends JFrame {
 						}
 					}
 					else{
-						if(y<=131) {
+						if(y>=288) {
 							jWallCandidate.setLocation(x, y-56);
 							}
 						}
@@ -294,7 +295,7 @@ public class NewJBoard extends JFrame {
 						}
 					}
 					else{
-						if(((x)>=60)&&((x)<=540)&&((y-60)>=60)&&((y-60)<=540)) {
+						if(x>=82) {
 							jWallCandidate.setLocation(x-56, y);
 							}
 						}
@@ -309,7 +310,7 @@ public class NewJBoard extends JFrame {
 						}
 					}
 					else{
-						if(((x)>=60)&&((x)<=540)&&((y-60)>=60)&&((y-60)<=540)) {
+						if(y<=577) {
 							jWallCandidate.setLocation(x, y+56);
 							}
 						}
@@ -324,7 +325,7 @@ public class NewJBoard extends JFrame {
 						}
 					}
 					else{
-						if(((x)>=60)&&((x)<=540)&&((y-60)>=60)&&((y-60)<=540)) {
+						if(x<=362) {
 							jWallCandidate.setLocation(x+56, y);
 							}
 						}
@@ -336,15 +337,15 @@ public class NewJBoard extends JFrame {
 						int y = jWallCandidate.getLocation().y;
 						int old_h = jWallCandidate.getBounds().height;
 						int old_w = jWallCandidate.getBounds().width;
-						if (old_h==10) {
+						if (old_h==9) {
 							// horizontal
-							jWallCandidate.setBounds(x, y, 10, 110);
-							jWallCandidate.setLocation(jWallCandidate.getLocation().x+50 , jWallCandidate.getLocation().y-50);
+							jWallCandidate.setBounds(x, y, 9, 103);
+							jWallCandidate.setLocation(jWallCandidate.getLocation().x+47 , jWallCandidate.getLocation().y-47);
 						}
 						else {
 							// vertical
-							jWallCandidate.setBounds(x, y, 110, 10);
-							jWallCandidate.setLocation(jWallCandidate.getLocation().x-50 , jWallCandidate.getLocation().y+50);        
+							jWallCandidate.setBounds(x, y, 103, 9);
+							jWallCandidate.setLocation(jWallCandidate.getLocation().x-47 , jWallCandidate.getLocation().y+47);        
 						}
 					
 				}
