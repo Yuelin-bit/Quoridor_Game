@@ -1624,6 +1624,10 @@ public class CucumberStepDefinitions {
 				prow = quoridor.getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
 				pcol = quoridor.getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
 				opponent = quoridor.getCurrentGame().getBlackPlayer();
+				boolean cmp1 = string.equals("left") && (orow == prow) && (ocol == pcol - 1);
+				boolean cmp2 = string.equals("right") && (orow == prow) && (ocol == pcol + 1);
+				boolean cmp3 = string.equals("up") && (orow == prow - 1) && (ocol == pcol);
+				boolean cmp4 = string.equals("down") && (orow == prow + 1) && (ocol == pcol);
 			}		
 			
 		}
@@ -1682,20 +1686,6 @@ public class CucumberStepDefinitions {
 		    Tile tile = quoridor.getBoard().getTile((int1 - 1) * 9 + int2 - 1);
 		    new WallMove(1, 1, black, tile, quoridor.getCurrentGame(), wallDirection, wall);
 		    quoridor.getCurrentGame().getCurrentPosition().addBlackWallsOnBoard(wall);
-		}
-
-		@Given("My opponent is not {string} from the player")
-		public void my_opponent_is_not_from_the_player(String string) {
-//			Player me = quoridor.getCurrentGame().getCurrentPosition().getPlayerToMove();
-//			Player opponent = null;
-//			if (me.hasGameAsBlack()) {
-//				opponent = quoridor.getCurrentGame().getWhitePlayer();
-//				int row = quoridor.getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
-//				int col = quoridor.getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
-//				if (string.equals("left") && row == ) {
-//					
-//				}
-//			}
 		}
 		
 		

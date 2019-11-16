@@ -93,7 +93,7 @@ Feature: Jump Pawn
       | white  |    3 |    2 |    3 |    1 | vertical   | downleft  | success |    4 |    1 | black   |
       | black  |    6 |    8 |    6 |    9 | vertical   | upright   | success |    5 |    9 | white   |
       | black  |    6 |    8 |    6 |    9 | vertical   | downright | success |    7 |    9 | white   |
-      | white  |    2 |    3 |    1 |    3 | horizontal | upleft    | success |    1 |    2 | white   |
-      | white  |    2 |    3 |    1 |    3 | horizontal | upright   | success |    1 |    4 | white   |
+      | white  |    2 |    3 |    1 |    3 | horizontal | upleft    | success |    1 |    2 | black   |
+      | white  |    2 |    3 |    1 |    3 | horizontal | upright   | success |    1 |    4 | black   |
       | black  |    8 |    6 |    9 |    6 | horizontal | downleft  | success |    9 |    5 | white   |
       | black  |    8 |    6 |    9 |    6 | horizontal | downright | success |    9 |    7 | white   |
