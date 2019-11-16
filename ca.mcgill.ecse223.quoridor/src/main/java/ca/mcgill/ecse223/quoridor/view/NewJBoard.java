@@ -69,7 +69,7 @@ public class NewJBoard extends JFrame {
 	private JWall[] JWhiteWallInStock = {jWallCandidate_1,jWallCandidate_2,jWallCandidate_3,jWallCandidate_4,jWallCandidate_5,jWallCandidate_6,jWallCandidate_7,jWallCandidate_8,jWallCandidate_9,jWallCandidate_10};
 	private JWall[] JBlackWallInStock = {jWallCandidate_11,jWallCandidate_12,jWallCandidate_13,jWallCandidate_14,jWallCandidate_15,jWallCandidate_16,jWallCandidate_17,jWallCandidate_18,jWallCandidate_19,jWallCandidate_20};
 	
-	private JWall jWallCandidate = null;
+	private JWall jWallCandidate = new JWall();
 	
 	private static final int MAX_WALL = 10;
 	private int BLACK_WALL_INDEX = 0;//how many times you grabed before
@@ -85,6 +85,7 @@ public class NewJBoard extends JFrame {
 	 * Create the frame.
 	 */
 	public NewJBoard() {
+		
 		
 		isWhiteTurn = true;
 		isBlackTurn = false;
@@ -115,21 +116,133 @@ public class NewJBoard extends JFrame {
 		
 		
 		
-		Pawn whitePawn = new Pawn(PawnColor.WHITE);
-		whitePawn.setBounds(310, 540, 50, 50);
-		whitePawn.setVisible(true);
-		mainLayerPanel.add(whitePawn);
-
-
-		Pawn blackPawn = new Pawn(PawnColor.BLACK);
-		blackPawn.setBounds(310, 60, 50, 50);
-		blackPawn.setVisible(true);
-		mainLayerPanel.add(blackPawn);
+//		Pawn whitePawn = new Pawn(PawnColor.WHITE);
+//		whitePawn.setBounds(310, 540, 50, 50);
+//		whitePawn.setVisible(true);
+//		mainLayerPanel.add(whitePawn);
+//
+//
+//		Pawn blackPawn = new Pawn(PawnColor.BLACK);
+//		blackPawn.setBounds(310, 60, 50, 50);
+//		blackPawn.setVisible(true);
+//		mainLayerPanel.add(blackPawn);
 		
 		
 		
 		
 		tile = new JTile();
+		tile.setBackground(Color.WHITE);
+		tile.setBounds(0, 0, 560, 800);
+		tile.setOpaque(false);
+		mainLayerPanel.add(tile);
+		
+		
+		
+//		txtrSeconds = new JLabel();
+//		txtrSeconds.setBounds(243, 115, 64, 20);
+//		txtrSeconds.setBackground(new Color(245, 245, 220));
+//		txtrSeconds.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+//		txtrSeconds.setText("Seconds");
+//		
+//		
+//		
+//		JLabel lblNewLabel = new JLabel();
+//		lblNewLabel.setBounds(19, 20, 127, 120);
+//		lblNewLabel.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/monkey_128.png")));
+//		
+//		
+//		
+//		JLabel label = new JLabel();
+//		label.setBounds(472, 44, 127, 120);
+//		label.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/cat_128.png")));
+//		
+//		
+//		
+//		setting = new JButton("");
+//		setting.setBounds(296, 135, 30, 28);
+//		setting.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/30—setting.png")));
+//		
+//		
+//		
+//		whiteUser = new JLabel(QuoridorController.getWhiteName());
+//		whiteUser.setBounds(29, 135, 72, 15);
+//		whiteUser.setForeground(Color.WHITE);
+//		
+//		
+//		
+//		blackUser = new JLabel(QuoridorController.getBlackName());
+//		blackUser.setBounds(512, 176, 36, 15);
+//		blackUser.setForeground(Color.WHITE);
+//		
+//		
+//		
+//		bigTime = new JLabel(QuoridorController.getWhiteRemainingTime());
+//		bigTime.setBounds(235, 49, 91, 20);
+//		bigTime.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+//		
+//		
+//		
+//		whiteStock = new JTextArea();
+//		whiteStock.setBounds(143, 118, 69, 15);
+//		whiteStock.setText(QuoridorController.getWhiteStocks());
+//		
+//		
+//		
+//		blackStock = new JTextArea();
+//		blackStock.setBounds(400, 164, 44, 15);
+//		blackStock.setText(QuoridorController.getBlackStocks());
+//		
+//		
+//		
+//		whiteTime = new JLabel(QuoridorController.getWhiteRemainingTime());
+//		whiteTime.setBounds(157, 38, 72, 15);
+//		whiteTime.setForeground(Color.WHITE);
+//		
+//		
+//		
+//		blackTime = new JLabel(QuoridorController.getBlackRemainingTime());
+//		blackTime.setBounds(400, 38, 39, 15);
+//		blackTime.setForeground(Color.WHITE);
+		
+		
+		
+//		whitePawn = new JLabel("");
+//		whitePawn.setBounds(167, 66, 32, 32);
+//		whitePawn.setForeground(Color.YELLOW);
+//		whitePawn.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/32—wqueen.png")));
+//		whitePawn.setVisible(true);
+//		blackPawn = new JLabel("");
+//		blackPawn.setBounds(400, 115, 32, 32);
+//		blackPawn.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/32—wqueen.png")));
+//		blackPawn.setVisible(false);
+//		tile.setLayout(null);
+//		tile.add(lblNewLabel);
+//		tile.add(whiteUser);
+//		tile.add(bigTime);
+//		tile.add(whiteStock);
+//		tile.add(setting);
+//		tile.add(whitePawn);
+//		tile.add(txtrSeconds);
+//		tile.add(whiteTime);
+//		tile.add(blackStock);
+//		tile.add(blackTime);
+//		tile.add(blackPawn);
+//		tile.add(label);
+//		tile.add(blackUser);
+		
+		
+		
+		users = new JUser();
+		users.setBounds(0, 0, 560, 800);
+		users.setOpaque(false);
+		mainLayerPanel.add(users);
+		
+		
+//		mainLayerPanel.add(jWallCandidate);
+//		jWallCandidate.setVisible(true);
+//		jWallCandidate.setBackground(Color.BLACK);
+//		jWallCandidate.setBounds(297, 418, 9, 103);
+        tile.setFocusable(true);
 		tile.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -138,8 +251,8 @@ public class NewJBoard extends JFrame {
 						if(WHITE_WALL_INDEX<MAX_WALL) {
 							jWallCandidate = JWhiteWallInStock[WHITE_WALL_INDEX];
 							mainLayerPanel.add(jWallCandidate);//????
-							jWallCandidate.setBackground(Color.GRAY);
-							jWallCandidate.setBounds(360, 300, 9, 103);
+							jWallCandidate.setBackground(Color.BLACK);
+							jWallCandidate.setBounds(297, 418, 9, 103);
 							jWallCandidate.setVisible(true);	
 							WHITE_WALL_INDEX++;
 						}
@@ -147,15 +260,14 @@ public class NewJBoard extends JFrame {
 					if((isWhiteTurn==false)&&(isBlackTurn==true)) {
 						if(BLACK_WALL_INDEX<MAX_WALL) {
 							jWallCandidate = JBlackWallInStock[WHITE_WALL_INDEX];
-							mainLayerPanel.add(jWallCandidate);//????
+							//mainLayerPanel.add(jWallCandidate);//????
 							jWallCandidate.setBackground(Color.GRAY);
 							jWallCandidate.setBounds(360, 300, 9, 103);
 							jWallCandidate.setVisible(true);
 							WHITE_WALL_INDEX++;
 						}
 					}
-					QuoridorController.grabWall();
-					
+					QuoridorController.grabWall();		
 				}
 				if ((e.getKeyChar()=='w')||(e.getKeyCode() == KeyEvent.VK_UP)) {
 					QuoridorController.MoveWall("up");
@@ -163,60 +275,63 @@ public class NewJBoard extends JFrame {
 					int y = jWallCandidate.getLocation().y;
 					if(jWallCandidate.getHeight()==103) {
 						if(((x)>=120)&&((x)<=540)&&((y-60)>=60)&&((y-60)<=480)) {
-							jWallCandidate.setLocation(x, y-60);
+							jWallCandidate.setLocation(x, y-56);
 						}
 					}
 					else{
 						if(((x)>=60)&&((x)<=540)&&((y-60)>=60)&&((y-60)<=540)) {
-							jWallCandidate.setLocation(x, y-60);
+							jWallCandidate.setLocation(x, y-56);
 							}
 						}
 				}
 				if ((e.getKeyChar()=='a')||(e.getKeyCode() == KeyEvent.VK_LEFT)) {
-					if(WALL_INDEX<MAX_WALL&&grab) {
-						QuoridorController.MoveWall("left");
-						int x = jWallCandidate.getLocation().x;
-						int y = jWallCandidate.getLocation().y;
-						
-						if(jWallCandidate.getHeight()==110) {
-						if(((x-60)>=120)&&((x-60)<=540)&&((y)>=60)&&((y)<=480))
-							jWallCandidate.setLocation(x-60, y);}
-						
-						if(jWallCandidate.getHeight()==10) {
-							if(((x-60)>=60)&&((x-60)<=540)&&((y)>=60)&&((y)<=540))
-								jWallCandidate.setLocation(x-60, y);}
+					QuoridorController.MoveWall("left");
+					int x = jWallCandidate.getLocation().x;
+					int y = jWallCandidate.getLocation().y;
+					if(jWallCandidate.getHeight()==103) {
+						if(((x)>=120)&&((x)<=540)&&((y-60)>=60)&&((y-60)<=480)) {
+							jWallCandidate.setLocation(x-56, y);
+						}
 					}
+					else{
+						if(((x)>=60)&&((x)<=540)&&((y-60)>=60)&&((y-60)<=540)) {
+							jWallCandidate.setLocation(x-56, y);
+							}
+						}
 				}
 				if ((e.getKeyChar()=='s')||(e.getKeyCode() == KeyEvent.VK_DOWN)) {
-					if(WALL_INDEX<MAX_WALL&&grab) {
-						QuoridorController.MoveWall("down");
-						int x = jWallCandidate.getLocation().x;
-						int y = jWallCandidate.getLocation().y;
-						if(jWallCandidate.getHeight()==110) {
-						if(((x)>=120)&&((x)<=540)&&((y+60)>=60)&&((y+60)<=480))
-							jWallCandidate.setLocation(x, y+60);}
-						if(jWallCandidate.getHeight()==10) {
-							if(((x)>=60)&&((x)<=540)&&((y+60)>=60)&&((y+60)<=540))
-								jWallCandidate.setLocation(x, y+60);}
-						
+					QuoridorController.MoveWall("down");
+					int x = jWallCandidate.getLocation().x;
+					int y = jWallCandidate.getLocation().y;
+					if(jWallCandidate.getHeight()==103) {
+						if(((x)>=120)&&((x)<=540)&&((y-60)>=60)&&((y-60)<=480)) {
+							jWallCandidate.setLocation(x, y+56);
+						}
 					}
+					else{
+						if(((x)>=60)&&((x)<=540)&&((y-60)>=60)&&((y-60)<=540)) {
+							jWallCandidate.setLocation(x, y+56);
+							}
+						}
 				}
 				if ((e.getKeyChar()=='d')||(e.getKeyCode() == KeyEvent.VK_RIGHT)) {
-					if(WALL_INDEX<MAX_WALL&&grab) {
-						QuoridorController.MoveWall("right");
-						int x = jWallCandidate.getLocation().x;
-						int y = jWallCandidate.getLocation().y;
-						if(jWallCandidate.getHeight()==110) {
-						if(((x+60)>=120)&&((x+60)<=540)&&((y)>=60)&&((y)<=480))
-							jWallCandidate.setLocation(x+60, y);}
-						if(jWallCandidate.getHeight()==10) {
-							if(((x+60)>=60)&&((x+60)<=540)&&((y)>=60)&&((y)<=540))
-								jWallCandidate.setLocation(x+60, y);}
+					QuoridorController.MoveWall("right");
+					int x = jWallCandidate.getLocation().x;
+					int y = jWallCandidate.getLocation().y;
+					if(jWallCandidate.getHeight()==103) {
+						if(((x)>=120)&&((x)<=540)&&((y-60)>=60)&&((y-60)<=480)) {
+							jWallCandidate.setLocation(x+56, y);
+						}
 					}
+					else{
+						if(((x)>=60)&&((x)<=540)&&((y-60)>=60)&&((y-60)<=540)) {
+							jWallCandidate.setLocation(x+56, y);
+							}
+						}
 				}
-				if (e.getKeyChar()=='r'&&grab) {
+				if (e.getKeyChar()=='r') {
 					QuoridorController.flipWall();
-					if(WALL_INDEX<MAX_WALL) {
+					
 						int x = jWallCandidate.getLocation().x;
 						int y = jWallCandidate.getLocation().y;
 						int old_h = jWallCandidate.getBounds().height;
@@ -231,7 +346,7 @@ public class NewJBoard extends JFrame {
 							jWallCandidate.setBounds(x, y, 110, 10);
 							jWallCandidate.setLocation(jWallCandidate.getLocation().x-50 , jWallCandidate.getLocation().y+50);        
 						}
-					}
+					
 				}
 				if (e.getKeyChar()=='t') if (e.getKeyChar()=='t') {
 					boolean overlapped = true;
@@ -242,151 +357,42 @@ public class NewJBoard extends JFrame {
 					}
 					
 					QuoridorController.releaseWall();
-					if((WALL_INDEX<MAX_WALL&&grab)&&(overlapped==false)) {
-
-							
-							WALL_INDEX++;
+//					if((WALL_INDEX<MAX_WALL&&grab)&&(overlapped==false)) {
+//
+//							
+//							WALL_INDEX++;
+////							if(WALL_INDEX<MAX_WALL) {
+////								jWallCandidate = WallList.get(WALL_INDEX);
+////							}
+//							grab = false;
+//							mainLayerPanel.add(blackPawnMove);
+//							mainLayerPanel.add(whitePawnMove);
+//							
+//							
 //							if(WALL_INDEX<MAX_WALL) {
-//								jWallCandidate = WallList.get(WALL_INDEX);
-//							}
-							grab = false;
-							mainLayerPanel.add(blackPawnMove);
-							mainLayerPanel.add(whitePawnMove);
-							
-							
-							if(WALL_INDEX<MAX_WALL) {
-						         if (BLACK_WALL_INDEX+1<WHITE_WALL_INDEX) {
-						 
-						           BLACK_WALL_INDEX++;
-						           jWallCandidate=BlackWallList.get(BLACK_WALL_INDEX);
-						          }else if (BLACK_WALL_INDEX+1>WHITE_WALL_INDEX){
-						           WHITE_WALL_INDEX++;
-						           jWallCandidate=WhiteWallList.get(WHITE_WALL_INDEX);
-						          }else {
-						           BLACK_WALL_INDEX++;
-						           jWallCandidate=BlackWallList.get(BLACK_WALL_INDEX);
-						          }
-						         
-						        }
-							
-							
-						}
-					
-					}
-
+//						         if (BLACK_WALL_INDEX+1<WHITE_WALL_INDEX) {
+//						 
+//						           BLACK_WALL_INDEX++;
+//						           jWallCandidate=BlackWallList.get(BLACK_WALL_INDEX);
+//						          }else if (BLACK_WALL_INDEX+1>WHITE_WALL_INDEX){
+//						           WHITE_WALL_INDEX++;
+//						           jWallCandidate=WhiteWallList.get(WHITE_WALL_INDEX);
+//						          }else {
+//						           BLACK_WALL_INDEX++;
+//						           jWallCandidate=BlackWallList.get(BLACK_WALL_INDEX);
+//						          }
+//						         
+//						        }
+//							
+//							
+//						}
+//					
 				}
+
+			}
 
 			
 		});
-		tile.setBackground(Color.WHITE);
-		tile.setBounds(0, 0, 560, 800);
-		tile.setOpaque(false);
-		mainLayerPanel.add(tile);
-		
-		
-		
-		txtrSeconds = new JLabel();
-		txtrSeconds.setBounds(243, 115, 64, 20);
-		txtrSeconds.setBackground(new Color(245, 245, 220));
-		txtrSeconds.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-		txtrSeconds.setText("Seconds");
-		
-		
-		
-		JLabel lblNewLabel = new JLabel();
-		lblNewLabel.setBounds(19, 20, 127, 120);
-		lblNewLabel.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/monkey_128.png")));
-		
-		
-		
-		JLabel label = new JLabel();
-		label.setBounds(472, 44, 127, 120);
-		label.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/cat_128.png")));
-		
-		
-		
-		setting = new JButton("");
-		setting.setBounds(296, 135, 30, 28);
-		setting.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/30—setting.png")));
-		
-		
-		
-		whiteUser = new JLabel(QuoridorController.getWhiteName());
-		whiteUser.setBounds(29, 135, 72, 15);
-		whiteUser.setForeground(Color.WHITE);
-		
-		
-		
-		blackUser = new JLabel(QuoridorController.getBlackName());
-		blackUser.setBounds(512, 176, 36, 15);
-		blackUser.setForeground(Color.WHITE);
-		
-		
-		
-		bigTime = new JLabel(QuoridorController.getWhiteRemainingTime());
-		bigTime.setBounds(235, 49, 91, 20);
-		bigTime.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-		
-		
-		
-		whiteStock = new JTextArea();
-		whiteStock.setBounds(143, 118, 69, 15);
-		whiteStock.setText(QuoridorController.getWhiteStocks());
-		
-		
-		
-		blackStock = new JTextArea();
-		blackStock.setBounds(400, 164, 44, 15);
-		blackStock.setText(QuoridorController.getBlackStocks());
-		
-		
-		
-		whiteTime = new JLabel(QuoridorController.getWhiteRemainingTime());
-		whiteTime.setBounds(157, 38, 72, 15);
-		whiteTime.setForeground(Color.WHITE);
-		
-		
-		
-		blackTime = new JLabel(QuoridorController.getBlackRemainingTime());
-		blackTime.setBounds(400, 38, 39, 15);
-		blackTime.setForeground(Color.WHITE);
-		
-		
-		
-		whitePawn = new JLabel("");
-		whitePawn.setBounds(167, 66, 32, 32);
-		whitePawn.setForeground(Color.YELLOW);
-		whitePawn.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/32—wqueen.png")));
-		whitePawn.setVisible(true);
-		blackPawn = new JLabel("");
-		blackPawn.setBounds(400, 115, 32, 32);
-		blackPawn.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/32—wqueen.png")));
-		blackPawn.setVisible(false);
-		tile.setLayout(null);
-		tile.add(lblNewLabel);
-		tile.add(whiteUser);
-		tile.add(bigTime);
-		tile.add(whiteStock);
-		tile.add(setting);
-		tile.add(whitePawn);
-		tile.add(txtrSeconds);
-		tile.add(whiteTime);
-		tile.add(blackStock);
-		tile.add(blackTime);
-		tile.add(blackPawn);
-		tile.add(label);
-		tile.add(blackUser);
-		
-		
-		
-		users = new JUser();
-		users.setBounds(0, 0, 560, 800);
-		users.setOpaque(false);
-		mainLayerPanel.add(users);
-		
-		
-        
-    	
 	}
 	
 	
