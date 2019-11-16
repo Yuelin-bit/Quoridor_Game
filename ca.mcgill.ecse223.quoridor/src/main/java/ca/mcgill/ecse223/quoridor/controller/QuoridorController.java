@@ -1432,8 +1432,6 @@ public class QuoridorController {
 			 System.out.println("has move");
 			 return false;
 		 }
-		 
-
 		 g.setGameStatus(GameStatus.ReadyToStart);
 		 return true;
 	 }
