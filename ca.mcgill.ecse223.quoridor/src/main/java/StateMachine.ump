@@ -1,3 +1,5 @@
+namespace ca.mcgill.ecse223.quoridor.model;  
+
 class PawnBehavior {
 
     //0..1 -> 0..1 Game currentGame;
@@ -79,9 +81,9 @@ class PawnBehavior {
   
       
     }
-    //Finished{
-   // startGame -> Playing;
-    //}
+    Finished{
+    startGame -> Playing;
+    }
         
         
       
@@ -104,5 +106,5 @@ class PawnBehavior {
     
     // Enumeration for the possible moving directions
     // (directions are from the viewpoint of white player)
-    enum MoveDirection { East, South, West, North; }
+    enum MoveDirection { East, South, West, North };
 }
