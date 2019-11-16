@@ -2,6 +2,7 @@
 /*This code was generated using the UMPLE 1.29.0.4181.a593105a9 modeling language!*/
 
 package ca.mcgill.ecse223.quoridor.controller;
+import ca.mcgill.ecse223.quoridor.model.*;
 
 // line 5 "../../../../../StateMachine.ump"
 public class PawnBehavior
@@ -28,6 +29,10 @@ public class PawnBehavior
   private PawnSMPlayingNorthSouthNorthSouth pawnSMPlayingNorthSouthNorthSouth;
   private PawnSMPlayingEastWest pawnSMPlayingEastWest;
   private PawnSMPlayingEastWestEastWest pawnSMPlayingEastWestEastWest;
+
+  //PawnBehavior Associations
+  private Game currentGame;
+  private Player player;
 
   //------------------------
   // CONSTRUCTOR
@@ -524,9 +529,50 @@ public class PawnBehavior
     pawnSMPlayingEastWestEastWest = aPawnSMPlayingEastWestEastWest;
     if (pawnSMPlayingEastWest != PawnSMPlayingEastWest.EastWest && aPawnSMPlayingEastWestEastWest != PawnSMPlayingEastWestEastWest.Null) { setPawnSMPlayingEastWest(PawnSMPlayingEastWest.EastWest); }
   }
+  /* Code from template association_GetOne */
+  public Game getCurrentGame()
+  {
+    return currentGame;
+  }
+
+  public boolean hasCurrentGame()
+  {
+    boolean has = currentGame != null;
+    return has;
+  }
+  /* Code from template association_GetOne */
+  public Player getPlayer()
+  {
+    return player;
+  }
+
+  public boolean hasPlayer()
+  {
+    boolean has = player != null;
+    return has;
+  }
+  /* Code from template association_SetUnidirectionalOptionalOne */
+  public boolean setCurrentGame(Game aNewCurrentGame)
+  {
+    boolean wasSet = false;
+    currentGame = aNewCurrentGame;
+    wasSet = true;
+    return wasSet;
+  }
+  /* Code from template association_SetUnidirectionalOptionalOne */
+  public boolean setPlayer(Player aNewPlayer)
+  {
+    boolean wasSet = false;
+    player = aNewPlayer;
+    wasSet = true;
+    return wasSet;
+  }
 
   public void delete()
-  {}
+  {
+    currentGame = null;
+    player = null;
+  }
 
 
   /**
