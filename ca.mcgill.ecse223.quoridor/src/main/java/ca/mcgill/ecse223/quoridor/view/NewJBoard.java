@@ -45,29 +45,29 @@ public class NewJBoard extends JFrame {
 	private JLabel blackPawn;
 	private JLabel bigTime;
 	
-	private JWall jwall_1= new JWall();
-	private JWall jwall_2= new JWall();
-	private JWall jwall_3= new JWall();
-	private JWall jwall_4= new JWall();
-	private JWall jwall_5= new JWall();
-	private JWall jwall_6= new JWall();
-	private JWall jwall_7= new JWall();
-	private JWall jwall_8= new JWall();
-	private JWall jwall_9= new JWall();
-	private JWall jwall_10= new JWall();
-	private JWall jwall_11= new JWall();
-	private JWall jwall_12= new JWall();
-	private JWall jwall_13= new JWall();
-	private JWall jwall_14= new JWall();
-	private JWall jwall_15= new JWall();
-	private JWall jwall_16= new JWall();
-	private JWall jwall_17= new JWall();
-	private JWall jwall_18= new JWall();
-	private JWall jwall_19= new JWall();
-	private JWall jwall_20= new JWall();
+	private JWall jWallCandidate_1= new JWall();
+	private JWall jWallCandidate_2= new JWall();
+	private JWall jWallCandidate_3= new JWall();
+	private JWall jWallCandidate_4= new JWall();
+	private JWall jWallCandidate_5= new JWall();
+	private JWall jWallCandidate_6= new JWall();
+	private JWall jWallCandidate_7= new JWall();
+	private JWall jWallCandidate_8= new JWall();
+	private JWall jWallCandidate_9= new JWall();
+	private JWall jWallCandidate_10= new JWall();
+	private JWall jWallCandidate_11= new JWall();
+	private JWall jWallCandidate_12= new JWall();
+	private JWall jWallCandidate_13= new JWall();
+	private JWall jWallCandidate_14= new JWall();
+	private JWall jWallCandidate_15= new JWall();
+	private JWall jWallCandidate_16= new JWall();
+	private JWall jWallCandidate_17= new JWall();
+	private JWall jWallCandidate_18= new JWall();
+	private JWall jWallCandidate_19= new JWall();
+	private JWall jWallCandidate_20= new JWall();
 	
-	private JWall[] JWhiteWallInStock = {jwall_1,jwall_2,jwall_3,jwall_4,jwall_5,jwall_6,jwall_7,jwall_8,jwall_9,jwall_10};
-	private JWall[] JBlackWallInStock = {jwall_11,jwall_12,jwall_13,jwall_14,jwall_15,jwall_16,jwall_17,jwall_18,jwall_19,jwall_20};
+	private JWall[] JWhiteWallInStock = {jWallCandidate_1,jWallCandidate_2,jWallCandidate_3,jWallCandidate_4,jWallCandidate_5,jWallCandidate_6,jWallCandidate_7,jWallCandidate_8,jWallCandidate_9,jWallCandidate_10};
+	private JWall[] JBlackWallInStock = {jWallCandidate_11,jWallCandidate_12,jWallCandidate_13,jWallCandidate_14,jWallCandidate_15,jWallCandidate_16,jWallCandidate_17,jWallCandidate_18,jWallCandidate_19,jWallCandidate_20};
 	
 	private JWall jWallCandidate = null;
 	
@@ -139,7 +139,7 @@ public class NewJBoard extends JFrame {
 							jWallCandidate = JWhiteWallInStock[WHITE_WALL_INDEX];
 							mainLayerPanel.add(jWallCandidate);//????
 							jWallCandidate.setBackground(Color.GRAY);
-							jWallCandidate.setBounds(360, 300, 10, 110);
+							jWallCandidate.setBounds(360, 300, 9, 103);
 							jWallCandidate.setVisible(true);	
 							WHITE_WALL_INDEX++;
 						}
@@ -149,7 +149,7 @@ public class NewJBoard extends JFrame {
 							jWallCandidate = JBlackWallInStock[WHITE_WALL_INDEX];
 							mainLayerPanel.add(jWallCandidate);//????
 							jWallCandidate.setBackground(Color.GRAY);
-							jWallCandidate.setBounds(360, 300, 10, 110);
+							jWallCandidate.setBounds(360, 300, 9, 103);
 							jWallCandidate.setVisible(true);
 							WHITE_WALL_INDEX++;
 						}
@@ -158,79 +158,78 @@ public class NewJBoard extends JFrame {
 					
 				}
 				if ((e.getKeyChar()=='w')||(e.getKeyCode() == KeyEvent.VK_UP)) {
-					if(WALL_INDEX<MAX_WALL&&grab) {
-						QuoridorController.MoveWall("up");
-						int x = jwall.getLocation().x;
-						int y = jwall.getLocation().y;
-						
-						if(jwall.getHeight()==110) {
-						if(((x)>=120)&&((x)<=540)&&((y-60)>=60)&&((y-60)<=480))
-							jwall.setLocation(x, y-60);}
-						
-						if(jwall.getHeight()==10) {
-							if(((x)>=60)&&((x)<=540)&&((y-60)>=60)&&((y-60)<=540))
-								jwall.setLocation(x, y-60);}
-						
+					QuoridorController.MoveWall("up");
+					int x = jWallCandidate.getLocation().x;
+					int y = jWallCandidate.getLocation().y;
+					if(jWallCandidate.getHeight()==103) {
+						if(((x)>=120)&&((x)<=540)&&((y-60)>=60)&&((y-60)<=480)) {
+							jWallCandidate.setLocation(x, y-60);
+						}
 					}
+					else{
+						if(((x)>=60)&&((x)<=540)&&((y-60)>=60)&&((y-60)<=540)) {
+							jWallCandidate.setLocation(x, y-60);
+							}
+						}
 				}
 				if ((e.getKeyChar()=='a')||(e.getKeyCode() == KeyEvent.VK_LEFT)) {
 					if(WALL_INDEX<MAX_WALL&&grab) {
 						QuoridorController.MoveWall("left");
-						int x = jwall.getLocation().x;
-						int y = jwall.getLocation().y;
+						int x = jWallCandidate.getLocation().x;
+						int y = jWallCandidate.getLocation().y;
 						
-						if(jwall.getHeight()==110) {
+						if(jWallCandidate.getHeight()==110) {
 						if(((x-60)>=120)&&((x-60)<=540)&&((y)>=60)&&((y)<=480))
-							jwall.setLocation(x-60, y);}
+							jWallCandidate.setLocation(x-60, y);}
 						
-						if(jwall.getHeight()==10) {
+						if(jWallCandidate.getHeight()==10) {
 							if(((x-60)>=60)&&((x-60)<=540)&&((y)>=60)&&((y)<=540))
-								jwall.setLocation(x-60, y);}
+								jWallCandidate.setLocation(x-60, y);}
 					}
 				}
 				if ((e.getKeyChar()=='s')||(e.getKeyCode() == KeyEvent.VK_DOWN)) {
 					if(WALL_INDEX<MAX_WALL&&grab) {
 						QuoridorController.MoveWall("down");
-						int x = jwall.getLocation().x;
-						int y = jwall.getLocation().y;
-						if(jwall.getHeight()==110) {
+						int x = jWallCandidate.getLocation().x;
+						int y = jWallCandidate.getLocation().y;
+						if(jWallCandidate.getHeight()==110) {
 						if(((x)>=120)&&((x)<=540)&&((y+60)>=60)&&((y+60)<=480))
-							jwall.setLocation(x, y+60);}
-						if(jwall.getHeight()==10) {
+							jWallCandidate.setLocation(x, y+60);}
+						if(jWallCandidate.getHeight()==10) {
 							if(((x)>=60)&&((x)<=540)&&((y+60)>=60)&&((y+60)<=540))
-								jwall.setLocation(x, y+60);}
+								jWallCandidate.setLocation(x, y+60);}
 						
 					}
 				}
 				if ((e.getKeyChar()=='d')||(e.getKeyCode() == KeyEvent.VK_RIGHT)) {
 					if(WALL_INDEX<MAX_WALL&&grab) {
 						QuoridorController.MoveWall("right");
-						int x = jwall.getLocation().x;
-						int y = jwall.getLocation().y;
-						if(jwall.getHeight()==110) {
+						int x = jWallCandidate.getLocation().x;
+						int y = jWallCandidate.getLocation().y;
+						if(jWallCandidate.getHeight()==110) {
 						if(((x+60)>=120)&&((x+60)<=540)&&((y)>=60)&&((y)<=480))
-							jwall.setLocation(x+60, y);}
-						if(jwall.getHeight()==10) {
+							jWallCandidate.setLocation(x+60, y);}
+						if(jWallCandidate.getHeight()==10) {
 							if(((x+60)>=60)&&((x+60)<=540)&&((y)>=60)&&((y)<=540))
-								jwall.setLocation(x+60, y);}
+								jWallCandidate.setLocation(x+60, y);}
 					}
 				}
 				if (e.getKeyChar()=='r'&&grab) {
 					QuoridorController.flipWall();
 					if(WALL_INDEX<MAX_WALL) {
-						int x = jwall.getLocation().x;
-						int y = jwall.getLocation().y;
-						int old_h = jwall.getBounds().height;
-						int old_w = jwall.getBounds().width;
+						int x = jWallCandidate.getLocation().x;
+						int y = jWallCandidate.getLocation().y;
+						int old_h = jWallCandidate.getBounds().height;
+						int old_w = jWallCandidate.getBounds().width;
 						if (old_h==10) {
 							// horizontal
-							jwall.setBounds(x, y, 10, 110);
-							jwall.setLocation(jwall.getLocation().x+50 , jwall.getLocation().y-50);
+							jWallCandidate.setBounds(x, y, 10, 110);
+							jWallCandidate.setLocation(jWallCandidate.getLocation().x+50 , jWallCandidate.getLocation().y-50);
 						}
 						else {
 							// vertical
-							jwall.setBounds(x, y, 110, 10);
-							jwall.setLocation(jwall.getLocation().x-50 , jwall.getLocation().y+50);        
+							jWallCandidate.setBounds(x, y, 110, 10);
+							jWallCandidate.setLocation(jWallCandidate.getLocation().x-50 , jWallCandidate.getLocation().y+50);        
 						}
 					}
 				}
@@ -248,7 +247,7 @@ public class NewJBoard extends JFrame {
 							
 							WALL_INDEX++;
 //							if(WALL_INDEX<MAX_WALL) {
-//								jwall = WallList.get(WALL_INDEX);
+//								jWallCandidate = WallList.get(WALL_INDEX);
 //							}
 							grab = false;
 							mainLayerPanel.add(blackPawnMove);
@@ -259,13 +258,13 @@ public class NewJBoard extends JFrame {
 						         if (BLACK_WALL_INDEX+1<WHITE_WALL_INDEX) {
 						 
 						           BLACK_WALL_INDEX++;
-						           jwall=BlackWallList.get(BLACK_WALL_INDEX);
+						           jWallCandidate=BlackWallList.get(BLACK_WALL_INDEX);
 						          }else if (BLACK_WALL_INDEX+1>WHITE_WALL_INDEX){
 						           WHITE_WALL_INDEX++;
-						           jwall=WhiteWallList.get(WHITE_WALL_INDEX);
+						           jWallCandidate=WhiteWallList.get(WHITE_WALL_INDEX);
 						          }else {
 						           BLACK_WALL_INDEX++;
-						           jwall=BlackWallList.get(BLACK_WALL_INDEX);
+						           jWallCandidate=BlackWallList.get(BLACK_WALL_INDEX);
 						          }
 						         
 						        }
@@ -386,12 +385,6 @@ public class NewJBoard extends JFrame {
 		mainLayerPanel.add(users);
 		
 		
-		
-		jwall = new JWall();            
-        jwall.setBackground(Color.GRAY);
-        jwall.setBounds(50+35,650,10,110);
-        jwall.setVisible(true);
-        mainLayerPanel.add(jwall);
         
     	
 	}
