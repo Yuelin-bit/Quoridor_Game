@@ -39,12 +39,11 @@ public class NewJBoard extends JFrame {
 	private JLabel txtrSeconds;
 	private JLabel whiteUser;
 	private JLabel blackUser;
-	private JTextArea whiteStock;
 	private JLabel blackTime;
 	private JLabel whiteTime;
-	private JTextArea blackStock;
 	private JButton setting;
 	private JLabel whiteTurnGUI;
+	
 	public JLabel getWhiteTurnGUI() {
 		return whiteTurnGUI;
 	}
@@ -60,6 +59,21 @@ public class NewJBoard extends JFrame {
 
 	private JLabel blackTurnGUI;
 	private JLabel bigTime;
+	private JLabel whiteStock;
+	public JLabel getWhiteStock() {
+		return whiteStock;
+	}
+	public void setWhiteStock(JLabel whiteStock) {
+		this.whiteStock = whiteStock;
+	}
+	public JLabel getBlackStock() {
+		return blackStock;
+	}
+	public void setBlackStock(JLabel blackStock) {
+		this.blackStock = blackStock;
+	}
+
+	private JLabel blackStock;
 	
 	private JWall jWallCandidate_1= new JWall();
 	private JWall jWallCandidate_2= new JWall();
@@ -92,6 +106,7 @@ public class NewJBoard extends JFrame {
 	private int WHITE_WALL_INDEX = 0;
 	
 	private boolean isWhiteTurn = true;
+	
 	
 
 	public boolean isWhiteTurn() {
@@ -139,20 +154,6 @@ public class NewJBoard extends JFrame {
 		
 		
 		
-//		Pawn whitePawn = new Pawn(PawnColor.WHITE);
-//		whitePawn.setBounds(310, 540, 50, 50);
-//		whitePawn.setVisible(true);
-//		mainLayerPanel.add(whitePawn);
-//
-//
-//		Pawn blackPawn = new Pawn(PawnColor.BLACK);
-//		blackPawn.setBounds(310, 60, 50, 50);
-//		blackPawn.setVisible(true);
-//		mainLayerPanel.add(blackPawn);
-		
-		
-		
-		
 		tile = new JTile();
 		tile.setBackground(Color.WHITE);
 		tile.setBounds(0, 0, 560, 800);
@@ -161,14 +162,14 @@ public class NewJBoard extends JFrame {
 		
 		
 		
-//		txtrSeconds = new JLabel();
-//		txtrSeconds.setBounds(243, 115, 64, 20);
-//		txtrSeconds.setBackground(new Color(245, 245, 220));
-//		txtrSeconds.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-//		txtrSeconds.setText("Seconds");
-//		
-//		
-//		
+		txtrSeconds = new JLabel();
+		txtrSeconds.setBounds(235, 94, 64, 20);
+		txtrSeconds.setBackground(new Color(245, 245, 220));
+		txtrSeconds.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		txtrSeconds.setText("Seconds");
+		
+		
+		
 		JLabel monkey_White = new JLabel();
 		monkey_White.setBounds(17, 17, 127, 120);
 		monkey_White.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/monkey_128.png")));
@@ -184,53 +185,41 @@ public class NewJBoard extends JFrame {
 		setting = new JButton("");
 		setting.setBounds(296, 135, 30, 28);
 		setting.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/30—setting.png")));
-//		
-//		
-//		
-//		whiteUser = new JLabel(QuoridorController.getWhiteName());
-//		whiteUser.setBounds(29, 135, 72, 15);
-//		whiteUser.setForeground(Color.WHITE);
-//		
-//		
-//		
-//		blackUser = new JLabel(QuoridorController.getBlackName());
-//		blackUser.setBounds(512, 176, 36, 15);
-//		blackUser.setForeground(Color.WHITE);
-//		
-//		
-//		
-//		bigTime = new JLabel(QuoridorController.getWhiteRemainingTime());
-//		bigTime.setBounds(235, 49, 91, 20);
-//		bigTime.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-//		
-//		
-//		
-//		whiteStock = new JTextArea();
-//		whiteStock.setBounds(143, 118, 69, 15);
-//		whiteStock.setText(QuoridorController.getWhiteStocks());
-//		
-//		
-//		
-//		blackStock = new JTextArea();
-//		blackStock.setBounds(400, 164, 44, 15);
-//		blackStock.setText(QuoridorController.getBlackStocks());
-//		
-//		
-//		
-//		whiteTime = new JLabel(QuoridorController.getWhiteRemainingTime());
-//		whiteTime.setBounds(157, 38, 72, 15);
-//		whiteTime.setForeground(Color.WHITE);
-//		
-//		
-//		
-//		blackTime = new JLabel(QuoridorController.getBlackRemainingTime());
-//		blackTime.setBounds(400, 38, 39, 15);
-//		blackTime.setForeground(Color.WHITE);
+		
+		
+		
+		whiteUser = new JLabel(QuoridorController.getWhiteName());
+		whiteUser.setBounds(29, 135, 72, 15);
+		whiteUser.setForeground(Color.WHITE);
+		
+		
+		
+		blackUser = new JLabel(QuoridorController.getBlackName());
+		blackUser.setBounds(413, 135, 71, 15);
+		blackUser.setForeground(Color.WHITE);
+		
+		
+		
+		bigTime = new JLabel(QuoridorController.getWhiteRemainingTime());
+		bigTime.setBounds(221, 51, 91, 20);
+		bigTime.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		
+		
+		
+		whiteTime = new JLabel(QuoridorController.getWhiteRemainingTime());
+		whiteTime.setBounds(132, 38, 72, 15);
+		whiteTime.setForeground(Color.WHITE);
+		
+		
+		
+		blackTime = new JLabel(QuoridorController.getBlackRemainingTime());
+		blackTime.setBounds(360, 38, 39, 15);
+		blackTime.setForeground(Color.WHITE);
 		
 		
 		
 		whiteTurnGUI = new JLabel("");
-		whiteTurnGUI.setBounds(156, 105, 32, 32);
+		whiteTurnGUI.setBounds(156, 94, 32, 32);
 		whiteTurnGUI.setForeground(Color.YELLOW);
 		whiteTurnGUI.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/32—wqueen.png")));
 		whiteTurnGUI.setVisible(true);
@@ -238,6 +227,18 @@ public class NewJBoard extends JFrame {
 		blackTurnGUI.setBounds(360, 94, 32, 32);
 		blackTurnGUI.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/32—wqueen.png")));
 		blackTurnGUI.setVisible(false);
+		
+		
+		
+        whiteStock = new JLabel("WS");
+        whiteStock.setForeground(Color.WHITE);
+        whiteStock.setBounds(127, 134, 61, 16);
+        
+        
+        blackStock = new JLabel("BS");
+        blackStock.setForeground(Color.WHITE);
+        blackStock.setBounds(350, 134, 49, 16);
+        
 		
 		
 		
@@ -253,18 +254,18 @@ public class NewJBoard extends JFrame {
 		
 		
 		tile.add(monkey_White);
-//		tile.add(whiteUser);
-//		tile.add(bigTime);
-//		tile.add(whiteStock);
+		tile.add(whiteUser);
+		tile.add(whiteStock);
+		tile.add(bigTime);
 		tile.add(setting);
 		tile.add(whiteTurnGUI);
-//		tile.add(txtrSeconds);
-//		tile.add(whiteTime);
-//		tile.add(blackStock);
-//		tile.add(blackTime);
+		tile.add(txtrSeconds);
+		tile.add(whiteTime);
+		tile.add(blackTime);
 		tile.add(blackTurnGUI);
 		tile.add(cat_Black);
-//		tile.add(blackUser);
+		tile.add(blackUser);
+		tile.add(blackStock);
 		
 		
 		
@@ -276,6 +277,8 @@ public class NewJBoard extends JFrame {
 		
 
         tile.setFocusable(true);
+        
+
 		tile.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -459,12 +462,7 @@ public class NewJBoard extends JFrame {
 		this.blackUser = blackUser;
 	}
 
-	/**
-	 * @param whiteStock the whiteStock to set
-	 */
-	public void setWhiteStock(JTextArea whiteStock) {
-		this.whiteStock = whiteStock;
-	}
+	
 
 	/**
 	 * @param blackTime the blackTime to set
@@ -480,13 +478,7 @@ public class NewJBoard extends JFrame {
 		this.whiteTime = whiteTime;
 	}
 
-	/**
-	 * @param blackStock the blackStock to set
-	 */
-	public void setBlackStock(JTextArea blackStock) {
-		this.blackStock = blackStock;
-	}
-
+	
 	/**
 	 * @param whitePawn the whitePawn to set
 	 */
@@ -530,12 +522,7 @@ public class NewJBoard extends JFrame {
 		return whiteUser;
 	}
 
-	/**
-	 * @return the whiteStock
-	 */
-	public JTextArea getWhiteStock() {
-		return whiteStock;
-	}
+	
 
 	/**
 	 * @return the whiteTime
@@ -598,19 +585,5 @@ public class NewJBoard extends JFrame {
 		this.txtrSeconds = txtrSeconds;
 	}
 
-	public JTextArea getwhiteStock() {
-		return whiteStock;
-	}
-
-	public void setwhiteStock(JTextArea whiteStock) {
-		this.whiteStock = whiteStock;
-	}
-
-	public JTextArea getblackStock() {
-		return blackStock;
-	}
-
-	public void setblackStock(JTextArea blackStock) {
-		this.blackStock = blackStock;
-	}
+	
 }
