@@ -17,6 +17,8 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextArea;
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -43,6 +45,19 @@ public class NewJBoard extends JFrame {
 	private JTextArea blackStock;
 	private JButton setting;
 	private JLabel whiteTurnGUI;
+	public JLabel getWhiteTurnGUI() {
+		return whiteTurnGUI;
+	}
+	public void setWhiteTurnGUI(JLabel whiteTurnGUI) {
+		this.whiteTurnGUI = whiteTurnGUI;
+	}
+	public JLabel getBlackTurnGUI() {
+		return blackTurnGUI;
+	}
+	public void setBlackTurnGUI(JLabel blackTurnGUI) {
+		this.blackTurnGUI = blackTurnGUI;
+	}
+
 	private JLabel blackTurnGUI;
 	private JLabel bigTime;
 	
@@ -79,11 +94,23 @@ public class NewJBoard extends JFrame {
 	private boolean isWhiteTurn = true;
 	
 
+	public boolean isWhiteTurn() {
+		return isWhiteTurn;
+	}
+	public void setWhiteTurn(boolean isWhiteTurn) {
+		this.isWhiteTurn = isWhiteTurn;
+	}
+
+
+
+
+
 	/**
 	 * Create the frame.
 	 */
 	public NewJBoard() {
 		
+		System.out.println(jWallCandidate_1.getLocation().x+" and "+jWallCandidate_1.getLocation().y);
 
 		
 		for(int i=0; i<10; i++) {
@@ -211,7 +238,20 @@ public class NewJBoard extends JFrame {
 		blackTurnGUI.setBounds(360, 94, 32, 32);
 		blackTurnGUI.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/32—wqueen.png")));
 		blackTurnGUI.setVisible(false);
+		
+		
+		
+		
 		tile.setLayout(null);
+		
+		
+		
+		//ImageIcon whitePawn = new ImageIcon("/ca.mcgill.ecse223.quoridor/src/main/java/ca/mcgill/ecse223/quoridor/resources/wpawn.png");
+		
+		
+		
+		
+		
 		tile.add(monkey_White);
 //		tile.add(whiteUser);
 //		tile.add(bigTime);
@@ -370,38 +410,31 @@ public class NewJBoard extends JFrame {
 				}
 				if (e.getKeyChar()=='t') if (e.getKeyChar()=='t') {
 					if(jWallCandidate!=null) {
-						boolean overlapped = true;
 						if(QuoridorController.verifyOverlapped(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate())==false) 
 						{
-							overlapped = false;
-							System.out.println("Not overlapped!");
-						}
-						if(isWhiteTurn) {
-							int x = jWallCandidate.getLocation().x;
-							int y = jWallCandidate.getLocation().y;
-							JWhiteWallInStock[WHITE_WALL_INDEX-1].setLocation(x, y);
-							JWhiteWallInStock[WHITE_WALL_INDEX-1].setBackground(Color.BLUE);
-							JWhiteWallInStock[WHITE_WALL_INDEX-1].setVisible(true);
-							whiteTurnGUI.setVisible(false);
-							blackTurnGUI.setVisible(true);
-						}else {
-							int x = jWallCandidate.getLocation().x;
-							int y = jWallCandidate.getLocation().y;
-							JBlackWallInStock[WHITE_WALL_INDEX-1].setLocation(x, y);
-							JBlackWallInStock[WHITE_WALL_INDEX-1].setBackground(Color.BLUE);
-							JBlackWallInStock[WHITE_WALL_INDEX-1].setVisible(true);
-							whiteTurnGUI.setVisible(true);
-							blackTurnGUI.setVisible(false);
-						}
-						
-						
-						
-						jWallCandidate = null;
-						isWhiteTurn = !isWhiteTurn;
-						QuoridorController.releaseWall();				
+							if(isWhiteTurn) {
+								int x = jWallCandidate.getLocation().x;
+								int y = jWallCandidate.getLocation().y;
+								JWhiteWallInStock[WHITE_WALL_INDEX-1].setLocation(x, y);
+								JWhiteWallInStock[WHITE_WALL_INDEX-1].setBackground(Color.BLUE);
+								JWhiteWallInStock[WHITE_WALL_INDEX-1].setVisible(true);
+								whiteTurnGUI.setVisible(false);
+								blackTurnGUI.setVisible(true);
+							}else {
+								int x = jWallCandidate.getLocation().x;
+								int y = jWallCandidate.getLocation().y;
+								JBlackWallInStock[BLACK_WALL_INDEX-1].setLocation(x, y);
+								JBlackWallInStock[BLACK_WALL_INDEX-1].setBackground(Color.BLUE);
+								JBlackWallInStock[BLACK_WALL_INDEX-1].setVisible(true);
+								whiteTurnGUI.setVisible(true);
+								blackTurnGUI.setVisible(false);
+							}
+							jWallCandidate = null;
+							isWhiteTurn = !isWhiteTurn;
+						}	
+						QuoridorController.releaseWall();
 					}
 				}
-
 			}
 
 			
@@ -580,6 +613,4 @@ public class NewJBoard extends JFrame {
 	public void setblackStock(JTextArea blackStock) {
 		this.blackStock = blackStock;
 	}
-
-	
 }

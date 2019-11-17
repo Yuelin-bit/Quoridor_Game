@@ -312,8 +312,7 @@ public class QuoridorController {
 
 		if(QuoridorController.verifyOverlapped(wallmove)==true) 
 		{
-
-			//QuoridorApplication.getJboard().notifyIllegal();
+			JOptionPane.showMessageDialog(null, "Illegal drop!");
 			return;
 		}
 
@@ -321,28 +320,13 @@ public class QuoridorController {
 		Tile t = wallmove.getTargetTile();
 		Player currentPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
 		Game currentGame = QuoridorApplication.getQuoridor().getCurrentGame();
-
-		//		JBoard newb = new JBoard();
-		//		QuoridorApplication.setJboard(newb);
-
-		if((QuoridorController.verifyOverlapped(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate()))
-				||(QuoridorController.verifyOutsideTheBoard(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate())))
-		{
-			System.out.println("cannot drop!!!!!!!!!");
-			JOptionPane.showMessageDialog(null, "cannot drop!!!!!!!!!");
-
-		}
-
 		if(currentPlayer.hasGameAsWhite()) {
 			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().addWhiteWallsOnBoard(wallmove.getWallPlaced());
 			Player blackPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
 			currentPlayer.setNextPlayer(blackPlayer);
 			currentPlayer.setGameAsWhite(null);
 			currentPlayer.setGameAsBlack(currentGame);
-		}
-
-		else{
-			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().addBlackWallsOnBoard(wallmove.getWallPlaced());
+		}else {	QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().addBlackWallsOnBoard(wallmove.getWallPlaced());
 			Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
 			currentPlayer.setNextPlayer(whitePlayer);
 			currentPlayer.setGameAsBlack(null);
@@ -404,8 +388,7 @@ public class QuoridorController {
 	{	
 		if(QuoridorController.verifyOnEdge(string)==true) 
 		{
-			//QuoridorApplication.setJboard(new JBoard());
-			//QuoridorApplication.getJboard().notifyIllegal();
+			JOptionPane.showMessageDialog(null, "Exceed the board!");
 		}
 
 		if((string.equalsIgnoreCase("left"))&&(QuoridorController.verifyOnEdge(string)==false)) {
