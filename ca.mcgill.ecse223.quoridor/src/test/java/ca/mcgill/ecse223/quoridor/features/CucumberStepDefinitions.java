@@ -22,6 +22,8 @@ import javax.swing.JOptionPane;
 import ca.mcgill.ecse223.quoridor.QuoridorApplication;
 import ca.mcgill.ecse223.quoridor.controller.QuoridorController;
 import ca.mcgill.ecse223.quoridor.controller.Stopwatch;
+import ca.mcgill.ecse223.quoridor.controller.PawnBehavior;
+import ca.mcgill.ecse223.quoridor.controller.PawnBehavior.MoveDirection;
 import ca.mcgill.ecse223.quoridor.model.Game.GameStatus;
 import ca.mcgill.ecse223.quoridor.model.Game.MoveMode;
 import ca.mcgill.ecse223.quoridor.model.*;
@@ -1635,7 +1637,28 @@ public class CucumberStepDefinitions {
 
 		@When("Player {string} initiates to move {string}")
 		public void player_initiates_to_move(String string, String string2) {
-			movePawnSuccess = QuoridorController.movePlayer(string, string2);
+			PawnBehavior pawnBehavior = new PawnBehavior();
+			MoveDirection movedirection = null;
+			if (string2.equals("left")) {
+				movedirection = MoveDirection.West;
+			}
+			if (string2.equals("right")) {
+				movedirection = MoveDirection.East;
+			}
+			if (string2.equals("up")) {
+				movedirection = MoveDirection.North;
+			}
+			if (string2.equals("down")) {
+				movedirection = MoveDirection.South;
+			}
+			
+			if (pawnBehavior.isLegalStep(movedirection)) {
+				movePawnSuccess = QuoridorController.movePlayer(string, string2);
+			} else {
+				//System.out.println("=====================================================================");
+				movePawnSuccess = false;
+			}
+			
 		}
 
 		@Then("The move {string} shall be {string}")
