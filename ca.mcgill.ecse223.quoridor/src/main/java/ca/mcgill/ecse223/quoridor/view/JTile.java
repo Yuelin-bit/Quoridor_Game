@@ -907,6 +907,12 @@ public class JTile extends JPanel {
 			if(makeSureLegalMove(x, y)) {
 				refreshAllWhite();
 				if(QuoridorApplication.getJboard().isWhiteTurn()==false) {
+					if((x==blackPawn_row)&&(y==blackPawn_column)) {
+						isSelectedState = !isSelectedState;
+						System.out.println("suspend!");
+						this.requestFocus();
+						return;
+					}		
 					allButton[x][y].setIcon(new ImageIcon(JTile.class.getResource("/ca/mcgill/ecse223/quoridor/resources/bpawn.png")));
 					allButton[blackPawn_row][blackPawn_column].setIcon(null);
 					//System.out.println(determineDirection(x,y,blackPawn_row,blackPawn_column));
@@ -921,6 +927,12 @@ public class JTile extends JPanel {
 					QuoridorApplication.getJboard().getWhiteTurnGUI().setVisible(true);
 					QuoridorApplication.getJboard().getBlackTurnGUI().setVisible(false);
 				}else {
+					if((x==whitePawn_row)&&(y==whitePawn_column)) {
+						isSelectedState = !isSelectedState;
+						System.out.println("suspend!");
+						this.requestFocus();
+						return;
+					}
 					allButton[x][y].setIcon(new ImageIcon(JTile.class.getResource("/ca/mcgill/ecse223/quoridor/resources/wpawn.png")));
 					allButton[whitePawn_row][whitePawn_column].setIcon(null);
 					//System.out.println(determineDirection(x,y,whitePawn_row,whitePawn_column));
@@ -937,8 +949,9 @@ public class JTile extends JPanel {
 				}
 				isSelectedState = !isSelectedState;
 			}
+			this.requestFocus();
 		}
-		this.requestFocus();
+		
 	}
 	public String determineDirection(int x, int y, int a, int b) {
 		if(((x-1)==a)&&(y==b)) {
@@ -1004,6 +1017,9 @@ public class JTile extends JPanel {
 			if((x==blackPawn_row)&&((y-1)==blackPawn_column)) {
 				return true;
 			}
+			if((x==blackPawn_row)&&(y==blackPawn_column)) {
+				return true;
+			}
 			return false;
 		}else {
 			if(((x+1)==whitePawn_row)&&(y==whitePawn_column)) {
@@ -1016,6 +1032,9 @@ public class JTile extends JPanel {
 				return true;
 			}
 			if((x==whitePawn_row)&&((y-1)==whitePawn_column)) {
+				return true;
+			}
+			if((x==whitePawn_row)&&(y==whitePawn_column)) {
 				return true;
 			}
 			return false;
