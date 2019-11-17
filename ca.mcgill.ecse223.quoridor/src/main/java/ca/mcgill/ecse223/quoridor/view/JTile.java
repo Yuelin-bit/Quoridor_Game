@@ -1006,18 +1006,51 @@ public class JTile extends JPanel {
 		}
 	}
 	public boolean makeSureLegalMove(int x, int y) {
+		ArrayList<SmallWallTO> t = QuoridorApplication.getJboard().getListOfSmallWallTO();
 		if(QuoridorApplication.getJboard().isWhiteTurn()==false) {
 			if(((x+1)==blackPawn_row)&&(y==blackPawn_column)) {
-				return true;
+				boolean can = true;
+				for(int i=0; i<t.size(); i++) {
+					if(t.get(i).isVertical()==false) {
+						if((t.get(i).getRowSmall()==(blackPawn_row-1))&&((t.get(i).getColumnSmall()==blackPawn_column)||(t.get(i).getColumnSmall()==(blackPawn_column-1)))){
+							can = false;
+						}
+					}
+				}
+				return can;
 			}
 			if(((x-1)==blackPawn_row)&&(y==blackPawn_column)) {
-				return true;
+				boolean can = true;
+				for(int i=0; i<t.size(); i++) {
+					if(t.get(i).isVertical()==false) {
+						if((t.get(i).getRowSmall()==blackPawn_row)&&((t.get(i).getColumnSmall()==blackPawn_column)||(t.get(i).getColumnSmall()==(blackPawn_column-1)))){
+							can = false;
+						}
+					}
+				}
+				return can;
 			}
 			if((x==blackPawn_row)&&((y+1)==blackPawn_column)) {
-				return true;
+				boolean can = true;
+				for(int i=0; i<t.size(); i++) {
+					if(t.get(i).isVertical()==true) {
+						if((t.get(i).getColumnSmall()==(blackPawn_column-1))&&((t.get(i).getRowSmall()==x)||(t.get(i).getRowSmall()==(x-1)))) {
+							can = false;
+						}
+					}
+				}
+				return can;
 			}
 			if((x==blackPawn_row)&&((y-1)==blackPawn_column)) {
-				return true;
+				boolean can = true;
+				for(int i=0; i<t.size(); i++) {
+					if(t.get(i).isVertical()==true) {
+						if((t.get(i).getColumnSmall()==blackPawn_column)&&((t.get(i).getRowSmall()==x)||(t.get(i).getRowSmall()==(x-1)))) {
+							can = false;
+						}
+					}
+				}
+				return can;
 			}
 			if((x==blackPawn_row)&&(y==blackPawn_column)) {
 				return true;
@@ -1025,16 +1058,48 @@ public class JTile extends JPanel {
 			return false;
 		}else {
 			if(((x+1)==whitePawn_row)&&(y==whitePawn_column)) {
-				return true;
+				boolean can = true;
+				for(int i=0; i<t.size(); i++) {
+					if(t.get(i).isVertical()==false) {
+						if((t.get(i).getRowSmall()==(whitePawn_row-1))&&((t.get(i).getColumnSmall()==whitePawn_column)||(t.get(i).getColumnSmall()==(whitePawn_column-1)))){
+							can = false;
+						}
+					}
+				}
+				return can;
 			}
 			if(((x-1)==whitePawn_row)&&(y==whitePawn_column)) {
-				return true;
+				boolean can = true;
+				for(int i=0; i<t.size(); i++) {
+					if(t.get(i).isVertical()==false) {
+						if((t.get(i).getRowSmall()==whitePawn_row)&&((t.get(i).getColumnSmall()==whitePawn_column)||(t.get(i).getColumnSmall()==(whitePawn_column-1)))){
+							can = false;
+						}
+					}
+				}
+				return can;
 			}
 			if((x==whitePawn_row)&&((y+1)==whitePawn_column)) {
-				return true;
+				boolean can = true;
+				for(int i=0; i<t.size(); i++) {
+					if(t.get(i).isVertical()==true) {
+						if((t.get(i).getColumnSmall()==(whitePawn_column-1))&&((t.get(i).getRowSmall()==x)||(t.get(i).getRowSmall()==(x-1)))) {
+							can = false;
+						}
+					}
+				}
+				return can;
 			}
 			if((x==whitePawn_row)&&((y-1)==whitePawn_column)) {
-				return true;
+				boolean can = true;
+				for(int i=0; i<t.size(); i++) {
+					if(t.get(i).isVertical()==true) {
+						if((t.get(i).getColumnSmall()==whitePawn_column)&&((t.get(i).getRowSmall()==x)||(t.get(i).getRowSmall()==(x-1)))) {
+							can = false;
+						}
+					}
+				}
+				return can;
 			}
 			if((x==whitePawn_row)&&(y==whitePawn_column)) {
 				return true;
