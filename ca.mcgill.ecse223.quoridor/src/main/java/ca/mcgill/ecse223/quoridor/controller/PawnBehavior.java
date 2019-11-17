@@ -867,7 +867,7 @@ public class PawnBehavior
 			
 			if (dir == MoveDirection.West) {
 				if ((wallDirection == Direction.Vertical) && (wallColumn == pcol-1) && 
-						((wallRow == prow+1) || (wallRow == prow))) {
+						((wallRow == prow-1) || (wallRow == prow))) {
 					result = false;
 					break;
 				}
@@ -875,7 +875,7 @@ public class PawnBehavior
 			
 			if (dir == MoveDirection.East) {
 				if ((wallDirection == Direction.Vertical) && (wallColumn == pcol) && 
-						((wallRow == prow+1) || (wallRow == prow))) {
+						((wallRow == prow-1) || (wallRow == prow))) {
 					result = false;
 					break;
 				}

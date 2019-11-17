@@ -37,7 +37,7 @@ Feature: Move Pawn
     And The next player to move shall become "<nplayer>"
 
     Examples: 
-      | player | prow | pcol | dir        | wrow | wcol | side  | status  | nrow | ncol | player |
+      | player | prow | pcol | dir        | wrow | wcol | side  | status  | nrow | ncol | nplayer |
       | white  |    3 |    3 | vertical   |    2 |    2 | left  | illegal |    3 |    3 | white  |
       | black  |    3 |    3 | vertical   |    3 |    2 | left  | illegal |    3 |    3 | black  |
       | white  |    3 |    3 | vertical   |    2 |    3 | right | illegal |    3 |    3 | white  |
