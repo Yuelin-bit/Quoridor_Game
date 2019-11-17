@@ -274,6 +274,8 @@ public class NewJBoard extends JFrame {
 		users.setOpaque(false);
 		mainLayerPanel.add(users);
 		
+
+		
 		
 
         tile.setFocusable(true);
