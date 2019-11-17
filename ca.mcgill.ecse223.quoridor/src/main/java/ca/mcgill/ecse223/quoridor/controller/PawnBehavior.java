@@ -911,7 +911,6 @@ public class PawnBehavior
 	  currentGame = QuoridorApplication.getQuoridor().getCurrentGame();
 	  GamePosition currentPosition = currentGame.getCurrentPosition();
 	  Player player = currentGame.getCurrentPosition().getPlayerToMove();
-	  Player opponent = player.getNextPlayer();
 	  List<Wall> blackWalls = currentPosition.getBlackWallsOnBoard();
 	  List<Wall> whiteWalls = currentPosition.getWhiteWallsOnBoard();
 	  PlayerPosition playerPosition, opponentPosition;
