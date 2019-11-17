@@ -223,14 +223,14 @@ public class SelectName extends JFrame {
 					setVisible(false);
 					dispose();
 				}
-				QuoridorController.refreshData();
+				//QuoridorController.refreshData();
 			}
 		});
 		
 		JButton btnRefresh = new JButton("Refresh");
 		btnRefresh.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				QuoridorApplication.getQuoridor().getCurrentGame().delete();
+				//QuoridorApplication.getQuoridor().getCurrentGame().delete();
 				SelectName sn = new SelectName();
 				setVisible(false);
 				dispose();
