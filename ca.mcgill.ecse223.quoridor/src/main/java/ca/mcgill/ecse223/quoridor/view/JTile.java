@@ -1058,10 +1058,16 @@ public class JTile extends JPanel {
 			boolean can = true;
 			for(int i=0; i<t.size(); i++) {
 				if(t.get(i).isVertical()==false) {
-					if((t.get(i).getRowSmall()==origin_x)&&((t.get(i).getColumnSmall()==origin_y)||(t.get(i).getColumnSmall()==(origin_y-1)))){
+					if((t.get(i).getRowSmall()==(origin_x-1))&&((t.get(i).getColumnSmall()==origin_y)||(t.get(i).getColumnSmall()==(origin_y-1)))){
 						can = false;
 					}
 				}
+			}
+			if((origin_x-1==blackPawn_row)&&(origin_y==blackPawn_column)) {
+				can = false;
+			}
+			if((origin_x-1==whitePawn_row)&&(origin_y==whitePawn_column)) {
+				can = false;
 			}
 			return can;
 		}
@@ -1069,10 +1075,16 @@ public class JTile extends JPanel {
 			boolean can = true;
 			for(int i=0; i<t.size(); i++) {
 				if(t.get(i).isVertical()==false) {
-					if((t.get(i).getRowSmall()==(origin_x-1))&&((t.get(i).getColumnSmall()==origin_y)||(t.get(i).getColumnSmall()==(origin_y-1)))){
+					if((t.get(i).getRowSmall()==origin_x)&&((t.get(i).getColumnSmall()==origin_y)||(t.get(i).getColumnSmall()==(origin_y-1)))){
 						can = false;
 					}
 				}
+			}
+			if((origin_x+1==blackPawn_row)&&(origin_y==blackPawn_column)) {
+				can = false;
+			}
+			if((origin_x+1==whitePawn_row)&&(origin_y==whitePawn_column)) {
+				can = false;
 			}
 			return can;
 		}
@@ -1085,6 +1097,12 @@ public class JTile extends JPanel {
 					}
 				}
 			}
+			if((origin_x==blackPawn_row)&&(origin_y-1==blackPawn_column)) {
+				can = false;
+			}
+			if((origin_x==whitePawn_row)&&(origin_y-1==whitePawn_column)) {
+				can = false;
+			}
 			return can;
 		}
 		else if(s.equalsIgnoreCase("right")){
@@ -1095,6 +1113,12 @@ public class JTile extends JPanel {
 						can = false;
 					}
 				}
+			}
+			if((origin_x==blackPawn_row)&&(origin_y+1==blackPawn_column)) {
+				can = false;
+			}
+			if((origin_x==whitePawn_row)&&(origin_y+1==whitePawn_column)) {
+				can = false;
 			}
 			return can;
 		}
