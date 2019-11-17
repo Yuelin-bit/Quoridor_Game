@@ -891,7 +891,6 @@ public class JTile extends JPanel {
 		
 		//JButton[][] allButton = new JButton[9][9];
 		
-		this.setFocusable(true);
 	
 		
 	}
@@ -919,6 +918,7 @@ public class JTile extends JPanel {
 			}
 		}
 		isSelectedState = !isSelectedState;
+		this.requestFocus();
 	}
 	public void refreshAllWhite() {
 		for(int i=1;i<10;i++) {

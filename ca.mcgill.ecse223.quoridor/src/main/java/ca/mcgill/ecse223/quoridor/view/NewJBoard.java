@@ -410,38 +410,31 @@ public class NewJBoard extends JFrame {
 				}
 				if (e.getKeyChar()=='t') if (e.getKeyChar()=='t') {
 					if(jWallCandidate!=null) {
-						boolean overlapped = true;
 						if(QuoridorController.verifyOverlapped(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate())==false) 
 						{
-							overlapped = false;
-							System.out.println("Not overlapped!");
-						}
-						if(isWhiteTurn) {
-							int x = jWallCandidate.getLocation().x;
-							int y = jWallCandidate.getLocation().y;
-							JWhiteWallInStock[WHITE_WALL_INDEX-1].setLocation(x, y);
-							JWhiteWallInStock[WHITE_WALL_INDEX-1].setBackground(Color.BLUE);
-							JWhiteWallInStock[WHITE_WALL_INDEX-1].setVisible(true);
-							whiteTurnGUI.setVisible(false);
-							blackTurnGUI.setVisible(true);
-						}else {
-							int x = jWallCandidate.getLocation().x;
-							int y = jWallCandidate.getLocation().y;
-							JBlackWallInStock[WHITE_WALL_INDEX-1].setLocation(x, y);
-							JBlackWallInStock[WHITE_WALL_INDEX-1].setBackground(Color.BLUE);
-							JBlackWallInStock[WHITE_WALL_INDEX-1].setVisible(true);
-							whiteTurnGUI.setVisible(true);
-							blackTurnGUI.setVisible(false);
-						}
-						
-						
-						
-						jWallCandidate = null;
-						isWhiteTurn = !isWhiteTurn;
-						QuoridorController.releaseWall();				
+							if(isWhiteTurn) {
+								int x = jWallCandidate.getLocation().x;
+								int y = jWallCandidate.getLocation().y;
+								JWhiteWallInStock[WHITE_WALL_INDEX-1].setLocation(x, y);
+								JWhiteWallInStock[WHITE_WALL_INDEX-1].setBackground(Color.BLUE);
+								JWhiteWallInStock[WHITE_WALL_INDEX-1].setVisible(true);
+								whiteTurnGUI.setVisible(false);
+								blackTurnGUI.setVisible(true);
+							}else {
+								int x = jWallCandidate.getLocation().x;
+								int y = jWallCandidate.getLocation().y;
+								JBlackWallInStock[BLACK_WALL_INDEX-1].setLocation(x, y);
+								JBlackWallInStock[BLACK_WALL_INDEX-1].setBackground(Color.BLUE);
+								JBlackWallInStock[BLACK_WALL_INDEX-1].setVisible(true);
+								whiteTurnGUI.setVisible(true);
+								blackTurnGUI.setVisible(false);
+							}
+							jWallCandidate = null;
+							isWhiteTurn = !isWhiteTurn;
+						}	
+						QuoridorController.releaseWall();
 					}
 				}
-
 			}
 
 			
