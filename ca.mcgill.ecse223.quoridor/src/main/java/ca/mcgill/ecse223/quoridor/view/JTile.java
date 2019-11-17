@@ -1009,48 +1009,16 @@ public class JTile extends JPanel {
 		ArrayList<SmallWallTO> t = QuoridorApplication.getJboard().getListOfSmallWallTO();
 		if(QuoridorApplication.getJboard().isWhiteTurn()==false) {
 			if(((x+1)==blackPawn_row)&&(y==blackPawn_column)) {
-				boolean can = true;
-				for(int i=0; i<t.size(); i++) {
-					if(t.get(i).isVertical()==false) {
-						if((t.get(i).getRowSmall()==(blackPawn_row-1))&&((t.get(i).getColumnSmall()==blackPawn_column)||(t.get(i).getColumnSmall()==(blackPawn_column-1)))){
-							can = false;
-						}
-					}
-				}
-				return can;
+				return legalMove("up", blackPawn_row, blackPawn_column);
 			}
 			if(((x-1)==blackPawn_row)&&(y==blackPawn_column)) {
-				boolean can = true;
-				for(int i=0; i<t.size(); i++) {
-					if(t.get(i).isVertical()==false) {
-						if((t.get(i).getRowSmall()==blackPawn_row)&&((t.get(i).getColumnSmall()==blackPawn_column)||(t.get(i).getColumnSmall()==(blackPawn_column-1)))){
-							can = false;
-						}
-					}
-				}
-				return can;
+				return legalMove("down", blackPawn_row, blackPawn_column);
 			}
 			if((x==blackPawn_row)&&((y+1)==blackPawn_column)) {
-				boolean can = true;
-				for(int i=0; i<t.size(); i++) {
-					if(t.get(i).isVertical()==true) {
-						if((t.get(i).getColumnSmall()==(blackPawn_column-1))&&((t.get(i).getRowSmall()==x)||(t.get(i).getRowSmall()==(x-1)))) {
-							can = false;
-						}
-					}
-				}
-				return can;
+				return legalMove("left", blackPawn_row, blackPawn_column);
 			}
 			if((x==blackPawn_row)&&((y-1)==blackPawn_column)) {
-				boolean can = true;
-				for(int i=0; i<t.size(); i++) {
-					if(t.get(i).isVertical()==true) {
-						if((t.get(i).getColumnSmall()==blackPawn_column)&&((t.get(i).getRowSmall()==x)||(t.get(i).getRowSmall()==(x-1)))) {
-							can = false;
-						}
-					}
-				}
-				return can;
+				return legalMove("right", blackPawn_row, blackPawn_column);
 			}
 			if((x==blackPawn_row)&&(y==blackPawn_column)) {
 				return true;
@@ -1058,48 +1026,16 @@ public class JTile extends JPanel {
 			return false;
 		}else {
 			if(((x+1)==whitePawn_row)&&(y==whitePawn_column)) {
-				boolean can = true;
-				for(int i=0; i<t.size(); i++) {
-					if(t.get(i).isVertical()==false) {
-						if((t.get(i).getRowSmall()==(whitePawn_row-1))&&((t.get(i).getColumnSmall()==whitePawn_column)||(t.get(i).getColumnSmall()==(whitePawn_column-1)))){
-							can = false;
-						}
-					}
-				}
-				return can;
+				return legalMove("up", whitePawn_row, whitePawn_column);
 			}
 			if(((x-1)==whitePawn_row)&&(y==whitePawn_column)) {
-				boolean can = true;
-				for(int i=0; i<t.size(); i++) {
-					if(t.get(i).isVertical()==false) {
-						if((t.get(i).getRowSmall()==whitePawn_row)&&((t.get(i).getColumnSmall()==whitePawn_column)||(t.get(i).getColumnSmall()==(whitePawn_column-1)))){
-							can = false;
-						}
-					}
-				}
-				return can;
+				return legalMove("down", whitePawn_row, whitePawn_column);
 			}
 			if((x==whitePawn_row)&&((y+1)==whitePawn_column)) {
-				boolean can = true;
-				for(int i=0; i<t.size(); i++) {
-					if(t.get(i).isVertical()==true) {
-						if((t.get(i).getColumnSmall()==(whitePawn_column-1))&&((t.get(i).getRowSmall()==x)||(t.get(i).getRowSmall()==(x-1)))) {
-							can = false;
-						}
-					}
-				}
-				return can;
+				return legalMove("left", whitePawn_row, whitePawn_column);
 			}
 			if((x==whitePawn_row)&&((y-1)==whitePawn_column)) {
-				boolean can = true;
-				for(int i=0; i<t.size(); i++) {
-					if(t.get(i).isVertical()==true) {
-						if((t.get(i).getColumnSmall()==whitePawn_column)&&((t.get(i).getRowSmall()==x)||(t.get(i).getRowSmall()==(x-1)))) {
-							can = false;
-						}
-					}
-				}
-				return can;
+				return legalMove("right", whitePawn_row, whitePawn_column);
 			}
 			if((x==whitePawn_row)&&(y==whitePawn_column)) {
 				return true;
@@ -1116,6 +1052,56 @@ public class JTile extends JPanel {
 			}
 		}
 	}
+	public boolean legalMove(String s, int origin_x, int origin_y) {
+		ArrayList<SmallWallTO> t = QuoridorApplication.getJboard().getListOfSmallWallTO();
+		if(s.equalsIgnoreCase("up")) {
+			boolean can = true;
+			for(int i=0; i<t.size(); i++) {
+				if(t.get(i).isVertical()==false) {
+					if((t.get(i).getRowSmall()==origin_x)&&((t.get(i).getColumnSmall()==origin_y)||(t.get(i).getColumnSmall()==(origin_y-1)))){
+						can = false;
+					}
+				}
+			}
+			return can;
+		}
+		else if(s.equalsIgnoreCase("down")){
+			boolean can = true;
+			for(int i=0; i<t.size(); i++) {
+				if(t.get(i).isVertical()==false) {
+					if((t.get(i).getRowSmall()==(origin_x-1))&&((t.get(i).getColumnSmall()==origin_y)||(t.get(i).getColumnSmall()==(origin_y-1)))){
+						can = false;
+					}
+				}
+			}
+			return can;
+		}
+		else if(s.equalsIgnoreCase("left")){
+			boolean can = true;
+			for(int i=0; i<t.size(); i++) {
+				if(t.get(i).isVertical()==true) {
+					if((t.get(i).getColumnSmall()==(origin_y-1))&&((t.get(i).getRowSmall()==origin_x)||(t.get(i).getRowSmall()==(origin_x-1)))) {
+						can = false;
+					}
+				}
+			}
+			return can;
+		}
+		else if(s.equalsIgnoreCase("right")){
+			boolean can = true;
+			for(int i=0; i<t.size(); i++) {
+				if(t.get(i).isVertical()==true) {
+					if((t.get(i).getColumnSmall()==origin_y)&&((t.get(i).getRowSmall()==origin_x)||(t.get(i).getRowSmall()==(origin_x-1)))) {
+						can = false;
+					}
+				}
+			}
+			return can;
+		}
+		else {
+			return false;
+		}
+	}
 	public void findAndGreenAvailableButton(int x, int y) {
 		ArrayList<SmallWallTO> t = QuoridorApplication.getJboard().getListOfSmallWallTO();
 		for(int i=0; i<t.size(); i++) {
@@ -1125,54 +1111,22 @@ public class JTile extends JPanel {
 			System.out.println("{isVertical: " + v + ", row: "+ r + ", column: " + c + "}");
 		}
 		if(legalB(x+1,y)) {
-			boolean can = true;
-			for(int i=0; i<t.size(); i++) {
-				if(t.get(i).isVertical()==false) {
-					if((t.get(i).getRowSmall()==x)&&((t.get(i).getColumnSmall()==y)||(t.get(i).getColumnSmall()==(y-1)))){
-						can = false;
-					}
-				}
-			}
-			if(can==true) {
+			if(legalMove("down", x, y)) {
 				greenButton(allButton[x+1][y]);
 			}
 		}
 		if(legalB(x-1,y)) {
-			boolean can = true;
-			for(int i=0; i<t.size(); i++) {
-				if(t.get(i).isVertical()==false) {
-					if((t.get(i).getRowSmall()==(x-1))&&((t.get(i).getColumnSmall()==y)||(t.get(i).getColumnSmall()==(y-1)))){
-						can = false;
-					}
-				}
-			}
-			if(can==true) {
+			if(legalMove("up", x, y)) {
 				greenButton(allButton[x-1][y]);
 			}
 		}
 		if(legalB(x,y+1)) {
-			boolean can = true;
-			for(int i=0; i<t.size(); i++) {
-				if(t.get(i).isVertical()==true) {
-					if((t.get(i).getColumnSmall()==y)&&((t.get(i).getRowSmall()==x)||(t.get(i).getRowSmall()==(x-1)))) {
-						can = false;
-					}
-				}
-			}
-			if(can==true) {
+			if(legalMove("right", x, y)) {
 				greenButton(allButton[x][y+1]);
 			}
 		}
 		if(legalB(x,y-1)) {
-			boolean can = true;
-			for(int i=0; i<t.size(); i++) {
-				if(t.get(i).isVertical()==true) {
-					if((t.get(i).getColumnSmall()==(y-1))&&((t.get(i).getRowSmall()==x)||(t.get(i).getRowSmall()==(x-1)))) {
-						can = false;
-					}
-				}
-			}
-			if(can==true) {
+			if(legalMove("left", x, y)) {
 				greenButton(allButton[x][y-1]);
 			}
 		}
