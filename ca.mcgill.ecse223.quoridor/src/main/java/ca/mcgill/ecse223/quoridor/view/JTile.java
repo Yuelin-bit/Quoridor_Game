@@ -896,29 +896,99 @@ public class JTile extends JPanel {
 	}
 	public void takeActions(int x, int y) {
 		if(isSelectedState==false) {
-			findAndGreenAvailableButton(x, y);
+			if(makeSureLegalTrun(x, y)) {
+				findAndGreenAvailableButton(x, y);
+				isSelectedState = !isSelectedState;
+			}
 		}else {
-			refreshAllWhite();
-			if(QuoridorApplication.getJboard().isWhiteTurn()==false) {
-				allButton[x][y].setIcon(new ImageIcon(JTile.class.getResource("/ca/mcgill/ecse223/quoridor/resources/bpawn.png")));
-				allButton[blackPawn_row][blackPawn_column].setIcon(null);
-				blackPawn_row = x;
-				blackPawn_column = y;
-				QuoridorApplication.getJboard().setWhiteTurn(true);
-				QuoridorApplication.getJboard().getWhiteTurnGUI().setVisible(true);
-				QuoridorApplication.getJboard().getBlackTurnGUI().setVisible(false);
-			}else {
-				allButton[x][y].setIcon(new ImageIcon(JTile.class.getResource("/ca/mcgill/ecse223/quoridor/resources/wpawn.png")));
-				allButton[whitePawn_row][whitePawn_column].setIcon(null);
-				whitePawn_row = x;
-				whitePawn_column = y;
-				QuoridorApplication.getJboard().setWhiteTurn(false);
-				QuoridorApplication.getJboard().getWhiteTurnGUI().setVisible(false);
-				QuoridorApplication.getJboard().getBlackTurnGUI().setVisible(true);
+			if(makeSureLegalMove(x, y)) {
+				refreshAllWhite();
+				if(QuoridorApplication.getJboard().isWhiteTurn()==false) {
+					allButton[x][y].setIcon(new ImageIcon(JTile.class.getResource("/ca/mcgill/ecse223/quoridor/resources/bpawn.png")));
+					allButton[blackPawn_row][blackPawn_column].setIcon(null);
+					System.out.println(determineDirection(x,y,blackPawn_row,blackPawn_column));
+					blackPawn_row = x;
+					blackPawn_column = y;
+					QuoridorApplication.getJboard().setWhiteTurn(true);
+					QuoridorApplication.getJboard().getWhiteTurnGUI().setVisible(true);
+					QuoridorApplication.getJboard().getBlackTurnGUI().setVisible(false);
+				}else {
+					allButton[x][y].setIcon(new ImageIcon(JTile.class.getResource("/ca/mcgill/ecse223/quoridor/resources/wpawn.png")));
+					allButton[whitePawn_row][whitePawn_column].setIcon(null);
+					System.out.println(determineDirection(x,y,whitePawn_row,whitePawn_column));
+					whitePawn_row = x;
+					whitePawn_column = y;
+					QuoridorApplication.getJboard().setWhiteTurn(false);
+					QuoridorApplication.getJboard().getWhiteTurnGUI().setVisible(false);
+					QuoridorApplication.getJboard().getBlackTurnGUI().setVisible(true);
+				}
+				isSelectedState = !isSelectedState;
 			}
 		}
-		isSelectedState = !isSelectedState;
 		this.requestFocus();
+	}
+	public String determineDirection(int x, int y, int a, int b) {
+		if(((x-1)==a)&&(y==b)) {
+			return "down";
+		}
+		if(((x+1)==a)&&(y==b)) {
+			return "up";
+		}
+		if(((x)==a)&&((y-1)==b)) {
+			return "right";
+		}
+		if(((x)==a)&&((y+1)==b)) {
+			return "left";
+		}
+		else {
+			return null;
+		}
+	}
+	public boolean makeSureLegalTrun(int x, int y) {
+		if(QuoridorApplication.getJboard().isWhiteTurn()==false) {
+			if((x==blackPawn_row)&&(y==blackPawn_column)) {
+				return true;
+			}else {
+				return false;
+			}
+		}else {
+			if((x==whitePawn_row)&&(y==whitePawn_column)) {
+				return true;
+			}else {
+				return false;
+			}
+		}
+	}
+	public boolean makeSureLegalMove(int x, int y) {
+		if(QuoridorApplication.getJboard().isWhiteTurn()==false) {
+			if(((x+1)==blackPawn_row)&&(y==blackPawn_column)) {
+				return true;
+			}
+			if(((x-1)==blackPawn_row)&&(y==blackPawn_column)) {
+				return true;
+			}
+			if((x==blackPawn_row)&&((y+1)==blackPawn_column)) {
+				return true;
+			}
+			if((x==blackPawn_row)&&((y-1)==blackPawn_column)) {
+				return true;
+			}
+			return false;
+		}else {
+			if(((x+1)==whitePawn_row)&&(y==whitePawn_column)) {
+				return true;
+			}
+			if(((x-1)==whitePawn_row)&&(y==whitePawn_column)) {
+				return true;
+			}
+			if((x==whitePawn_row)&&((y+1)==whitePawn_column)) {
+				return true;
+			}
+			if((x==whitePawn_row)&&((y-1)==whitePawn_column)) {
+				return true;
+			}
+			return false;
+		}
 	}
 	public void refreshAllWhite() {
 		for(int i=1;i<10;i++) {
