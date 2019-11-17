@@ -17,6 +17,8 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextArea;
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -211,7 +213,20 @@ public class NewJBoard extends JFrame {
 		blackTurnGUI.setBounds(360, 94, 32, 32);
 		blackTurnGUI.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/32—wqueen.png")));
 		blackTurnGUI.setVisible(false);
+		
+		
+		
+		
 		tile.setLayout(null);
+		
+		
+		
+		//ImageIcon whitePawn = new ImageIcon("/ca.mcgill.ecse223.quoridor/src/main/java/ca/mcgill/ecse223/quoridor/resources/wpawn.png");
+		
+		
+		
+		
+		
 		tile.add(monkey_White);
 //		tile.add(whiteUser);
 //		tile.add(bigTime);
