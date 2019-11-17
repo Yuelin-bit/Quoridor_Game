@@ -10,6 +10,7 @@ import javax.swing.plaf.metal.MetalButtonUI;
 import ca.mcgill.ecse223.quoridor.QuoridorApplication;
 import ca.mcgill.ecse223.quoridor.controller.PawnBehavior;
 import ca.mcgill.ecse223.quoridor.controller.PawnBehavior.MoveDirection;
+import ca.mcgill.ecse223.quoridor.view.NewJBoard.SmallWallTO;
 import ca.mcgill.ecse223.quoridor.controller.QuoridorController;
 
 import javax.swing.JButton;
@@ -18,6 +19,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
@@ -916,11 +918,11 @@ public class JTile extends JPanel {
 					allButton[x][y].setIcon(new ImageIcon(JTile.class.getResource("/ca/mcgill/ecse223/quoridor/resources/bpawn.png")));
 					allButton[blackPawn_row][blackPawn_column].setIcon(null);
 					//System.out.println(determineDirection(x,y,blackPawn_row,blackPawn_column));
-					String direction = determineDirection(x,y,blackPawn_row,blackPawn_column);
-					PawnBehavior pawnBehavior = new PawnBehavior();
-					if (pawnBehavior.isLegalStep(checkMoveDirection(direction))) {
-						boolean result = QuoridorController.movePlayer("black", direction);
-					}
+//					String direction = determineDirection(x,y,blackPawn_row,blackPawn_column);
+//					PawnBehavior pawnBehavior = new PawnBehavior();
+//					if (pawnBehavior.isLegalStep(checkMoveDirection(direction))) {
+//						boolean result = QuoridorController.movePlayer("black", direction);
+//					}
 					blackPawn_row = x;
 					blackPawn_column = y;
 					QuoridorApplication.getJboard().setWhiteTurn(true);
@@ -936,11 +938,11 @@ public class JTile extends JPanel {
 					allButton[x][y].setIcon(new ImageIcon(JTile.class.getResource("/ca/mcgill/ecse223/quoridor/resources/wpawn.png")));
 					allButton[whitePawn_row][whitePawn_column].setIcon(null);
 					//System.out.println(determineDirection(x,y,whitePawn_row,whitePawn_column));
-					String direction = determineDirection(x,y,whitePawn_row,whitePawn_column);
-					PawnBehavior pawnBehavior = new PawnBehavior();
-					if (pawnBehavior.isLegalStep(checkMoveDirection(direction))) {
-						boolean result = QuoridorController.movePlayer("white", direction);
-					}
+//					String direction = determineDirection(x,y,whitePawn_row,whitePawn_column);
+//					PawnBehavior pawnBehavior = new PawnBehavior();
+//					if (pawnBehavior.isLegalStep(checkMoveDirection(direction))) {
+//						boolean result = QuoridorController.movePlayer("white", direction);
+//					}
 					whitePawn_row = x;
 					whitePawn_column = y;
 					QuoridorApplication.getJboard().setWhiteTurn(false);
@@ -1050,17 +1052,64 @@ public class JTile extends JPanel {
 		}
 	}
 	public void findAndGreenAvailableButton(int x, int y) {
+		ArrayList<SmallWallTO> t = QuoridorApplication.getJboard().getListOfSmallWallTO();
+		for(int i=0; i<t.size(); i++) {
+			int r = t.get(i).getRowSmall();
+			int c = t.get(i).getColumnSmall();
+			boolean v = t.get(i).isVertical();
+			System.out.println("{isVertical: " + v + ", row: "+ r + ", column: " + c + "}");
+		}
 		if(legalB(x+1,y)) {
-			greenButton(allButton[x+1][y]);
+			boolean can = true;
+			for(int i=0; i<t.size(); i++) {
+				if(t.get(i).isVertical()==false) {
+					if((t.get(i).getRowSmall()==x)&&((t.get(i).getColumnSmall()==y)||(t.get(i).getColumnSmall()==(y-1)))){
+						can = false;
+					}
+				}
+			}
+			if(can==true) {
+				greenButton(allButton[x+1][y]);
+			}
 		}
 		if(legalB(x-1,y)) {
-			greenButton(allButton[x-1][y]);
+			boolean can = true;
+			for(int i=0; i<t.size(); i++) {
+				if(t.get(i).isVertical()==false) {
+					if((t.get(i).getRowSmall()==(x-1))&&((t.get(i).getColumnSmall()==y)||(t.get(i).getColumnSmall()==(y-1)))){
+						can = false;
+					}
+				}
+			}
+			if(can==true) {
+				greenButton(allButton[x-1][y]);
+			}
 		}
 		if(legalB(x,y+1)) {
-			greenButton(allButton[x][y+1]);
+			boolean can = true;
+			for(int i=0; i<t.size(); i++) {
+				if(t.get(i).isVertical()==true) {
+					if((t.get(i).getColumnSmall()==y)&&((t.get(i).getRowSmall()==x)||(t.get(i).getRowSmall()==(x-1)))) {
+						can = false;
+					}
+				}
+			}
+			if(can==true) {
+				greenButton(allButton[x][y+1]);
+			}
 		}
 		if(legalB(x,y-1)) {
-			greenButton(allButton[x][y-1]);
+			boolean can = true;
+			for(int i=0; i<t.size(); i++) {
+				if(t.get(i).isVertical()==true) {
+					if((t.get(i).getColumnSmall()==(y-1))&&((t.get(i).getRowSmall()==x)||(t.get(i).getRowSmall()==(x-1)))) {
+						can = false;
+					}
+				}
+			}
+			if(can==true) {
+				greenButton(allButton[x][y-1]);
+			}
 		}
 	}
 	public boolean legalB(int x, int y) {
