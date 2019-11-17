@@ -45,6 +45,19 @@ public class NewJBoard extends JFrame {
 	private JTextArea blackStock;
 	private JButton setting;
 	private JLabel whiteTurnGUI;
+	public JLabel getWhiteTurnGUI() {
+		return whiteTurnGUI;
+	}
+	public void setWhiteTurnGUI(JLabel whiteTurnGUI) {
+		this.whiteTurnGUI = whiteTurnGUI;
+	}
+	public JLabel getBlackTurnGUI() {
+		return blackTurnGUI;
+	}
+	public void setBlackTurnGUI(JLabel blackTurnGUI) {
+		this.blackTurnGUI = blackTurnGUI;
+	}
+
 	private JLabel blackTurnGUI;
 	private JLabel bigTime;
 	
@@ -81,11 +94,23 @@ public class NewJBoard extends JFrame {
 	private boolean isWhiteTurn = true;
 	
 
+	public boolean isWhiteTurn() {
+		return isWhiteTurn;
+	}
+	public void setWhiteTurn(boolean isWhiteTurn) {
+		this.isWhiteTurn = isWhiteTurn;
+	}
+
+
+
+
+
 	/**
 	 * Create the frame.
 	 */
 	public NewJBoard() {
 		
+		System.out.println(jWallCandidate_1.getLocation().x+" and "+jWallCandidate_1.getLocation().y);
 
 		
 		for(int i=0; i<10; i++) {
@@ -595,6 +620,4 @@ public class NewJBoard extends JFrame {
 	public void setblackStock(JTextArea blackStock) {
 		this.blackStock = blackStock;
 	}
-
-	
 }
