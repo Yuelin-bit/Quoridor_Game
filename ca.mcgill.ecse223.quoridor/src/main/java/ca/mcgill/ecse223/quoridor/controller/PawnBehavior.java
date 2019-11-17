@@ -866,38 +866,36 @@ public class PawnBehavior
 			Direction wallDirection = wall.getMove().getWallDirection();
 			
 			if (dir == MoveDirection.West) {
-				if ((wallDirection == Direction.Horizontal) && (wallColumn == prow-1) && 
-						((wallRow == prow-1) || (wallRow == prow+1) || (wallRow == prow))) {
+				if ((wallDirection == Direction.Vertical) && (wallColumn == pcol-1) && 
+						((wallRow == prow+1) || (wallRow == prow))) {
 					result = false;
 					break;
 				}
 			}
 			
 			if (dir == MoveDirection.East) {
-				if ((wallDirection == Direction.Horizontal) && (wallColumn == pcol+1) && 
-						((wallRow == prow-1) || (wallRow == prow+1) || (wallRow == prow))) {
+				if ((wallDirection == Direction.Vertical) && (wallColumn == pcol) && 
+						((wallRow == prow+1) || (wallRow == prow))) {
 					result = false;
 					break;
 				}
 			}
 			
 			if (dir == MoveDirection.North) {
-				if ((wallDirection == Direction.Vertical) && (wallRow == prow-1) && 
-						((wallColumn== pcol-1) || (wallColumn == pcol+1) || (wallColumn == pcol))) {
+				if ((wallDirection == Direction.Horizontal) && (wallRow == prow-1) && 
+						((wallColumn== pcol-1) || (wallColumn == pcol))) {
 					result = false;
 					break;
 				}
 			}
 			
 			if (dir == MoveDirection.South) {
-				if ((wallDirection == Direction.Vertical) && (wallRow == prow+1) && 
-						((wallColumn== pcol-1) || (wallColumn == pcol+1) || (wallColumn == pcol))) {
+				if ((wallDirection == Direction.Horizontal) && (wallRow == prow) && 
+						((wallColumn== pcol-1) || (wallColumn == pcol))) {
 					result = false;
 					break;
 				}
-			}
-				
-				
+			}				
 			
 		}
 		

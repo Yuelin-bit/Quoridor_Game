@@ -1597,39 +1597,39 @@ public class CucumberStepDefinitions {
 
 		@Given("The opponent is not {string} from the player")
 		public void the_opponent_is_not_from_the_player(String string) {
-			Player aPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
-			int prow;
-			int pcol;
-			int orow;
-			int ocol;
-			Player opponent;
-			if(aPlayer.hasGameAsBlack()) {
-				prow = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
-				pcol = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getColumn();
-				orow = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
-				ocol = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
-				opponent = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
-				boolean cmp1 = string.equals("left") && (orow == prow) && (ocol == pcol - 1);
-				boolean cmp2 = string.equals("right") && (orow == prow) && (ocol == pcol + 1);
-				boolean cmp3 = string.equals("up") && (orow == prow - 1) && (ocol == pcol);
-				boolean cmp4 = string.equals("down") && (orow == prow + 1) && (ocol == pcol);
-				if (cmp1 && cmp2 && cmp3 && cmp4) {
-					Tile player1StartPos = QuoridorApplication.getQuoridor().getBoard().getTile(4);
-					PlayerPosition whitePosition = new PlayerPosition(QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer(), player1StartPos);
-					QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setWhitePosition(whitePosition);
-				}
-				
-			}else {
-				orow = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
-				ocol = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getColumn();
-				prow = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
-				pcol = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
-				opponent = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
-				boolean cmp1 = string.equals("left") && (orow == prow) && (ocol == pcol - 1);
-				boolean cmp2 = string.equals("right") && (orow == prow) && (ocol == pcol + 1);
-				boolean cmp3 = string.equals("up") && (orow == prow - 1) && (ocol == pcol);
-				boolean cmp4 = string.equals("down") && (orow == prow + 1) && (ocol == pcol);
-			}		
+//			Player aPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
+//			int prow;
+//			int pcol;
+//			int orow;
+//			int ocol;
+//			Player opponent;
+//			if(aPlayer.hasGameAsBlack()) {
+//				prow = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
+//				pcol = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getColumn();
+//				orow = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
+//				ocol = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
+//				opponent = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
+//				boolean cmp1 = string.equals("left") && (orow == prow) && (ocol == pcol - 1);
+//				boolean cmp2 = string.equals("right") && (orow == prow) && (ocol == pcol + 1);
+//				boolean cmp3 = string.equals("up") && (orow == prow - 1) && (ocol == pcol);
+//				boolean cmp4 = string.equals("down") && (orow == prow + 1) && (ocol == pcol);
+//				if (cmp1 && cmp2 && cmp3 && cmp4) {
+//					Tile player1StartPos = QuoridorApplication.getQuoridor().getBoard().getTile(4);
+//					PlayerPosition whitePosition = new PlayerPosition(QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer(), player1StartPos);
+//					QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setWhitePosition(whitePosition);
+//				}
+//				
+//			}else {
+//				orow = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
+//				ocol = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getColumn();
+//				prow = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
+//				pcol = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
+//				opponent = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
+//				boolean cmp1 = string.equals("left") && (orow == prow) && (ocol == pcol - 1);
+//				boolean cmp2 = string.equals("right") && (orow == prow) && (ocol == pcol + 1);
+//				boolean cmp3 = string.equals("up") && (orow == prow - 1) && (ocol == pcol);
+//				boolean cmp4 = string.equals("down") && (orow == prow + 1) && (ocol == pcol);
+//			}		
 			
 		}
 
