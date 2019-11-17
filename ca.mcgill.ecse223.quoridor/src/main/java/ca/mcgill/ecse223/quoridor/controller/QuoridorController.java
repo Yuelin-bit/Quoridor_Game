@@ -1712,6 +1712,7 @@ public class QuoridorController {
 			//GamePosition currentGamePosition = new GamePosition(id, newWhitePosition, newBlackPosition, blackPlayer,game);
 			GamePosition currentGamePosition = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition();
 			currentGamePosition.setWhitePosition(newWhitePosition);
+			currentGamePosition.setPlayerToMove(blackPlayer);
 			currentGamePosition.setId(id);
 			QuoridorApplication.getQuoridor().getCurrentGame().addPosition(currentGamePosition);
 			QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(currentGamePosition);
@@ -1758,6 +1759,7 @@ public class QuoridorController {
 			//GamePosition currentGamePosition = new GamePosition(id, newBlackPosition, newWhitePosition, whitePlayer,game);
 			GamePosition currentGamePosition = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition();
 			currentGamePosition.setBlackPosition(newBlackPosition);
+			currentGamePosition.setPlayerToMove(whitePlayer);
 			currentGamePosition.setId(id);
 			QuoridorApplication.getQuoridor().getCurrentGame().addPosition(currentGamePosition);
 			QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(currentGamePosition);
