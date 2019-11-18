@@ -324,13 +324,15 @@ public class QuoridorController {
 			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().addWhiteWallsOnBoard(wallmove.getWallPlaced());
 			Player blackPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
 			currentPlayer.setNextPlayer(blackPlayer);
-			currentPlayer.setGameAsWhite(null);
-			currentPlayer.setGameAsBlack(currentGame);
+			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(blackPlayer);
+//			currentPlayer.setGameAsWhite(null);
+//			currentPlayer.setGameAsBlack(currentGame);
 		}else {	QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().addBlackWallsOnBoard(wallmove.getWallPlaced());
 			Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
 			currentPlayer.setNextPlayer(whitePlayer);
-			currentPlayer.setGameAsBlack(null);
-			currentPlayer.setGameAsWhite(currentGame);
+			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(whitePlayer);
+//			currentPlayer.setGameAsBlack(null);
+//			currentPlayer.setGameAsWhite(currentGame);
 			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(whitePlayer);
 		}
 
@@ -1246,8 +1248,8 @@ public class QuoridorController {
 		Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
 		Player blackPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
 		whitePlayer.setGameAsWhite(game);
-		Tile initWhite = new Tile(5, 9, board);
-		Tile initBlack = new Tile(5, 1, board);
+		Tile initWhite = new Tile(9, 5, board);
+		Tile initBlack = new Tile(1, 5, board);
 		PlayerPosition initialWhite = new PlayerPosition(whitePlayer, initWhite);
 		PlayerPosition initialBlack = new PlayerPosition(whitePlayer, initBlack);
 
@@ -1707,9 +1709,13 @@ public class QuoridorController {
 
 			Tile newTile = QuoridorApplication.getQuoridor().getBoard().getTile(9*(row-1)+(column-1));
 			PlayerPosition newWhitePosition = new PlayerPosition(whitePlayer,newTile);		
-			PlayerPosition newBlackPosition = new PlayerPosition(blackPlayer,blackTile);			
+			//PlayerPosition newBlackPosition = new PlayerPosition(blackPlayer,blackTile);			
 
-			GamePosition currentGamePosition = new GamePosition(id, newWhitePosition, newBlackPosition, blackPlayer,game);
+			//GamePosition currentGamePosition = new GamePosition(id, newWhitePosition, newBlackPosition, blackPlayer,game);
+			GamePosition currentGamePosition = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition();
+			currentGamePosition.setWhitePosition(newWhitePosition);
+			currentGamePosition.setPlayerToMove(blackPlayer);
+			currentGamePosition.setId(id);
 			QuoridorApplication.getQuoridor().getCurrentGame().addPosition(currentGamePosition);
 			QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(currentGamePosition);
 			int x = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
@@ -1751,8 +1757,12 @@ public class QuoridorController {
 			}
 			Tile newTile = QuoridorApplication.getQuoridor().getBoard().getTile((row-1)*9+(column-1));
 			PlayerPosition newBlackPosition = new PlayerPosition(blackPlayer,newTile);		
-			PlayerPosition newWhitePosition = new PlayerPosition(whitePlayer,whiteTile);			
-			GamePosition currentGamePosition = new GamePosition(id, newBlackPosition, newWhitePosition, whitePlayer,game);
+			//PlayerPosition newWhitePosition = new PlayerPosition(whitePlayer,whiteTile);			
+			//GamePosition currentGamePosition = new GamePosition(id, newBlackPosition, newWhitePosition, whitePlayer,game);
+			GamePosition currentGamePosition = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition();
+			currentGamePosition.setBlackPosition(newBlackPosition);
+			currentGamePosition.setPlayerToMove(whitePlayer);
+			currentGamePosition.setId(id);
 			QuoridorApplication.getQuoridor().getCurrentGame().addPosition(currentGamePosition);
 			QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(currentGamePosition);
 			int x = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
@@ -1911,8 +1921,8 @@ public class QuoridorController {
 		// There are total 36 tiles in the first four rows and
 		// indexing starts from 0 -> tiles with indices 36 and 36+8=44 are the starting
 		// positions
-		Tile player1StartPos = quoridor.getBoard().getTile(36);
-		Tile player2StartPos = quoridor.getBoard().getTile(44);
+		Tile player1StartPos = quoridor.getBoard().getTile(4);
+		Tile player2StartPos = quoridor.getBoard().getTile(76);
 
 		Game game = new Game(GameStatus.Running, MoveMode.PlayerMove, quoridor);
 		game.setWhitePlayer(players.get(0));
