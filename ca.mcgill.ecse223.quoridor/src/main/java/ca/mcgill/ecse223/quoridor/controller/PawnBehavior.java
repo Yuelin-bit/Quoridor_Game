@@ -1008,7 +1008,7 @@ public class PawnBehavior
 
 
   /**
-   * Returns if it is legal to jump in the given direction
+   * 
    */
   // line 123 "../../../../../StateMachine.ump"
   public boolean isLegalJump(MoveDirection dir){
@@ -1031,9 +1031,9 @@ public class PawnBehavior
 	  int yDiff = playerCoord[1] - opponentCoord[1];
 	  int[] targetCoord;
 	  if (dir.equals(MoveDirection.North)) {
-		  targetCoord = new int[] {playerCoord[0], playerCoord[1]+2};
-	  } else if (dir.equals(MoveDirection.South)) {
 		  targetCoord = new int[] {playerCoord[0], playerCoord[1]-2};
+	  } else if (dir.equals(MoveDirection.South)) {
+		  targetCoord = new int[] {playerCoord[0], playerCoord[1]+2};
 	  } else if (dir.equals(MoveDirection.West)) {
 		  targetCoord = new int[] {playerCoord[0]-2, playerCoord[1]};
 	  } else if (dir.equals(MoveDirection.East)) {
