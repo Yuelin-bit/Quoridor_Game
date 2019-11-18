@@ -1780,6 +1780,7 @@ public class QuoridorController {
 	 * This method takes two parameters: one for suggest player and one for direction. It will proceed a jump move
 	 * for the given player. It is assumed that the movement is legal.
 	 *  
+	 * @author Pengnan Fan 
 	 * @param player
 	 * @param direction
 	 * @return A boolean variable to suggest if the movement has been proceed.

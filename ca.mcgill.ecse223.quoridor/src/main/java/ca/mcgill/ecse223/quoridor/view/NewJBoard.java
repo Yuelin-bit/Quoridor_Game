@@ -109,6 +109,13 @@ public class NewJBoard extends JFrame {
 	
 	private JWall jWallCandidate = null;
 	
+	public JWall getjWallCandidate() {
+		return jWallCandidate;
+	}
+	public void setjWallCandidate(JWall jWallCandidate) {
+		this.jWallCandidate = jWallCandidate;
+	}
+
 	private static final int MAX_WALL = 10;
 	private int BLACK_WALL_INDEX = 0;//how many times you grabed before
 	private int WHITE_WALL_INDEX = 0;

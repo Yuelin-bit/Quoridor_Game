@@ -1042,9 +1042,9 @@ public class PawnBehavior
 	  int yDiff = playerCoord[1] - opponentCoord[1];
 	  int[] targetCoord;
 	  if (dir.equals(MoveDirection.North)) {
-		  targetCoord = new int[] {playerCoord[0], playerCoord[1]+2};
-	  } else if (dir.equals(MoveDirection.South)) {
 		  targetCoord = new int[] {playerCoord[0], playerCoord[1]-2};
+	  } else if (dir.equals(MoveDirection.South)) {
+		  targetCoord = new int[] {playerCoord[0], playerCoord[1]+2};
 	  } else if (dir.equals(MoveDirection.West)) {
 		  targetCoord = new int[] {playerCoord[0]-2, playerCoord[1]};
 	  } else if (dir.equals(MoveDirection.East)) {
@@ -1098,17 +1098,17 @@ public class PawnBehavior
 			  			return false;
 			  		} else if (dir.equals(MoveDirection.South)
 			  				&&currentWallDirection.equals(Direction.Horizontal)
-			  				&&currentWallTile.getRow()==targetCoord[1]
+			  				&&currentWallTile.getRow()==targetCoord[1]-1
 			  				&&(currentWallTile.getColumn()==targetCoord[0]||currentWallTile.getColumn()==targetCoord[0]-1)) {
 			  			return false;
 			  		} else if (dir.equals(MoveDirection.West)
 			  				&&currentWallDirection.equals(Direction.Vertical)
-			  				&&currentWallTile.getColumn()==targetCoord[0]-1
+			  				&&currentWallTile.getColumn()==targetCoord[0]
 			  				&&(currentWallTile.getRow()==targetCoord[1]||currentWallTile.getRow()==targetCoord[1]-1)) {
 			  			return false;
 			  		} else if (dir.equals(MoveDirection.East)
 			  				&&currentWallDirection.equals(Direction.Vertical)
-			  				&&currentWallTile.getColumn()==targetCoord[0]
+			  				&&currentWallTile.getColumn()==targetCoord[0]-1
 			  				&&(currentWallTile.getRow()==targetCoord[1]||currentWallTile.getRow()==targetCoord[1]-1)) {
 			  			return false;
 			  		}
@@ -1146,17 +1146,17 @@ public class PawnBehavior
 			  			return false;
 			  		} else if (dir.equals(MoveDirection.South)
 			  				&&currentWallDirection.equals(Direction.Horizontal)
-			  				&&currentWallTile.getRow()==targetCoord[1]
+			  				&&currentWallTile.getRow()==targetCoord[1]-1
 			  				&&(currentWallTile.getColumn()==targetCoord[0]||currentWallTile.getColumn()==targetCoord[0]-1)) {
 			  			return false;
 			  		} else if (dir.equals(MoveDirection.West)
 			  				&&currentWallDirection.equals(Direction.Vertical)
-			  				&&currentWallTile.getColumn()==targetCoord[0]-1
+			  				&&currentWallTile.getColumn()==targetCoord[0]
 			  				&&(currentWallTile.getRow()==targetCoord[1]||currentWallTile.getRow()==targetCoord[1]-1)) {
 			  			return false;
 			  		} else if (dir.equals(MoveDirection.East)
 			  				&&currentWallDirection.equals(Direction.Vertical)
-			  				&&currentWallTile.getColumn()==targetCoord[0]
+			  				&&currentWallTile.getColumn()==targetCoord[0]-1
 			  				&&(currentWallTile.getRow()==targetCoord[1]||currentWallTile.getRow()==targetCoord[1]-1)) {
 			  			return false;
 			  		}

@@ -207,7 +207,6 @@ public class CucumberStepDefinitions {
 	public void i_release_the_wall_in_my_hand() {
 		//WallMove a = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate();
 		QuoridorController.releaseWall();
-		QuoridorApplication.getJboard().dispose();
 	}
 
 	@Then("A wall move shall be registered with {string} at position \\({int}, {int})")
@@ -229,11 +228,14 @@ public class CucumberStepDefinitions {
 
 	@Then("I shall have a wall in my hand over the board")
 	public void i_shall_have_a_wall_in_my_hand_over_the_board() {
-		boolean haveAWall = false;
-//		if(QuoridorApplication.getJboard().getJwall()!=null) {
-//			haveAWall = true;
-//		}
-		Assert.assertEquals(true,haveAWall);
+		boolean haveWall = true;
+		try {
+			QuoridorApplication.getJboard().getjWallCandidate();
+			haveWall = false;
+		}catch(Exception e) {
+			
+		}
+		Assert.assertEquals(true,haveWall);
 	}
 	
 	
@@ -257,7 +259,7 @@ public class CucumberStepDefinitions {
 	@Then("It shall not be my turn to move")
 	public void it_shall_not_be_my_turn_to_move() {
 		Player aPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getPlayer();
-		Assert.assertEquals(aPlayer, QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove());
+		Assert.assertNotEquals(aPlayer, QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove());
 	    
 	}
 	
@@ -565,7 +567,7 @@ public class CucumberStepDefinitions {
 			newWallFromStock = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition()
 					.getWhiteWallsInStock().get(0);
 		}
-		Assert.assertEquals(null, newWallFromStock);
+		Assert.assertNotEquals(null, newWallFromStock);
 	}
 
 	// Scenario: No more walls in stock
@@ -608,25 +610,27 @@ public class CucumberStepDefinitions {
 	@Then("I shall not have a wall in my hand")
 	public void i_shall_not_have_a_wall_in_my_hand() {
 		// GUI-related feature -- TODO for later
-		boolean noWall = false;
-//		if(QuoridorApplication.getJboard().getJwall()!=null) {
-//			noWall = true;
-//		}
+		boolean noWall = true;
+		try {
+			QuoridorApplication.getJboard().getjWallCandidate();
+			noWall = false;
+		}catch(Exception e) {
+			
+		}
 		Assert.assertEquals(true,noWall);
 		//throw new cucumber.api.PendingException();
 	}
 	
 	@Then("I shall have no walls in my hand")
 	public void i_shall_have_no_walls_in_my_hand() {
-//		int w = QuoridorApplication.getJboard().getWhiteWallList().size();
-//		int b = QuoridorApplication.getJboard().getBlackWallList().size();
-//		Assert.assertEquals(10,w);
-//		Assert.assertEquals(10,b);	
+		int w = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsInStock().size();
+     	int b = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsInStock().size();	
 		boolean noWall = false;
 //		if(QuoridorApplication.getJboard().getJwall()!=null) {
 //			noWall = true;
 //		}
-		Assert.assertEquals(true,noWall);
+		Assert.assertNotEquals(w,10);
+		Assert.assertNotEquals(b,1);
 	}
 
 	//// *******************************************************************************************************************************
@@ -1444,8 +1448,8 @@ public class CucumberStepDefinitions {
 		@Then("White's pawn shall be in its initial position")
 		public void white_s_pawn_shall_be_in_its_initial_position() {
 			//white starts from e9
-			int whiteRow = 5;
-			int whiteColumn = 9;
+			int whiteRow = 9;
+			int whiteColumn = 5;
 			int whiteCurrentRow = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
 			int whiteCurrentColumn = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
 			assertEquals(whiteRow,whiteCurrentRow);
@@ -1456,8 +1460,8 @@ public class CucumberStepDefinitions {
 		@Then("Black's pawn shall be in its initial position")
 		public void black_s_pawn_shall_be_in_its_initial_position() {
 			//black starts from e1, e is column and 1 is row
-			int blackRow = 5;
-			int blackColumn = 1;
+			int blackRow = 1;
+			int blackColumn = 5;
 			int blackCurrentRow = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
 			int blackCurrentColumn = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getColumn();
 			assertEquals(blackRow,blackCurrentRow);
