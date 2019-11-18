@@ -899,6 +899,7 @@ public class JTile extends JPanel {
 	
 		
 	}
+	boolean dangerous = false;
 	public void takeActions(int x, int y) {
 		if(isSelectedState==false) {
 			if(makeSureLegalTrun(x, y)) {
@@ -918,10 +919,12 @@ public class JTile extends JPanel {
 					allButton[x][y].setIcon(new ImageIcon(JTile.class.getResource("/ca/mcgill/ecse223/quoridor/resources/bpawn.png")));
 					allButton[blackPawn_row][blackPawn_column].setIcon(null);
 //					System.out.println(determineDirection(x,y,blackPawn_row,blackPawn_column));
-					String direction = determineDirection(x,y,blackPawn_row,blackPawn_column);
-					PawnBehavior pawnBehavior = new PawnBehavior();
-					if (pawnBehavior.isLegalStep(checkMoveDirection(direction))) {
-						boolean result = QuoridorController.movePlayer("black", direction);
+					if(dangerous==false) {
+						String direction = determineDirection(x,y,blackPawn_row,blackPawn_column);
+						PawnBehavior pawnBehavior = new PawnBehavior();
+						if (pawnBehavior.isLegalStep(checkMoveDirection(direction))) {
+							boolean result = QuoridorController.movePlayer("black", direction);
+						}
 					}
 					blackPawn_row = x;
 					blackPawn_column = y;
@@ -938,10 +941,12 @@ public class JTile extends JPanel {
 					allButton[x][y].setIcon(new ImageIcon(JTile.class.getResource("/ca/mcgill/ecse223/quoridor/resources/wpawn.png")));
 					allButton[whitePawn_row][whitePawn_column].setIcon(null);
 //					System.out.println(determineDirection(x,y,whitePawn_row,whitePawn_column));
-					String direction = determineDirection(x,y,whitePawn_row,whitePawn_column);
-					PawnBehavior pawnBehavior = new PawnBehavior();
-					if (pawnBehavior.isLegalStep(checkMoveDirection(direction))) {
-						boolean result = QuoridorController.movePlayer("white", direction);
+					if(dangerous==false) {
+						String direction = determineDirection(x,y,whitePawn_row,whitePawn_column);
+						PawnBehavior pawnBehavior = new PawnBehavior();
+						if (pawnBehavior.isLegalStep(checkMoveDirection(direction))) {
+							boolean result = QuoridorController.movePlayer("white", direction);
+						}
 					}
 					whitePawn_row = x;
 					whitePawn_column = y;
@@ -1012,37 +1017,45 @@ public class JTile extends JPanel {
 				return legalMove("up", blackPawn_row, blackPawn_column);
 			}
 			if(((x+2)==blackPawn_row)&&(y==blackPawn_column)) {
+				dangerous = true;
 				return legalMove("upJump", blackPawn_row, blackPawn_column);
 			}
 			if(((x-1)==blackPawn_row)&&(y==blackPawn_column)) {
 				return legalMove("down", blackPawn_row, blackPawn_column);
 			}
 			if(((x-2)==blackPawn_row)&&(y==blackPawn_column)) {
+				dangerous = true;
 				return legalMove("downJump", blackPawn_row, blackPawn_column);
 			}
 			if((x==blackPawn_row)&&((y+1)==blackPawn_column)) {
 				return legalMove("left", blackPawn_row, blackPawn_column);
 			}
 			if((x==blackPawn_row)&&((y+2)==blackPawn_column)) {
+				dangerous = true;
 				return legalMove("leftJump", blackPawn_row, blackPawn_column);
 			}
 			if((x==blackPawn_row)&&((y-1)==blackPawn_column)) {
 				return legalMove("right", blackPawn_row, blackPawn_column);
 			}
 			if((x==blackPawn_row)&&((y-2)==blackPawn_column)) {
+				dangerous = true;
 				return legalMove("rightJump", blackPawn_row, blackPawn_column);
 			}
 			/////////
 			if(((x-1)==blackPawn_row)&&((y-1)==blackPawn_column)) {
+				dangerous = true;
 				return (legalMove("downRightJump", blackPawn_row, blackPawn_column)||legalMove("rightDownJump", blackPawn_row, blackPawn_column));
 			}
 			if(((x-1)==blackPawn_row)&&((y+1)==blackPawn_column)) {
+				dangerous = true;
 				return (legalMove("downLeftJump", blackPawn_row, blackPawn_column)||legalMove("leftDownJump", blackPawn_row, blackPawn_column));
 			}
 			if(((x+1)==blackPawn_row)&&((y-1)==blackPawn_column)) {
+				dangerous = true;
 				return (legalMove("upRightJump", blackPawn_row, blackPawn_column)||legalMove("rightUpJump", blackPawn_row, blackPawn_column));
 			}
 			if(((x+1)==blackPawn_row)&&((y+1)==blackPawn_column)) {
+				dangerous = true;
 				return (legalMove("upLeftJump", blackPawn_row, blackPawn_column)||legalMove("leftUpJump", blackPawn_row, blackPawn_column));
 			}
 			///////
@@ -1055,24 +1068,28 @@ public class JTile extends JPanel {
 				return legalMove("up", whitePawn_row, whitePawn_column);
 			}
 			if(((x+2)==whitePawn_row)&&(y==whitePawn_column)) {
+				dangerous = true;
 				return legalMove("upJump", whitePawn_row, whitePawn_column);
 			}
 			if(((x-1)==whitePawn_row)&&(y==whitePawn_column)) {
 				return legalMove("down", whitePawn_row, whitePawn_column);
 			}
 			if(((x-2)==whitePawn_row)&&(y==whitePawn_column)) {
+				dangerous = true;
 				return legalMove("downJump", whitePawn_row, whitePawn_column);
 			}
 			if((x==whitePawn_row)&&((y+1)==whitePawn_column)) {
 				return legalMove("left", whitePawn_row, whitePawn_column);
 			}
 			if((x==whitePawn_row)&&((y+2)==whitePawn_column)) {
+				dangerous = true;
 				return legalMove("leftJump", whitePawn_row, whitePawn_column);
 			}
 			if((x==whitePawn_row)&&((y-1)==whitePawn_column)) {
 				return legalMove("right", whitePawn_row, whitePawn_column);
 			}
 			if((x==whitePawn_row)&&((y-2)==whitePawn_column)) {
+				dangerous = true;
 				return legalMove("rightJump", whitePawn_row, whitePawn_column);
 			}
 			if((x==whitePawn_row)&&(y==whitePawn_column)) {
@@ -1080,15 +1097,19 @@ public class JTile extends JPanel {
 			}
 			/////////
 			if(((x-1)==whitePawn_row)&&((y-1)==whitePawn_column)) {
+				dangerous = true;
 				return (legalMove("downRightJump", whitePawn_row, whitePawn_column)||legalMove("rightDownJump", whitePawn_row, whitePawn_column));
 			}
 			if(((x-1)==whitePawn_row)&&((y+1)==whitePawn_column)) {
+				dangerous = true;
 				return (legalMove("downLeftJump", whitePawn_row, whitePawn_column)||legalMove("leftDownJump", whitePawn_row, whitePawn_column));
 			}
 			if(((x+1)==whitePawn_row)&&((y-1)==whitePawn_column)) {
+				dangerous = true;
 				return (legalMove("upRightJump", whitePawn_row, whitePawn_column)||legalMove("rightUpJump", whitePawn_row, whitePawn_column));
 			}
 			if(((x+1)==whitePawn_row)&&((y+1)==whitePawn_column)) {
+				dangerous = true;
 				return (legalMove("upLeftJump", whitePawn_row, whitePawn_column)||legalMove("leftUpJump", whitePawn_row, whitePawn_column));
 			}
 				///////
