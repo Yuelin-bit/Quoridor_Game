@@ -115,6 +115,9 @@ public class NewJBoard extends JFrame {
 	private JLabel instruction1;
 	private JLabel instruction2;
 	private JLabel instruction3;
+	private JLabel instruction4;
+	private JLabel lblWalls;
+	private JLabel label;
 	
 	
 
@@ -186,7 +189,7 @@ public class NewJBoard extends JFrame {
 		
 		
 		JLabel cat_Black = new JLabel();
-		cat_Black.setBounds(403, 17, 127, 120);
+		cat_Black.setBounds(411, 17, 127, 120);
 		cat_Black.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/cat_128.png")));
 		
 		
@@ -239,14 +242,14 @@ public class NewJBoard extends JFrame {
 		
 		
 		
-        whiteStock = new JLabel("WS");
+        whiteStock = new JLabel("10");
         whiteStock.setForeground(Color.WHITE);
-        whiteStock.setBounds(127, 134, 61, 16);
+        whiteStock.setBounds(166, 134, 16, 16);
         
         
-        blackStock = new JLabel("BS");
+        blackStock = new JLabel("10");
         blackStock.setForeground(Color.WHITE);
-        blackStock.setBounds(350, 134, 49, 16);
+        blackStock.setBounds(393, 134, 16, 16);
         
 		
 		
@@ -300,6 +303,20 @@ public class NewJBoard extends JFrame {
         instruction3 = new JLabel("Move Wall: Press W,A,S,D");
         instruction3.setBounds(29, 742, 313, 16);
         tile.add(instruction3);
+        
+        instruction4 = new JLabel("Flip Wall: Press R");
+        instruction4.setBounds(379, 714, 118, 16);
+        tile.add(instruction4);
+        
+        lblWalls = new JLabel("Walls:");
+        lblWalls.setForeground(Color.WHITE);
+        lblWalls.setBounds(115, 134, 39, 16);
+        tile.add(lblWalls);
+        
+        label = new JLabel("Walls:");
+        label.setForeground(Color.WHITE);
+        label.setBounds(353, 134, 39, 16);
+        tile.add(label);
         
 
 		tile.addKeyListener(new KeyAdapter() {
@@ -445,6 +462,7 @@ public class NewJBoard extends JFrame {
 								JWhiteWallInStock[WHITE_WALL_INDEX-1].setBackground(Color.BLUE);
 								JWhiteWallInStock[WHITE_WALL_INDEX-1].setVisible(true);
 								JWhiteWallOnBoard[WHITE_WALL_INDEX-1] = JWhiteWallInStock[WHITE_WALL_INDEX-1];
+								whiteStock.setText(transferInt(10-WHITE_WALL_INDEX));
 								whiteTurnGUI.setVisible(false);
 								blackTurnGUI.setVisible(true);
 							}else {
@@ -454,6 +472,7 @@ public class NewJBoard extends JFrame {
 								JBlackWallInStock[BLACK_WALL_INDEX-1].setBackground(Color.BLUE);
 								JBlackWallInStock[BLACK_WALL_INDEX-1].setVisible(true);
 								JBlackWallOnBoard[BLACK_WALL_INDEX-1] = JBlackWallInStock[BLACK_WALL_INDEX-1];
+								blackStock.setText(transferInt(10-BLACK_WALL_INDEX));
 								whiteTurnGUI.setVisible(true);
 								blackTurnGUI.setVisible(false);
 							}
@@ -469,6 +488,20 @@ public class NewJBoard extends JFrame {
 		});
 	}
 	
+	public String transferInt(int a) {
+		if(a==10) return "10";
+		if(a==9) return "9";
+		if(a==8) return "8";
+		if(a==7) return "7";
+		if(a==6) return "6";
+		if(a==5) return "5";
+		if(a==4) return "4";
+		if(a==3) return "3";
+		if(a==2) return "2";
+		if(a==1) return "1";
+		if(a==0) return "0";
+		return null;
+	}
 
 	public class SmallWallTO{
 		private boolean isVertical;

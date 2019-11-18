@@ -1185,6 +1185,9 @@ public class JTile extends JPanel {
 					if((t.get(i).getRowSmall()==(origin_x+1))&&((t.get(i).getColumnSmall()==origin_y)||(t.get(i).getColumnSmall()==(origin_y-1)))){
 						can = false;
 					}
+					if((t.get(i).getRowSmall()==(origin_x))&&((t.get(i).getColumnSmall()==origin_y)||(t.get(i).getColumnSmall()==(origin_y-1)))){
+						can = false;
+					}
 				}
 			}
 			return can;
@@ -1198,6 +1201,9 @@ public class JTile extends JPanel {
 			for(int i=0; i<t.size(); i++) {
 				if(t.get(i).isVertical()==false) {
 					if((t.get(i).getRowSmall()==(origin_x-2))&&((t.get(i).getColumnSmall()==origin_y)||(t.get(i).getColumnSmall()==(origin_y-1)))){
+						can = false;
+					}
+					if((t.get(i).getRowSmall()==(origin_x-1))&&((t.get(i).getColumnSmall()==origin_y)||(t.get(i).getColumnSmall()==(origin_y-1)))){
 						can = false;
 					}
 				}
@@ -1215,6 +1221,9 @@ public class JTile extends JPanel {
 					if((t.get(i).getColumnSmall()==origin_y+1)&&((t.get(i).getRowSmall()==origin_x)||(t.get(i).getRowSmall()==(origin_x-1)))) {
 						can = false;
 					}
+					if((t.get(i).getColumnSmall()==origin_y)&&((t.get(i).getRowSmall()==origin_x)||(t.get(i).getRowSmall()==(origin_x-1)))) {
+						can = false;
+					}
 				}
 			}
 			return can;
@@ -1228,6 +1237,9 @@ public class JTile extends JPanel {
 			for(int i=0; i<t.size(); i++) {
 				if(t.get(i).isVertical()==true) {
 					if((t.get(i).getColumnSmall()==origin_y-2)&&((t.get(i).getRowSmall()==origin_x)||(t.get(i).getRowSmall()==(origin_x-1)))) {
+						can = false;
+					}
+					if((t.get(i).getColumnSmall()==origin_y-1)&&((t.get(i).getRowSmall()==origin_x)||(t.get(i).getRowSmall()==(origin_x-1)))) {
 						can = false;
 					}
 				}
