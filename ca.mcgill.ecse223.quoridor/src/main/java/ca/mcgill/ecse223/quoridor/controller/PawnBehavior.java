@@ -1083,7 +1083,7 @@ public class PawnBehavior
    */
   // line 126 "../../../../../StateMachine.ump"
   public void illegalMove(){
-	 
+	  System.out.println("Can't exceed boundary");
   }
 
 }
