@@ -357,7 +357,7 @@ public class PawnBehavior
         {
           exitPawnSMPlayingNorthSouthNorthSouth();
         // line 39 "../../../../../StateMachine.ump"
-          jumpPown(MoveDirection.South);
+          jumpPawn(MoveDirection.South);
           setPawnSMPlayingNorthSouthNorthSouth(PawnSMPlayingNorthSouthNorthSouth.SouthEdge);
           wasEventProcessed = true;
           break;
