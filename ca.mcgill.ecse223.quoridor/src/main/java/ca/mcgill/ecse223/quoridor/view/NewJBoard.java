@@ -11,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 
 import ca.mcgill.ecse223.quoridor.QuoridorApplication;
 import ca.mcgill.ecse223.quoridor.controller.QuoridorController;
+//import ca.mcgill.ecse223.quoridor.controller.nothing;
 import ca.mcgill.ecse223.quoridor.view.Pawn.PawnColor;
 
 import javax.swing.GroupLayout;
@@ -33,6 +34,15 @@ import java.util.ArrayList;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * 
+ * Name : NewJBoard
+ * 
+ * @author EveryOne
+ * @version this is our significant page
+ * @exception nothing
+ *
+ */
 public class NewJBoard extends JFrame {
 
 	private JPanel contentPane;
@@ -46,7 +56,10 @@ public class NewJBoard extends JFrame {
 	private JLabel whiteTime;
 	private JButton setting;
 	private JLabel whiteTurnGUI;
-	
+	/**
+	 * 
+	 * The below is generated automatically
+	 */
 	public JLabel getWhiteTurnGUI() {
 		return whiteTurnGUI;
 	}
@@ -127,6 +140,7 @@ public class NewJBoard extends JFrame {
 	private JLabel instruction4;
 	private JLabel lblWalls;
 	private JLabel label;
+	private JLabel lblNewLabel;
 	
 	
 
@@ -338,6 +352,10 @@ public class NewJBoard extends JFrame {
         label.setBounds(353, 134, 39, 16);
         tile.add(label);
         
+        lblNewLabel = new JLabel("Back ->");
+        lblNewLabel.setBounds(223, 147, 61, 16);
+        tile.add(lblNewLabel);
+        
 
 		tile.addKeyListener(new KeyAdapter() {
 			@Override
@@ -507,7 +525,14 @@ public class NewJBoard extends JFrame {
 			
 		});
 	}
-	
+	/**
+	 * 
+	 * 
+	 * @author EveryOne
+	 * @version convert int to string
+	 * @exception nothing
+	 *
+	 */
 	public String transferInt(int a) {
 		if(a==10) return "10";
 		if(a==9) return "9";
@@ -523,6 +548,14 @@ public class NewJBoard extends JFrame {
 		return null;
 	}
 
+	/**
+	 * 
+	 * 
+	 * @author EveryOne
+	 * @version inner class to get data of jwalls
+	 * @exception nothing
+	 *
+	 */
 	public class SmallWallTO{
 		private boolean isVertical;
 		private int rowSmall;
@@ -551,7 +584,14 @@ public class NewJBoard extends JFrame {
 			this.columnSmall = columnSmall;
 		}
 	}
-	
+	/**
+	 * 
+	 * 
+	 * @author EveryOne
+	 * @version get data of jwalls
+	 * @exception nothing
+	 *
+	 */
 	public ArrayList<SmallWallTO> getListOfSmallWallTO(){
 		ArrayList<SmallWallTO> listOfGUIWall = new ArrayList<SmallWallTO>();
 		for(int i=0; i<10; i++) {

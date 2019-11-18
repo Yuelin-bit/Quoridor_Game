@@ -1,4 +1,13 @@
 package ca.mcgill.ecse223.quoridor.view;
+/**
+ * 
+ * Name : JTile
+ * 
+ * @author EveryOne
+ * @version This is out main view, we draw 81 tiles and create 81 buttons in order to move pawn.
+ * @exception nothing
+ *
+ */
 
 import java.awt.Color;
 import java.awt.Font;

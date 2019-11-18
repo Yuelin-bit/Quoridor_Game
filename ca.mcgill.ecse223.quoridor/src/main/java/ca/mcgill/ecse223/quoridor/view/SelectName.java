@@ -1,4 +1,13 @@
 package ca.mcgill.ecse223.quoridor.view;
+/**
+ * 
+ * Name : Select
+ * 
+ * @author EveryOne
+ * @version this is our login page to start a new game
+ * @exception nothing
+ *
+ */
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;

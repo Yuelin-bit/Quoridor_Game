@@ -1,4 +1,13 @@
 package ca.mcgill.ecse223.quoridor.view;
+/**
+ * 
+ * Name : MainMenu
+ * 
+ * @author EveryOne
+ * @version this is our main page, you can create new users and start new game
+ * @exception nothing
+ *
+ */
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
