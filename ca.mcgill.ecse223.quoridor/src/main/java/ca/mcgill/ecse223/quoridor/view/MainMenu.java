@@ -51,7 +51,7 @@ public class MainMenu extends JFrame {
 		JButton btnNewButton = new JButton("New Game");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				QuoridorController.initializeNewGame();
+				QuoridorController.initializeNewGame(); //boolean not catched
 				SelectName page = new SelectName();
 				page.setVisible(true);
 				setVisible(false);//close the mainMenu.

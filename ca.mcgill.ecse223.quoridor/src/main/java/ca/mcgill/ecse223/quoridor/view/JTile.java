@@ -917,12 +917,12 @@ public class JTile extends JPanel {
 					}		
 					allButton[x][y].setIcon(new ImageIcon(JTile.class.getResource("/ca/mcgill/ecse223/quoridor/resources/bpawn.png")));
 					allButton[blackPawn_row][blackPawn_column].setIcon(null);
-					//System.out.println(determineDirection(x,y,blackPawn_row,blackPawn_column));
-//					String direction = determineDirection(x,y,blackPawn_row,blackPawn_column);
-//					PawnBehavior pawnBehavior = new PawnBehavior();
-//					if (pawnBehavior.isLegalStep(checkMoveDirection(direction))) {
-//						boolean result = QuoridorController.movePlayer("black", direction);
-//					}
+//					System.out.println(determineDirection(x,y,blackPawn_row,blackPawn_column));
+					String direction = determineDirection(x,y,blackPawn_row,blackPawn_column);
+					PawnBehavior pawnBehavior = new PawnBehavior();
+					if (pawnBehavior.isLegalStep(checkMoveDirection(direction))) {
+						boolean result = QuoridorController.movePlayer("black", direction);
+					}
 					blackPawn_row = x;
 					blackPawn_column = y;
 					QuoridorApplication.getJboard().setWhiteTurn(true);
@@ -937,12 +937,12 @@ public class JTile extends JPanel {
 					}
 					allButton[x][y].setIcon(new ImageIcon(JTile.class.getResource("/ca/mcgill/ecse223/quoridor/resources/wpawn.png")));
 					allButton[whitePawn_row][whitePawn_column].setIcon(null);
-					//System.out.println(determineDirection(x,y,whitePawn_row,whitePawn_column));
-//					String direction = determineDirection(x,y,whitePawn_row,whitePawn_column);
-//					PawnBehavior pawnBehavior = new PawnBehavior();
-//					if (pawnBehavior.isLegalStep(checkMoveDirection(direction))) {
-//						boolean result = QuoridorController.movePlayer("white", direction);
-//					}
+//					System.out.println(determineDirection(x,y,whitePawn_row,whitePawn_column));
+					String direction = determineDirection(x,y,whitePawn_row,whitePawn_column);
+					PawnBehavior pawnBehavior = new PawnBehavior();
+					if (pawnBehavior.isLegalStep(checkMoveDirection(direction))) {
+						boolean result = QuoridorController.movePlayer("white", direction);
+					}
 					whitePawn_row = x;
 					whitePawn_column = y;
 					QuoridorApplication.getJboard().setWhiteTurn(false);
@@ -973,7 +973,7 @@ public class JTile extends JPanel {
 		}
 	}
 	
-	public MoveDirection checkMoveDirection(String direction) {
+	private MoveDirection checkMoveDirection(String direction) {
 		MoveDirection movedirection = null;
 		if (direction.equals("left")) {
 			movedirection = MoveDirection.West;

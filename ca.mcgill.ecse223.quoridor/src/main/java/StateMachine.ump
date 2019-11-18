@@ -104,10 +104,10 @@ class PawnBehavior {
     Finished { }    
   }
 
-  void jumpPawn(MoveDirection dir){
+  boolean jumpPawn(MoveDirection dir){
   }
   
-  void movePlayer(MoveDirection dir){
+  boolean movePlayer(MoveDirection dir){
   }
   
   void startTheGame(){}

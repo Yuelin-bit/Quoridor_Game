@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ca.mcgill.ecse223.quoridor.QuoridorApplication;
+import ca.mcgill.ecse223.quoridor.controller.PawnBehavior.MoveDirection;
 import ca.mcgill.ecse223.quoridor.model.*;
 
 // line 4 "../../../../../StateMachine.ump"
@@ -118,7 +119,7 @@ public class PawnBehavior
     switch (aPawnSMPlayingNorthSouthNorthSouth)
     {
       case Setup:
-        if (getPlayer().getGameAsWhite.equals(getCurrentGame()))
+        if (getPlayer().getGameAsWhite().equals(getCurrentGame()))
         {
           exitPawnSMPlayingNorthSouthNorthSouth();
         // line 19 "../../../../../StateMachine.ump"
@@ -357,7 +358,7 @@ public class PawnBehavior
         {
           exitPawnSMPlayingNorthSouthNorthSouth();
         // line 39 "../../../../../StateMachine.ump"
-          jumpPown(MoveDirection.South);
+          jumpPawn(MoveDirection.South);
           setPawnSMPlayingNorthSouthNorthSouth(PawnSMPlayingNorthSouthNorthSouth.SouthEdge);
           wasEventProcessed = true;
           break;
@@ -366,7 +367,7 @@ public class PawnBehavior
         {
           exitPawnSMPlayingNorthSouthNorthSouth();
         // line 40 "../../../../../StateMachine.ump"
-          jumpPown(MoveDirection.South);
+          jumpPawn(MoveDirection.South);
           setPawnSMPlayingNorthSouthNorthSouth(PawnSMPlayingNorthSouthNorthSouth.SouthBorder);
           wasEventProcessed = true;
           break;
@@ -375,7 +376,7 @@ public class PawnBehavior
         {
           exitPawnSMPlayingNorthSouthNorthSouth();
         // line 43 "../../../../../StateMachine.ump"
-          jumpPown(MoveDirection.South);
+          jumpPawn(MoveDirection.South);
           setPawnSMPlayingNorthSouthNorthSouth(PawnSMPlayingNorthSouthNorthSouth.MiddleNS);
           wasEventProcessed = true;
           break;
@@ -386,7 +387,7 @@ public class PawnBehavior
         {
           exitPawnSMPlayingNorthSouthNorthSouth();
         // line 49 "../../../../../StateMachine.ump"
-          jumpPown(MoveDirection.South);
+          jumpPawn(MoveDirection.South);
           setPawnSMPlayingNorthSouthNorthSouth(PawnSMPlayingNorthSouthNorthSouth.MiddleNS);
           wasEventProcessed = true;
           break;
@@ -397,7 +398,7 @@ public class PawnBehavior
         {
           exitPawnSMPlayingNorthSouthNorthSouth();
         // line 54 "../../../../../StateMachine.ump"
-          jumpPown(MoveDirection.South);
+          jumpPawn(MoveDirection.South);
           setPawnSMPlayingNorthSouthNorthSouth(PawnSMPlayingNorthSouthNorthSouth.MiddleNS);
           wasEventProcessed = true;
           break;
@@ -449,7 +450,7 @@ public class PawnBehavior
           wasEventProcessed = true;
           break;
         }
-        if (isLegalStep(MoveDirection.East)&&getCurrentPawnColumn()>=3&&Column()<=6)
+        if (isLegalStep(MoveDirection.East)&&getCurrentPawnColumn()>=3&&getCurrentPawnColumn()<=6)
         {
           exitPawnSMPlayingEastWestEastWest();
         // line 87 "../../../../../StateMachine.ump"
@@ -857,12 +858,20 @@ public class PawnBehavior
 
   // line 108 "../../../../../StateMachine.ump"
   public void jumpPawn(MoveDirection dir){
+	  
     
   }
 
   // line 111 "../../../../../StateMachine.ump"
-  public void movePlayer(MoveDirection dir){
-    
+  public boolean movePlayer(MoveDirection dir){
+	String playerSide;
+	Player player = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
+	if (player.hasGameAsBlack()) {
+		playerSide = "black";
+	} else {
+		playerSide = "white";
+	}
+    return QuoridorController.movePlayer(playerSide, determineDirection(dir));
   }
 
   // line 113 "../../../../../StateMachine.ump"
@@ -1085,5 +1094,22 @@ public class PawnBehavior
   public void illegalMove(){
 	 
   }
-
+  
+  private String determineDirection(MoveDirection dir) {
+		if(dir == MoveDirection.South) {
+			return "down";
+		}
+		if(dir == MoveDirection.North) {
+			return "up";
+		}
+		if(dir == MoveDirection.East) {
+			return "right";
+		}
+		if(dir == MoveDirection.West) {
+			return "left";
+		}
+		else {
+			return null;
+		}
+	}
 }
