@@ -112,6 +112,9 @@ public class NewJBoard extends JFrame {
 	private int WHITE_WALL_INDEX = 0;
 	
 	private boolean isWhiteTurn = true;
+	private JLabel instruction1;
+	private JLabel instruction2;
+	private JLabel instruction3;
 	
 	
 
@@ -285,6 +288,18 @@ public class NewJBoard extends JFrame {
 		
 
         tile.setFocusable(true);
+        
+        instruction1 = new JLabel("Grab Wall: Press G");
+        instruction1.setBounds(29, 714, 118, 16);
+        tile.add(instruction1);
+        
+        instruction2 = new JLabel("Drop Wall: Press T");
+        instruction2.setBounds(221, 714, 118, 16);
+        tile.add(instruction2);
+        
+        instruction3 = new JLabel("Move Wall: Press W,A,S,D");
+        instruction3.setBounds(29, 742, 313, 16);
+        tile.add(instruction3);
         
 
 		tile.addKeyListener(new KeyAdapter() {
