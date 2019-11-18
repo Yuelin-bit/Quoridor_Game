@@ -882,8 +882,11 @@ public class PawnBehavior
 
   /**
    * Returns the current row number of the pawn
+   * @author Zirui He
+   * @return int
    */
   // line 117 "../../../../../StateMachine.ump"
+
   public int getCurrentPawnRow(){
 	  currentGame = QuoridorApplication.getQuoridor().getCurrentGame();
 	  Player player = currentGame.getCurrentPosition().getPlayerToMove();
@@ -899,6 +902,8 @@ public class PawnBehavior
 
   /**
    * Returns the current column number of the pawn
+   * @author Zirui He
+   * @return int
    */
   // line 119 "../../../../../StateMachine.ump"
   public int getCurrentPawnColumn(){
@@ -916,6 +921,9 @@ public class PawnBehavior
 
   /**
    * Returns if it is legal to step in the given direction
+   * @author Zirui He
+   * @param dir
+   * @return boolean
    */
   // line 121 "../../../../../StateMachine.ump"
   public boolean isLegalStep(MoveDirection dir){
@@ -1009,6 +1017,9 @@ public class PawnBehavior
 
   /**
    * Returns if it is legal to jump in the given direction
+   * @author Pengnan Fan
+   * @param dir
+   * @return boolean
    */
   // line 123 "../../../../../StateMachine.ump"
   public boolean isLegalJump(MoveDirection dir){
@@ -1157,14 +1168,21 @@ public class PawnBehavior
   }
 
 
-  /**
-   * Action to be called when an illegal move is attempted
-   */
+ /**
+  * this method will print out the error message when try to move pawn out of board
+  * @auther Zirui He
+  */
   // line 126 "../../../../../StateMachine.ump"
   public void illegalMove(){
 	  System.out.println("Can't exceed boundary");
   }
   
+  /**
+   * this method will change MoveDirection to corresponding string
+   * @author Zirui He
+   * @param dir
+   * @return String
+   */
   private String determineDirection(MoveDirection dir) {
 		if(dir == MoveDirection.South) {
 			return "down";

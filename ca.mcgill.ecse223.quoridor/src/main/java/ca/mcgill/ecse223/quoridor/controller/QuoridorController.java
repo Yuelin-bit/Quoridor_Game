@@ -1505,10 +1505,9 @@ public class QuoridorController {
 
 
 	/**
-	 * This method checks the clock of the current player to count down.
-	 * It returns true if the clock is counting down.
+	 * We are not using this method right now
 	 * 
-	 * @author Non
+	 * @author Gengyi Sun
 	 * @param String string, String string2
 	 * @return boolean
 	 */ 
@@ -1652,10 +1651,9 @@ public class QuoridorController {
 
 	}
 	/**
-	 * This method checks the clock of the current player to count down.
-	 * It returns true if the clock is counting down.
+	 * this method will move a pawn to certain direction and return the result
 	 * 
-	 * @author Non
+	 * @author Zirui He, Gengyi Sun
 	 * @param String string, String string2
 	 * @return boolean
 	 */ 
@@ -1841,6 +1839,13 @@ public class QuoridorController {
 
 	//helper method
 
+	/**
+	 * this helper method change the single character that represent column to integer 
+	 * 
+	 * @author Zirui He
+	 * @param x
+	 * @return int
+	 */
 	private static int columnNum(String x) {
 		int result = 0;
 		if (x.equals("a"))  result = 1;
@@ -1855,6 +1860,15 @@ public class QuoridorController {
 		return result;
 	}
 
+	/**
+	 * this method get users from model and use the users to create two players and 
+	 * connect players to the model
+	 * 
+	 * @author Zirui He
+	 * @param userName1
+	 * @param userName2
+	 * @return ArrayList<Player>
+	 */
 	public static ArrayList<Player> createUsersAndPlayers(String userName1, String userName2) {
 		Quoridor quoridor = QuoridorApplication.getQuoridor();
 		//			User user1 = quoridor.addUser(userName1);
@@ -1916,6 +1930,11 @@ public class QuoridorController {
 		return playersList;
 	}
 
+	/**
+	 * This is the method form stepDefinition written by Marton
+	 * 
+	 * @param players
+	 */
 	public static void createAndStartGame(ArrayList<Player> players) {
 		Quoridor quoridor = QuoridorApplication.getQuoridor();
 		// There are total 36 tiles in the first four rows and
@@ -1945,6 +1964,9 @@ public class QuoridorController {
 		game.setCurrentPosition(gamePosition);
 	}
 
+	/**
+	 * This is the method form stepDefinition written by Marton
+	 */
 	public static void initQuoridorAndBoard() {
 		Quoridor quoridor = QuoridorApplication.getQuoridor();
 		//Board board = new Board(quoridor);
