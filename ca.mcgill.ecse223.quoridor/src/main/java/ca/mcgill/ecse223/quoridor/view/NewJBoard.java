@@ -29,6 +29,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.UIManager;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 public class NewJBoard extends JFrame {
 
@@ -98,6 +99,11 @@ public class NewJBoard extends JFrame {
 	
 	private JWall[] JWhiteWallInStock = {jWallCandidate_1,jWallCandidate_2,jWallCandidate_3,jWallCandidate_4,jWallCandidate_5,jWallCandidate_6,jWallCandidate_7,jWallCandidate_8,jWallCandidate_9,jWallCandidate_10};
 	private JWall[] JBlackWallInStock = {jWallCandidate_11,jWallCandidate_12,jWallCandidate_13,jWallCandidate_14,jWallCandidate_15,jWallCandidate_16,jWallCandidate_17,jWallCandidate_18,jWallCandidate_19,jWallCandidate_20};
+	private JWall[] JWhiteWallOnBoard = new JWall[10];
+	private JWall[] JBlackWallOnBoard = new JWall[10];
+	
+	
+	
 	
 	private JWall jWallCandidate = null;
 	
@@ -423,6 +429,7 @@ public class NewJBoard extends JFrame {
 								JWhiteWallInStock[WHITE_WALL_INDEX-1].setLocation(x, y);
 								JWhiteWallInStock[WHITE_WALL_INDEX-1].setBackground(Color.BLUE);
 								JWhiteWallInStock[WHITE_WALL_INDEX-1].setVisible(true);
+								JWhiteWallOnBoard[WHITE_WALL_INDEX-1] = JWhiteWallInStock[WHITE_WALL_INDEX-1];
 								whiteTurnGUI.setVisible(false);
 								blackTurnGUI.setVisible(true);
 							}else {
@@ -431,6 +438,7 @@ public class NewJBoard extends JFrame {
 								JBlackWallInStock[BLACK_WALL_INDEX-1].setLocation(x, y);
 								JBlackWallInStock[BLACK_WALL_INDEX-1].setBackground(Color.BLUE);
 								JBlackWallInStock[BLACK_WALL_INDEX-1].setVisible(true);
+								JBlackWallOnBoard[BLACK_WALL_INDEX-1] = JBlackWallInStock[BLACK_WALL_INDEX-1];
 								whiteTurnGUI.setVisible(true);
 								blackTurnGUI.setVisible(false);
 							}
@@ -446,8 +454,77 @@ public class NewJBoard extends JFrame {
 		});
 	}
 	
+
+	public class SmallWallTO{
+		private boolean isVertical;
+		private int rowSmall;
+		private int columnSmall;
+		SmallWallTO(boolean isVertical, int rowSmall, int columnSmall){
+			this.setColumnSmall(columnSmall);
+			this.setRowSmall(rowSmall);
+			this.setVertical(isVertical);
+		}
+		public boolean isVertical() {
+			return isVertical;
+		}
+		public void setVertical(boolean isVertical) {
+			this.isVertical = isVertical;
+		}
+		public int getRowSmall() {
+			return rowSmall;
+		}
+		public void setRowSmall(int rowSmall) {
+			this.rowSmall = rowSmall;
+		}
+		public int getColumnSmall() {
+			return columnSmall;
+		}
+		public void setColumnSmall(int columnSmall) {
+			this.columnSmall = columnSmall;
+		}
+	}
 	
-	
+	public ArrayList<SmallWallTO> getListOfSmallWallTO(){
+		ArrayList<SmallWallTO> listOfGUIWall = new ArrayList<SmallWallTO>();
+		for(int i=0; i<10; i++) {
+			if(JBlackWallOnBoard[i]!=null) {
+				boolean isVertical;
+				int rowSmall;
+				int columnSmall;
+				if(JBlackWallOnBoard[i].getHeight()==9) {
+					isVertical = false;
+					rowSmall = (JBlackWallOnBoard[i].getLocation().y - 185) / 56;
+					columnSmall = (JBlackWallOnBoard[i].getLocation().x + 30) / 56;
+				}else {
+					isVertical = true;
+					rowSmall = (JBlackWallOnBoard[i].getLocation().y - 138) / 56;
+					columnSmall = (JBlackWallOnBoard[i].getLocation().x -17) / 56;
+				}
+				SmallWallTO a = new SmallWallTO(isVertical, rowSmall, columnSmall);
+				listOfGUIWall.add(a);
+			}
+		}
+		
+		for(int i=0; i<10; i++) {
+			if(JWhiteWallOnBoard[i]!=null) {
+				boolean isVertical;
+				int rowSmall;
+				int columnSmall;
+				if(JWhiteWallOnBoard[i].getHeight()==9) {
+					isVertical = false;
+					rowSmall = (JWhiteWallOnBoard[i].getLocation().y - 185) / 56;
+					columnSmall = (JWhiteWallOnBoard[i].getLocation().x + 30) / 56;
+				}else {
+					isVertical = true;
+					rowSmall = (JWhiteWallOnBoard[i].getLocation().y - 138) / 56;
+					columnSmall = (JWhiteWallOnBoard[i].getLocation().x -17) / 56;
+				}
+				SmallWallTO a = new SmallWallTO(isVertical, rowSmall, columnSmall);
+				listOfGUIWall.add(a);
+			}
+		}
+		return listOfGUIWall;
+	}
 	
 
 	/**
