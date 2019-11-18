@@ -1593,7 +1593,7 @@ public class QuoridorController {
 				return false;
 			}
 
-			Tile newTile = QuoridorApplication.getQuoridor().getBoard().getTile((row-1)*9+column);
+			Tile newTile = QuoridorApplication.getQuoridor().getBoard().getTile((row-1)*9+(column-1));
 			PlayerPosition newWhitePosition = new PlayerPosition(whitePlayer,newTile);		
 			PlayerPosition newBlackPosition = new PlayerPosition(blackPlayer,blackTile);			
 
@@ -1651,7 +1651,7 @@ public class QuoridorController {
 
 				return false;
 			}
-			Tile newTile = QuoridorApplication.getQuoridor().getBoard().getTile((row-1)*9+column);
+			Tile newTile = QuoridorApplication.getQuoridor().getBoard().getTile((row-1)*9+(column-1));
 			PlayerPosition newBlackPosition = new PlayerPosition(blackPlayer,newTile);		
 			PlayerPosition newWhitePosition = new PlayerPosition(whitePlayer,whiteTile);			
 			GamePosition currentGamePosition = new GamePosition(id, newBlackPosition, newWhitePosition, whitePlayer,game);
