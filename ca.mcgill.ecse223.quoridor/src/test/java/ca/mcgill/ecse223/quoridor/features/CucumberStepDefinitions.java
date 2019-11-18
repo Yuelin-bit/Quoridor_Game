@@ -1681,11 +1681,11 @@ public class CucumberStepDefinitions {
 			Integer col;
 
 			if(movePawnSuccess&&aPlayer.hasGameAsBlack()) {
-				row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
-				col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getColumn();
-			}else if(movePawnSuccess&&aPlayer.hasGameAsWhite()){
 				row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
 				col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
+			}else if(movePawnSuccess&&aPlayer.hasGameAsWhite()){
+				row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
+				col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getColumn();
 			}
 			else if(!movePawnSuccess&&aPlayer.hasGameAsBlack()) {
 				row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();

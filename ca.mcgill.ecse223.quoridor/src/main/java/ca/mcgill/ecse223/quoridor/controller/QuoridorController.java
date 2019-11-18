@@ -1807,6 +1807,11 @@ public class QuoridorController {
 		targetTile = QuoridorApplication.getQuoridor().getBoard().getTile((y-1)*9+x-1);
 		pos = new PlayerPosition(p, targetTile);
 		g.getCurrentPosition().setWhitePosition(pos);
+		if (p.hasGameAsBlack()) {
+			g.getCurrentPosition().setPlayerToMove(g.getWhitePlayer());
+		} else {
+			g.getCurrentPosition().setPlayerToMove(g.getBlackPlayer());
+		}
 		return true;
 	}
 
