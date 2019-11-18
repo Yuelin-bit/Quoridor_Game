@@ -232,7 +232,7 @@ public class SelectName extends JFrame {
 					setVisible(false);
 					dispose();
 				}
-				//QuoridorController.refreshData();
+				QuoridorController.refreshData();
 			}
 		});
 		
