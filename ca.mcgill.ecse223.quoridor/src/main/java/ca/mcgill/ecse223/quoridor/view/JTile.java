@@ -1011,15 +1011,41 @@ public class JTile extends JPanel {
 			if(((x+1)==blackPawn_row)&&(y==blackPawn_column)) {
 				return legalMove("up", blackPawn_row, blackPawn_column);
 			}
+			if(((x+2)==blackPawn_row)&&(y==blackPawn_column)) {
+				return legalMove("upJump", blackPawn_row, blackPawn_column);
+			}
 			if(((x-1)==blackPawn_row)&&(y==blackPawn_column)) {
 				return legalMove("down", blackPawn_row, blackPawn_column);
+			}
+			if(((x-2)==blackPawn_row)&&(y==blackPawn_column)) {
+				return legalMove("downJump", blackPawn_row, blackPawn_column);
 			}
 			if((x==blackPawn_row)&&((y+1)==blackPawn_column)) {
 				return legalMove("left", blackPawn_row, blackPawn_column);
 			}
+			if((x==blackPawn_row)&&((y+2)==blackPawn_column)) {
+				return legalMove("leftJump", blackPawn_row, blackPawn_column);
+			}
 			if((x==blackPawn_row)&&((y-1)==blackPawn_column)) {
 				return legalMove("right", blackPawn_row, blackPawn_column);
 			}
+			if((x==blackPawn_row)&&((y-2)==blackPawn_column)) {
+				return legalMove("rightJump", blackPawn_row, blackPawn_column);
+			}
+			/////////
+			if(((x-1)==blackPawn_row)&&((y-1)==blackPawn_column)) {
+				return (legalMove("downRightJump", blackPawn_row, blackPawn_column)||legalMove("rightDownJump", blackPawn_row, blackPawn_column));
+			}
+			if(((x-1)==blackPawn_row)&&((y+1)==blackPawn_column)) {
+				return (legalMove("downLeftJump", blackPawn_row, blackPawn_column)||legalMove("leftDownJump", blackPawn_row, blackPawn_column));
+			}
+			if(((x+1)==blackPawn_row)&&((y-1)==blackPawn_column)) {
+				return (legalMove("upRightJump", blackPawn_row, blackPawn_column)||legalMove("rightUpJump", blackPawn_row, blackPawn_column));
+			}
+			if(((x+1)==blackPawn_row)&&((y+1)==blackPawn_column)) {
+				return (legalMove("upLeftJump", blackPawn_row, blackPawn_column)||legalMove("leftUpJump", blackPawn_row, blackPawn_column));
+			}
+			///////
 			if((x==blackPawn_row)&&(y==blackPawn_column)) {
 				return true;
 			}
@@ -1028,18 +1054,44 @@ public class JTile extends JPanel {
 			if(((x+1)==whitePawn_row)&&(y==whitePawn_column)) {
 				return legalMove("up", whitePawn_row, whitePawn_column);
 			}
+			if(((x+2)==whitePawn_row)&&(y==whitePawn_column)) {
+				return legalMove("upJump", whitePawn_row, whitePawn_column);
+			}
 			if(((x-1)==whitePawn_row)&&(y==whitePawn_column)) {
 				return legalMove("down", whitePawn_row, whitePawn_column);
+			}
+			if(((x-2)==whitePawn_row)&&(y==whitePawn_column)) {
+				return legalMove("downJump", whitePawn_row, whitePawn_column);
 			}
 			if((x==whitePawn_row)&&((y+1)==whitePawn_column)) {
 				return legalMove("left", whitePawn_row, whitePawn_column);
 			}
+			if((x==whitePawn_row)&&((y+2)==whitePawn_column)) {
+				return legalMove("leftJump", whitePawn_row, whitePawn_column);
+			}
 			if((x==whitePawn_row)&&((y-1)==whitePawn_column)) {
 				return legalMove("right", whitePawn_row, whitePawn_column);
+			}
+			if((x==whitePawn_row)&&((y-2)==whitePawn_column)) {
+				return legalMove("rightJump", whitePawn_row, whitePawn_column);
 			}
 			if((x==whitePawn_row)&&(y==whitePawn_column)) {
 				return true;
 			}
+			/////////
+			if(((x-1)==whitePawn_row)&&((y-1)==whitePawn_column)) {
+				return (legalMove("downRightJump", whitePawn_row, whitePawn_column)||legalMove("rightDownJump", whitePawn_row, whitePawn_column));
+			}
+			if(((x-1)==whitePawn_row)&&((y+1)==whitePawn_column)) {
+				return (legalMove("downLeftJump", whitePawn_row, whitePawn_column)||legalMove("leftDownJump", whitePawn_row, whitePawn_column));
+			}
+			if(((x+1)==whitePawn_row)&&((y-1)==whitePawn_column)) {
+				return (legalMove("upRightJump", whitePawn_row, whitePawn_column)||legalMove("rightUpJump", whitePawn_row, whitePawn_column));
+			}
+			if(((x+1)==whitePawn_row)&&((y+1)==whitePawn_column)) {
+				return (legalMove("upLeftJump", whitePawn_row, whitePawn_column)||legalMove("leftUpJump", whitePawn_row, whitePawn_column));
+			}
+				///////
 			return false;
 		}
 	}
@@ -1122,6 +1174,255 @@ public class JTile extends JPanel {
 			}
 			return can;
 		}
+		else if(s.equalsIgnoreCase("downJump")) {
+			boolean can = true;
+			if(!(((origin_x+1==blackPawn_row)&&(origin_y==blackPawn_column))
+				||((origin_x+1==whitePawn_row)&&(origin_y==whitePawn_column)))) {
+				can = false;
+			}
+			for(int i=0; i<t.size(); i++) {
+				if(t.get(i).isVertical()==false) {
+					if((t.get(i).getRowSmall()==(origin_x+1))&&((t.get(i).getColumnSmall()==origin_y)||(t.get(i).getColumnSmall()==(origin_y-1)))){
+						can = false;
+					}
+					if((t.get(i).getRowSmall()==(origin_x))&&((t.get(i).getColumnSmall()==origin_y)||(t.get(i).getColumnSmall()==(origin_y-1)))){
+						can = false;
+					}
+				}
+			}
+			return can;
+		}
+		else if(s.equalsIgnoreCase("upJump")) {
+			boolean can = true;
+			if(!(((origin_x-1==blackPawn_row)&&(origin_y==blackPawn_column))
+				||((origin_x-1==whitePawn_row)&&(origin_y==whitePawn_column)))) {
+				can = false;
+			}
+			for(int i=0; i<t.size(); i++) {
+				if(t.get(i).isVertical()==false) {
+					if((t.get(i).getRowSmall()==(origin_x-2))&&((t.get(i).getColumnSmall()==origin_y)||(t.get(i).getColumnSmall()==(origin_y-1)))){
+						can = false;
+					}
+					if((t.get(i).getRowSmall()==(origin_x-1))&&((t.get(i).getColumnSmall()==origin_y)||(t.get(i).getColumnSmall()==(origin_y-1)))){
+						can = false;
+					}
+				}
+			}
+			return can;
+		}
+		else if(s.equalsIgnoreCase("rightJump")) {
+			boolean can = true;
+			if(!(((origin_x==blackPawn_row)&&(origin_y+1==blackPawn_column))
+					||((origin_x==whitePawn_row)&&(origin_y+1==whitePawn_column)))) {
+					can = false;
+			}
+			for(int i=0; i<t.size(); i++) {
+				if(t.get(i).isVertical()==true) {
+					if((t.get(i).getColumnSmall()==origin_y+1)&&((t.get(i).getRowSmall()==origin_x)||(t.get(i).getRowSmall()==(origin_x-1)))) {
+						can = false;
+					}
+					if((t.get(i).getColumnSmall()==origin_y)&&((t.get(i).getRowSmall()==origin_x)||(t.get(i).getRowSmall()==(origin_x-1)))) {
+						can = false;
+					}
+				}
+			}
+			return can;
+		}
+		else if(s.equalsIgnoreCase("leftJump")) {
+			boolean can = true;
+			if(!(((origin_x==blackPawn_row)&&(origin_y-1==blackPawn_column))
+					||((origin_x==whitePawn_row)&&(origin_y-1==whitePawn_column)))) {
+					can = false;
+			}
+			for(int i=0; i<t.size(); i++) {
+				if(t.get(i).isVertical()==true) {
+					if((t.get(i).getColumnSmall()==origin_y-2)&&((t.get(i).getRowSmall()==origin_x)||(t.get(i).getRowSmall()==(origin_x-1)))) {
+						can = false;
+					}
+					if((t.get(i).getColumnSmall()==origin_y-1)&&((t.get(i).getRowSmall()==origin_x)||(t.get(i).getRowSmall()==(origin_x-1)))) {
+						can = false;
+					}
+				}
+			}
+			return can;
+		}
+		else if(s.equalsIgnoreCase("downRightJump")) {
+			boolean can = true;
+			boolean exist = false;
+			if(!(((origin_x+1==blackPawn_row)&&(origin_y==blackPawn_column))
+					||((origin_x+1==whitePawn_row)&&(origin_y==whitePawn_column)))) {
+					can = false;
+			}
+			for(int i=0; i<t.size(); i++) {
+				if(t.get(i).isVertical()==false) {
+					if((t.get(i).getRowSmall()==origin_x)&&((t.get(i).getColumnSmall()==origin_y)||(t.get(i).getColumnSmall()==(origin_y-1)))){
+						can = false;
+					}
+					if((t.get(i).getRowSmall()==(origin_x+1))&&((t.get(i).getColumnSmall()==origin_y)||(t.get(i).getColumnSmall()==(origin_y-1)))){
+						exist = true;
+					}
+				}		
+			}
+			if(exist==true) {
+				return can;
+			}
+			return false;
+		}
+		else if(s.equalsIgnoreCase("rightDownJump")) {
+			boolean can = true;
+			boolean exist = false;
+			if(!(((origin_x==blackPawn_row)&&(origin_y+1==blackPawn_column))
+					||((origin_x==whitePawn_row)&&(origin_y+1==whitePawn_column)))) {
+					can = false;
+			}
+			for(int i=0; i<t.size(); i++) {
+				if(t.get(i).isVertical()==true) {
+					if((t.get(i).getColumnSmall()==origin_y)&&((t.get(i).getRowSmall()==origin_x)||(t.get(i).getRowSmall()==(origin_x-1)))) {
+						can = false;
+					}
+					if((t.get(i).getColumnSmall()==(origin_y+1))&&((t.get(i).getRowSmall()==origin_x)||(t.get(i).getRowSmall()==(origin_x-1)))) {
+						exist = true;
+					}
+				}		
+			}
+			if(exist==true) {
+				return can;
+			}
+			return false;
+		}
+		else if(s.equalsIgnoreCase("downLeftJump")) {
+			boolean can = true;
+			boolean exist = false;
+			if(!(((origin_x+1==blackPawn_row)&&(origin_y==blackPawn_column))
+					||((origin_x+1==whitePawn_row)&&(origin_y==whitePawn_column)))) {
+					can = false;
+			}
+			for(int i=0; i<t.size(); i++) {
+				if(t.get(i).isVertical()==false) {
+					if((t.get(i).getRowSmall()==origin_x)&&((t.get(i).getColumnSmall()==origin_y)||(t.get(i).getColumnSmall()==(origin_y-1)))){
+						can = false;
+					}
+					if((t.get(i).getRowSmall()==(origin_x+1))&&((t.get(i).getColumnSmall()==origin_y)||(t.get(i).getColumnSmall()==(origin_y-1)))){
+						exist = true;
+					}
+				}		
+			}
+			if(exist==true) {
+				return can;
+			}
+			return false;
+		}
+		else if(s.equalsIgnoreCase("leftDownJump")) {
+			boolean can = true;
+			boolean exist = false;
+			if(!(((origin_x==blackPawn_row)&&(origin_y-1==blackPawn_column))
+					||((origin_x==whitePawn_row)&&(origin_y-1==whitePawn_column)))) {
+					can = false;
+			}
+			for(int i=0; i<t.size(); i++) {
+				if(t.get(i).isVertical()==true) {
+					if((t.get(i).getColumnSmall()==(origin_y-1))&&((t.get(i).getRowSmall()==origin_x)||(t.get(i).getRowSmall()==(origin_x-1)))) {
+						can = false;
+					}
+					if((t.get(i).getColumnSmall()==(origin_y-2))&&((t.get(i).getRowSmall()==origin_x)||(t.get(i).getRowSmall()==(origin_x-1)))) {
+						exist = true;
+					}
+				}		
+			}
+			if(exist==true) {
+				return can;
+			}
+			return false;
+		}
+		else if(s.equalsIgnoreCase("upRightJump")) {
+			boolean can = true;
+			boolean exist = false;
+			if(!(((origin_x-1==blackPawn_row)&&(origin_y==blackPawn_column))
+					||((origin_x-1==whitePawn_row)&&(origin_y==whitePawn_column)))) {
+					can = false;
+			}
+			for(int i=0; i<t.size(); i++) {
+				if(t.get(i).isVertical()==false) {
+					if((t.get(i).getRowSmall()==(origin_x-1))&&((t.get(i).getColumnSmall()==origin_y)||(t.get(i).getColumnSmall()==(origin_y-1)))){
+						can = false;
+					}
+					if((t.get(i).getRowSmall()==(origin_x-2))&&((t.get(i).getColumnSmall()==origin_y)||(t.get(i).getColumnSmall()==(origin_y-1)))){
+						exist = true;
+					}
+				}		
+			}
+			if(exist==true) {
+				return can;
+			}
+			return false;
+		}
+		else if(s.equalsIgnoreCase("rightUpJump")) {
+			boolean can = true;
+			boolean exist = false;
+			if(!(((origin_x==blackPawn_row)&&(origin_y+1==blackPawn_column))
+					||((origin_x==whitePawn_row)&&(origin_y+1==whitePawn_column)))) {
+					can = false;
+			}
+			for(int i=0; i<t.size(); i++) {
+				if(t.get(i).isVertical()==true) {
+					if((t.get(i).getColumnSmall()==origin_y)&&((t.get(i).getRowSmall()==origin_x)||(t.get(i).getRowSmall()==(origin_x-1)))) {
+						can = false;
+					}
+					if((t.get(i).getColumnSmall()==(origin_y+1))&&((t.get(i).getRowSmall()==origin_x)||(t.get(i).getRowSmall()==(origin_x-1)))) {
+						exist = true;
+					}
+				}		
+			}
+			if(exist==true) {
+				return can;
+			}
+			return false;
+		}
+		else if(s.equalsIgnoreCase("upLeftJump")) {
+			boolean can = true;
+			boolean exist = false;
+			if(!(((origin_x-1==blackPawn_row)&&(origin_y==blackPawn_column))
+					||((origin_x-1==whitePawn_row)&&(origin_y==whitePawn_column)))) {
+					can = false;
+			}
+			for(int i=0; i<t.size(); i++) {
+				if(t.get(i).isVertical()==false) {
+					if((t.get(i).getRowSmall()==(origin_x-1))&&((t.get(i).getColumnSmall()==origin_y)||(t.get(i).getColumnSmall()==(origin_y-1)))){
+						can = false;
+					}
+					if((t.get(i).getRowSmall()==(origin_x-2))&&((t.get(i).getColumnSmall()==origin_y)||(t.get(i).getColumnSmall()==(origin_y-1)))){
+						exist = true;
+					}
+				}		
+			}
+			if(exist==true) {
+				return can;
+			}
+			return false;
+		}
+		else if(s.equalsIgnoreCase("leftUpJump")) {
+			boolean can = true;
+			boolean exist = false;
+			if(!(((origin_x==blackPawn_row)&&(origin_y-1==blackPawn_column))
+					||((origin_x==whitePawn_row)&&(origin_y-1==whitePawn_column)))) {
+					can = false;
+			}
+			for(int i=0; i<t.size(); i++) {
+				if(t.get(i).isVertical()==true) {
+					if((t.get(i).getColumnSmall()==(origin_y-1))&&((t.get(i).getRowSmall()==origin_x)||(t.get(i).getRowSmall()==(origin_x-1)))) {
+						can = false;
+					}
+					if((t.get(i).getColumnSmall()==(origin_y-2))&&((t.get(i).getRowSmall()==origin_x)||(t.get(i).getRowSmall()==(origin_x-1)))) {
+						exist = true;
+					}
+				}		
+			}
+			if(exist==true) {
+				return can;
+			}
+			return false;
+		}
+		
 		else {
 			return false;
 		}
@@ -1152,6 +1453,47 @@ public class JTile extends JPanel {
 		if(legalB(x,y-1)) {
 			if(legalMove("left", x, y)) {
 				greenButton(allButton[x][y-1]);
+			}
+		}
+		if(legalB(x+2,y)) {
+			if(legalMove("downJump", x, y)) {
+				greenButton(allButton[x+2][y]);
+			}
+		}
+		if(legalB(x-2,y)) {
+			if(legalMove("upJump", x, y)) {
+				greenButton(allButton[x-2][y]);
+			}
+		}
+		if(legalB(x,y-2)) {
+			if(legalMove("leftJump", x, y)) {
+				greenButton(allButton[x][y-2]);
+			}
+		}
+		if(legalB(x,y+2)) {
+			if(legalMove("rightJump", x, y)) {
+				greenButton(allButton[x][y+2]);
+			}
+		}
+		///////////
+		if(legalB(x+1,y+1)) {
+			if((legalMove("downRightJump", x, y))||(legalMove("rightDownJump", x, y))) {
+				greenButton(allButton[x+1][y+1]);
+			}
+		}
+		if(legalB(x+1,y-1)) {
+			if((legalMove("downLeftJump", x, y))||(legalMove("leftDownJump", x, y))) {
+				greenButton(allButton[x+1][y-1]);
+			}
+		}
+		if(legalB(x-1,y+1)) {
+			if((legalMove("upRightJump", x, y))||(legalMove("rightUpJump", x, y))) {
+				greenButton(allButton[x-1][y+1]);
+			}
+		}
+		if(legalB(x-1,y-1)) {
+			if((legalMove("upLeftJump", x, y))||(legalMove("leftUpJump", x, y))) {
+				greenButton(allButton[x-1][y-1]);
 			}
 		}
 	}

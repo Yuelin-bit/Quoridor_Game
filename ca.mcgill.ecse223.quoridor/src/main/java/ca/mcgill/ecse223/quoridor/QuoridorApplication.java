@@ -13,6 +13,13 @@ public class QuoridorApplication {
 
 	private static Quoridor quoridor;
 	static MainMenu mainMenu;
+	public static MainMenu getMainMenu() {
+		return mainMenu;
+	}
+	public static void setMainMenu(MainMenu mainMenu) {
+		QuoridorApplication.mainMenu = mainMenu;
+	}
+
 	private static NewJBoard jboard;
 	private static LoadPosition loadposition;
 	private JOptionPane errorHint;
