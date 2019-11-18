@@ -1777,6 +1777,67 @@ public class QuoridorController {
 		return true;
 
 	}
+	
+	/**
+	 * This method takes two parameters: one for suggest player and one for direction. It will proceed a jump move
+	 * for the given player. It is assumed that the movement is legal.
+	 *  
+	 * @param player
+	 * @param direction
+	 * @return A boolean variable to suggest if the movement has been proceed.
+	 */
+	
+	public static boolean jumpPlayer(String player, String direction) {
+		Player p;
+		Tile currentTile;
+		Tile targetTile;
+		Game g = QuoridorApplication.getQuoridor().getCurrentGame();
+		int x, y;
+		PlayerPosition pos;
+		p = g.getCurrentPosition().getPlayerToMove();
+		if (player.equals("white")&&p.hasGameAsBlack()) {
+			throw new IllegalArgumentException("Wrong player: player CANNOT be "+player);
+		} else if (player.equals("black")&&p.hasGameAsWhite()) {
+			throw new IllegalArgumentException("Wrong player: player CANNOT be "+player);
+		}
+		if (p.hasGameAsBlack()) {
+			currentTile = g.getCurrentPosition().getBlackPosition().getTile();
+		} else if (p.hasGameAsWhite()) {
+			currentTile = g.getCurrentPosition().getWhitePosition().getTile();
+		} else {
+			throw new UnsupportedOperationException("Something goes wrong");
+		}
+		x = currentTile.getColumn();
+		y = currentTile.getRow();
+		if (direction.equals("up")) {
+			y-=2;
+		} else if (direction.equals("down")) {
+			y+=2;
+		} else if (direction.equals("left")) {
+			x-=2;
+		} else if (direction.equals("right")) {
+			x+=2;
+		} else {
+			throw new IllegalArgumentException("Wrong direction: direction CANNOT be "+direction);
+		}
+		targetTile = QuoridorApplication.getQuoridor().getBoard().getTile((y-1)*9+x-1);
+		pos = new PlayerPosition(p, targetTile);
+		boolean result = false;
+		if (p.hasGameAsBlack()) {
+			result = g.getCurrentPosition().setBlackPosition(pos);
+			if (result) {
+				g.getCurrentPosition().setPlayerToMove(g.getWhitePlayer());
+			}
+		} else if(p.hasGameAsWhite()) {
+			result = g.getCurrentPosition().setWhitePosition(pos);
+			if (result) {
+				g.getCurrentPosition().setPlayerToMove(g.getBlackPlayer());
+			}
+		} else {
+			throw new UnsupportedOperationException("Something goes wrong");
+		}
+		return result;
+	}
 
 	//helper method
 
