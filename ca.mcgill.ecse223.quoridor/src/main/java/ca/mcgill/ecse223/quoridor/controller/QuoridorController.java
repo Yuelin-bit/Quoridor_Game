@@ -1790,7 +1790,13 @@ public class QuoridorController {
 		} else if (player.equals("black")&&p.hasGameAsWhite()) {
 			throw new IllegalArgumentException("Wrong player: player CANNOT be "+player);
 		}
-		currentTile = g.getCurrentPosition().getWhitePosition().getTile();
+		if (p.hasGameAsBlack()) {
+			currentTile = g.getCurrentPosition().getBlackPosition().getTile();
+		} else if (p.hasGameAsWhite()) {
+			currentTile = g.getCurrentPosition().getWhitePosition().getTile();
+		} else {
+			throw new UnsupportedOperationException("Something goes wrong");
+		}
 		x = currentTile.getColumn();
 		y = currentTile.getRow();
 		if (direction.equals("up")) {
@@ -1806,13 +1812,21 @@ public class QuoridorController {
 		}
 		targetTile = QuoridorApplication.getQuoridor().getBoard().getTile((y-1)*9+x-1);
 		pos = new PlayerPosition(p, targetTile);
-		g.getCurrentPosition().setWhitePosition(pos);
+		boolean result = false;
 		if (p.hasGameAsBlack()) {
-			g.getCurrentPosition().setPlayerToMove(g.getWhitePlayer());
+			result = g.getCurrentPosition().setBlackPosition(pos);
+			if (result) {
+				g.getCurrentPosition().setPlayerToMove(g.getWhitePlayer());
+			}
+		} else if(p.hasGameAsWhite()) {
+			result = g.getCurrentPosition().setWhitePosition(pos);
+			if (result) {
+				g.getCurrentPosition().setPlayerToMove(g.getBlackPlayer());
+			}
 		} else {
-			g.getCurrentPosition().setPlayerToMove(g.getBlackPlayer());
+			throw new UnsupportedOperationException("Something goes wrong");
 		}
-		return true;
+		return result;
 	}
 
 	//helper method

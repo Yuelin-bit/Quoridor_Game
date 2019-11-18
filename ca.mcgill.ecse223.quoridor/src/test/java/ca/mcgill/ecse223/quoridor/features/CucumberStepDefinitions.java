@@ -1674,29 +1674,33 @@ public class CucumberStepDefinitions {
 		@Then("Player's new position shall be {int}:{int}")
 		public void player_s_new_position_shall_be(Integer int1, Integer int2) {
 			Player aPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
-			Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
-			Player blackPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
 
 			Integer row;
 			Integer col;
-
+//			String x;
 			if(movePawnSuccess&&aPlayer.hasGameAsBlack()) {
 				row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
 				col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
+//				x = "1";
 			}else if(movePawnSuccess&&aPlayer.hasGameAsWhite()){
 				row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
 				col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getColumn();
+//				x = "2";
 			}
 			else if(!movePawnSuccess&&aPlayer.hasGameAsBlack()) {
 				row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
 				col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getColumn();
+//				x = "3";
 			}else if(!movePawnSuccess&&aPlayer.hasGameAsWhite()){
 				row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
 				col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
+//				x = "4";
 			} else {
 				col = -1;
 				row = -1;
+//				x = "5";
 			}
+//			Assert.assertEquals("which", x);
 			Assert.assertEquals(int2, col);
 
 			Assert.assertEquals(int1, row);
@@ -1737,41 +1741,6 @@ public class CucumberStepDefinitions {
 		// *****************************************************
 		
 		/* Scenario: Jump over opponent */
-
-//		@Given("^The game is running$")
-//		public void theGameIsRunning() {
-//			initQuoridorAndBoard();
-//			ArrayList<Player> createUsersAndPlayers = createUsersAndPlayers("user1", "user2");
-//			createAndStartGame(createUsersAndPlayers);
-//		}
-		
-//		@Given("The player to move is {string}")
-//		public void the_player_to_move_is_white(String string) {
-//			Player player;
-//			if (string.equals("white")) {
-//				player = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
-//				QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(player);
-//			}else {
-//				player = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
-//				QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(player);
-//			}
-//		}
-		
-//		@Given("The player is located at {int}:{int}")
-//		public void the_player_is_located_at(Integer int1, Integer int2) {
-//			Tile tile = QuoridorApplication.getQuoridor().getBoard().getTile((int1 - 1) * 9 + int2 - 1);
-//			//Tile tile = new Tile(int1, int2, QuoridorApplication.getQuoridor().getBoard());
-//			Player aPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
-//			PlayerPosition  playerposition = new PlayerPosition(aPlayer, tile);
-//					
-//			if(aPlayer.hasGameAsBlack()) {
-//				QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setBlackPosition(playerposition);
-//			}
-//			else {
-//				QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setWhitePosition(playerposition);
-//			}	
-//
-//		}
 		
 		@Given("The opponent is located at {int}:{int}")
 		public void the_opponent_is_located_at(Integer int1, Integer int2) {
@@ -1844,83 +1813,6 @@ public class CucumberStepDefinitions {
 				}
 			}
 		}
-		
-//		@When("Player {string} initiates to move {string}")
-//		public void player_initiates_to_move(String string, String string2) {
-//			PawnBehavior pawnBehavior = new PawnBehavior();
-//			MoveDirection movedirection = null;
-//			if (string2.equals("left")) {
-//				movedirection = MoveDirection.West;
-//			}
-//			if (string2.equals("right")) {
-//				movedirection = MoveDirection.East;
-//			}
-//			if (string2.equals("up")) {
-//				movedirection = MoveDirection.North;
-//			}
-//			if (string2.equals("down")) {
-//				movedirection = MoveDirection.South;
-//			}
-//			
-//			if (pawnBehavior.isLegalStep(movedirection)) {
-//				movePawnSuccess = QuoridorController.movePlayer(string, string2);
-//			} else {
-//				//System.out.println("=====================================================================");
-//				movePawnSuccess = false;
-//			}
-//			
-//		}
-		
-//		@Then("The move {string} shall be {string}")
-//		public void the_move_shall_be(String string, String string2) {
-//			String status = movePawnSuccess?"success":"illegal";
-//			//Assert.assertEquals(string, string);
-//			Assert.assertEquals(string2, status);
-//		}
-		
-//		@Then("Player's new position shall be {int}:{int}")
-//		public void player_s_new_position_shall_be(Integer int1, Integer int2) {
-//			Player aPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
-//			Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
-//			Player blackPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
-//
-//			Integer row;
-//			Integer col;
-//
-//			if(movePawnSuccess&&!aPlayer.equals(blackPlayer)) {
-//				row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
-//				col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getColumn();
-//			}else if(movePawnSuccess&&!aPlayer.equals(whitePlayer)){
-//				row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
-//				col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
-//			}
-//			else if(!movePawnSuccess&&aPlayer.equals(blackPlayer)) {
-//				row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
-//				col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getColumn();
-//			}else if(!movePawnSuccess&&aPlayer.equals(whitePlayer)){
-//				row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
-//				col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
-//			}else {
-//				col = -1;
-//				row = -1;
-//			}
-//			Assert.assertEquals(int2, col);
-//
-//			Assert.assertEquals(int1, row);
-//			
-//		}
-		
-//		@Then("The next player to move shall become {string}")
-//		public void the_next_player_to_move_shall_become(String string) {
-//			String toCompare;	
-//			Player player = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
-//			if(player.hasGameAsBlack()) {
-//				toCompare = "black";
-//			}else {
-//				toCompare = "white";
-//			}
-//			assertEquals(string, toCompare);
-//		}
 		
 		
 		
