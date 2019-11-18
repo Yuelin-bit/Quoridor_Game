@@ -1657,8 +1657,7 @@ public class CucumberStepDefinitions {
 			} else {
 				//System.out.println("=====================================================================");
 				movePawnSuccess = false;
-			}
-			
+			}			
 		}
 
 		@Then("The move {string} shall be {string}")
@@ -1677,17 +1676,17 @@ public class CucumberStepDefinitions {
 			Integer row;
 			Integer col;
 
-			if(movePawnSuccess&&!aPlayer.equals(blackPlayer)) {
+			if(movePawnSuccess&&aPlayer.hasGameAsWhite()) {
 				row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
 				col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getColumn();
-			}else if(movePawnSuccess&&!aPlayer.equals(whitePlayer)){
+			}else if(movePawnSuccess&&aPlayer.hasGameAsBlack()){
 				row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
 				col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
 			}
-			else if(!movePawnSuccess&&aPlayer.equals(blackPlayer)) {
+			else if(!movePawnSuccess&&aPlayer.hasGameAsBlack()) {
 				row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
 				col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getColumn();
-			}else if(!movePawnSuccess&&aPlayer.equals(whitePlayer)){
+			}else if(!movePawnSuccess&&aPlayer.hasGameAsWhite()){
 				row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
 				col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
 			}else {
