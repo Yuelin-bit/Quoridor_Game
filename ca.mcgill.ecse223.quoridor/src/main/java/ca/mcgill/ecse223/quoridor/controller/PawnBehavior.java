@@ -983,17 +983,17 @@ public class PawnBehavior
 			  			return false;
 			  		} else if (dir.equals(MoveDirection.South)
 			  				&&currentWallDirection.equals(Direction.Horizontal)
-			  				&&currentWallTile.getRow()==targetCoord[1]
+			  				&&currentWallTile.getRow()==targetCoord[1]-1
 			  				&&(currentWallTile.getColumn()==targetCoord[0]||currentWallTile.getColumn()==targetCoord[0]-1)) {
 			  			return false;
 			  		} else if (dir.equals(MoveDirection.West)
 			  				&&currentWallDirection.equals(Direction.Vertical)
-			  				&&currentWallTile.getColumn()==targetCoord[0]-1
+			  				&&currentWallTile.getColumn()==targetCoord[0]
 			  				&&(currentWallTile.getRow()==targetCoord[1]||currentWallTile.getRow()==targetCoord[1]-1)) {
 			  			return false;
 			  		} else if (dir.equals(MoveDirection.East)
 			  				&&currentWallDirection.equals(Direction.Vertical)
-			  				&&currentWallTile.getColumn()==targetCoord[0]
+			  				&&currentWallTile.getColumn()==targetCoord[0]-1
 			  				&&(currentWallTile.getRow()==targetCoord[1]||currentWallTile.getRow()==targetCoord[1]-1)) {
 			  			return false;
 			  		}
@@ -1031,17 +1031,17 @@ public class PawnBehavior
 			  			return false;
 			  		} else if (dir.equals(MoveDirection.South)
 			  				&&currentWallDirection.equals(Direction.Horizontal)
-			  				&&currentWallTile.getRow()==targetCoord[1]
+			  				&&currentWallTile.getRow()==targetCoord[1]-1
 			  				&&(currentWallTile.getColumn()==targetCoord[0]||currentWallTile.getColumn()==targetCoord[0]-1)) {
 			  			return false;
 			  		} else if (dir.equals(MoveDirection.West)
 			  				&&currentWallDirection.equals(Direction.Vertical)
-			  				&&currentWallTile.getColumn()==targetCoord[0]-1
+			  				&&currentWallTile.getColumn()==targetCoord[0]
 			  				&&(currentWallTile.getRow()==targetCoord[1]||currentWallTile.getRow()==targetCoord[1]-1)) {
 			  			return false;
 			  		} else if (dir.equals(MoveDirection.East)
 			  				&&currentWallDirection.equals(Direction.Vertical)
-			  				&&currentWallTile.getColumn()==targetCoord[0]
+			  				&&currentWallTile.getColumn()==targetCoord[0]-1
 			  				&&(currentWallTile.getRow()==targetCoord[1]||currentWallTile.getRow()==targetCoord[1]-1)) {
 			  			return false;
 			  		}
