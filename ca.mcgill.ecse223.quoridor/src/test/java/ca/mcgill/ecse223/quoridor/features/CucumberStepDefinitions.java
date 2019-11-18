@@ -1660,8 +1660,7 @@ public class CucumberStepDefinitions {
 			}else {
 				//System.out.println("=====================================================================");
 				movePawnSuccess = false;
-			};
-			
+			}
 		}
 
 		@Then("The move {string} shall be {string}")
