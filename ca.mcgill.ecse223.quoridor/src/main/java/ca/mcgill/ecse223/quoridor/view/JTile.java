@@ -1011,14 +1011,26 @@ public class JTile extends JPanel {
 			if(((x+1)==blackPawn_row)&&(y==blackPawn_column)) {
 				return legalMove("up", blackPawn_row, blackPawn_column);
 			}
+			if(((x+2)==blackPawn_row)&&(y==blackPawn_column)) {
+				return legalMove("upJump", blackPawn_row, blackPawn_column);
+			}
 			if(((x-1)==blackPawn_row)&&(y==blackPawn_column)) {
 				return legalMove("down", blackPawn_row, blackPawn_column);
+			}
+			if(((x-2)==blackPawn_row)&&(y==blackPawn_column)) {
+				return legalMove("downJump", blackPawn_row, blackPawn_column);
 			}
 			if((x==blackPawn_row)&&((y+1)==blackPawn_column)) {
 				return legalMove("left", blackPawn_row, blackPawn_column);
 			}
+			if((x==blackPawn_row)&&((y+2)==blackPawn_column)) {
+				return legalMove("leftJump", blackPawn_row, blackPawn_column);
+			}
 			if((x==blackPawn_row)&&((y-1)==blackPawn_column)) {
 				return legalMove("right", blackPawn_row, blackPawn_column);
+			}
+			if((x==blackPawn_row)&&((y-2)==blackPawn_column)) {
+				return legalMove("rightJump", blackPawn_row, blackPawn_column);
 			}
 			if((x==blackPawn_row)&&(y==blackPawn_column)) {
 				return true;
@@ -1028,14 +1040,26 @@ public class JTile extends JPanel {
 			if(((x+1)==whitePawn_row)&&(y==whitePawn_column)) {
 				return legalMove("up", whitePawn_row, whitePawn_column);
 			}
+			if(((x+2)==whitePawn_row)&&(y==whitePawn_column)) {
+				return legalMove("upJump", whitePawn_row, whitePawn_column);
+			}
 			if(((x-1)==whitePawn_row)&&(y==whitePawn_column)) {
 				return legalMove("down", whitePawn_row, whitePawn_column);
+			}
+			if(((x-2)==whitePawn_row)&&(y==whitePawn_column)) {
+				return legalMove("downJump", whitePawn_row, whitePawn_column);
 			}
 			if((x==whitePawn_row)&&((y+1)==whitePawn_column)) {
 				return legalMove("left", whitePawn_row, whitePawn_column);
 			}
+			if((x==whitePawn_row)&&((y+2)==whitePawn_column)) {
+				return legalMove("leftJump", whitePawn_row, whitePawn_column);
+			}
 			if((x==whitePawn_row)&&((y-1)==whitePawn_column)) {
 				return legalMove("right", whitePawn_row, whitePawn_column);
+			}
+			if((x==whitePawn_row)&&((y-2)==whitePawn_column)) {
+				return legalMove("rightJump", whitePawn_row, whitePawn_column);
 			}
 			if((x==whitePawn_row)&&(y==whitePawn_column)) {
 				return true;
@@ -1122,6 +1146,66 @@ public class JTile extends JPanel {
 			}
 			return can;
 		}
+		else if(s.equalsIgnoreCase("downJump")) {
+			boolean can = true;
+			if(!(((origin_x+1==blackPawn_row)&&(origin_y==blackPawn_column))
+				||((origin_x+1==whitePawn_row)&&(origin_y==whitePawn_column)))) {
+				can = false;
+			}
+			for(int i=0; i<t.size(); i++) {
+				if(t.get(i).isVertical()==false) {
+					if((t.get(i).getRowSmall()==(origin_x+1))&&((t.get(i).getColumnSmall()==origin_y)||(t.get(i).getColumnSmall()==(origin_y-1)))){
+						can = false;
+					}
+				}
+			}
+			return can;
+		}
+		else if(s.equalsIgnoreCase("upJump")) {
+			boolean can = true;
+			if(!(((origin_x-1==blackPawn_row)&&(origin_y==blackPawn_column))
+				||((origin_x-1==whitePawn_row)&&(origin_y==whitePawn_column)))) {
+				can = false;
+			}
+			for(int i=0; i<t.size(); i++) {
+				if(t.get(i).isVertical()==false) {
+					if((t.get(i).getRowSmall()==(origin_x-2))&&((t.get(i).getColumnSmall()==origin_y)||(t.get(i).getColumnSmall()==(origin_y-1)))){
+						can = false;
+					}
+				}
+			}
+			return can;
+		}
+		else if(s.equalsIgnoreCase("rightJump")) {
+			boolean can = true;
+			if(!(((origin_x==blackPawn_row)&&(origin_y+1==blackPawn_column))
+					||((origin_x==whitePawn_row)&&(origin_y+1==whitePawn_column)))) {
+					can = false;
+			}
+			for(int i=0; i<t.size(); i++) {
+				if(t.get(i).isVertical()==true) {
+					if((t.get(i).getColumnSmall()==origin_y+1)&&((t.get(i).getRowSmall()==origin_x)||(t.get(i).getRowSmall()==(origin_x-1)))) {
+						can = false;
+					}
+				}
+			}
+			return can;
+		}
+		else if(s.equalsIgnoreCase("leftJump")) {
+			boolean can = true;
+			if(!(((origin_x==blackPawn_row)&&(origin_y-1==blackPawn_column))
+					||((origin_x==whitePawn_row)&&(origin_y-1==whitePawn_column)))) {
+					can = false;
+			}
+			for(int i=0; i<t.size(); i++) {
+				if(t.get(i).isVertical()==true) {
+					if((t.get(i).getColumnSmall()==origin_y-2)&&((t.get(i).getRowSmall()==origin_x)||(t.get(i).getRowSmall()==(origin_x-1)))) {
+						can = false;
+					}
+				}
+			}
+			return can;
+		}
 		else {
 			return false;
 		}
@@ -1154,6 +1238,47 @@ public class JTile extends JPanel {
 				greenButton(allButton[x][y-1]);
 			}
 		}
+		if(legalB(x+2,y)) {
+			if(legalMove("downJump", x, y)) {
+				greenButton(allButton[x+2][y]);
+			}
+		}
+		if(legalB(x-2,y)) {
+			if(legalMove("upJump", x, y)) {
+				greenButton(allButton[x-2][y]);
+			}
+		}
+		if(legalB(x,y-2)) {
+			if(legalMove("leftJump", x, y)) {
+				greenButton(allButton[x][y-2]);
+			}
+		}
+		if(legalB(x,y+2)) {
+			if(legalMove("rightJump", x, y)) {
+				greenButton(allButton[x][y+2]);
+			}
+		}
+		///////////
+//		if(legalB(x+1,y+1)) {
+//			if(legalMove("downRightJump", x, y)) {
+//				greenButton(allButton[x+1][y+1]);
+//			}
+//		}
+//		if(legalB(x+1,y-1)) {
+//			if(legalMove("downLeftJump", x, y)) {
+//				greenButton(allButton[x+1][y-1]);
+//			}
+//		}
+//		if(legalB(x-1,y+1)) {
+//			if(legalMove("upRightJump", x, y)) {
+//				greenButton(allButton[x-1][y+1]);
+//			}
+//		}
+//		if(legalB(x-1,y-1)) {
+//			if(legalMove("upLeftJump", x, y)) {
+//				greenButton(allButton[x-1][y-1]);
+//			}
+//		}
 	}
 	public boolean legalB(int x, int y) {
 		if((x>=1)&&(x<=9)&(y>=1)&(y<=9)) {
