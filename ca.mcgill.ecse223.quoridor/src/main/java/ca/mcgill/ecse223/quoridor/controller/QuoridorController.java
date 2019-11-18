@@ -312,8 +312,7 @@ public class QuoridorController {
 
 		if(QuoridorController.verifyOverlapped(wallmove)==true) 
 		{
-
-			//QuoridorApplication.getJboard().notifyIllegal();
+			JOptionPane.showMessageDialog(null, "Illegal drop!");
 			return;
 		}
 
@@ -321,32 +320,19 @@ public class QuoridorController {
 		Tile t = wallmove.getTargetTile();
 		Player currentPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
 		Game currentGame = QuoridorApplication.getQuoridor().getCurrentGame();
-
-		//		JBoard newb = new JBoard();
-		//		QuoridorApplication.setJboard(newb);
-
-		if((QuoridorController.verifyOverlapped(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate()))
-				||(QuoridorController.verifyOutsideTheBoard(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate())))
-		{
-			System.out.println("cannot drop!!!!!!!!!");
-			JOptionPane.showMessageDialog(null, "cannot drop!!!!!!!!!");
-
-		}
-
 		if(currentPlayer.hasGameAsWhite()) {
 			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().addWhiteWallsOnBoard(wallmove.getWallPlaced());
 			Player blackPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
 			currentPlayer.setNextPlayer(blackPlayer);
-			currentPlayer.setGameAsWhite(null);
-			currentPlayer.setGameAsBlack(currentGame);
-		}
-
-		else{
-			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().addBlackWallsOnBoard(wallmove.getWallPlaced());
+			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(blackPlayer);
+//			currentPlayer.setGameAsWhite(null);
+//			currentPlayer.setGameAsBlack(currentGame);
+		}else {	QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().addBlackWallsOnBoard(wallmove.getWallPlaced());
 			Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
 			currentPlayer.setNextPlayer(whitePlayer);
-			currentPlayer.setGameAsBlack(null);
-			currentPlayer.setGameAsWhite(currentGame);
+			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(whitePlayer);
+//			currentPlayer.setGameAsBlack(null);
+//			currentPlayer.setGameAsWhite(currentGame);
 			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(whitePlayer);
 		}
 
@@ -404,8 +390,7 @@ public class QuoridorController {
 	{	
 		if(QuoridorController.verifyOnEdge(string)==true) 
 		{
-			//QuoridorApplication.setJboard(new JBoard());
-			//QuoridorApplication.getJboard().notifyIllegal();
+			JOptionPane.showMessageDialog(null, "Exceed the board!");
 		}
 
 		if((string.equalsIgnoreCase("left"))&&(QuoridorController.verifyOnEdge(string)==false)) {
@@ -1263,8 +1248,8 @@ public class QuoridorController {
 		Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
 		Player blackPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
 		whitePlayer.setGameAsWhite(game);
-		Tile initWhite = new Tile(5, 9, board);
-		Tile initBlack = new Tile(5, 1, board);
+		Tile initWhite = new Tile(9, 5, board);
+		Tile initBlack = new Tile(1, 5, board);
 		PlayerPosition initialWhite = new PlayerPosition(whitePlayer, initWhite);
 		PlayerPosition initialBlack = new PlayerPosition(whitePlayer, initBlack);
 
@@ -1520,10 +1505,9 @@ public class QuoridorController {
 
 
 	/**
-	 * This method checks the clock of the current player to count down.
-	 * It returns true if the clock is counting down.
+	 * We are not using this method right now
 	 * 
-	 * @author Non
+	 * @author Gengyi Sun
 	 * @param String string, String string2
 	 * @return boolean
 	 */ 
@@ -1667,10 +1651,9 @@ public class QuoridorController {
 
 	}
 	/**
-	 * This method checks the clock of the current player to count down.
-	 * It returns true if the clock is counting down.
+	 * this method will move a pawn to certain direction and return the result
 	 * 
-	 * @author Non
+	 * @author Zirui He, Gengyi Sun
 	 * @param String string, String string2
 	 * @return boolean
 	 */ 
@@ -1724,9 +1707,13 @@ public class QuoridorController {
 
 			Tile newTile = QuoridorApplication.getQuoridor().getBoard().getTile(9*(row-1)+(column-1));
 			PlayerPosition newWhitePosition = new PlayerPosition(whitePlayer,newTile);		
-			PlayerPosition newBlackPosition = new PlayerPosition(blackPlayer,blackTile);			
+			//PlayerPosition newBlackPosition = new PlayerPosition(blackPlayer,blackTile);			
 
-			GamePosition currentGamePosition = new GamePosition(id, newWhitePosition, newBlackPosition, blackPlayer,game);
+			//GamePosition currentGamePosition = new GamePosition(id, newWhitePosition, newBlackPosition, blackPlayer,game);
+			GamePosition currentGamePosition = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition();
+			currentGamePosition.setWhitePosition(newWhitePosition);
+			currentGamePosition.setPlayerToMove(blackPlayer);
+			currentGamePosition.setId(id);
 			QuoridorApplication.getQuoridor().getCurrentGame().addPosition(currentGamePosition);
 			QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(currentGamePosition);
 			int x = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
@@ -1766,10 +1753,14 @@ public class QuoridorController {
 
 				return false;
 			}
-			Tile newTile = QuoridorApplication.getQuoridor().getBoard().getTile((row-1)*9+column);
+			Tile newTile = QuoridorApplication.getQuoridor().getBoard().getTile((row-1)*9+(column-1));
 			PlayerPosition newBlackPosition = new PlayerPosition(blackPlayer,newTile);		
-			PlayerPosition newWhitePosition = new PlayerPosition(whitePlayer,whiteTile);			
-			GamePosition currentGamePosition = new GamePosition(id, newBlackPosition, newWhitePosition, whitePlayer,game);
+			//PlayerPosition newWhitePosition = new PlayerPosition(whitePlayer,whiteTile);			
+			//GamePosition currentGamePosition = new GamePosition(id, newBlackPosition, newWhitePosition, whitePlayer,game);
+			GamePosition currentGamePosition = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition();
+			currentGamePosition.setBlackPosition(newBlackPosition);
+			currentGamePosition.setPlayerToMove(whitePlayer);
+			currentGamePosition.setId(id);
 			QuoridorApplication.getQuoridor().getCurrentGame().addPosition(currentGamePosition);
 			QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(currentGamePosition);
 			int x = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
@@ -1784,9 +1775,78 @@ public class QuoridorController {
 		return true;
 
 	}
+	
+	/**
+	 * This method takes two parameters: one for suggest player and one for direction. It will proceed a jump move
+	 * for the given player. It is assumed that the movement is legal.
+	 *  
+	 * @author Pengnan Fan 
+	 * @param player
+	 * @param direction
+	 * @return A boolean variable to suggest if the movement has been proceed.
+	 */
+	
+	public static boolean jumpPlayer(String player, String direction) {
+		Player p;
+		Tile currentTile;
+		Tile targetTile;
+		Game g = QuoridorApplication.getQuoridor().getCurrentGame();
+		int x, y;
+		PlayerPosition pos;
+		p = g.getCurrentPosition().getPlayerToMove();
+		if (player.equals("white")&&p.hasGameAsBlack()) {
+			throw new IllegalArgumentException("Wrong player: player CANNOT be "+player);
+		} else if (player.equals("black")&&p.hasGameAsWhite()) {
+			throw new IllegalArgumentException("Wrong player: player CANNOT be "+player);
+		}
+		if (p.hasGameAsBlack()) {
+			currentTile = g.getCurrentPosition().getBlackPosition().getTile();
+		} else if (p.hasGameAsWhite()) {
+			currentTile = g.getCurrentPosition().getWhitePosition().getTile();
+		} else {
+			throw new UnsupportedOperationException("Something goes wrong");
+		}
+		x = currentTile.getColumn();
+		y = currentTile.getRow();
+		if (direction.equals("up")) {
+			y-=2;
+		} else if (direction.equals("down")) {
+			y+=2;
+		} else if (direction.equals("left")) {
+			x-=2;
+		} else if (direction.equals("right")) {
+			x+=2;
+		} else {
+			throw new IllegalArgumentException("Wrong direction: direction CANNOT be "+direction);
+		}
+		targetTile = QuoridorApplication.getQuoridor().getBoard().getTile((y-1)*9+x-1);
+		pos = new PlayerPosition(p, targetTile);
+		boolean result = false;
+		if (p.hasGameAsBlack()) {
+			result = g.getCurrentPosition().setBlackPosition(pos);
+			if (result) {
+				g.getCurrentPosition().setPlayerToMove(g.getWhitePlayer());
+			}
+		} else if(p.hasGameAsWhite()) {
+			result = g.getCurrentPosition().setWhitePosition(pos);
+			if (result) {
+				g.getCurrentPosition().setPlayerToMove(g.getBlackPlayer());
+			}
+		} else {
+			throw new UnsupportedOperationException("Something goes wrong");
+		}
+		return result;
+	}
 
 	//helper method
 
+	/**
+	 * this helper method change the single character that represent column to integer 
+	 * 
+	 * @author Zirui He
+	 * @param x
+	 * @return int
+	 */
 	private static int columnNum(String x) {
 		int result = 0;
 		if (x.equals("a"))  result = 1;
@@ -1801,6 +1861,15 @@ public class QuoridorController {
 		return result;
 	}
 
+	/**
+	 * this method get users from model and use the users to create two players and 
+	 * connect players to the model
+	 * 
+	 * @author Zirui He
+	 * @param userName1
+	 * @param userName2
+	 * @return ArrayList<Player>
+	 */
 	public static ArrayList<Player> createUsersAndPlayers(String userName1, String userName2) {
 		Quoridor quoridor = QuoridorApplication.getQuoridor();
 		//			User user1 = quoridor.addUser(userName1);
@@ -1862,13 +1931,18 @@ public class QuoridorController {
 		return playersList;
 	}
 
+	/**
+	 * This is the method form stepDefinition written by Marton
+	 * 
+	 * @param players
+	 */
 	public static void createAndStartGame(ArrayList<Player> players) {
 		Quoridor quoridor = QuoridorApplication.getQuoridor();
 		// There are total 36 tiles in the first four rows and
 		// indexing starts from 0 -> tiles with indices 36 and 36+8=44 are the starting
 		// positions
-		Tile player1StartPos = quoridor.getBoard().getTile(36);
-		Tile player2StartPos = quoridor.getBoard().getTile(44);
+		Tile player1StartPos = quoridor.getBoard().getTile(4);
+		Tile player2StartPos = quoridor.getBoard().getTile(76);
 
 		Game game = new Game(GameStatus.Running, MoveMode.PlayerMove, quoridor);
 		game.setWhitePlayer(players.get(0));
@@ -1891,6 +1965,9 @@ public class QuoridorController {
 		game.setCurrentPosition(gamePosition);
 	}
 
+	/**
+	 * This is the method form stepDefinition written by Marton
+	 */
 	public static void initQuoridorAndBoard() {
 		Quoridor quoridor = QuoridorApplication.getQuoridor();
 		//Board board = new Board(quoridor);

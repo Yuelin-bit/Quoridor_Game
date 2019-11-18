@@ -1,4 +1,13 @@
 package ca.mcgill.ecse223.quoridor.view;
+/**
+ * 
+ * Name : JWall
+ * 
+ * @author EveryOne
+ * @version this is wall in view
+ * @exception nothing
+ *
+ */
 
 import java.awt.Color;
 import java.awt.Graphics;

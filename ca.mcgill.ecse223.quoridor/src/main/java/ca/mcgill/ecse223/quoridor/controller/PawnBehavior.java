@@ -6,9 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ca.mcgill.ecse223.quoridor.QuoridorApplication;
+import ca.mcgill.ecse223.quoridor.controller.PawnBehavior.MoveDirection;
 import ca.mcgill.ecse223.quoridor.model.*;
 
-// line 5 "../../../../../StateMachine.ump"
+// line 4 "../../../../../StateMachine.ump"
 public class PawnBehavior
 {
 
@@ -16,7 +17,7 @@ public class PawnBehavior
   // ENUMERATIONS
   //------------------------
 
-  public enum MoveDirection { East, South, West, North }
+  public enum MoveDirection {East, South, West, North}
 
   //------------------------
   // MEMBER VARIABLES
@@ -37,7 +38,7 @@ public class PawnBehavior
   //PawnBehavior Associations
   private Game currentGame;
   private Player player;
-  
+
   //------------------------
   // CONSTRUCTOR
   //------------------------
@@ -121,6 +122,8 @@ public class PawnBehavior
         if (getPlayer().getGameAsWhite().equals(getCurrentGame()))
         {
           exitPawnSMPlayingNorthSouthNorthSouth();
+        // line 19 "../../../../../StateMachine.ump"
+          startGame();
           setPawnSMPlayingNorthSouthNorthSouth(PawnSMPlayingNorthSouthNorthSouth.SouthEdge);
           wasEventProcessed = true;
           break;
@@ -152,10 +155,11 @@ public class PawnBehavior
     switch (aPawnSMPlayingNorthSouthNorthSouth)
     {
       case SouthEdge:
-
         if (isLegalStep(MoveDirection.North))
         {
           exitPawnSMPlayingNorthSouthNorthSouth();
+        // line 23 "../../../../../StateMachine.ump"
+          movePlayer (MoveDirection.North);
           setPawnSMPlayingNorthSouthNorthSouth(PawnSMPlayingNorthSouthNorthSouth.SouthBorder);
           wasEventProcessed = true;
           break;
@@ -165,6 +169,8 @@ public class PawnBehavior
         if (isLegalStep(MoveDirection.North))
         {
           exitPawnSMPlayingNorthSouthNorthSouth();
+        // line 28 "../../../../../StateMachine.ump"
+          movePlayer (MoveDirection.North);
           setPawnSMPlayingNorthSouthNorthSouth(PawnSMPlayingNorthSouthNorthSouth.MiddleNS);
           wasEventProcessed = true;
           break;
@@ -174,6 +180,8 @@ public class PawnBehavior
         if (isLegalStep(MoveDirection.North)&&getCurrentPawnRow()==3)
         {
           exitPawnSMPlayingNorthSouthNorthSouth();
+        // line 34 "../../../../../StateMachine.ump"
+          movePlayer (MoveDirection.North);
           setPawnSMPlayingNorthSouthNorthSouth(PawnSMPlayingNorthSouthNorthSouth.NorthBorder);
           wasEventProcessed = true;
           break;
@@ -181,6 +189,8 @@ public class PawnBehavior
         if (isLegalStep(MoveDirection.North)&&getCurrentPawnRow()>=4&&getCurrentPawnRow()<=7)
         {
           exitPawnSMPlayingNorthSouthNorthSouth();
+        // line 37 "../../../../../StateMachine.ump"
+          movePlayer (MoveDirection.North);
           setPawnSMPlayingNorthSouthNorthSouth(PawnSMPlayingNorthSouthNorthSouth.MiddleNS);
           wasEventProcessed = true;
           break;
@@ -190,6 +200,8 @@ public class PawnBehavior
         if (isLegalStep(MoveDirection.North))
         {
           exitPawnSMPlayingNorthSouthNorthSouth();
+        // line 47 "../../../../../StateMachine.ump"
+          movePlayer (MoveDirection.North);
           setPawnSMPlayingNorthSouthNorthSouth(PawnSMPlayingNorthSouthNorthSouth.NorthEdge);
           wasEventProcessed = true;
           break;
@@ -213,6 +225,8 @@ public class PawnBehavior
         if (isLegalJump(MoveDirection.North))
         {
           exitPawnSMPlayingNorthSouthNorthSouth();
+        // line 24 "../../../../../StateMachine.ump"
+          jumpPawn(MoveDirection.North);
           setPawnSMPlayingNorthSouthNorthSouth(PawnSMPlayingNorthSouthNorthSouth.MiddleNS);
           wasEventProcessed = true;
           break;
@@ -222,6 +236,8 @@ public class PawnBehavior
         if (isLegalJump(MoveDirection.North))
         {
           exitPawnSMPlayingNorthSouthNorthSouth();
+        // line 30 "../../../../../StateMachine.ump"
+          jumpPawn(MoveDirection.North);
           setPawnSMPlayingNorthSouthNorthSouth(PawnSMPlayingNorthSouthNorthSouth.MiddleNS);
           wasEventProcessed = true;
           break;
@@ -231,6 +247,8 @@ public class PawnBehavior
         if (isLegalJump(MoveDirection.North)&&getCurrentPawnRow()==3)
         {
           exitPawnSMPlayingNorthSouthNorthSouth();
+        // line 35 "../../../../../StateMachine.ump"
+          jumpPawn(MoveDirection.North);
           setPawnSMPlayingNorthSouthNorthSouth(PawnSMPlayingNorthSouthNorthSouth.NorthEdge);
           wasEventProcessed = true;
           break;
@@ -238,6 +256,8 @@ public class PawnBehavior
         if (isLegalJump(MoveDirection.North)&&getCurrentPawnRow()==4)
         {
           exitPawnSMPlayingNorthSouthNorthSouth();
+        // line 36 "../../../../../StateMachine.ump"
+          jumpPawn(MoveDirection.North);
           setPawnSMPlayingNorthSouthNorthSouth(PawnSMPlayingNorthSouthNorthSouth.NorthBorder);
           wasEventProcessed = true;
           break;
@@ -245,6 +265,8 @@ public class PawnBehavior
         if (isLegalJump(MoveDirection.North)&&getCurrentPawnRow()>=5&&getCurrentPawnRow()<=7)
         {
           exitPawnSMPlayingNorthSouthNorthSouth();
+        // line 42 "../../../../../StateMachine.ump"
+          jumpPawn(MoveDirection.North);
           setPawnSMPlayingNorthSouthNorthSouth(PawnSMPlayingNorthSouthNorthSouth.MiddleNS);
           wasEventProcessed = true;
           break;
@@ -268,6 +290,8 @@ public class PawnBehavior
         if (isLegalStep(MoveDirection.South))
         {
           exitPawnSMPlayingNorthSouthNorthSouth();
+        // line 29 "../../../../../StateMachine.ump"
+          movePlayer(MoveDirection.South);
           setPawnSMPlayingNorthSouthNorthSouth(PawnSMPlayingNorthSouthNorthSouth.SouthEdge);
           wasEventProcessed = true;
           break;
@@ -277,6 +301,8 @@ public class PawnBehavior
         if (isLegalStep(MoveDirection.South)&&getCurrentPawnRow()==7)
         {
           exitPawnSMPlayingNorthSouthNorthSouth();
+        // line 38 "../../../../../StateMachine.ump"
+          movePlayer(MoveDirection.South);
           setPawnSMPlayingNorthSouthNorthSouth(PawnSMPlayingNorthSouthNorthSouth.SouthBorder);
           wasEventProcessed = true;
           break;
@@ -284,6 +310,8 @@ public class PawnBehavior
         if (isLegalStep(MoveDirection.South)&&getCurrentPawnRow()>=3&&getCurrentPawnRow()<=6)
         {
           exitPawnSMPlayingNorthSouthNorthSouth();
+        // line 41 "../../../../../StateMachine.ump"
+          movePlayer(MoveDirection.South);
           setPawnSMPlayingNorthSouthNorthSouth(PawnSMPlayingNorthSouthNorthSouth.MiddleNS);
           wasEventProcessed = true;
           break;
@@ -293,6 +321,8 @@ public class PawnBehavior
         if (isLegalStep(MoveDirection.South))
         {
           exitPawnSMPlayingNorthSouthNorthSouth();
+        // line 48 "../../../../../StateMachine.ump"
+          movePlayer(MoveDirection.South);
           setPawnSMPlayingNorthSouthNorthSouth(PawnSMPlayingNorthSouthNorthSouth.MiddleNS);
           wasEventProcessed = true;
           break;
@@ -302,6 +332,8 @@ public class PawnBehavior
         if (isLegalStep(MoveDirection.South))
         {
           exitPawnSMPlayingNorthSouthNorthSouth();
+        // line 53 "../../../../../StateMachine.ump"
+          movePlayer(MoveDirection.South);
           setPawnSMPlayingNorthSouthNorthSouth(PawnSMPlayingNorthSouthNorthSouth.NorthBorder);
           wasEventProcessed = true;
           break;
@@ -325,6 +357,8 @@ public class PawnBehavior
         if (isLegalJump(MoveDirection.South)&&getCurrentPawnRow()==7)
         {
           exitPawnSMPlayingNorthSouthNorthSouth();
+        // line 39 "../../../../../StateMachine.ump"
+          jumpPawn(MoveDirection.South);
           setPawnSMPlayingNorthSouthNorthSouth(PawnSMPlayingNorthSouthNorthSouth.SouthEdge);
           wasEventProcessed = true;
           break;
@@ -332,6 +366,8 @@ public class PawnBehavior
         if (isLegalJump(MoveDirection.South)&&getCurrentPawnRow()==6)
         {
           exitPawnSMPlayingNorthSouthNorthSouth();
+        // line 40 "../../../../../StateMachine.ump"
+          jumpPawn(MoveDirection.South);
           setPawnSMPlayingNorthSouthNorthSouth(PawnSMPlayingNorthSouthNorthSouth.SouthBorder);
           wasEventProcessed = true;
           break;
@@ -339,6 +375,8 @@ public class PawnBehavior
         if (isLegalJump(MoveDirection.South)&&getCurrentPawnRow()>=3&&getCurrentPawnRow()<=5)
         {
           exitPawnSMPlayingNorthSouthNorthSouth();
+        // line 43 "../../../../../StateMachine.ump"
+          jumpPawn(MoveDirection.South);
           setPawnSMPlayingNorthSouthNorthSouth(PawnSMPlayingNorthSouthNorthSouth.MiddleNS);
           wasEventProcessed = true;
           break;
@@ -348,6 +386,8 @@ public class PawnBehavior
         if (isLegalJump(MoveDirection.South))
         {
           exitPawnSMPlayingNorthSouthNorthSouth();
+        // line 49 "../../../../../StateMachine.ump"
+          jumpPawn(MoveDirection.South);
           setPawnSMPlayingNorthSouthNorthSouth(PawnSMPlayingNorthSouthNorthSouth.MiddleNS);
           wasEventProcessed = true;
           break;
@@ -357,6 +397,8 @@ public class PawnBehavior
         if (isLegalJump(MoveDirection.South))
         {
           exitPawnSMPlayingNorthSouthNorthSouth();
+        // line 54 "../../../../../StateMachine.ump"
+          jumpPawn(MoveDirection.South);
           setPawnSMPlayingNorthSouthNorthSouth(PawnSMPlayingNorthSouthNorthSouth.MiddleNS);
           wasEventProcessed = true;
           break;
@@ -380,6 +422,8 @@ public class PawnBehavior
         if (isLegalStep(MoveDirection.East))
         {
           exitPawnSMPlayingEastWestEastWest();
+        // line 67 "../../../../../StateMachine.ump"
+          movePlayer(MoveDirection.East);
           setPawnSMPlayingEastWestEastWest(PawnSMPlayingEastWestEastWest.WestBorder);
           wasEventProcessed = true;
           break;
@@ -389,6 +433,8 @@ public class PawnBehavior
         if (isLegalStep(MoveDirection.East))
         {
           exitPawnSMPlayingEastWestEastWest();
+        // line 72 "../../../../../StateMachine.ump"
+          movePlayer(MoveDirection.East);
           setPawnSMPlayingEastWestEastWest(PawnSMPlayingEastWestEastWest.MiddleEW);
           wasEventProcessed = true;
           break;
@@ -398,6 +444,8 @@ public class PawnBehavior
         if (isLegalStep(MoveDirection.East)&&getCurrentPawnColumn()==7)
         {
           exitPawnSMPlayingEastWestEastWest();
+        // line 84 "../../../../../StateMachine.ump"
+          movePlayer(MoveDirection.East);
           setPawnSMPlayingEastWestEastWest(PawnSMPlayingEastWestEastWest.EastBorder);
           wasEventProcessed = true;
           break;
@@ -405,6 +453,8 @@ public class PawnBehavior
         if (isLegalStep(MoveDirection.East)&&getCurrentPawnColumn()>=3&&getCurrentPawnColumn()<=6)
         {
           exitPawnSMPlayingEastWestEastWest();
+        // line 87 "../../../../../StateMachine.ump"
+          movePlayer(MoveDirection.East);
           setPawnSMPlayingEastWestEastWest(PawnSMPlayingEastWestEastWest.MiddleEW);
           wasEventProcessed = true;
           break;
@@ -414,6 +464,8 @@ public class PawnBehavior
         if (isLegalStep(MoveDirection.East))
         {
           exitPawnSMPlayingEastWestEastWest();
+        // line 94 "../../../../../StateMachine.ump"
+          movePlayer(MoveDirection.East);
           setPawnSMPlayingEastWestEastWest(PawnSMPlayingEastWestEastWest.EastEdge);
           wasEventProcessed = true;
           break;
@@ -437,6 +489,8 @@ public class PawnBehavior
         if (isLegalJump(MoveDirection.East))
         {
           exitPawnSMPlayingEastWestEastWest();
+        // line 68 "../../../../../StateMachine.ump"
+          jumpPawn(MoveDirection.East);
           setPawnSMPlayingEastWestEastWest(PawnSMPlayingEastWestEastWest.MiddleEW);
           wasEventProcessed = true;
           break;
@@ -446,6 +500,8 @@ public class PawnBehavior
         if (isLegalJump(MoveDirection.East))
         {
           exitPawnSMPlayingEastWestEastWest();
+        // line 73 "../../../../../StateMachine.ump"
+          jumpPawn(MoveDirection.East);
           setPawnSMPlayingEastWestEastWest(PawnSMPlayingEastWestEastWest.MiddleEW);
           wasEventProcessed = true;
           break;
@@ -455,6 +511,8 @@ public class PawnBehavior
         if (getCurrentPawnColumn()>=3&&getCurrentPawnColumn()<=5)
         {
           exitPawnSMPlayingEastWestEastWest();
+        // line 82 "../../../../../StateMachine.ump"
+          jumpPawn(MoveDirection.East);
           setPawnSMPlayingEastWestEastWest(PawnSMPlayingEastWestEastWest.MiddleEW);
           wasEventProcessed = true;
           break;
@@ -462,6 +520,8 @@ public class PawnBehavior
         if (isLegalJump(MoveDirection.East)&&getCurrentPawnColumn()==7)
         {
           exitPawnSMPlayingEastWestEastWest();
+        // line 85 "../../../../../StateMachine.ump"
+          jumpPawn(MoveDirection.East);
           setPawnSMPlayingEastWestEastWest(PawnSMPlayingEastWestEastWest.EastEdge);
           wasEventProcessed = true;
           break;
@@ -469,6 +529,8 @@ public class PawnBehavior
         if (isLegalJump(MoveDirection.East)&&getCurrentPawnColumn()==6)
         {
           exitPawnSMPlayingEastWestEastWest();
+        // line 86 "../../../../../StateMachine.ump"
+          jumpPawn(MoveDirection.East);
           setPawnSMPlayingEastWestEastWest(PawnSMPlayingEastWestEastWest.EastBorder);
           wasEventProcessed = true;
           break;
@@ -492,6 +554,8 @@ public class PawnBehavior
         if (isLegalStep(MoveDirection.West))
         {
           exitPawnSMPlayingEastWestEastWest();
+        // line 74 "../../../../../StateMachine.ump"
+          movePlayer(MoveDirection.West);
           setPawnSMPlayingEastWestEastWest(PawnSMPlayingEastWestEastWest.WestEdge);
           wasEventProcessed = true;
           break;
@@ -501,6 +565,8 @@ public class PawnBehavior
         if (isLegalStep(MoveDirection.West)&&getCurrentPawnColumn()==3)
         {
           exitPawnSMPlayingEastWestEastWest();
+        // line 79 "../../../../../StateMachine.ump"
+          movePlayer(MoveDirection.West);
           setPawnSMPlayingEastWestEastWest(PawnSMPlayingEastWestEastWest.WestBorder);
           wasEventProcessed = true;
           break;
@@ -508,16 +574,19 @@ public class PawnBehavior
         if (isLegalStep(MoveDirection.West)&&getCurrentPawnColumn()>=4&&getCurrentPawnColumn()<=7)
         {
           exitPawnSMPlayingEastWestEastWest();
+        // line 88 "../../../../../StateMachine.ump"
+          movePlayer(MoveDirection.West);
           setPawnSMPlayingEastWestEastWest(PawnSMPlayingEastWestEastWest.MiddleEW);
           wasEventProcessed = true;
           break;
         }
         break;
       case EastBorder:
-
         if (isLegalStep(MoveDirection.West))
         {
           exitPawnSMPlayingEastWestEastWest();
+        // line 93 "../../../../../StateMachine.ump"
+          movePlayer(MoveDirection.West);
           setPawnSMPlayingEastWestEastWest(PawnSMPlayingEastWestEastWest.MiddleEW);
           wasEventProcessed = true;
           break;
@@ -527,6 +596,8 @@ public class PawnBehavior
         if (isLegalStep(MoveDirection.West))
         {
           exitPawnSMPlayingEastWestEastWest();
+        // line 99 "../../../../../StateMachine.ump"
+          movePlayer(MoveDirection.West);
           setPawnSMPlayingEastWestEastWest(PawnSMPlayingEastWestEastWest.EastBorder);
           wasEventProcessed = true;
           break;
@@ -550,6 +621,8 @@ public class PawnBehavior
         if (isLegalJump(MoveDirection.West)&&getCurrentPawnColumn()==3)
         {
           exitPawnSMPlayingEastWestEastWest();
+        // line 80 "../../../../../StateMachine.ump"
+          jumpPawn(MoveDirection.West);
           setPawnSMPlayingEastWestEastWest(PawnSMPlayingEastWestEastWest.WestEdge);
           wasEventProcessed = true;
           break;
@@ -557,6 +630,8 @@ public class PawnBehavior
         if (isLegalJump(MoveDirection.West)&&getCurrentPawnColumn()==4)
         {
           exitPawnSMPlayingEastWestEastWest();
+        // line 81 "../../../../../StateMachine.ump"
+          jumpPawn(MoveDirection.West);
           setPawnSMPlayingEastWestEastWest(PawnSMPlayingEastWestEastWest.WestBorder);
           wasEventProcessed = true;
           break;
@@ -564,6 +639,8 @@ public class PawnBehavior
         if (isLegalJump(MoveDirection.West)&&isLegalJump(MoveDirection.West)&&getCurrentPawnColumn()>=5&&getCurrentPawnColumn()<=7)
         {
           exitPawnSMPlayingEastWestEastWest();
+        // line 83 "../../../../../StateMachine.ump"
+          jumpPawn(MoveDirection.West);
           setPawnSMPlayingEastWestEastWest(PawnSMPlayingEastWestEastWest.MiddleEW);
           wasEventProcessed = true;
           break;
@@ -573,6 +650,8 @@ public class PawnBehavior
         if (isLegalJump(MoveDirection.West))
         {
           exitPawnSMPlayingEastWestEastWest();
+        // line 95 "../../../../../StateMachine.ump"
+          jumpPawn(MoveDirection.West);
           setPawnSMPlayingEastWestEastWest(PawnSMPlayingEastWestEastWest.MiddleEW);
           wasEventProcessed = true;
           break;
@@ -582,6 +661,8 @@ public class PawnBehavior
         if (isLegalJump(MoveDirection.West))
         {
           exitPawnSMPlayingEastWestEastWest();
+        // line 100 "../../../../../StateMachine.ump"
+          jumpPawn(MoveDirection.West);
           setPawnSMPlayingEastWestEastWest(PawnSMPlayingEastWestEastWest.MiddleEW);
           wasEventProcessed = true;
           break;
@@ -775,11 +856,37 @@ public class PawnBehavior
     player = null;
   }
 
+  // line 108 "../../../../../StateMachine.ump"
+  public void jumpPawn(MoveDirection dir){
+	  
+    
+  }
+
+  // line 111 "../../../../../StateMachine.ump"
+  public boolean movePlayer(MoveDirection dir){
+	String playerSide;
+	Player player = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
+	if (player.hasGameAsBlack()) {
+		playerSide = "black";
+	} else {
+		playerSide = "white";
+	}
+    return QuoridorController.movePlayer(playerSide, determineDirection(dir));
+  }
+
+  // line 113 "../../../../../StateMachine.ump"
+  public void startTheGame(){
+    
+  }
+
 
   /**
    * Returns the current row number of the pawn
+   * @author Zirui He
+   * @return int
    */
   // line 117 "../../../../../StateMachine.ump"
+
   public int getCurrentPawnRow(){
 	  currentGame = QuoridorApplication.getQuoridor().getCurrentGame();
 	  Player player = currentGame.getCurrentPosition().getPlayerToMove();
@@ -795,6 +902,8 @@ public class PawnBehavior
 
   /**
    * Returns the current column number of the pawn
+   * @author Zirui He
+   * @return int
    */
   // line 119 "../../../../../StateMachine.ump"
   public int getCurrentPawnColumn(){
@@ -812,6 +921,9 @@ public class PawnBehavior
 
   /**
    * Returns if it is legal to step in the given direction
+   * @author Zirui He
+   * @param dir
+   * @return boolean
    */
   // line 121 "../../../../../StateMachine.ump"
   public boolean isLegalStep(MoveDirection dir){
@@ -866,38 +978,36 @@ public class PawnBehavior
 			Direction wallDirection = wall.getMove().getWallDirection();
 			
 			if (dir == MoveDirection.West) {
-				if ((wallDirection == Direction.Horizontal) && (wallColumn == prow-1) && 
-						((wallRow == prow-1) || (wallRow == prow+1) || (wallRow == prow))) {
+				if ((wallDirection == Direction.Vertical) && (wallColumn == pcol-1) && 
+						((wallRow == prow-1) || (wallRow == prow))) {
 					result = false;
 					break;
 				}
 			}
 			
 			if (dir == MoveDirection.East) {
-				if ((wallDirection == Direction.Horizontal) && (wallColumn == pcol+1) && 
-						((wallRow == prow-1) || (wallRow == prow+1) || (wallRow == prow))) {
+				if ((wallDirection == Direction.Vertical) && (wallColumn == pcol) && 
+						((wallRow == prow-1) || (wallRow == prow))) {
 					result = false;
 					break;
 				}
 			}
 			
 			if (dir == MoveDirection.North) {
-				if ((wallDirection == Direction.Vertical) && (wallRow == prow-1) && 
-						((wallColumn== pcol-1) || (wallColumn == pcol+1) || (wallColumn == pcol))) {
+				if ((wallDirection == Direction.Horizontal) && (wallRow == prow-1) && 
+						((wallColumn== pcol-1) || (wallColumn == pcol))) {
 					result = false;
 					break;
 				}
 			}
 			
 			if (dir == MoveDirection.South) {
-				if ((wallDirection == Direction.Vertical) && (wallRow == prow+1) && 
-						((wallColumn== pcol-1) || (wallColumn == pcol+1) || (wallColumn == pcol))) {
+				if ((wallDirection == Direction.Horizontal) && (wallRow == prow) && 
+						((wallColumn== pcol-1) || (wallColumn == pcol))) {
 					result = false;
 					break;
 				}
-			}
-				
-				
+			}				
 			
 		}
 		
@@ -907,13 +1017,15 @@ public class PawnBehavior
 
   /**
    * Returns if it is legal to jump in the given direction
+   * @author Pengnan Fan
+   * @param dir
+   * @return boolean
    */
   // line 123 "../../../../../StateMachine.ump"
   public boolean isLegalJump(MoveDirection dir){
 	  currentGame = QuoridorApplication.getQuoridor().getCurrentGame();
 	  GamePosition currentPosition = currentGame.getCurrentPosition();
 	  Player player = currentGame.getCurrentPosition().getPlayerToMove();
-	  Player opponent = player.getNextPlayer();
 	  List<Wall> blackWalls = currentPosition.getBlackWallsOnBoard();
 	  List<Wall> whiteWalls = currentPosition.getWhiteWallsOnBoard();
 	  PlayerPosition playerPosition, opponentPosition;
@@ -928,69 +1040,164 @@ public class PawnBehavior
 	  int[] opponentCoord = new int[]{opponentPosition.getTile().getColumn(), opponentPosition.getTile().getRow()};
 	  int xDiff = playerCoord[0] - opponentCoord[0];
 	  int yDiff = playerCoord[1] - opponentCoord[1];
+	  int[] targetCoord;
+	  if (dir.equals(MoveDirection.North)) {
+		  targetCoord = new int[] {playerCoord[0], playerCoord[1]-2};
+	  } else if (dir.equals(MoveDirection.South)) {
+		  targetCoord = new int[] {playerCoord[0], playerCoord[1]+2};
+	  } else if (dir.equals(MoveDirection.West)) {
+		  targetCoord = new int[] {playerCoord[0]-2, playerCoord[1]};
+	  } else if (dir.equals(MoveDirection.East)) {
+		  targetCoord = new int[] {playerCoord[0]+2, playerCoord[1]};
+	  } else {
+		return false;  
+	  }
 	  
 	  //Check if it is applicable to jump
-	  if (xDiff != 1 && xDiff != -1 && yDiff == 0) {
-		  return false;
-	  } else if (yDiff != 1 && yDiff != -1 && xDiff == 0) {
-		  return false;
+	  if ((xDiff==1 && yDiff==0 && dir.equals(MoveDirection.West) && playerCoord[0]>2) 
+			  || (xDiff==-1 && yDiff==0 && dir.equals(MoveDirection.East) && playerCoord[0]<8)
+			  || (xDiff==0 && yDiff==1 && dir.equals(MoveDirection.North) && playerCoord[1]>2) 
+			  || (xDiff==0 && yDiff==-1 && dir.equals(MoveDirection.South)) && playerCoord[1]<8) {
+		  		//Check if it is out of index
+			 	//Check if there is wall blocking
+			  	int bWallSize = blackWalls.size();
+			  	int wWallSize = whiteWalls.size();
+			  	WallMove currentWallMove;
+			  	Tile currentWallTile;
+			  	Direction currentWallDirection;
+			  	for(int i = 0; i<bWallSize; i++) {
+			  		currentWallMove = blackWalls.get(i).getMove();
+			  		currentWallTile = currentWallMove.getTargetTile();
+			  		currentWallDirection = currentWallMove.getWallDirection();
+			  		if (dir.equals(MoveDirection.North)
+			  				&&currentWallDirection.equals(Direction.Horizontal)
+			  				&&currentWallTile.getRow()==playerCoord[1]-1
+			  				&&(currentWallTile.getColumn()==playerCoord[0]||currentWallTile.getColumn()==playerCoord[0]-1)) {
+			  			return false;
+			  		} else if (dir.equals(MoveDirection.South)
+			  				&&currentWallDirection.equals(Direction.Horizontal)
+			  				&&currentWallTile.getRow()==playerCoord[1]
+			  				&&(currentWallTile.getColumn()==playerCoord[0]||currentWallTile.getColumn()==playerCoord[0]-1)) {
+			  			return false;
+			  		} else if (dir.equals(MoveDirection.West)
+			  				&&currentWallDirection.equals(Direction.Vertical)
+			  				&&currentWallTile.getColumn()==playerCoord[0]-1
+			  				&&(currentWallTile.getRow()==playerCoord[1]||currentWallTile.getRow()==playerCoord[1]-1)) {
+			  			return false;
+			  		} else if (dir.equals(MoveDirection.East)
+			  				&&currentWallDirection.equals(Direction.Vertical)
+			  				&&currentWallTile.getColumn()==playerCoord[0]
+			  				&&(currentWallTile.getRow()==playerCoord[1]||currentWallTile.getRow()==playerCoord[1]-1)) {
+			  			return false;
+			  		}
+			  		
+			  		if (dir.equals(MoveDirection.North)
+			  				&&currentWallDirection.equals(Direction.Horizontal)
+			  				&&currentWallTile.getRow()==targetCoord[1]
+			  				&&(currentWallTile.getColumn()==targetCoord[0]||currentWallTile.getColumn()==targetCoord[0]-1)) {
+			  			return false;
+			  		} else if (dir.equals(MoveDirection.South)
+			  				&&currentWallDirection.equals(Direction.Horizontal)
+			  				&&currentWallTile.getRow()==targetCoord[1]-1
+			  				&&(currentWallTile.getColumn()==targetCoord[0]||currentWallTile.getColumn()==targetCoord[0]-1)) {
+			  			return false;
+			  		} else if (dir.equals(MoveDirection.West)
+			  				&&currentWallDirection.equals(Direction.Vertical)
+			  				&&currentWallTile.getColumn()==targetCoord[0]
+			  				&&(currentWallTile.getRow()==targetCoord[1]||currentWallTile.getRow()==targetCoord[1]-1)) {
+			  			return false;
+			  		} else if (dir.equals(MoveDirection.East)
+			  				&&currentWallDirection.equals(Direction.Vertical)
+			  				&&currentWallTile.getColumn()==targetCoord[0]-1
+			  				&&(currentWallTile.getRow()==targetCoord[1]||currentWallTile.getRow()==targetCoord[1]-1)) {
+			  			return false;
+			  		}
+			  	}
+			  	for(int i = 0; i<wWallSize; i++) {
+			  		currentWallMove = whiteWalls.get(i).getMove();
+			  		currentWallTile = currentWallMove.getTargetTile();
+			  		currentWallDirection = currentWallMove.getWallDirection();
+			  		if (dir.equals(MoveDirection.North)
+			  				&&currentWallDirection.equals(Direction.Horizontal)
+			  				&&currentWallTile.getRow()==playerCoord[1]-1
+			  				&&(currentWallTile.getColumn()==playerCoord[0]||currentWallTile.getColumn()==playerCoord[0]-1)) {
+			  			return false;
+			  		} else if (dir.equals(MoveDirection.South)
+			  				&&currentWallDirection.equals(Direction.Horizontal)
+			  				&&currentWallTile.getRow()==playerCoord[1]
+			  				&&(currentWallTile.getColumn()==playerCoord[0]||currentWallTile.getColumn()==playerCoord[0]-1)) {
+			  			return false;
+			  		} else if (dir.equals(MoveDirection.West)
+			  				&&currentWallDirection.equals(Direction.Vertical)
+			  				&&currentWallTile.getColumn()==playerCoord[0]-1
+			  				&&(currentWallTile.getRow()==playerCoord[1]||currentWallTile.getRow()==playerCoord[1]-1)) {
+			  			return false;
+			  		} else if (dir.equals(MoveDirection.East)
+			  				&&currentWallDirection.equals(Direction.Vertical)
+			  				&&currentWallTile.getColumn()==playerCoord[0]
+			  				&&(currentWallTile.getRow()==playerCoord[1]||currentWallTile.getRow()==playerCoord[1]-1)) {
+			  			return false;
+			  		}
+			  		
+			  		if (dir.equals(MoveDirection.North)
+			  				&&currentWallDirection.equals(Direction.Horizontal)
+			  				&&currentWallTile.getRow()==targetCoord[1]
+			  				&&(currentWallTile.getColumn()==targetCoord[0]||currentWallTile.getColumn()==targetCoord[0]-1)) {
+			  			return false;
+			  		} else if (dir.equals(MoveDirection.South)
+			  				&&currentWallDirection.equals(Direction.Horizontal)
+			  				&&currentWallTile.getRow()==targetCoord[1]-1
+			  				&&(currentWallTile.getColumn()==targetCoord[0]||currentWallTile.getColumn()==targetCoord[0]-1)) {
+			  			return false;
+			  		} else if (dir.equals(MoveDirection.West)
+			  				&&currentWallDirection.equals(Direction.Vertical)
+			  				&&currentWallTile.getColumn()==targetCoord[0]
+			  				&&(currentWallTile.getRow()==targetCoord[1]||currentWallTile.getRow()==targetCoord[1]-1)) {
+			  			return false;
+			  		} else if (dir.equals(MoveDirection.East)
+			  				&&currentWallDirection.equals(Direction.Vertical)
+			  				&&currentWallTile.getColumn()==targetCoord[0]-1
+			  				&&(currentWallTile.getRow()==targetCoord[1]||currentWallTile.getRow()==targetCoord[1]-1)) {
+			  			return false;
+			  		}
+			  	}
+			  	return true;
 	  } else {
-		  //Check if it is out of index
-		  if (dir.equals(MoveDirection.North) && playerCoord[1]<=2) {
-			  return false;
-		  } else if (dir.equals(MoveDirection.South) && playerCoord[1]>=8) {
-			  return false;
-		  } else if (dir.equals(MoveDirection.West) && playerCoord[0]<=2) {
-			  return false;
-		  } else if (dir.equals(MoveDirection.East) && playerCoord[0]>=8) {
-			  return false;
-		  } else {
-			  //Check if there is wall blocking
-			  int bWallSize = blackWalls.size();
-			  int wWallSize = whiteWalls.size();
-			  WallMove currentWallMove;
-			  Tile currentWallTile;
-			  Direction currentWallDirection;
-			  for(int i = 0; i<bWallSize; i++) {
-				  currentWallMove = blackWalls.get(i).getMove();
-				  currentWallTile = currentWallMove.getTargetTile();
-				  currentWallDirection = currentWallMove.getWallDirection();
-				  if (dir.equals(MoveDirection.North)&&currentWallDirection.equals(Direction.Horizontal)&&currentWallTile.getRow()==playerCoord[1]) {
-					  return false;
-				  } else if (dir.equals(MoveDirection.South)&&currentWallDirection.equals(Direction.Horizontal)&&currentWallTile.getRow()==playerCoord[1]+1) {
-					  return false;
-				  } else if (dir.equals(MoveDirection.West)&&currentWallDirection.equals(Direction.Vertical)&&currentWallTile.getColumn()==playerCoord[1]) {
-					  return false;
-				  } else if (dir.equals(MoveDirection.East)&&currentWallDirection.equals(Direction.Vertical)&&currentWallTile.getColumn()==playerCoord[1]+1) {
-					  return false;
-				  }
-			  }
-			  for(int i = 0; i<wWallSize; i++) {
-				  currentWallMove = whiteWalls.get(i).getMove();
-				  currentWallTile = currentWallMove.getTargetTile();
-				  currentWallDirection = currentWallMove.getWallDirection();
-				  if (dir.equals(MoveDirection.North)&&currentWallDirection.equals(Direction.Horizontal)&&currentWallTile.getRow()==playerCoord[1]) {
-					  return false;
-				  } else if (dir.equals(MoveDirection.South)&&currentWallDirection.equals(Direction.Horizontal)&&currentWallTile.getRow()==playerCoord[1]+1) {
-					  return false;
-				  } else if (dir.equals(MoveDirection.West)&&currentWallDirection.equals(Direction.Vertical)&&currentWallTile.getColumn()==playerCoord[1]) {
-					  return false;
-				  } else if (dir.equals(MoveDirection.East)&&currentWallDirection.equals(Direction.Vertical)&&currentWallTile.getColumn()==playerCoord[1]+1) {
-					  return false;
-				  }
-			  }
-		  }
-		  return true;
+		  return false;
 	  }
   }
 
 
-  /**
-   * Action to be called when an illegal move is attempted
-   */
+ /**
+  * this method will print out the error message when try to move pawn out of board
+  * @auther Zirui He
+  */
   // line 126 "../../../../../StateMachine.ump"
   public void illegalMove(){
-	 
+	  System.out.println("Can't exceed boundary");
   }
-
+  
+  /**
+   * this method will change MoveDirection to corresponding string
+   * @author Zirui He
+   * @param dir
+   * @return String
+   */
+  private String determineDirection(MoveDirection dir) {
+		if(dir == MoveDirection.South) {
+			return "down";
+		}
+		if(dir == MoveDirection.North) {
+			return "up";
+		}
+		if(dir == MoveDirection.East) {
+			return "right";
+		}
+		if(dir == MoveDirection.West) {
+			return "left";
+		}
+		else {
+			return null;
+		}
+	}
 }

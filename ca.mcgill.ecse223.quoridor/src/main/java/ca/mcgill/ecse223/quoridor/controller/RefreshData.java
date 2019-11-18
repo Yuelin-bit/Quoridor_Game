@@ -25,8 +25,8 @@ public class RefreshData extends Thread{
 		
 			board.getwhitePawn().setVisible(whiteTurn);
 			board.getblackPawn().setVisible(blackTurn);
-			board.getwhiteStock().setText(QuoridorController.getWhiteStocks());
-			board.getblackStock().setText(QuoridorController.getBlackStocks());	
+			board.getWhiteStock().setText(QuoridorController.getWhiteStocks());
+			board.getBlackStock().setText(QuoridorController.getBlackStocks());	
 			if(whiteTurn) {
 				String time = QuoridorController.getWhiteRemainingTime();
 				board.getwhiteTime().setText(time);
