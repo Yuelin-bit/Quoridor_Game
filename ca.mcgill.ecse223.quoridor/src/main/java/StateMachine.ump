@@ -22,6 +22,7 @@ class PawnBehavior {
           SouthEdge{
             stepUp [isLegalMove(MoveDirection.North)]-> / {movePlayer (MoveDirection.North);} SouthBorder;     
             jumpUp [isLegalJump(MoveDirection.North)] -> /{jumpPawn(MoveDirection.North);} MiddleNS;
+            stepDown -> / {illegalStep()} SouthEdge;
           }
       
           SouthBorder{
@@ -52,6 +53,7 @@ class PawnBehavior {
         NorthEdge{ 
             stepDown [isLegalMove(MoveDirection.South)] -> / {movePlayer(MoveDirection.South);}NorthBorder;
             jumpDown [isLegalJump(MoveDirection.South)]-> / {jumpPown(MoveDirection.South);} MiddleNS;
+          stepUp -> / {illegalStep();} NorthEdge;
         }
       }
         
@@ -66,12 +68,14 @@ class PawnBehavior {
         WestEdge{
           stepRight [isLegalMove(MoveDirection.East)]-> /{movePlayer(MoveDirection.East);} WestBorder;
                 jumpRight [isLegalJump(MoveDirection.East)]->/{jumpPawn(MoveDirection.East);} MiddleEW;
+           stepLeft -> / {illegalStep();} WestEdge;
         }
     
         WestBorder{
               stepRight [isLegalMove(MoveDirection.East)]-> /{movePlayer(MoveDirection.East);} MiddleEW;
               jumpRight [isLegalJump(MoveDirection.East)]-> /{jumpPawn(MoveDirection.East);} MiddleEW;
               stepLeft [isLegalMove(MoveDirection.West)]-> /{movePlayer(MoveDirection.West);} WestEdge;
+         
         }    
     
         MiddleEW{
@@ -98,6 +102,8 @@ class PawnBehavior {
         EastEdge{
              stepLeft [isLegalMove(MoveDirection.West)]-> /{movePlayer(MoveDirection.West);} EastBorder;
              jumpLeft [isLegalJump(MoveDirection.West)]-> /{jumpPawn(MoveDirection.West);}  MiddleEW;
+          stepRight -> / {illegalStep();} EastEdge;
+          
         }   
       }
    }
