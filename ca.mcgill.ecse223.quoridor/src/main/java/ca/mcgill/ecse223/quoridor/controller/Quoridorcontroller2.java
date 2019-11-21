@@ -1230,7 +1230,7 @@ public class Quoridorcontroller2 {
 	 * perform a movement first.
 	 * It returns true if the initiating is successful.
 	 * 
-	 * @author Sun, Gengyi
+	 * @author Sun, Gengyi && Yuelin Liu
 	 * @return A flag indicating whether the method successfully launched.
 	 */
 	public static void initializeBoard4() {
@@ -1245,21 +1245,30 @@ public class Quoridorcontroller2 {
 		Game game = QuoridorApplication.getQuoridor().getCurrentGame();
 		QuoridorApplication.getQuoridor().setBoard(board);
 		Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
-		Player yellowPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getPlayer(2);
+		Player yellowPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getYellowPlayer();
 		Player blackPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
+		Player redPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getRedPlayer();
 		
 		whitePlayer.setGameAsWhite(game);
 		Tile initWhite = new Tile(9, 5, board);
+		Tile initYellow = new Tile(5, 9, board);
 		Tile initBlack = new Tile(1, 5, board);
+		Tile initRed = new Tile(5, 1, board);
+		
+		
 		PlayerPosition initialWhite = new PlayerPosition(whitePlayer, initWhite);
+		PlayerPosition initialYellow = new PlayerPosition(whitePlayer, initYellow);
 		PlayerPosition initialBlack = new PlayerPosition(whitePlayer, initBlack);
+		PlayerPosition initialRed = new PlayerPosition(whitePlayer, initRed);
 
-		GamePosition g = new GamePosition(0, initialWhite, initialBlack, whitePlayer, game);
+		GamePosition g = new GamePosition(0, initialWhite, initialYellow, initialBlack, initialRed, whitePlayer, game);
 		g.setPlayerToMove(whitePlayer);
 		game.setCurrentPosition(g);
 
 		initializeWhiteWall(g,whitePlayer);
+		initializeYellowWall(g,yellowPlayer);
 		initializeBlackWall(g,blackPlayer);
+		initializeRedWall(g,redPlayer);
 		g.setPlayerToMove(whitePlayer);
 		Stopwatch white = new Stopwatch(whitePlayer);
 		whiteWatch = white;
@@ -1269,52 +1278,102 @@ public class Quoridorcontroller2 {
 		blackWatch.start();
 		blackWatch.suspend();
 	}
-
-	/**
-	 * Feature: InitialzeBoard
-	 * This static method initializes initial number of walls left for the black player, 
-	 * contains all of them in a list.
-	 * It returns true if the initiating is successful.
-	 * 
-	 * @author Sun, Gengyi
-	 * @param blackPlayer
-	 * @return A flag indicating whether the method successfully launched.
-	 */
-	public static List<Wall> initializeBlackWall(GamePosition g,Player blackPlayer) {
-		//TODO GUI
-		List<Wall> whiteWallsInStock = new ArrayList<Wall>();
-		int blackIndex = 0;
-		if(!blackPlayer.hasWalls()) {
-			for(int i = 0; i<10;i++) {
-				Wall wall = new Wall(blackIndex+i, blackPlayer);
-				g.addBlackWallsInStock(wall);
-			}
-		}
-		return whiteWallsInStock;
-
-	}
+	
 	/**
 	 * Feature: InitialzeBoard
 	 * This static method initializes initial number of walls left for the white player,
 	 * contains all of them in a list.
 	 * It returns true if the initiating is successful.
 	 * 
-	 * @author Sun, Gengyi
+	 * @author Sun, Gengyi && Yuelin Liu
 	 * @param whitePlayer
 	 * @return A flag indicating whether the method successfully launched.
 	 */
-	public static void initializeWhiteWall(GamePosition g,Player whitePlayer) {
-		//TODO GUIint blackIndex = 0;
-		int whiteIndex = 10;
-		List<Wall> blackWallsInStock= new ArrayList<Wall>();
-		if(!whitePlayer.hasWalls()) {
+	public static void initializeWhiteWall(GamePosition g,Player player) {
+		int index = 1;
+		if(!player.hasWalls()) {
 			for(int i = 0; i<10;i++) {
-				Wall wall = new Wall(whiteIndex+i, whitePlayer);		
+				Wall wall = new Wall(index+i, player);		
 				g.addWhiteWallsInStock(wall);
 			}
 		}
 
 	}
+	
+	
+	/**
+	 * Feature: InitialzeBoard
+	 * This static method initializes initial number of walls left for the white player,
+	 * contains all of them in a list.
+	 * It returns true if the initiating is successful.
+	 * 
+	 * @author Sun, Gengyi && Yuelin Liu
+	 * @param whitePlayer
+	 * @return A flag indicating whether the method successfully launched.
+	 */
+	public static void initializeYellowWall(GamePosition g,Player player) {
+		int index = 11;
+		if(!player.hasWalls()) {
+			for(int i = 0; i<10;i++) {
+				Wall wall = new Wall(index+i, player);		
+				g.addYellowWallsInStock(wall);
+			}
+		}
+
+	}
+	
+	/**
+	 * Feature: InitialzeBoard
+	 * This static method initializes initial number of walls left for the white player,
+	 * contains all of them in a list.
+	 * It returns true if the initiating is successful.
+	 * 
+	 * @author Sun, Gengyi && Yuelin Liu
+	 * @param whitePlayer
+	 * @return A flag indicating whether the method successfully launched.
+	 */
+	public static void initializeBlackWall(GamePosition g,Player player) {
+		int index = 21;
+		if(!player.hasWalls()) {
+			for(int i = 0; i<10;i++) {
+				Wall wall = new Wall(index+i, player);		
+				g.addBlackWallsInStock(wall);
+			}
+		}
+
+	}
+	
+	
+	/**
+	 * Feature: InitialzeBoard
+	 * This static method initializes initial number of walls left for the white player,
+	 * contains all of them in a list.
+	 * It returns true if the initiating is successful.
+	 * 
+	 * @author Sun, Gengyi && Yuelin Liu
+	 * @param whitePlayer
+	 * @return A flag indicating whether the method successfully launched.
+	 */
+	public static void initializeRedWall(GamePosition g,Player player) {
+		int index = 31;
+		if(!player.hasWalls()) {
+			for(int i = 0; i<10;i++) {
+				Wall wall = new Wall(index+i, player);		
+				g.addRedWallsInStock(wall);
+			}
+		}
+
+	}
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
 
 	/**
 	 * This method verify if the total thinking time of a give game is correctly 
