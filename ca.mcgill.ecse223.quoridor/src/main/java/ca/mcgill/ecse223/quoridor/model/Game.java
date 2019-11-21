@@ -3,7 +3,6 @@
 
 package ca.mcgill.ecse223.quoridor.model;
 import java.util.*;
-import java.sql.Time;
 
 // line 42 "../../../../../QuoridorGame.ump"
 public class Game
@@ -13,7 +12,7 @@ public class Game
   // ENUMERATIONS
   //------------------------
 
-  public enum GameStatus { Initializing, ReadyToStart, Running, WhiteWon, BlackWon, Draw, Replay }
+  public enum GameStatus { Initializing, ReadyToStart, Running, WhiteWon, YellowWon, BlackWon, RedWon, Draw, Replay }
   public enum MoveMode { WallMove, PlayerMove }
 
   //------------------------
@@ -30,8 +29,9 @@ public class Game
   private List<GamePosition> positions;
   private WallMove wallMoveCandidate;
   private Player whitePlayer;
+  private Player yellowPlayer;
   private Player blackPlayer;
-  private List<Player> players;
+  private Player redPlayer;
   private Quoridor quoridor;
 
   //------------------------
@@ -44,7 +44,6 @@ public class Game
     moveMode = aMoveMode;
     moves = new ArrayList<Move>();
     positions = new ArrayList<GamePosition>();
-    players = new ArrayList<Player>();
     boolean didAddQuoridor = setQuoridor(aQuoridor);
     if (!didAddQuoridor)
     {
@@ -175,6 +174,17 @@ public class Game
     return has;
   }
   /* Code from template association_GetOne */
+  public Player getYellowPlayer()
+  {
+    return yellowPlayer;
+  }
+
+  public boolean hasYellowPlayer()
+  {
+    boolean has = yellowPlayer != null;
+    return has;
+  }
+  /* Code from template association_GetOne */
   public Player getBlackPlayer()
   {
     return blackPlayer;
@@ -185,38 +195,16 @@ public class Game
     boolean has = blackPlayer != null;
     return has;
   }
-  /* Code from template association_GetMany */
-  public Player getPlayer(int index)
+  /* Code from template association_GetOne */
+  public Player getRedPlayer()
   {
-    Player aPlayer = players.get(index);
-    return aPlayer;
+    return redPlayer;
   }
 
-  /**
-   * Add this for four player game
-   */
-  public List<Player> getPlayers()
+  public boolean hasRedPlayer()
   {
-    List<Player> newPlayers = Collections.unmodifiableList(players);
-    return newPlayers;
-  }
-
-  public int numberOfPlayers()
-  {
-    int number = players.size();
-    return number;
-  }
-
-  public boolean hasPlayers()
-  {
-    boolean has = players.size() > 0;
+    boolean has = redPlayer != null;
     return has;
-  }
-
-  public int indexOfPlayer(Player aPlayer)
-  {
-    int index = players.indexOf(aPlayer);
-    return index;
   }
   /* Code from template association_GetOne */
   public Quoridor getQuoridor()
@@ -306,9 +294,9 @@ public class Game
     return 0;
   }
   /* Code from template association_AddManyToOne */
-  public GamePosition addPosition(int aId, PlayerPosition aWhitePosition, PlayerPosition aBlackPosition, Player aPlayerToMove)
+  public GamePosition addPosition(int aId, PlayerPosition aWhitePosition, PlayerPosition aYellowPosition, PlayerPosition aBlackPosition, PlayerPosition aRedPosition, Player aPlayerToMove)
   {
-    return new GamePosition(aId, aWhitePosition, aBlackPosition, aPlayerToMove, this);
+    return new GamePosition(aId, aWhitePosition, aYellowPosition, aBlackPosition, aRedPosition, aPlayerToMove, this);
   }
 
   public boolean addPosition(GamePosition aPosition)
@@ -439,6 +427,39 @@ public class Game
     return wasSet;
   }
   /* Code from template association_SetOptionalOneToOptionalOne */
+  public boolean setYellowPlayer(Player aNewYellowPlayer)
+  {
+    boolean wasSet = false;
+    if (aNewYellowPlayer == null)
+    {
+      Player existingYellowPlayer = yellowPlayer;
+      yellowPlayer = null;
+      
+      if (existingYellowPlayer != null && existingYellowPlayer.getGameAsYellow() != null)
+      {
+        existingYellowPlayer.setGameAsYellow(null);
+      }
+      wasSet = true;
+      return wasSet;
+    }
+
+    Player currentYellowPlayer = getYellowPlayer();
+    if (currentYellowPlayer != null && !currentYellowPlayer.equals(aNewYellowPlayer))
+    {
+      currentYellowPlayer.setGameAsYellow(null);
+    }
+
+    yellowPlayer = aNewYellowPlayer;
+    Game existingGameAsYellow = aNewYellowPlayer.getGameAsYellow();
+
+    if (!equals(existingGameAsYellow))
+    {
+      aNewYellowPlayer.setGameAsYellow(this);
+    }
+    wasSet = true;
+    return wasSet;
+  }
+  /* Code from template association_SetOptionalOneToOptionalOne */
   public boolean setBlackPlayer(Player aNewBlackPlayer)
   {
     boolean wasSet = false;
@@ -471,77 +492,38 @@ public class Game
     wasSet = true;
     return wasSet;
   }
-  /* Code from template association_MinimumNumberOfMethod */
-  public static int minimumNumberOfPlayers()
+  /* Code from template association_SetOptionalOneToOptionalOne */
+  public boolean setRedPlayer(Player aNewRedPlayer)
   {
-    return 0;
-  }
-  /* Code from template association_AddManyToOne */
-  public Player addPlayer(Time aRemainingTime, User aUser, Destination aDestination)
-  {
-    return new Player(aRemainingTime, aUser, aDestination, this);
-  }
+    boolean wasSet = false;
+    if (aNewRedPlayer == null)
+    {
+      Player existingRedPlayer = redPlayer;
+      redPlayer = null;
+      
+      if (existingRedPlayer != null && existingRedPlayer.getGameAsRed() != null)
+      {
+        existingRedPlayer.setGameAsRed(null);
+      }
+      wasSet = true;
+      return wasSet;
+    }
 
-  public boolean addPlayer(Player aPlayer)
-  {
-    boolean wasAdded = false;
-    if (players.contains(aPlayer)) { return false; }
-    Game existingGame = aPlayer.getGame();
-    boolean isNewGame = existingGame != null && !this.equals(existingGame);
-    if (isNewGame)
+    Player currentRedPlayer = getRedPlayer();
+    if (currentRedPlayer != null && !currentRedPlayer.equals(aNewRedPlayer))
     {
-      aPlayer.setGame(this);
+      currentRedPlayer.setGameAsRed(null);
     }
-    else
-    {
-      players.add(aPlayer);
-    }
-    wasAdded = true;
-    return wasAdded;
-  }
 
-  public boolean removePlayer(Player aPlayer)
-  {
-    boolean wasRemoved = false;
-    //Unable to remove aPlayer, as it must always have a game
-    if (!this.equals(aPlayer.getGame()))
-    {
-      players.remove(aPlayer);
-      wasRemoved = true;
-    }
-    return wasRemoved;
-  }
-  /* Code from template association_AddIndexControlFunctions */
-  public boolean addPlayerAt(Player aPlayer, int index)
-  {  
-    boolean wasAdded = false;
-    if(addPlayer(aPlayer))
-    {
-      if(index < 0 ) { index = 0; }
-      if(index > numberOfPlayers()) { index = numberOfPlayers() - 1; }
-      players.remove(aPlayer);
-      players.add(index, aPlayer);
-      wasAdded = true;
-    }
-    return wasAdded;
-  }
+    redPlayer = aNewRedPlayer;
+    Game existingGameAsRed = aNewRedPlayer.getGameAsRed();
 
-  public boolean addOrMovePlayerAt(Player aPlayer, int index)
-  {
-    boolean wasAdded = false;
-    if(players.contains(aPlayer))
+    if (!equals(existingGameAsRed))
     {
-      if(index < 0 ) { index = 0; }
-      if(index > numberOfPlayers()) { index = numberOfPlayers() - 1; }
-      players.remove(aPlayer);
-      players.add(index, aPlayer);
-      wasAdded = true;
-    } 
-    else 
-    {
-      wasAdded = addPlayerAt(aPlayer, index);
+      aNewRedPlayer.setGameAsRed(this);
     }
-    return wasAdded;
+    wasSet = true;
+    return wasSet;
   }
   /* Code from template association_SetOneToOptionalOne */
   public boolean setQuoridor(Quoridor aNewQuoridor)
@@ -603,6 +585,13 @@ public class Game
       existingWhitePlayer.delete();
       existingWhitePlayer.setGameAsWhite(null);
     }
+    Player existingYellowPlayer = yellowPlayer;
+    yellowPlayer = null;
+    if (existingYellowPlayer != null)
+    {
+      existingYellowPlayer.delete();
+      existingYellowPlayer.setGameAsYellow(null);
+    }
     Player existingBlackPlayer = blackPlayer;
     blackPlayer = null;
     if (existingBlackPlayer != null)
@@ -610,13 +599,13 @@ public class Game
       existingBlackPlayer.delete();
       existingBlackPlayer.setGameAsBlack(null);
     }
-    while (players.size() > 0)
+    Player existingRedPlayer = redPlayer;
+    redPlayer = null;
+    if (existingRedPlayer != null)
     {
-      Player aPlayer = players.get(players.size() - 1);
-      aPlayer.delete();
-      players.remove(aPlayer);
+      existingRedPlayer.delete();
+      existingRedPlayer.setGameAsRed(null);
     }
-    
     Quoridor existingQuoridor = quoridor;
     quoridor = null;
     if (existingQuoridor != null)
@@ -634,7 +623,9 @@ public class Game
             "  " + "currentPosition = "+(getCurrentPosition()!=null?Integer.toHexString(System.identityHashCode(getCurrentPosition())):"null") + System.getProperties().getProperty("line.separator") +
             "  " + "wallMoveCandidate = "+(getWallMoveCandidate()!=null?Integer.toHexString(System.identityHashCode(getWallMoveCandidate())):"null") + System.getProperties().getProperty("line.separator") +
             "  " + "whitePlayer = "+(getWhitePlayer()!=null?Integer.toHexString(System.identityHashCode(getWhitePlayer())):"null") + System.getProperties().getProperty("line.separator") +
+            "  " + "yellowPlayer = "+(getYellowPlayer()!=null?Integer.toHexString(System.identityHashCode(getYellowPlayer())):"null") + System.getProperties().getProperty("line.separator") +
             "  " + "blackPlayer = "+(getBlackPlayer()!=null?Integer.toHexString(System.identityHashCode(getBlackPlayer())):"null") + System.getProperties().getProperty("line.separator") +
+            "  " + "redPlayer = "+(getRedPlayer()!=null?Integer.toHexString(System.identityHashCode(getRedPlayer())):"null") + System.getProperties().getProperty("line.separator") +
             "  " + "quoridor = "+(getQuoridor()!=null?Integer.toHexString(System.identityHashCode(getQuoridor())):"null");
   }
 }

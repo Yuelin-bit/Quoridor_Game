@@ -4,7 +4,7 @@
 package ca.mcgill.ecse223.quoridor.model;
 import java.sql.Time;
 
-// line 67 "../../../../../QuoridorGame.ump"
+// line 75 "../../../../../QuoridorGame.ump"
 public class Destination
 {
 
@@ -34,11 +34,11 @@ public class Destination
     player = aPlayer;
   }
 
-  public Destination(int aTargetNumber, Direction aDirection, Time aRemainingTimeForPlayer, User aUserForPlayer, Game aGameForPlayer)
+  public Destination(int aTargetNumber, Direction aDirection, Time aRemainingTimeForPlayer, User aUserForPlayer)
   {
     targetNumber = aTargetNumber;
     direction = aDirection;
-    player = new Player(aRemainingTimeForPlayer, aUserForPlayer, this, aGameForPlayer);
+    player = new Player(aRemainingTimeForPlayer, aUserForPlayer, this);
   }
 
   //------------------------

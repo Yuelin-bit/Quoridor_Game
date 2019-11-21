@@ -4,7 +4,7 @@
 package ca.mcgill.ecse223.quoridor.model;
 import java.util.*;
 
-// line 56 "../../../../../QuoridorGame.ump"
+// line 58 "../../../../../QuoridorGame.ump"
 public class GamePosition
 {
 
@@ -23,19 +23,25 @@ public class GamePosition
 
   //GamePosition Associations
   private PlayerPosition whitePosition;
+  private PlayerPosition yellowPosition;
   private PlayerPosition blackPosition;
+  private PlayerPosition redPosition;
   private Player playerToMove;
   private List<Wall> whiteWallsOnBoard;
+  private List<Wall> yellowWallsOnBoard;
   private List<Wall> blackWallsOnBoard;
+  private List<Wall> redWallsOnBoard;
   private List<Wall> whiteWallsInStock;
+  private List<Wall> yellowWallsInStock;
   private List<Wall> blackWallsInStock;
+  private List<Wall> redWallsInStock;
   private Game game;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public GamePosition(int aId, PlayerPosition aWhitePosition, PlayerPosition aBlackPosition, Player aPlayerToMove, Game aGame)
+  public GamePosition(int aId, PlayerPosition aWhitePosition, PlayerPosition aYellowPosition, PlayerPosition aBlackPosition, PlayerPosition aRedPosition, Player aPlayerToMove, Game aGame)
   {
     if (!setId(aId))
     {
@@ -46,19 +52,33 @@ public class GamePosition
     {
       throw new RuntimeException("Unable to create whiteInGame due to whitePosition");
     }
+    boolean didAddYellowPosition = setYellowPosition(aYellowPosition);
+    if (!didAddYellowPosition)
+    {
+      throw new RuntimeException("Unable to create yellowInGame due to yellowPosition");
+    }
     boolean didAddBlackPosition = setBlackPosition(aBlackPosition);
     if (!didAddBlackPosition)
     {
       throw new RuntimeException("Unable to create blackInGame due to blackPosition");
+    }
+    boolean didAddRedPosition = setRedPosition(aRedPosition);
+    if (!didAddRedPosition)
+    {
+      throw new RuntimeException("Unable to create redInGame due to redPosition");
     }
     if (!setPlayerToMove(aPlayerToMove))
     {
       throw new RuntimeException("Unable to create GamePosition due to aPlayerToMove");
     }
     whiteWallsOnBoard = new ArrayList<Wall>();
+    yellowWallsOnBoard = new ArrayList<Wall>();
     blackWallsOnBoard = new ArrayList<Wall>();
+    redWallsOnBoard = new ArrayList<Wall>();
     whiteWallsInStock = new ArrayList<Wall>();
+    yellowWallsInStock = new ArrayList<Wall>();
     blackWallsInStock = new ArrayList<Wall>();
+    redWallsInStock = new ArrayList<Wall>();
     boolean didAddGame = setGame(aGame);
     if (!didAddGame)
     {
@@ -106,9 +126,19 @@ public class GamePosition
     return whitePosition;
   }
   /* Code from template association_GetOne */
+  public PlayerPosition getYellowPosition()
+  {
+    return yellowPosition;
+  }
+  /* Code from template association_GetOne */
   public PlayerPosition getBlackPosition()
   {
     return blackPosition;
+  }
+  /* Code from template association_GetOne */
+  public PlayerPosition getRedPosition()
+  {
+    return redPosition;
   }
   /* Code from template association_GetOne */
   public Player getPlayerToMove()
@@ -146,6 +176,36 @@ public class GamePosition
     return index;
   }
   /* Code from template association_GetMany */
+  public Wall getYellowWallsOnBoard(int index)
+  {
+    Wall aYellowWallsOnBoard = yellowWallsOnBoard.get(index);
+    return aYellowWallsOnBoard;
+  }
+
+  public List<Wall> getYellowWallsOnBoard()
+  {
+    List<Wall> newYellowWallsOnBoard = Collections.unmodifiableList(yellowWallsOnBoard);
+    return newYellowWallsOnBoard;
+  }
+
+  public int numberOfYellowWallsOnBoard()
+  {
+    int number = yellowWallsOnBoard.size();
+    return number;
+  }
+
+  public boolean hasYellowWallsOnBoard()
+  {
+    boolean has = yellowWallsOnBoard.size() > 0;
+    return has;
+  }
+
+  public int indexOfYellowWallsOnBoard(Wall aYellowWallsOnBoard)
+  {
+    int index = yellowWallsOnBoard.indexOf(aYellowWallsOnBoard);
+    return index;
+  }
+  /* Code from template association_GetMany */
   public Wall getBlackWallsOnBoard(int index)
   {
     Wall aBlackWallsOnBoard = blackWallsOnBoard.get(index);
@@ -173,6 +233,36 @@ public class GamePosition
   public int indexOfBlackWallsOnBoard(Wall aBlackWallsOnBoard)
   {
     int index = blackWallsOnBoard.indexOf(aBlackWallsOnBoard);
+    return index;
+  }
+  /* Code from template association_GetMany */
+  public Wall getRedWallsOnBoard(int index)
+  {
+    Wall aRedWallsOnBoard = redWallsOnBoard.get(index);
+    return aRedWallsOnBoard;
+  }
+
+  public List<Wall> getRedWallsOnBoard()
+  {
+    List<Wall> newRedWallsOnBoard = Collections.unmodifiableList(redWallsOnBoard);
+    return newRedWallsOnBoard;
+  }
+
+  public int numberOfRedWallsOnBoard()
+  {
+    int number = redWallsOnBoard.size();
+    return number;
+  }
+
+  public boolean hasRedWallsOnBoard()
+  {
+    boolean has = redWallsOnBoard.size() > 0;
+    return has;
+  }
+
+  public int indexOfRedWallsOnBoard(Wall aRedWallsOnBoard)
+  {
+    int index = redWallsOnBoard.indexOf(aRedWallsOnBoard);
     return index;
   }
   /* Code from template association_GetMany */
@@ -206,6 +296,36 @@ public class GamePosition
     return index;
   }
   /* Code from template association_GetMany */
+  public Wall getYellowWallsInStock(int index)
+  {
+    Wall aYellowWallsInStock = yellowWallsInStock.get(index);
+    return aYellowWallsInStock;
+  }
+
+  public List<Wall> getYellowWallsInStock()
+  {
+    List<Wall> newYellowWallsInStock = Collections.unmodifiableList(yellowWallsInStock);
+    return newYellowWallsInStock;
+  }
+
+  public int numberOfYellowWallsInStock()
+  {
+    int number = yellowWallsInStock.size();
+    return number;
+  }
+
+  public boolean hasYellowWallsInStock()
+  {
+    boolean has = yellowWallsInStock.size() > 0;
+    return has;
+  }
+
+  public int indexOfYellowWallsInStock(Wall aYellowWallsInStock)
+  {
+    int index = yellowWallsInStock.indexOf(aYellowWallsInStock);
+    return index;
+  }
+  /* Code from template association_GetMany */
   public Wall getBlackWallsInStock(int index)
   {
     Wall aBlackWallsInStock = blackWallsInStock.get(index);
@@ -233,6 +353,36 @@ public class GamePosition
   public int indexOfBlackWallsInStock(Wall aBlackWallsInStock)
   {
     int index = blackWallsInStock.indexOf(aBlackWallsInStock);
+    return index;
+  }
+  /* Code from template association_GetMany */
+  public Wall getRedWallsInStock(int index)
+  {
+    Wall aRedWallsInStock = redWallsInStock.get(index);
+    return aRedWallsInStock;
+  }
+
+  public List<Wall> getRedWallsInStock()
+  {
+    List<Wall> newRedWallsInStock = Collections.unmodifiableList(redWallsInStock);
+    return newRedWallsInStock;
+  }
+
+  public int numberOfRedWallsInStock()
+  {
+    int number = redWallsInStock.size();
+    return number;
+  }
+
+  public boolean hasRedWallsInStock()
+  {
+    boolean has = redWallsInStock.size() > 0;
+    return has;
+  }
+
+  public int indexOfRedWallsInStock(Wall aRedWallsInStock)
+  {
+    int index = redWallsInStock.indexOf(aRedWallsInStock);
     return index;
   }
   /* Code from template association_GetOne */
@@ -269,6 +419,34 @@ public class GamePosition
     return wasSet;
   }
   /* Code from template association_SetOneToOptionalOne */
+  public boolean setYellowPosition(PlayerPosition aNewYellowPosition)
+  {
+    boolean wasSet = false;
+    if (aNewYellowPosition == null)
+    {
+      //Unable to setYellowPosition to null, as yellowInGame must always be associated to a yellowPosition
+      return wasSet;
+    }
+    
+    GamePosition existingYellowInGame = aNewYellowPosition.getYellowInGame();
+    if (existingYellowInGame != null && !equals(existingYellowInGame))
+    {
+      //Unable to setYellowPosition, the current yellowPosition already has a yellowInGame, which would be orphaned if it were re-assigned
+      return wasSet;
+    }
+    
+    PlayerPosition anOldYellowPosition = yellowPosition;
+    yellowPosition = aNewYellowPosition;
+    yellowPosition.setYellowInGame(this);
+
+    if (anOldYellowPosition != null)
+    {
+      anOldYellowPosition.setYellowInGame(null);
+    }
+    wasSet = true;
+    return wasSet;
+  }
+  /* Code from template association_SetOneToOptionalOne */
   public boolean setBlackPosition(PlayerPosition aNewBlackPosition)
   {
     boolean wasSet = false;
@@ -292,6 +470,34 @@ public class GamePosition
     if (anOldBlackPosition != null)
     {
       anOldBlackPosition.setBlackInGame(null);
+    }
+    wasSet = true;
+    return wasSet;
+  }
+  /* Code from template association_SetOneToOptionalOne */
+  public boolean setRedPosition(PlayerPosition aNewRedPosition)
+  {
+    boolean wasSet = false;
+    if (aNewRedPosition == null)
+    {
+      //Unable to setRedPosition to null, as redInGame must always be associated to a redPosition
+      return wasSet;
+    }
+    
+    GamePosition existingRedInGame = aNewRedPosition.getRedInGame();
+    if (existingRedInGame != null && !equals(existingRedInGame))
+    {
+      //Unable to setRedPosition, the current redPosition already has a redInGame, which would be orphaned if it were re-assigned
+      return wasSet;
+    }
+    
+    PlayerPosition anOldRedPosition = redPosition;
+    redPosition = aNewRedPosition;
+    redPosition.setRedInGame(this);
+
+    if (anOldRedPosition != null)
+    {
+      anOldRedPosition.setRedInGame(null);
     }
     wasSet = true;
     return wasSet;
@@ -365,6 +571,63 @@ public class GamePosition
     return wasAdded;
   }
   /* Code from template association_MinimumNumberOfMethod */
+  public static int minimumNumberOfYellowWallsOnBoard()
+  {
+    return 0;
+  }
+  /* Code from template association_AddUnidirectionalMany */
+  public boolean addYellowWallsOnBoard(Wall aYellowWallsOnBoard)
+  {
+    boolean wasAdded = false;
+    if (yellowWallsOnBoard.contains(aYellowWallsOnBoard)) { return false; }
+    yellowWallsOnBoard.add(aYellowWallsOnBoard);
+    wasAdded = true;
+    return wasAdded;
+  }
+
+  public boolean removeYellowWallsOnBoard(Wall aYellowWallsOnBoard)
+  {
+    boolean wasRemoved = false;
+    if (yellowWallsOnBoard.contains(aYellowWallsOnBoard))
+    {
+      yellowWallsOnBoard.remove(aYellowWallsOnBoard);
+      wasRemoved = true;
+    }
+    return wasRemoved;
+  }
+  /* Code from template association_AddIndexControlFunctions */
+  public boolean addYellowWallsOnBoardAt(Wall aYellowWallsOnBoard, int index)
+  {  
+    boolean wasAdded = false;
+    if(addYellowWallsOnBoard(aYellowWallsOnBoard))
+    {
+      if(index < 0 ) { index = 0; }
+      if(index > numberOfYellowWallsOnBoard()) { index = numberOfYellowWallsOnBoard() - 1; }
+      yellowWallsOnBoard.remove(aYellowWallsOnBoard);
+      yellowWallsOnBoard.add(index, aYellowWallsOnBoard);
+      wasAdded = true;
+    }
+    return wasAdded;
+  }
+
+  public boolean addOrMoveYellowWallsOnBoardAt(Wall aYellowWallsOnBoard, int index)
+  {
+    boolean wasAdded = false;
+    if(yellowWallsOnBoard.contains(aYellowWallsOnBoard))
+    {
+      if(index < 0 ) { index = 0; }
+      if(index > numberOfYellowWallsOnBoard()) { index = numberOfYellowWallsOnBoard() - 1; }
+      yellowWallsOnBoard.remove(aYellowWallsOnBoard);
+      yellowWallsOnBoard.add(index, aYellowWallsOnBoard);
+      wasAdded = true;
+    } 
+    else 
+    {
+      wasAdded = addYellowWallsOnBoardAt(aYellowWallsOnBoard, index);
+    }
+    return wasAdded;
+  }
+  /* Code from template association_MinimumNumberOfMethod */
   public static int minimumNumberOfBlackWallsOnBoard()
   {
     return 0;
@@ -418,6 +681,63 @@ public class GamePosition
     else 
     {
       wasAdded = addBlackWallsOnBoardAt(aBlackWallsOnBoard, index);
+    }
+    return wasAdded;
+  }
+  /* Code from template association_MinimumNumberOfMethod */
+  public static int minimumNumberOfRedWallsOnBoard()
+  {
+    return 0;
+  }
+  /* Code from template association_AddUnidirectionalMany */
+  public boolean addRedWallsOnBoard(Wall aRedWallsOnBoard)
+  {
+    boolean wasAdded = false;
+    if (redWallsOnBoard.contains(aRedWallsOnBoard)) { return false; }
+    redWallsOnBoard.add(aRedWallsOnBoard);
+    wasAdded = true;
+    return wasAdded;
+  }
+
+  public boolean removeRedWallsOnBoard(Wall aRedWallsOnBoard)
+  {
+    boolean wasRemoved = false;
+    if (redWallsOnBoard.contains(aRedWallsOnBoard))
+    {
+      redWallsOnBoard.remove(aRedWallsOnBoard);
+      wasRemoved = true;
+    }
+    return wasRemoved;
+  }
+  /* Code from template association_AddIndexControlFunctions */
+  public boolean addRedWallsOnBoardAt(Wall aRedWallsOnBoard, int index)
+  {  
+    boolean wasAdded = false;
+    if(addRedWallsOnBoard(aRedWallsOnBoard))
+    {
+      if(index < 0 ) { index = 0; }
+      if(index > numberOfRedWallsOnBoard()) { index = numberOfRedWallsOnBoard() - 1; }
+      redWallsOnBoard.remove(aRedWallsOnBoard);
+      redWallsOnBoard.add(index, aRedWallsOnBoard);
+      wasAdded = true;
+    }
+    return wasAdded;
+  }
+
+  public boolean addOrMoveRedWallsOnBoardAt(Wall aRedWallsOnBoard, int index)
+  {
+    boolean wasAdded = false;
+    if(redWallsOnBoard.contains(aRedWallsOnBoard))
+    {
+      if(index < 0 ) { index = 0; }
+      if(index > numberOfRedWallsOnBoard()) { index = numberOfRedWallsOnBoard() - 1; }
+      redWallsOnBoard.remove(aRedWallsOnBoard);
+      redWallsOnBoard.add(index, aRedWallsOnBoard);
+      wasAdded = true;
+    } 
+    else 
+    {
+      wasAdded = addRedWallsOnBoardAt(aRedWallsOnBoard, index);
     }
     return wasAdded;
   }
@@ -479,6 +799,63 @@ public class GamePosition
     return wasAdded;
   }
   /* Code from template association_MinimumNumberOfMethod */
+  public static int minimumNumberOfYellowWallsInStock()
+  {
+    return 0;
+  }
+  /* Code from template association_AddUnidirectionalMany */
+  public boolean addYellowWallsInStock(Wall aYellowWallsInStock)
+  {
+    boolean wasAdded = false;
+    if (yellowWallsInStock.contains(aYellowWallsInStock)) { return false; }
+    yellowWallsInStock.add(aYellowWallsInStock);
+    wasAdded = true;
+    return wasAdded;
+  }
+
+  public boolean removeYellowWallsInStock(Wall aYellowWallsInStock)
+  {
+    boolean wasRemoved = false;
+    if (yellowWallsInStock.contains(aYellowWallsInStock))
+    {
+      yellowWallsInStock.remove(aYellowWallsInStock);
+      wasRemoved = true;
+    }
+    return wasRemoved;
+  }
+  /* Code from template association_AddIndexControlFunctions */
+  public boolean addYellowWallsInStockAt(Wall aYellowWallsInStock, int index)
+  {  
+    boolean wasAdded = false;
+    if(addYellowWallsInStock(aYellowWallsInStock))
+    {
+      if(index < 0 ) { index = 0; }
+      if(index > numberOfYellowWallsInStock()) { index = numberOfYellowWallsInStock() - 1; }
+      yellowWallsInStock.remove(aYellowWallsInStock);
+      yellowWallsInStock.add(index, aYellowWallsInStock);
+      wasAdded = true;
+    }
+    return wasAdded;
+  }
+
+  public boolean addOrMoveYellowWallsInStockAt(Wall aYellowWallsInStock, int index)
+  {
+    boolean wasAdded = false;
+    if(yellowWallsInStock.contains(aYellowWallsInStock))
+    {
+      if(index < 0 ) { index = 0; }
+      if(index > numberOfYellowWallsInStock()) { index = numberOfYellowWallsInStock() - 1; }
+      yellowWallsInStock.remove(aYellowWallsInStock);
+      yellowWallsInStock.add(index, aYellowWallsInStock);
+      wasAdded = true;
+    } 
+    else 
+    {
+      wasAdded = addYellowWallsInStockAt(aYellowWallsInStock, index);
+    }
+    return wasAdded;
+  }
+  /* Code from template association_MinimumNumberOfMethod */
   public static int minimumNumberOfBlackWallsInStock()
   {
     return 0;
@@ -535,6 +912,63 @@ public class GamePosition
     }
     return wasAdded;
   }
+  /* Code from template association_MinimumNumberOfMethod */
+  public static int minimumNumberOfRedWallsInStock()
+  {
+    return 0;
+  }
+  /* Code from template association_AddUnidirectionalMany */
+  public boolean addRedWallsInStock(Wall aRedWallsInStock)
+  {
+    boolean wasAdded = false;
+    if (redWallsInStock.contains(aRedWallsInStock)) { return false; }
+    redWallsInStock.add(aRedWallsInStock);
+    wasAdded = true;
+    return wasAdded;
+  }
+
+  public boolean removeRedWallsInStock(Wall aRedWallsInStock)
+  {
+    boolean wasRemoved = false;
+    if (redWallsInStock.contains(aRedWallsInStock))
+    {
+      redWallsInStock.remove(aRedWallsInStock);
+      wasRemoved = true;
+    }
+    return wasRemoved;
+  }
+  /* Code from template association_AddIndexControlFunctions */
+  public boolean addRedWallsInStockAt(Wall aRedWallsInStock, int index)
+  {  
+    boolean wasAdded = false;
+    if(addRedWallsInStock(aRedWallsInStock))
+    {
+      if(index < 0 ) { index = 0; }
+      if(index > numberOfRedWallsInStock()) { index = numberOfRedWallsInStock() - 1; }
+      redWallsInStock.remove(aRedWallsInStock);
+      redWallsInStock.add(index, aRedWallsInStock);
+      wasAdded = true;
+    }
+    return wasAdded;
+  }
+
+  public boolean addOrMoveRedWallsInStockAt(Wall aRedWallsInStock, int index)
+  {
+    boolean wasAdded = false;
+    if(redWallsInStock.contains(aRedWallsInStock))
+    {
+      if(index < 0 ) { index = 0; }
+      if(index > numberOfRedWallsInStock()) { index = numberOfRedWallsInStock() - 1; }
+      redWallsInStock.remove(aRedWallsInStock);
+      redWallsInStock.add(index, aRedWallsInStock);
+      wasAdded = true;
+    } 
+    else 
+    {
+      wasAdded = addRedWallsInStockAt(aRedWallsInStock, index);
+    }
+    return wasAdded;
+  }
   /* Code from template association_SetOneToMany */
   public boolean setGame(Game aGame)
   {
@@ -564,17 +998,33 @@ public class GamePosition
     {
       existingWhitePosition.delete();
     }
+    PlayerPosition existingYellowPosition = yellowPosition;
+    yellowPosition = null;
+    if (existingYellowPosition != null)
+    {
+      existingYellowPosition.delete();
+    }
     PlayerPosition existingBlackPosition = blackPosition;
     blackPosition = null;
     if (existingBlackPosition != null)
     {
       existingBlackPosition.delete();
     }
+    PlayerPosition existingRedPosition = redPosition;
+    redPosition = null;
+    if (existingRedPosition != null)
+    {
+      existingRedPosition.delete();
+    }
     playerToMove = null;
     whiteWallsOnBoard.clear();
+    yellowWallsOnBoard.clear();
     blackWallsOnBoard.clear();
+    redWallsOnBoard.clear();
     whiteWallsInStock.clear();
+    yellowWallsInStock.clear();
     blackWallsInStock.clear();
+    redWallsInStock.clear();
     Game placeholderGame = game;
     this.game = null;
     if(placeholderGame != null)
@@ -589,7 +1039,9 @@ public class GamePosition
     return super.toString() + "["+
             "id" + ":" + getId()+ "]" + System.getProperties().getProperty("line.separator") +
             "  " + "whitePosition = "+(getWhitePosition()!=null?Integer.toHexString(System.identityHashCode(getWhitePosition())):"null") + System.getProperties().getProperty("line.separator") +
+            "  " + "yellowPosition = "+(getYellowPosition()!=null?Integer.toHexString(System.identityHashCode(getYellowPosition())):"null") + System.getProperties().getProperty("line.separator") +
             "  " + "blackPosition = "+(getBlackPosition()!=null?Integer.toHexString(System.identityHashCode(getBlackPosition())):"null") + System.getProperties().getProperty("line.separator") +
+            "  " + "redPosition = "+(getRedPosition()!=null?Integer.toHexString(System.identityHashCode(getRedPosition())):"null") + System.getProperties().getProperty("line.separator") +
             "  " + "playerToMove = "+(getPlayerToMove()!=null?Integer.toHexString(System.identityHashCode(getPlayerToMove())):"null") + System.getProperties().getProperty("line.separator") +
             "  " + "game = "+(getGame()!=null?Integer.toHexString(System.identityHashCode(getGame())):"null");
   }

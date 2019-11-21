@@ -22,14 +22,15 @@ public class Player
   private List<Wall> walls;
   private Player nextPlayer;
   private Game gameAsWhite;
+  private Game gameAsYellow;
   private Game gameAsBlack;
-  private Game game;
+  private Game gameAsRed;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public Player(Time aRemainingTime, User aUser, Destination aDestination, Game aGame)
+  public Player(Time aRemainingTime, User aUser, Destination aDestination)
   {
     remainingTime = aRemainingTime;
     if (!setUser(aUser))
@@ -42,14 +43,9 @@ public class Player
     }
     destination = aDestination;
     walls = new ArrayList<Wall>();
-    boolean didAddGame = setGame(aGame);
-    if (!didAddGame)
-    {
-      throw new RuntimeException("Unable to create player due to game");
-    }
   }
 
-  public Player(Time aRemainingTime, User aUser, int aTargetNumberForDestination, Direction aDirectionForDestination, Game aGame)
+  public Player(Time aRemainingTime, User aUser, int aTargetNumberForDestination, Direction aDirectionForDestination)
   {
     remainingTime = aRemainingTime;
     boolean didAddUser = setUser(aUser);
@@ -59,11 +55,6 @@ public class Player
     }
     destination = new Destination(aTargetNumberForDestination, aDirectionForDestination, this);
     walls = new ArrayList<Wall>();
-    boolean didAddGame = setGame(aGame);
-    if (!didAddGame)
-    {
-      throw new RuntimeException("Unable to create player due to game");
-    }
   }
 
   //------------------------
@@ -145,6 +136,17 @@ public class Player
     return has;
   }
   /* Code from template association_GetOne */
+  public Game getGameAsYellow()
+  {
+    return gameAsYellow;
+  }
+
+  public boolean hasGameAsYellow()
+  {
+    boolean has = gameAsYellow != null;
+    return has;
+  }
+  /* Code from template association_GetOne */
   public Game getGameAsBlack()
   {
     return gameAsBlack;
@@ -156,9 +158,15 @@ public class Player
     return has;
   }
   /* Code from template association_GetOne */
-  public Game getGame()
+  public Game getGameAsRed()
   {
-    return game;
+    return gameAsRed;
+  }
+
+  public boolean hasGameAsRed()
+  {
+    boolean has = gameAsRed != null;
+    return has;
   }
   /* Code from template association_SetUnidirectionalOne */
   public boolean setUser(User aNewUser)
@@ -302,6 +310,39 @@ public class Player
     return wasSet;
   }
   /* Code from template association_SetOptionalOneToOptionalOne */
+  public boolean setGameAsYellow(Game aNewGameAsYellow)
+  {
+    boolean wasSet = false;
+    if (aNewGameAsYellow == null)
+    {
+      Game existingGameAsYellow = gameAsYellow;
+      gameAsYellow = null;
+      
+      if (existingGameAsYellow != null && existingGameAsYellow.getYellowPlayer() != null)
+      {
+        existingGameAsYellow.setYellowPlayer(null);
+      }
+      wasSet = true;
+      return wasSet;
+    }
+
+    Game currentGameAsYellow = getGameAsYellow();
+    if (currentGameAsYellow != null && !currentGameAsYellow.equals(aNewGameAsYellow))
+    {
+      currentGameAsYellow.setYellowPlayer(null);
+    }
+
+    gameAsYellow = aNewGameAsYellow;
+    Player existingYellowPlayer = aNewGameAsYellow.getYellowPlayer();
+
+    if (!equals(existingYellowPlayer))
+    {
+      aNewGameAsYellow.setYellowPlayer(this);
+    }
+    wasSet = true;
+    return wasSet;
+  }
+  /* Code from template association_SetOptionalOneToOptionalOne */
   public boolean setGameAsBlack(Game aNewGameAsBlack)
   {
     boolean wasSet = false;
@@ -334,22 +375,36 @@ public class Player
     wasSet = true;
     return wasSet;
   }
-  /* Code from template association_SetOneToMany */
-  public boolean setGame(Game aGame)
+  /* Code from template association_SetOptionalOneToOptionalOne */
+  public boolean setGameAsRed(Game aNewGameAsRed)
   {
     boolean wasSet = false;
-    if (aGame == null)
+    if (aNewGameAsRed == null)
     {
+      Game existingGameAsRed = gameAsRed;
+      gameAsRed = null;
+      
+      if (existingGameAsRed != null && existingGameAsRed.getRedPlayer() != null)
+      {
+        existingGameAsRed.setRedPlayer(null);
+      }
+      wasSet = true;
       return wasSet;
     }
 
-    Game existingGame = game;
-    game = aGame;
-    if (existingGame != null && !existingGame.equals(aGame))
+    Game currentGameAsRed = getGameAsRed();
+    if (currentGameAsRed != null && !currentGameAsRed.equals(aNewGameAsRed))
     {
-      existingGame.removePlayer(this);
+      currentGameAsRed.setRedPlayer(null);
     }
-    game.addPlayer(this);
+
+    gameAsRed = aNewGameAsRed;
+    Player existingRedPlayer = aNewGameAsRed.getRedPlayer();
+
+    if (!equals(existingRedPlayer))
+    {
+      aNewGameAsRed.setRedPlayer(this);
+    }
     wasSet = true;
     return wasSet;
   }
@@ -375,15 +430,17 @@ public class Player
     {
       gameAsWhite.setWhitePlayer(null);
     }
+    if (gameAsYellow != null)
+    {
+      gameAsYellow.setYellowPlayer(null);
+    }
     if (gameAsBlack != null)
     {
       gameAsBlack.setBlackPlayer(null);
     }
-    Game placeholderGame = game;
-    this.game = null;
-    if(placeholderGame != null)
+    if (gameAsRed != null)
     {
-      placeholderGame.removePlayer(this);
+      gameAsRed.setRedPlayer(null);
     }
   }
 
@@ -395,7 +452,8 @@ public class Player
             "  " + "user = "+(getUser()!=null?Integer.toHexString(System.identityHashCode(getUser())):"null") + System.getProperties().getProperty("line.separator") +
             "  " + "destination = "+(getDestination()!=null?Integer.toHexString(System.identityHashCode(getDestination())):"null") + System.getProperties().getProperty("line.separator") +
             "  " + "gameAsWhite = "+(getGameAsWhite()!=null?Integer.toHexString(System.identityHashCode(getGameAsWhite())):"null") + System.getProperties().getProperty("line.separator") +
+            "  " + "gameAsYellow = "+(getGameAsYellow()!=null?Integer.toHexString(System.identityHashCode(getGameAsYellow())):"null") + System.getProperties().getProperty("line.separator") +
             "  " + "gameAsBlack = "+(getGameAsBlack()!=null?Integer.toHexString(System.identityHashCode(getGameAsBlack())):"null") + System.getProperties().getProperty("line.separator") +
-            "  " + "game = "+(getGame()!=null?Integer.toHexString(System.identityHashCode(getGame())):"null");
+            "  " + "gameAsRed = "+(getGameAsRed()!=null?Integer.toHexString(System.identityHashCode(getGameAsRed())):"null");
   }
 }
