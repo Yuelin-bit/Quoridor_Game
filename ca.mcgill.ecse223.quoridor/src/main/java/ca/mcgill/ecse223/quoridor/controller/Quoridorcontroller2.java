@@ -1265,10 +1265,10 @@ public class Quoridorcontroller2 {
 		g.setPlayerToMove(whitePlayer);
 		game.setCurrentPosition(g);
 
-		initializeWhiteWall(g,whitePlayer);
-		initializeYellowWall(g,yellowPlayer);
-		initializeBlackWall(g,blackPlayer);
-		initializeRedWall(g,redPlayer);
+		initializeWhiteWall4(g,whitePlayer);
+		initializeYellowWall4(g,yellowPlayer);
+		initializeBlackWall4(g,blackPlayer);
+		initializeRedWall4(g,redPlayer);
 		g.setPlayerToMove(whitePlayer);
 		Stopwatch white = new Stopwatch(whitePlayer);
 		whiteWatch = white;
@@ -1289,7 +1289,7 @@ public class Quoridorcontroller2 {
 	 * @param whitePlayer
 	 * @return A flag indicating whether the method successfully launched.
 	 */
-	public static void initializeWhiteWall(GamePosition g,Player player) {
+	public static void initializeWhiteWall4(GamePosition g,Player player) {
 		int index = 1;
 		if(!player.hasWalls()) {
 			for(int i = 0; i<10;i++) {
@@ -1311,7 +1311,7 @@ public class Quoridorcontroller2 {
 	 * @param whitePlayer
 	 * @return A flag indicating whether the method successfully launched.
 	 */
-	public static void initializeYellowWall(GamePosition g,Player player) {
+	public static void initializeYellowWall4(GamePosition g,Player player) {
 		int index = 11;
 		if(!player.hasWalls()) {
 			for(int i = 0; i<10;i++) {
@@ -1332,7 +1332,7 @@ public class Quoridorcontroller2 {
 	 * @param whitePlayer
 	 * @return A flag indicating whether the method successfully launched.
 	 */
-	public static void initializeBlackWall(GamePosition g,Player player) {
+	public static void initializeBlackWall4(GamePosition g,Player player) {
 		int index = 21;
 		if(!player.hasWalls()) {
 			for(int i = 0; i<10;i++) {
@@ -1354,7 +1354,7 @@ public class Quoridorcontroller2 {
 	 * @param whitePlayer
 	 * @return A flag indicating whether the method successfully launched.
 	 */
-	public static void initializeRedWall(GamePosition g,Player player) {
+	public static void initializeRedWall4(GamePosition g,Player player) {
 		int index = 31;
 		if(!player.hasWalls()) {
 			for(int i = 0; i<10;i++) {
