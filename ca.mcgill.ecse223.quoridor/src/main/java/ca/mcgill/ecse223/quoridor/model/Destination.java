@@ -34,11 +34,11 @@ public class Destination
     player = aPlayer;
   }
 
-  public Destination(int aTargetNumber, Direction aDirection, Time aRemainingTimeForPlayer, User aUserForPlayer)
+  public Destination(int aTargetNumber, Direction aDirection, Time aRemainingTimeForPlayer, User aUserForPlayer, Game aGameForPlayer)
   {
     targetNumber = aTargetNumber;
     direction = aDirection;
-    player = new Player(aRemainingTimeForPlayer, aUserForPlayer, this);
+    player = new Player(aRemainingTimeForPlayer, aUserForPlayer, this, aGameForPlayer);
   }
 
   //------------------------

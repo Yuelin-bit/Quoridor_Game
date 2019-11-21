@@ -23,12 +23,13 @@ public class Player
   private Player nextPlayer;
   private Game gameAsWhite;
   private Game gameAsBlack;
+  private Game game;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public Player(Time aRemainingTime, User aUser, Destination aDestination)
+  public Player(Time aRemainingTime, User aUser, Destination aDestination, Game aGame)
   {
     remainingTime = aRemainingTime;
     if (!setUser(aUser))
@@ -41,9 +42,14 @@ public class Player
     }
     destination = aDestination;
     walls = new ArrayList<Wall>();
+    boolean didAddGame = setGame(aGame);
+    if (!didAddGame)
+    {
+      throw new RuntimeException("Unable to create player due to game");
+    }
   }
 
-  public Player(Time aRemainingTime, User aUser, int aTargetNumberForDestination, Direction aDirectionForDestination)
+  public Player(Time aRemainingTime, User aUser, int aTargetNumberForDestination, Direction aDirectionForDestination, Game aGame)
   {
     remainingTime = aRemainingTime;
     boolean didAddUser = setUser(aUser);
@@ -53,6 +59,11 @@ public class Player
     }
     destination = new Destination(aTargetNumberForDestination, aDirectionForDestination, this);
     walls = new ArrayList<Wall>();
+    boolean didAddGame = setGame(aGame);
+    if (!didAddGame)
+    {
+      throw new RuntimeException("Unable to create player due to game");
+    }
   }
 
   //------------------------
@@ -143,6 +154,11 @@ public class Player
   {
     boolean has = gameAsBlack != null;
     return has;
+  }
+  /* Code from template association_GetOne */
+  public Game getGame()
+  {
+    return game;
   }
   /* Code from template association_SetUnidirectionalOne */
   public boolean setUser(User aNewUser)
@@ -318,6 +334,25 @@ public class Player
     wasSet = true;
     return wasSet;
   }
+  /* Code from template association_SetOneToMany */
+  public boolean setGame(Game aGame)
+  {
+    boolean wasSet = false;
+    if (aGame == null)
+    {
+      return wasSet;
+    }
+
+    Game existingGame = game;
+    game = aGame;
+    if (existingGame != null && !existingGame.equals(aGame))
+    {
+      existingGame.removePlayer(this);
+    }
+    game.addPlayer(this);
+    wasSet = true;
+    return wasSet;
+  }
 
   public void delete()
   {
@@ -344,6 +379,12 @@ public class Player
     {
       gameAsBlack.setBlackPlayer(null);
     }
+    Game placeholderGame = game;
+    this.game = null;
+    if(placeholderGame != null)
+    {
+      placeholderGame.removePlayer(this);
+    }
   }
 
 
@@ -354,6 +395,7 @@ public class Player
             "  " + "user = "+(getUser()!=null?Integer.toHexString(System.identityHashCode(getUser())):"null") + System.getProperties().getProperty("line.separator") +
             "  " + "destination = "+(getDestination()!=null?Integer.toHexString(System.identityHashCode(getDestination())):"null") + System.getProperties().getProperty("line.separator") +
             "  " + "gameAsWhite = "+(getGameAsWhite()!=null?Integer.toHexString(System.identityHashCode(getGameAsWhite())):"null") + System.getProperties().getProperty("line.separator") +
-            "  " + "gameAsBlack = "+(getGameAsBlack()!=null?Integer.toHexString(System.identityHashCode(getGameAsBlack())):"null");
+            "  " + "gameAsBlack = "+(getGameAsBlack()!=null?Integer.toHexString(System.identityHashCode(getGameAsBlack())):"null") + System.getProperties().getProperty("line.separator") +
+            "  " + "game = "+(getGame()!=null?Integer.toHexString(System.identityHashCode(getGame())):"null");
   }
 }

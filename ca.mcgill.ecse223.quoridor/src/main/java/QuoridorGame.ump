@@ -50,7 +50,7 @@ class Game {
 	0..1 <@>- 0..1 WallMove wallMoveCandidate; // placeholder for a wall move which is not yet finalized
 	0..1 gameAsWhite <@>- 0..1 Player whitePlayer;  
 	0..1 gameAsBlack <@>- 0..1 Player blackPlayer;
-//	1 <@>- * Player players; // Add this for four player game
+	1 <@>- * Player players; // Add this for four player game
 }
 
 class GamePosition {

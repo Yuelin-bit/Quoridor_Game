@@ -3,6 +3,7 @@
 
 package ca.mcgill.ecse223.quoridor.model;
 import java.util.*;
+import java.sql.Time;
 
 // line 42 "../../../../../QuoridorGame.ump"
 public class Game
@@ -30,6 +31,7 @@ public class Game
   private WallMove wallMoveCandidate;
   private Player whitePlayer;
   private Player blackPlayer;
+  private List<Player> players;
   private Quoridor quoridor;
 
   //------------------------
@@ -42,6 +44,7 @@ public class Game
     moveMode = aMoveMode;
     moves = new ArrayList<Move>();
     positions = new ArrayList<GamePosition>();
+    players = new ArrayList<Player>();
     boolean didAddQuoridor = setQuoridor(aQuoridor);
     if (!didAddQuoridor)
     {
@@ -181,6 +184,39 @@ public class Game
   {
     boolean has = blackPlayer != null;
     return has;
+  }
+  /* Code from template association_GetMany */
+  public Player getPlayer(int index)
+  {
+    Player aPlayer = players.get(index);
+    return aPlayer;
+  }
+
+  /**
+   * Add this for four player game
+   */
+  public List<Player> getPlayers()
+  {
+    List<Player> newPlayers = Collections.unmodifiableList(players);
+    return newPlayers;
+  }
+
+  public int numberOfPlayers()
+  {
+    int number = players.size();
+    return number;
+  }
+
+  public boolean hasPlayers()
+  {
+    boolean has = players.size() > 0;
+    return has;
+  }
+
+  public int indexOfPlayer(Player aPlayer)
+  {
+    int index = players.indexOf(aPlayer);
+    return index;
   }
   /* Code from template association_GetOne */
   public Quoridor getQuoridor()
@@ -435,6 +471,78 @@ public class Game
     wasSet = true;
     return wasSet;
   }
+  /* Code from template association_MinimumNumberOfMethod */
+  public static int minimumNumberOfPlayers()
+  {
+    return 0;
+  }
+  /* Code from template association_AddManyToOne */
+  public Player addPlayer(Time aRemainingTime, User aUser, Destination aDestination)
+  {
+    return new Player(aRemainingTime, aUser, aDestination, this);
+  }
+
+  public boolean addPlayer(Player aPlayer)
+  {
+    boolean wasAdded = false;
+    if (players.contains(aPlayer)) { return false; }
+    Game existingGame = aPlayer.getGame();
+    boolean isNewGame = existingGame != null && !this.equals(existingGame);
+    if (isNewGame)
+    {
+      aPlayer.setGame(this);
+    }
+    else
+    {
+      players.add(aPlayer);
+    }
+    wasAdded = true;
+    return wasAdded;
+  }
+
+  public boolean removePlayer(Player aPlayer)
+  {
+    boolean wasRemoved = false;
+    //Unable to remove aPlayer, as it must always have a game
+    if (!this.equals(aPlayer.getGame()))
+    {
+      players.remove(aPlayer);
+      wasRemoved = true;
+    }
+    return wasRemoved;
+  }
+  /* Code from template association_AddIndexControlFunctions */
+  public boolean addPlayerAt(Player aPlayer, int index)
+  {  
+    boolean wasAdded = false;
+    if(addPlayer(aPlayer))
+    {
+      if(index < 0 ) { index = 0; }
+      if(index > numberOfPlayers()) { index = numberOfPlayers() - 1; }
+      players.remove(aPlayer);
+      players.add(index, aPlayer);
+      wasAdded = true;
+    }
+    return wasAdded;
+  }
+
+  public boolean addOrMovePlayerAt(Player aPlayer, int index)
+  {
+    boolean wasAdded = false;
+    if(players.contains(aPlayer))
+    {
+      if(index < 0 ) { index = 0; }
+      if(index > numberOfPlayers()) { index = numberOfPlayers() - 1; }
+      players.remove(aPlayer);
+      players.add(index, aPlayer);
+      wasAdded = true;
+    } 
+    else 
+    {
+      wasAdded = addPlayerAt(aPlayer, index);
+    }
+    return wasAdded;
+  }
   /* Code from template association_SetOneToOptionalOne */
   public boolean setQuoridor(Quoridor aNewQuoridor)
   {
@@ -502,6 +610,13 @@ public class Game
       existingBlackPlayer.delete();
       existingBlackPlayer.setGameAsBlack(null);
     }
+    while (players.size() > 0)
+    {
+      Player aPlayer = players.get(players.size() - 1);
+      aPlayer.delete();
+      players.remove(aPlayer);
+    }
+    
     Quoridor existingQuoridor = quoridor;
     quoridor = null;
     if (existingQuoridor != null)
