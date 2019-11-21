@@ -24,6 +24,9 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import java.awt.Color;
+import javax.swing.ImageIcon;
 
 public class MainMenu extends JFrame {
 
@@ -53,13 +56,13 @@ public class MainMenu extends JFrame {
 	public MainMenu() {
 		setTitle("McQuoridor");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(0, 0, 1000, 800);
+		setBounds(0, 0, 500, 800);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
 		JButton btnNewButton = new JButton("Play 1 on 1");
-		btnNewButton.setBounds(415, 166, 166, 75);
+		btnNewButton.setBounds(168, 165, 166, 75);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				QuoridorController.initializeNewGame(); //boolean not catched
@@ -71,7 +74,7 @@ public class MainMenu extends JFrame {
 		});
 		
 		JButton btnNewButton_1 = new JButton("Load Position");
-		btnNewButton_1.setBounds(415, 526, 166, 75);
+		btnNewButton_1.setBounds(168, 525, 166, 75);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				LoadPosition loadposition = new LoadPosition();
@@ -82,7 +85,7 @@ public class MainMenu extends JFrame {
 		});
 		
 		JButton btnNewButton_2 = new JButton("Registeration");
-		btnNewButton_2.setBounds(415, 45, 166, 75);
+		btnNewButton_2.setBounds(168, 47, 166, 75);
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Registeration r = new Registeration();
@@ -91,7 +94,7 @@ public class MainMenu extends JFrame {
 		});
 		
 		JButton continue_old = new JButton("Continue Old Game");
-		continue_old.setBounds(415, 639, 166, 75);
+		continue_old.setBounds(168, 641, 166, 75);
 		continue_old.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(QuoridorApplication.getQuoridor()!=null) {
@@ -107,7 +110,7 @@ public class MainMenu extends JFrame {
 		contentPane.add(btnNewButton);
 		
 		JButton btnPracticeai = new JButton("Practice (AI)");
-		btnPracticeai.setBounds(415, 399, 166, 75);
+		btnPracticeai.setBounds(168, 398, 166, 75);
 		contentPane.add(btnPracticeai);
 		
 		JButton btnPlay = new JButton("Play 1 on 3");
@@ -115,7 +118,13 @@ public class MainMenu extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnPlay.setBounds(415, 282, 166, 75);
+		btnPlay.setBounds(168, 281, 166, 75);
 		contentPane.add(btnPlay);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setIcon(new ImageIcon(MainMenu.class.getResource("/ca/mcgill/ecse223/quoridor/resources/timg.jpeg")));
+		lblNewLabel.setBackground(Color.ORANGE);
+		lblNewLabel.setBounds(0, 0, 494, 790);
+		contentPane.add(lblNewLabel);
 	}
 }
