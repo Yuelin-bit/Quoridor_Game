@@ -365,7 +365,8 @@ public class NewJBoard extends JFrame {
 						if(isWhiteTurn) {
 							if(WHITE_WALL_INDEX<MAX_WALL) {
 								jWallCandidate = JWhiteWallInStock[WHITE_WALL_INDEX];
-								mainLayerPanel.add(jWallCandidate);//????
+								mainLayerPanel.add(jWallCandidate);
+								//getLayeredPane().add(jWallCandidate);
 								jWallCandidate.setBackground(Color.BLACK);
 								jWallCandidate.setBounds(297, 418, 9, 103);
 								jWallCandidate.setVisible(true);	
@@ -378,7 +379,8 @@ public class NewJBoard extends JFrame {
 						else {
 							if(BLACK_WALL_INDEX<MAX_WALL) {
 								jWallCandidate = JBlackWallInStock[BLACK_WALL_INDEX];
-								mainLayerPanel.add(jWallCandidate);//????
+								mainLayerPanel.add(jWallCandidate);
+								//getLayeredPane().add(jWallCandidate);
 								jWallCandidate.setBackground(Color.GREEN);
 								jWallCandidate.setBounds(297, 418, 9, 103);
 								jWallCandidate.setVisible(true);
