@@ -1868,23 +1868,6 @@ public class CucumberStepDefinitions {
 		//	*******************************************
 		
 		//	Scenario: Player resigned
-//		@Given("^The game is running$")
-//		public void theGameIsRunning() {
-//			initQuoridorAndBoard();
-//			ArrayList<Player> createUsersAndPlayers = createUsersAndPlayers("user1", "user2");
-//			createAndStartGame(createUsersAndPlayers);
-//		}
-//		@Given("The player to move is {string}")
-//		public void the_player_to_move_is_white(String string) {
-//			Player player;
-//			if (string.equals("white")) {
-//				player = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
-//				QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(player);
-//			}else {
-//				player = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
-//				QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(player);
-//			}
-//		}
 		@When("Player initates to resign")
 		public void player_initates_to_resign() {
 		    // Write code here that turns the phrase above into concrete actions
@@ -1905,8 +1888,48 @@ public class CucumberStepDefinitions {
 		    QuoridorApplication.getQuoridor().getCurrentGame().delete();
 		}
 		
+		//	***********************************
+		//	Enter Replay Mode
+		//	***********************************
 		
+		/* Entering replay mode */
+		@Given("^The game is not running$")
+//		public void theGameIsNotRunning() {
+//			initQuoridorAndBoard();
+//			this.playerList = createUsersAndPlayers("user1", "user2");
+//		}
 		
+		@When("I initiate replay mode")
+		public void i_initiate_replay_mode() {
+		    // Write code here that turns the phrase above into concrete actions
+		    QuoridorController.replay();
+		}
+		
+		@Then("The game shall be in replay mode")
+		public void the_game_shall_be_in_replay_mode() {
+		    // Write code here that turns the phrase above into concrete actions
+		    assertEquals(GameStatus.Replay, QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus());
+		}
+		
+		/* Continue an unfinished game */
+		
+		@Given("The game is in replay mode")
+		public void the_game_is_in_replay_mode() {
+		    // Write code here that turns the phrase above into concrete actions
+			QuoridorController.replay();
+		}
+		
+		@Given("The following moves have been played in game:")
+		public void the_following_moves_have_been_played_in_game(io.cucumber.datatable.DataTable dataTable) {
+		    // Write code here that turns the phrase above into concrete actions
+		    // For automatic transformation, change DataTable to one of
+		    // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
+		    // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
+		    // Double, Byte, Short, Long, BigInteger or BigDecimal.
+		    //
+		    // For other transformations you can register a DataTableType.
+		    throw new cucumber.api.PendingException();
+		}
 		
 		
 		
