@@ -171,7 +171,7 @@ public class NewJBoard4 extends JFrame {
 		whiteTurnGUI = new JLabel("");
 		whiteTurnGUI.setBounds(495, 720, 32, 32);
 		whiteTurnGUI.setForeground(Color.WHITE);
-		whiteTurnGUI.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/32—wqueen.png")));
+		whiteTurnGUI.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/32-wqueen.png")));
 		whiteTurnGUI.setVisible(true);
 		tile4.add(whiteTurnGUI);
 		
