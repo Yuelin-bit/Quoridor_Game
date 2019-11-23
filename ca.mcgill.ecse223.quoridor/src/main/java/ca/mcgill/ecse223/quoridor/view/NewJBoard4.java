@@ -106,6 +106,39 @@ public class NewJBoard4 extends JFrame {
 	public void setTurnGUI(String turnGUI) {
 		this.turnGUI = turnGUI;
 	}
+	
+	public JLabel getWhiteTurnGUI() {
+		return whiteTurnGUI;
+	}
+
+	public void setWhiteTurnGUI(JLabel whiteTurnGUI) {
+		this.whiteTurnGUI = whiteTurnGUI;
+	}
+
+	public JLabel getYellowTurnGUI() {
+		return yellowTurnGUI;
+	}
+
+	public void setYellowTurnGUI(JLabel yellowTurnGUI) {
+		this.yellowTurnGUI = yellowTurnGUI;
+	}
+
+	public JLabel getBlackTurnGUI() {
+		return blackTurnGUI;
+	}
+
+	public void setBlackTurnGUI(JLabel blackTurnGUI) {
+		this.blackTurnGUI = blackTurnGUI;
+	}
+
+	public JLabel getRedTurnGUI() {
+		return redTurnGUI;
+	}
+
+	public void setRedTurnGUI(JLabel redTurnGUI) {
+		this.redTurnGUI = redTurnGUI;
+	}
+
 
 	/**
 	 * Launch the application.

@@ -7,7 +7,7 @@ As a player, I wish to review a past game in replay mode to walk through the mov
 		Then The game shall be in replay mode 
 			
 	Scenario Outline: Continue an unfinished game  
-		Given The game is replay mode
+		Given The game is in replay mode
     Given The following moves have been played in game:
       | mv | rnd | move |
       |  1 |   1 | e8   |

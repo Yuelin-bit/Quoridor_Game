@@ -20,6 +20,7 @@ import ca.mcgill.ecse223.quoridor.QuoridorApplication;
 import ca.mcgill.ecse223.quoridor.controller.PawnBehavior;
 import ca.mcgill.ecse223.quoridor.controller.PawnBehavior.MoveDirection;
 import ca.mcgill.ecse223.quoridor.view.NewJBoard.SmallWallTO;
+import ca.mcgill.ecse223.quoridor.view.NewJBoard4.SmallWallTO4;
 import ca.mcgill.ecse223.quoridor.controller.QuoridorController;
 
 import javax.swing.JButton;
@@ -37,8 +38,12 @@ public class JTile4 extends JPanel {
 	boolean isSelectedState = false;
 	int whitePawn_row = 9;
 	int whitePawn_column = 5;
+	int yellowPawn_row = 5;
+	int yellowPawn_column = 1;
 	int blackPawn_row = 1;
 	int blackPawn_column = 5;
+	int redPawn_row = 5;
+	int redPawn_column = 9;
 
 	/**
 	 * Create the panel.
@@ -920,50 +925,77 @@ public class JTile4 extends JPanel {
 		}else {
 			if(makeSureLegalMove(x, y)) {
 				refreshAllWhite();
-				if(QuoridorApplication.getJboard().isWhiteTurn()==false) {
-					if((x==blackPawn_row)&&(y==blackPawn_column)) {
-						isSelectedState = !isSelectedState;
-						System.out.println("suspend!");
-						this.requestFocus();
-						return;
-					}		
-					allButton[x][y].setIcon(new ImageIcon(JTile.class.getResource("/ca/mcgill/ecse223/quoridor/resources/bpawn.png")));
-					allButton[blackPawn_row][blackPawn_column].setIcon(null);
-//					System.out.println(determineDirection(x,y,blackPawn_row,blackPawn_column));
-					if(dangerous==false) {
-						String direction = determineDirection(x,y,blackPawn_row,blackPawn_column);
-						PawnBehavior pawnBehavior = new PawnBehavior();
-						if (pawnBehavior.isLegalStep(checkMoveDirection(direction))) {
-							boolean result = QuoridorController.movePlayer("black", direction);
-						}
-					}
-					blackPawn_row = x;
-					blackPawn_column = y;
-					QuoridorApplication.getJboard().setWhiteTurn(true);
-					QuoridorApplication.getJboard().getWhiteTurnGUI().setVisible(true);
-					QuoridorApplication.getJboard().getBlackTurnGUI().setVisible(false);
-				}else {
+				if(QuoridorApplication.getJboard4().getTurnGUI()=="white") {
 					if((x==whitePawn_row)&&(y==whitePawn_column)) {
 						isSelectedState = !isSelectedState;
 						System.out.println("suspend!");
 						this.requestFocus();
 						return;
-					}
+					}	
 					allButton[x][y].setIcon(new ImageIcon(JTile.class.getResource("/ca/mcgill/ecse223/quoridor/resources/wpawn.png")));
 					allButton[whitePawn_row][whitePawn_column].setIcon(null);
-//					System.out.println(determineDirection(x,y,whitePawn_row,whitePawn_column));
-					if(dangerous==false) {
-						String direction = determineDirection(x,y,whitePawn_row,whitePawn_column);
-						PawnBehavior pawnBehavior = new PawnBehavior();
-						if (pawnBehavior.isLegalStep(checkMoveDirection(direction))) {
-							boolean result = QuoridorController.movePlayer("white", direction);
-						}
-					}
+					System.out.println(determineDirection(x,y,whitePawn_row,whitePawn_column));
 					whitePawn_row = x;
 					whitePawn_column = y;
-					QuoridorApplication.getJboard().setWhiteTurn(false);
-					QuoridorApplication.getJboard().getWhiteTurnGUI().setVisible(false);
-					QuoridorApplication.getJboard().getBlackTurnGUI().setVisible(true);
+					QuoridorApplication.getJboard4().setTurnGUI("yellow");
+					QuoridorApplication.getJboard4().getWhiteTurnGUI().setVisible(false);
+					QuoridorApplication.getJboard4().getYellowTurnGUI().setVisible(true);
+					QuoridorApplication.getJboard4().getBlackTurnGUI().setVisible(false);
+					QuoridorApplication.getJboard4().getRedTurnGUI().setVisible(false);
+				}
+				else if(QuoridorApplication.getJboard4().getTurnGUI()=="yellow") {
+					if((x==yellowPawn_row)&&(y==yellowPawn_column)) {
+						isSelectedState = !isSelectedState;
+						System.out.println("suspend!");
+						this.requestFocus();
+						return;
+					}	
+					allButton[x][y].setIcon(new ImageIcon(JTile.class.getResource("/ca/mcgill/ecse223/quoridor/resources/43-ypawn.png")));
+					allButton[yellowPawn_row][yellowPawn_column].setIcon(null);
+					System.out.println(determineDirection(x,y,yellowPawn_row,yellowPawn_column));
+					yellowPawn_row = x;
+					yellowPawn_column = y;
+					QuoridorApplication.getJboard4().setTurnGUI("black");
+					QuoridorApplication.getJboard4().getWhiteTurnGUI().setVisible(false);
+					QuoridorApplication.getJboard4().getYellowTurnGUI().setVisible(false);
+					QuoridorApplication.getJboard4().getBlackTurnGUI().setVisible(true);
+					QuoridorApplication.getJboard4().getRedTurnGUI().setVisible(false);
+				}
+				else if(QuoridorApplication.getJboard4().getTurnGUI()=="black") {
+					if((x==blackPawn_row)&&(y==blackPawn_column)) {
+						isSelectedState = !isSelectedState;
+						System.out.println("suspend!");
+						this.requestFocus();
+						return;
+					}	
+					allButton[x][y].setIcon(new ImageIcon(JTile.class.getResource("/ca/mcgill/ecse223/quoridor/resources/bpawn.png")));
+					allButton[blackPawn_row][blackPawn_column].setIcon(null);
+					System.out.println(determineDirection(x,y,blackPawn_row,blackPawn_column));
+					blackPawn_row = x;
+					blackPawn_column = y;
+					QuoridorApplication.getJboard4().setTurnGUI("red");
+					QuoridorApplication.getJboard4().getWhiteTurnGUI().setVisible(false);
+					QuoridorApplication.getJboard4().getYellowTurnGUI().setVisible(false);
+					QuoridorApplication.getJboard4().getBlackTurnGUI().setVisible(false);
+					QuoridorApplication.getJboard4().getRedTurnGUI().setVisible(true);
+				}
+				else {
+					if((x==redPawn_row)&&(y==redPawn_column)) {
+						isSelectedState = !isSelectedState;
+						System.out.println("suspend!");
+						this.requestFocus();
+						return;
+					}	
+					allButton[x][y].setIcon(new ImageIcon(JTile.class.getResource("/ca/mcgill/ecse223/quoridor/resources/rpawn.png")));
+					allButton[redPawn_row][redPawn_column].setIcon(null);
+					System.out.println(determineDirection(x,y,redPawn_row,redPawn_column));
+					redPawn_row = x;
+					redPawn_column = y;
+					QuoridorApplication.getJboard4().setTurnGUI("white");
+					QuoridorApplication.getJboard4().getWhiteTurnGUI().setVisible(true);
+					QuoridorApplication.getJboard4().getYellowTurnGUI().setVisible(false);
+					QuoridorApplication.getJboard4().getBlackTurnGUI().setVisible(false);
+					QuoridorApplication.getJboard4().getRedTurnGUI().setVisible(false);
 				}
 				isSelectedState = !isSelectedState;
 			}
@@ -1007,74 +1039,49 @@ public class JTile4 extends JPanel {
 	}
 	
 	public boolean makeSureLegalTrun(int x, int y) {
-		if(QuoridorApplication.getJboard().isWhiteTurn()==false) {
-			if((x==blackPawn_row)&&(y==blackPawn_column)) {
-				return true;
-			}else {
-				return false;
-			}
-		}else {
+		if(QuoridorApplication.getJboard4().getTurnGUI()=="white") {
 			if((x==whitePawn_row)&&(y==whitePawn_column)) {
 				return true;
 			}else {
 				return false;
 			}
 		}
-	}
-	public boolean makeSureLegalMove(int x, int y) {
-		ArrayList<SmallWallTO> t = QuoridorApplication.getJboard().getListOfSmallWallTO();
-		if(QuoridorApplication.getJboard().isWhiteTurn()==false) {
-			if(((x+1)==blackPawn_row)&&(y==blackPawn_column)) {
-				return legalMove("up", blackPawn_row, blackPawn_column);
+		else if(QuoridorApplication.getJboard4().getTurnGUI()=="yellow") {
+			if((x==yellowPawn_row)&&(y==yellowPawn_column)) {
+				return true;
+			}else {
+				return false;
 			}
-			if(((x+2)==blackPawn_row)&&(y==blackPawn_column)) {
-				dangerous = true;
-				return legalMove("upJump", blackPawn_row, blackPawn_column);
-			}
-			if(((x-1)==blackPawn_row)&&(y==blackPawn_column)) {
-				return legalMove("down", blackPawn_row, blackPawn_column);
-			}
-			if(((x-2)==blackPawn_row)&&(y==blackPawn_column)) {
-				dangerous = true;
-				return legalMove("downJump", blackPawn_row, blackPawn_column);
-			}
-			if((x==blackPawn_row)&&((y+1)==blackPawn_column)) {
-				return legalMove("left", blackPawn_row, blackPawn_column);
-			}
-			if((x==blackPawn_row)&&((y+2)==blackPawn_column)) {
-				dangerous = true;
-				return legalMove("leftJump", blackPawn_row, blackPawn_column);
-			}
-			if((x==blackPawn_row)&&((y-1)==blackPawn_column)) {
-				return legalMove("right", blackPawn_row, blackPawn_column);
-			}
-			if((x==blackPawn_row)&&((y-2)==blackPawn_column)) {
-				dangerous = true;
-				return legalMove("rightJump", blackPawn_row, blackPawn_column);
-			}
-			/////////
-			if(((x-1)==blackPawn_row)&&((y-1)==blackPawn_column)) {
-				dangerous = true;
-				return (legalMove("downRightJump", blackPawn_row, blackPawn_column)||legalMove("rightDownJump", blackPawn_row, blackPawn_column));
-			}
-			if(((x-1)==blackPawn_row)&&((y+1)==blackPawn_column)) {
-				dangerous = true;
-				return (legalMove("downLeftJump", blackPawn_row, blackPawn_column)||legalMove("leftDownJump", blackPawn_row, blackPawn_column));
-			}
-			if(((x+1)==blackPawn_row)&&((y-1)==blackPawn_column)) {
-				dangerous = true;
-				return (legalMove("upRightJump", blackPawn_row, blackPawn_column)||legalMove("rightUpJump", blackPawn_row, blackPawn_column));
-			}
-			if(((x+1)==blackPawn_row)&&((y+1)==blackPawn_column)) {
-				dangerous = true;
-				return (legalMove("upLeftJump", blackPawn_row, blackPawn_column)||legalMove("leftUpJump", blackPawn_row, blackPawn_column));
-			}
-			///////
+		}
+		else if(QuoridorApplication.getJboard4().getTurnGUI()=="black") {
 			if((x==blackPawn_row)&&(y==blackPawn_column)) {
 				return true;
+			}else {
+				return false;
 			}
-			return false;
-		}else {
+		}
+		else {
+			if((x==redPawn_row)&&(y==redPawn_column)) {
+				return true;
+			}else {
+				return false;
+			}
+		}
+	}
+//	if(QuoridorApplication.getJboard4().getTurnGUI()=="white") {
+//		
+//	}
+//	else if(QuoridorApplication.getJboard4().getTurnGUI()=="yellow") {
+//		
+//	}
+//	else if(QuoridorApplication.getJboard4().getTurnGUI()=="black") {
+//		
+//	}
+//	else {
+//		
+//	}
+	public boolean makeSureLegalMove(int x, int y) {
+		if(QuoridorApplication.getJboard4().getTurnGUI()=="white") {
 			if(((x+1)==whitePawn_row)&&(y==whitePawn_column)) {
 				return legalMove("up", whitePawn_row, whitePawn_column);
 			}
@@ -1126,6 +1133,160 @@ public class JTile4 extends JPanel {
 				///////
 			return false;
 		}
+		else if(QuoridorApplication.getJboard4().getTurnGUI()=="yellow") {
+			if(((x+1)==yellowPawn_row)&&(y==yellowPawn_column)) {
+				return legalMove("up", yellowPawn_row, yellowPawn_column);
+			}
+			if(((x+2)==yellowPawn_row)&&(y==yellowPawn_column)) {
+				dangerous = true;
+				return legalMove("upJump", yellowPawn_row, yellowPawn_column);
+			}
+			if(((x-1)==yellowPawn_row)&&(y==yellowPawn_column)) {
+				return legalMove("down", yellowPawn_row, yellowPawn_column);
+			}
+			if(((x-2)==yellowPawn_row)&&(y==yellowPawn_column)) {
+				dangerous = true;
+				return legalMove("downJump", yellowPawn_row, yellowPawn_column);
+			}
+			if((x==yellowPawn_row)&&((y+1)==yellowPawn_column)) {
+				return legalMove("left", yellowPawn_row, yellowPawn_column);
+			}
+			if((x==yellowPawn_row)&&((y+2)==yellowPawn_column)) {
+				dangerous = true;
+				return legalMove("leftJump", yellowPawn_row, yellowPawn_column);
+			}
+			if((x==yellowPawn_row)&&((y-1)==yellowPawn_column)) {
+				return legalMove("right", yellowPawn_row, yellowPawn_column);
+			}
+			if((x==yellowPawn_row)&&((y-2)==yellowPawn_column)) {
+				dangerous = true;
+				return legalMove("rightJump", yellowPawn_row, yellowPawn_column);
+			}
+			if((x==yellowPawn_row)&&(y==yellowPawn_column)) {
+				return true;
+			}
+			/////////
+			if(((x-1)==yellowPawn_row)&&((y-1)==yellowPawn_column)) {
+				dangerous = true;
+				return (legalMove("downRightJump", yellowPawn_row, yellowPawn_column)||legalMove("rightDownJump", yellowPawn_row, yellowPawn_column));
+			}
+			if(((x-1)==yellowPawn_row)&&((y+1)==yellowPawn_column)) {
+				dangerous = true;
+				return (legalMove("downLeftJump", yellowPawn_row, yellowPawn_column)||legalMove("leftDownJump", yellowPawn_row, yellowPawn_column));
+			}
+			if(((x+1)==yellowPawn_row)&&((y-1)==yellowPawn_column)) {
+				dangerous = true;
+				return (legalMove("upRightJump", yellowPawn_row, yellowPawn_column)||legalMove("rightUpJump", yellowPawn_row, yellowPawn_column));
+			}
+			if(((x+1)==yellowPawn_row)&&((y+1)==yellowPawn_column)) {
+				dangerous = true;
+				return (legalMove("upLeftJump", yellowPawn_row, yellowPawn_column)||legalMove("leftUpJump", yellowPawn_row, yellowPawn_column));
+			}
+				///////
+			return false;
+		}
+		else if(QuoridorApplication.getJboard4().getTurnGUI()=="black") {
+			if(((x+1)==blackPawn_row)&&(y==blackPawn_column)) {
+				return legalMove("up", blackPawn_row, blackPawn_column);
+			}
+			if(((x+2)==blackPawn_row)&&(y==blackPawn_column)) {
+				dangerous = true;
+				return legalMove("upJump", blackPawn_row, blackPawn_column);
+			}
+			if(((x-1)==blackPawn_row)&&(y==blackPawn_column)) {
+				return legalMove("down", blackPawn_row, blackPawn_column);
+			}
+			if(((x-2)==blackPawn_row)&&(y==blackPawn_column)) {
+				dangerous = true;
+				return legalMove("downJump", blackPawn_row, blackPawn_column);
+			}
+			if((x==blackPawn_row)&&((y+1)==blackPawn_column)) {
+				return legalMove("left", blackPawn_row, blackPawn_column);
+			}
+			if((x==blackPawn_row)&&((y+2)==blackPawn_column)) {
+				dangerous = true;
+				return legalMove("leftJump", blackPawn_row, blackPawn_column);
+			}
+			if((x==blackPawn_row)&&((y-1)==blackPawn_column)) {
+				return legalMove("right", blackPawn_row, blackPawn_column);
+			}
+			if((x==blackPawn_row)&&((y-2)==blackPawn_column)) {
+				dangerous = true;
+				return legalMove("rightJump", blackPawn_row, blackPawn_column);
+			}
+			if((x==blackPawn_row)&&(y==blackPawn_column)) {
+				return true;
+			}
+			/////////
+			if(((x-1)==blackPawn_row)&&((y-1)==blackPawn_column)) {
+				dangerous = true;
+				return (legalMove("downRightJump", blackPawn_row, blackPawn_column)||legalMove("rightDownJump", blackPawn_row, blackPawn_column));
+			}
+			if(((x-1)==blackPawn_row)&&((y+1)==blackPawn_column)) {
+				dangerous = true;
+				return (legalMove("downLeftJump", blackPawn_row, blackPawn_column)||legalMove("leftDownJump", blackPawn_row, blackPawn_column));
+			}
+			if(((x+1)==blackPawn_row)&&((y-1)==blackPawn_column)) {
+				dangerous = true;
+				return (legalMove("upRightJump", blackPawn_row, blackPawn_column)||legalMove("rightUpJump", blackPawn_row, blackPawn_column));
+			}
+			if(((x+1)==blackPawn_row)&&((y+1)==blackPawn_column)) {
+				dangerous = true;
+				return (legalMove("upLeftJump", blackPawn_row, blackPawn_column)||legalMove("leftUpJump", blackPawn_row, blackPawn_column));
+			}
+			return false;
+		}
+		else {
+			if(((x+1)==redPawn_row)&&(y==redPawn_column)) {
+				return legalMove("up", redPawn_row, redPawn_column);
+			}
+			if(((x+2)==redPawn_row)&&(y==redPawn_column)) {
+				dangerous = true;
+				return legalMove("upJump", redPawn_row, redPawn_column);
+			}
+			if(((x-1)==redPawn_row)&&(y==redPawn_column)) {
+				return legalMove("down", redPawn_row, redPawn_column);
+			}
+			if(((x-2)==redPawn_row)&&(y==redPawn_column)) {
+				dangerous = true;
+				return legalMove("downJump", redPawn_row, redPawn_column);
+			}
+			if((x==redPawn_row)&&((y+1)==redPawn_column)) {
+				return legalMove("left", redPawn_row, redPawn_column);
+			}
+			if((x==redPawn_row)&&((y+2)==redPawn_column)) {
+				dangerous = true;
+				return legalMove("leftJump", redPawn_row, redPawn_column);
+			}
+			if((x==redPawn_row)&&((y-1)==redPawn_column)) {
+				return legalMove("right", redPawn_row, redPawn_column);
+			}
+			if((x==redPawn_row)&&((y-2)==redPawn_column)) {
+				dangerous = true;
+				return legalMove("rightJump", redPawn_row, redPawn_column);
+			}
+			if((x==redPawn_row)&&(y==redPawn_column)) {
+				return true;
+			}
+			/////////
+			if(((x-1)==redPawn_row)&&((y-1)==redPawn_column)) {
+				dangerous = true;
+				return (legalMove("downRightJump", redPawn_row, redPawn_column)||legalMove("rightDownJump", redPawn_row, redPawn_column));
+			}
+			if(((x-1)==redPawn_row)&&((y+1)==redPawn_column)) {
+				dangerous = true;
+				return (legalMove("downLeftJump", redPawn_row, redPawn_column)||legalMove("leftDownJump", redPawn_row, redPawn_column));
+			}
+			if(((x+1)==redPawn_row)&&((y-1)==redPawn_column)) {
+				dangerous = true;
+				return (legalMove("upRightJump", redPawn_row, redPawn_column)||legalMove("rightUpJump", redPawn_row, redPawn_column));
+			}
+			if(((x+1)==redPawn_row)&&((y+1)==redPawn_column)) {
+				dangerous = true;
+				return (legalMove("upLeftJump", redPawn_row, redPawn_column)||legalMove("leftUpJump", redPawn_row, redPawn_column));
+			}
+			return false;
+		}
 	}
 	public void refreshAllWhite() {
 		for(int i=1;i<10;i++) {
@@ -1137,7 +1298,7 @@ public class JTile4 extends JPanel {
 		}
 	}
 	public boolean legalMove(String s, int origin_x, int origin_y) {
-		ArrayList<SmallWallTO> t = QuoridorApplication.getJboard().getListOfSmallWallTO();
+		ArrayList<SmallWallTO4> t = QuoridorApplication.getJboard4().getListOfSmallWallTO4();
 		if(s.equalsIgnoreCase("up")) {
 			boolean can = true;
 			for(int i=0; i<t.size(); i++) {
@@ -1147,12 +1308,18 @@ public class JTile4 extends JPanel {
 					}
 				}
 			}
-			if((origin_x-1==blackPawn_row)&&(origin_y==blackPawn_column)) {
-				can = false;
-			}
 			if((origin_x-1==whitePawn_row)&&(origin_y==whitePawn_column)) {
 				can = false;
 			}
+			if((origin_x-1==yellowPawn_row)&&(origin_y==yellowPawn_column)) {
+				can = false;
+			}
+			if((origin_x-1==blackPawn_row)&&(origin_y==blackPawn_column)) {
+				can = false;
+			}
+			if((origin_x-1==redPawn_row)&&(origin_y==redPawn_column)) {
+				can = false;
+			}		
 			return can;
 		}
 		else if(s.equalsIgnoreCase("down")){
@@ -1164,12 +1331,18 @@ public class JTile4 extends JPanel {
 					}
 				}
 			}
-			if((origin_x+1==blackPawn_row)&&(origin_y==blackPawn_column)) {
-				can = false;
-			}
 			if((origin_x+1==whitePawn_row)&&(origin_y==whitePawn_column)) {
 				can = false;
 			}
+			if((origin_x+1==yellowPawn_row)&&(origin_y==yellowPawn_column)) {
+				can = false;
+			}
+			if((origin_x+1==blackPawn_row)&&(origin_y==blackPawn_column)) {
+				can = false;
+			}
+			if((origin_x+1==redPawn_row)&&(origin_y==redPawn_column)) {
+				can = false;
+			}	
 			return can;
 		}
 		else if(s.equalsIgnoreCase("left")){
@@ -1181,12 +1354,18 @@ public class JTile4 extends JPanel {
 					}
 				}
 			}
-			if((origin_x==blackPawn_row)&&(origin_y-1==blackPawn_column)) {
-				can = false;
-			}
 			if((origin_x==whitePawn_row)&&(origin_y-1==whitePawn_column)) {
 				can = false;
 			}
+			if((origin_x==yellowPawn_row)&&(origin_y-1==yellowPawn_column)) {
+				can = false;
+			}
+			if((origin_x==blackPawn_row)&&(origin_y-1==blackPawn_column)) {
+				can = false;
+			}
+			if((origin_x==redPawn_row)&&(origin_y-1==redPawn_column)) {
+				can = false;
+			}	
 			return can;
 		}
 		else if(s.equalsIgnoreCase("right")){
@@ -1198,18 +1377,26 @@ public class JTile4 extends JPanel {
 					}
 				}
 			}
-			if((origin_x==blackPawn_row)&&(origin_y+1==blackPawn_column)) {
-				can = false;
-			}
 			if((origin_x==whitePawn_row)&&(origin_y+1==whitePawn_column)) {
 				can = false;
 			}
+			if((origin_x==yellowPawn_row)&&(origin_y+1==yellowPawn_column)) {
+				can = false;
+			}
+			if((origin_x==blackPawn_row)&&(origin_y+1==blackPawn_column)) {
+				can = false;
+			}
+			if((origin_x==redPawn_row)&&(origin_y+1==redPawn_column)) {
+				can = false;
+			}	
 			return can;
 		}
 		else if(s.equalsIgnoreCase("downJump")) {
 			boolean can = true;
 			if(!(((origin_x+1==blackPawn_row)&&(origin_y==blackPawn_column))
-				||((origin_x+1==whitePawn_row)&&(origin_y==whitePawn_column)))) {
+				||((origin_x+1==whitePawn_row)&&(origin_y==whitePawn_column))
+				||((origin_x+1==yellowPawn_row)&&(origin_y==yellowPawn_column))
+				||((origin_x+1==redPawn_row)&&(origin_y==redPawn_column)))) {
 				can = false;
 			}
 			for(int i=0; i<t.size(); i++) {
@@ -1222,13 +1409,21 @@ public class JTile4 extends JPanel {
 					}
 				}
 			}
+			if(((origin_x+2==blackPawn_row)&&(origin_y==blackPawn_column))
+					||((origin_x+2==whitePawn_row)&&(origin_y==whitePawn_column))
+					||((origin_x+2==yellowPawn_row)&&(origin_y==yellowPawn_column))
+					||((origin_x+2==redPawn_row)&&(origin_y==redPawn_column))) {
+					can = false;
+			}
 			return can;
 		}
 		else if(s.equalsIgnoreCase("upJump")) {
 			boolean can = true;
 			if(!(((origin_x-1==blackPawn_row)&&(origin_y==blackPawn_column))
-				||((origin_x-1==whitePawn_row)&&(origin_y==whitePawn_column)))) {
-				can = false;
+					||((origin_x-1==whitePawn_row)&&(origin_y==whitePawn_column))
+					||((origin_x-1==yellowPawn_row)&&(origin_y==yellowPawn_column))
+					||((origin_x-1==redPawn_row)&&(origin_y==redPawn_column)))) {
+					can = false;
 			}
 			for(int i=0; i<t.size(); i++) {
 				if(t.get(i).isVertical()==false) {
@@ -1240,12 +1435,20 @@ public class JTile4 extends JPanel {
 					}
 				}
 			}
+			if(((origin_x-2==blackPawn_row)&&(origin_y==blackPawn_column))
+					||((origin_x-2==whitePawn_row)&&(origin_y==whitePawn_column))
+					||((origin_x-2==yellowPawn_row)&&(origin_y==yellowPawn_column))
+					||((origin_x-2==redPawn_row)&&(origin_y==redPawn_column))) {
+					can = false;
+			}
 			return can;
 		}
 		else if(s.equalsIgnoreCase("rightJump")) {
 			boolean can = true;
 			if(!(((origin_x==blackPawn_row)&&(origin_y+1==blackPawn_column))
-					||((origin_x==whitePawn_row)&&(origin_y+1==whitePawn_column)))) {
+					||((origin_x==whitePawn_row)&&(origin_y+1==whitePawn_column))
+					||((origin_x==yellowPawn_row)&&(origin_y+1==yellowPawn_column))
+					||((origin_x==redPawn_row)&&(origin_y+1==redPawn_column)))) {
 					can = false;
 			}
 			for(int i=0; i<t.size(); i++) {
@@ -1258,12 +1461,20 @@ public class JTile4 extends JPanel {
 					}
 				}
 			}
+			if(((origin_x==blackPawn_row)&&(origin_y+2==blackPawn_column))
+					||((origin_x==whitePawn_row)&&(origin_y+2==whitePawn_column))
+					||((origin_x==yellowPawn_row)&&(origin_y+2==yellowPawn_column))
+					||((origin_x==redPawn_row)&&(origin_y+2==redPawn_column))) {
+					can = false;
+			}
 			return can;
 		}
 		else if(s.equalsIgnoreCase("leftJump")) {
 			boolean can = true;
 			if(!(((origin_x==blackPawn_row)&&(origin_y-1==blackPawn_column))
-					||((origin_x==whitePawn_row)&&(origin_y-1==whitePawn_column)))) {
+					||((origin_x==whitePawn_row)&&(origin_y-1==whitePawn_column))
+					||((origin_x==yellowPawn_row)&&(origin_y-1==yellowPawn_column))
+					||((origin_x==redPawn_row)&&(origin_y-1==redPawn_column)))) {
 					can = false;
 			}
 			for(int i=0; i<t.size(); i++) {
@@ -1275,6 +1486,12 @@ public class JTile4 extends JPanel {
 						can = false;
 					}
 				}
+			}
+			if(((origin_x==blackPawn_row)&&(origin_y-2==blackPawn_column))
+					||((origin_x==whitePawn_row)&&(origin_y-2==whitePawn_column))
+					||((origin_x==yellowPawn_row)&&(origin_y-2==yellowPawn_column))
+					||((origin_x==redPawn_row)&&(origin_y-2==redPawn_column))) {
+					can = false;
 			}
 			return can;
 		}
@@ -1295,6 +1512,10 @@ public class JTile4 extends JPanel {
 					}
 				}		
 			}
+			if(origin_x==8) {
+				exist = true;
+			}
+			//System.out.println("can: " + can + ", exist: " + exist);
 			if(exist==true) {
 				return can;
 			}
@@ -1316,6 +1537,9 @@ public class JTile4 extends JPanel {
 						exist = true;
 					}
 				}		
+			}
+			if(origin_y==8) {
+				exist = true;
 			}
 			if(exist==true) {
 				return can;
@@ -1339,6 +1563,10 @@ public class JTile4 extends JPanel {
 					}
 				}		
 			}
+			if(origin_x==8) {
+				exist = true;
+			}
+			//System.out.println("can: " + can + ", exist: " + exist);
 			if(exist==true) {
 				return can;
 			}
@@ -1360,6 +1588,9 @@ public class JTile4 extends JPanel {
 						exist = true;
 					}
 				}		
+			}
+			if(origin_y==2) {
+				exist = true;
 			}
 			if(exist==true) {
 				return can;
@@ -1383,6 +1614,10 @@ public class JTile4 extends JPanel {
 					}
 				}		
 			}
+			if(origin_x==2) {
+				exist = true;
+			}
+			//System.out.println("can: " + can + ", exist: " + exist);
 			if(exist==true) {
 				return can;
 			}
@@ -1405,6 +1640,9 @@ public class JTile4 extends JPanel {
 					}
 				}		
 			}
+			if(origin_y==8) {
+				exist = true;
+			}
 			if(exist==true) {
 				return can;
 			}
@@ -1425,8 +1663,12 @@ public class JTile4 extends JPanel {
 					if((t.get(i).getRowSmall()==(origin_x-2))&&((t.get(i).getColumnSmall()==origin_y)||(t.get(i).getColumnSmall()==(origin_y-1)))){
 						exist = true;
 					}
-				}		
+				}	
 			}
+			if(origin_x==2) {
+				exist = true;
+			}
+			//System.out.println("can: " + can + ", exist: " + exist);
 			if(exist==true) {
 				return can;
 			}
@@ -1449,6 +1691,9 @@ public class JTile4 extends JPanel {
 					}
 				}		
 			}
+			if(origin_y==2) {
+				exist = true;
+			}
 			if(exist==true) {
 				return can;
 			}
@@ -1460,7 +1705,7 @@ public class JTile4 extends JPanel {
 		}
 	}
 	public void findAndGreenAvailableButton(int x, int y) {
-		ArrayList<SmallWallTO> t = QuoridorApplication.getJboard().getListOfSmallWallTO();
+		ArrayList<SmallWallTO4> t = QuoridorApplication.getJboard4().getListOfSmallWallTO4();
 		for(int i=0; i<t.size(); i++) {
 			int r = t.get(i).getRowSmall();
 			int c = t.get(i).getColumnSmall();
