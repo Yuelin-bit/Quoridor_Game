@@ -1291,8 +1291,12 @@ public class JTile extends JPanel {
 					if((t.get(i).getRowSmall()==(origin_x+1))&&((t.get(i).getColumnSmall()==origin_y)||(t.get(i).getColumnSmall()==(origin_y-1)))){
 						exist = true;
 					}
+					if(origin_x==8) {
+						exist = true;
+					}
 				}		
 			}
+			System.out.println("can: " + can + "exist: " + exist);
 			if(exist==true) {
 				return can;
 			}
@@ -1311,6 +1315,9 @@ public class JTile extends JPanel {
 						can = false;
 					}
 					if((t.get(i).getColumnSmall()==(origin_y+1))&&((t.get(i).getRowSmall()==origin_x)||(t.get(i).getRowSmall()==(origin_x-1)))) {
+						exist = true;
+					}
+					if(origin_y==8) {
 						exist = true;
 					}
 				}		
@@ -1335,8 +1342,12 @@ public class JTile extends JPanel {
 					if((t.get(i).getRowSmall()==(origin_x+1))&&((t.get(i).getColumnSmall()==origin_y)||(t.get(i).getColumnSmall()==(origin_y-1)))){
 						exist = true;
 					}
+					if(origin_x==8) {
+						exist = true;
+					}
 				}		
 			}
+			System.out.println("can: " + can + "exist: " + exist);
 			if(exist==true) {
 				return can;
 			}
@@ -1355,6 +1366,9 @@ public class JTile extends JPanel {
 						can = false;
 					}
 					if((t.get(i).getColumnSmall()==(origin_y-2))&&((t.get(i).getRowSmall()==origin_x)||(t.get(i).getRowSmall()==(origin_x-1)))) {
+						exist = true;
+					}
+					if(origin_y==2) {
 						exist = true;
 					}
 				}		
@@ -1379,8 +1393,12 @@ public class JTile extends JPanel {
 					if((t.get(i).getRowSmall()==(origin_x-2))&&((t.get(i).getColumnSmall()==origin_y)||(t.get(i).getColumnSmall()==(origin_y-1)))){
 						exist = true;
 					}
+					if(origin_x==2) {
+						exist = true;
+					}
 				}		
 			}
+			System.out.println("can: " + can + "exist: " + exist);
 			if(exist==true) {
 				return can;
 			}
@@ -1399,6 +1417,9 @@ public class JTile extends JPanel {
 						can = false;
 					}
 					if((t.get(i).getColumnSmall()==(origin_y+1))&&((t.get(i).getRowSmall()==origin_x)||(t.get(i).getRowSmall()==(origin_x-1)))) {
+						exist = true;
+					}
+					if(origin_y==8) {
 						exist = true;
 					}
 				}		
@@ -1423,8 +1444,12 @@ public class JTile extends JPanel {
 					if((t.get(i).getRowSmall()==(origin_x-2))&&((t.get(i).getColumnSmall()==origin_y)||(t.get(i).getColumnSmall()==(origin_y-1)))){
 						exist = true;
 					}
+					if(origin_x==2) {
+						exist = true;
+					}
 				}		
 			}
+			System.out.println("can: " + can + "exist: " + exist);
 			if(exist==true) {
 				return can;
 			}
@@ -1445,6 +1470,9 @@ public class JTile extends JPanel {
 					if((t.get(i).getColumnSmall()==(origin_y-2))&&((t.get(i).getRowSmall()==origin_x)||(t.get(i).getRowSmall()==(origin_x-1)))) {
 						exist = true;
 					}
+					if(origin_y==2) {
+						exist = true;
+					}
 				}		
 			}
 			if(exist==true) {
@@ -1463,7 +1491,7 @@ public class JTile extends JPanel {
 			int r = t.get(i).getRowSmall();
 			int c = t.get(i).getColumnSmall();
 			boolean v = t.get(i).isVertical();
-			System.out.println("{isVertical: " + v + ", row: "+ r + ", column: " + c + "}");
+			//System.out.println("{isVertical: " + v + ", row: "+ r + ", column: " + c + "}");
 		}
 		if(legalB(x+1,y)) {
 			if(legalMove("down", x, y)) {
