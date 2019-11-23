@@ -116,6 +116,9 @@ public class MainMenu extends JFrame {
 		JButton btnPlay = new JButton("Play 1 on 3");
 		btnPlay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				NewJBoard4 a = new NewJBoard4();
+				QuoridorApplication.setJboard4(a);
+				QuoridorApplication.getJboard4().setVisible(true);
 			}
 		});
 		btnPlay.setBounds(168, 281, 166, 75);
