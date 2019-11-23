@@ -91,7 +91,7 @@ public class JTile4 extends JPanel {
 		JButton NewButton48 = new JButton("");
 		JButton NewButton49 = new JButton("");
 		JButton NewButton51 = new JButton("");
-		NewButton51.setIcon(new ImageIcon(JTile4.class.getResource("/ca/mcgill/ecse223/quoridor/resources/43—ypawn.png")));
+		NewButton51.setIcon(new ImageIcon(JTile4.class.getResource("/ca/mcgill/ecse223/quoridor/resources/43-ypawn.png")));
 		JButton NewButton52 = new JButton("");
 		JButton NewButton53 = new JButton("");
 		JButton NewButton54 = new JButton("");
