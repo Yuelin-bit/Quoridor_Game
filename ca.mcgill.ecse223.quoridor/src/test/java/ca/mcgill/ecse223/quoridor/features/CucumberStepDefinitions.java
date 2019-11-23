@@ -1764,9 +1764,47 @@ public class CucumberStepDefinitions {
 		
 		
 		
+		//	*******************************************
+		//	ResignGame
+		//	*******************************************
 		
-		
-		
+		//	Scenario: Player resigned
+//		@Given("^The game is running$")
+//		public void theGameIsRunning() {
+//			initQuoridorAndBoard();
+//			ArrayList<Player> createUsersAndPlayers = createUsersAndPlayers("user1", "user2");
+//			createAndStartGame(createUsersAndPlayers);
+//		}
+//		@Given("The player to move is {string}")
+//		public void the_player_to_move_is_white(String string) {
+//			Player player;
+//			if (string.equals("white")) {
+//				player = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
+//				QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(player);
+//			}else {
+//				player = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
+//				QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(player);
+//			}
+//		}
+		@When("Player initates to resign")
+		public void player_initates_to_resign() {
+		    // Write code here that turns the phrase above into concrete actions
+			assertEquals(true, QuoridorController.resign());
+		}
+		@Then("Game result shall be {string}")
+		public void game_result_shall_be(String string) {
+		    // Write code here that turns the phrase above into concrete actions
+			if (string.equals("BlackWon")) {
+				assertEquals(GameStatus.BlackWon, QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus());
+			} else {
+				assertEquals(GameStatus.WhiteWon, QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus());
+			}
+		}
+		@Then("The game shall no longer be running")
+		public void the_game_shall_no_longer_be_running() {
+		    // Write code here that turns the phrase above into concrete actions
+		    QuoridorApplication.getQuoridor().getCurrentGame().delete();
+		}
 		
 		
 		
