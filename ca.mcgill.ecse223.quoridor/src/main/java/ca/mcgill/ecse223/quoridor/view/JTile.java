@@ -1296,7 +1296,7 @@ public class JTile extends JPanel {
 			if(origin_x==8) {
 				exist = true;
 			}
-			System.out.println("can: " + can + ", exist: " + exist);
+			//System.out.println("can: " + can + ", exist: " + exist);
 			if(exist==true) {
 				return can;
 			}
@@ -1347,7 +1347,7 @@ public class JTile extends JPanel {
 			if(origin_x==8) {
 				exist = true;
 			}
-			System.out.println("can: " + can + ", exist: " + exist);
+			//System.out.println("can: " + can + ", exist: " + exist);
 			if(exist==true) {
 				return can;
 			}
@@ -1398,7 +1398,7 @@ public class JTile extends JPanel {
 			if(origin_x==2) {
 				exist = true;
 			}
-			System.out.println("can: " + can + ", exist: " + exist);
+			//System.out.println("can: " + can + ", exist: " + exist);
 			if(exist==true) {
 				return can;
 			}
@@ -1449,7 +1449,7 @@ public class JTile extends JPanel {
 			if(origin_x==2) {
 				exist = true;
 			}
-			System.out.println("can: " + can + ", exist: " + exist);
+			//System.out.println("can: " + can + ", exist: " + exist);
 			if(exist==true) {
 				return can;
 			}
