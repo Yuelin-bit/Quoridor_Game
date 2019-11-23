@@ -910,7 +910,7 @@ public class JTile4 extends JPanel {
 	
 		
 	}
-	boolean dangerous = false;
+	boolean dangerous = true;
 	public void takeActions(int x, int y) {
 		if(isSelectedState==false) {
 			if(makeSureLegalTrun(x, y)) {

@@ -14,10 +14,12 @@ import javax.swing.border.EmptyBorder;
 
 import ca.mcgill.ecse223.quoridor.QuoridorApplication;
 import ca.mcgill.ecse223.quoridor.controller.QuoridorController;
+import ca.mcgill.ecse223.quoridor.view.NewJBoard.SmallWallTO;
 
 import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 public class NewJBoard4 extends JFrame {
 
@@ -96,6 +98,14 @@ public class NewJBoard4 extends JFrame {
 	
 	private String turnGUI = "white";
 
+
+	public String getTurnGUI() {
+		return turnGUI;
+	}
+
+	public void setTurnGUI(String turnGUI) {
+		this.turnGUI = turnGUI;
+	}
 
 	/**
 	 * Launch the application.
@@ -400,7 +410,7 @@ public class NewJBoard4 extends JFrame {
 								JWhiteWallInStock[WHITE_WALL_INDEX-1].setBackground(Color.BLUE);
 								JWhiteWallInStock[WHITE_WALL_INDEX-1].setVisible(true);
 								JWhiteWallOnBoard[WHITE_WALL_INDEX-1] = JWhiteWallInStock[WHITE_WALL_INDEX-1];
-								whiteStock.setText(transferInt(10-WHITE_WALL_INDEX));
+								whiteStock.setText(transferInt4(10-WHITE_WALL_INDEX));
 								whiteTurnGUI.setVisible(false);
 								yellowTurnGUI.setVisible(true);
 								blackTurnGUI.setVisible(false);
@@ -414,7 +424,7 @@ public class NewJBoard4 extends JFrame {
 								JYellowWallInStock[YELLOW_WALL_INDEX-1].setBackground(Color.BLUE);
 								JYellowWallInStock[YELLOW_WALL_INDEX-1].setVisible(true);
 								JYellowWallOnBoard[YELLOW_WALL_INDEX-1] = JYellowWallInStock[YELLOW_WALL_INDEX-1];
-								yellowStock.setText(transferInt(10-YELLOW_WALL_INDEX));
+								yellowStock.setText(transferInt4(10-YELLOW_WALL_INDEX));
 								whiteTurnGUI.setVisible(false);
 								yellowTurnGUI.setVisible(false);
 								blackTurnGUI.setVisible(true);
@@ -428,7 +438,7 @@ public class NewJBoard4 extends JFrame {
 								JBlackWallInStock[BLACK_WALL_INDEX-1].setBackground(Color.BLUE);
 								JBlackWallInStock[BLACK_WALL_INDEX-1].setVisible(true);
 								JBlackWallOnBoard[BLACK_WALL_INDEX-1] = JBlackWallInStock[BLACK_WALL_INDEX-1];
-								blackStock.setText(transferInt(10-BLACK_WALL_INDEX));
+								blackStock.setText(transferInt4(10-BLACK_WALL_INDEX));
 								whiteTurnGUI.setVisible(false);
 								yellowTurnGUI.setVisible(false);
 								blackTurnGUI.setVisible(false);
@@ -442,7 +452,7 @@ public class NewJBoard4 extends JFrame {
 								JRedWallInStock[RED_WALL_INDEX-1].setBackground(Color.BLUE);
 								JRedWallInStock[RED_WALL_INDEX-1].setVisible(true);
 								JRedWallOnBoard[RED_WALL_INDEX-1] = JRedWallInStock[RED_WALL_INDEX-1];
-								redStock.setText(transferInt(10-RED_WALL_INDEX));
+								redStock.setText(transferInt4(10-RED_WALL_INDEX));
 								whiteTurnGUI.setVisible(true);
 								yellowTurnGUI.setVisible(false);
 								blackTurnGUI.setVisible(false);
@@ -470,7 +480,7 @@ public class NewJBoard4 extends JFrame {
 	 * @exception nothing
 	 *
 	 */
-	public String transferInt(int a) {
+	public String transferInt4(int a) {
 		if(a==10) return "10";
 		if(a==9) return "9";
 		if(a==8) return "8";
@@ -483,6 +493,120 @@ public class NewJBoard4 extends JFrame {
 		if(a==1) return "1";
 		if(a==0) return "0";
 		return null;
+	}
+	
+	/**
+	 * 
+	 * 
+	 * @author EveryOne
+	 * @version inner class to get data of jwalls
+	 * @exception nothing
+	 *
+	 */
+	public class SmallWallTO4{
+		private boolean isVertical;
+		private int rowSmall;
+		private int columnSmall;
+		SmallWallTO4(boolean isVertical, int rowSmall, int columnSmall){
+			this.setColumnSmall(columnSmall);
+			this.setRowSmall(rowSmall);
+			this.setVertical(isVertical);
+		}
+		public boolean isVertical() {
+			return isVertical;
+		}
+		public void setVertical(boolean isVertical) {
+			this.isVertical = isVertical;
+		}
+		public int getRowSmall() {
+			return rowSmall;
+		}
+		public void setRowSmall(int rowSmall) {
+			this.rowSmall = rowSmall;
+		}
+		public int getColumnSmall() {
+			return columnSmall;
+		}
+		public void setColumnSmall(int columnSmall) {
+			this.columnSmall = columnSmall;
+		}
+	}
+	
+	public ArrayList<SmallWallTO4> getListOfSmallWallTO4(){
+		ArrayList<SmallWallTO4> listOfGUIWall = new ArrayList<SmallWallTO4>();
+		for(int i=0; i<10; i++) {
+			if(JWhiteWallOnBoard[i]!=null) {
+				boolean isVertical;
+				int rowSmall;
+				int columnSmall;
+				if(JWhiteWallOnBoard[i].getHeight()==9) {
+					isVertical = false;
+					rowSmall = (JWhiteWallOnBoard[i].getLocation().y - 141) / 56;
+					columnSmall = (JWhiteWallOnBoard[i].getLocation().x - 97) / 56;
+				}else {
+					isVertical = true;
+					rowSmall = (JWhiteWallOnBoard[i].getLocation().y - 94) / 56;
+					columnSmall = (JWhiteWallOnBoard[i].getLocation().x -144) / 56;
+				}
+				SmallWallTO4 a = new SmallWallTO4(isVertical, rowSmall, columnSmall);
+				listOfGUIWall.add(a);
+			}
+		}
+		for(int i=0; i<10; i++) {
+			if(JYellowWallOnBoard[i]!=null) {
+				boolean isVertical;
+				int rowSmall;
+				int columnSmall;
+				if(JYellowWallOnBoard[i].getHeight()==9) {
+					isVertical = false;
+					rowSmall = (JYellowWallOnBoard[i].getLocation().y - 141) / 56;
+					columnSmall = (JYellowWallOnBoard[i].getLocation().x - 97) / 56;
+				}else {
+					isVertical = true;
+					rowSmall = (JYellowWallOnBoard[i].getLocation().y - 94) / 56;
+					columnSmall = (JYellowWallOnBoard[i].getLocation().x -144) / 56;
+				}
+				SmallWallTO4 a = new SmallWallTO4(isVertical, rowSmall, columnSmall);
+				listOfGUIWall.add(a);
+			}
+		}
+		for(int i=0; i<10; i++) {
+			if(JBlackWallOnBoard[i]!=null) {
+				boolean isVertical;
+				int rowSmall;
+				int columnSmall;
+				if(JBlackWallOnBoard[i].getHeight()==9) {
+					isVertical = false;
+					rowSmall = (JBlackWallOnBoard[i].getLocation().y - 141) / 56;
+					columnSmall = (JBlackWallOnBoard[i].getLocation().x - 97) / 56;
+				}else {
+					isVertical = true;
+					rowSmall = (JBlackWallOnBoard[i].getLocation().y - 94) / 56;
+					columnSmall = (JBlackWallOnBoard[i].getLocation().x -144) / 56;
+				}
+				SmallWallTO4 a = new SmallWallTO4(isVertical, rowSmall, columnSmall);
+				listOfGUIWall.add(a);
+			}
+		}
+		for(int i=0; i<10; i++) {
+			if(JRedWallOnBoard[i]!=null) {
+				boolean isVertical;
+				int rowSmall;
+				int columnSmall;
+				if(JRedWallOnBoard[i].getHeight()==9) {
+					isVertical = false;
+					rowSmall = (JRedWallOnBoard[i].getLocation().y - 141) / 56;
+					columnSmall = (JRedWallOnBoard[i].getLocation().x - 97) / 56;
+				}else {
+					isVertical = true;
+					rowSmall = (JRedWallOnBoard[i].getLocation().y - 94) / 56;
+					columnSmall = (JRedWallOnBoard[i].getLocation().x -144) / 56;
+				}
+				SmallWallTO4 a = new SmallWallTO4(isVertical, rowSmall, columnSmall);
+				listOfGUIWall.add(a);
+			}
+		}	
+		return listOfGUIWall;
 	}
 
 }
