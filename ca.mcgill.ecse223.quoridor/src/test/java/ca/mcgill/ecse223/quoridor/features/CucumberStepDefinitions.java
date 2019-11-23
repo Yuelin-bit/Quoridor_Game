@@ -1343,7 +1343,7 @@ public class CucumberStepDefinitions {
 			}else {
 				player = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
 				PlayerPosition newBlackPosition = new PlayerPosition(player, newTile);	
-				QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setWhitePosition(newBlackPosition);
+				QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setBlackPosition(newBlackPosition);
 			}
 		}
 
