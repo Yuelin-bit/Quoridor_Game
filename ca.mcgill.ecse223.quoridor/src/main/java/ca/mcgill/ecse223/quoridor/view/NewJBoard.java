@@ -249,7 +249,8 @@ public class NewJBoard extends JFrame {
 		bigTime = new JLabel(QuoridorController.getWhiteRemainingTime());
 		bigTime.setBounds(221, 51, 91, 20);
 		bigTime.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-		
+		bigTime.setText(QuoridorController.getWhiteRemainingTime());
+
 		
 		
 		whiteTime = new JLabel(QuoridorController.getWhiteRemainingTime());
