@@ -480,7 +480,7 @@ public class QuoridorController {
 		try {
 			if(currentPlayer.hasGameAsBlack()) {			
 				List<Wall> inStock = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsInStock();		
-				Wall grabbedWall = inStock.get(1);
+				Wall grabbedWall = inStock.get(0);
 
 				System.out.println("Black: "+inStock.size());
 
@@ -495,7 +495,7 @@ public class QuoridorController {
 
 			if(currentPlayer.hasGameAsWhite()) {
 				List<Wall> inStock = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsInStock();
-				Wall grabbedWall = inStock.get(1);
+				Wall grabbedWall = inStock.get(0);
 
 				System.out.println("White: "+inStock.size());
 
@@ -1837,7 +1837,26 @@ public class QuoridorController {
 		}
 		return result;
 	}
-
+	
+	/**
+	 * This method will let the current player resign immediately and end the game.
+	 * @author Pengnan Fan
+	 * @return
+	 */
+	public static boolean resign() {
+		boolean result = false;
+		Game currentGame = QuoridorApplication.getQuoridor().getCurrentGame();
+		Player currentPlayer = currentGame.getCurrentPosition().getPlayerToMove();
+		if (currentPlayer.hasGameAsBlack()) {
+			result = currentGame.setGameStatus(GameStatus.WhiteWon);
+		} else if (currentPlayer.hasGameAsWhite()) {
+			result = currentGame.setGameStatus(GameStatus.BlackWon);
+		} else {
+			throw new RuntimeException("Unable to resign game");
+		}
+		return result;
+	}
+	
 	//helper method
 
 	/**

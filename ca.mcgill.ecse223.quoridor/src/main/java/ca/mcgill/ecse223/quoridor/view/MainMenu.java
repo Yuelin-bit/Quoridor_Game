@@ -24,6 +24,9 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import java.awt.Color;
+import javax.swing.ImageIcon;
 
 public class MainMenu extends JFrame {
 
@@ -53,12 +56,13 @@ public class MainMenu extends JFrame {
 	public MainMenu() {
 		setTitle("McQuoridor");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(0, 0, 1000, 800);
+		setBounds(0, 0, 500, 800);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		JButton btnNewButton = new JButton("New Game");
+		JButton btnNewButton = new JButton("Play 1 on 1");
+		btnNewButton.setBounds(168, 165, 166, 75);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				QuoridorController.initializeNewGame(); //boolean not catched
@@ -70,6 +74,7 @@ public class MainMenu extends JFrame {
 		});
 		
 		JButton btnNewButton_1 = new JButton("Load Position");
+		btnNewButton_1.setBounds(168, 525, 166, 75);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				LoadPosition loadposition = new LoadPosition();
@@ -80,6 +85,7 @@ public class MainMenu extends JFrame {
 		});
 		
 		JButton btnNewButton_2 = new JButton("Registeration");
+		btnNewButton_2.setBounds(168, 47, 166, 75);
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Registeration r = new Registeration();
@@ -88,6 +94,7 @@ public class MainMenu extends JFrame {
 		});
 		
 		JButton continue_old = new JButton("Continue Old Game");
+		continue_old.setBounds(168, 641, 166, 75);
 		continue_old.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(QuoridorApplication.getQuoridor()!=null) {
@@ -96,31 +103,31 @@ public class MainMenu extends JFrame {
 				}
 			}
 		});
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(410)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
-						.addComponent(continue_old, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(btnNewButton_2, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(btnNewButton_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(btnNewButton, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE))
-					.addContainerGap(419, Short.MAX_VALUE))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(72)
-					.addComponent(btnNewButton_2, GroupLayout.PREFERRED_SIZE, 112, GroupLayout.PREFERRED_SIZE)
-					.addGap(30)
-					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 102, GroupLayout.PREFERRED_SIZE)
-					.addGap(52)
-					.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
-					.addGap(74)
-					.addComponent(continue_old, GroupLayout.PREFERRED_SIZE, 107, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(110, Short.MAX_VALUE))
-		);
-		contentPane.setLayout(gl_contentPane);
+		contentPane.setLayout(null);
+		contentPane.add(continue_old);
+		contentPane.add(btnNewButton_2);
+		contentPane.add(btnNewButton_1);
+		contentPane.add(btnNewButton);
+		
+		JButton btnPracticeai = new JButton("Practice (AI)");
+		btnPracticeai.setBounds(168, 398, 166, 75);
+		contentPane.add(btnPracticeai);
+		
+		JButton btnPlay = new JButton("Play 1 on 3");
+		btnPlay.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				NewJBoard4 a = new NewJBoard4();
+				QuoridorApplication.setJboard4(a);
+				QuoridorApplication.getJboard4().setVisible(true);
+			}
+		});
+		btnPlay.setBounds(168, 281, 166, 75);
+		contentPane.add(btnPlay);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setIcon(new ImageIcon(MainMenu.class.getResource("/ca/mcgill/ecse223/quoridor/resources/timg.jpeg")));
+		lblNewLabel.setBackground(Color.ORANGE);
+		lblNewLabel.setBounds(0, 0, 494, 790);
+		contentPane.add(lblNewLabel);
 	}
 }

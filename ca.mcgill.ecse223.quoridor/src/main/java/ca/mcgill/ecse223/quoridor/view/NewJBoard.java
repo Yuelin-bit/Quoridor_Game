@@ -230,7 +230,7 @@ public class NewJBoard extends JFrame {
 			}
 		});
 		setting.setBounds(296, 135, 30, 28);
-		setting.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/30—setting.png")));
+		setting.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/30-setting.png")));
 		
 		
 		
@@ -268,11 +268,11 @@ public class NewJBoard extends JFrame {
 		whiteTurnGUI = new JLabel("");
 		whiteTurnGUI.setBounds(156, 94, 32, 32);
 		whiteTurnGUI.setForeground(Color.YELLOW);
-		whiteTurnGUI.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/32—wqueen.png")));
+		whiteTurnGUI.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/32-wqueen.png")));
 		whiteTurnGUI.setVisible(true);
 		blackTurnGUI = new JLabel("");
 		blackTurnGUI.setBounds(360, 94, 32, 32);
-		blackTurnGUI.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/32—wqueen.png")));
+		blackTurnGUI.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/32-wqueen.png")));
 		blackTurnGUI.setVisible(false);
 		
 		
@@ -366,7 +366,8 @@ public class NewJBoard extends JFrame {
 						if(isWhiteTurn) {
 							if(WHITE_WALL_INDEX<MAX_WALL) {
 								jWallCandidate = JWhiteWallInStock[WHITE_WALL_INDEX];
-								mainLayerPanel.add(jWallCandidate);//????
+								mainLayerPanel.add(jWallCandidate);
+								//getLayeredPane().add(jWallCandidate);
 								jWallCandidate.setBackground(Color.BLACK);
 								jWallCandidate.setBounds(297, 418, 9, 103);
 								jWallCandidate.setVisible(true);	
@@ -379,7 +380,8 @@ public class NewJBoard extends JFrame {
 						else {
 							if(BLACK_WALL_INDEX<MAX_WALL) {
 								jWallCandidate = JBlackWallInStock[BLACK_WALL_INDEX];
-								mainLayerPanel.add(jWallCandidate);//????
+								mainLayerPanel.add(jWallCandidate);
+								//getLayeredPane().add(jWallCandidate);
 								jWallCandidate.setBackground(Color.GREEN);
 								jWallCandidate.setBounds(297, 418, 9, 103);
 								jWallCandidate.setVisible(true);

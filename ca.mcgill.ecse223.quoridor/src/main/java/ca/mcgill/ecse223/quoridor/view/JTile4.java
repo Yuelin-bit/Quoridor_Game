@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
-public class JTile extends JPanel {
+public class JTile4 extends JPanel {
 	JButton[][] allButton = new JButton[10][10];
 	boolean isSelectedState = false;
 	int whitePawn_row = 9;
@@ -43,13 +43,13 @@ public class JTile extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public JTile() {
+	public JTile4() {
 		setLayout(null);
-		setBounds(0,0,560,800);
+		setBounds(0,0,800,800);
 		int sideLength = 47;
 		int sideLengthPlus = 56;
-		int referX = 26;
-		int referY = 194;
+		int referX = 153;
+		int referY = 150;
 		
 		
 		
@@ -58,6 +58,7 @@ public class JTile extends JPanel {
 		JButton NewButton13 = new JButton("");
 		JButton NewButton14 = new JButton("");
 		JButton NewButton15 = new JButton("");
+		NewButton15.setIcon(new ImageIcon(JTile.class.getResource("/ca/mcgill/ecse223/quoridor/resources/bpawn.png")));
 		JButton NewButton16 = new JButton("");
 		JButton NewButton17 = new JButton("");
 		JButton NewButton18 = new JButton("");
@@ -90,6 +91,7 @@ public class JTile extends JPanel {
 		JButton NewButton48 = new JButton("");
 		JButton NewButton49 = new JButton("");
 		JButton NewButton51 = new JButton("");
+		NewButton51.setIcon(new ImageIcon(JTile4.class.getResource("/ca/mcgill/ecse223/quoridor/resources/43-ypawn.png")));
 		JButton NewButton52 = new JButton("");
 		JButton NewButton53 = new JButton("");
 		JButton NewButton54 = new JButton("");
@@ -98,6 +100,7 @@ public class JTile extends JPanel {
 		JButton NewButton57 = new JButton("");
 		JButton NewButton58 = new JButton("");
 		JButton NewButton59 = new JButton("");
+		NewButton59.setIcon(new ImageIcon(JTile4.class.getResource("/ca/mcgill/ecse223/quoridor/resources/rpawn.png")));
 		JButton NewButton61 = new JButton("");
 		JButton NewButton62 = new JButton("");
 		JButton NewButton63 = new JButton("");
@@ -130,6 +133,7 @@ public class JTile extends JPanel {
 		JButton NewButton93 = new JButton("");
 		JButton NewButton94 = new JButton("");
 		JButton NewButton95 = new JButton("");
+		NewButton95.setIcon(new ImageIcon(JTile.class.getResource("/ca/mcgill/ecse223/quoridor/resources/wpawn.png")));
 		JButton NewButton96 = new JButton("");
 		JButton NewButton97 = new JButton("");
 		JButton NewButton98 = new JButton("");
@@ -258,7 +262,6 @@ public class JTile extends JPanel {
 		NewButton14.setBounds(referX+sideLengthPlus*3,referY,sideLength,sideLength);
 		add(NewButton14);
 		
-		NewButton15.setIcon(new ImageIcon(JTile.class.getResource("/ca/mcgill/ecse223/quoridor/resources/bpawn.png")));
 		NewButton15.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				takeActions(1,5);
@@ -858,7 +861,6 @@ public class JTile extends JPanel {
 		NewButton94.setBounds(referX+sideLengthPlus*3,referY+sideLengthPlus*8,sideLength,sideLength);
 		add(NewButton94);
 	
-		NewButton95.setIcon(new ImageIcon(JTile.class.getResource("/ca/mcgill/ecse223/quoridor/resources/wpawn.png")));
 		NewButton95.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				takeActions(9,5);
@@ -908,7 +910,7 @@ public class JTile extends JPanel {
 	
 		
 	}
-	boolean dangerous = false;
+	boolean dangerous = true;
 	public void takeActions(int x, int y) {
 		if(isSelectedState==false) {
 			if(makeSureLegalTrun(x, y)) {
@@ -1293,10 +1295,6 @@ public class JTile extends JPanel {
 					}
 				}		
 			}
-			if(origin_x==8) {
-				exist = true;
-			}
-			System.out.println("can: " + can + ", exist: " + exist);
 			if(exist==true) {
 				return can;
 			}
@@ -1318,9 +1316,6 @@ public class JTile extends JPanel {
 						exist = true;
 					}
 				}		
-			}
-			if(origin_y==8) {
-				exist = true;
 			}
 			if(exist==true) {
 				return can;
@@ -1344,10 +1339,6 @@ public class JTile extends JPanel {
 					}
 				}		
 			}
-			if(origin_x==8) {
-				exist = true;
-			}
-			System.out.println("can: " + can + ", exist: " + exist);
 			if(exist==true) {
 				return can;
 			}
@@ -1369,9 +1360,6 @@ public class JTile extends JPanel {
 						exist = true;
 					}
 				}		
-			}
-			if(origin_y==2) {
-				exist = true;
 			}
 			if(exist==true) {
 				return can;
@@ -1395,10 +1383,6 @@ public class JTile extends JPanel {
 					}
 				}		
 			}
-			if(origin_x==2) {
-				exist = true;
-			}
-			System.out.println("can: " + can + ", exist: " + exist);
 			if(exist==true) {
 				return can;
 			}
@@ -1421,9 +1405,6 @@ public class JTile extends JPanel {
 					}
 				}		
 			}
-			if(origin_y==8) {
-				exist = true;
-			}
 			if(exist==true) {
 				return can;
 			}
@@ -1444,12 +1425,8 @@ public class JTile extends JPanel {
 					if((t.get(i).getRowSmall()==(origin_x-2))&&((t.get(i).getColumnSmall()==origin_y)||(t.get(i).getColumnSmall()==(origin_y-1)))){
 						exist = true;
 					}
-				}	
+				}		
 			}
-			if(origin_x==2) {
-				exist = true;
-			}
-			System.out.println("can: " + can + ", exist: " + exist);
 			if(exist==true) {
 				return can;
 			}
@@ -1472,9 +1449,6 @@ public class JTile extends JPanel {
 					}
 				}		
 			}
-			if(origin_y==2) {
-				exist = true;
-			}
 			if(exist==true) {
 				return can;
 			}
@@ -1491,7 +1465,7 @@ public class JTile extends JPanel {
 			int r = t.get(i).getRowSmall();
 			int c = t.get(i).getColumnSmall();
 			boolean v = t.get(i).isVertical();
-			//System.out.println("{isVertical: " + v + ", row: "+ r + ", column: " + c + "}");
+			System.out.println("{isVertical: " + v + ", row: "+ r + ", column: " + c + "}");
 		}
 		if(legalB(x+1,y)) {
 			if(legalMove("down", x, y)) {
@@ -1575,8 +1549,8 @@ public void paint(Graphics g){
 		g.setFont(f);
 		
 		
-		int a = 16;
-		int b = 184;
+		int a = 143;
+		int b = 140;
 		int tileLength = 46;
 		int wallLength = 10;
 		int c = (tileLength+wallLength)*9 + wallLength;
