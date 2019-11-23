@@ -146,6 +146,12 @@ public class CucumberStepDefinitions {
 		game.setWhitePlayer(this.playerList.get(1));
 	}
 	
+	@Given("The game is in replay mode")
+	public void the_game_is_in_replay_mode() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+	
 
 
 	
@@ -522,7 +528,53 @@ public class CucumberStepDefinitions {
 	////*******************************************************************************************************************************
 	////*******************************************************************************************************************************
 	
+	@Given("The following moves have been played in game:")
+	public void the_following_moves_have_been_played_in_game(io.cucumber.datatable.DataTable dataTable) {
+	    // Write code here that turns the phrase above into concrete actions
+	    // For automatic transformation, change DataTable to one of
+	    // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
+	    // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
+	    // Double, Byte, Short, Long, BigInteger or BigDecimal.
+	    //
+	    // For other transformations you can register a DataTableType.
+	    throw new cucumber.api.PendingException();
+	}
 	
+	@When("Step backward is initiated")
+	public void step_backward_is_initiated() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+	
+	@Then("The next move shall be {double}")
+	public void the_next_move_shall_be(Double double1) {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("White player's position shall be \\({double})")
+	public void white_player_s_position_shall_be(Double double1) {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("Black player's position shall be \\({double})")
+	public void black_player_s_position_shall_be(Double double1) {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("White has <wwallno> on stock")
+	public void white_has_wwallno_on_stock() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("Black has {int} on stock")
+	public void black_has_on_stock(Integer int1) {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
 	
 	
 	////*******************************************************************************************************************************
