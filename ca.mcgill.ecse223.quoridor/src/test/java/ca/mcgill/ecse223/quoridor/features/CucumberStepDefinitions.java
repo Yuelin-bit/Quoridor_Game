@@ -149,7 +149,8 @@ public class CucumberStepDefinitions {
 	@Given("The game is in replay mode")
 	public void the_game_is_in_replay_mode() {
 	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+		QuoridorController.initializeNewGame();
+	    QuoridorController.replay();
 	}
 	
 
@@ -528,18 +529,18 @@ public class CucumberStepDefinitions {
 	////*******************************************************************************************************************************
 	////*******************************************************************************************************************************
 	
-	@Given("The following moves have been played in game:")
-	public void the_following_moves_have_been_played_in_game(io.cucumber.datatable.DataTable dataTable) {
-	    // Write code here that turns the phrase above into concrete actions
-	    // For automatic transformation, change DataTable to one of
-	    // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-	    // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-	    // Double, Byte, Short, Long, BigInteger or BigDecimal.
-	    //
-	    // For other transformations you can register a DataTableType.
-	    throw new cucumber.api.PendingException();
-	}
-	
+//	@Given("The following moves have been played in game:")
+//	public void the_following_moves_have_been_played_in_game(io.cucumber.datatable.DataTable dataTable) {
+//	    // Write code here that turns the phrase above into concrete actions
+//	    // For automatic transformation, change DataTable to one of
+//	    // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
+//	    // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
+//	    // Double, Byte, Short, Long, BigInteger or BigDecimal.
+//	    //
+//	    // For other transformations you can register a DataTableType.
+//	    throw new cucumber.api.PendingException();
+//	}
+//	
 	@When("Step backward is initiated")
 	public void step_backward_is_initiated() {
 	    // Write code here that turns the phrase above into concrete actions
@@ -1893,7 +1894,7 @@ public class CucumberStepDefinitions {
 		//	***********************************
 		
 		/* Entering replay mode */
-		@Given("^The game is not running$")
+//		@Given("^The game is not running$")
 //		public void theGameIsNotRunning() {
 //			initQuoridorAndBoard();
 //			this.playerList = createUsersAndPlayers("user1", "user2");
@@ -1902,6 +1903,7 @@ public class CucumberStepDefinitions {
 		@When("I initiate replay mode")
 		public void i_initiate_replay_mode() {
 		    // Write code here that turns the phrase above into concrete actions
+			QuoridorController.initializeNewGame();
 		    QuoridorController.replay();
 		}
 		
@@ -1913,11 +1915,11 @@ public class CucumberStepDefinitions {
 		
 		/* Continue an unfinished game */
 		
-		@Given("The game is in replay mode")
-		public void the_game_is_in_replay_mode() {
-		    // Write code here that turns the phrase above into concrete actions
-			QuoridorController.replay();
-		}
+//		@Given("The game is in replay mode")
+//		public void the_game_is_in_replay_mode() {
+//		    // Write code here that turns the phrase above into concrete actions
+//			QuoridorController.replay();
+//		}
 		
 		@Given("The following moves have been played in game:")
 		public void the_following_moves_have_been_played_in_game(io.cucumber.datatable.DataTable dataTable) {
