@@ -8,6 +8,7 @@ import ca.mcgill.ecse223.quoridor.model.Quoridor;
 import ca.mcgill.ecse223.quoridor.view.LoadPosition;
 import ca.mcgill.ecse223.quoridor.view.MainMenu;
 import ca.mcgill.ecse223.quoridor.view.NewJBoard;
+import ca.mcgill.ecse223.quoridor.view.NewJBoard4;
 
 public class QuoridorApplication {
 
@@ -21,12 +22,18 @@ public class QuoridorApplication {
 	}
 
 	private static NewJBoard jboard;
+	private static NewJBoard4 jboard4;
 	private static LoadPosition loadposition;
 	private JOptionPane errorHint;
 	private String error = null;
-	private boolean grab = false;
-	private JLabel lblBlackStock;
-	private JLabel lblWhiteBlock;
+	
+	public static NewJBoard4 getJboard4() {
+		return jboard4;
+	}
+	public static void setJboard4(NewJBoard4 jboard4) {
+		QuoridorApplication.jboard4 = jboard4;
+	}
+
 	public String getError() {
 		return error;
 	}
