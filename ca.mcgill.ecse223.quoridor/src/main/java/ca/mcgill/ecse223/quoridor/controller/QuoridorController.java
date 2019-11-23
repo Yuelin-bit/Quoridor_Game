@@ -1841,12 +1841,18 @@ public class QuoridorController {
 	/**
 	 * This method will let the current player resign immediately and end the game.
 	 * @author Pengnan Fan
-	 * @return
+	 * @return A boolean value to suggest if it is successful.
 	 */
 	public static boolean resign() {
 		boolean result = false;
 		Game currentGame = QuoridorApplication.getQuoridor().getCurrentGame();
+		if (currentGame == null) {
+			throw new RuntimeException("No current game exist");
+		}
 		Player currentPlayer = currentGame.getCurrentPosition().getPlayerToMove();
+		if (currentPlayer == null) {
+			throw new RuntimeException("No current player");
+		}
 		if (currentPlayer.hasGameAsBlack()) {
 			result = currentGame.setGameStatus(GameStatus.WhiteWon);
 		} else if (currentPlayer.hasGameAsWhite()) {
@@ -1854,6 +1860,21 @@ public class QuoridorController {
 		} else {
 			throw new RuntimeException("Unable to resign game");
 		}
+		return result;
+	}
+	
+	/**
+	 * This method will set the current game to be in replay mode.
+	 * @author Pengnan Fan
+	 * @return A boolean value to suggest if it is successful.
+	 */
+	public static boolean replay() {
+		boolean result = false;
+		Game currentGame = QuoridorApplication.getQuoridor().getCurrentGame();
+		if (currentGame == null) {
+			throw new RuntimeException("No current game exist");
+		}
+		result = currentGame.setGameStatus(GameStatus.Replay);
 		return result;
 	}
 	
