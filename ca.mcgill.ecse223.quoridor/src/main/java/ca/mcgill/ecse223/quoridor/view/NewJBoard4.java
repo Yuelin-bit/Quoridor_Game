@@ -171,28 +171,28 @@ public class NewJBoard4 extends JFrame {
 		whiteTurnGUI = new JLabel("");
 		whiteTurnGUI.setBounds(495, 720, 32, 32);
 		whiteTurnGUI.setForeground(Color.WHITE);
-		whiteTurnGUI.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/32-wqueen.png")));
+		whiteTurnGUI.setIcon(new ImageIcon(NewJBoard4.class.getResource("/ca/mcgill/ecse223/quoridor/resources/32-wqueen.png")));
 		whiteTurnGUI.setVisible(true);
 		tile4.add(whiteTurnGUI);
 		
 		yellowTurnGUI = new JLabel("");
 		yellowTurnGUI.setBounds(53, 483, 32, 32);
 		yellowTurnGUI.setForeground(Color.WHITE);
-		yellowTurnGUI.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/32—wqueen.png")));
+		yellowTurnGUI.setIcon(new ImageIcon(NewJBoard4.class.getResource("/ca/mcgill/ecse223/quoridor/resources/32-wqueen.png")));
 		yellowTurnGUI.setVisible(true);
 		tile4.add(yellowTurnGUI);
 		
 		blackTurnGUI = new JLabel("");
 		blackTurnGUI.setBounds(495, 96, 32, 32);
 		blackTurnGUI.setForeground(Color.WHITE);
-		blackTurnGUI.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/32—wqueen.png")));
+		blackTurnGUI.setIcon(new ImageIcon(NewJBoard4.class.getResource("/ca/mcgill/ecse223/quoridor/resources/32-wqueen.png")));
 		blackTurnGUI.setVisible(true);
 		tile4.add(blackTurnGUI);
 		
 		redTurnGUI = new JLabel("");
 		redTurnGUI.setBounds(722, 498, 32, 32);
 		redTurnGUI.setForeground(Color.WHITE);
-		redTurnGUI.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/32—wqueen.png")));
+		redTurnGUI.setIcon(new ImageIcon(NewJBoard4.class.getResource("/ca/mcgill/ecse223/quoridor/resources/32-wqueen.png")));
 		redTurnGUI.setVisible(true);
 		tile4.add(redTurnGUI);
 		
