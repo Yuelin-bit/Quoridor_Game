@@ -533,7 +533,40 @@ public class CucumberStepDefinitions {
 	////
 	////*******************************************************************************************************************************
 	////*******************************************************************************************************************************
-	
+	public class SnapShot {
+	    private int moveN;
+	    private int roundN;
+	    private String moveS;
+
+	    public SnapShot(int moveN, int roundN, String moveS) {
+	    	this.moveN = moveN;
+	    	this.roundN = roundN;
+	    	this.moveS = moveS;
+	    }
+	    public int getMoveN() {
+			return moveN;
+		}
+
+		public void setMoveN(int moveN) {
+			this.moveN = moveN;
+		}
+
+		public int getRoundN() {
+			return roundN;
+		}
+
+		public void setRoundN(int roundN) {
+			this.roundN = roundN;
+		}
+
+		public String getMoveS() {
+			return moveS;
+		}
+
+		public void setMoveS(String moveS) {
+			this.moveS = moveS;
+		}
+	}
 	@Given("The following moves have been played in game:")
 	public void the_following_moves_have_been_played_in_game(io.cucumber.datatable.DataTable dataTable) {
 	    // Write code here that turns the phrase above into concrete actions
@@ -543,6 +576,8 @@ public class CucumberStepDefinitions {
 	    // Double, Byte, Short, Long, BigInteger or BigDecimal.
 	    //
 	    // For other transformations you can register a DataTableType.
+		List<SnapShot> Lsnapshot = dataTable.asList(SnapShot.class);
+	
 	    throw new cucumber.api.PendingException();
 	}
 	
