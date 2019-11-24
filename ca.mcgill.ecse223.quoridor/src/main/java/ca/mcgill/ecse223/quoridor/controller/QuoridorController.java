@@ -46,6 +46,19 @@ public class QuoridorController {
 		refresh.start();
 	}
 	/**
+	 * Stops both watch counting down.
+	 */
+	public static void stopWatch() {
+		whiteWatch.stop();
+		blackWatch.stop();
+	}
+	/**
+	 * Ground both player.
+	 */
+	public static void terminatePlayerMove() {
+		QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(null);
+	}
+	/**
 	 * This method helps communicating through model and UI.
 	 * @return A string of white user's time
 	 */
@@ -1134,7 +1147,47 @@ public class QuoridorController {
 	}
 
 
-
+	/**
+	 * Feature: IdentifyGameWon
+	 * This method will check the game result and return a string to notify the result 
+	 * 
+	 * @author Zirui He
+	 * @return game result in string
+	 */
+	public static String checkGameResult() {
+		Player white = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
+		Destination whiteDest = white.getDestination();
+		Direction whiteDir = whiteDest.getDirection();
+		int whiteTarget = whiteDest.getTargetNumber();
+		int whiteRow = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
+		boolean whiteWon = (whiteDir == Direction.Horizontal) && (whiteTarget == whiteRow);
+		
+		Player black = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
+		Destination blackDest = black.getDestination();
+		Direction blackDir = blackDest.getDirection();
+		int blackTarget = blackDest.getTargetNumber();
+		int blackRow = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
+		boolean blackWon = (blackDir == Direction.Horizontal) && (blackTarget == blackRow);
+		
+		if (whiteWon && !blackWon) {
+			QuoridorApplication.getQuoridor().getCurrentGame().setGameStatus(GameStatus.WhiteWon);
+			return "whiteWon";
+		} 
+		else if (!whiteWon && blackWon) {
+			QuoridorApplication.getQuoridor().getCurrentGame().setGameStatus(GameStatus.BlackWon);
+			return "blackWon";
+		}
+		else {
+			return "pending";
+		}
+		
+	}
+	
+	
+	public static void colckCountToZero() {
+		
+	}
+	
 
 	/**
 	 * Feature:switch player
@@ -1148,14 +1201,14 @@ public class QuoridorController {
 		Player white = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
 		Player black = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
 		if (player.hasGameAsBlack()) {
-			whiteWatch.suspend();
-			blackWatch.resume();
+//			whiteWatch.suspend();
+//			blackWatch.resume();
 			player.setNextPlayer(white);
 			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(white);
 			//QuoridorApplication.getJboard().whiteTurn();
 		}else {
-			whiteWatch.resume();
-			blackWatch.suspend();
+//			whiteWatch.resume();
+//			blackWatch.suspend();
 			player.setNextPlayer(black);
 			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(black);
 			//QuoridorApplication.getJboard().blackTurn();
