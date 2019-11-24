@@ -18,7 +18,7 @@ and see the board position after that move.
       |  4 |   1 | d3v  |
       |  4 |   2 | f2   |
     And The next move is <movno>.<rndno>
-    When Step backward is initiated
+    When Step forward is initiated
     Then The next move shall be <nmov>.<nrnd>
     And White player's position shall be (<wrow>,<wcol>)
     And Black player's position shall be (<brow>,<bcol>)

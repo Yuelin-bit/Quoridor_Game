@@ -508,7 +508,11 @@ public class CucumberStepDefinitions {
 	////*******************************************************************************************************************************
 	
 	
-	
+	@When("Step forward is initiated")
+	public void step_forward_is_initiated() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
 	
 	////*******************************************************************************************************************************
 	////*******************************************************************************************************************************
@@ -530,17 +534,23 @@ public class CucumberStepDefinitions {
 	////*******************************************************************************************************************************
 	////*******************************************************************************************************************************
 	
-//	@Given("The following moves have been played in game:")
-//	public void the_following_moves_have_been_played_in_game(io.cucumber.datatable.DataTable dataTable) {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    // For automatic transformation, change DataTable to one of
-//	    // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-//	    // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-//	    // Double, Byte, Short, Long, BigInteger or BigDecimal.
-//	    //
-//	    // For other transformations you can register a DataTableType.
-//	    throw new cucumber.api.PendingException();
-//	}
+	@Given("The following moves have been played in game:")
+	public void the_following_moves_have_been_played_in_game(io.cucumber.datatable.DataTable dataTable) {
+	    // Write code here that turns the phrase above into concrete actions
+	    // For automatic transformation, change DataTable to one of
+	    // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
+	    // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
+	    // Double, Byte, Short, Long, BigInteger or BigDecimal.
+	    //
+	    // For other transformations you can register a DataTableType.
+	    throw new cucumber.api.PendingException();
+	}
+	
+	@Given("The next move is {double}")
+	public void the_next_move_is(Double double1) {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
 //	
 	@When("Step backward is initiated")
 	public void step_backward_is_initiated() {
