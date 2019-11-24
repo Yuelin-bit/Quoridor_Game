@@ -97,7 +97,7 @@ public class MainMenu extends JFrame {
 		continue_old.setBounds(168, 641, 166, 75);
 		continue_old.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(QuoridorApplication.getQuoridor()!=null) {
+				if(QuoridorApplication.getQuoridor()!=null&&QuoridorApplication.getQuoridor().getCurrentGame()!=null) {
 					QuoridorApplication.getJboard().setVisible(true);
 					QuoridorApplication.getMainMenu().setVisible(false);
 				}
