@@ -775,5 +775,6 @@ public class NewJBoard extends JFrame {
 		this.txtrSeconds = txtrSeconds;
 	}
 
+
 	
 }

@@ -2051,32 +2051,30 @@ public class CucumberStepDefinitions {
 //		    // Write code here that turns the phrase above into concrete actions
 //			QuoridorController.replay();
 //		}
-		
-		@Given("The following moves have been played in game:")
-		public void the_following_moves_have_been_played_in_game(io.cucumber.datatable.DataTable dataTable) {
-		    // Write code here that turns the phrase above into concrete actions
-		    // For automatic transformation, change DataTable to one of
-		    // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-		    // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-		    // Double, Byte, Short, Long, BigInteger or BigDecimal.
-		    //
-		    // For other transformations you can register a DataTableType.
-		    throw new cucumber.api.PendingException();
-		}
-		
+//		
+//		@Given("The following moves have been played in game:")
+//		public void the_following_moves_have_been_played_in_game(io.cucumber.datatable.DataTable dataTable) {
+//		    // Write code here that turns the phrase above into concrete actions
+//		    // For automatic transformation, change DataTable to one of
+//		    // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
+//		    // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
+//		    // Double, Byte, Short, Long, BigInteger or BigDecimal.
+//		    //
+//		    // For other transformations you can register a DataTableType.
+//		    throw new cucumber.api.PendingException();
+//		}
+//		
 		//	*******************************************
 		//	Report Game
 		//	*******************************************
 			
 		@When("The game is no longer running")
 		public void the_game_is_no_longer_running() {
-		    // Write code here that turns the phrase above into concrete actions
-		    throw new cucumber.api.PendingException();
 		}
 
 		@Then("The final result shall be displayed")
 		public void the_final_result_shall_be_displayed() {
-		    // Write code here that turns the phrase above into concrete actions
+		    // GUI Test
 		    throw new cucumber.api.PendingException();
 		}
 

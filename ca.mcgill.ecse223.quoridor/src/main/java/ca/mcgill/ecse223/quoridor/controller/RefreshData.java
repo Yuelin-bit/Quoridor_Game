@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextArea;
 
 import ca.mcgill.ecse223.quoridor.QuoridorApplication;
+import ca.mcgill.ecse223.quoridor.model.Game.GameStatus;
 import ca.mcgill.ecse223.quoridor.view.NewJBoard;
 
 public class RefreshData extends Thread{
@@ -17,12 +18,20 @@ public class RefreshData extends Thread{
 	}
 	public void run() {
 		while(true) {
+			GameStatus current = QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus();
 			boolean whiteTurn = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer().equals(
 					QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove());
 			
 			boolean blackTurn = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer().equals(
 					QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove());
 		
+			if(current == GameStatus.BlackWon) {
+				board.getBigTime().setBackground(Color.RED);
+				board.getBigTime().setText("Black Won!");
+			}else if (current == GameStatus.WhiteWon) {
+				board.getBigTime().setBackground(Color.RED);
+				board.getBigTime().setText("White Won!");
+			}
 			board.getwhitePawn().setVisible(whiteTurn);
 			board.getblackPawn().setVisible(blackTurn);
 			board.getWhiteStock().setText(QuoridorController.getWhiteStocks());
