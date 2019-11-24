@@ -46,6 +46,19 @@ public class QuoridorController {
 		refresh.start();
 	}
 	/**
+	 * Stops both watch counting down.
+	 */
+	public static void stopWatch() {
+		whiteWatch.stop();
+		blackWatch.stop();
+	}
+	/**
+	 * Ground both player.
+	 */
+	public static void terminatePlayerMove() {
+		QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(null);
+	}
+	/**
 	 * This method helps communicating through model and UI.
 	 * @return A string of white user's time
 	 */
