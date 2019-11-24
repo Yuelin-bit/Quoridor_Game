@@ -576,9 +576,67 @@ public class CucumberStepDefinitions {
 	    // Double, Byte, Short, Long, BigInteger or BigDecimal.
 	    //
 	    // For other transformations you can register a DataTableType.
+		Quoridor quoridorR = QuoridorApplication.getQuoridor();
+		if(QuoridorApplication.getQuoridor().getBoard()==null) {
+			this.initQuoridorAndBoard();
+		}
+		User user1 = quoridorR.addUser("whiteReplayer");
+		User user2 = quoridorR.addUser("blackReplayer");
+		int thinkingTime = 180;
+		Player player1 = new Player(new Time(thinkingTime), user1, 9, Direction.Horizontal);
+		Player player2 = new Player(new Time(thinkingTime), user2, 1, Direction.Horizontal);
+		Player[] players = { player1, player2 };
+		for (int i = 0; i < 2; i++) {
+			for (int j = 0; j < 10; j++) {
+				new Wall(i * 10 + j+1, players[i]);
+			}
+		}
+		
+		Tile player1StartPos = quoridorR.getBoard().getTile(4);
+		Tile player2StartPos = quoridorR.getBoard().getTile(76);
+		QuoridorApplication.getQuoridor().getCurrentGame().setWhitePlayer(player1);
+		QuoridorApplication.getQuoridor().getCurrentGame().setBlackPlayer(player2);
+
+		Game gameR = QuoridorApplication.getQuoridor().getCurrentGame();
+		PlayerPosition player1Position = new PlayerPosition(quoridorR.getCurrentGame().getWhitePlayer(), player1StartPos);
+		PlayerPosition player2Position = new PlayerPosition(quoridorR.getCurrentGame().getBlackPlayer(), player2StartPos);
+		GamePosition gamePosition = new GamePosition(0, player1Position, player2Position, player1, gameR);
+		
+		for (int j = 0; j < 10; j++) {
+			Wall wall = Wall.getWithId(j+1);
+			gamePosition.addWhiteWallsInStock(wall);
+		}
+		for (int j = 0; j < 10; j++) {
+			Wall wall = Wall.getWithId(j + 10+1);
+			gamePosition.addBlackWallsInStock(wall);
+		}
+		gameR.setCurrentPosition(gamePosition);
+		
+		
 		List<SnapShot> Lsnapshot = dataTable.asList(SnapShot.class);
-	
-	    throw new cucumber.api.PendingException();
+		for(int i=0; i<Lsnapshot.size(); i++) {
+			if(Lsnapshot.get(i).getMoveS().length()==2) {
+				int oldRow;
+				int oldColumn;
+				if(quoridorR.getCurrentGame().getCurrentPosition().getPlayerToMove().hasGameAsWhite()){
+					oldRow = quoridorR.getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
+					oldColumn = quoridorR.getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
+				}else {
+					oldRow = quoridorR.getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
+					oldColumn = quoridorR.getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getColumn();
+				}	
+				QuoridorController.movePlayer("step", QuoridorController.convertMove2(Lsnapshot.get(i).getMoveS(), oldRow, oldColumn));
+			}else {
+				QuoridorController.grabWall();
+				if(Lsnapshot.get(i).getMoveS().charAt(2)=='h') {
+					QuoridorController.flipWall();
+				}
+				int a = (int) QuoridorController.convertMove3(Lsnapshot.get(i).getMoveS()).get(0);
+				int b = (int) QuoridorController.convertMove3(Lsnapshot.get(i).getMoveS()).get(1);
+				Tile t= new Tile(a, b, quoridorR.getBoard());
+				quoridorR.getCurrentGame().getWallMoveCandidate().setTargetTile(t);
+			}
+		}
 	}
 	
 	@Given("The next move is {double}")
@@ -2096,28 +2154,28 @@ public class CucumberStepDefinitions {
 		
 		/* Continue an unfinished game */
 
-		@Given("The following moves have been played in game:")
-		public void the_following_moves_have_been_played_in_game(io.cucumber.datatable.DataTable dataTable) {
-		    // Write code here that turns the phrase above into concrete actions
-		    // For automatic transformation, change DataTable to one of
-		    // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-		    // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-		    // Double, Byte, Short, Long, BigInteger or BigDecimal.
-		    //
-		    // For other transformations you can register a DataTableType.
-			Game g = QuoridorApplication.getQuoridor().getCurrentGame();
-			assertNotEquals(g.getBlackPlayer(), null);
-			assertNotEquals(g.getWhitePlayer(), null);
-			
-			List<Map<String, String>> valueMaps = dataTable.asMaps();
-			for (Map<String, String> map : valueMaps) {
-				int mv = Integer.parseInt(map.get("mv"));
-				int rnd = Integer.parseInt(map.get("rnd"));
-				String move = map.get("move");
-				
-			}
-		    throw new cucumber.api.PendingException();
-		}
+//		@Given("The following moves have been played in game:")
+//		public void the_following_moves_have_been_played_in_game(io.cucumber.datatable.DataTable dataTable) {
+//		    // Write code here that turns the phrase above into concrete actions
+//		    // For automatic transformation, change DataTable to one of
+//		    // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
+//		    // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
+//		    // Double, Byte, Short, Long, BigInteger or BigDecimal.
+//		    //
+//		    // For other transformations you can register a DataTableType.
+//			Game g = QuoridorApplication.getQuoridor().getCurrentGame();
+//			assertNotEquals(g.getBlackPlayer(), null);
+//			assertNotEquals(g.getWhitePlayer(), null);
+//			
+//			List<Map<String, String>> valueMaps = dataTable.asMaps();
+//			for (Map<String, String> map : valueMaps) {
+//				int mv = Integer.parseInt(map.get("mv"));
+//				int rnd = Integer.parseInt(map.get("rnd"));
+//				String move = map.get("move");
+//				
+//			}
+//		    throw new cucumber.api.PendingException();
+//		}
 
 		//	*******************************************
 		//	Report Game

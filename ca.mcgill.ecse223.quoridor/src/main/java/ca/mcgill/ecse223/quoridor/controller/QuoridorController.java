@@ -436,8 +436,97 @@ public class QuoridorController {
 
 		//JOptionPane.showMessageDialog(null, "It is illegal!!!");	
 	}
-
-
+	/**
+	 * Feature:StepForward
+	 * 
+	 * 
+	 * @author Yuelin Liu
+	 * @param string String stands for the direction of the wall that is to be moved.
+	 * @return void
+	 * @exception nothing 
+	 */
+	public static String convertMove2(String string, int oldRow, int oldColumn) {
+		char s1 = string.charAt(0);
+		char s2 = string.charAt(1);
+		int newRow = 0;
+		int newColumn = 0;
+		if(s1=='a') newRow = 1;
+		if(s1=='b') newRow = 2;
+		if(s1=='c') newRow = 3;
+		if(s1=='d') newRow = 4;
+		if(s1=='e') newRow = 5;
+		if(s1=='f') newRow = 6;
+		if(s1=='g') newRow = 7;
+		if(s1=='h') newRow = 8;
+		if(s1=='i') newRow = 9;
+		
+		if(s2==1) newColumn = 1;
+		if(s2==2) newColumn = 2;
+		if(s2==3) newColumn = 3;
+		if(s2==4) newColumn = 4;
+		if(s2==5) newColumn = 5;
+		if(s2==6) newColumn = 6;
+		if(s2==7) newColumn = 7;
+		if(s2==8) newColumn = 8;
+		if(s2==9) newColumn = 9;
+		
+		if((newRow==oldRow)&&(newColumn==oldColumn+1)) {
+			return "right";
+		}
+		if((newRow==oldRow)&&(newColumn==oldColumn-1)) {
+			return "left";
+		}
+		if((newRow==oldRow+1)&&(newColumn==oldColumn)) {
+			return "down";
+		}
+		if((newRow==oldRow-1)&&(newColumn==oldColumn)) {
+			return "up";
+		}	
+		return string;
+	}
+	
+	
+	/**
+	 * Feature:StepForward
+	 * 
+	 * 
+	 * @author Yuelin Liu
+	 * @param string String stands for the direction of the wall that is to be moved.
+	 * @return void
+	 * @exception nothing 
+	 */
+	public static ArrayList convertMove3(String string) {
+		char s1 = string.charAt(0);
+		char s2 = string.charAt(1);
+		int newRow = 0;
+		int newColumn = 0;
+		if(s1=='a') newRow = 1;
+		if(s1=='b') newRow = 2;
+		if(s1=='c') newRow = 3;
+		if(s1=='d') newRow = 4;
+		if(s1=='e') newRow = 5;
+		if(s1=='f') newRow = 6;
+		if(s1=='g') newRow = 7;
+		if(s1=='h') newRow = 8;
+		if(s1=='i') newRow = 9;
+		
+		if(s2==1) newColumn = 1;
+		if(s2==2) newColumn = 2;
+		if(s2==3) newColumn = 3;
+		if(s2==4) newColumn = 4;
+		if(s2==5) newColumn = 5;
+		if(s2==6) newColumn = 6;
+		if(s2==7) newColumn = 7;
+		if(s2==8) newColumn = 8;
+		if(s2==9) newColumn = 9;
+		
+		ArrayList<Integer> result = new ArrayList<Integer>();
+		result.add(newRow);
+		result.add(newColumn);
+		
+		return result;
+	}
+	
 
 
 
