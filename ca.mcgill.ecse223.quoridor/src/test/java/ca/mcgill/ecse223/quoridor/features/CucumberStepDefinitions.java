@@ -1904,6 +1904,9 @@ public class CucumberStepDefinitions {
 		public void i_initiate_replay_mode() {
 		    // Write code here that turns the phrase above into concrete actions
 			QuoridorController.initializeNewGame();
+			Game g = QuoridorApplication.getQuoridor().getCurrentGame();
+			g.setBlackPlayer(this.playerList.get(0));
+			g.setWhitePlayer(this.playerList.get(1));
 		    QuoridorController.replay();
 		}
 		
@@ -1914,13 +1917,6 @@ public class CucumberStepDefinitions {
 		}
 		
 		/* Continue an unfinished game */
-		
-//		@Given("The game is in replay mode")
-//		public void the_game_is_in_replay_mode() {
-//		    // Write code here that turns the phrase above into concrete actions
-//			QuoridorController.replay();
-//		}
-		
 		@Given("The following moves have been played in game:")
 		public void the_following_moves_have_been_played_in_game(io.cucumber.datatable.DataTable dataTable) {
 		    // Write code here that turns the phrase above into concrete actions
@@ -1930,6 +1926,17 @@ public class CucumberStepDefinitions {
 		    // Double, Byte, Short, Long, BigInteger or BigDecimal.
 		    //
 		    // For other transformations you can register a DataTableType.
+			Game g = QuoridorApplication.getQuoridor().getCurrentGame();
+			assertNotEquals(g.getBlackPlayer(), null);
+			assertNotEquals(g.getWhitePlayer(), null);
+			
+			List<Map<String, String>> valueMaps = dataTable.asMaps();
+			for (Map<String, String> map : valueMaps) {
+				int mv = Integer.parseInt(map.get("mv"));
+				int rnd = Integer.parseInt(map.get("rnd"));
+				String move = map.get("move");
+				
+			}
 		    throw new cucumber.api.PendingException();
 		}
 		
