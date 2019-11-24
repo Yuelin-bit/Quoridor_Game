@@ -1392,11 +1392,11 @@ public class CucumberStepDefinitions {
 		    throw new cucumber.api.PendingException();
 		}
 
-		@Then("The game shall be in replay mode")
-		public void the_game_shall_be_in_replay_mode() {
-		    // Write code here that turns the phrase above into concrete actions
-		    throw new cucumber.api.PendingException();
-		}
+//		@Then("The game shall be in replay mode")
+//		public void the_game_shall_be_in_replay_mode() {
+//		    // Write code here that turns the phrase above into concrete actions
+//		    throw new cucumber.api.PendingException();
+//		}
 
 		@When("The game to load has an invalid move")
 		public void the_game_to_load_has_an_invalid_move() {
@@ -1471,10 +1471,10 @@ public class CucumberStepDefinitions {
 		    gameResult = QuoridorController.checkGameResult();
 		}
 
-		@Then("Game result shall be {string}")
-		public void game_result_shall_be(String string) {
-			assertEquals(string, gameResult);
-		}
+//		@Then("Game result shall be {string}")
+//		public void game_result_shall_be(String string) {
+//			assertEquals(string, gameResult);
+//		}
 
 		@Then("The game shall no longer be running")
 		public void the_game_shall_no_longer_be_running() {
@@ -2053,17 +2053,19 @@ public class CucumberStepDefinitions {
 		@Then("Game result shall be {string}")
 		public void game_result_shall_be(String string) {
 		    // Write code here that turns the phrase above into concrete actions
-			if (string.equals("BlackWon")) {
+			if (string.equals("BlackWon") || string.equals("blackWon")) {
 				assertEquals(GameStatus.BlackWon, QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus());
-			} else {
+			} else if(string.equals("whiteWon") || string.equals("WhiteWon")) {
 				assertEquals(GameStatus.WhiteWon, QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus());
+			} else {
+				assertEquals(string, gameResult);
 			}
 		}
-		@Then("The game shall no longer be running")
-		public void the_game_shall_no_longer_be_running() {
-		    // Write code here that turns the phrase above into concrete actions
-		    QuoridorApplication.getQuoridor().getCurrentGame().delete();
-		}
+//		@Then("The game shall no longer be running")
+//		public void the_game_shall_no_longer_be_running() {
+//		    // Write code here that turns the phrase above into concrete actions
+//		    QuoridorApplication.getQuoridor().getCurrentGame().delete();
+//		}
 		
 		//	***********************************
 		//	Enter Replay Mode
@@ -2080,6 +2082,9 @@ public class CucumberStepDefinitions {
 		public void i_initiate_replay_mode() {
 		    // Write code here that turns the phrase above into concrete actions
 			QuoridorController.initializeNewGame();
+			Game g = QuoridorApplication.getQuoridor().getCurrentGame();
+			g.setBlackPlayer(this.playerList.get(0));
+			g.setWhitePlayer(this.playerList.get(1));
 		    QuoridorController.replay();
 		}
 		
@@ -2090,25 +2095,30 @@ public class CucumberStepDefinitions {
 		}
 		
 		/* Continue an unfinished game */
-		
-//		@Given("The game is in replay mode")
-//		public void the_game_is_in_replay_mode() {
-//		    // Write code here that turns the phrase above into concrete actions
-//			QuoridorController.replay();
-//		}
-//		
-//		@Given("The following moves have been played in game:")
-//		public void the_following_moves_have_been_played_in_game(io.cucumber.datatable.DataTable dataTable) {
-//		    // Write code here that turns the phrase above into concrete actions
-//		    // For automatic transformation, change DataTable to one of
-//		    // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-//		    // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-//		    // Double, Byte, Short, Long, BigInteger or BigDecimal.
-//		    //
-//		    // For other transformations you can register a DataTableType.
-//		    throw new cucumber.api.PendingException();
-//		}
-//		
+
+		@Given("The following moves have been played in game:")
+		public void the_following_moves_have_been_played_in_game(io.cucumber.datatable.DataTable dataTable) {
+		    // Write code here that turns the phrase above into concrete actions
+		    // For automatic transformation, change DataTable to one of
+		    // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
+		    // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
+		    // Double, Byte, Short, Long, BigInteger or BigDecimal.
+		    //
+		    // For other transformations you can register a DataTableType.
+			Game g = QuoridorApplication.getQuoridor().getCurrentGame();
+			assertNotEquals(g.getBlackPlayer(), null);
+			assertNotEquals(g.getWhitePlayer(), null);
+			
+			List<Map<String, String>> valueMaps = dataTable.asMaps();
+			for (Map<String, String> map : valueMaps) {
+				int mv = Integer.parseInt(map.get("mv"));
+				int rnd = Integer.parseInt(map.get("rnd"));
+				String move = map.get("move");
+				
+			}
+		    throw new cucumber.api.PendingException();
+		}
+
 		//	*******************************************
 		//	Report Game
 		//	*******************************************
