@@ -1134,7 +1134,47 @@ public class QuoridorController {
 	}
 
 
-
+	/**
+	 * Feature: IdentifyGameWon
+	 * This method will check the game result and return a string to notify the result 
+	 * 
+	 * @author Zirui He
+	 * @return game result in string
+	 */
+	public static String checkGameResult() {
+		Player white = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
+		Destination whiteDest = white.getDestination();
+		Direction whiteDir = whiteDest.getDirection();
+		int whiteTarget = whiteDest.getTargetNumber();
+		int whiteRow = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
+		boolean whiteWon = (whiteDir == Direction.Horizontal) && (whiteTarget == whiteRow);
+		
+		Player black = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
+		Destination blackDest = black.getDestination();
+		Direction blackDir = blackDest.getDirection();
+		int blackTarget = blackDest.getTargetNumber();
+		int blackRow = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
+		boolean blackWon = (blackDir == Direction.Horizontal) && (blackTarget == blackRow);
+		
+		if (whiteWon && !blackWon) {
+			QuoridorApplication.getQuoridor().getCurrentGame().setGameStatus(GameStatus.WhiteWon);
+			return "whiteWon";
+		} 
+		else if (!whiteWon && blackWon) {
+			QuoridorApplication.getQuoridor().getCurrentGame().setGameStatus(GameStatus.BlackWon);
+			return "blackWon";
+		}
+		else {
+			return "pending";
+		}
+		
+	}
+	
+	
+	public static void colckCountToZero() {
+		
+	}
+	
 
 	/**
 	 * Feature:switch player
@@ -1148,14 +1188,14 @@ public class QuoridorController {
 		Player white = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
 		Player black = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
 		if (player.hasGameAsBlack()) {
-			whiteWatch.suspend();
-			blackWatch.resume();
+//			whiteWatch.suspend();
+//			blackWatch.resume();
 			player.setNextPlayer(white);
 			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(white);
 			//QuoridorApplication.getJboard().whiteTurn();
 		}else {
-			whiteWatch.resume();
-			blackWatch.suspend();
+//			whiteWatch.resume();
+//			blackWatch.suspend();
 			player.setNextPlayer(black);
 			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(black);
 			//QuoridorApplication.getJboard().blackTurn();
@@ -1841,12 +1881,18 @@ public class QuoridorController {
 	/**
 	 * This method will let the current player resign immediately and end the game.
 	 * @author Pengnan Fan
-	 * @return
+	 * @return A boolean value to suggest if it is successful.
 	 */
 	public static boolean resign() {
 		boolean result = false;
 		Game currentGame = QuoridorApplication.getQuoridor().getCurrentGame();
+		if (currentGame == null) {
+			throw new RuntimeException("No current game exist");
+		}
 		Player currentPlayer = currentGame.getCurrentPosition().getPlayerToMove();
+		if (currentPlayer == null) {
+			throw new RuntimeException("No current player");
+		}
 		if (currentPlayer.hasGameAsBlack()) {
 			result = currentGame.setGameStatus(GameStatus.WhiteWon);
 		} else if (currentPlayer.hasGameAsWhite()) {
@@ -1854,6 +1900,21 @@ public class QuoridorController {
 		} else {
 			throw new RuntimeException("Unable to resign game");
 		}
+		return result;
+	}
+	
+	/**
+	 * This method will set the current game to be in replay mode.
+	 * @author Pengnan Fan
+	 * @return A boolean value to suggest if it is successful.
+	 */
+	public static boolean replay() {
+		boolean result = false;
+		Game currentGame = QuoridorApplication.getQuoridor().getCurrentGame();
+		if (currentGame == null) {
+			throw new RuntimeException("No current game exist");
+		}
+		result = currentGame.setGameStatus(GameStatus.Replay);
 		return result;
 	}
 	
