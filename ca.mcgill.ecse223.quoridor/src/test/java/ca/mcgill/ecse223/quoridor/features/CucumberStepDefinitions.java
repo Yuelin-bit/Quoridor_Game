@@ -635,6 +635,7 @@ public class CucumberStepDefinitions {
 				}
 				int a = (int) QuoridorController.convertMove3(map.get("move")).get(0);
 				int b = (int) QuoridorController.convertMove3(map.get("move")).get(1);
+				System.out.println("a: " + a + ", b: " + b);
 				Tile t= new Tile(a, b, quoridorR.getBoard());
 				quoridorR.getCurrentGame().getWallMoveCandidate().setTargetTile(t);
 			}

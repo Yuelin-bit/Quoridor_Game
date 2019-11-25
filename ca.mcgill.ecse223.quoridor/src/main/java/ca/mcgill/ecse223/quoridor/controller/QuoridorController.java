@@ -510,15 +510,15 @@ public class QuoridorController {
 		if(s1=='h') newRow = 8;
 		if(s1=='i') newRow = 9;
 		
-		if(s2==1) newColumn = 1;
-		if(s2==2) newColumn = 2;
-		if(s2==3) newColumn = 3;
-		if(s2==4) newColumn = 4;
-		if(s2==5) newColumn = 5;
-		if(s2==6) newColumn = 6;
-		if(s2==7) newColumn = 7;
-		if(s2==8) newColumn = 8;
-		if(s2==9) newColumn = 9;
+		if(s2=='1') newColumn = 1;
+		if(s2=='2') newColumn = 2;
+		if(s2=='3') newColumn = 3;
+		if(s2=='4') newColumn = 4;
+		if(s2=='5') newColumn = 5;
+		if(s2=='6') newColumn = 6;
+		if(s2=='7') newColumn = 7;
+		if(s2=='8') newColumn = 8;
+		if(s2=='9') newColumn = 9;
 		
 		ArrayList<Integer> result = new ArrayList<Integer>();
 		result.add(newRow);
