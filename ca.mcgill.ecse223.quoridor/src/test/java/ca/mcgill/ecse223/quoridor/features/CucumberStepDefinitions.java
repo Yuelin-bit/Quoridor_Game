@@ -533,40 +533,40 @@ public class CucumberStepDefinitions {
 	////
 	////*******************************************************************************************************************************
 	////*******************************************************************************************************************************
-	public class SnapShot {
-	    private int moveN;
-	    private int roundN;
-	    private String moveS;
-
-	    public SnapShot(int moveN, int roundN, String moveS) {
-	    	this.moveN = moveN;
-	    	this.roundN = roundN;
-	    	this.moveS = moveS;
-	    }
-	    public int getMoveN() {
-			return moveN;
-		}
-
-		public void setMoveN(int moveN) {
-			this.moveN = moveN;
-		}
-
-		public int getRoundN() {
-			return roundN;
-		}
-
-		public void setRoundN(int roundN) {
-			this.roundN = roundN;
-		}
-
-		public String getMoveS() {
-			return moveS;
-		}
-
-		public void setMoveS(String moveS) {
-			this.moveS = moveS;
-		}
-	}
+//	public class SnapShot {
+//	    private int moveN;
+//	    private int roundN;
+//	    private String moveS;
+//
+//	    public SnapShot(int moveN, int roundN, String moveS) {
+//	    	this.moveN = moveN;
+//	    	this.roundN = roundN;
+//	    	this.moveS = moveS;
+//	    }
+//	    public int getMoveN() {
+//			return moveN;
+//		}
+//
+//		public void setMoveN(int moveN) {
+//			this.moveN = moveN;
+//		}
+//
+//		public int getRoundN() {
+//			return roundN;
+//		}
+//
+//		public void setRoundN(int roundN) {
+//			this.roundN = roundN;
+//		}
+//
+//		public String getMoveS() {
+//			return moveS;
+//		}
+//
+//		public void setMoveS(String moveS) {
+//			this.moveS = moveS;
+//		}
+//	}
 	@Given("The following moves have been played in game:")
 	public void the_following_moves_have_been_played_in_game(io.cucumber.datatable.DataTable dataTable) {
 	    // Write code here that turns the phrase above into concrete actions
@@ -615,8 +615,9 @@ public class CucumberStepDefinitions {
 		
 		//List<SnapShot> Lsnapshot = dataTable.asList(SnapShot.class);
 		List<Map<String, String>> Lsnapshot = dataTable.asMaps();
-		for(int i=0; i<Lsnapshot.size(); i++) {
-			if(Lsnapshot.get(i).getMoveS().length()==2) {
+		// keys:  | mv | rnd | move |
+		for(Map<String, String> map : Lsnapshot) {
+			if(map.get("move").length()==2) {
 				int oldRow;
 				int oldColumn;
 				if(quoridorR.getCurrentGame().getCurrentPosition().getPlayerToMove().hasGameAsWhite()){
@@ -626,14 +627,14 @@ public class CucumberStepDefinitions {
 					oldRow = quoridorR.getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
 					oldColumn = quoridorR.getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getColumn();
 				}	
-				QuoridorController.movePlayer("step", QuoridorController.convertMove2(Lsnapshot.get(i).getMoveS(), oldRow, oldColumn));
+				QuoridorController.movePlayer("step", QuoridorController.convertMove2(map.get("move"), oldRow, oldColumn));
 			}else {
 				QuoridorController.grabWall();
-				if(Lsnapshot.get(i).getMoveS().charAt(2)=='h') {
+				if(map.get("move").charAt(2)=='h') {
 					QuoridorController.flipWall();
 				}
-				int a = (int) QuoridorController.convertMove3(Lsnapshot.get(i).getMoveS()).get(0);
-				int b = (int) QuoridorController.convertMove3(Lsnapshot.get(i).getMoveS()).get(1);
+				int a = (int) QuoridorController.convertMove3(map.get("move")).get(0);
+				int b = (int) QuoridorController.convertMove3(map.get("move")).get(1);
 				Tile t= new Tile(a, b, quoridorR.getBoard());
 				quoridorR.getCurrentGame().getWallMoveCandidate().setTargetTile(t);
 			}
