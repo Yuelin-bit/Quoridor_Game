@@ -13,6 +13,7 @@ import java.io.IOException;
 
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -645,6 +646,10 @@ public class CucumberStepDefinitions {
 	@Given("The next move is {double}")
 	public void the_next_move_is(Double double1) {
 	    // Write code here that turns the phrase above into concrete actions
+		List<Move> m = QuoridorApplication.getQuoridor().getCurrentGame().getMoves();
+		List<GamePosition> p = QuoridorApplication.getQuoridor().getCurrentGame().getPositions();
+		Iterator mIterator = m.iterator();
+		
 	    throw new cucumber.api.PendingException();
 	}
 //	
