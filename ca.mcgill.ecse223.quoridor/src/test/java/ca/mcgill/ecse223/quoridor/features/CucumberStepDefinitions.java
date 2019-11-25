@@ -613,7 +613,8 @@ public class CucumberStepDefinitions {
 		gameR.setCurrentPosition(gamePosition);
 		
 		
-		List<SnapShot> Lsnapshot = dataTable.asList(SnapShot.class);
+		//List<SnapShot> Lsnapshot = dataTable.asList(SnapShot.class);
+		List<Map<String, String>> Lsnapshot = dataTable.asMaps();
 		for(int i=0; i<Lsnapshot.size(); i++) {
 			if(Lsnapshot.get(i).getMoveS().length()==2) {
 				int oldRow;
