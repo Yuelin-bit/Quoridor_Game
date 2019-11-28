@@ -2,9 +2,10 @@
 /*This code was generated using the UMPLE 1.29.0.4181.a593105a9 modeling language!*/
 
 package ca.mcgill.ecse223.quoridor.model;
+import java.lang.Cloneable;
 import java.util.*;
 
-// line 56 "../../../../../QuoridorGame.ump"
+// line 58 "../../../../../QuoridorGame.ump"
 public class GamePosition implements Cloneable
 {
 
@@ -65,11 +66,6 @@ public class GamePosition implements Cloneable
       throw new RuntimeException("Unable to create position due to game");
     }
   }
-
-  	@Override
-	public Object clone() throws CloneNotSupportedException {
-		return (GamePosition)super.clone();
-	}
 
   //------------------------
   // INTERFACE
@@ -586,6 +582,13 @@ public class GamePosition implements Cloneable
     {
       placeholderGame.removePosition(this);
     }
+  }
+
+
+  @Override
+  // line 72 "../../../../../QuoridorGame.ump"
+   public Object clone() throws CloneNotSupportedException{
+    return (GamePosition)super.clone();
   }
 
 

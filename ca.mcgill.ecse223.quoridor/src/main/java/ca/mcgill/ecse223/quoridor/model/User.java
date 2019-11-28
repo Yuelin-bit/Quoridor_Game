@@ -4,7 +4,7 @@
 package ca.mcgill.ecse223.quoridor.model;
 import java.util.*;
 
-// line 26 "../../../../../QuoridorGame.ump"
+// line 28 "../../../../../QuoridorGame.ump"
 public class User
 {
 
