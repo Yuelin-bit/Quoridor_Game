@@ -1103,7 +1103,7 @@ public class QuoridorController {
 			return "Drawn" ;
 		}
 		else {
-			return "pending";
+			return "Pending";
 		}
 		
 	}
