@@ -1159,7 +1159,7 @@ public class CucumberStepDefinitions {
 		
 		
 		@Given("The following moves were executed:")
-		public void the_following_moves_were_executed(io.cucumber.datatable.DataTable dataTable) {
+		public void the_following_moves_were_executed(io.cucumber.datatable.DataTable dataTable) throws CloneNotSupportedException {
 			Quoridor quoridorR = QuoridorApplication.getQuoridor();
 			if(QuoridorApplication.getQuoridor().getBoard()==null) {
 				this.initQuoridorAndBoard();

@@ -267,7 +267,12 @@ public class JTile extends JPanel {
 		
 		NewButton14.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(1,4);
+				try {
+					takeActions(1,4);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton14.setBounds(referX+sideLengthPlus*3,referY,sideLength,sideLength);
@@ -276,7 +281,12 @@ public class JTile extends JPanel {
 		NewButton15.setIcon(new ImageIcon(JTile.class.getResource("/ca/mcgill/ecse223/quoridor/resources/bpawn.png")));
 		NewButton15.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(1,5);
+				try {
+					takeActions(1,5);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton15.setBounds(referX+sideLengthPlus*4,referY,sideLength,sideLength);
@@ -284,7 +294,12 @@ public class JTile extends JPanel {
 		
 		NewButton16.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(1,6);
+				try {
+					takeActions(1,6);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton16.setBounds(referX+sideLengthPlus*5,referY,sideLength,sideLength);
@@ -292,7 +307,12 @@ public class JTile extends JPanel {
 		
 		NewButton17.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(1,7);
+				try {
+					takeActions(1,7);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton17.setBounds(referX+sideLengthPlus*6,referY,sideLength,sideLength);
@@ -300,7 +320,12 @@ public class JTile extends JPanel {
 		
 		NewButton18.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(1,8);
+				try {
+					takeActions(1,8);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton18.setBounds(referX+sideLengthPlus*7,referY,sideLength,sideLength);
@@ -308,7 +333,12 @@ public class JTile extends JPanel {
 		
 		NewButton19.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(1,9);
+				try {
+					takeActions(1,9);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton19.setBounds(referX+sideLengthPlus*8,referY,sideLength,sideLength);
@@ -318,7 +348,12 @@ public class JTile extends JPanel {
 		
 		NewButton21.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(2,1);
+				try {
+					takeActions(2,1);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton21.setBounds(referX,referY+sideLengthPlus*1,sideLength,sideLength);
@@ -326,7 +361,12 @@ public class JTile extends JPanel {
 		
 		NewButton22.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(2,2);
+				try {
+					takeActions(2,2);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton22.setBounds(referX+sideLengthPlus*1,referY+sideLengthPlus*1,sideLength,sideLength);
@@ -334,7 +374,12 @@ public class JTile extends JPanel {
 		
 		NewButton23.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(2,3);
+				try {
+					takeActions(2,3);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton23.setBounds(referX+sideLengthPlus*2,referY+sideLengthPlus*1,sideLength,sideLength);
@@ -342,7 +387,12 @@ public class JTile extends JPanel {
 		
 		NewButton24.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(2,4);
+				try {
+					takeActions(2,4);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton24.setBounds(referX+sideLengthPlus*3,referY+sideLengthPlus*1,sideLength,sideLength);
@@ -350,7 +400,12 @@ public class JTile extends JPanel {
 		
 		NewButton25.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(2,5);
+				try {
+					takeActions(2,5);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton25.setBounds(referX+sideLengthPlus*4,referY+sideLengthPlus*1,sideLength,sideLength);
@@ -358,7 +413,12 @@ public class JTile extends JPanel {
 		
 		NewButton26.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(2,6);
+				try {
+					takeActions(2,6);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton26.setBounds(referX+sideLengthPlus*5,referY+sideLengthPlus*1,sideLength,sideLength);
@@ -366,7 +426,12 @@ public class JTile extends JPanel {
 		
 		NewButton27.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(2,7);
+				try {
+					takeActions(2,7);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton27.setBounds(referX+sideLengthPlus*6,referY+sideLengthPlus*1,sideLength,sideLength);
@@ -374,7 +439,12 @@ public class JTile extends JPanel {
 		
 		NewButton28.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(2,8);
+				try {
+					takeActions(2,8);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton28.setBounds(referX+sideLengthPlus*7,referY+sideLengthPlus*1,sideLength,sideLength);
@@ -382,7 +452,12 @@ public class JTile extends JPanel {
 		
 		NewButton29.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(2,9);
+				try {
+					takeActions(2,9);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton29.setBounds(referX+sideLengthPlus*8,referY+sideLengthPlus*1,sideLength,sideLength);
@@ -393,7 +468,12 @@ public class JTile extends JPanel {
 		
 		NewButton31.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(3,1);
+				try {
+					takeActions(3,1);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton31.setBounds(referX,referY+sideLengthPlus*2,sideLength,sideLength);
@@ -401,7 +481,12 @@ public class JTile extends JPanel {
 		
 		NewButton32.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(3,2);
+				try {
+					takeActions(3,2);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton32.setBounds(referX+sideLengthPlus*1,referY+sideLengthPlus*2,sideLength,sideLength);
@@ -409,7 +494,12 @@ public class JTile extends JPanel {
 		
 		NewButton33.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(3,3);
+				try {
+					takeActions(3,3);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton33.setBounds(referX+sideLengthPlus*2,referY+sideLengthPlus*2,sideLength,sideLength);
@@ -417,7 +507,12 @@ public class JTile extends JPanel {
 		
 		NewButton34.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(3,4);
+				try {
+					takeActions(3,4);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton34.setBounds(referX+sideLengthPlus*3,referY+sideLengthPlus*2,sideLength,sideLength);
@@ -425,7 +520,12 @@ public class JTile extends JPanel {
 		
 		NewButton35.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(3,5);
+				try {
+					takeActions(3,5);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton35.setBounds(referX+sideLengthPlus*4,referY+sideLengthPlus*2,sideLength,sideLength);
@@ -433,7 +533,12 @@ public class JTile extends JPanel {
 		
 		NewButton36.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(3,6);
+				try {
+					takeActions(3,6);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton36.setBounds(referX+sideLengthPlus*5,referY+sideLengthPlus*2,sideLength,sideLength);
@@ -441,7 +546,12 @@ public class JTile extends JPanel {
 		
 		NewButton37.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(3,7);
+				try {
+					takeActions(3,7);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton37.setBounds(referX+sideLengthPlus*6,referY+sideLengthPlus*2,sideLength,sideLength);
@@ -449,7 +559,12 @@ public class JTile extends JPanel {
 		
 		NewButton38.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(3,8);
+				try {
+					takeActions(3,8);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton38.setBounds(referX+sideLengthPlus*7,referY+sideLengthPlus*2,sideLength,sideLength);
@@ -457,7 +572,12 @@ public class JTile extends JPanel {
 		
 		NewButton39.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(3,9);
+				try {
+					takeActions(3,9);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton39.setBounds(referX+sideLengthPlus*8,referY+sideLengthPlus*2,sideLength,sideLength);
@@ -470,7 +590,12 @@ public class JTile extends JPanel {
 		
 		NewButton41.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(4,1);
+				try {
+					takeActions(4,1);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton41.setBounds(referX,referY+sideLengthPlus*3,sideLength,sideLength);
@@ -478,7 +603,12 @@ public class JTile extends JPanel {
 	
 		NewButton42.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(4,2);
+				try {
+					takeActions(4,2);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton42.setBounds(referX+sideLengthPlus*1,referY+sideLengthPlus*3,sideLength,sideLength);
@@ -486,7 +616,12 @@ public class JTile extends JPanel {
 		
 		NewButton43.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(4,3);
+				try {
+					takeActions(4,3);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton43.setBounds(referX+sideLengthPlus*2,referY+sideLengthPlus*3,sideLength,sideLength);
@@ -494,7 +629,12 @@ public class JTile extends JPanel {
 		
 		NewButton44.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(4,4);
+				try {
+					takeActions(4,4);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton44.setBounds(referX+sideLengthPlus*3,referY+sideLengthPlus*3,sideLength,sideLength);
@@ -502,7 +642,12 @@ public class JTile extends JPanel {
 		
 		NewButton45.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(4,5);
+				try {
+					takeActions(4,5);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton45.setBounds(referX+sideLengthPlus*4,referY+sideLengthPlus*3,sideLength,sideLength);
@@ -510,7 +655,12 @@ public class JTile extends JPanel {
 		
 		NewButton46.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(4,6);
+				try {
+					takeActions(4,6);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton46.setBounds(referX+sideLengthPlus*5,referY+sideLengthPlus*3,sideLength,sideLength);
@@ -518,7 +668,12 @@ public class JTile extends JPanel {
 		
 		NewButton47.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(4,7);
+				try {
+					takeActions(4,7);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton47.setBounds(referX+sideLengthPlus*6,referY+sideLengthPlus*3,sideLength,sideLength);
@@ -526,7 +681,12 @@ public class JTile extends JPanel {
 		
 		NewButton48.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(4,8);
+				try {
+					takeActions(4,8);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton48.setBounds(referX+sideLengthPlus*7,referY+sideLengthPlus*3,sideLength,sideLength);
@@ -534,7 +694,12 @@ public class JTile extends JPanel {
 		
 		NewButton49.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(4,9);
+				try {
+					takeActions(4,9);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton49.setBounds(referX+sideLengthPlus*8,referY+sideLengthPlus*3,sideLength,sideLength);
@@ -544,7 +709,12 @@ public class JTile extends JPanel {
 		
 		NewButton51.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(5,1);
+				try {
+					takeActions(5,1);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton51.setBounds(referX,referY+sideLengthPlus*4,sideLength,sideLength);
@@ -552,7 +722,12 @@ public class JTile extends JPanel {
 		
 		NewButton52.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(5,2);
+				try {
+					takeActions(5,2);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton52.setBounds(referX+sideLengthPlus*1,referY+sideLengthPlus*4,sideLength,sideLength);
@@ -560,7 +735,12 @@ public class JTile extends JPanel {
 		
 		NewButton53.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(5,3);
+				try {
+					takeActions(5,3);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton53.setBounds(referX+sideLengthPlus*2,referY+sideLengthPlus*4,sideLength,sideLength);
@@ -568,7 +748,12 @@ public class JTile extends JPanel {
 		
 		NewButton54.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(5,4);
+				try {
+					takeActions(5,4);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton54.setBounds(referX+sideLengthPlus*3,referY+sideLengthPlus*4,sideLength,sideLength);
@@ -576,7 +761,12 @@ public class JTile extends JPanel {
 		
 		NewButton55.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(5,5);
+				try {
+					takeActions(5,5);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton55.setBounds(referX+sideLengthPlus*4,referY+sideLengthPlus*4,sideLength,sideLength);
@@ -584,7 +774,12 @@ public class JTile extends JPanel {
 		
 		NewButton56.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(5,6);
+				try {
+					takeActions(5,6);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton56.setBounds(referX+sideLengthPlus*5,referY+sideLengthPlus*4,sideLength,sideLength);
@@ -592,7 +787,12 @@ public class JTile extends JPanel {
 		
 		NewButton57.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(5,7);
+				try {
+					takeActions(5,7);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton57.setBounds(referX+sideLengthPlus*6,referY+sideLengthPlus*4,sideLength,sideLength);
@@ -600,7 +800,12 @@ public class JTile extends JPanel {
 		
 		NewButton58.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(5,8);
+				try {
+					takeActions(5,8);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton58.setBounds(referX+sideLengthPlus*7,referY+sideLengthPlus*4,sideLength,sideLength);
@@ -608,7 +813,12 @@ public class JTile extends JPanel {
 		
 		NewButton59.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(5,9);
+				try {
+					takeActions(5,9);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton59.setBounds(referX+sideLengthPlus*8,referY+sideLengthPlus*4,sideLength,sideLength);
@@ -619,7 +829,12 @@ public class JTile extends JPanel {
 		
 		NewButton61.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(6,1);
+				try {
+					takeActions(6,1);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton61.setBounds(referX,referY+sideLengthPlus*5,sideLength,sideLength);
@@ -627,7 +842,12 @@ public class JTile extends JPanel {
 		
 		NewButton62.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(6,2);
+				try {
+					takeActions(6,2);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton62.setBounds(referX+sideLengthPlus*1,referY+sideLengthPlus*5,sideLength,sideLength);
@@ -635,7 +855,12 @@ public class JTile extends JPanel {
 		
 		NewButton63.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(6,3);
+				try {
+					takeActions(6,3);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton63.setBounds(referX+sideLengthPlus*2,referY+sideLengthPlus*5,sideLength,sideLength);
@@ -643,7 +868,12 @@ public class JTile extends JPanel {
 		
 		NewButton64.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(6,4);
+				try {
+					takeActions(6,4);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton64.setBounds(referX+sideLengthPlus*3,referY+sideLengthPlus*5,sideLength,sideLength);
@@ -651,7 +881,12 @@ public class JTile extends JPanel {
 		
 		NewButton65.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(6,5);
+				try {
+					takeActions(6,5);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton65.setBounds(referX+sideLengthPlus*4,referY+sideLengthPlus*5,sideLength,sideLength);
@@ -659,7 +894,12 @@ public class JTile extends JPanel {
 		
 		NewButton66.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(6,6);
+				try {
+					takeActions(6,6);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton66.setBounds(referX+sideLengthPlus*5,referY+sideLengthPlus*5,sideLength,sideLength);
@@ -667,7 +907,12 @@ public class JTile extends JPanel {
 		
 		NewButton67.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(6,7);
+				try {
+					takeActions(6,7);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton67.setBounds(referX+sideLengthPlus*6,referY+sideLengthPlus*5,sideLength,sideLength);
@@ -675,7 +920,12 @@ public class JTile extends JPanel {
 		
 		NewButton68.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(6,8);
+				try {
+					takeActions(6,8);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton68.setBounds(referX+sideLengthPlus*7,referY+sideLengthPlus*5,sideLength,sideLength);
@@ -683,7 +933,12 @@ public class JTile extends JPanel {
 		
 		NewButton69.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(6,9);
+				try {
+					takeActions(6,9);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton69.setBounds(referX+sideLengthPlus*8,referY+sideLengthPlus*5,sideLength,sideLength);
@@ -693,7 +948,12 @@ public class JTile extends JPanel {
 	
 		NewButton71.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(7,1);
+				try {
+					takeActions(7,1);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton71.setBounds(referX,referY+sideLengthPlus*6,sideLength,sideLength);
@@ -701,7 +961,12 @@ public class JTile extends JPanel {
 		
 		NewButton72.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(7,2);
+				try {
+					takeActions(7,2);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton72.setBounds(referX+sideLengthPlus*1,referY+sideLengthPlus*6,sideLength,sideLength);
@@ -709,7 +974,12 @@ public class JTile extends JPanel {
 		
 		NewButton73.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(7,3);
+				try {
+					takeActions(7,3);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton73.setBounds(referX+sideLengthPlus*2,referY+sideLengthPlus*6,sideLength,sideLength);
@@ -717,7 +987,12 @@ public class JTile extends JPanel {
 		
 		NewButton74.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(7,4);
+				try {
+					takeActions(7,4);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton74.setBounds(referX+sideLengthPlus*3,referY+sideLengthPlus*6,sideLength,sideLength);
@@ -725,7 +1000,12 @@ public class JTile extends JPanel {
 		
 		NewButton75.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(7,5);
+				try {
+					takeActions(7,5);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton75.setBounds(referX+sideLengthPlus*4,referY+sideLengthPlus*6,sideLength,sideLength);
@@ -733,7 +1013,12 @@ public class JTile extends JPanel {
 		
 		NewButton76.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(7,6);
+				try {
+					takeActions(7,6);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton76.setBounds(referX+sideLengthPlus*5,referY+sideLengthPlus*6,sideLength,sideLength);
@@ -741,7 +1026,12 @@ public class JTile extends JPanel {
 		
 		NewButton77.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(7,7);
+				try {
+					takeActions(7,7);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton77.setBounds(referX+sideLengthPlus*6,referY+sideLengthPlus*6,sideLength,sideLength);
@@ -749,7 +1039,12 @@ public class JTile extends JPanel {
 		
 		NewButton78.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(7,8);
+				try {
+					takeActions(7,8);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton78.setBounds(referX+sideLengthPlus*7,referY+sideLengthPlus*6,sideLength,sideLength);
@@ -757,7 +1052,12 @@ public class JTile extends JPanel {
 		
 		NewButton79.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(7,9);
+				try {
+					takeActions(7,9);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton79.setBounds(referX+sideLengthPlus*8,referY+sideLengthPlus*6,sideLength,sideLength);
@@ -767,7 +1067,12 @@ public class JTile extends JPanel {
 		
 		NewButton81.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(8,1);
+				try {
+					takeActions(8,1);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton81.setBounds(referX,referY+sideLengthPlus*7,sideLength,sideLength);
@@ -775,7 +1080,12 @@ public class JTile extends JPanel {
 		
 		NewButton82.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(8,2);
+				try {
+					takeActions(8,2);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton82.setBounds(referX+sideLengthPlus*1,referY+sideLengthPlus*7,sideLength,sideLength);
@@ -783,7 +1093,12 @@ public class JTile extends JPanel {
 		
 		NewButton83.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(8,3);
+				try {
+					takeActions(8,3);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton83.setBounds(referX+sideLengthPlus*2,referY+sideLengthPlus*7,sideLength,sideLength);
@@ -791,7 +1106,12 @@ public class JTile extends JPanel {
 		
 		NewButton84.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(8,4);
+				try {
+					takeActions(8,4);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton84.setBounds(referX+sideLengthPlus*3,referY+sideLengthPlus*7,sideLength,sideLength);
@@ -799,7 +1119,12 @@ public class JTile extends JPanel {
 		
 		NewButton85.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(8,5);
+				try {
+					takeActions(8,5);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton85.setBounds(referX+sideLengthPlus*4,referY+sideLengthPlus*7,sideLength,sideLength);
@@ -807,7 +1132,12 @@ public class JTile extends JPanel {
 		
 		NewButton86.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(8,6);
+				try {
+					takeActions(8,6);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton86.setBounds(referX+sideLengthPlus*5,referY+sideLengthPlus*7,sideLength,sideLength);
@@ -815,7 +1145,12 @@ public class JTile extends JPanel {
 		
 		NewButton87.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(8,7);
+				try {
+					takeActions(8,7);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton87.setBounds(referX+sideLengthPlus*6,referY+sideLengthPlus*7,sideLength,sideLength);
@@ -823,7 +1158,12 @@ public class JTile extends JPanel {
 		
 		NewButton88.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(8,8);
+				try {
+					takeActions(8,8);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton88.setBounds(referX+sideLengthPlus*7,referY+sideLengthPlus*7,sideLength,sideLength);
@@ -831,7 +1171,12 @@ public class JTile extends JPanel {
 	
 		NewButton89.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(8,9);
+				try {
+					takeActions(8,9);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton89.setBounds(referX+sideLengthPlus*8,referY+sideLengthPlus*7,sideLength,sideLength);
@@ -843,7 +1188,12 @@ public class JTile extends JPanel {
 		
 		NewButton91.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(9,1);
+				try {
+					takeActions(9,1);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton91.setBounds(referX,referY+sideLengthPlus*8,sideLength,sideLength);
@@ -851,7 +1201,12 @@ public class JTile extends JPanel {
 		
 		NewButton92.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(9,2);
+				try {
+					takeActions(9,2);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton92.setBounds(referX+sideLengthPlus*1,referY+sideLengthPlus*8,sideLength,sideLength);
@@ -859,7 +1214,12 @@ public class JTile extends JPanel {
 		
 		NewButton93.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(9,3);
+				try {
+					takeActions(9,3);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton93.setBounds(referX+sideLengthPlus*2,referY+sideLengthPlus*8,sideLength,sideLength);
@@ -867,7 +1227,12 @@ public class JTile extends JPanel {
 		
 		NewButton94.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(9,4);
+				try {
+					takeActions(9,4);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton94.setBounds(referX+sideLengthPlus*3,referY+sideLengthPlus*8,sideLength,sideLength);
@@ -876,7 +1241,12 @@ public class JTile extends JPanel {
 		NewButton95.setIcon(new ImageIcon(JTile.class.getResource("/ca/mcgill/ecse223/quoridor/resources/wpawn.png")));
 		NewButton95.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(9,5);
+				try {
+					takeActions(9,5);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton95.setBounds(referX+sideLengthPlus*4,referY+sideLengthPlus*8,sideLength,sideLength);
@@ -884,7 +1254,12 @@ public class JTile extends JPanel {
 		
 		NewButton96.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(9,6);
+				try {
+					takeActions(9,6);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton96.setBounds(referX+sideLengthPlus*5,referY+sideLengthPlus*8,sideLength,sideLength);
@@ -892,7 +1267,12 @@ public class JTile extends JPanel {
 		
 		NewButton97.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(9,7);
+				try {
+					takeActions(9,7);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton97.setBounds(referX+sideLengthPlus*6,referY+sideLengthPlus*8,sideLength,sideLength);
@@ -900,7 +1280,12 @@ public class JTile extends JPanel {
 		
 		NewButton98.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(9,8);
+				try {
+					takeActions(9,8);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton98.setBounds(referX+sideLengthPlus*7,referY+sideLengthPlus*8,sideLength,sideLength);
@@ -908,7 +1293,12 @@ public class JTile extends JPanel {
 		
 		NewButton99.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(9,9);
+				try {
+					takeActions(9,9);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton99.setBounds(referX+sideLengthPlus*8,referY+sideLengthPlus*8,sideLength,sideLength);
