@@ -2300,7 +2300,7 @@ public class CucumberStepDefinitions {
 		@When("The game is no longer running")
 		public void the_game_is_no_longer_running() {
 			   //QuoridorController.stopTime();
-			   QuoridorController.terminatePlayerMove();
+			//   QuoridorController.terminatePlayerMove();
 		}
 
 		@Then("The final result shall be displayed")
