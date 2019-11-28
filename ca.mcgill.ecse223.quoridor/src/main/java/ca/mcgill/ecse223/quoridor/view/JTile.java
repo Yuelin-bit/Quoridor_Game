@@ -909,7 +909,7 @@ public class JTile extends JPanel {
 		
 	}
 	boolean dangerous = false;
-	public void takeActions(int x, int y) {
+	public void takeActions(int x, int y) throws CloneNotSupportedException {
 		if(isSelectedState==false) {
 			if(makeSureLegalTrun(x, y)) {
 				findAndGreenAvailableButton(x, y);

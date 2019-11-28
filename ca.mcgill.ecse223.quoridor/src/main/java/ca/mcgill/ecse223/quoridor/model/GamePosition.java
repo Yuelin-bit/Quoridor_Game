@@ -5,7 +5,7 @@ package ca.mcgill.ecse223.quoridor.model;
 import java.util.*;
 
 // line 56 "../../../../../QuoridorGame.ump"
-public class GamePosition
+public class GamePosition implements Cloneable
 {
 
   //------------------------
@@ -65,6 +65,11 @@ public class GamePosition
       throw new RuntimeException("Unable to create position due to game");
     }
   }
+
+  	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return (GamePosition)super.clone();
+	}
 
   //------------------------
   // INTERFACE

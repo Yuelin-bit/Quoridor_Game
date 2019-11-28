@@ -569,7 +569,7 @@ public class CucumberStepDefinitions {
 //		}
 //	}
 	@Given("The following moves have been played in game:")
-	public void the_following_moves_have_been_played_in_game(io.cucumber.datatable.DataTable dataTable) {
+	public void the_following_moves_have_been_played_in_game(io.cucumber.datatable.DataTable dataTable) throws CloneNotSupportedException {
 	    // Write code here that turns the phrase above into concrete actions
 	    // For automatic transformation, change DataTable to one of
 	    // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
@@ -593,8 +593,8 @@ public class CucumberStepDefinitions {
 			}
 		}
 		
-		Tile player1StartPos = quoridorR.getBoard().getTile(4);
-		Tile player2StartPos = quoridorR.getBoard().getTile(76);
+		Tile player1StartPos = quoridorR.getBoard().getTile(76);
+		Tile player2StartPos = quoridorR.getBoard().getTile(4);
 		QuoridorApplication.getQuoridor().getCurrentGame().setWhitePlayer(player1);
 		QuoridorApplication.getQuoridor().getCurrentGame().setBlackPlayer(player2);
 
@@ -624,11 +624,13 @@ public class CucumberStepDefinitions {
 				if(quoridorR.getCurrentGame().getCurrentPosition().getPlayerToMove().hasGameAsWhite()){
 					oldRow = quoridorR.getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
 					oldColumn = quoridorR.getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
+					QuoridorController.movePlayer("white", QuoridorController.convertMove2(map.get("move"), oldRow, oldColumn));
 				}else {
 					oldRow = quoridorR.getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
 					oldColumn = quoridorR.getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getColumn();
+					QuoridorController.movePlayer("black", QuoridorController.convertMove2(map.get("move"), oldRow, oldColumn));
 				}	
-				QuoridorController.movePlayer("step", QuoridorController.convertMove2(map.get("move"), oldRow, oldColumn));
+				
 			}else {
 				QuoridorController.grabWall();
 				if(map.get("move").charAt(2)=='h') {
@@ -646,11 +648,12 @@ public class CucumberStepDefinitions {
 	@Given("The next move is {double}")
 	public void the_next_move_is(Double double1) {
 	    // Write code here that turns the phrase above into concrete actions
-		List<Move> m = QuoridorApplication.getQuoridor().getCurrentGame().getMoves();
-		List<GamePosition> p = QuoridorApplication.getQuoridor().getCurrentGame().getPositions();
-		Iterator mIterator = m.iterator();
-		
-	    throw new cucumber.api.PendingException();
+		QuoridorApplication.getQuoridor().getCurrentGame().getPositions();
+		double t = double1;
+		int moveN = (int)t;
+		int roundN = (int)((double1 - moveN)*10);
+		int index = (moveN-1)*2 + roundN - 1; 
+		QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(QuoridorApplication.getQuoridor().getCurrentGame().getPosition(index));
 	}
 //	
 	@When("Step backward is initiated")
@@ -1921,7 +1924,7 @@ public class CucumberStepDefinitions {
 		}
 
 		@When("Player {string} initiates to move {string}")
-		public void player_initiates_to_move(String string, String string2) {
+		public void player_initiates_to_move(String string, String string2) throws CloneNotSupportedException {
 			PawnBehavior pawnBehavior = new PawnBehavior();
 			MoveDirection movedirection = null;
 			if (string2.equals("left")) {
