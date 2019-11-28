@@ -213,7 +213,7 @@ public class CucumberStepDefinitions {
 	
 	
 	@When("I release the wall in my hand")
-	public void i_release_the_wall_in_my_hand() {
+	public void i_release_the_wall_in_my_hand() throws CloneNotSupportedException {
 		QuoridorController.releaseWall();
 	}
 
@@ -640,8 +640,9 @@ public class CucumberStepDefinitions {
 				int a = (int) QuoridorController.convertMove3(map.get("move")).get(0);
 				int b = (int) QuoridorController.convertMove3(map.get("move")).get(1);
 				System.out.println("a: " + a + ", b: " + b);
-				Tile t= new Tile(a, b, quoridorR.getBoard());
+				Tile t= new Tile(b, a, quoridorR.getBoard());
 				quoridorR.getCurrentGame().getWallMoveCandidate().setTargetTile(t);
+				QuoridorController.releaseWall();
 			}
 		}
 	}
@@ -653,7 +654,7 @@ public class CucumberStepDefinitions {
 		double t = double1;
 		int moveN = (int)t;
 		int roundN = (int)((double1 - moveN)*10);
-		int index = (moveN-1)*2 + roundN - 1; 
+		int index = (moveN-1)*2 + roundN; 
 		QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(QuoridorApplication.getQuoridor().getCurrentGame().getPosition(index));
 	}
 //	
@@ -761,7 +762,7 @@ public class CucumberStepDefinitions {
 	}
 
 	@When("I try to grab a wall from my stock")
-	public void i_try_to_grab_a_wall_from_my_stock() {
+	public void i_try_to_grab_a_wall_from_my_stock() throws CloneNotSupportedException {
 		QuoridorController.grabWall();
 	}
 

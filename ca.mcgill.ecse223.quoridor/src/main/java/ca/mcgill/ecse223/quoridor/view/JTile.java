@@ -119,7 +119,7 @@ public class JTile extends JPanel {
 		JButton NewButton81 = new JButton("");
 		JButton NewButton82 = new JButton("");
 		JButton NewButton83 = new JButton("");
-		JButton NewButton84= new JButton("");
+		JButton NewButton84 = new JButton("");
 		JButton NewButton85 = new JButton("");
 		JButton NewButton86 = new JButton("");
 		JButton NewButton87 = new JButton("");
@@ -228,7 +228,12 @@ public class JTile extends JPanel {
 		
 		NewButton11.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(1,1);
+				try {
+					takeActions(1,1);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton11.setBounds(referX,referY,sideLength,sideLength);
@@ -236,7 +241,12 @@ public class JTile extends JPanel {
 		
 		NewButton12.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(1,2);
+				try {
+					takeActions(1,2);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton12.setBounds(referX+sideLengthPlus*1,referY,sideLength,sideLength);
@@ -244,7 +254,12 @@ public class JTile extends JPanel {
 		
 		NewButton13.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				takeActions(1,3);
+				try {
+					takeActions(1,3);
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		NewButton13.setBounds(referX+sideLengthPlus*2,referY,sideLength,sideLength);

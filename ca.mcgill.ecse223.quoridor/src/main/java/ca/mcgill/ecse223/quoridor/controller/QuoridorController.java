@@ -314,10 +314,11 @@ public class QuoridorController {
 	 * @author Yuelin Liu
 	 * @param wallmove WallMove candidate to be released.
 	 * @return void
+	 * @throws CloneNotSupportedException 
 	 * @exception nothing
 	 *
 	 */
-	public static void releaseWall() 
+	public static void releaseWall() throws CloneNotSupportedException 
 	{	
 		//QuoridorApplication.setJboard(new JBoard());
 
@@ -328,8 +329,7 @@ public class QuoridorController {
 			JOptionPane.showMessageDialog(null, "Illegal drop!");
 			return;
 		}
-
-
+		
 		Tile t = wallmove.getTargetTile();
 		Player currentPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
 		Game currentGame = QuoridorApplication.getQuoridor().getCurrentGame();
@@ -583,16 +583,19 @@ public class QuoridorController {
 	 * @param void 
 	 * @author Yujing Yang
 	 * @return boolean		return true if grabWall successfully; return false if don't
+	 * @throws CloneNotSupportedException 
 	 */
 
-	public static boolean grabWall() {	
+	public static boolean grabWall() throws CloneNotSupportedException {	
 
 		Player currentPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
-
+		GamePosition currentGamePosition = (GamePosition) QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().clone();
+		QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(currentGamePosition);
+		
 
 		try {
 			if(currentPlayer.hasGameAsBlack()) {			
-				List<Wall> inStock = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsInStock();		
+				List<Wall> inStock = currentGamePosition.getBlackWallsInStock();		
 				Wall grabbedWall = inStock.get(0);
 
 				System.out.println("Black: "+inStock.size());
@@ -601,13 +604,13 @@ public class QuoridorController {
 				int a = QuoridorApplication.getQuoridor().getCurrentGame().getMoves().size();
 				WallMove WallMove = new WallMove(a+1, (a + 3) / 2, currentPlayer, WallTile,QuoridorApplication.getQuoridor().getCurrentGame(), Direction.Vertical, grabbedWall);	
 				QuoridorApplication.getQuoridor().getCurrentGame().setWallMoveCandidate(WallMove);
-				QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().removeBlackWallsInStock(grabbedWall);
+				currentGamePosition.removeBlackWallsInStock(grabbedWall);
 				System.out.println("Black after: "+inStock.size());
 				return true;				
 			}
 
 			if(currentPlayer.hasGameAsWhite()) {
-				List<Wall> inStock = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsInStock();
+				List<Wall> inStock = currentGamePosition.getWhiteWallsInStock();
 				Wall grabbedWall = inStock.get(0);
 
 				System.out.println("White: "+inStock.size());
@@ -616,7 +619,7 @@ public class QuoridorController {
 				int a = QuoridorApplication.getQuoridor().getCurrentGame().getMoves().size();
 				WallMove WallMove = new WallMove(a+1, (a + 3) / 2, currentPlayer, WallTile,QuoridorApplication.getQuoridor().getCurrentGame(), Direction.Vertical, grabbedWall);
 				QuoridorApplication.getQuoridor().getCurrentGame().setWallMoveCandidate(WallMove);
-				QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().removeWhiteWallsInStock(grabbedWall);
+				currentGamePosition.removeWhiteWallsInStock(grabbedWall);
 				System.out.println("White after: "+inStock.size());
 				return true;
 			}
