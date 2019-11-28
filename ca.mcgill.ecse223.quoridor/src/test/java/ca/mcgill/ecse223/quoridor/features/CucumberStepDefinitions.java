@@ -2299,36 +2299,41 @@ public class CucumberStepDefinitions {
 			
 		@When("The game is no longer running")
 		public void the_game_is_no_longer_running() {
+			   //QuoridorController.stopTime();
+			   QuoridorController.terminatePlayerMove();
 		}
 
 		@Then("The final result shall be displayed")
 		public void the_final_result_shall_be_displayed() {
-		    // GUI Test
-		    throw new cucumber.api.PendingException();
+			String result =(QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus().equals(GameStatus.WhiteWon))?"WhiteWon!":"Peace and Love";
+			result =(QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus().equals(GameStatus.BlackWon))?"BlackWon!":"Peace and Love";
+		    assertEquals(result,QuoridorController.getGameResult());
 		}
 
 		@Then("White's clock shall not be counting down")
 		public void white_s_clock_shall_not_be_counting_down() {
-		    // Write code here that turns the phrase above into concrete actions
-		    throw new cucumber.api.PendingException();
+			assertEquals(0,QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer().getRemainingTime().getSeconds());
+
+			assertEquals(0,QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer().getRemainingTime().getMinutes());
 		}
 
 		@Then("Black's clock shall not be counting down")
 		public void black_s_clock_shall_not_be_counting_down() {
-		    // Write code here that turns the phrase above into concrete actions
-		    throw new cucumber.api.PendingException();
+			assertEquals(0,QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer().getRemainingTime().getSeconds());
+
+			assertEquals(0,QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer().getRemainingTime().getMinutes());
+
 		}
 
 		@Then("White shall be unable to move")
 		public void white_shall_be_unable_to_move() {
-		    // Write code here that turns the phrase above into concrete actions
-		    throw new cucumber.api.PendingException();
+			assertEquals(false,QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer().hasGameAsWhite());
+
 		}
 
 		@Then("Black shall be unable to move")
 		public void black_shall_be_unable_to_move() {
-		    // Write code here that turns the phrase above into concrete actions
-		    throw new cucumber.api.PendingException();
+			assertEquals(false,QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer().hasGameAsBlack());
 		}
 	
 		//	*******************************************

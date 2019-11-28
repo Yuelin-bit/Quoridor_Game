@@ -51,12 +51,31 @@ public class QuoridorController {
 	public static void stopWatch() {
 		whiteWatch.stop();
 		blackWatch.stop();
+		Time zero = new Time(0);
+		QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer().setRemainingTime(zero);
+		QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer().setRemainingTime(zero);
+	}
+	public static void stopTime() {
+		Time zero = new Time(0);
+		QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer().setRemainingTime(zero);
+		QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer().setRemainingTime(zero);
+	}
+	public static void stopWhiteWatch() {
+		whiteWatch.stop();
+	}
+	public static void stopBlackWatch() {
+		blackWatch.stop();
 	}
 	/**
 	 * Ground both player.
 	 */
 	public static void terminatePlayerMove() {
 		QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(null);
+	}
+	public static String getGameResult() {
+	if(QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus().equals(GameStatus.WhiteWon)) return "WhiteWon!";
+	else if(QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus().equals(GameStatus.BlackWon)) return "BlackWon!";
+	else return "Peace and Love";
 	}
 	/**
 	 * This method helps communicating through model and UI.
