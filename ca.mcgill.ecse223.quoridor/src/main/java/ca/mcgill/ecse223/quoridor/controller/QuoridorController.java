@@ -1086,6 +1086,57 @@ public class QuoridorController {
 		
 	}
 	
+	
+	
+	/**
+	 * Feature:IdentifyGameDrawn
+	 * 
+	 * 
+	 * @author Bozhong Lu
+	 * @param string String stands for the direction of the wall that is to be moved.
+	 * @return void
+	 * @exception nothing 
+	 */
+	public static String convertToMove(String stringRow , String stringCol , int oldRow, int oldColumn) {
+		
+		String result = "";
+		int newRow = 0;
+		int newColumn = 0;
+		if(stringCol=="1") newColumn = 1;
+		if(stringCol=="2") newColumn = 2;
+		if(stringCol=="3") newColumn = 3;
+		if(stringCol=="4") newColumn = 4;
+		if(stringCol=="5") newColumn = 5;
+		if(stringCol=="6") newColumn = 6;
+		if(stringCol=="7") newColumn = 7;
+		if(stringCol=="8") newColumn = 8;
+		if(stringCol=="9") newColumn = 9;
+		
+		if(stringRow=="1") newRow = 1;
+		if(stringRow=="2") newRow = 2;
+		if(stringRow=="3") newRow = 3;
+		if(stringRow=="4") newRow = 4;
+		if(stringRow=="5") newRow = 5;
+		if(stringRow=="6") newRow = 6;
+		if(stringRow=="7") newRow = 7;
+		if(stringRow=="8") newRow = 8;
+		if(stringRow=="9") newRow = 9;
+		
+		if((newRow==oldRow)&&(newColumn==oldColumn+1)) {
+			result = "right";
+		}
+		if((newRow==oldRow)&&(newColumn==oldColumn-1)) {
+			result = "left";
+		}
+		if((newRow==oldRow+1)&&(newColumn==oldColumn)) {
+			result = "down";
+		}
+		if((newRow==oldRow-1)&&(newColumn==oldColumn)) {
+			result = "up";
+		}	
+		return result;
+	}
+	
 
 
 
