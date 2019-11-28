@@ -1170,11 +1170,6 @@ public class CucumberStepDefinitions {
 			Player player1 = new Player(new Time(thinkingTime), user1, 9, Direction.Horizontal);
 			Player player2 = new Player(new Time(thinkingTime), user2, 1, Direction.Horizontal);
 			Player[] players = { player1, player2 };
-			for (int i = 0; i < 2; i++) {
-				for (int j = 0; j < 10; j++) {
-					new Wall(i * 10 + j+1, players[i]);
-				}
-			}
 			
 			Tile player1StartPos = quoridorR.getBoard().getTile(76);
 			Tile player2StartPos = quoridorR.getBoard().getTile(4);
@@ -1645,10 +1640,10 @@ public class CucumberStepDefinitions {
 		    gameResult = QuoridorController.checkGameResult();
 		}
 
-//		@Then("Game result shall be {string}")
-//		public void game_result_shall_be(String string) {
-//			assertEquals(string, gameResult);
-//		}
+		@Then("Game result shall be {string}")
+		public void game_result_shall_be(String string) {
+			assertEquals(string, gameResult);
+		}
 
 		@Then("The game shall no longer be running")
 		public void the_game_shall_no_longer_be_running() {
@@ -2235,11 +2230,11 @@ public class CucumberStepDefinitions {
 				assertEquals(string, gameResult);
 			}
 		}
-//		@Then("The game shall no longer be running")
-//		public void the_game_shall_no_longer_be_running() {
-//		    // Write code here that turns the phrase above into concrete actions
-//		    QuoridorApplication.getQuoridor().getCurrentGame().delete();
-//		}
+		@Then("The game shall no longer be running")
+		public void the_game_shall_no_longer_be_running() {
+		    // Write code here that turns the phrase above into concrete actions
+		    QuoridorApplication.getQuoridor().getCurrentGame().delete();
+		}
 		
 		//	***********************************
 		//	Enter Replay Mode
