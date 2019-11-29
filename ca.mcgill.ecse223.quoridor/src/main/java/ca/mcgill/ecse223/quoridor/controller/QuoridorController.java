@@ -556,9 +556,46 @@ public class QuoridorController {
 		
 		return result;
 	}
+	/**
+	 * Feature: StepForward
+	 * 
+	 * In the replay mode, I want to take a look at the next Position.
+	 * 
+	 * I first get the ID of the current position and then set the id to id+1.
+	 * @author Yuelin Liu
+	 * 
+	 * @return void
+	 */
 	
+	public static void stepForward() {
+		int oldID = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getId();
+		int newID = oldID + 1;
+		if(newID >= QuoridorApplication.getQuoridor().getCurrentGame().getPositions().size()) {
+			newID = QuoridorApplication.getQuoridor().getCurrentGame().getPositions().size() - 1;
+		}
+		QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(QuoridorApplication.getQuoridor().getCurrentGame().getPositions().get(newID));	
+	}
+	
+	
+	/**
+	 * Feature: StepBackward
+	 * 
+	 * In the replay mode, I want to take a look at the next Position.
+	 * 
+	 * I first get the ID of the current position and then set the id to id-1.
+	 * @author Yuelin Liu
+	 * 
+	 * @return void
+	 */
 
-
+	public static void stepBackward() {
+		int oldID = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getId();
+		int newID = oldID - 1;
+		if(newID < 0) {
+			newID = 0;
+		}
+		QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(QuoridorApplication.getQuoridor().getCurrentGame().getPositions().get(newID));	
+	}
 
 
 
@@ -2334,6 +2371,7 @@ public class QuoridorController {
 		//				}
 		//			}
 	}
+	
 
 
 }

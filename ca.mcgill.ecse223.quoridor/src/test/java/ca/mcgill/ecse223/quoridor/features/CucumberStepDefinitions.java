@@ -512,8 +512,7 @@ public class CucumberStepDefinitions {
 	
 	@When("Step forward is initiated")
 	public void step_forward_is_initiated() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+		QuoridorController.stepForward();
 	}
 	
 	////*******************************************************************************************************************************
@@ -653,21 +652,35 @@ public class CucumberStepDefinitions {
 		QuoridorApplication.getQuoridor().getCurrentGame().getPositions();
 		double t = double1;
 		int moveN = (int)t;
-		int roundN = (int)((double1 - moveN)*10);
-		int index = (moveN-1)*2 + roundN; 
+		int roundN = (int)((double1 - moveN + 0.0001)*10);
+		int index = (moveN-1)*2 + roundN - 1; 
 		QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(QuoridorApplication.getQuoridor().getCurrentGame().getPosition(index));
 	}
 //	
 	@When("Step backward is initiated")
 	public void step_backward_is_initiated() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+		QuoridorController.stepBackward();
 	}
 	
 	@Then("The next move shall be {double}")
 	public void the_next_move_shall_be(Double double1) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+		double t = double1;
+		int moveN = (int)t;
+		int roundN = (int)((double1 - (double)moveN + 0.0001)*10);
+		int currentID = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getId();
+		int actualMoveN;
+		int actualRoundN;
+		if(currentID-(currentID/2)*2==0) {
+			actualMoveN = currentID/2 + 1;
+			actualRoundN = 1;
+		}
+		else {
+			actualMoveN = currentID/2 + 1;
+			actualRoundN = 2;
+		}
+		
+		Assert.assertEquals(moveN, actualMoveN);
+		Assert.assertEquals(roundN, actualRoundN);	
 	}
 
 	@Then("White player's position shall be \\({double})")
