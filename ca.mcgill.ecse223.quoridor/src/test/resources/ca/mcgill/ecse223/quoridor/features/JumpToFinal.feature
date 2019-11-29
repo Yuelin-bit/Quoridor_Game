@@ -18,17 +18,17 @@ As a player using replay mode, I wish to scroll fast to the very beginning of th
     And The next move is <movno>.<rndno>
     When Jump to start position is initiated
     Then The next move shall be <nmov>.<nrnd>
-    And White player's position shall be (<wrow>,<wcol>)
-    And Black player's position shall be (<brow>,<bcol>)
-    And White has <wwallno> on stock
-    And Black has <bwallno> on stock
+    And White player's position shall be <wrow>.<wcol>
+    And Black player's position shall be <brow>.<bcol>
+    And White has <wwall> on stock
+    And Black has <bwall> on stock
 
     Examples: 
-      | movno | rndno | nmov | nrnd | wrow | wcol | wwall | brow | bcol | bwallno |
-      |     1 |     1 |    5 |    1 |    7 |    5 |     8 |    3 |    6 |       9 |
-      |     1 |     2 |    5 |    1 |    7 |    5 |     8 |    3 |    6 |       9 |
-      |     2 |     1 |    5 |    1 |    7 |    5 |     8 |    3 |    6 |       9 |
-      |     2 |     2 |    5 |    1 |    7 |    5 |     8 |    3 |    6 |       9 |
-      |     3 |     1 |    5 |    1 |    7 |    5 |     8 |    3 |    6 |       9 |
-      |     4 |     2 |    5 |    1 |    7 |    5 |     8 |    3 |    6 |       9 |
+      | movno | rndno | nmov | nrnd | wrow | wcol | wwall | brow | bcol | bwall |
+      |     1 |     1 |    5 |    1 |    7 |    5 |     8 |    3 |    6 |     9 |
+      |     1 |     2 |    5 |    1 |    7 |    5 |     8 |    3 |    6 |     9 |
+      |     2 |     1 |    5 |    1 |    7 |    5 |     8 |    3 |    6 |     9 |
+      |     2 |     2 |    5 |    1 |    7 |    5 |     8 |    3 |    6 |     9 |
+      |     3 |     1 |    5 |    1 |    7 |    5 |     8 |    3 |    6 |     9 |
+      |     4 |     2 |    5 |    1 |    7 |    5 |     8 |    3 |    6 |     9 |
       

@@ -20,19 +20,19 @@ and see the board position after that move.
     And The next move is <movno>.<rndno>
     When Step forward is initiated
     Then The next move shall be <nmov>.<nrnd>
-    And White player's position shall be (<wrow>,<wcol>)
-    And Black player's position shall be (<brow>,<bcol>)
-    And White has <wwallno> on stock
-    And Black has <bwallno> on stock
+    And White player's position shall be <wrow>.<wcol>
+    And Black player's position shall be <brow>.<bcol>
+    And White has <wwall> on stock
+    And Black has <bwall> on stock
 
     Examples: 
-      | movno | rndno | nmov | nrnd | wrow | wcol | wwall | brow | bcol | bwallno |
-      |     1 |     1 |    1 |    2 |    8 |    5 |    10 |    1 |    5 |      10 |
-      |     1 |     2 |    2 |    1 |    8 |    5 |    10 |    2 |    5 |      10 |
-      |     2 |     1 |    2 |    2 |    7 |    5 |    10 |    2 |    5 |      10 |
-      |     2 |     2 |    3 |    1 |    7 |    5 |    10 |    3 |    5 |      10 |
-      |     3 |     1 |    3 |    2 |    7 |    5 |     9 |    3 |    5 |      10 |
-      |     3 |     2 |    4 |    1 |    7 |    5 |     9 |    3 |    5 |       9 |
-      |     4 |     1 |    4 |    2 |    7 |    5 |     8 |    3 |    5 |       9 |
-      |     4 |     2 |    5 |    1 |    7 |    5 |     8 |    3 |    6 |       9 |
+      | movno | rndno | nmov | nrnd | wrow | wcol | wwall | brow | bcol | bwall |
+      |     1 |     1 |    1 |    2 |    8 |    5 |    10 |    1 |    5 |    10 |
+      |     1 |     2 |    2 |    1 |    8 |    5 |    10 |    2 |    5 |    10 |
+      |     2 |     1 |    2 |    2 |    7 |    5 |    10 |    2 |    5 |    10 |
+      |     2 |     2 |    3 |    1 |    7 |    5 |    10 |    3 |    5 |    10 |
+      |     3 |     1 |    3 |    2 |    7 |    5 |     9 |    3 |    5 |    10 |
+      |     3 |     2 |    4 |    1 |    7 |    5 |     9 |    3 |    5 |     9 |
+      |     4 |     1 |    4 |    2 |    7 |    5 |     8 |    3 |    5 |     9 |
+      |     4 |     2 |    5 |    1 |    7 |    5 |     8 |    3 |    6 |     9 |
 

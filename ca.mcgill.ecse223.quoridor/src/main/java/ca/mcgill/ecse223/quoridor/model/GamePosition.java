@@ -591,6 +591,26 @@ public class GamePosition implements Cloneable
     return (GamePosition)super.clone();
   }
 
+  // line 76 "../../../../../QuoridorGame.ump"
+   public void setWhiteWallsInStock(List<Wall> whiteWallsInStock){
+    this.whiteWallsInStock = whiteWallsInStock;
+  }
+
+  // line 80 "../../../../../QuoridorGame.ump"
+   public void setBlackWallsInStock(List<Wall> blackWallsInStock){
+    this.blackWallsInStock = blackWallsInStock;
+  }
+
+  // line 84 "../../../../../QuoridorGame.ump"
+   public void setWhiteWallsOnBoard(List<Wall> whiteWallsOnBoard){
+    this.whiteWallsOnBoard = whiteWallsOnBoard;
+  }
+
+  // line 88 "../../../../../QuoridorGame.ump"
+   public void setBlackWallsOnBoard(List<Wall> blackWallsOnBoard){
+    this.blackWallsOnBoard = blackWallsOnBoard;
+  }
+
 
   public String toString()
   {
