@@ -4,7 +4,7 @@
 package ca.mcgill.ecse223.quoridor.model;
 import java.sql.Time;
 
-// line 76 "../../../../../QuoridorGame.ump"
+// line 84 "../../../../../QuoridorGame.ump"
 public class Destination
 {
 

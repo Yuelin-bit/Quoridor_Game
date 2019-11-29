@@ -683,28 +683,38 @@ public class CucumberStepDefinitions {
 		Assert.assertEquals(roundN, actualRoundN);	
 	}
 
-	@Then("White player's position shall be \\({double})")
+	@Then("White player's position shall be {double}")
 	public void white_player_s_position_shall_be(Double double1) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+		double t = double1;
+		int rowExpected = (int)t;
+		int columnExpected = (int)((double1 - (double)rowExpected + 0.0001)*10);
+		int row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
+		int column = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
+		Assert.assertEquals(rowExpected, row);
+		Assert.assertEquals(columnExpected, column);
 	}
 
-	@Then("Black player's position shall be \\({double})")
+	@Then("Black player's position shall be {double}")
 	public void black_player_s_position_shall_be(Double double1) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+		double t = double1;
+		int rowExpected = (int)t;
+		int columnExpected = (int)((double1 - (double)rowExpected + 0.0001)*10);
+		int row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
+		int column = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getColumn();
+		Assert.assertEquals(rowExpected, row);
+		Assert.assertEquals(columnExpected, column);
 	}
-
-	@Then("White has <wwallno> on stock")
-	public void white_has_wwallno_on_stock() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+	
+	@Then("White has {int} on stock")
+	public void white_has_on_stock(Integer int1) {
+	    Integer actual = Integer.valueOf(QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().numberOfWhiteWallsInStock());
+	    Assert.assertEquals(int1, actual);
 	}
 
 	@Then("Black has {int} on stock")
 	public void black_has_on_stock(Integer int1) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+		Integer actual = Integer.valueOf(QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().numberOfBlackWallsInStock());
+	    Assert.assertEquals(int1, actual);
 	}
 	
 	
