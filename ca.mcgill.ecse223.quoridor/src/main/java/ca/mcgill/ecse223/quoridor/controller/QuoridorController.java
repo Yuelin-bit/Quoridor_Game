@@ -1443,8 +1443,20 @@ public class QuoridorController {
 	}
 	
 	
-	public static void colckCountToZero() {
-		
+	public static String clockCountToZero(Player player) {
+		Time timeremain = player.getRemainingTime();
+		Time zero = new Time(0);
+		if (timeremain.equals(zero)) {
+			if (player.hasGameAsBlack()) {
+				QuoridorApplication.getQuoridor().getCurrentGame().setGameStatus(GameStatus.WhiteWon);
+				return "whiteWon";
+			} else {
+				QuoridorApplication.getQuoridor().getCurrentGame().setGameStatus(GameStatus.BlackWon);
+				return "blackWon";
+			}
+		} else {
+			return "pending";
+		}
 	}
 	
 

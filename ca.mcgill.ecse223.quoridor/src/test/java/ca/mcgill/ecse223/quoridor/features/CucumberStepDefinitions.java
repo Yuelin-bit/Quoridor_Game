@@ -1219,18 +1219,18 @@ public class CucumberStepDefinitions {
 			}	
 		}
 
-		@Given("Player {string} has just completed his move")
-		public void player_has_just_completed_his_move(String string) {
-		    // Write code here that turns the phrase above into concrete actions
-			Player player;
-			if (string.equals("white")) {
-			player = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
-				QuoridorController.completeMove(player);
-			}else {
-				player = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
-				QuoridorController.completeMove(player);
-			}
-		}
+//		@Given("Player {string} has just completed his move")
+//		public void player_has_just_completed_his_move(String string) {
+//		    // Write code here that turns the phrase above into concrete actions
+//			Player player;
+//			if (string.equals("white")) {
+//			player = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
+//				QuoridorController.completeMove(player);
+//			}else {
+//				player = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
+//				QuoridorController.completeMove(player);
+//			}
+//		}
 
 		@Given("The last move of {string} is pawn move to {int}:{int}")
 		public void the_last_move_of_is_pawn_move_to(String string, Integer int1, Integer int2) {
@@ -1251,23 +1251,23 @@ public class CucumberStepDefinitions {
 			}
 		}
 
-		@When("Checking of game result is initated")
-		public void checking_of_game_result_is_initated() {
-		    gameFinalResult = QuoridorController.checkGameDrawn();
-		}
-
-		@Then("Game result shall be {string}")
-		public void game_result_shall_be(String string) {
-			assertEquals(string , gameFinalResult) ;
-		}
-
-		@Then("The game shall no longer be running")
-		public void the_game_shall_no_longer_be_running() {
-			GameStatus status = QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus();    
-			boolean gameIsRunning = (GameStatus.Running == status);
-			assertEquals(false, gameIsRunning);
-		}
-		
+//		@When("Checking of game result is initated")
+//		public void checking_of_game_result_is_initated() {
+//		    gameFinalResult = QuoridorController.checkGameDrawn();
+//		}
+//
+//		@Then("Game result shall be {string}")
+//		public void game_result_shall_be(String string) {
+//			assertEquals(string , gameFinalResult) ;
+//		}
+//
+//		@Then("The game shall no longer be running")
+//		public void the_game_shall_no_longer_be_running() {
+//			GameStatus status = QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus();    
+//			boolean gameIsRunning = (GameStatus.Running == status);
+//			assertEquals(false, gameIsRunning);
+//		}
+//		
 		
 		
 		
@@ -1657,10 +1657,10 @@ public class CucumberStepDefinitions {
 		    gameResult = QuoridorController.checkGameResult();
 		}
 
-		@Then("Game result shall be {string}")
-		public void game_result_shall_be(String string) {
-			assertEquals(string, gameResult);
-		}
+//		@Then("Game result shall be {string}")
+//		public void game_result_shall_be(String string) {
+//			assertEquals(string, gameResult);
+//		}
 
 		@Then("The game shall no longer be running")
 		public void the_game_shall_no_longer_be_running() {
@@ -1671,6 +1671,15 @@ public class CucumberStepDefinitions {
 
 		@When("The clock of {string} counts down to zero")
 		public void the_clock_of_counts_down_to_zero(String string) {
+			Player player;
+			if (string.equals("white")) {
+				player = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
+				
+			} else {
+				player = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
+			}
+			player.setRemainingTime(new Time(0));
+			gameResult = QuoridorController.clockCountToZero(player);
 			
 		}
 
@@ -2247,12 +2256,12 @@ public class CucumberStepDefinitions {
 				assertEquals(string, gameResult);
 			}
 		}
-		@Then("The game shall no longer be running")
-		public void the_game_shall_no_longer_be_running() {
-		    // Write code here that turns the phrase above into concrete actions
-		    QuoridorApplication.getQuoridor().getCurrentGame().delete();
-		}
-		
+//		@Then("The game shall no longer be running")
+//		public void the_game_shall_no_longer_be_running() {
+//		    // Write code here that turns the phrase above into concrete actions
+//		    QuoridorApplication.getQuoridor().getCurrentGame().delete();
+//		}
+//		
 		//	***********************************
 		//	Enter Replay Mode
 		//	***********************************
