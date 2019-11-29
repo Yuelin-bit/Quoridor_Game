@@ -147,7 +147,7 @@ public class PawnBehavior
     return wasEventProcessed;
   }
 
-  public boolean stepUp()
+  public boolean stepUp() throws CloneNotSupportedException
   {
     boolean wasEventProcessed = false;
     
@@ -279,7 +279,7 @@ public class PawnBehavior
     return wasEventProcessed;
   }
 
-  public boolean stepDown()
+  public boolean stepDown() throws CloneNotSupportedException
   {
     boolean wasEventProcessed = false;
     
@@ -411,7 +411,7 @@ public class PawnBehavior
     return wasEventProcessed;
   }
 
-  public boolean stepRight()
+  public boolean stepRight() throws CloneNotSupportedException
   {
     boolean wasEventProcessed = false;
     
@@ -543,7 +543,7 @@ public class PawnBehavior
     return wasEventProcessed;
   }
 
-  public boolean stepLeft()
+  public boolean stepLeft() throws CloneNotSupportedException
   {
     boolean wasEventProcessed = false;
     
@@ -863,7 +863,7 @@ public class PawnBehavior
   }
 
   // line 111 "../../../../../StateMachine.ump"
-  public boolean movePlayer(MoveDirection dir){
+  public boolean movePlayer(MoveDirection dir) throws CloneNotSupportedException{
 	String playerSide;
 	Player player = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
 	if (player.hasGameAsBlack()) {

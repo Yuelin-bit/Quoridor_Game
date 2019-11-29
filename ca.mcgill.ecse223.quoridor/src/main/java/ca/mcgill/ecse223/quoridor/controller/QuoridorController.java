@@ -51,12 +51,31 @@ public class QuoridorController {
 	public static void stopWatch() {
 		whiteWatch.stop();
 		blackWatch.stop();
+		Time zero = new Time(0);
+		QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer().setRemainingTime(zero);
+		QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer().setRemainingTime(zero);
+	}
+	public static void stopTime() {
+		Time zero = new Time(0);
+		QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer().setRemainingTime(zero);
+		QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer().setRemainingTime(zero);
+	}
+	public static void stopWhiteWatch() {
+		whiteWatch.stop();
+	}
+	public static void stopBlackWatch() {
+		blackWatch.stop();
 	}
 	/**
 	 * Ground both player.
 	 */
 	public static void terminatePlayerMove() {
 		QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(null);
+	}
+	public static String getGameResult() {
+	if(QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus().equals(GameStatus.WhiteWon)) return "WhiteWon!";
+	else if(QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus().equals(GameStatus.BlackWon)) return "BlackWon!";
+	else return "Peace and Love";
 	}
 	/**
 	 * This method helps communicating through model and UI.
@@ -314,10 +333,11 @@ public class QuoridorController {
 	 * @author Yuelin Liu
 	 * @param wallmove WallMove candidate to be released.
 	 * @return void
+	 * @throws CloneNotSupportedException 
 	 * @exception nothing
 	 *
 	 */
-	public static void releaseWall() 
+	public static void releaseWall() throws CloneNotSupportedException 
 	{	
 		//QuoridorApplication.setJboard(new JBoard());
 
@@ -328,25 +348,35 @@ public class QuoridorController {
 			JOptionPane.showMessageDialog(null, "Illegal drop!");
 			return;
 		}
-
-
+		
 		Tile t = wallmove.getTargetTile();
 		Player currentPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
 		Game currentGame = QuoridorApplication.getQuoridor().getCurrentGame();
 		if(currentPlayer.hasGameAsWhite()) {
-			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().addWhiteWallsOnBoard(wallmove.getWallPlaced());
+			int id = 1 + QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getId();
 			Player blackPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
 			currentPlayer.setNextPlayer(blackPlayer);
-			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(blackPlayer);
-//			currentPlayer.setGameAsWhite(null);
-//			currentPlayer.setGameAsBlack(currentGame);
-		}else {	QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().addBlackWallsOnBoard(wallmove.getWallPlaced());
+			
+			GamePosition currentGamePosition = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition();
+			currentGamePosition.addWhiteWallsOnBoard(wallmove.getWallPlaced());
+			currentGamePosition.setPlayerToMove(blackPlayer);
+			currentGamePosition.setId(id);
+			QuoridorApplication.getQuoridor().getCurrentGame().addPosition(currentGamePosition);
+			QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(currentGamePosition);
+			
+
+		}else {	
+			int id = 1 + QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getId();
 			Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
 			currentPlayer.setNextPlayer(whitePlayer);
-			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(whitePlayer);
-//			currentPlayer.setGameAsBlack(null);
-//			currentPlayer.setGameAsWhite(currentGame);
-			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(whitePlayer);
+			
+			GamePosition currentGamePosition = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition();
+			currentGamePosition.addBlackWallsOnBoard(wallmove.getWallPlaced());
+			currentGamePosition.setPlayerToMove(whitePlayer);
+			currentGamePosition.setId(id);
+			QuoridorApplication.getQuoridor().getCurrentGame().addPosition(currentGamePosition);
+			QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(currentGamePosition);
+			
 		}
 
 		System.out.println("hasGameAsBlack(): "+QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove().hasGameAsBlack());
@@ -450,25 +480,25 @@ public class QuoridorController {
 		char s2 = string.charAt(1);
 		int newRow = 0;
 		int newColumn = 0;
-		if(s1=='a') newRow = 1;
-		if(s1=='b') newRow = 2;
-		if(s1=='c') newRow = 3;
-		if(s1=='d') newRow = 4;
-		if(s1=='e') newRow = 5;
-		if(s1=='f') newRow = 6;
-		if(s1=='g') newRow = 7;
-		if(s1=='h') newRow = 8;
-		if(s1=='i') newRow = 9;
+		if(s1=='a') newColumn = 1;
+		if(s1=='b') newColumn = 2;
+		if(s1=='c') newColumn = 3;
+		if(s1=='d') newColumn = 4;
+		if(s1=='e') newColumn = 5;
+		if(s1=='f') newColumn = 6;
+		if(s1=='g') newColumn = 7;
+		if(s1=='h') newColumn = 8;
+		if(s1=='i') newColumn = 9;
 		
-		if(s2==1) newColumn = 1;
-		if(s2==2) newColumn = 2;
-		if(s2==3) newColumn = 3;
-		if(s2==4) newColumn = 4;
-		if(s2==5) newColumn = 5;
-		if(s2==6) newColumn = 6;
-		if(s2==7) newColumn = 7;
-		if(s2==8) newColumn = 8;
-		if(s2==9) newColumn = 9;
+		if(s2=='1') newRow = 1;
+		if(s2=='2') newRow = 2;
+		if(s2=='3') newRow = 3;
+		if(s2=='4') newRow = 4;
+		if(s2=='5') newRow = 5;
+		if(s2=='6') newRow = 6;
+		if(s2=='7') newRow = 7;
+		if(s2=='8') newRow = 8;
+		if(s2=='9') newRow = 9;
 		
 		if((newRow==oldRow)&&(newColumn==oldColumn+1)) {
 			return "right";
@@ -572,16 +602,19 @@ public class QuoridorController {
 	 * @param void 
 	 * @author Yujing Yang
 	 * @return boolean		return true if grabWall successfully; return false if don't
+	 * @throws CloneNotSupportedException 
 	 */
 
-	public static boolean grabWall() {	
+	public static boolean grabWall() throws CloneNotSupportedException {	
 
 		Player currentPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
-
+		GamePosition currentGamePosition = (GamePosition) QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().clone();
+		QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(currentGamePosition);
+		
 
 		try {
 			if(currentPlayer.hasGameAsBlack()) {			
-				List<Wall> inStock = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsInStock();		
+				List<Wall> inStock = currentGamePosition.getBlackWallsInStock();		
 				Wall grabbedWall = inStock.get(0);
 
 				System.out.println("Black: "+inStock.size());
@@ -590,13 +623,13 @@ public class QuoridorController {
 				int a = QuoridorApplication.getQuoridor().getCurrentGame().getMoves().size();
 				WallMove WallMove = new WallMove(a+1, (a + 3) / 2, currentPlayer, WallTile,QuoridorApplication.getQuoridor().getCurrentGame(), Direction.Vertical, grabbedWall);	
 				QuoridorApplication.getQuoridor().getCurrentGame().setWallMoveCandidate(WallMove);
-				QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().removeBlackWallsInStock(grabbedWall);
+				currentGamePosition.removeBlackWallsInStock(grabbedWall);
 				System.out.println("Black after: "+inStock.size());
 				return true;				
 			}
 
 			if(currentPlayer.hasGameAsWhite()) {
-				List<Wall> inStock = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsInStock();
+				List<Wall> inStock = currentGamePosition.getWhiteWallsInStock();
 				Wall grabbedWall = inStock.get(0);
 
 				System.out.println("White: "+inStock.size());
@@ -605,7 +638,7 @@ public class QuoridorController {
 				int a = QuoridorApplication.getQuoridor().getCurrentGame().getMoves().size();
 				WallMove WallMove = new WallMove(a+1, (a + 3) / 2, currentPlayer, WallTile,QuoridorApplication.getQuoridor().getCurrentGame(), Direction.Vertical, grabbedWall);
 				QuoridorApplication.getQuoridor().getCurrentGame().setWallMoveCandidate(WallMove);
-				QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().removeWhiteWallsInStock(grabbedWall);
+				currentGamePosition.removeWhiteWallsInStock(grabbedWall);
 				System.out.println("White after: "+inStock.size());
 				return true;
 			}
@@ -989,6 +1022,143 @@ public class QuoridorController {
 			return pawnIsValid;
 		}
 	}
+	
+	
+	
+	/**
+	 * Feature: IdentifyGameDrawn
+	 * This method checks the result of the game is Pending or Drawn
+	 * is within the board boundary 
+	 * 
+	 * @author Bozhong Lu
+	 * @return String
+	 */
+	
+	public static String checkGameDrawn() {
+
+		boolean gameDrawn = false;
+		
+		ArrayList<ArrayList<Integer>> outer = new ArrayList<ArrayList<Integer>>();
+		int numberOfMovesPerformed = QuoridorApplication.getQuoridor().getCurrentGame().numberOfMoves() ;
+		int index = numberOfMovesPerformed-1 ;
+		Move currentCheckingMove = QuoridorApplication.getQuoridor().getCurrentGame().getMove(index) ;
+		if( numberOfMovesPerformed >= 9) {
+			for(int i=0 ; i<=8 ; i++) {
+				ArrayList<Integer> inner = new ArrayList<Integer>();
+				int row = currentCheckingMove.getTargetTile().getRow() ;
+				int column = currentCheckingMove.getTargetTile().getColumn();
+				inner.add(row);
+				inner.add(column);
+				outer.add(inner);
+				index--;
+				currentCheckingMove = currentCheckingMove.getPrevMove();
+			}
+			//current player moves
+			int move9row = outer.get(0).get(0);
+			int move9column = outer.get(0).get(1);
+			int move7row = outer.get(2).get(0);
+			int move7column = outer.get(2).get(1);
+			int move5row = outer.get(4).get(0);
+			int move5column = outer.get(4).get(1);
+			int move3row = outer.get(6).get(0);
+			int move3column = outer.get(6).get(1);
+			int move1row = outer.get(8).get(0);
+			int move1column = outer.get(8).get(1);
+			
+			//opponent player moves
+			int move8row = outer.get(1).get(0);
+			int move8column = outer.get(1).get(1);
+			int move6row = outer.get(3).get(0);
+			int move6column = outer.get(3).get(1);
+			int move4row = outer.get(5).get(0);
+			int move4column = outer.get(5).get(1);
+			int move2row = outer.get(7).get(0);
+			int move2column = outer.get(7).get(1);
+			
+			if((move9row == move5row)&&(move5row == move1row)&&(move9column == move5column)&&(move5column == move1column)) {
+				if((move3row == move7row)&&(move3column == move7column)) {
+					if(((move9row == move7row+1)||(move9row == move7row-1))&&(move9column == move7column)) {
+						if((move8row == move4row)&&(move6row == move2row)&&(move8column == move4column)&&(move6column == move2column)) {
+							if(((move8row == move6row+1)||(move8row == move6row-1))&&(move8column == move6column)) {
+								gameDrawn = true ;
+							}else if(((move8column == move6column+1)||(move8column == move6column-1))&&(move8row == move6row)) {
+								gameDrawn = true ;
+							}
+						}
+					}else if(((move9column == move7column+1)||(move9column == move7column-1))&&(move9row == move7row)) {
+						if((move8row == move4row)&&(move6row == move2row)&&(move8column == move4column)&&(move6column == move2column)) {
+							if(((move8row == move6row+1)||(move8row == move6row-1))&&(move8column == move6column)) {
+								gameDrawn = true ;
+							}else if(((move8column == move6column+1)||(move8column == move6column-1))&&(move8row == move6row)) {
+								gameDrawn = true ;
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		
+		if (gameDrawn) {
+			return "Drawn" ;
+		}
+		else {
+			return "Pending";
+		}
+		
+	}
+	
+	
+	
+	/**
+	 * Feature:IdentifyGameDrawn
+	 * 
+	 * 
+	 * @author Bozhong Lu
+	 * @param string String stands for the direction of the wall that is to be moved.
+	 * @return void
+	 * @exception nothing 
+	 */
+	public static String convertToMove(String stringRow , String stringCol , int oldRow, int oldColumn) {
+		
+		String result = "";
+		int newRow = 0;
+		int newColumn = 0;
+		if(stringCol=="1") newColumn = 1;
+		if(stringCol=="2") newColumn = 2;
+		if(stringCol=="3") newColumn = 3;
+		if(stringCol=="4") newColumn = 4;
+		if(stringCol=="5") newColumn = 5;
+		if(stringCol=="6") newColumn = 6;
+		if(stringCol=="7") newColumn = 7;
+		if(stringCol=="8") newColumn = 8;
+		if(stringCol=="9") newColumn = 9;
+		
+		if(stringRow=="1") newRow = 1;
+		if(stringRow=="2") newRow = 2;
+		if(stringRow=="3") newRow = 3;
+		if(stringRow=="4") newRow = 4;
+		if(stringRow=="5") newRow = 5;
+		if(stringRow=="6") newRow = 6;
+		if(stringRow=="7") newRow = 7;
+		if(stringRow=="8") newRow = 8;
+		if(stringRow=="9") newRow = 9;
+		
+		if((newRow==oldRow)&&(newColumn==oldColumn+1)) {
+			result = "right";
+		}
+		if((newRow==oldRow)&&(newColumn==oldColumn-1)) {
+			result = "left";
+		}
+		if((newRow==oldRow+1)&&(newColumn==oldColumn)) {
+			result = "down";
+		}
+		if((newRow==oldRow-1)&&(newColumn==oldColumn)) {
+			result = "up";
+		}	
+		return result;
+	}
+	
 
 
 
@@ -1798,8 +1968,9 @@ public class QuoridorController {
 	 * @author Zirui He, Gengyi Sun
 	 * @param String string, String string2
 	 * @return boolean
+	 * @throws CloneNotSupportedException 
 	 */ 
-	public static boolean movePlayer(String string, String string2) {
+	public static boolean movePlayer(String string, String string2) throws CloneNotSupportedException {
 
 
 		Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
@@ -1852,7 +2023,8 @@ public class QuoridorController {
 			//PlayerPosition newBlackPosition = new PlayerPosition(blackPlayer,blackTile);			
 
 			//GamePosition currentGamePosition = new GamePosition(id, newWhitePosition, newBlackPosition, blackPlayer,game);
-			GamePosition currentGamePosition = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition();
+			GamePosition currentGamePosition = (GamePosition) QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().clone();
+			//GamePosition currentGamePosition = new GamePosition(id, newWhitePosition, blackPosition, blackPlayer, game);
 			currentGamePosition.setWhitePosition(newWhitePosition);
 			currentGamePosition.setPlayerToMove(blackPlayer);
 			currentGamePosition.setId(id);
@@ -1899,7 +2071,8 @@ public class QuoridorController {
 			PlayerPosition newBlackPosition = new PlayerPosition(blackPlayer,newTile);		
 			//PlayerPosition newWhitePosition = new PlayerPosition(whitePlayer,whiteTile);			
 			//GamePosition currentGamePosition = new GamePosition(id, newBlackPosition, newWhitePosition, whitePlayer,game);
-			GamePosition currentGamePosition = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition();
+			//GamePosition currentGamePosition = new GamePosition(id, whitePosition, newBlackPosition, whitePlayer, game);
+			GamePosition currentGamePosition = (GamePosition) QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().clone();
 			currentGamePosition.setBlackPosition(newBlackPosition);
 			currentGamePosition.setPlayerToMove(whitePlayer);
 			currentGamePosition.setId(id);

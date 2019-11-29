@@ -1,5 +1,7 @@
 namespace ca.mcgill.ecse223.quoridor.model;  
 
+external interface Cloneable{}
+
 
 
 // Due to a bug in Umple, this enum has been added manually to the ca.mcgill.ecse223.quoridor.model package
@@ -54,6 +56,8 @@ class Game {
 }
 
 class GamePosition {
+	depend java.lang.Cloneable;
+	isA Cloneable;
 	unique Integer id;
 	0..1 whiteInGame <@>- 1 PlayerPosition whitePosition;
 	0..1 blackInGame <@>- 1 PlayerPosition blackPosition;
@@ -62,6 +66,11 @@ class GamePosition {
 	0..1 -> * Wall blackWallsOnBoard;
 	0..1 -> * Wall whiteWallsInStock;
 	0..1 -> * Wall blackWallsInStock;
+	
+	@Override
+ 	public Object clone() throws CloneNotSupportedException {
+ 		return (GamePosition)super.clone();
+ 	}
 }
 
 class Destination {

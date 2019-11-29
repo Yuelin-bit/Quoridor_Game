@@ -2,10 +2,11 @@
 /*This code was generated using the UMPLE 1.29.0.4181.a593105a9 modeling language!*/
 
 package ca.mcgill.ecse223.quoridor.model;
+import java.lang.Cloneable;
 import java.util.*;
 
-// line 56 "../../../../../QuoridorGame.ump"
-public class GamePosition
+// line 58 "../../../../../QuoridorGame.ump"
+public class GamePosition implements Cloneable
 {
 
   //------------------------
@@ -581,6 +582,13 @@ public class GamePosition
     {
       placeholderGame.removePosition(this);
     }
+  }
+
+
+  @Override
+  // line 72 "../../../../../QuoridorGame.ump"
+   public Object clone() throws CloneNotSupportedException{
+    return (GamePosition)super.clone();
   }
 
 

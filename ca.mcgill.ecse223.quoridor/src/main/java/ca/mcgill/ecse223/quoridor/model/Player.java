@@ -5,7 +5,7 @@ package ca.mcgill.ecse223.quoridor.model;
 import java.sql.Time;
 import java.util.*;
 
-// line 34 "../../../../../QuoridorGame.ump"
+// line 36 "../../../../../QuoridorGame.ump"
 public class Player
 {
 
