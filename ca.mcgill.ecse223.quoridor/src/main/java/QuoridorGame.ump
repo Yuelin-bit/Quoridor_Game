@@ -79,6 +79,14 @@ class GamePosition {
 	public void setBlackWallsInStock(List<Wall> blackWallsInStock) {
 	this.blackWallsInStock = blackWallsInStock;
 	}
+	
+	 public void setWhiteWallsOnBoard(List<Wall> whiteWallsOnBoard) {
+	this.whiteWallsOnBoard = whiteWallsOnBoard;
+	}
+
+	public void setBlackWallsOnBoard(List<Wall> blackWallsOnBoard) {
+	this.blackWallsOnBoard = blackWallsOnBoard;
+	}
 }
 
 class Destination {

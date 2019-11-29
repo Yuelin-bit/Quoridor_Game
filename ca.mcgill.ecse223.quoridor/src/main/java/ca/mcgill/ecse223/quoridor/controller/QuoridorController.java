@@ -352,12 +352,23 @@ public class QuoridorController {
 		Tile t = wallmove.getTargetTile();
 		Player currentPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
 		Game currentGame = QuoridorApplication.getQuoridor().getCurrentGame();
+		GamePosition currentGamePosition = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition();
+		List<Wall> bOnBoard = new ArrayList<Wall>();
+		for(int i=0;i<currentGamePosition.getBlackWallsOnBoard().size();i++) {
+			bOnBoard.add(currentGamePosition.getBlackWallsOnBoard().get(i));
+		}
+		List<Wall> wOnBoard = new ArrayList<Wall>();
+		for(int i=0;i<currentGamePosition.getWhiteWallsOnBoard().size();i++) {
+			wOnBoard.add(currentGamePosition.getWhiteWallsOnBoard().get(i));
+		}
+		currentGamePosition.setBlackWallsOnBoard(bOnBoard);
+		currentGamePosition.setWhiteWallsOnBoard(wOnBoard);
 		if(currentPlayer.hasGameAsWhite()) {
 			//int id = 1 + QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getId();
 			Player blackPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
 			currentPlayer.setNextPlayer(blackPlayer);
 			
-			GamePosition currentGamePosition = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition();
+			//GamePosition currentGamePosition = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition();
 			currentGamePosition.addWhiteWallsOnBoard(wallmove.getWallPlaced());
 			currentGamePosition.setPlayerToMove(blackPlayer);
 			//currentGamePosition.setId(id);
@@ -370,7 +381,7 @@ public class QuoridorController {
 			Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
 			currentPlayer.setNextPlayer(whitePlayer);
 			
-			GamePosition currentGamePosition = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition();
+			//GamePosition currentGamePosition = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition();
 			currentGamePosition.addBlackWallsOnBoard(wallmove.getWallPlaced());
 			currentGamePosition.setPlayerToMove(whitePlayer);
 			//currentGamePosition.setId(id);

@@ -601,6 +601,16 @@ public class GamePosition implements Cloneable
     this.blackWallsInStock = blackWallsInStock;
   }
 
+  // line 84 "../../../../../QuoridorGame.ump"
+   public void setWhiteWallsOnBoard(List<Wall> whiteWallsOnBoard){
+    this.whiteWallsOnBoard = whiteWallsOnBoard;
+  }
+
+  // line 88 "../../../../../QuoridorGame.ump"
+   public void setBlackWallsOnBoard(List<Wall> blackWallsOnBoard){
+    this.blackWallsOnBoard = blackWallsOnBoard;
+  }
+
 
   public String toString()
   {
