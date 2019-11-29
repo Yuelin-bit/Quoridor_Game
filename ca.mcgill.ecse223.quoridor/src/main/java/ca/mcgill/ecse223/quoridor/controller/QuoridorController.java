@@ -1,6 +1,7 @@
 package ca.mcgill.ecse223.quoridor.controller;
 
 import java.io.FileInputStream;
+
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -27,7 +28,9 @@ import ca.mcgill.ecse223.quoridor.model.*;
 import ca.mcgill.ecse223.quoridor.model.Game.GameStatus;
 import ca.mcgill.ecse223.quoridor.model.Game.MoveMode;
 import ca.mcgill.ecse223.quoridor.view.JWall;
-
+import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
+import org.jgrapht.graph.*;
+import org.jgrapht.util.SupplierUtil;
 
 public class QuoridorController {
 	private static Stopwatch whiteWatch;
