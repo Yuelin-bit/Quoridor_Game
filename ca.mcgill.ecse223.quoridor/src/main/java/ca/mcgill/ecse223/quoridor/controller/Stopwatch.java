@@ -39,6 +39,7 @@ public class Stopwatch extends Thread{
 			timeLeftInSec = (int) (timeLeft/numConversion);
 		}
 		timeIsEnd = true;
+		// set game state to <other player> won
 
 	}
 	/**
