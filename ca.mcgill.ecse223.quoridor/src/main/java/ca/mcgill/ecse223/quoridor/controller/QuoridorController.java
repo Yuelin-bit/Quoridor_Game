@@ -1239,7 +1239,125 @@ public class QuoridorController {
 
 
 
-
+	
+	
+	public static boolean loadGame(String filename, Player white, Player black) throws Exception {
+		Quoridor quoridor = QuoridorApplication.getQuoridor();
+		
+		FileInputStream inputstream = new FileInputStream(filename);
+		@SuppressWarnings("resource")
+		Scanner scanner = new Scanner(inputstream);
+		
+		int whiteRound = 1;
+		int blackRound = 2;
+		int positionId = 1;
+		List<Wall> whiteWalls = new ArrayList<Wall>();
+		List<Wall> blackWalls = new ArrayList<Wall>();
+		List<Move> moves = new ArrayList<Move>();
+		
+		while (scanner.hasNextLine()) {
+			String line = scanner.nextLine();
+			String delims = "[ .]+";
+			String[] split = line.split(delims);
+			int moveNum = Integer.parseInt(split[0]);
+			
+			//*****************************************************************
+			//the first player to move is always white, now set up white player
+			//*****************************************************************
+			Tile whitetile = null;
+			int whiteWallIndex = 0;
+			String[] sw = split[1].split("");	//split string by each character
+			try {
+				whitetile = quoridor.getBoard().getTile((Integer.parseInt(sw[1]) - 1) * 9 + columnNum(sw[0]) - 1);
+			} catch(Exception e) {
+				throw(new Exception("Out of boundary!", e));
+			}
+			if (sw.length == 2) {	//check if is pawn move					
+				moves.add(new StepMove(moveNum, whiteRound, white, whitetile, quoridor.getCurrentGame()));	//add move to the list
+				GamePosition currentGamePosition = (GamePosition) QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().clone();
+				PlayerPosition whiteposition = new PlayerPosition(white, whitetile);
+				currentGamePosition.setWhitePosition(whiteposition);
+				currentGamePosition.setId(positionId);
+				QuoridorApplication.getQuoridor().getCurrentGame().addPosition(currentGamePosition);
+				QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(currentGamePosition);
+				currentGamePosition.setPlayerToMove(black);
+				positionId++;
+			}
+			if (sw.length == 3) { 	//check if is wall move
+				Direction direction;
+				switch (sw[2]) {
+				case "h":
+					direction = Direction.Horizontal;
+					break;
+				case "v":
+					direction = Direction.Vertical;
+					break;
+				default:
+					throw new IllegalArgumentException("Unsupported wall direction was provided");
+				}
+				Wall wall = white.getWall(whiteWallIndex);
+				whiteWallIndex++;
+				moves.add(new WallMove(moveNum, whiteRound, white, whitetile, quoridor.getCurrentGame(), direction, wall)); 	//put wall on the board
+				GamePosition currentGamePosition = (GamePosition) QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().clone();
+				currentGamePosition.addWhiteWallsOnBoard(wall);
+				currentGamePosition.setId(positionId);
+				QuoridorApplication.getQuoridor().getCurrentGame().addPosition(currentGamePosition);
+				QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(currentGamePosition);
+				currentGamePosition.setPlayerToMove(black);
+				positionId++;
+				whiteWalls.add(wall);			
+			}
+			
+			//*****************************************************************
+			//the second player to move is always black, now set up black player
+			//*****************************************************************
+			Tile blacktile = null;
+			int blackWallIndex = 0;
+			String[] sb = split[2].split("");	//split string by each character
+			try {
+				blacktile = quoridor.getBoard().getTile((Integer.parseInt(sb[1]) - 1) * 9 + columnNum(sb[0]) - 1);
+			} catch(Exception e) {
+				throw(new Exception("Out of boundary!", e));
+			}
+			if (sb.length == 2) {	//check if is pawn move					
+				moves.add(new StepMove(moveNum, blackRound, black, blacktile, quoridor.getCurrentGame()));	//add move to the list
+				GamePosition currentGamePosition = (GamePosition) QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().clone();
+				PlayerPosition blackposition = new PlayerPosition(white, blacktile);
+				currentGamePosition.setBlackPosition(blackposition);
+				currentGamePosition.setId(positionId);
+				QuoridorApplication.getQuoridor().getCurrentGame().addPosition(currentGamePosition);
+				QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(currentGamePosition);
+				currentGamePosition.setPlayerToMove(white);
+				positionId++;
+			}
+			if (sb.length == 3) { 	//check if is wall move
+				Direction direction;
+				switch (sb[2]) {
+				case "h":
+					direction = Direction.Horizontal;
+					break;
+				case "v":
+					direction = Direction.Vertical;
+					break;
+				default:
+					throw new IllegalArgumentException("Unsupported wall direction was provided");
+				}
+				Wall wall = black.getWall(whiteWallIndex);
+				whiteWallIndex++;
+				moves.add(new WallMove(moveNum, blackRound, black, blacktile, quoridor.getCurrentGame(), direction, wall)); 	//put wall on the board
+				GamePosition currentGamePosition = (GamePosition) QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().clone();
+				currentGamePosition.addBlackWallsOnBoard(wall);
+				currentGamePosition.setId(positionId);
+				QuoridorApplication.getQuoridor().getCurrentGame().addPosition(currentGamePosition);
+				QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(currentGamePosition);
+				currentGamePosition.setPlayerToMove(white);
+				positionId++;
+				blackWalls.add(wall);			
+			}
+			
+		}
+		return true;
+	}
 
 
 	/**
