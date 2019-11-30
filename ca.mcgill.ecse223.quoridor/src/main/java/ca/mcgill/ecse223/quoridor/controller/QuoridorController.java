@@ -621,6 +621,37 @@ public class QuoridorController {
 		QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(QuoridorApplication.getQuoridor().getCurrentGame().getPositions().get(newID));	
 	}
 
+	
+	/**
+	  * Feature: JumpToStart
+	  * 
+	  * In the replay mode, I want to jump to the start position of the game
+	  * 
+	  * I first get the ID of the initial position and then set the id to it
+	  * @author Yujing Yang
+	  * 
+	  * @return void
+	  */
+	 
+	 public static void jumpToStart() {
+	  QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(QuoridorApplication.getQuoridor().getCurrentGame().getPositions().get(0));
+	 }
+	 
+	 /**
+	  * Feature: JumpToFinal
+	  * 
+	  * In the replay mode, I want to jump to the final position of the game
+	  * 
+	  * I first get the ID of the final position and then set the id to it
+	  * @author Yujing Yang
+	  * 
+	  * @return void
+	  */
+	 
+	 public static void jumpToFinal() {
+	  int ID = QuoridorApplication.getQuoridor().getCurrentGame().getPositions().size() - 1;
+	  QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(QuoridorApplication.getQuoridor().getCurrentGame().getPositions().get(ID));
+	 }
 
 
 	/**
