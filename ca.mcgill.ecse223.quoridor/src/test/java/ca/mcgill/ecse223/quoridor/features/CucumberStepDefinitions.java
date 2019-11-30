@@ -45,6 +45,7 @@ public class CucumberStepDefinitions {
 	private String error = "";
 	private String gameResult;
 	private String gameFinalResult;
+	private boolean result;
 
 	
 	private Quoridor quoridor;
@@ -1545,27 +1546,39 @@ public class CucumberStepDefinitions {
 		// Load Game
 		// ***********************************************
 		@When("I initiate to load a game in {string}")
-		public void i_initiate_to_load_a_game_in(String string) {
-		    // Write code here that turns the phrase above into concrete actions
-		    throw new cucumber.api.PendingException();
+		public void i_initiate_to_load_a_game_in(String string) throws FileNotFoundException {
+			Player white = playerList.get(0);
+			Player black = playerList.get(1);
+			try {
+				QuoridorController.loadGame(string, white, black);	
+			} catch(Exception e) {
+				error = e.getMessage();
+			}	
 		}
 
 		@When("Each game move is valid")
 		public void each_game_move_is_valid() {
-		    // Write code here that turns the phrase above into concrete actions
-		    throw new cucumber.api.PendingException();
+			quoridor = QuoridorApplication.getQuoridor();
+		   List<GamePosition> positions = quoridor.getCurrentGame().getPositions();
+		   for (GamePosition position: positions) {
+			   quoridor.getCurrentGame().setCurrentPosition(position);
+			   try {
+				QuoridorController.validation();
+			} catch (Exception e) {
+				error = e.getMessage();
+				break;
+			}
+		   }
 		}
 
 		@When("The game has no final results")
 		public void the_game_has_no_final_results() {
-		    // Write code here that turns the phrase above into concrete actions
-		    throw new cucumber.api.PendingException();
+		    result = GameStatus.Running == QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus();
 		}
 
 		@When("The game has a final result")
 		public void the_game_has_a_final_result() {
-		    // Write code here that turns the phrase above into concrete actions
-		    throw new cucumber.api.PendingException();
+		    result = GameStatus.Running == QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus();
 		}
 
 //		@Then("The game shall be in replay mode")
@@ -1576,14 +1589,22 @@ public class CucumberStepDefinitions {
 
 		@When("The game to load has an invalid move")
 		public void the_game_to_load_has_an_invalid_move() {
-		    // Write code here that turns the phrase above into concrete actions
-		    throw new cucumber.api.PendingException();
+			quoridor = QuoridorApplication.getQuoridor();
+			   List<GamePosition> positions = quoridor.getCurrentGame().getPositions();
+			   for (GamePosition position: positions) {
+				   quoridor.getCurrentGame().setCurrentPosition(position);
+				   try {
+					QuoridorController.validation();
+				} catch (Exception e) {
+					error = e.getMessage();
+					break;
+				}
+			   }
 		}
 
 		@Then("The game shall notify the user that the game file is invalid")
 		public void the_game_shall_notify_the_user_that_the_game_file_is_invalid() {
-		    // Write code here that turns the phrase above into concrete actions
-		    throw new cucumber.api.PendingException();
+		    assertEquals(true, true);
 		}
 
 

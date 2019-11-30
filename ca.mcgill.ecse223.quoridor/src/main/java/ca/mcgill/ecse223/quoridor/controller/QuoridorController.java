@@ -1241,10 +1241,8 @@ public class QuoridorController {
 
 	
 	
-	public static boolean loadGame(String filename) throws Exception {
+	public static boolean loadGame(String filename, Player white, Player black) throws Exception {
 		Quoridor quoridor = QuoridorApplication.getQuoridor();
-		Player white = quoridor.getCurrentGame().getWhitePlayer();
-		Player black = quoridor.getCurrentGame().getBlackPlayer();
 		
 		FileInputStream inputstream = new FileInputStream(filename);
 		@SuppressWarnings("resource")
