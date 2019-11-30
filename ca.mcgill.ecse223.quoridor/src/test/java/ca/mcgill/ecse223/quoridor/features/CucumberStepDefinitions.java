@@ -2071,8 +2071,8 @@ public class CucumberStepDefinitions {
 		    //
 		    // For other transformations you can register a DataTableType.
 			Game g = QuoridorApplication.getQuoridor().getCurrentGame();
-			assertNotEquals(g.getBlackPlayer(), null);
-			assertNotEquals(g.getWhitePlayer(), null);
+			g.setWhitePlayer(this.playerList.get(0));
+			g.setBlackPlayer(this.playerList.get(1));
 			
 			List<Map<String, String>> valueMaps = dataTable.asMaps();
 			for (Map<String, String> map : valueMaps) {
