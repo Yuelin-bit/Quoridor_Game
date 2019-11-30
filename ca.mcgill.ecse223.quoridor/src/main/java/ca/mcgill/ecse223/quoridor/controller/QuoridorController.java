@@ -1041,17 +1041,16 @@ public class QuoridorController {
 		ArrayList<ArrayList<Integer>> outer = new ArrayList<ArrayList<Integer>>();
 		int numberOfMovesPerformed = QuoridorApplication.getQuoridor().getCurrentGame().numberOfMoves() ;
 		int index = numberOfMovesPerformed-1 ;
-		Move currentCheckingMove = QuoridorApplication.getQuoridor().getCurrentGame().getMove(index) ;
 		if( numberOfMovesPerformed >= 9) {
 			for(int i=0 ; i<=8 ; i++) {
 				ArrayList<Integer> inner = new ArrayList<Integer>();
+				Move currentCheckingMove = QuoridorApplication.getQuoridor().getCurrentGame().getMove(index) ;
 				int row = currentCheckingMove.getTargetTile().getRow() ;
 				int column = currentCheckingMove.getTargetTile().getColumn();
 				inner.add(row);
 				inner.add(column);
 				outer.add(inner);
 				index--;
-				currentCheckingMove = currentCheckingMove.getPrevMove();
 			}
 			//current player moves
 			int move9row = outer.get(0).get(0);
@@ -1100,6 +1099,7 @@ public class QuoridorController {
 		
 		
 		if (gameDrawn) {
+			QuoridorApplication.getQuoridor().getCurrentGame().setGameStatus(GameStatus.Draw);
 			return "Drawn" ;
 		}
 		else {

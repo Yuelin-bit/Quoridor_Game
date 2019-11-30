@@ -1242,10 +1242,10 @@ public class CucumberStepDefinitions {
 			Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
 			Tile targetTile = new Tile(int1 , int2 , currentBoard);
 			
-			if(string == "white") {
+			if(string.equals("white")) {
 				Move pawnMove = new StepMove(moveNumber , roundNumber , whitePlayer , targetTile , currentGame);
 				QuoridorApplication.getQuoridor().getCurrentGame().addMove(pawnMove);
-			}else if(string == "black") {
+			}else if(string.equals("black")) {
 				Move pawnMove = new StepMove(moveNumber , roundNumber , blackPlayer , targetTile , currentGame);
 				QuoridorApplication.getQuoridor().getCurrentGame().addMove(pawnMove);
 			}
