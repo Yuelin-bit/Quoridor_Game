@@ -356,7 +356,12 @@ public class QuoridorController {
 			JOptionPane.showMessageDialog(null, "Illegal drop!");
 			return;
 		}
-		
+		//check if path exist
+		String error = PathCheck.pathCheck();
+		if(!error.equals("both")) {
+			JOptionPane.showMessageDialog(null, "Only "+error+" player has path!");
+			return;
+		}
 		Tile t = wallmove.getTargetTile();
 		Player currentPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
 		Game currentGame = QuoridorApplication.getQuoridor().getCurrentGame();

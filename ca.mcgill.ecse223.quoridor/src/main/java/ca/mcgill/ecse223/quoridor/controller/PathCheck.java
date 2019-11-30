@@ -22,8 +22,23 @@ import ca.mcgill.ecse223.quoridor.model.WallMove;
 
 public class PathCheck {
 
-	
-	public static boolean pathCheck(Player player) {
+	public static String pathCheck() {
+		DefaultUndirectedGraph<Tile, DefaultEdge> graph = initializeGraph();
+		Player white = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
+		Player black = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
+		String result = "";
+		boolean whiteHasPath = PathToDestination(white, graph);
+		boolean blackHasPath = PathToDestination(black, graph);
+		if(whiteHasPath||blackHasPath) {
+			if(whiteHasPath)result = "white";
+			else 
+		if(blackHasPath) result = "black";
+			if(whiteHasPath&&blackHasPath) result = "both";
+		}
+		else result = "none";
+		return result;
+	}
+	public static boolean pathCheckPlayer(Player player) {
 		DefaultUndirectedGraph<Tile, DefaultEdge> graph = initializeGraph();
 		return PathToDestination(player, graph);	
 	}
@@ -46,9 +61,15 @@ public class PathCheck {
 
 		int index = 0;
 		for(Tile t: tiles) {
-			vertices[index] = t;
-			graph.addVertex(vertices[index]);
-			index++;
+			try {
+				vertices[index] = t;
+				graph.addVertex(vertices[index]);
+				index++;
+			}
+			catch(ArrayIndexOutOfBoundsException e) {
+				System.out.println(e.getMessage());
+			}
+			
 		}
 		for (int i = 1; i <= 9; i++) {
 			for (int j = 1; j <= 8; j++) {
