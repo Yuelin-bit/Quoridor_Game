@@ -2,10 +2,11 @@
 /*This code was generated using the UMPLE 1.29.0.4181.a593105a9 modeling language!*/
 
 package ca.mcgill.ecse223.quoridor.model;
+import java.lang.Cloneable;
 import java.util.*;
 
-// line 56 "../../../../../QuoridorGame.ump"
-public class GamePosition
+// line 58 "../../../../../QuoridorGame.ump"
+public class GamePosition implements Cloneable
 {
 
   //------------------------
@@ -581,6 +582,33 @@ public class GamePosition
     {
       placeholderGame.removePosition(this);
     }
+  }
+
+
+  @Override
+  // line 72 "../../../../../QuoridorGame.ump"
+   public Object clone() throws CloneNotSupportedException{
+    return (GamePosition)super.clone();
+  }
+
+  // line 76 "../../../../../QuoridorGame.ump"
+   public void setWhiteWallsInStock(List<Wall> whiteWallsInStock){
+    this.whiteWallsInStock = whiteWallsInStock;
+  }
+
+  // line 80 "../../../../../QuoridorGame.ump"
+   public void setBlackWallsInStock(List<Wall> blackWallsInStock){
+    this.blackWallsInStock = blackWallsInStock;
+  }
+
+  // line 84 "../../../../../QuoridorGame.ump"
+   public void setWhiteWallsOnBoard(List<Wall> whiteWallsOnBoard){
+    this.whiteWallsOnBoard = whiteWallsOnBoard;
+  }
+
+  // line 88 "../../../../../QuoridorGame.ump"
+   public void setBlackWallsOnBoard(List<Wall> blackWallsOnBoard){
+    this.blackWallsOnBoard = blackWallsOnBoard;
   }
 
 
