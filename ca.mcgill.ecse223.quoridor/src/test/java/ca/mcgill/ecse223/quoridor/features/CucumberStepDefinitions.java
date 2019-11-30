@@ -1556,7 +1556,7 @@ public class CucumberStepDefinitions {
 			}	
 		}
 
-		@When("Each game move is valid")
+		@And("Each game move is valid")
 		public void each_game_move_is_valid() {
 			quoridor = QuoridorApplication.getQuoridor();
 		   List<GamePosition> positions = quoridor.getCurrentGame().getPositions();
@@ -1571,12 +1571,12 @@ public class CucumberStepDefinitions {
 		   }
 		}
 
-		@When("The game has no final results")
+		@And("The game has no final results")
 		public void the_game_has_no_final_results() {
 		    result = GameStatus.Running == QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus();
 		}
 
-		@When("The game has a final result")
+		@And("The game has a final result")
 		public void the_game_has_a_final_result() {
 		    result = GameStatus.Running == QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus();
 		}
@@ -1587,7 +1587,7 @@ public class CucumberStepDefinitions {
 //		    throw new cucumber.api.PendingException();
 //		}
 
-		@When("The game to load has an invalid move")
+		@And("The game to load has an invalid move")
 		public void the_game_to_load_has_an_invalid_move() {
 			quoridor = QuoridorApplication.getQuoridor();
 			   List<GamePosition> positions = quoridor.getCurrentGame().getPositions();
