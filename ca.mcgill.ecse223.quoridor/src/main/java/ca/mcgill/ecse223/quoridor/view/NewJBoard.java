@@ -390,7 +390,12 @@ public class NewJBoard extends JFrame {
 								JOptionPane.showMessageDialog(null, "You have no more black walls in hand!");
 							}
 						}
-						QuoridorController.grabWall();	
+						try {
+							QuoridorController.grabWall();
+						} catch (CloneNotSupportedException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}	
 					}else {
 						jWallCandidate.setVisible(false);
 						jWallCandidate=null;
@@ -520,7 +525,12 @@ public class NewJBoard extends JFrame {
 							jWallCandidate = null;
 							isWhiteTurn = !isWhiteTurn;
 						}	
-						QuoridorController.releaseWall();
+						try {
+							QuoridorController.releaseWall();
+						} catch (CloneNotSupportedException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					}
 				}
 			}

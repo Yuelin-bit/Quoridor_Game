@@ -8,7 +8,7 @@ import java.util.*;
  * Due to a bug in Umple, this enum has been added manually to the ca.mcgill.ecse223.quoridor.model package
  * public enum Direction { Horizontal, Vertical }
  */
-// line 9 "../../../../../QuoridorGame.ump"
+// line 11 "../../../../../QuoridorGame.ump"
 public class Quoridor
 {
 
