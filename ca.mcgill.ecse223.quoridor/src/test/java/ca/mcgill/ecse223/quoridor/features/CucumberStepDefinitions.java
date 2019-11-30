@@ -535,40 +535,6 @@ public class CucumberStepDefinitions {
 	////
 	////*******************************************************************************************************************************
 	////*******************************************************************************************************************************
-//	public class SnapShot {
-//	    private int moveN;
-//	    private int roundN;
-//	    private String moveS;
-//
-//	    public SnapShot(int moveN, int roundN, String moveS) {
-//	    	this.moveN = moveN;
-//	    	this.roundN = roundN;
-//	    	this.moveS = moveS;
-//	    }
-//	    public int getMoveN() {
-//			return moveN;
-//		}
-//
-//		public void setMoveN(int moveN) {
-//			this.moveN = moveN;
-//		}
-//
-//		public int getRoundN() {
-//			return roundN;
-//		}
-//
-//		public void setRoundN(int roundN) {
-//			this.roundN = roundN;
-//		}
-//
-//		public String getMoveS() {
-//			return moveS;
-//		}
-//
-//		public void setMoveS(String moveS) {
-//			this.moveS = moveS;
-//		}
-//	}
 	@Given("The following moves have been played in game:")
 	public void the_following_moves_have_been_played_in_game(io.cucumber.datatable.DataTable dataTable) throws CloneNotSupportedException {
 	    // Write code here that turns the phrase above into concrete actions
@@ -2314,29 +2280,31 @@ public class CucumberStepDefinitions {
 		}
 		
 		/* Continue an unfinished game */
-
-//		@Given("The following moves have been played in game:")
-//		public void the_following_moves_have_been_played_in_game(io.cucumber.datatable.DataTable dataTable) {
-//		    // Write code here that turns the phrase above into concrete actions
-//		    // For automatic transformation, change DataTable to one of
-//		    // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-//		    // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-//		    // Double, Byte, Short, Long, BigInteger or BigDecimal.
-//		    //
-//		    // For other transformations you can register a DataTableType.
-//			Game g = QuoridorApplication.getQuoridor().getCurrentGame();
-//			assertNotEquals(g.getBlackPlayer(), null);
-//			assertNotEquals(g.getWhitePlayer(), null);
-//			
-//			List<Map<String, String>> valueMaps = dataTable.asMaps();
-//			for (Map<String, String> map : valueMaps) {
-//				int mv = Integer.parseInt(map.get("mv"));
-//				int rnd = Integer.parseInt(map.get("rnd"));
-//				String move = map.get("move");
-//				
-//			}
-//		    throw new cucumber.api.PendingException();
-//		}
+		@Given("The game does not have a final result")
+		public void the_game_does_not_have_a_final_result() {
+		    // Write code here that turns the phrase above into concrete actions
+			assertEquals(GameStatus.Replay, QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus());
+		}
+		
+		@When("I initiate to continue game")
+		public void i_initiate_to_continue_game() {
+		    // Write code here that turns the phrase above into concrete actions
+		    QuoridorApplication.getQuoridor().getCurrentGame().setGameStatus(GameStatus.Running);
+		}
+		
+		@Then("The remaining moves of the game shall be removed")
+		public void the_remaining_moves_of_the_game_shall_be_removed() {
+		    // Write code here that turns the phrase above into concrete actions
+		    
+		}
+		
+		/* Scenario: Continue a finished game */
+		@Then("I shall be notified that finished games cannot be continued")
+		public void i_shall_be_notified_that_finished_games_cannot_be_continued() {
+		    // Write code here that turns the phrase above into concrete actions
+		    throw new cucumber.api.PendingException();
+		}
+		
 
 		//	*******************************************
 		//	Report Game
