@@ -1241,8 +1241,10 @@ public class QuoridorController {
 
 	
 	
-	public static boolean loadGame(String filename, Player white, Player black) throws Exception {
+	public static boolean loadGame(String filename) throws Exception {
 		Quoridor quoridor = QuoridorApplication.getQuoridor();
+		Player white = quoridor.getCurrentGame().getWhitePlayer();
+		Player black = quoridor.getCurrentGame().getBlackPlayer();
 		
 		FileInputStream inputstream = new FileInputStream(filename);
 		@SuppressWarnings("resource")
@@ -1300,6 +1302,7 @@ public class QuoridorController {
 				moves.add(new WallMove(moveNum, whiteRound, white, whitetile, quoridor.getCurrentGame(), direction, wall)); 	//put wall on the board
 				GamePosition currentGamePosition = (GamePosition) QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().clone();
 				currentGamePosition.addWhiteWallsOnBoard(wall);
+				currentGamePosition.removeWhiteWallsInStock(wall);
 				currentGamePosition.setId(positionId);
 				QuoridorApplication.getQuoridor().getCurrentGame().addPosition(currentGamePosition);
 				QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(currentGamePosition);
@@ -1343,10 +1346,11 @@ public class QuoridorController {
 					throw new IllegalArgumentException("Unsupported wall direction was provided");
 				}
 				Wall wall = black.getWall(whiteWallIndex);
-				whiteWallIndex++;
+				blackWallIndex++;
 				moves.add(new WallMove(moveNum, blackRound, black, blacktile, quoridor.getCurrentGame(), direction, wall)); 	//put wall on the board
 				GamePosition currentGamePosition = (GamePosition) QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().clone();
 				currentGamePosition.addBlackWallsOnBoard(wall);
+				currentGamePosition.removeBlackWallsInStock(wall);
 				currentGamePosition.setId(positionId);
 				QuoridorApplication.getQuoridor().getCurrentGame().addPosition(currentGamePosition);
 				QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(currentGamePosition);
@@ -1356,6 +1360,7 @@ public class QuoridorController {
 			}
 			
 		}
+
 		return true;
 	}
 
