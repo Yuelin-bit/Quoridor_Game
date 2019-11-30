@@ -23,6 +23,7 @@ import javax.swing.JOptionPane;
 import ca.mcgill.ecse223.quoridor.QuoridorApplication;
 import ca.mcgill.ecse223.quoridor.controller.QuoridorController;
 import ca.mcgill.ecse223.quoridor.controller.Stopwatch;
+import ca.mcgill.ecse223.quoridor.controller.PathCheck;
 import ca.mcgill.ecse223.quoridor.controller.PawnBehavior;
 import ca.mcgill.ecse223.quoridor.controller.PawnBehavior.MoveDirection;
 import ca.mcgill.ecse223.quoridor.model.Game.GameStatus;
@@ -2403,32 +2404,80 @@ public class CucumberStepDefinitions {
 		
 		@Given("A {string} wall move candidate exists at position {int}:{int}")
 		public void a_wall_move_candidate_exists_at_position(String string, Integer int1, Integer int2) {
-		    // Write code here that turns the phrase above into concrete actions
-		    throw new cucumber.api.PendingException();
+			Quoridor quoridor = QuoridorApplication.getQuoridor();
+			Game currentGame = quoridor.getCurrentGame();
+			Player playerToMove = currentGame.getCurrentPosition().getPlayerToMove();
+			Tile targetTile = quoridor.getBoard().getTile(9 * (int1 - 1) + (int2 - 1));
+			Direction wallDirection;
+			
+			switch (string) {
+			case "horizontal":
+				wallDirection = Direction.Horizontal;
+				break;
+			case "vertical":
+				wallDirection = Direction.Vertical;
+				break;
+			default:
+				throw new IllegalArgumentException("Unsupported wall direction was provided");
+			}
+			
+			
+			List<Wall> wallsInStock;
+			if(playerToMove.hasGameAsWhite()) {
+				wallsInStock = currentGame.getCurrentPosition().getWhiteWallsInStock();
+			} else wallsInStock = currentGame.getCurrentPosition().getBlackWallsInStock();
+			
+			WallMove wallMoveCandidate = new WallMove(1, 1, playerToMove, targetTile, currentGame,
+					wallDirection, wallsInStock.get(1));
+			//TODO Change first wall index
+			currentGame.setWallMoveCandidate(wallMoveCandidate);
+			wallMoveCandidate.setPlayer(playerToMove);
+			wallMoveCandidate.setTargetTile(targetTile);
+			wallMoveCandidate.setWallDirection(wallDirection);
 		}
 
 		@Given("The black player is located at {int}:{int}")
 		public void the_black_player_is_located_at(Integer int1, Integer int2) {
-		    // Write code here that turns the phrase above into concrete actions
-		    throw new cucumber.api.PendingException();
+			Quoridor quoridor = QuoridorApplication.getQuoridor();
+			Game currentGame = quoridor.getCurrentGame();
+			PlayerPosition blackPosition = currentGame.getCurrentPosition().getBlackPosition();
+			Tile tile = quoridor.getBoard().getTile(9 * (int1 - 1) + (int2 - 1));
+			blackPosition.setTile(tile);	
 		}
 
 		@Given("The white player is located at {int}:{int}")
 		public void the_white_player_is_located_at(Integer int1, Integer int2) {
-		    // Write code here that turns the phrase above into concrete actions
-		    throw new cucumber.api.PendingException();
+			Quoridor quoridor = QuoridorApplication.getQuoridor();
+			Game currentGame = quoridor.getCurrentGame();
+			PlayerPosition whitePosition = currentGame.getCurrentPosition().getWhitePosition();
+			Tile tile = quoridor.getBoard().getTile(9 * (int1 - 1) + (int2 - 1));
+			whitePosition.setTile(tile);
 		}
 
 		@When("Check path existence is initiated")
 		public void check_path_existence_is_initiated() {
-		    // Write code here that turns the phrase above into concrete actions
-		    throw new cucumber.api.PendingException();
+			PathCheck.initializeGraph();
+			
+			
+			
 		}
 
 		@Then("Path is available for {string} player\\(s)")
 		public void path_is_available_for_player_s(String string) {
-		    // Write code here that turns the phrase above into concrete actions
-		    throw new cucumber.api.PendingException();
+			Player white = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
+			Player black = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
+			String result = "";
+			boolean whiteHasPath = PathCheck.pathCheck(white);
+			boolean blackHasPath = PathCheck.pathCheck(black);
+			if(whiteHasPath||blackHasPath) {
+				if(whiteHasPath)result = "white";
+				else 
+			if(blackHasPath) result = "black";
+				if(whiteHasPath&&blackHasPath) result = "both";
+			}
+			else result = "none";
+			assertEquals(string,result);
+
 		}
 		
 		
