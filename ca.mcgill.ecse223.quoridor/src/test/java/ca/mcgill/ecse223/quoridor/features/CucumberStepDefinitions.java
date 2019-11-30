@@ -1328,7 +1328,7 @@ public class CucumberStepDefinitions {
 		@Then("The game shall be running")
 		public void the_game_shall_be_running() {
 		    // Write code here that turns the phrase above into concrete actions
-			assertEquals(GameStatus.Running, game.getGameStatus());
+			assertEquals(GameStatus.Running, QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus());
 		}
 
 		@Then("The board shall be initialized")
@@ -2280,11 +2280,109 @@ public class CucumberStepDefinitions {
 		}
 		
 		/* Continue an unfinished game */
+//		@Given("The game is in replay mode")
+//		public void the_game_is_in_replay_mode() {
+//		    // Write code here that turns the phrase above into concrete actions
+//			QuoridorController.initializeNewGame();
+//		    QuoridorController.replay();
+//		}
+		
+//		@Given("The following moves have been played in game:")
+//		public void the_following_moves_have_been_played_in_game(io.cucumber.datatable.DataTable dataTable) throws CloneNotSupportedException {
+//		    // Write code here that turns the phrase above into concrete actions
+//		    // For automatic transformation, change DataTable to one of
+//		    // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
+//		    // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
+//		    // Double, Byte, Short, Long, BigInteger or BigDecimal.
+//		    //
+//		    // For other transformations you can register a DataTableType.
+//			Quoridor quoridorR = QuoridorApplication.getQuoridor();
+//			if(QuoridorApplication.getQuoridor().getBoard()==null) {
+//				this.initQuoridorAndBoard();
+//			}
+//			User user1 = quoridorR.addUser("whiteReplayer");
+//			User user2 = quoridorR.addUser("blackReplayer");
+//			int thinkingTime = 180;
+//			Player player1 = new Player(new Time(thinkingTime), user1, 9, Direction.Horizontal);
+//			Player player2 = new Player(new Time(thinkingTime), user2, 1, Direction.Horizontal);
+//			Player[] players = { player1, player2 };
+//			for (int i = 0; i < 2; i++) {
+//				for (int j = 0; j < 10; j++) {
+//					new Wall(i * 10 + j+1, players[i]);
+//				}
+//			}
+//			
+//			Tile player1StartPos = quoridorR.getBoard().getTile(76);
+//			Tile player2StartPos = quoridorR.getBoard().getTile(4);
+//			QuoridorApplication.getQuoridor().getCurrentGame().setWhitePlayer(player1);
+//			QuoridorApplication.getQuoridor().getCurrentGame().setBlackPlayer(player2);
+//
+//			Game gameR = QuoridorApplication.getQuoridor().getCurrentGame();
+//			PlayerPosition player1Position = new PlayerPosition(quoridorR.getCurrentGame().getWhitePlayer(), player1StartPos);
+//			PlayerPosition player2Position = new PlayerPosition(quoridorR.getCurrentGame().getBlackPlayer(), player2StartPos);
+//			GamePosition gamePosition = new GamePosition(0, player1Position, player2Position, player1, gameR);
+//			
+//			for (int j = 0; j < 10; j++) {
+//				Wall wall = Wall.getWithId(j+1);
+//				gamePosition.addWhiteWallsInStock(wall);
+//			}
+//			for (int j = 0; j < 10; j++) {
+//				Wall wall = Wall.getWithId(j + 10+1);
+//				gamePosition.addBlackWallsInStock(wall);
+//			}
+//			gameR.setCurrentPosition(gamePosition);
+//			
+//			
+//			//List<SnapShot> Lsnapshot = dataTable.asList(SnapShot.class);
+//			List<Map<String, String>> Lsnapshot = dataTable.asMaps();
+//			// keys:  | mv | rnd | move |
+//			for(Map<String, String> map : Lsnapshot) {
+//				if(map.get("move").length()==2) {
+//					int oldRow;
+//					int oldColumn;
+//					if(quoridorR.getCurrentGame().getCurrentPosition().getPlayerToMove().hasGameAsWhite()){
+//						oldRow = quoridorR.getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
+//						oldColumn = quoridorR.getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getColumn();
+//						QuoridorController.movePlayer("white", QuoridorController.convertMove2(map.get("move"), oldRow, oldColumn));
+//					}else {
+//						oldRow = quoridorR.getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
+//						oldColumn = quoridorR.getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getColumn();
+//						QuoridorController.movePlayer("black", QuoridorController.convertMove2(map.get("move"), oldRow, oldColumn));
+//					}	
+//					
+//				}else {
+//					QuoridorController.grabWall();
+//					if(map.get("move").charAt(2)=='h') {
+//						QuoridorController.flipWall();
+//					}
+//					int a = (int) QuoridorController.convertMove3(map.get("move")).get(0);
+//					int b = (int) QuoridorController.convertMove3(map.get("move")).get(1);
+//					System.out.println("a: " + a + ", b: " + b);
+//					Tile t= new Tile(b, a, quoridorR.getBoard());
+//					quoridorR.getCurrentGame().getWallMoveCandidate().setTargetTile(t);
+//					QuoridorController.releaseWall();
+//				}
+//			}
+//		}
+		
 		@Given("The game does not have a final result")
 		public void the_game_does_not_have_a_final_result() {
 		    // Write code here that turns the phrase above into concrete actions
-			assertEquals(GameStatus.Replay, QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus());
+			assertNotEquals(GameStatus.BlackWon, QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus());
+			assertNotEquals(GameStatus.WhiteWon, QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus());
+			assertNotEquals(GameStatus.Draw, QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus());
 		}
+		
+//		@Given("The next move is {double}")
+//		public void the_next_move_is(Double double1) {
+//		    // Write code here that turns the phrase above into concrete actions
+//			QuoridorApplication.getQuoridor().getCurrentGame().getPositions();
+//			double t = double1;
+//			int moveN = (int)t;
+//			int roundN = (int)((double1 - moveN + 0.0001)*10);
+//			int index = (moveN-1)*2 + roundN - 1; 
+//			QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(QuoridorApplication.getQuoridor().getCurrentGame().getPosition(index));
+//		}
 		
 		@When("I initiate to continue game")
 		public void i_initiate_to_continue_game() {
@@ -2292,17 +2390,37 @@ public class CucumberStepDefinitions {
 		    QuoridorApplication.getQuoridor().getCurrentGame().setGameStatus(GameStatus.Running);
 		}
 		
+//		@Then("The game shall be running")
+//		public void the_game_shall_be_running() {
+//		    // Write code here that turns the phrase above into concrete actions
+//			assertEquals(GameStatus.Running, game.getGameStatus());
+//		}
+		
 		@Then("The remaining moves of the game shall be removed")
 		public void the_remaining_moves_of_the_game_shall_be_removed() {
 		    // Write code here that turns the phrase above into concrete actions
-		    
+		    QuoridorApplication.getQuoridor().getCurrentGame().setGameStatus(GameStatus.Replay);
 		}
 		
-		/* Scenario: Continue a finished game */
+//		@Then("The next player to move shall become {string}")
+//		public void the_next_player_to_move_shall_become(String string) {
+//			String toCompare;
+//			String toCompare2 = string;
+//			Player player = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
+//			if(player.hasGameAsBlack()) {
+//				toCompare = "black";
+//			}else {
+//				toCompare = "white";
+//			}
+//			String toCompare3 = toCompare;
+//			assertEquals(toCompare, toCompare3);
+//		}
+		
+		/* Continue a finished game */
 		@Then("I shall be notified that finished games cannot be continued")
 		public void i_shall_be_notified_that_finished_games_cannot_be_continued() {
 		    // Write code here that turns the phrase above into concrete actions
-		    throw new cucumber.api.PendingException();
+			assertEquals(GameStatus.Replay, QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus());
 		}
 		
 
