@@ -1526,18 +1526,45 @@ public class CucumberStepDefinitions {
 			Integer col;
 			Integer row;
 			Direction wallDirection;
+			boolean result = false;
 			if(string.equals("black")) {
-				wallDirection = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard(0).getMove().getWallDirection();
-				col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard(0).getMove().getTargetTile().getColumn();
-				row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard(0).getMove().getTargetTile().getRow();
+				List<Wall> blackwalls = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard();
+				for (Wall wall : blackwalls) {
+					wallDirection = wall.getMove().getWallDirection();
+					col = wall.getMove().getTargetTile().getColumn();
+					row = wall.getMove().getTargetTile().getRow();
+					result = (Direction.Vertical == wallDirection) && (int1 == row) && (int2 == col);
+					if (result) {
+						break;
+					}
+				}
+				
 			}else {
-				wallDirection = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard(0).getMove().getWallDirection();
-				col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard(0).getMove().getTargetTile().getColumn();
-				row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard(0).getMove().getTargetTile().getRow();
+				List<Wall> whitewalls = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard();
+				for (Wall wall : whitewalls) {
+					wallDirection = wall.getMove().getWallDirection();
+					col = wall.getMove().getTargetTile().getColumn();
+					row = wall.getMove().getTargetTile().getRow();
+					result = (Direction.Vertical == wallDirection) && (int1 == row) && (int2 == col);
+					if (result) {
+						break;
+					}
+				}
 			}
-			assertEquals(Direction.Vertical, wallDirection);
-			assertEquals(row, int1);
-			assertEquals(col, int2);
+			assertEquals(true, result);
+			
+//			if(string.equals("black")) {
+//				wallDirection = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard(0).getMove().getWallDirection();
+//				col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard(0).getMove().getTargetTile().getColumn();
+//				row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard(0).getMove().getTargetTile().getRow();
+//			}else {
+//				wallDirection = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard(0).getMove().getWallDirection();
+//				col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard(0).getMove().getTargetTile().getColumn();
+//				row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard(0).getMove().getTargetTile().getRow();
+//			}
+//			assertEquals(Direction.Vertical, wallDirection);
+//			assertEquals(row, int1);
+//			assertEquals(col, int2);
 		    
 		}
 
@@ -1546,18 +1573,35 @@ public class CucumberStepDefinitions {
 			Integer col;
 			Integer row;
 			Direction wallDirection;
+			boolean result = false;
 			if(string.equals("black")) {
-				wallDirection = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard(0).getMove().getWallDirection();
-				col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard(0).getMove().getTargetTile().getColumn();
-				row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard(0).getMove().getTargetTile().getRow();
+				List<Wall> blackwalls = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard();
+				for (Wall wall : blackwalls) {
+					wallDirection = wall.getMove().getWallDirection();
+					col = wall.getMove().getTargetTile().getColumn();
+					row = wall.getMove().getTargetTile().getRow();
+					result = (Direction.Horizontal == wallDirection) && (int1 == row) && (int2 == col);
+					if (result) {
+						break;
+					}
+				}
+				
 			}else {
-				wallDirection = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard(0).getMove().getWallDirection();
-				col = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard(0).getMove().getTargetTile().getColumn();
-				row = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard(0).getMove().getTargetTile().getRow();
+				List<Wall> whitewalls = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard();
+				for (Wall wall : whitewalls) {
+					wallDirection = wall.getMove().getWallDirection();
+					col = wall.getMove().getTargetTile().getColumn();
+					row = wall.getMove().getTargetTile().getRow();
+					result = (Direction.Horizontal == wallDirection) && (int1 == row) && (int2 == col);
+					if (result) {
+						break;
+					}
+				}
 			}
-			assertEquals(Direction.Horizontal, wallDirection);
-			assertEquals(row, int1);
-			assertEquals(col, int2);
+//			assertEquals(Direction.Horizontal, wallDirection);
+//			assertEquals(int1, row);
+//			assertEquals(int2, col);
+			assertEquals(true, result);
 		    
 		}
 

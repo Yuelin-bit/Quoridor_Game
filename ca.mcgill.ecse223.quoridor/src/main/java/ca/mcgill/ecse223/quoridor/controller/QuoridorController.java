@@ -1288,6 +1288,9 @@ public class QuoridorController {
 		int whiteRound = 1;
 		int blackRound = 2;
 		int positionId = 1;
+		int whiteWallIndex = 0;
+		int blackWallIndex = 0;
+
 		List<Wall> whiteWalls = new ArrayList<Wall>();
 		List<Wall> blackWalls = new ArrayList<Wall>();
 		List<Move> moves = new ArrayList<Move>();
@@ -1302,7 +1305,6 @@ public class QuoridorController {
 			//the first player to move is always white, now set up white player
 			//*****************************************************************
 			Tile whitetile = null;
-			int whiteWallIndex = 0;
 			String[] sw = split[1].split("");	//split string by each character
 			try {
 				whitetile = quoridor.getBoard().getTile((Integer.parseInt(sw[1]) - 1) * 9 + columnNum(sw[0]) - 1);
@@ -1350,7 +1352,6 @@ public class QuoridorController {
 			//the second player to move is always black, now set up black player
 			//*****************************************************************
 			Tile blacktile = null;
-			int blackWallIndex = 0;
 			String[] sb = split[2].split("");	//split string by each character
 			try {
 				blacktile = quoridor.getBoard().getTile((Integer.parseInt(sb[1]) - 1) * 9 + columnNum(sb[0]) - 1);
@@ -1380,7 +1381,7 @@ public class QuoridorController {
 				default:
 					throw new IllegalArgumentException("Unsupported wall direction was provided");
 				}
-				Wall wall = black.getWall(whiteWallIndex);
+				Wall wall = black.getWall(blackWallIndex);
 				blackWallIndex++;
 				moves.add(new WallMove(moveNum, blackRound, black, blacktile, quoridor.getCurrentGame(), direction, wall)); 	//put wall on the board
 				GamePosition currentGamePosition = (GamePosition) QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().clone();
@@ -1971,14 +1972,14 @@ public class QuoridorController {
 			System.out.println("no white");
 			return false;
 		}
-		if(!g.getMoveMode().equals(MoveMode.WallMove)) {
-			System.out.println("wrong move mode");
-			return false;
-		}
-		if(g.hasMoves()) {
-			System.out.println("has move");
-			return false;
-		}
+//		if(!g.getMoveMode().equals(MoveMode.WallMove)) {
+//			System.out.println("wrong move mode");
+//			return false;
+//		}
+//		if(g.hasMoves()) {
+//			System.out.println("has move");
+//			return false;
+//		}
 
 
 		g.setGameStatus(GameStatus.ReadyToStart);
