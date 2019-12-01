@@ -66,6 +66,7 @@ public class ReplayRefresh {
 		for(int i=0; i<10; i++) {
 			QuoridorApplication.getLoadPosition().getReplayBoard().getJBlackWallInStock()[i].setVisible(false);
 		}
+		
 		for(int i=0; i<10; i++) {
 			QuoridorApplication.getLoadPosition().getReplayBoard().getJWhiteWallInStock()[i].setVisible(false);
 		}
@@ -74,24 +75,29 @@ public class ReplayRefresh {
 		int blackWallStock;
 		int whiteWallStock;
 		
-		blackWallStock = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().numberOfBlackWallsInStock();
-		whiteWallStock = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().numberOfWhiteWallsInStock();
-		
-		QuoridorApplication.getLoadPosition().getReplayBoard().getWhiteStock().setText(QuoridorApplication.getLoadPosition().getReplayBoard().transferInt(blackWallStock));
-		QuoridorApplication.getLoadPosition().getReplayBoard().getBlackStock().setText(QuoridorApplication.getLoadPosition().getReplayBoard().transferInt(whiteWallStock));
 	
-		for(int num = 0; num < QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard().size(); num++) {
+		for(int num = 0; num < QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard().size(); num++) {			
+			blackWallStock = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().numberOfBlackWallsInStock();		
+			QuoridorApplication.getLoadPosition().getReplayBoard().getBlackStock().setText(QuoridorApplication.getLoadPosition().getReplayBoard().transferInt(blackWallStock));
 			Wall current_wall = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard().get(num);
 			Tile current_tile = current_wall.getMove().getTargetTile();
 			int row = current_tile.getRow();
 			int column = current_tile.getColumn();
-			QuoridorApplication.getLoadPosition().getReplayBoard().getJBlackWallOnBoard()[num].setBounds(row, column, 100, 100);
+			QuoridorApplication.getLoadPosition().getReplayBoard().getJBlackWallOnBoard()[num].setBounds(100, 100, 100, 100);
 			QuoridorApplication.getLoadPosition().getReplayBoard().getJBlackWallOnBoard()[num].setVisible(true);
 		}
-
+		
+		for(int num = 0; num < QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard().size(); num++) {			
+			whiteWallStock = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().numberOfWhiteWallsInStock();			
+			QuoridorApplication.getLoadPosition().getReplayBoard().getWhiteStock().setText(QuoridorApplication.getLoadPosition().getReplayBoard().transferInt(whiteWallStock));
+			Wall current_wall = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard(num);
+			Tile current_tile = current_wall.getMove().getTargetTile();
+			int row = current_tile.getRow();
+			int column = current_tile.getColumn();
+			QuoridorApplication.getLoadPosition().getReplayBoard().getJWhiteWallOnBoard()[num].setBounds(100, 100, 100, 100);
+			QuoridorApplication.getLoadPosition().getReplayBoard().getJWhiteWallOnBoard()[num].setVisible(true);
+		}
 		
 		
 	}
-	
-
 }

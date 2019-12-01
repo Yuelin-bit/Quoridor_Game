@@ -249,16 +249,22 @@ public class LoadPosition extends JFrame {
 					QuoridorController.releaseWall();
 					QuoridorController.movePlayer("white","up");
 					QuoridorController.movePlayer("black","down");
-					QuoridorController.movePlayer("white","up");
-					QuoridorController.movePlayer("black","left");
-					QuoridorController.movePlayer("white","right");
 					QuoridorController.grabWall();
 					QuoridorController.MoveWall("up");
 					QuoridorController.MoveWall("up");
 					QuoridorController.MoveWall("up");
 					QuoridorController.releaseWall();
-					QuoridorController.movePlayer("white","up");
+				
+					QuoridorController.movePlayer("black","left");
+					QuoridorController.movePlayer("white","right");
+					
 					QuoridorController.movePlayer("black","down");
+					QuoridorController.movePlayer("white","right");
+					QuoridorController.grabWall();
+					QuoridorController.MoveWall("right");
+					QuoridorController.MoveWall("right");
+					QuoridorController.MoveWall("right");
+					QuoridorController.releaseWall();
 					QuoridorController.movePlayer("white","up");
 					QuoridorController.movePlayer("black","left");
 					QuoridorController.movePlayer("white","right");
