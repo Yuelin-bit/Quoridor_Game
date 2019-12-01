@@ -357,6 +357,7 @@ public class QuoridorController {
 			return;
 		}
 		//check if path exist
+		
 		String error = PathCheck.pathCheck();
 		if(!error.equals("both")) {
 			JOptionPane.showMessageDialog(null, "Only "+error+" player has path!");
@@ -767,7 +768,7 @@ public class QuoridorController {
 
 	/**
 	 * 
-	 * Feature:SavePosition
+	 * Feature: SaveGame , SavePosition
 	 *
 	 * @author Bozhong Lu
 	 * Method that checks file with specified name exists in my folder
@@ -863,7 +864,7 @@ public class QuoridorController {
 
 
 	/**
-	 * Feature:SavePosition
+	 * Feature: SaveGame , SavePosition
 	 * 
 	 * Method that writes the current Player positions and Wall Positions in a specific file
 	 * The player to move is written at the first line, and the next player to move is written on the second line
@@ -913,7 +914,7 @@ public class QuoridorController {
 	}
 
 	/**
-	 * Feature:SavePosition
+	 * Feature: SaveGame , SavePosition
 	 * 
 	 * Method that is connected to the User Interface
 	 * If the user click the "Yes" Button, this method will return a boolean "true"
@@ -929,7 +930,7 @@ public class QuoridorController {
 	}
 
 	/**
-	 * Feature:SavePosition
+	 * Feature: SaveGame , SavePosition
 	 * 
 	 * Method that is connected to the User Interface
 	 * If the user click the "No" Button, this method will return a boolean "false"
@@ -947,7 +948,7 @@ public class QuoridorController {
 
 
 	/**
-	 * Feature:SavePosition
+	 * Feature: SaveGame , SavePosition
 	 * 
 	 * Method that check the last modified time of the specified file 
 	 * If the file was updated within the past 30s, it means that it was succesfully updated
@@ -974,7 +975,7 @@ public class QuoridorController {
 	}
 
 	/**
-	 * Feature:SavePosition
+	 * Feature: SaveGame , SavePosition
 	 * 
 	 * Method that creats a new file with name filename
 	 * 
@@ -991,7 +992,7 @@ public class QuoridorController {
 	}
 
 	/**
-	 * Feature:SavePosition
+	 * Feature: SaveGame , SavePosition
 	 * 
 	 * Method that deletes file filename from file system
 	 * 
@@ -1575,19 +1576,21 @@ public class QuoridorController {
 	 * @author Zirui He
 	 * @param player
 	 */
+	@SuppressWarnings("deprecation")
 	public static void completeMove(Player player) {
 
 		Player white = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
 		Player black = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
-		if (player.hasGameAsBlack()) {
-//			whiteWatch.suspend();
-//			blackWatch.resume();
+		if (QuoridorApplication.getJboard().isWhiteTurn()==false) {
+			whiteWatch.setRunning(false);
+			blackWatch.setRunning(true);
+			blackWatch.notify();
 			player.setNextPlayer(white);
 			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(white);
 			//QuoridorApplication.getJboard().whiteTurn();
 		}else {
-//			whiteWatch.resume();
-//			blackWatch.suspend();
+			whiteWatch.setRunning(true);
+			blackWatch.setRunning(false);
 			player.setNextPlayer(black);
 			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(black);
 			//QuoridorApplication.getJboard().blackTurn();
@@ -1697,8 +1700,8 @@ public class QuoridorController {
 		Stopwatch black = new Stopwatch(blackPlayer);
 		blackWatch = black;
 		whiteWatch.start();
+		whiteWatch.setRunning(true);
 		blackWatch.start();
-		blackWatch.suspend();
 	}
 
 	/**
