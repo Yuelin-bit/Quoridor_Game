@@ -1292,22 +1292,22 @@ public class CucumberStepDefinitions {
 			}
 		}
 
-		@When("Checking of game result is initated")
-		public void checking_of_game_result_is_initated() {
-		    gameFinalResult = QuoridorController.checkGameDrawn();
-		}
-
-		@Then("Game result shall be {string}")
-		public void game_result_shall_be(String string) {
-			assertEquals(string , gameFinalResult) ;
-		}
-
-		@Then("The game shall no longer be running")
-		public void the_game_shall_no_longer_be_running() {
-			GameStatus status = QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus();    
-			boolean gameIsRunning = (GameStatus.Running == status);
-			assertEquals(false, gameIsRunning);
-		}
+//		@When("Checking of game result is initated")
+//		public void checking_of_game_result_is_initated() {
+//		    gameFinalResult = QuoridorController.checkGameDrawn();
+//		}
+//
+//		@Then("Game result shall be {string}")
+//		public void game_result_shall_be(String string) {
+//			assertEquals(string , gameFinalResult) ;
+//		}
+//
+//		@Then("The game shall no longer be running")
+//		public void the_game_shall_no_longer_be_running() {
+//			GameStatus status = QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus();    
+//			boolean gameIsRunning = (GameStatus.Running == status);
+//			assertEquals(false, gameIsRunning);
+//		}
 		
 		
 		
@@ -1351,7 +1351,8 @@ public class CucumberStepDefinitions {
 
 		@Then("The game shall become ready to start")
 		public void the_game_shall_become_ready_to_start() {
-			assertEquals(true, QuoridorController.verifyGameIsReady());
+			//assertEquals(true, QuoridorController.verifyGameIsReady());
+			assertEquals(GameStatus.ReadyToStart, QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus());
 		}
 		
 		@Given("The game is ready to start")

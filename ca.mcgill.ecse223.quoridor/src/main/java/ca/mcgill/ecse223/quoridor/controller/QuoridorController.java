@@ -1275,6 +1275,12 @@ public class QuoridorController {
 	public static boolean loadGame(String filename, Player white, Player black) throws Exception {
 		Quoridor quoridor = QuoridorApplication.getQuoridor();
 		
+		//create game that is initializing
+		ArrayList<Player> playersList = new ArrayList<Player>();
+		playersList.add(white);
+		playersList.add(black);
+		QuoridorController.prepareToLoadGame(playersList);
+		
 		FileInputStream inputstream = new FileInputStream(filename);
 		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(inputstream);
@@ -1389,6 +1395,9 @@ public class QuoridorController {
 			}
 			
 		}
+		
+		//quoridor.getCurrentGame().setGameStatus(GameStatus.ReadyToStart);
+		QuoridorController.verifyGameIsReady();
 
 		return true;
 	}
@@ -2532,7 +2541,7 @@ public class QuoridorController {
 	 * 
 	 * @param players
 	 */
-	public static void createAndStartGame(ArrayList<Player> players) {
+	public static void prepareToLoadGame(ArrayList<Player> players) {
 		Quoridor quoridor = QuoridorApplication.getQuoridor();
 		// There are total 36 tiles in the first four rows and
 		// indexing starts from 0 -> tiles with indices 36 and 36+8=44 are the starting
@@ -2540,7 +2549,7 @@ public class QuoridorController {
 		Tile player1StartPos = quoridor.getBoard().getTile(4);
 		Tile player2StartPos = quoridor.getBoard().getTile(76);
 
-		Game game = new Game(GameStatus.Running, MoveMode.PlayerMove, quoridor);
+		Game game = new Game(GameStatus.Initializing, MoveMode.PlayerMove, quoridor);
 		game.setWhitePlayer(players.get(0));
 		game.setBlackPlayer(players.get(1));
 		PlayerPosition player1Position = new PlayerPosition(quoridor.getCurrentGame().getWhitePlayer(), player1StartPos);
