@@ -105,8 +105,10 @@ public class QuoridorApplication {
                 mainMenu.setVisible(true);
             }
         });
-        MusicPlayer.play("src\\main\\java\\ca\\mcgill\\ecse223\\quoridor\\"
-				+ "resources\\ddz_wav.wav");
+        while(true) {
+        	MusicPlayer.play("src\\main\\java\\ca\\mcgill\\ecse223"
+        			+ "\\quoridor\\resources\\ddz_wav.wav");
+        }
 	}
 	
 	public static Quoridor getQuoridor() {
