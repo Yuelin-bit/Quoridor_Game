@@ -14,9 +14,9 @@ As a player using replay mode, I wish to scroll fast to the very beginning of th
       |  3 |   1 | e3h  |
       |  3 |   2 | e8h  |
       |  4 |   1 | d3v  |
-      |  4 |   2 | f2   |
+      |  4 |   2 | f3   |
     And The next move is <movno>.<rndno>
-    When Jump to start position is initiated
+    When Jump to final position is initiated
     Then The next move shall be <nmov>.<nrnd>
     And White player's position shall be <wrow>.<wcol>
     And Black player's position shall be <brow>.<bcol>

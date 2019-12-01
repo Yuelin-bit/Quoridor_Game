@@ -7,8 +7,20 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import ca.mcgill.ecse223.quoridor.QuoridorApplication;
 import ca.mcgill.ecse223.quoridor.controller.QuoridorController;
+import ca.mcgill.ecse223.quoridor.model.Board;
+import ca.mcgill.ecse223.quoridor.model.Direction;
+import ca.mcgill.ecse223.quoridor.model.Game;
+import ca.mcgill.ecse223.quoridor.model.GamePosition;
 import ca.mcgill.ecse223.quoridor.model.Player;
+import ca.mcgill.ecse223.quoridor.model.PlayerPosition;
+import ca.mcgill.ecse223.quoridor.model.Quoridor;
+import ca.mcgill.ecse223.quoridor.model.Tile;
+import ca.mcgill.ecse223.quoridor.model.User;
+import ca.mcgill.ecse223.quoridor.model.Wall;
+import ca.mcgill.ecse223.quoridor.model.Game.GameStatus;
+import ca.mcgill.ecse223.quoridor.model.Game.MoveMode;
 
 import java.awt.Color;
 import javax.swing.GroupLayout;
@@ -26,12 +38,14 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+
 
 public class LoadPosition extends JFrame {
 	
@@ -43,9 +57,18 @@ public class LoadPosition extends JFrame {
 	JComboBox<String> comboBox;
 	private JTextField textField;
 	private JTextField textField_1;
+	private NewJBoardReplay replayBoard;
 	
 
-//	public String getError() {
+	public NewJBoardReplay getReplayBoard() {
+		return replayBoard;
+	}
+
+	public void setReplayBoard(NewJBoardReplay replayBoard) {
+		this.replayBoard = replayBoard;
+	}
+
+	//	public String getError() {
 //		return error;
 //	}
 //	public void setError(String error) {
@@ -78,6 +101,7 @@ public class LoadPosition extends JFrame {
 	 * Create the frame.
 	 */
 	public LoadPosition() {
+		replayBoard = new NewJBoardReplay();
 		setBackground(Color.PINK);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 1080, 720);
@@ -157,6 +181,75 @@ public class LoadPosition extends JFrame {
 		
 		JLabel lblNewLabel_1 = new JLabel("Enter user name");
 		
+		JButton btnRepLaA = new JButton("Replay");
+		btnRepLaA.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				replayBoard = new NewJBoardReplay();
+				replayBoard.setVisible(true);
+				
+				QuoridorController.initializeNewGame();
+			    QuoridorController.replay();
+				Quoridor quoridorR = QuoridorApplication.getQuoridor();
+				//new Game(GameStatus.Initializing, MoveMode.WallMove, QuoridorApplication.getQuoridor());
+				if(QuoridorApplication.getQuoridor().getBoard()==null) {
+					Quoridor quoridor = QuoridorApplication.getQuoridor();
+					Board board = new Board(quoridor);
+					// Creating tiles by rows, i.e., the column index changes with every tile
+					// creation
+					for (int i = 1; i <= 9; i++) { // rows
+						for (int j = 1; j <= 9; j++) { // columns
+							board.addTile(i, j);
+						}
+					}
+				}
+				User user1 = quoridorR.addUser("whiteReplayer");
+				User user2 = quoridorR.addUser("blackReplayer");
+				int thinkingTime = 180;
+				Player player1 = new Player(new Time(thinkingTime), user1, 9, Direction.Horizontal);
+				Player player2 = new Player(new Time(thinkingTime), user2, 1, Direction.Horizontal);
+				Player[] players = { player1, player2 };
+				for (int i = 0; i < 2; i++) {
+					for (int j = 0; j < 10; j++) {
+						new Wall(i * 10 + j+1, players[i]);
+					}
+				}
+				
+				Tile player1StartPos = quoridorR.getBoard().getTile(76);
+				Tile player2StartPos = quoridorR.getBoard().getTile(4);
+				QuoridorApplication.getQuoridor().getCurrentGame().setWhitePlayer(player1);
+				QuoridorApplication.getQuoridor().getCurrentGame().setBlackPlayer(player2);
+
+				Game gameR = QuoridorApplication.getQuoridor().getCurrentGame();
+				PlayerPosition player1Position = new PlayerPosition(quoridorR.getCurrentGame().getWhitePlayer(), player1StartPos);
+				PlayerPosition player2Position = new PlayerPosition(quoridorR.getCurrentGame().getBlackPlayer(), player2StartPos);
+				GamePosition gamePosition = new GamePosition(0, player1Position, player2Position, player1, gameR);
+				
+				for (int j = 0; j < 10; j++) {
+					Wall wall = Wall.getWithId(j+1);
+					gamePosition.addWhiteWallsInStock(wall);
+				}
+				for (int j = 0; j < 10; j++) {
+					Wall wall = Wall.getWithId(j + 10+1);
+					gamePosition.addBlackWallsInStock(wall);
+				}
+				gameR.setCurrentPosition(gamePosition);
+				
+				
+				try {
+					QuoridorController.movePlayer("white","up");
+					QuoridorController.movePlayer("black","down");
+					QuoridorController.movePlayer("white","up");
+					QuoridorController.movePlayer("black","left");
+					QuoridorController.movePlayer("white","right");
+					QuoridorController.jumpToStart();
+				} catch (CloneNotSupportedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		});
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -168,21 +261,24 @@ public class LoadPosition extends JFrame {
 					.addGap(405)
 					.addComponent(lblChooseGameTo, GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
 					.addGap(495))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(447)
+				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+					.addGap(372)
 					.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
-					.addGap(535))
+					.addGap(597))
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(328)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(68)
-							.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(414))
-						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(comboBox, 0, 342, Short.MAX_VALUE)
-							.addGap(400))))
+							.addGap(400))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addComponent(btnRepLaA)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addGap(68)
+									.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+							.addGap(414))))
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(337)
 					.addComponent(lblNewLabel)
@@ -208,7 +304,9 @@ public class LoadPosition extends JFrame {
 						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(128)
-					.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+						.addComponent(btnRepLaA, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
 					.addGap(151))
 		);
 		contentPane.setLayout(gl_contentPane);

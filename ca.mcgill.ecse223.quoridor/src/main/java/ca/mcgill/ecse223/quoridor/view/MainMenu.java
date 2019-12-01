@@ -27,6 +27,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Color;
 import javax.swing.ImageIcon;
+import java.awt.SystemColor;
 
 public class MainMenu extends JFrame {
 
@@ -56,13 +57,14 @@ public class MainMenu extends JFrame {
 	public MainMenu() {
 		setTitle("McQuoridor");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(0, 0, 500, 800);
+		setBounds(0, 0, 570, 800);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.LIGHT_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
 		JButton btnNewButton = new JButton("Play 1 on 1");
-		btnNewButton.setBounds(168, 165, 166, 75);
+		btnNewButton.setBounds(74, 340, 166, 75);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				QuoridorController.initializeNewGame(); //boolean not catched
@@ -73,11 +75,12 @@ public class MainMenu extends JFrame {
 			}
 		});
 		
-		JButton btnNewButton_1 = new JButton("Load Position");
-		btnNewButton_1.setBounds(168, 525, 166, 75);
+		JButton btnNewButton_1 = new JButton("Load Game");
+		btnNewButton_1.setBounds(328, 197, 166, 75);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				LoadPosition loadposition = new LoadPosition();
+				QuoridorApplication.setLoadposition(loadposition);
 				loadposition.setVisible(true);
 				setVisible(false);
 				dispose();
@@ -85,7 +88,7 @@ public class MainMenu extends JFrame {
 		});
 		
 		JButton btnNewButton_2 = new JButton("Registeration");
-		btnNewButton_2.setBounds(168, 47, 166, 75);
+		btnNewButton_2.setBounds(74, 197, 166, 75);
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Registeration r = new Registeration();
@@ -94,7 +97,7 @@ public class MainMenu extends JFrame {
 		});
 		
 		JButton continue_old = new JButton("Continue Old Game");
-		continue_old.setBounds(168, 641, 166, 75);
+		continue_old.setBounds(328, 465, 166, 75);
 		continue_old.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(QuoridorApplication.getQuoridor()!=null&&QuoridorApplication.getQuoridor().getCurrentGame()!=null) {
@@ -110,7 +113,11 @@ public class MainMenu extends JFrame {
 		contentPane.add(btnNewButton);
 		
 		JButton btnPracticeai = new JButton("Practice (AI)");
-		btnPracticeai.setBounds(168, 398, 166, 75);
+		btnPracticeai.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnPracticeai.setBounds(74, 465, 166, 75);
 		contentPane.add(btnPracticeai);
 		
 		JButton btnPlay = new JButton("Play 1 on 3");
@@ -121,13 +128,36 @@ public class MainMenu extends JFrame {
 				QuoridorApplication.getJboard4().setVisible(true);
 			}
 		});
-		btnPlay.setBounds(168, 281, 166, 75);
+		btnPlay.setBounds(328, 340, 166, 75);
 		contentPane.add(btnPlay);
 		
+		JLabel lblNewLabel_1 = new JLabel("New label");
+		lblNewLabel_1.setIcon(new ImageIcon(MainMenu.class.getResource("/ca/mcgill/ecse223/quoridor/resources/1575219678_187266.png")));
+		lblNewLabel_1.setBounds(127, 0, 569, 124);
+		contentPane.add(lblNewLabel_1);
+		
+		JLabel label = new JLabel("New label");
+		label.setIcon(new ImageIcon(MainMenu.class.getResource("/ca/mcgill/ecse223/quoridor/resources/1575219678_187266.png")));
+		label.setBounds(-332, 0, 466, 124);
+		contentPane.add(label);
+		
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon(MainMenu.class.getResource("/ca/mcgill/ecse223/quoridor/resources/timg.jpeg")));
+		lblNewLabel.setIcon(new ImageIcon(MainMenu.class.getResource("/ca/mcgill/ecse223/quoridor/resources/greyBack2.jpg")));
 		lblNewLabel.setBackground(Color.ORANGE);
-		lblNewLabel.setBounds(0, 0, 494, 790);
+		lblNewLabel.setBounds(0, 0, 569, 557);
 		contentPane.add(lblNewLabel);
+		
+		JLabel lblGreyback = new JLabel("greyBack");
+		lblGreyback.setIcon(new ImageIcon(MainMenu.class.getResource("/ca/mcgill/ecse223/quoridor/resources/greyB.jpg")));
+		lblGreyback.setBounds(0, 552, 569, 238);
+		contentPane.add(lblGreyback);
+		
+	
+		
+		
+		
+		
+		
+		
 	}
 }

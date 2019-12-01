@@ -698,6 +698,56 @@ public class CucumberStepDefinitions {
 	
 	
 	
+	////===============================================================================================================================
+	////*******************************************************************************************************************************
+	////*******************************************************************************************************************************
+	////   
+	////											The following is JumpToFinal
+	////
+	////*******************************************************************************************************************************
+	////*******************************************************************************************************************************
+	
+	
+	////*******************************************************************************************************************************
+	////*******************************************************************************************************************************
+	////   
+	////											The above is JumpToFinal
+	////
+	////*******************************************************************************************************************************
+	////*******************************************************************************************************************************
+	////===============================================================================================================================
+	
+	@When("Jump to final position is initiated")
+	public void jump_to_final_position_is_initiated() {
+		QuoridorController.jumpToFinal();
+	}
+	////===============================================================================================================================
+	////*******************************************************************************************************************************
+	////*******************************************************************************************************************************
+	////   
+	////											The following is JumpToStart
+	////
+	////*******************************************************************************************************************************
+	////*******************************************************************************************************************************
+	
+	@When("Jump to start position is initiated")
+	public void jump_to_start_position_is_initiated() {
+		QuoridorController.jumpToStart();
+	}
+	
+	////*******************************************************************************************************************************
+	////*******************************************************************************************************************************
+	////   
+	////											The above is JumpToStart
+	////
+	////*******************************************************************************************************************************
+	////*******************************************************************************************************************************
+	////===============================================================================================================================
+	
+	
+	
+	
+	
 	
 	
 	
@@ -1209,18 +1259,18 @@ public class CucumberStepDefinitions {
 			}	
 		}
 
-//		@Given("Player {string} has just completed his move")
-//		public void player_has_just_completed_his_move(String string) {
-//		    // Write code here that turns the phrase above into concrete actions
-//			Player player;
-//			if (string.equals("white")) {
-//			player = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
-//				QuoridorController.completeMove(player);
-//			}else {
-//				player = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
-//				QuoridorController.completeMove(player);
-//			}
-//		}
+		@Given("Player {string} has just completed his move")
+		public void player_has_just_completed_his_move(String string) {
+		    // Write code here that turns the phrase above into concrete actions
+			Player player;
+			if (string.equals("white")) {
+			player = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
+				QuoridorController.completeMove(player);
+			}else {
+				player = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
+				QuoridorController.completeMove(player);
+			}
+		}
 
 		@Given("The last move of {string} is pawn move to {int}:{int}")
 		public void the_last_move_of_is_pawn_move_to(String string, Integer int1, Integer int2) {
@@ -1232,32 +1282,32 @@ public class CucumberStepDefinitions {
 			Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
 			Tile targetTile = new Tile(int1 , int2 , currentBoard);
 			
-			if(string == "white") {
+			if(string.equals("white")) {
 				Move pawnMove = new StepMove(moveNumber , roundNumber , whitePlayer , targetTile , currentGame);
 				QuoridorApplication.getQuoridor().getCurrentGame().addMove(pawnMove);
-			}else if(string == "black") {
+			}else if(string.equals("black")) {
 				Move pawnMove = new StepMove(moveNumber , roundNumber , blackPlayer , targetTile , currentGame);
 				QuoridorApplication.getQuoridor().getCurrentGame().addMove(pawnMove);
 			}
 		}
 
-//		@When("Checking of game result is initated")
-//		public void checking_of_game_result_is_initated() {
-//		    gameFinalResult = QuoridorController.checkGameDrawn();
-//		}
-//
-//		@Then("Game result shall be {string}")
-//		public void game_result_shall_be(String string) {
-//			assertEquals(string , gameFinalResult) ;
-//		}
-//
-//		@Then("The game shall no longer be running")
-//		public void the_game_shall_no_longer_be_running() {
-//			GameStatus status = QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus();    
-//			boolean gameIsRunning = (GameStatus.Running == status);
-//			assertEquals(false, gameIsRunning);
-//		}
-//		
+		@When("Checking of game result is initated")
+		public void checking_of_game_result_is_initated() {
+		    gameFinalResult = QuoridorController.checkGameDrawn();
+		}
+
+		@Then("Game result shall be {string}")
+		public void game_result_shall_be(String string) {
+			assertEquals(string , gameFinalResult) ;
+		}
+
+		@Then("The game shall no longer be running")
+		public void the_game_shall_no_longer_be_running() {
+			GameStatus status = QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus();    
+			boolean gameIsRunning = (GameStatus.Running == status);
+			assertEquals(false, gameIsRunning);
+		}
+		
 		
 		
 		
