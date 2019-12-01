@@ -1676,14 +1676,14 @@ public class CucumberStepDefinitions {
 				public void the_game_has_no_final_results() {
 				    result = GameStatus.Running == QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus();
 				}
-
-		@When("The game has a final result")
-		public void the_game_has_a_final_result() {
-		    // Write code here that turns the phrase above into concrete actions
-			GameStatus gs = QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus();
-		    boolean result = gs.equals(GameStatus.BlackWon) || gs.equals(GameStatus.WhiteWon);
-		    assertEquals(true, result);
-		}
+//
+//		@When("The game has a final result")
+//		public void the_game_has_a_final_result() {
+//		    // Write code here that turns the phrase above into concrete actions
+//			GameStatus gs = QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus();
+//		    boolean result = gs.equals(GameStatus.BlackWon) || gs.equals(GameStatus.WhiteWon);
+//		    assertEquals(true, result);
+//		}
   
 				@And("The game has a final result")
 				public void the_game_has_a_final_result() {
