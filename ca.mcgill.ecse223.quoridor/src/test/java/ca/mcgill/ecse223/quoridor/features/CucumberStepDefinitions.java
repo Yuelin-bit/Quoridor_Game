@@ -1699,7 +1699,7 @@ public class CucumberStepDefinitions {
 
 		@Then("The game shall notify the user that the game file is invalid")
 		public void the_game_shall_notify_the_user_that_the_game_file_is_invalid() {
-		    assertEquals(true, true);
+			assertTrue(error.equals("Out of boundary!") || error.equals("Wall Overlapping!") || error.equals("Invalid Pawn!"));
 		}
 
 
