@@ -599,6 +599,9 @@ public class CucumberStepDefinitions {
 				}	
 				
 			}else {
+				if(map.get("move").equals("0-1")) {
+					QuoridorApplication.getQuoridor().getCurrentGame().setGameStatus(GameStatus.BlackWon);
+				}
 				QuoridorController.grabWall();
 				if(map.get("move").charAt(2)=='h') {
 					QuoridorController.flipWall();
