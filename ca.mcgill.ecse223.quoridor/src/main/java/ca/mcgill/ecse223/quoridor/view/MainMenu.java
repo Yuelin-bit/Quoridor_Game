@@ -115,6 +115,7 @@ public class MainMenu extends JFrame {
 		JButton btnPracticeai = new JButton("Practice (AI)");
 		btnPracticeai.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				QuoridorApplication.getJboardAI().setVisible(true);
 			}
 		});
 		btnPracticeai.setBounds(74, 465, 166, 75);
@@ -126,6 +127,7 @@ public class MainMenu extends JFrame {
 				NewJBoard4 a = new NewJBoard4();
 				QuoridorApplication.setJboard4(a);
 				QuoridorApplication.getJboard4().setVisible(true);
+				QuoridorApplication.getMainMenu().setVisible(false);
 			}
 		});
 		btnPlay.setBounds(328, 340, 166, 75);

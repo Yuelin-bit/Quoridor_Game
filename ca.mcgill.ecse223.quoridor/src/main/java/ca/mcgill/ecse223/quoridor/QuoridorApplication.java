@@ -10,6 +10,7 @@ import ca.mcgill.ecse223.quoridor.view.LoadPosition;
 import ca.mcgill.ecse223.quoridor.view.MainMenu;
 import ca.mcgill.ecse223.quoridor.view.NewJBoard;
 import ca.mcgill.ecse223.quoridor.view.NewJBoard4;
+import ca.mcgill.ecse223.quoridor.view.NewJBoardAI;
 
 import java.applet.AudioClip; 
 import java.io.*; 
@@ -52,6 +53,14 @@ public class QuoridorApplication {
 
 	private static NewJBoard jboard;
 	private static NewJBoard4 jboard4;
+	private static NewJBoardAI jboardAI;
+	public static NewJBoardAI getJboardAI() {
+		return jboardAI;
+	}
+	public static void setJboardAI(NewJBoardAI jboardAI) {
+		QuoridorApplication.jboardAI = jboardAI;
+	}
+
 	private static LoadPosition loadposition;
 	public static LoadPosition getLoadposition() {
 		return loadposition;
@@ -105,8 +114,8 @@ public class QuoridorApplication {
                 mainMenu.setVisible(true);
             }
         });
-        MusicPlayer.play("src\\main\\java\\ca\\mcgill\\ecse223\\quoridor\\"
-				+ "resources\\zbj_wav.wav");
+        MusicPlayer.play("src/main/java/ca/mcgill/ecse223/quoridor/"
+				+ "resources/zbj_wav.wav");
 	}
 	
 	public static Quoridor getQuoridor() {
