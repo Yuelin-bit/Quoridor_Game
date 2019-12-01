@@ -8,6 +8,7 @@ import java.util.List;
 import ca.mcgill.ecse223.quoridor.QuoridorApplication;
 import ca.mcgill.ecse223.quoridor.controller.PawnBehavior.MoveDirection;
 import ca.mcgill.ecse223.quoridor.model.*;
+import ca.mcgill.ecse223.quoridor.model.Game.GameStatus;
 
 // line 4 "../../../../../StateMachine.ump"
 public class PawnBehavior
@@ -929,6 +930,9 @@ public class PawnBehavior
   public boolean isLegalStep(MoveDirection dir){
 	  boolean result = true;
 	  currentGame = QuoridorApplication.getQuoridor().getCurrentGame();
+	  if(!currentGame.getGameStatus().equals(GameStatus.Running)) {
+		 return false; 
+	  }
 	  Player player = currentGame.getCurrentPosition().getPlayerToMove();
 	  List<Wall> blackWalls = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard();
 	  List<Wall> whiteWalls = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard();
@@ -1024,6 +1028,9 @@ public class PawnBehavior
   // line 123 "../../../../../StateMachine.ump"
   public boolean isLegalJump(MoveDirection dir){
 	  currentGame = QuoridorApplication.getQuoridor().getCurrentGame();
+	  if(!currentGame.getGameStatus().equals(GameStatus.Running)) {
+		  return false;
+	  }
 	  GamePosition currentPosition = currentGame.getCurrentPosition();
 	  Player player = currentGame.getCurrentPosition().getPlayerToMove();
 	  List<Wall> blackWalls = currentPosition.getBlackWallsOnBoard();

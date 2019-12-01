@@ -621,6 +621,37 @@ public class QuoridorController {
 		QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(QuoridorApplication.getQuoridor().getCurrentGame().getPositions().get(newID));	
 	}
 
+	
+	/**
+	  * Feature: JumpToStart
+	  * 
+	  * In the replay mode, I want to jump to the start position of the game
+	  * 
+	  * I first get the ID of the initial position and then set the id to it
+	  * @author Yujing Yang
+	  * 
+	  * @return void
+	  */
+	 
+	 public static void jumpToStart() {
+	  QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(QuoridorApplication.getQuoridor().getCurrentGame().getPositions().get(0));
+	 }
+	 
+	 /**
+	  * Feature: JumpToFinal
+	  * 
+	  * In the replay mode, I want to jump to the final position of the game
+	  * 
+	  * I first get the ID of the final position and then set the id to it
+	  * @author Yujing Yang
+	  * 
+	  * @return void
+	  */
+	 
+	 public static void jumpToFinal() {
+	  int ID = QuoridorApplication.getQuoridor().getCurrentGame().getPositions().size() - 1;
+	  QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(QuoridorApplication.getQuoridor().getCurrentGame().getPositions().get(ID));
+	 }
 
 
 	/**
@@ -1118,17 +1149,16 @@ public class QuoridorController {
 		ArrayList<ArrayList<Integer>> outer = new ArrayList<ArrayList<Integer>>();
 		int numberOfMovesPerformed = QuoridorApplication.getQuoridor().getCurrentGame().numberOfMoves() ;
 		int index = numberOfMovesPerformed-1 ;
-		Move currentCheckingMove = QuoridorApplication.getQuoridor().getCurrentGame().getMove(index) ;
 		if( numberOfMovesPerformed >= 9) {
 			for(int i=0 ; i<=8 ; i++) {
 				ArrayList<Integer> inner = new ArrayList<Integer>();
+				Move currentCheckingMove = QuoridorApplication.getQuoridor().getCurrentGame().getMove(index) ;
 				int row = currentCheckingMove.getTargetTile().getRow() ;
 				int column = currentCheckingMove.getTargetTile().getColumn();
 				inner.add(row);
 				inner.add(column);
 				outer.add(inner);
 				index--;
-				currentCheckingMove = currentCheckingMove.getPrevMove();
 			}
 			//current player moves
 			int move9row = outer.get(0).get(0);
@@ -1177,6 +1207,7 @@ public class QuoridorController {
 		
 		
 		if (gameDrawn) {
+			QuoridorApplication.getQuoridor().getCurrentGame().setGameStatus(GameStatus.Draw);
 			return "Drawn" ;
 		}
 		else {
