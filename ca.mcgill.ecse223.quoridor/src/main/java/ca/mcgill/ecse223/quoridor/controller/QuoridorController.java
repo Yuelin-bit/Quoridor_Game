@@ -1671,7 +1671,73 @@ public class QuoridorController {
 		int blackRow = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
 		boolean blackWon = (blackDir == Direction.Horizontal) && (blackTarget == blackRow);
 		
-		if (whiteWon && !blackWon) {
+		//check Game Drawn
+		boolean gameDrawn = false;
+		
+		ArrayList<ArrayList<Integer>> outer = new ArrayList<ArrayList<Integer>>();
+		int numberOfMovesPerformed = QuoridorApplication.getQuoridor().getCurrentGame().numberOfMoves() ;
+		int index = numberOfMovesPerformed-1 ;
+		if( numberOfMovesPerformed >= 9) {
+			for(int i=0 ; i<=8 ; i++) {
+				ArrayList<Integer> inner = new ArrayList<Integer>();
+				Move currentCheckingMove = QuoridorApplication.getQuoridor().getCurrentGame().getMove(index) ;
+				int row = currentCheckingMove.getTargetTile().getRow() ;
+				int column = currentCheckingMove.getTargetTile().getColumn();
+				inner.add(row);
+				inner.add(column);
+				outer.add(inner);
+				index--;
+			}
+			//current player moves
+			int move9row = outer.get(0).get(0);
+			int move9column = outer.get(0).get(1);
+			int move7row = outer.get(2).get(0);
+			int move7column = outer.get(2).get(1);
+			int move5row = outer.get(4).get(0);
+			int move5column = outer.get(4).get(1);
+			int move3row = outer.get(6).get(0);
+			int move3column = outer.get(6).get(1);
+			int move1row = outer.get(8).get(0);
+			int move1column = outer.get(8).get(1);
+			
+			//opponent player moves
+			int move8row = outer.get(1).get(0);
+			int move8column = outer.get(1).get(1);
+			int move6row = outer.get(3).get(0);
+			int move6column = outer.get(3).get(1);
+			int move4row = outer.get(5).get(0);
+			int move4column = outer.get(5).get(1);
+			int move2row = outer.get(7).get(0);
+			int move2column = outer.get(7).get(1);
+			
+			if((move9row == move5row)&&(move5row == move1row)&&(move9column == move5column)&&(move5column == move1column)) {
+				if((move3row == move7row)&&(move3column == move7column)) {
+					if(((move9row == move7row+1)||(move9row == move7row-1))&&(move9column == move7column)) {
+						if((move8row == move4row)&&(move6row == move2row)&&(move8column == move4column)&&(move6column == move2column)) {
+							if(((move8row == move6row+1)||(move8row == move6row-1))&&(move8column == move6column)) {
+								gameDrawn = true ;
+							}else if(((move8column == move6column+1)||(move8column == move6column-1))&&(move8row == move6row)) {
+								gameDrawn = true ;
+							}
+						}
+					}else if(((move9column == move7column+1)||(move9column == move7column-1))&&(move9row == move7row)) {
+						if((move8row == move4row)&&(move6row == move2row)&&(move8column == move4column)&&(move6column == move2column)) {
+							if(((move8row == move6row+1)||(move8row == move6row-1))&&(move8column == move6column)) {
+								gameDrawn = true ;
+							}else if(((move8column == move6column+1)||(move8column == move6column-1))&&(move8row == move6row)) {
+								gameDrawn = true ;
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		
+		if (gameDrawn) {
+			QuoridorApplication.getQuoridor().getCurrentGame().setGameStatus(GameStatus.Draw);
+			return "Drawn" ;
+		} else if (whiteWon && !blackWon) {
 			QuoridorApplication.getQuoridor().getCurrentGame().setGameStatus(GameStatus.WhiteWon);
 			return "whiteWon";
 		} 
