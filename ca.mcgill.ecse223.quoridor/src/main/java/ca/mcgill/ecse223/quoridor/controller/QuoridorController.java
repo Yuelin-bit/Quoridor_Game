@@ -33,8 +33,8 @@ import org.jgrapht.graph.*;
 import org.jgrapht.util.SupplierUtil;
 
 public class QuoridorController {
-	private static Stopwatch whiteWatch;
-	private static Stopwatch blackWatch;
+//	private static Stopwatch whiteWatch;
+//	private static Stopwatch blackWatch;
 	/**
 	 * This method establish a thread that reset board data every second.
 	 */
@@ -52,8 +52,7 @@ public class QuoridorController {
 	 * Stops both watch counting down.
 	 */
 	public static void stopWatch() {
-		whiteWatch.stop();
-		blackWatch.stop();
+		
 		Time zero = new Time(0);
 		QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer().setRemainingTime(zero);
 		QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer().setRemainingTime(zero);
@@ -358,11 +357,11 @@ public class QuoridorController {
 		}
 		//check if path exist
 		
-		String error = PathCheck.pathCheck();
-		if(!error.equals("both")) {
-			JOptionPane.showMessageDialog(null, "Only "+error+" player has path!");
-			return;
-		}
+//		String error = PathCheck.pathCheck();
+//		if(!error.equals("both")) {
+//			JOptionPane.showMessageDialog(null, "Only "+error+" player has path!");
+//			return;
+//		}
 		Tile t = wallmove.getTargetTile();
 		Player currentPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
 		Game currentGame = QuoridorApplication.getQuoridor().getCurrentGame();
@@ -1582,15 +1581,13 @@ public class QuoridorController {
 		Player white = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
 		Player black = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
 		if (QuoridorApplication.getJboard().isWhiteTurn()==false) {
-			whiteWatch.setRunning(false);
-			blackWatch.setRunning(true);
-			blackWatch.notify();
+		
 			player.setNextPlayer(white);
 			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(white);
 			//QuoridorApplication.getJboard().whiteTurn();
 		}else {
-			whiteWatch.setRunning(true);
-			blackWatch.setRunning(false);
+			
+			
 			player.setNextPlayer(black);
 			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(black);
 			//QuoridorApplication.getJboard().blackTurn();
@@ -1695,13 +1692,7 @@ public class QuoridorController {
 		initializeWhiteWall(g,whitePlayer);
 		initializeBlackWall(g,blackPlayer);
 		g.setPlayerToMove(whitePlayer);
-		Stopwatch white = new Stopwatch(whitePlayer);
-		whiteWatch = white;
-		Stopwatch black = new Stopwatch(blackPlayer);
-		blackWatch = black;
-		whiteWatch.start();
-		whiteWatch.setRunning(true);
-		blackWatch.start();
+		
 	}
 
 	/**
