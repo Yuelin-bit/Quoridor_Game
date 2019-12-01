@@ -55,6 +55,13 @@ public class QuoridorApplication {
 	private static NewJBoard jboard;
 	private static NewJBoard4 jboard4;
 	private static LoadPosition loadposition;
+	public static LoadPosition getLoadposition() {
+		return loadposition;
+	}
+	public static void setLoadposition(LoadPosition loadposition) {
+		QuoridorApplication.loadposition = loadposition;
+	}
+
 	private JOptionPane errorHint;
 	private String error = null;
 	

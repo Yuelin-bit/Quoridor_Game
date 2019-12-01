@@ -78,6 +78,7 @@ public class MainMenu extends JFrame {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				LoadPosition loadposition = new LoadPosition();
+				QuoridorApplication.setLoadposition(loadposition);
 				loadposition.setVisible(true);
 				setVisible(false);
 				dispose();
