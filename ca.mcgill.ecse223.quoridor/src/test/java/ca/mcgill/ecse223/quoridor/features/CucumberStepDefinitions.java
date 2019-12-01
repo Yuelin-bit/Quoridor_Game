@@ -601,17 +601,18 @@ public class CucumberStepDefinitions {
 			}else {
 				if(map.get("move").equals("0-1")) {
 					QuoridorApplication.getQuoridor().getCurrentGame().setGameStatus(GameStatus.BlackWon);
+				} else {
+					QuoridorController.grabWall();
+					if(map.get("move").charAt(2)=='h') {
+						QuoridorController.flipWall();
+					}
+					int a = (int) QuoridorController.convertMove3(map.get("move")).get(0);
+					int b = (int) QuoridorController.convertMove3(map.get("move")).get(1);
+					System.out.println("a: " + a + ", b: " + b);
+					Tile t= new Tile(b, a, quoridorR.getBoard());
+					quoridorR.getCurrentGame().getWallMoveCandidate().setTargetTile(t);
+					QuoridorController.releaseWall();
 				}
-				QuoridorController.grabWall();
-				if(map.get("move").charAt(2)=='h') {
-					QuoridorController.flipWall();
-				}
-				int a = (int) QuoridorController.convertMove3(map.get("move")).get(0);
-				int b = (int) QuoridorController.convertMove3(map.get("move")).get(1);
-				System.out.println("a: " + a + ", b: " + b);
-				Tile t= new Tile(b, a, quoridorR.getBoard());
-				quoridorR.getCurrentGame().getWallMoveCandidate().setTargetTile(t);
-				QuoridorController.releaseWall();
 			}
 		}
 	}
@@ -1294,14 +1295,14 @@ public class CucumberStepDefinitions {
 			}
 		}
 
-		@When("Checking of game result is initated")
-		public void checking_of_game_result_is_initated() {
-		    gameFinalResult = QuoridorController.checkGameDrawn();
-		}
+
 
 //		@Then("Game result shall be {string}")
 //		public void game_result_shall_be(String string) {
 //			assertEquals(string , gameFinalResult) ;
+//		}//		@When("Checking of game result is initated")
+//		public void checking_of_game_result_is_initated() {
+//		    gameFinalResult = QuoridorController.checkGameDrawn();
 //		}
 
 		@Then("The game shall no longer be running")
