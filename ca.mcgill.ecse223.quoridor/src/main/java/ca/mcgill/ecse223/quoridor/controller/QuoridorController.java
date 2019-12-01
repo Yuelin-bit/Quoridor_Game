@@ -767,7 +767,7 @@ public class QuoridorController {
 
 	/**
 	 * 
-	 * Feature:SavePosition
+	 * Feature: SaveGame , SavePosition
 	 *
 	 * @author Bozhong Lu
 	 * Method that checks file with specified name exists in my folder
@@ -863,7 +863,7 @@ public class QuoridorController {
 
 
 	/**
-	 * Feature:SavePosition
+	 * Feature: SaveGame , SavePosition
 	 * 
 	 * Method that writes the current Player positions and Wall Positions in a specific file
 	 * The player to move is written at the first line, and the next player to move is written on the second line
@@ -913,7 +913,7 @@ public class QuoridorController {
 	}
 
 	/**
-	 * Feature:SavePosition
+	 * Feature: SaveGame , SavePosition
 	 * 
 	 * Method that is connected to the User Interface
 	 * If the user click the "Yes" Button, this method will return a boolean "true"
@@ -929,7 +929,7 @@ public class QuoridorController {
 	}
 
 	/**
-	 * Feature:SavePosition
+	 * Feature: SaveGame , SavePosition
 	 * 
 	 * Method that is connected to the User Interface
 	 * If the user click the "No" Button, this method will return a boolean "false"
@@ -947,7 +947,7 @@ public class QuoridorController {
 
 
 	/**
-	 * Feature:SavePosition
+	 * Feature: SaveGame , SavePosition
 	 * 
 	 * Method that check the last modified time of the specified file 
 	 * If the file was updated within the past 30s, it means that it was succesfully updated
@@ -974,7 +974,7 @@ public class QuoridorController {
 	}
 
 	/**
-	 * Feature:SavePosition
+	 * Feature: SaveGame , SavePosition
 	 * 
 	 * Method that creats a new file with name filename
 	 * 
@@ -991,7 +991,7 @@ public class QuoridorController {
 	}
 
 	/**
-	 * Feature:SavePosition
+	 * Feature: SaveGame , SavePosition
 	 * 
 	 * Method that deletes file filename from file system
 	 * 
