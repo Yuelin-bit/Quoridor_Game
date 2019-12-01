@@ -1844,7 +1844,17 @@ public class QuoridorController {
 
 
 	}
-
+public static void initializeEmptyBoard() {
+//	QuoridorApplication.setJBoard(new JBoard());
+	Board board = new Board(QuoridorApplication.getQuoridor());
+	//Board board = QuoridorApplication.getQuoridor().getBoard();
+	for(int i = 1; i<= 9; i++) {
+		for(int j = 1; j<=9; j++) {
+			Tile tile = new Tile(i, j, board);
+			board.addTile(tile);
+		}
+	}
+}
 	/**
 	 * Feature: InitialzeBoard
 	 * This method initialize a new board with 9*9 tiles. Then it 
@@ -1857,22 +1867,14 @@ public class QuoridorController {
 	 * @return A flag indicating whether the method successfully launched.
 	 */
 	public static void initializeBoard() {
-		//		QuoridorApplication.setJBoard(new JBoard());
-		Board board = new Board(QuoridorApplication.getQuoridor());
-		//Board board = QuoridorApplication.getQuoridor().getBoard();
-		for(int i = 1; i<= 9; i++) {
-			for(int j = 1; j<=9; j++) {
-				Tile tile = new Tile(i, j, board);
-				board.addTile(tile);
-			}
-		}
+		Board board = QuoridorApplication.getQuoridor().getBoard();
 		Game game = QuoridorApplication.getQuoridor().getCurrentGame();
 		QuoridorApplication.getQuoridor().setBoard(board);
 		Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
 		Player blackPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
 		whitePlayer.setGameAsWhite(game);
-		Tile initWhite = new Tile(9, 5, board);
-		Tile initBlack = new Tile(1, 5, board);
+		Tile initWhite = QuoridorApplication.getQuoridor().getBoard().getTile(8*9+4);
+		Tile initBlack = QuoridorApplication.getQuoridor().getBoard().getTile(4);
 		PlayerPosition initialWhite = new PlayerPosition(whitePlayer, initWhite);
 		PlayerPosition initialBlack = new PlayerPosition(whitePlayer, initBlack);
 
@@ -2636,14 +2638,14 @@ public class QuoridorController {
 	 */
 	public static void initQuoridorAndBoard() {
 		Quoridor quoridor = QuoridorApplication.getQuoridor();
-		//Board board = new Board(quoridor);
+		Board board = new Board(quoridor);
 		// Creating tiles by rows, i.e., the column index changes with every tile
 		// creation
-		//			for (int i = 1; i <= 9; i++) { // rows
-		//				for (int j = 1; j <= 9; j++) { // columns
-		//					board.addTile(i, j);
-		//				}
-		//			}
+					for (int i = 1; i <= 9; i++) { // rows
+						for (int j = 1; j <= 9; j++) { // columns
+							board.addTile(i, j);
+						}
+					}
 	}
 	
 

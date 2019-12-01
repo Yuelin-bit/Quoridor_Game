@@ -110,7 +110,8 @@ public class QuoridorApplication {
 		mainMenu = new MainMenu();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-            	QuoridorController.initQuoridorAndBoard();
+            	//QuoridorController.initQuoridorAndBoard();
+            	QuoridorController.initializeEmptyBoard();
                 mainMenu.setVisible(true);
             }
         });
