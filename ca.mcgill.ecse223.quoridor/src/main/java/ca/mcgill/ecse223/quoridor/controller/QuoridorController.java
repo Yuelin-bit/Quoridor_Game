@@ -357,6 +357,7 @@ public class QuoridorController {
 			return;
 		}
 		//check if path exist
+		
 		String error = PathCheck.pathCheck();
 		if(!error.equals("both")) {
 			JOptionPane.showMessageDialog(null, "Only "+error+" player has path!");
@@ -1575,19 +1576,21 @@ public class QuoridorController {
 	 * @author Zirui He
 	 * @param player
 	 */
+	@SuppressWarnings("deprecation")
 	public static void completeMove(Player player) {
 
 		Player white = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
 		Player black = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
-		if (player.hasGameAsBlack()) {
-//			whiteWatch.suspend();
-//			blackWatch.resume();
+		if (QuoridorApplication.getJboard().isWhiteTurn()==false) {
+			whiteWatch.setRunning(false);
+			blackWatch.setRunning(true);
+			blackWatch.notify();
 			player.setNextPlayer(white);
 			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(white);
 			//QuoridorApplication.getJboard().whiteTurn();
 		}else {
-//			whiteWatch.resume();
-//			blackWatch.suspend();
+			whiteWatch.setRunning(true);
+			blackWatch.setRunning(false);
 			player.setNextPlayer(black);
 			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(black);
 			//QuoridorApplication.getJboard().blackTurn();
@@ -1697,8 +1700,8 @@ public class QuoridorController {
 		Stopwatch black = new Stopwatch(blackPlayer);
 		blackWatch = black;
 		whiteWatch.start();
+		whiteWatch.setRunning(true);
 		blackWatch.start();
-		blackWatch.suspend();
 	}
 
 	/**
