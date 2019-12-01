@@ -18,13 +18,26 @@ import javax.swing.border.EmptyBorder;
 
 import ca.mcgill.ecse223.quoridor.QuoridorApplication;
 import ca.mcgill.ecse223.quoridor.controller.QuoridorController;
+import ca.mcgill.ecse223.quoridor.model.Board;
+import ca.mcgill.ecse223.quoridor.model.Direction;
+import ca.mcgill.ecse223.quoridor.model.Game;
+import ca.mcgill.ecse223.quoridor.model.GamePosition;
+import ca.mcgill.ecse223.quoridor.model.Player;
+import ca.mcgill.ecse223.quoridor.model.PlayerPosition;
+import ca.mcgill.ecse223.quoridor.model.Quoridor;
+import ca.mcgill.ecse223.quoridor.model.Tile;
+import ca.mcgill.ecse223.quoridor.model.User;
+import ca.mcgill.ecse223.quoridor.model.Wall;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.Time;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import java.awt.SystemColor;
@@ -67,11 +80,17 @@ public class MainMenu extends JFrame {
 		btnNewButton.setBounds(74, 340, 166, 75);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				QuoridorController.initializeNewGame(); //boolean not catched
-				SelectName page = new SelectName();
-				page.setVisible(true);
-				setVisible(false);//close the mainMenu.
-				dispose();
+				if(!QuoridorApplication.getQuoridor().hasCurrentGame()) {
+					QuoridorController.initializeNewGame();
+					SelectName page = new SelectName();
+					page.setVisible(true);
+					setVisible(false);//close the mainMenu.
+					dispose();
+				} else {
+					JOptionPane.showOptionDialog(null, "You cannot have a new game without save the existing game.",
+			                "Warning",
+			                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[]{"OK"}, "OK");
+				}
 			}
 		});
 		
@@ -103,6 +122,10 @@ public class MainMenu extends JFrame {
 				if(QuoridorApplication.getQuoridor()!=null&&QuoridorApplication.getQuoridor().getCurrentGame()!=null) {
 					QuoridorApplication.getJboard().setVisible(true);
 					QuoridorApplication.getMainMenu().setVisible(false);
+				} else {
+					JOptionPane.showOptionDialog(null, "You cannot continue game without having a game.",
+			                "Warning",
+			                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[]{"OK"}, "OK");
 				}
 			}
 		});
@@ -115,7 +138,72 @@ public class MainMenu extends JFrame {
 		JButton btnPracticeai = new JButton("Practice (AI)");
 		btnPracticeai.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				NewJBoardAI jai = new NewJBoardAI();
+				QuoridorApplication.setJboardAI(jai);
 				QuoridorApplication.getJboardAI().setVisible(true);
+				
+				
+				
+				
+				
+				
+				
+				
+				QuoridorController.initializeNewGame();
+			    QuoridorController.replay();
+				Quoridor quoridorR = QuoridorApplication.getQuoridor();
+				//new Game(GameStatus.Initializing, MoveMode.WallMove, QuoridorApplication.getQuoridor());
+				if(QuoridorApplication.getQuoridor().getBoard()==null) {
+					Quoridor quoridor = QuoridorApplication.getQuoridor();
+					Board board = new Board(quoridor);
+					// Creating tiles by rows, i.e., the column index changes with every tile
+					// creation
+					for (int i = 1; i <= 9; i++) { // rows
+						for (int j = 1; j <= 9; j++) { // columns
+							board.addTile(i, j);
+						}
+					}
+				}
+				User user1 = quoridorR.addUser("whiteReplayer");
+				User user2 = quoridorR.addUser("blackReplayer");
+				int thinkingTime = 180;
+				Player player1 = new Player(new Time(thinkingTime), user1, 9, Direction.Horizontal);
+				Player player2 = new Player(new Time(thinkingTime), user2, 1, Direction.Horizontal);
+				Player[] players = { player1, player2 };
+				for (int i = 0; i < 2; i++) {
+					for (int j = 0; j < 10; j++) {
+						new Wall(i * 10 + j+1, players[i]);
+					}
+				}
+				
+				Tile player1StartPos = quoridorR.getBoard().getTile(76);
+				Tile player2StartPos = quoridorR.getBoard().getTile(4);
+				QuoridorApplication.getQuoridor().getCurrentGame().setWhitePlayer(player1);
+				QuoridorApplication.getQuoridor().getCurrentGame().setBlackPlayer(player2);
+
+				Game gameR = QuoridorApplication.getQuoridor().getCurrentGame();
+				PlayerPosition player1Position = new PlayerPosition(quoridorR.getCurrentGame().getWhitePlayer(), player1StartPos);
+				PlayerPosition player2Position = new PlayerPosition(quoridorR.getCurrentGame().getBlackPlayer(), player2StartPos);
+				GamePosition gamePosition = new GamePosition(0, player1Position, player2Position, player1, gameR);
+				
+				for (int j = 0; j < 10; j++) {
+					Wall wall = Wall.getWithId(j+1);
+					gamePosition.addWhiteWallsInStock(wall);
+				}
+				for (int j = 0; j < 10; j++) {
+					Wall wall = Wall.getWithId(j + 10+1);
+					gamePosition.addBlackWallsInStock(wall);
+				}
+				gameR.setCurrentPosition(gamePosition);
+				
+				
+				
+				
+				
+				
+				
+				
 			}
 		});
 		btnPracticeai.setBounds(74, 465, 166, 75);

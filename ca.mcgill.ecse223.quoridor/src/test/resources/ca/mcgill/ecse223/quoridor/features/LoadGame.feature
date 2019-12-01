@@ -36,7 +36,7 @@ Feature: Load Game
       | quoridor_test_game_3.mov |  
 
   Scenario Outline: Invalid move in game file
-    When I initiate to load a saved game "<filename>"
+    When I initiate to load a game in "<filename>"
     And The game to load has an invalid move
     Then The game shall notify the user that the game file is invalid
 
