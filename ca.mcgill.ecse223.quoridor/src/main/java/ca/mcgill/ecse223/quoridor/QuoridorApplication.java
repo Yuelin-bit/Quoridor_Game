@@ -106,7 +106,7 @@ public class QuoridorApplication {
             }
         });
         MusicPlayer.play("src\\main\\java\\ca\\mcgill\\ecse223\\quoridor\\"
-				+ "resources\\zbj_wav.wav");
+				+ "resources\\ddz_wav.wav");
 	}
 	
 	public static Quoridor getQuoridor() {
