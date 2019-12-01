@@ -44,6 +44,7 @@ import java.awt.event.MouseEvent;
  * @exception nothing
  *
  */
+
 public class NewJBoardReplay extends JFrame {
 
 	private JPanel contentPane;
@@ -113,14 +114,38 @@ public class NewJBoardReplay extends JFrame {
 	private JWall jWallCandidate_19= new JWall();
 	private JWall jWallCandidate_20= new JWall();
 	
+	public JWall[] getJWhiteWallOnBoard() {
+		return JWhiteWallOnBoard;
+	}
+	public void setJWhiteWallOnBoard(JWall[] jWhiteWallOnBoard) {
+		JWhiteWallOnBoard = jWhiteWallOnBoard;
+	}
+	public JWall[] getJBlackWallOnBoard() {
+		return JBlackWallOnBoard;
+	}
+	public void setJBlackWallOnBoard(JWall[] jBlackWallOnBoard) {
+		JBlackWallOnBoard = jBlackWallOnBoard;
+	}
+
 	private JWall[] JWhiteWallInStock = {jWallCandidate_1,jWallCandidate_2,jWallCandidate_3,jWallCandidate_4,jWallCandidate_5,jWallCandidate_6,jWallCandidate_7,jWallCandidate_8,jWallCandidate_9,jWallCandidate_10};
+	public JWall[] getJWhiteWallInStock() {
+		return JWhiteWallInStock;
+	}
+	public void setJWhiteWallInStock(JWall[] jWhiteWallInStock) {
+		JWhiteWallInStock = jWhiteWallInStock;
+	}
+	public JWall[] getJBlackWallInStock() {
+		return JBlackWallInStock;
+	}
+	public void setJBlackWallInStock(JWall[] jBlackWallInStock) {
+		JBlackWallInStock = jBlackWallInStock;
+	}
+
 	private JWall[] JBlackWallInStock = {jWallCandidate_11,jWallCandidate_12,jWallCandidate_13,jWallCandidate_14,jWallCandidate_15,jWallCandidate_16,jWallCandidate_17,jWallCandidate_18,jWallCandidate_19,jWallCandidate_20};
 	private JWall[] JWhiteWallOnBoard = new JWall[10];
 	private JWall[] JBlackWallOnBoard = new JWall[10];
 	
-	
-	
-	
+		
 	private JWall jWallCandidate = null;
 	
 	public JWall getjWallCandidate() {
@@ -147,8 +172,6 @@ public class NewJBoardReplay extends JFrame {
 	private JButton btnBack;
 	private JButton btnNext;
 	
-	
-
 	public boolean isWhiteTurn() {
 		return isWhiteTurn;
 	}
@@ -156,17 +179,12 @@ public class NewJBoardReplay extends JFrame {
 		this.isWhiteTurn = isWhiteTurn;
 	}
 
-
-
-
-
 	/**
 	 * Create the frame.
 	 */
 	public NewJBoardReplay() {
 		
 		System.out.println(jWallCandidate_1.getLocation().x+" and "+jWallCandidate_1.getLocation().y);
-
 		
 		for(int i=0; i<10; i++) {
 			JWhiteWallInStock[i].setVisible(false);
@@ -174,45 +192,32 @@ public class NewJBoardReplay extends JFrame {
 		for(int i=0; i<10; i++) {
 			JBlackWallInStock[i].setVisible(false);
 		}
-		
-		
+			
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 560, 800);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
-		
-		
-		
+		setContentPane(contentPane);	
 		
 		mainLayerPanel = new JPanel();		  
 		contentPane.add(mainLayerPanel, BorderLayout.CENTER);		 
 		mainLayerPanel.setBorder(BorderFactory.createLineBorder(Color.orange, 2));
 		mainLayerPanel.setLayout(null);
-		
-		
-		
-		
+				
 		tile = new JTileR();
 		tile.setBackground(Color.WHITE);
 		tile.setBounds(0, 0, 560, 800);
 		tile.setOpaque(false);
 		mainLayerPanel.add(tile);
-		
-		
-		
+	
 		JLabel monkey_White = new JLabel();
 		monkey_White.setBounds(17, 17, 127, 120);
-		monkey_White.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/monkey_128.png")));
-		
-		
+		monkey_White.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/monkey_128.png")));	
 		
 		JLabel cat_Black = new JLabel();
 		cat_Black.setBounds(411, 17, 127, 120);
-		cat_Black.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/cat_128.png")));
-		
-		
+		cat_Black.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/cat_128.png")));		
 		
 		setting = new JButton("");
 		setting.addActionListener(new ActionListener() {
@@ -226,10 +231,9 @@ public class NewJBoardReplay extends JFrame {
 				QuoridorApplication.getMainMenu().setVisible(true);
 			}
 		});
+		
 		setting.setBounds(296, 135, 30, 28);
 		setting.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/30-setting.png")));
-		
-		
 		
 		whiteTurnGUI = new JLabel("");
 		whiteTurnGUI.setBounds(156, 94, 32, 32);
@@ -239,33 +243,20 @@ public class NewJBoardReplay extends JFrame {
 		blackTurnGUI = new JLabel("");
 		blackTurnGUI.setBounds(360, 94, 32, 32);
 		blackTurnGUI.setIcon(new ImageIcon(NewJBoard.class.getResource("/ca/mcgill/ecse223/quoridor/resources/32-wqueen.png")));
-		blackTurnGUI.setVisible(false);
-		
-		
+		blackTurnGUI.setVisible(false);	
 		
         whiteStock = new JLabel("10");
         whiteStock.setForeground(Color.WHITE);
         whiteStock.setBounds(166, 134, 16, 16);
-        
-        
+               
         blackStock = new JLabel("10");
         blackStock.setForeground(Color.WHITE);
         blackStock.setBounds(393, 134, 16, 16);
-        
-		
-		
-		
 		
 		tile.setLayout(null);
-		
-		
-		
+						
 		//ImageIcon whitePawn = new ImageIcon("/ca.mcgill.ecse223.quoridor/src/main/java/ca/mcgill/ecse223/quoridor/resources/wpawn.png");
-		
-		
-		
-		
-		
+
 		tile.add(monkey_White);
 		tile.add(whiteStock);
 		tile.add(setting);
@@ -274,38 +265,13 @@ public class NewJBoardReplay extends JFrame {
 		tile.add(cat_Black);
 		tile.add(blackStock);
 		
-		
-		
-//		users = new JUser();
-//		users.setBounds(0, 0, 560, 800);
-//		users.setOpaque(false);
-//		mainLayerPanel.add(users);
-		
 		JUserR users2 = new JUserR();
 		users2.setBounds(0, 0, 560, 800);
 		users2.setOpaque(false);
 		mainLayerPanel.add(users2);
 
-		
-		
-
         tile.setFocusable(true);
         
-        instruction1 = new JLabel("Grab Wall: Press G");
-        instruction1.setBounds(29, 714, 118, 16);
-        tile.add(instruction1);
-        
-        instruction2 = new JLabel("Drop Wall: Press T");
-        instruction2.setBounds(221, 714, 118, 16);
-        tile.add(instruction2);
-        
-        instruction3 = new JLabel("Move Wall: Press W,A,S,D");
-        instruction3.setBounds(29, 742, 313, 16);
-        tile.add(instruction3);
-        
-        instruction4 = new JLabel("Flip Wall: Press R");
-        instruction4.setBounds(379, 714, 118, 16);
-        tile.add(instruction4);
         
         lblWalls = new JLabel("Walls:");
         lblWalls.setForeground(Color.WHITE);
@@ -326,8 +292,10 @@ public class NewJBoardReplay extends JFrame {
         	public void actionPerformed(ActionEvent e) {
         		QuoridorController.jumpToStart();
         		ReplayRefresh.refreshBoardInReplayMode();
+        		ReplayRefresh.refreshBoardInReplayMode_wall();
         	}
         });
+        
         btnStart.setBounds(211, 56, 61, 32);
         tile.add(btnStart);
         
@@ -336,8 +304,11 @@ public class NewJBoardReplay extends JFrame {
         	public void actionPerformed(ActionEvent e) {
         		QuoridorController.jumpToFinal();
         		ReplayRefresh.refreshBoardInReplayMode();
+        		ReplayRefresh.refreshBoardInReplayMode_wall();
+        		
         	}
         });
+        
         btnFinal.setBounds(274, 56, 61, 32);
         tile.add(btnFinal);
         
@@ -346,6 +317,7 @@ public class NewJBoardReplay extends JFrame {
         	public void actionPerformed(ActionEvent e) {
         		QuoridorController.stepBackward();
         		ReplayRefresh.refreshBoardInReplayMode();
+        		ReplayRefresh.refreshBoardInReplayMode_wall();
         	}
         });
         btnBack.setBounds(211, 85, 61, 32);
@@ -356,6 +328,7 @@ public class NewJBoardReplay extends JFrame {
         	public void actionPerformed(ActionEvent e) {
         		QuoridorController.stepForward();
         		ReplayRefresh.refreshBoardInReplayMode();
+        		ReplayRefresh.refreshBoardInReplayMode_wall();
         	}
         });
         btnNext.setBounds(274, 85, 61, 32);
@@ -364,189 +337,16 @@ public class NewJBoardReplay extends JFrame {
         JLabel lblReplay = new JLabel("Replay");
         lblReplay.setFont(new Font("Lucida Grande", Font.PLAIN, 23));
         lblReplay.setBounds(235, 16, 74, 28);
-        tile.add(lblReplay);
-        
+        tile.add(lblReplay);       
 
-		tile.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if (e.getKeyChar()=='g') {	
-					if(jWallCandidate==null) {
-						if(isWhiteTurn) {
-							if(WHITE_WALL_INDEX<MAX_WALL) {
-								jWallCandidate = JWhiteWallInStock[WHITE_WALL_INDEX];
-								mainLayerPanel.add(jWallCandidate);
-								//getLayeredPane().add(jWallCandidate);
-								jWallCandidate.setBackground(Color.BLACK);
-								jWallCandidate.setBounds(297, 418, 9, 103);
-								jWallCandidate.setVisible(true);	
-								WHITE_WALL_INDEX++;
-							}else {
-								JOptionPane.showMessageDialog(null, "You have no more white walls in hand!");
-							}
-							
-						}
-						else {
-							if(BLACK_WALL_INDEX<MAX_WALL) {
-								jWallCandidate = JBlackWallInStock[BLACK_WALL_INDEX];
-								mainLayerPanel.add(jWallCandidate);
-								//getLayeredPane().add(jWallCandidate);
-								jWallCandidate.setBackground(Color.GREEN);
-								jWallCandidate.setBounds(297, 418, 9, 103);
-								jWallCandidate.setVisible(true);
-								BLACK_WALL_INDEX++;
-							}else {
-								JOptionPane.showMessageDialog(null, "You have no more black walls in hand!");
-							}
-						}
-						try {
-							QuoridorController.grabWall();
-						} catch (CloneNotSupportedException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}	
-					}else {
-						jWallCandidate.setVisible(false);
-						jWallCandidate=null;
-						if(isWhiteTurn) {
-							WHITE_WALL_INDEX--;
-							System.out.println("remove white");
-						}else {
-							BLACK_WALL_INDEX--;
-							System.out.println("remove black");
-						}
-					}
-				}
-				// up
-				if ((e.getKeyChar()=='w')||(e.getKeyCode() == KeyEvent.VK_UP)) {
-					if(jWallCandidate!=null) {
-						QuoridorController.MoveWall("up");
-						int x = jWallCandidate.getLocation().x;
-						int y = jWallCandidate.getLocation().y;
-						if(jWallCandidate.getHeight()==103) {
-							if(y>=250) {
-								jWallCandidate.setLocation(x, y-56);
-							}
-						}
-						else{
-							if(y>=288) {
-								jWallCandidate.setLocation(x, y-56);
-							}
-						}
-					}
-				}
-				if ((e.getKeyChar()=='a')||(e.getKeyCode() == KeyEvent.VK_LEFT)) {
-					if(jWallCandidate!=null) {
-						QuoridorController.MoveWall("left");
-						int x = jWallCandidate.getLocation().x;
-						int y = jWallCandidate.getLocation().y;
-						if(jWallCandidate.getHeight()==103) {
-							if(x>=129) {
-								jWallCandidate.setLocation(x-56, y);
-							}
-						}
-						else{
-							if(x>=82) {
-								jWallCandidate.setLocation(x-56, y);
-							}
-						}
-					}
-				}
-				if ((e.getKeyChar()=='s')||(e.getKeyCode() == KeyEvent.VK_DOWN)) {
-					if(jWallCandidate!=null) {
-						QuoridorController.MoveWall("down");
-						int x = jWallCandidate.getLocation().x;
-						int y = jWallCandidate.getLocation().y;
-						if(jWallCandidate.getHeight()==103) {
-							if(y<=530) {
-								jWallCandidate.setLocation(x, y+56);
-							}
-						}
-						else{
-							if(y<=577) {
-								jWallCandidate.setLocation(x, y+56);
-							}
-						}
-					}
-				}
-				if ((e.getKeyChar()=='d')||(e.getKeyCode() == KeyEvent.VK_RIGHT)) {
-					if(jWallCandidate!=null) {
-						QuoridorController.MoveWall("right");
-						int x = jWallCandidate.getLocation().x;
-						int y = jWallCandidate.getLocation().y;
-						if(jWallCandidate.getHeight()==103) {
-							if(x<=409) {
-								jWallCandidate.setLocation(x+56, y);
-							}
-						}
-						else{
-							if(x<=362) {
-								jWallCandidate.setLocation(x+56, y);
-							}
-						}
-					}
-				}
-				if (e.getKeyChar()=='r') {
-					if(jWallCandidate!=null) {
-						QuoridorController.flipWall();
-					    int x = jWallCandidate.getLocation().x;
-						int y = jWallCandidate.getLocation().y;
-						int old_h = jWallCandidate.getBounds().height;
-						int old_w = jWallCandidate.getBounds().width;
-						if (old_h==9) {
-							// horizontal
-							jWallCandidate.setBounds(x, y, 9, 103);
-							jWallCandidate.setLocation(jWallCandidate.getLocation().x+47 , jWallCandidate.getLocation().y-47);
-						}
-						else {
-							// vertical
-							jWallCandidate.setBounds(x, y, 103, 9);
-							jWallCandidate.setLocation(jWallCandidate.getLocation().x-47 , jWallCandidate.getLocation().y+47);        
-						}
-					}
-					
-				}
-				if (e.getKeyChar()=='t') if (e.getKeyChar()=='t') {
-					if(jWallCandidate!=null) {
-						if(QuoridorController.verifyOverlapped(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate())==false) 
-						{
-							if(isWhiteTurn) {
-								int x = jWallCandidate.getLocation().x;
-								int y = jWallCandidate.getLocation().y;
-								JWhiteWallInStock[WHITE_WALL_INDEX-1].setLocation(x, y);
-								JWhiteWallInStock[WHITE_WALL_INDEX-1].setBackground(Color.BLUE);
-								JWhiteWallInStock[WHITE_WALL_INDEX-1].setVisible(true);
-								JWhiteWallOnBoard[WHITE_WALL_INDEX-1] = JWhiteWallInStock[WHITE_WALL_INDEX-1];
-								whiteStock.setText(transferInt(10-WHITE_WALL_INDEX));
-								whiteTurnGUI.setVisible(false);
-								blackTurnGUI.setVisible(true);
-							}else {
-								int x = jWallCandidate.getLocation().x;
-								int y = jWallCandidate.getLocation().y;
-								JBlackWallInStock[BLACK_WALL_INDEX-1].setLocation(x, y);
-								JBlackWallInStock[BLACK_WALL_INDEX-1].setBackground(Color.BLUE);
-								JBlackWallInStock[BLACK_WALL_INDEX-1].setVisible(true);
-								JBlackWallOnBoard[BLACK_WALL_INDEX-1] = JBlackWallInStock[BLACK_WALL_INDEX-1];
-								blackStock.setText(transferInt(10-BLACK_WALL_INDEX));
-								whiteTurnGUI.setVisible(true);
-								blackTurnGUI.setVisible(false);
-							}
-							jWallCandidate = null;
-							isWhiteTurn = !isWhiteTurn;
-						}	
-						try {
-							QuoridorController.releaseWall();
-						} catch (CloneNotSupportedException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-					}
-				}
-			}
-
-			
-		});
+//		tile.addKeyListener(new KeyAdapter() {
+//			@Override
+//			public void keyPressed(KeyEvent e) {
+//			}			
+//		}		
+//				);
 	}
+	
 	/**
 	 * 
 	 * 
@@ -555,6 +355,7 @@ public class NewJBoardReplay extends JFrame {
 	 * @exception nothing
 	 *
 	 */
+	
 	public String transferInt(int a) {
 		if(a==10) return "10";
 		if(a==9) return "9";
@@ -614,6 +415,7 @@ public class NewJBoardReplay extends JFrame {
 	 * @exception nothing
 	 *
 	 */
+	
 	public ArrayList<SmallWallTO> getListOfSmallWallTO(){
 		ArrayList<SmallWallTO> listOfGUIWall = new ArrayList<SmallWallTO>();
 		for(int i=0; i<10; i++) {
@@ -655,10 +457,6 @@ public class NewJBoardReplay extends JFrame {
 		}
 		return listOfGUIWall;
 	}
-	
-
-
-	
 
 	
 	/**

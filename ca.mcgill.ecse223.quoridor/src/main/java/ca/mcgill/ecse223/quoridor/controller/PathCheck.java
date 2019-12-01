@@ -23,7 +23,7 @@ import ca.mcgill.ecse223.quoridor.model.WallMove;
 public class PathCheck {
 
 	public static String pathCheck() {
-		DefaultUndirectedGraph<Tile, DefaultEdge> graph = initializeGraph();
+		DefaultUndirectedGraph <Tile, DefaultEdge> graph = initializeGraph();
 		Player white = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
 		Player black = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
 		String result = "";
