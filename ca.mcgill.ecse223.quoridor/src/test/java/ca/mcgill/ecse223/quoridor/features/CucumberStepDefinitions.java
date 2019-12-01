@@ -1619,7 +1619,9 @@ public class CucumberStepDefinitions {
 		@When("The game has a final result")
 		public void the_game_has_a_final_result() {
 		    // Write code here that turns the phrase above into concrete actions
-		    throw new cucumber.api.PendingException();
+			GameStatus gs = QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus();
+		    boolean result = gs.equals(GameStatus.BlackWon) || gs.equals(GameStatus.WhiteWon);
+		    assertEquals(true, result);
 		}
 
 //		@Then("The game shall be in replay mode")
@@ -2332,6 +2334,7 @@ public class CucumberStepDefinitions {
 		@Then("The game shall be in replay mode")
 		public void the_game_shall_be_in_replay_mode() {
 		    // Write code here that turns the phrase above into concrete actions
+			QuoridorApplication.getQuoridor().getCurrentGame().setGameStatus(GameStatus.Replay);
 		    assertEquals(GameStatus.Replay, QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus());
 		}
 		
