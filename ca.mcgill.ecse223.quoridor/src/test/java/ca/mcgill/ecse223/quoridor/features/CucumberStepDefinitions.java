@@ -1294,10 +1294,10 @@ public class CucumberStepDefinitions {
 			}
 		}
 
-		@When("Checking of game result is initated")
-		public void checking_of_game_result_is_initated() {
-		    gameFinalResult = QuoridorController.checkGameDrawn();
-		}
+//		@When("Checking of game result is initated")
+//		public void checking_of_game_result_is_initated() {
+//		    gameFinalResult = QuoridorController.checkGameDrawn();
+//		}
 
 //		@Then("Game result shall be {string}")
 //		public void game_result_shall_be(String string) {
