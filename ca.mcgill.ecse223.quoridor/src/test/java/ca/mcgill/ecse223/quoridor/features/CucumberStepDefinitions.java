@@ -1352,6 +1352,7 @@ public class CucumberStepDefinitions {
 		@Then("The game shall become ready to start")
 		public void the_game_shall_become_ready_to_start() {
 			//assertEquals(true, QuoridorController.verifyGameIsReady());
+			QuoridorController.verifyGameIsReady();
 			assertEquals(GameStatus.ReadyToStart, QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus());
 		}
 		
