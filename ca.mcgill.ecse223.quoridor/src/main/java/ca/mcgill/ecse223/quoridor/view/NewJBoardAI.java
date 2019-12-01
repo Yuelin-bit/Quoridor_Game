@@ -234,32 +234,32 @@ public class NewJBoardAI extends JFrame {
 		
 		
 		
-		whiteUser = new JLabel(QuoridorController.getWhiteName());
+		whiteUser = new JLabel("Human");
 		whiteUser.setBounds(29, 135, 72, 15);
 		whiteUser.setForeground(Color.WHITE);
 		
 		
 		
-		blackUser = new JLabel(QuoridorController.getBlackName());
+		blackUser = new JLabel("Computer");
 		blackUser.setBounds(413, 135, 71, 15);
 		blackUser.setForeground(Color.WHITE);
 		
 		
 		
-		bigTime = new JLabel(QuoridorController.getWhiteRemainingTime());
+		bigTime = new JLabel("180");
 		bigTime.setBounds(221, 51, 91, 20);
 		bigTime.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-		bigTime.setText(QuoridorController.getWhiteRemainingTime());
+		bigTime.setText("180");
 
 		
 		
-		whiteTime = new JLabel(QuoridorController.getWhiteRemainingTime());
+		whiteTime = new JLabel("180");
 		whiteTime.setBounds(132, 38, 72, 15);
 		whiteTime.setForeground(Color.WHITE);
 		
 		
 		
-		blackTime = new JLabel(QuoridorController.getBlackRemainingTime());
+		blackTime = new JLabel("180");
 		blackTime.setBounds(360, 38, 39, 15);
 		blackTime.setForeground(Color.WHITE);
 		

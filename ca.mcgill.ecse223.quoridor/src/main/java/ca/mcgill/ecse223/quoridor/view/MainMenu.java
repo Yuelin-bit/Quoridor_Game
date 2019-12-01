@@ -115,6 +115,8 @@ public class MainMenu extends JFrame {
 		JButton btnPracticeai = new JButton("Practice (AI)");
 		btnPracticeai.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				NewJBoardAI aij = new NewJBoardAI();
+				QuoridorApplication.setJboardAI(aij);
 				QuoridorApplication.getJboardAI().setVisible(true);
 			}
 		});
