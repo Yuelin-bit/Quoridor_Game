@@ -25,6 +25,8 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import java.awt.SystemColor;
@@ -67,11 +69,17 @@ public class MainMenu extends JFrame {
 		btnNewButton.setBounds(74, 340, 166, 75);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				QuoridorController.initializeNewGame(); //boolean not catched
-				SelectName page = new SelectName();
-				page.setVisible(true);
-				setVisible(false);//close the mainMenu.
-				dispose();
+				if(!QuoridorApplication.getQuoridor().hasCurrentGame()) {
+					QuoridorController.initializeNewGame();
+					SelectName page = new SelectName();
+					page.setVisible(true);
+					setVisible(false);//close the mainMenu.
+					dispose();
+				} else {
+					JOptionPane.showOptionDialog(null, "You cannot have a new game without save the existing game.",
+			                "Warning",
+			                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[]{"OK"}, "OK");
+				}
 			}
 		});
 		
@@ -103,6 +111,10 @@ public class MainMenu extends JFrame {
 				if(QuoridorApplication.getQuoridor()!=null&&QuoridorApplication.getQuoridor().getCurrentGame()!=null) {
 					QuoridorApplication.getJboard().setVisible(true);
 					QuoridorApplication.getMainMenu().setVisible(false);
+				} else {
+					JOptionPane.showOptionDialog(null, "You cannot continue game without having a game.",
+			                "Warning",
+			                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[]{"OK"}, "OK");
 				}
 			}
 		});
@@ -115,8 +127,9 @@ public class MainMenu extends JFrame {
 		JButton btnPracticeai = new JButton("Practice (AI)");
 		btnPracticeai.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				NewJBoardAI aij = new NewJBoardAI();
-				QuoridorApplication.setJboardAI(aij);
+				
+				NewJBoardAI jai = new NewJBoardAI();
+				QuoridorApplication.setJboardAI(jai);
 				QuoridorApplication.getJboardAI().setVisible(true);
 			}
 		});
