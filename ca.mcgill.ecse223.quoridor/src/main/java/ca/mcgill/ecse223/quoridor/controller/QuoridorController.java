@@ -358,11 +358,11 @@ public class QuoridorController {
 		}
 		//check if path exist
 		
-		String error = PathCheck.pathCheck();
-		if(!error.equals("both")) {
-			JOptionPane.showMessageDialog(null, "Only "+error+" player has path!");
-			return;
-		}
+		//String error = PathCheck.pathCheck();
+//		if(!error.equals("both")) {
+//			JOptionPane.showMessageDialog(null, "Only "+error+" player has path!");
+//			return;
+//		}
 		Tile t = wallmove.getTargetTile();
 		Player currentPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
 		Game currentGame = QuoridorApplication.getQuoridor().getCurrentGame();
@@ -389,7 +389,12 @@ public class QuoridorController {
 			//QuoridorApplication.getQuoridor().getCurrentGame().addPosition(currentGamePosition);
 			//QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(currentGamePosition);
 			
-
+			whiteWatch.setRunning(true);
+			blackWatch.setRunning(false);
+			System.out.println("white"+whiteWatch.getRunning());
+			System.out.println("black"+blackWatch.getRunning());
+			System.out.println("white"+whiteWatch.getSecond());
+			System.out.println("black"+blackWatch.getSecond());
 		}else {	
 			int id = 1 + QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getId();
 			Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
@@ -401,11 +406,21 @@ public class QuoridorController {
 			//currentGamePosition.setId(id);
 			//QuoridorApplication.getQuoridor().getCurrentGame().addPosition(currentGamePosition);
 			//QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(currentGamePosition);
+			whiteWatch.setRunning(false);
+			blackWatch.setRunning(true);
+			System.out.println("white"+whiteWatch.getRunning());
+			System.out.println("black"+blackWatch.getRunning());
+			System.out.println("white"+whiteWatch.getSecond());
+			System.out.println("black"+blackWatch.getSecond());
 			
 		}
+		
 
 		System.out.println("hasGameAsBlack(): "+QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove().hasGameAsBlack());
-
+		System.out.println("white");
+		System.out.println("black"+blackWatch.getRunning());
+		System.out.println("white"+whiteWatch.getSecond());
+		System.out.println("black"+blackWatch.getSecond());
 	}
 
 	/**
@@ -1581,16 +1596,24 @@ public class QuoridorController {
 
 		Player white = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
 		Player black = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
-		if (QuoridorApplication.getJboard().isWhiteTurn()==false) {
+		if (!QuoridorApplication.getJboard().isWhiteTurn()) {
 			whiteWatch.setRunning(false);
 			blackWatch.setRunning(true);
-			blackWatch.notify();
+			System.out.println("white"+whiteWatch.getRunning());
+			System.out.println("black"+blackWatch.getRunning());
+			System.out.println("white"+whiteWatch.getSecond());
+			System.out.println("black"+blackWatch.getSecond());
+
 			player.setNextPlayer(white);
 			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(white);
 			//QuoridorApplication.getJboard().whiteTurn();
 		}else {
 			whiteWatch.setRunning(true);
 			blackWatch.setRunning(false);
+			System.out.println("white"+whiteWatch.getRunning());
+			System.out.println("black"+blackWatch.getRunning());
+			System.out.println("white"+whiteWatch.getSecond());
+			System.out.println("black"+blackWatch.getSecond());
 			player.setNextPlayer(black);
 			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(black);
 			//QuoridorApplication.getJboard().blackTurn();
@@ -1669,6 +1692,8 @@ public class QuoridorController {
 	 * @return A flag indicating whether the method successfully launched.
 	 */
 	public static void initializeBoard() {
+		System.out.println("white============================================================");
+
 		//		QuoridorApplication.setJBoard(new JBoard());
 		Board board = new Board(QuoridorApplication.getQuoridor());
 		//Board board = QuoridorApplication.getQuoridor().getBoard();
@@ -1678,6 +1703,8 @@ public class QuoridorController {
 				board.addTile(tile);
 			}
 		}
+		System.out.println("white============================================================");
+
 		Game game = QuoridorApplication.getQuoridor().getCurrentGame();
 		QuoridorApplication.getQuoridor().setBoard(board);
 		Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
@@ -1687,18 +1714,21 @@ public class QuoridorController {
 		Tile initBlack = new Tile(1, 5, board);
 		PlayerPosition initialWhite = new PlayerPosition(whitePlayer, initWhite);
 		PlayerPosition initialBlack = new PlayerPosition(whitePlayer, initBlack);
+		System.out.println("white============================================================");
 
 		GamePosition g = new GamePosition(0, initialWhite, initialBlack, whitePlayer, game);
 		g.setPlayerToMove(whitePlayer);
 		game.setCurrentPosition(g);
+		System.out.println("white============================================================");
 
 		initializeWhiteWall(g,whitePlayer);
 		initializeBlackWall(g,blackPlayer);
 		g.setPlayerToMove(whitePlayer);
-		Stopwatch white = new Stopwatch(whitePlayer);
-		whiteWatch = white;
-		Stopwatch black = new Stopwatch(blackPlayer);
-		blackWatch = black;
+		System.out.println("white============================================================");
+
+		 
+		whiteWatch = new Stopwatch(whitePlayer);
+		blackWatch = new Stopwatch(blackPlayer);
 		whiteWatch.start();
 		whiteWatch.setRunning(true);
 		blackWatch.start();
