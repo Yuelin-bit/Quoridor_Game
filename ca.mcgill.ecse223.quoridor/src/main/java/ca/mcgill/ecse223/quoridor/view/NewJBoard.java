@@ -225,8 +225,15 @@ public class NewJBoard extends JFrame {
 		setting.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				QuoridorApplication.getJboard().setVisible(false);
-				QuoridorApplication.getMainMenu().setVisible(true);
+				int result = JOptionPane.showOptionDialog(null, "Setting",
+		                "Setting",
+		                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[]{"Back to Main Menu", "Resign"}, "Back to Main Menu");
+				if (result==0) {
+					QuoridorApplication.getJboard().setVisible(false);
+					QuoridorApplication.getMainMenu().setVisible(true);
+				} else {
+					QuoridorController.resign();
+				}
 			}
 		});
 		setting.setBounds(296, 135, 30, 28);

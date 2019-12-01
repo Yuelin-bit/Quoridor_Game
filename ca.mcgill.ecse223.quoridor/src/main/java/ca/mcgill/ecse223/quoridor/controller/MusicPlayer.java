@@ -24,11 +24,13 @@ public class MusicPlayer {
 			float dB =(float) (Math.log(value==0.0?0.0001:value)/Math.log(10.0)*20.0);
 			fc.setValue(dB);
 			int nByte = 0;
-			int writeByte = 0;
 			final int SIZE = 1024*64;
 			byte[] buffer = new byte[SIZE];
 			while(nByte!=-1) {
 				nByte = ais.read(buffer, 0, SIZE);
+				if(nByte==-1) {
+					break;
+				}
 				sdl.write(buffer,  0,  nByte);
 			}
 			sdl.stop();
