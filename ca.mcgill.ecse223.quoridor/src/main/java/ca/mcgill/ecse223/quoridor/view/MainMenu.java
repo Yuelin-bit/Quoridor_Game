@@ -75,7 +75,7 @@ public class MainMenu extends JFrame {
 			}
 		});
 		
-		JButton btnNewButton_1 = new JButton("Load Position");
+		JButton btnNewButton_1 = new JButton("Load Game");
 		btnNewButton_1.setBounds(328, 197, 166, 75);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
