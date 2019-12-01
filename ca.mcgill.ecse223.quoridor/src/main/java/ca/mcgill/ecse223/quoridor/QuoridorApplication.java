@@ -105,9 +105,10 @@ public class QuoridorApplication {
                 mainMenu.setVisible(true);
             }
         });
+        String music = (System.getProperty("os.name").contains("Windows")) ? "src\\main\\java\\ca\\mcgill\\ecse223\\quoridor\\resources\\zbj_wav.wav" 
+        		: "src/main/java/ca/mcgill/ecse223/quoridor/resources/xyj.wav";
         while(true) {
-        	MusicPlayer.play("src\\main\\java\\ca\\mcgill\\ecse223"
-        			+ "\\quoridor\\resources\\xyj.wav");
+        	MusicPlayer.play(music);
         }
 	}
 	
