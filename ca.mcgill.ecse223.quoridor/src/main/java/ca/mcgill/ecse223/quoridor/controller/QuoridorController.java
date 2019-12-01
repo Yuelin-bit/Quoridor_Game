@@ -1398,7 +1398,11 @@ public class QuoridorController {
 		}
 		
 		//quoridor.getCurrentGame().setGameStatus(GameStatus.ReadyToStart);
-		QuoridorController.verifyGameIsReady();
+		if (QuoridorController.checkGameResult() == "whiteWon" || QuoridorController.checkGameResult() == "blackWon") {
+			quoridor.getCurrentGame().setGameStatus(GameStatus.Replay);
+		} else {
+			QuoridorController.verifyGameIsReady();
+		}
 
 		return true;
 	}
@@ -1981,7 +1985,7 @@ public class QuoridorController {
 //			return false;
 //		}
 
-
+		
 		g.setGameStatus(GameStatus.ReadyToStart);
 		return true;
 	}
