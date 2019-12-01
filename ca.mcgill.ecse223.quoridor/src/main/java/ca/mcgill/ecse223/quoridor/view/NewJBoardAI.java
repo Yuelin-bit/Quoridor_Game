@@ -47,7 +47,7 @@ public class NewJBoardAI extends JFrame {
 
 	private JPanel contentPane;
 	private JPanel mainLayerPanel;
-	private JTile tile;
+	private JTileAI tile;
 	private JUser users;
 	private JLabel txtrSeconds;
 	private JLabel whiteUser;
@@ -56,6 +56,7 @@ public class NewJBoardAI extends JFrame {
 	private JLabel whiteTime;
 	private JButton setting;
 	private JLabel whiteTurnGUI;
+	private int AIIndex = 0;
 	/**
 	 * 
 	 * The below is generated automatically
@@ -189,7 +190,7 @@ public class NewJBoardAI extends JFrame {
 		
 		
 		
-		tile = new JTile();
+		tile = new JTileAI();
 		tile.setBackground(Color.WHITE);
 		tile.setBounds(0, 0, 560, 800);
 		tile.setOpaque(false);
@@ -511,6 +512,7 @@ public class NewJBoardAI extends JFrame {
 								whiteStock.setText(transferInt(10-WHITE_WALL_INDEX));
 								whiteTurnGUI.setVisible(false);
 								blackTurnGUI.setVisible(true);
+								
 							}else {
 								int x = jWallCandidate.getLocation().x;
 								int y = jWallCandidate.getLocation().y;
@@ -524,6 +526,271 @@ public class NewJBoardAI extends JFrame {
 							}
 							jWallCandidate = null;
 							isWhiteTurn = !isWhiteTurn;
+							if(isWhiteTurn==false) {
+								if(AIIndex==0) {
+									if(BLACK_WALL_INDEX<MAX_WALL) {
+										jWallCandidate = JBlackWallInStock[BLACK_WALL_INDEX];
+										mainLayerPanel.add(jWallCandidate);
+										//getLayeredPane().add(jWallCandidate);
+										jWallCandidate.setBackground(Color.GREEN);
+										jWallCandidate.setBounds(297, 418, 9, 103);
+										jWallCandidate.setVisible(true);
+										BLACK_WALL_INDEX++;
+									}else {
+										JOptionPane.showMessageDialog(null, "You have no more black walls in hand!");
+									}
+									try {
+										QuoridorController.grabWall();
+									} catch (CloneNotSupportedException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									}
+									if(jWallCandidate!=null) {
+										QuoridorController.MoveWall("left");
+										int x = jWallCandidate.getLocation().x;
+										int y = jWallCandidate.getLocation().y;
+										if(jWallCandidate.getHeight()==103) {
+											if(x>=129) {
+												jWallCandidate.setLocation(x-56, y);
+											}
+										}
+										else{
+											if(x>=82) {
+												jWallCandidate.setLocation(x-56, y);
+											}
+										}
+									}
+									if(jWallCandidate!=null) {
+										QuoridorController.MoveWall("left");
+										int x = jWallCandidate.getLocation().x;
+										int y = jWallCandidate.getLocation().y;
+										if(jWallCandidate.getHeight()==103) {
+											if(x>=129) {
+												jWallCandidate.setLocation(x-56, y);
+											}
+										}
+										else{
+											if(x>=82) {
+												jWallCandidate.setLocation(x-56, y);
+											}
+										}
+									}
+									int x = jWallCandidate.getLocation().x;
+									int y = jWallCandidate.getLocation().y;
+									JBlackWallInStock[BLACK_WALL_INDEX-1].setLocation(x, y);
+									JBlackWallInStock[BLACK_WALL_INDEX-1].setBackground(Color.BLUE);
+									JBlackWallInStock[BLACK_WALL_INDEX-1].setVisible(true);
+									JBlackWallOnBoard[BLACK_WALL_INDEX-1] = JBlackWallInStock[BLACK_WALL_INDEX-1];
+									blackStock.setText(transferInt(10-BLACK_WALL_INDEX));
+									whiteTurnGUI.setVisible(true);
+									blackTurnGUI.setVisible(false);
+									AIIndex ++;
+								}
+								else if(AIIndex==1) {
+									if(BLACK_WALL_INDEX<MAX_WALL) {
+										jWallCandidate = JBlackWallInStock[BLACK_WALL_INDEX];
+										mainLayerPanel.add(jWallCandidate);
+										//getLayeredPane().add(jWallCandidate);
+										jWallCandidate.setBackground(Color.GREEN);
+										jWallCandidate.setBounds(297, 418, 9, 103);
+										jWallCandidate.setVisible(true);
+										BLACK_WALL_INDEX++;
+									}else {
+										JOptionPane.showMessageDialog(null, "You have no more black walls in hand!");
+									}
+									try {
+										QuoridorController.grabWall();
+									} catch (CloneNotSupportedException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									}
+									if(jWallCandidate!=null) {
+										QuoridorController.flipWall();
+									    int x = jWallCandidate.getLocation().x;
+										int y = jWallCandidate.getLocation().y;
+										int old_h = jWallCandidate.getBounds().height;
+										int old_w = jWallCandidate.getBounds().width;
+										if (old_h==9) {
+											// horizontal
+											jWallCandidate.setBounds(x, y, 9, 103);
+											jWallCandidate.setLocation(jWallCandidate.getLocation().x+47 , jWallCandidate.getLocation().y-47);
+										}
+										else {
+											// vertical
+											jWallCandidate.setBounds(x, y, 103, 9);
+											jWallCandidate.setLocation(jWallCandidate.getLocation().x-47 , jWallCandidate.getLocation().y+47);        
+										}
+									}
+									if(jWallCandidate!=null) {
+										QuoridorController.MoveWall("left");
+										int x = jWallCandidate.getLocation().x;
+										int y = jWallCandidate.getLocation().y;
+										if(jWallCandidate.getHeight()==103) {
+											if(x>=129) {
+												jWallCandidate.setLocation(x-56, y);
+											}
+										}
+										else{
+											if(x>=82) {
+												jWallCandidate.setLocation(x-56, y);
+											}
+										}
+									}
+									if(jWallCandidate!=null) {
+										QuoridorController.MoveWall("right");
+										int x = jWallCandidate.getLocation().x;
+										int y = jWallCandidate.getLocation().y;
+										if(jWallCandidate.getHeight()==103) {
+											if(x<=409) {
+												jWallCandidate.setLocation(x+56, y);
+											}
+										}
+										else{
+											if(x<=362) {
+												jWallCandidate.setLocation(x+56, y);
+											}
+										}
+									}
+									if(jWallCandidate!=null) {
+										QuoridorController.MoveWall("left");
+										int x = jWallCandidate.getLocation().x;
+										int y = jWallCandidate.getLocation().y;
+										if(jWallCandidate.getHeight()==103) {
+											if(x>=129) {
+												jWallCandidate.setLocation(x-56, y);
+											}
+										}
+										else{
+											if(x>=82) {
+												jWallCandidate.setLocation(x-56, y);
+											}
+										}
+									}
+									int x = jWallCandidate.getLocation().x;
+									int y = jWallCandidate.getLocation().y;
+									JBlackWallInStock[BLACK_WALL_INDEX-1].setLocation(x, y);
+									JBlackWallInStock[BLACK_WALL_INDEX-1].setBackground(Color.BLUE);
+									JBlackWallInStock[BLACK_WALL_INDEX-1].setVisible(true);
+									JBlackWallOnBoard[BLACK_WALL_INDEX-1] = JBlackWallInStock[BLACK_WALL_INDEX-1];
+									blackStock.setText(transferInt(10-BLACK_WALL_INDEX));
+									whiteTurnGUI.setVisible(true);
+									blackTurnGUI.setVisible(false);
+									AIIndex ++;
+								}
+								else if(AIIndex==2) {
+									if(BLACK_WALL_INDEX<MAX_WALL) {
+										jWallCandidate = JBlackWallInStock[BLACK_WALL_INDEX];
+										mainLayerPanel.add(jWallCandidate);
+										//getLayeredPane().add(jWallCandidate);
+										jWallCandidate.setBackground(Color.GREEN);
+										jWallCandidate.setBounds(297, 418, 9, 103);
+										jWallCandidate.setVisible(true);
+										BLACK_WALL_INDEX++;
+									}else {
+										JOptionPane.showMessageDialog(null, "You have no more black walls in hand!");
+									}
+									try {
+										QuoridorController.grabWall();
+									} catch (CloneNotSupportedException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									}
+									if(jWallCandidate!=null) {
+										QuoridorController.flipWall();
+									    int x = jWallCandidate.getLocation().x;
+										int y = jWallCandidate.getLocation().y;
+										int old_h = jWallCandidate.getBounds().height;
+										int old_w = jWallCandidate.getBounds().width;
+										if (old_h==9) {
+											// horizontal
+											jWallCandidate.setBounds(x, y, 9, 103);
+											jWallCandidate.setLocation(jWallCandidate.getLocation().x+47 , jWallCandidate.getLocation().y-47);
+										}
+										else {
+											// vertical
+											jWallCandidate.setBounds(x, y, 103, 9);
+											jWallCandidate.setLocation(jWallCandidate.getLocation().x-47 , jWallCandidate.getLocation().y+47);        
+										}
+									}
+									if(jWallCandidate!=null) {
+										QuoridorController.MoveWall("left");
+										int x = jWallCandidate.getLocation().x;
+										int y = jWallCandidate.getLocation().y;
+										if(jWallCandidate.getHeight()==103) {
+											if(x>=129) {
+												jWallCandidate.setLocation(x-56, y);
+											}
+										}
+										else{
+											if(x>=82) {
+												jWallCandidate.setLocation(x-56, y);
+											}
+										}
+									}
+									if(jWallCandidate!=null) {
+										QuoridorController.MoveWall("right");
+										int x = jWallCandidate.getLocation().x;
+										int y = jWallCandidate.getLocation().y;
+										if(jWallCandidate.getHeight()==103) {
+											if(x<=409) {
+												jWallCandidate.setLocation(x+56, y);
+											}
+										}
+										else{
+											if(x<=362) {
+												jWallCandidate.setLocation(x+56, y);
+											}
+										}
+									}
+									if(jWallCandidate!=null) {
+										QuoridorController.MoveWall("right");
+										int x = jWallCandidate.getLocation().x;
+										int y = jWallCandidate.getLocation().y;
+										if(jWallCandidate.getHeight()==103) {
+											if(x<=409) {
+												jWallCandidate.setLocation(x+56, y);
+											}
+										}
+										else{
+											if(x<=362) {
+												jWallCandidate.setLocation(x+56, y);
+											}
+										}
+									}
+									if(jWallCandidate!=null) {
+										QuoridorController.MoveWall("up");
+										int x = jWallCandidate.getLocation().x;
+										int y = jWallCandidate.getLocation().y;
+										if(jWallCandidate.getHeight()==103) {
+											if(y>=250) {
+												jWallCandidate.setLocation(x, y-56);
+											}
+										}
+										else{
+											if(y>=288) {
+												jWallCandidate.setLocation(x, y-56);
+											}
+										}
+									}
+									
+									int x = jWallCandidate.getLocation().x;
+									int y = jWallCandidate.getLocation().y;
+									JBlackWallInStock[BLACK_WALL_INDEX-1].setLocation(x, y);
+									JBlackWallInStock[BLACK_WALL_INDEX-1].setBackground(Color.BLUE);
+									JBlackWallInStock[BLACK_WALL_INDEX-1].setVisible(true);
+									JBlackWallOnBoard[BLACK_WALL_INDEX-1] = JBlackWallInStock[BLACK_WALL_INDEX-1];
+									blackStock.setText(transferInt(10-BLACK_WALL_INDEX));
+									whiteTurnGUI.setVisible(true);
+									blackTurnGUI.setVisible(false);
+									AIIndex ++;
+								}
+								
+								
+								
+								jWallCandidate = null;
+								isWhiteTurn = !isWhiteTurn;
+								
+							}
 						}	
 						try {
 							QuoridorController.releaseWall();
