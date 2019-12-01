@@ -3,6 +3,7 @@ package ca.mcgill.ecse223.quoridor;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import ca.mcgill.ecse223.quoridor.controller.MusicPlayer;
 import ca.mcgill.ecse223.quoridor.controller.QuoridorController;
 import ca.mcgill.ecse223.quoridor.model.Quoridor;
 import ca.mcgill.ecse223.quoridor.view.LoadPosition;
@@ -23,19 +24,16 @@ import javax.swing.JFrame;
 public class QuoridorApplication {
 
 	@SuppressWarnings("deprecation")
-	static void playMusic(){//背景音乐播放
+	static void playMusic(){
 		try {
 			URL cb;
-			File f = new File("a"); // 引号里面的是音乐文件所在的路径
+			File f = new File("./src/main/java/ca/mcgill/ecse223/quoridor/resources/zbj.mp3");
 			cb = f.toURL();
 			AudioClip aau;
 			aau = Applet.newAudioClip(cb);
 		
 			aau.play();	
-			aau.loop();//循环播放
-			System.out.println("可以播放");
-			// 循环播放 aau.play()
-			//单曲 aau.stop()停止播放
+			aau.loop();
  
 		} catch (MalformedURLException e) {
 			
@@ -100,7 +98,6 @@ public class QuoridorApplication {
 
 	public static void main(String[] args) {
 		// start UI
-		playMusic();
 		mainMenu = new MainMenu();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -108,6 +105,10 @@ public class QuoridorApplication {
                 mainMenu.setVisible(true);
             }
         });
+        while(true) {
+        	MusicPlayer.play("src\\main\\java\\ca\\mcgill\\ecse223"
+        			+ "\\quoridor\\resources\\xyj.wav");
+        }
 	}
 	
 	public static Quoridor getQuoridor() {
