@@ -57,6 +57,7 @@ public class MainMenu extends JFrame {
 					frame.setVisible(true);
 					//QuoridorController.initQuoridorAndBoard();
 					QuoridorController.initializeNewGame();
+//					QuoridorController.initializeEmptyBoard();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
