@@ -20,6 +20,7 @@ public class Stopwatch extends Thread{
 	private long totalInMilli;
 	private Player player;
 	private Time timeRemaining;
+	private boolean running = false;
 
 	@SuppressWarnings("deprecation")
 	public Stopwatch(Player player) {
@@ -29,14 +30,22 @@ public class Stopwatch extends Thread{
 		this.totalInMilli = total * numConversion;
 		this.player = player;
 	}
+	public void setRunning(boolean running) {
+		this.running = running;
+	}
+	public boolean getRunning() {
+		return running;
+	}
 	public void run() {
 		startTime = System.currentTimeMillis();
 		stopTime = startTime +totalInMilli;
 		while(System.currentTimeMillis()<=stopTime) {
+			if(running) {
 			timeLeft = stopTime - System.currentTimeMillis();
 			timeRemaining = new Time(timeLeft);
 			player.setRemainingTime(timeRemaining);
 			timeLeftInSec = (int) (timeLeft/numConversion);
+			}
 		}
 		timeIsEnd = true;
 		// set game state to <other player> won
@@ -175,36 +184,36 @@ public class Stopwatch extends Thread{
 		this.player = player;
 	}
 
-	public static void main (String [] args) {
-		User user1 = QuoridorApplication.getQuoridor().addUser("LOL");
-		Player player = new Player(new Time(3000), user1, 9, Direction.Horizontal);
-		Stopwatch stopwatch = new Stopwatch(player);
-		stopwatch.start();
-		int index = 0;
-		while(!stopwatch.timeIsEnd) {
-			if(stopwatch.timeLeftInSec == 7) {
-					stopwatch.suspend();
-				
-				index++;
-				System.out.println(index);
-
-			}
-			if(index==2) {
-				stopwatch.resume();
-				System.out.println("resume");
-
-			}
-			try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			System.out.println("total:"+stopwatch.timeLeftInSec);		
-		}
-		System.out.println(stopwatch.timeIsEnd);
-
-		
-	}
+//	public static void main (String [] args) {
+//		User user1 = QuoridorApplication.getQuoridor().addUser("LOL");
+//		Player player = new Player(new Time(3000), user1, 9, Direction.Horizontal);
+//		Stopwatch stopwatch = new Stopwatch(player);
+//		stopwatch.start();
+//		int index = 0;
+//		while(!stopwatch.timeIsEnd) {
+//			if(stopwatch.timeLeftInSec == 7) {
+//					stopwatch.suspend();
+//				
+//				index++;
+//				System.out.println(index);
+//
+//			}
+//			if(index==2) {
+//				stopwatch.resume();
+//				System.out.println("resume");
+//
+//			}
+//			try {
+//				Thread.sleep(500);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			System.out.println("total:"+stopwatch.timeLeftInSec);		
+//		}
+//		System.out.println(stopwatch.timeIsEnd);
+//
+//		
+//	}
 
 }
