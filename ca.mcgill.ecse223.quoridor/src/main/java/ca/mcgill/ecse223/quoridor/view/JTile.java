@@ -1354,6 +1354,7 @@ public class JTile extends JPanel {
 						}
 						blackPawn_row = x;
 						blackPawn_column = y;
+						if(x==9) {QuoridorApplication.getQuoridor().getCurrentGame().setGameStatus(GameStatus.BlackWon); JOptionPane.showMessageDialog(null, "Black Won!!");}
 						QuoridorApplication.getJboard().setWhiteTurn(true);
 						QuoridorApplication.getJboard().getWhiteTurnGUI().setVisible(true);
 						QuoridorApplication.getJboard().getBlackTurnGUI().setVisible(false);
@@ -1380,6 +1381,7 @@ public class JTile extends JPanel {
 						}
 						whitePawn_row = x;
 						whitePawn_column = y;
+						if(x==1) {QuoridorApplication.getQuoridor().getCurrentGame().setGameStatus(GameStatus.WhiteWon);JOptionPane.showMessageDialog(null, "White Won!!");}
 						QuoridorApplication.getJboard().setWhiteTurn(false);
 						QuoridorApplication.getJboard().getWhiteTurnGUI().setVisible(false);
 						QuoridorApplication.getJboard().getBlackTurnGUI().setVisible(true);
