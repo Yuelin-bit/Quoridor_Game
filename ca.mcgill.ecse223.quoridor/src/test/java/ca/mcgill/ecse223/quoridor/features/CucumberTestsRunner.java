@@ -1,4 +1,3 @@
-
 package ca.mcgill.ecse223.quoridor.features;
 
 import org.junit.runner.RunWith;
