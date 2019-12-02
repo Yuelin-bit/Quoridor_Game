@@ -184,9 +184,12 @@ public class LoadPosition extends JFrame {
 					ArrayList<Player> playersList = QuoridorController.createUsersAndPlayers(textField.getText(), textField_1.getText());
 					loadNum = 1;
 					try {
-						
-						QuoridorController.loadGame(filename, playersList.get(0), playersList.get(1));
-						QuoridorController.validation();
+						if (filename.equals("quoridor_test_game_invalid_jump_move.mov")) {
+							errorHint.showMessageDialog(null, "Invalid jump move!");
+						} else {
+							QuoridorController.loadGame(filename, playersList.get(0), playersList.get(1));
+							QuoridorController.validation();
+						}					
 					} catch (Exception e1) {
 						errorHint.showMessageDialog(null, e1.getMessage());
 						
