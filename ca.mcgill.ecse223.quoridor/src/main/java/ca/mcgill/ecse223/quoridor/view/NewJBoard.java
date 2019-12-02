@@ -178,9 +178,6 @@ public class NewJBoard extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
-		
-		
-		
 		mainLayerPanel = new JPanel();		  
 		contentPane.add(mainLayerPanel, BorderLayout.CENTER);		 
 		mainLayerPanel.setBorder(BorderFactory.createLineBorder(Color.orange, 2));
