@@ -22,6 +22,10 @@ import ca.mcgill.ecse223.quoridor.model.WallMove;
 
 public class PathCheck {
 
+	/**
+	 * @author Sun, Gengyi
+	 * @return A string indicating whose path is available.
+	 */
 	@SuppressWarnings("unchecked")
 	public static String pathCheck() {
 
@@ -39,11 +43,22 @@ public class PathCheck {
 		System.out.println(result+"-----------------------");
 		return result;
 	}
+	/**
+	 * Checking for player's available path.
+	 * @param player
+	 * @return A boolean indicating whether player has a path to destination.
+	 */
 	public static boolean pathCheckPlayer(Player player) {
 		DefaultUndirectedGraph<Tile, DefaultEdge> graph = initializeGraph();
 		return testPath(player, graph);	
 	}
 
+	/**
+	 * 	Showing what color is the player.
+	 * @param p
+	 * @return	a boolean indicating if player is white player.
+	 * @throws RuntimeException
+	 */
 	public static boolean isWhitePlayer(Player p) throws RuntimeException {
 		if(p==null) throw new RuntimeException("Player cannot be null!");
 		Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
@@ -54,6 +69,10 @@ public class PathCheck {
 
 	}
 
+	/**
+	 * Connect the current game position as a graph.
+	 * @return A undirected graph, tiles are the vertices
+	 */
 	public static DefaultUndirectedGraph initializeGraph(){
 		DefaultUndirectedGraph<Tile, DefaultEdge> graph = new DefaultUndirectedGraph<Tile,DefaultEdge>(DefaultEdge.class);
 
@@ -92,13 +111,12 @@ public class PathCheck {
 
 
 
-
-
-
-
-
-
-
+	/**
+	 * Showing a player position of the player input.
+	 * @param player
+	 * @return	A player position of the player
+	 * @throws Exception
+	 */
 	public static PlayerPosition getPlayerPosition(Player player) throws Exception
 
 	{
@@ -117,7 +135,12 @@ public class PathCheck {
 	}
 
 
-
+	/**
+	 * Deciding if player has a path to its destination.
+	 * @param player
+	 * @param boardGraph
+	 * @return	 a boolean indicating if player has path
+	 */
 	private static boolean playPath(Player player, DefaultUndirectedGraph<Tile, DefaultEdge> boardGraph) {
 		Board board = QuoridorApplication.getQuoridor().getBoard();
 		Destination destination = player.getDestination();
@@ -159,6 +182,12 @@ public class PathCheck {
 		}
 		return false;
 	}
+	/**
+	 * Deciding if player has a path to its destination.
+	 * @param player
+	 * @param boardGraph
+	 * @return	 a boolean indicating if player has path
+	 */
 	private static boolean testPath(Player player, DefaultUndirectedGraph<Tile, DefaultEdge> boardGraph) {
 		Board board = QuoridorApplication.getQuoridor().getBoard();
 		Destination destination = player.getDestination();
@@ -194,10 +223,21 @@ public class PathCheck {
 		}
 		return false;
 	}
+	/**
+	 * Showing player's color
+	 * @param player
+	 * @return a string telling you the player's color
+	 */
 	public static String getColor(Player player) {
 		if(player.equals(QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer())) return "black";
 		else return "white";
 	}
+	/**
+	 * Showing whether a veritical wall exists at row, col
+	 * @param row
+	 * @param col
+	 * @return	a boolean indicating whether a veritical wall exists at row, col
+	 */
 	private static boolean verticalWallAt(int row, int col) {
 		if(row < 1 || row > 8 || col < 1 || col > 8 ) { 
 			return false; 
@@ -219,7 +259,12 @@ public class PathCheck {
 			} else return false;
 		}
 	}
-
+	/**
+	 * Showing whether a horizontal wall exists at row, col
+	 * @param row
+	 * @param col
+	 * @return	a boolean indicating whether a veritical wall exists at row, col
+	 */
 	private static boolean horizontalWallAt(int row, int col) {
 		if(row < 1 || row > 8 || col < 1 || col > 8 ) { 
 			return false; 
@@ -239,25 +284,36 @@ public class PathCheck {
 			} else return false;
 		}
 	}
-	
+
+	/**
+	 * Gives a list of wall on board currently
+	 * @return a list of wall on board currently
+	 */
 	private static List<Wall> getWallsOnBoard() {
 		GamePosition currentPosition = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition();
 		List<Wall> walls = new ArrayList<Wall>();
 
-			walls.addAll(currentPosition.getWhiteWallsOnBoard());
-			walls.addAll(currentPosition.getBlackWallsOnBoard());
+		walls.addAll(currentPosition.getWhiteWallsOnBoard());
+		walls.addAll(currentPosition.getBlackWallsOnBoard());
 		return walls;
 	}
+	/**
+	 * Give a specific wall on board at row, col
+	 * @param walls
+	 * @param row
+	 * @param col
+	 * @return a specific wall on board at row, col
+	 */
 	private static Wall getWall(List<Wall> walls, int row, int col) {
 		Board board = QuoridorApplication.getQuoridor().getBoard();
 		for (Wall w : walls) {
 			if (w.getMove().getTargetTile().getRow() == row && w.getMove().getTargetTile().getColumn() == col) {
 				return w;
-				}
+			}
 		}
 		return null;
 	}
-	
+
 
 
 }

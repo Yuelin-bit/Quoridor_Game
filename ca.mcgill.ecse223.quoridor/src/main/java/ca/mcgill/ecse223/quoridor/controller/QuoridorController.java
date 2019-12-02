@@ -33,8 +33,10 @@ import org.jgrapht.graph.*;
 import org.jgrapht.util.SupplierUtil;
 
 public class QuoridorController {
+	public static List<Move> moveList;
 	/**
 	 * This method establish a thread that reset board data every second.
+	 * @author Sun, Gengyi
 	 */
 	public static void refreshData() {
 		try {
@@ -47,25 +49,28 @@ public class QuoridorController {
 		refresh.start();
 
 	}
-	
+
 	/**
 	 * Get game result.
-	 * @return
+	 * @author Sun, Gengyi
+	 * @return A string indicating game status
 	 */
 	public static String getGameResult() {
-	if(QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus().equals(GameStatus.WhiteWon)) return "WhiteWon!";
-	else if(QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus().equals(GameStatus.BlackWon)) return "BlackWon!";
-	else return "Peace and Love";
+		if(QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus().equals(GameStatus.WhiteWon)) return "WhiteWon!";
+		else if(QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus().equals(GameStatus.BlackWon)) return "BlackWon!";
+		else return "Peace and Love(Draw)";
 	}
 	/**
 	 * This method helps communicating through model and UI.
 	 * @return A string of white user's time
+	 * @author Sun, Gengyi
 	 */
 	public static String getWhiteName() {
 		return QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer().getUser().getName();
 	}
 	/**
 	 * This method helps communicating through model and UI.
+	 * @author Sun, Gengyi
 	 * @return A string of black user's time
 	 */
 	public static String getBlackName() {
@@ -74,6 +79,7 @@ public class QuoridorController {
 	/**
 	 * This method helps communicating through model and UI.
 	 * @return A string of white remaining time
+	 * @author Sun, Gengyi
 	 */
 	public static String getWhiteRemainingTime() {
 		int min = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer().getRemainingTime().getMinutes();
@@ -83,6 +89,7 @@ public class QuoridorController {
 	/**
 	 * This method helps communicating through model and UI.
 	 * @return A string of black remaining time
+	 * @author Sun, Gengyi
 	 */
 	public static String getBlackRemainingTime() {
 		int min = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer().getRemainingTime().getMinutes();
@@ -92,6 +99,7 @@ public class QuoridorController {
 	/**
 	 * This method helps communicating through model and UI.
 	 * @return A string of white remaining wall
+	 * @author Sun, Gengyi
 	 */
 	public static String getWhiteStocks() {
 		int num = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer().getWalls().size();
@@ -100,6 +108,7 @@ public class QuoridorController {
 	/**
 	 * This method helps communicating through model and UI.
 	 * @return A string of black remaining wall
+	 * @author Sun, Gengyi
 	 */
 	public static String getBlackStocks() {
 		int num = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer().getWalls().size();
@@ -107,13 +116,12 @@ public class QuoridorController {
 	}
 
 	/**
-	 * 
 	 * Refresh and set the environment up.
 	 * 
 	 * @return 
 	 * @return void
 	 * @exception nothing
-	 *
+	 * @author Yuelin Liu
 	 */
 	public static void refreshAndSet() {
 		QuoridorApplication.getQuoridor().setBoard(null);
@@ -202,8 +210,8 @@ public class QuoridorController {
 		boolean result = false;
 		int currentRow = wallmove.getTargetTile().getRow();
 		int currentColumn = wallmove.getTargetTile().getColumn();
-//		QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard();
-//		QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard();
+		//		QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard();
+		//		QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard();
 		int sizeB = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard().size();
 		int sizeW = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard().size();
 		if(wallmove.getWallDirection()==Direction.Vertical) {
@@ -329,7 +337,7 @@ public class QuoridorController {
 			return;
 		}
 		//check if path exist
-		
+
 
 		String error = PathCheck.pathCheck();
 		if(!error.equals("both")) {
@@ -354,19 +362,19 @@ public class QuoridorController {
 			//int id = 1 + QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getId();
 			Player blackPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
 			currentPlayer.setNextPlayer(blackPlayer);
-			
+
 			//GamePosition currentGamePosition = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition();
 			currentGamePosition.addWhiteWallsOnBoard(wallmove.getWallPlaced());
 			currentGamePosition.setPlayerToMove(blackPlayer);
 			//currentGamePosition.setId(id);
 			//QuoridorApplication.getQuoridor().getCurrentGame().addPosition(currentGamePosition);
 			//QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(currentGamePosition);
-			
+
 		}else {	
 			int id = 1 + QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getId();
 			Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
 			currentPlayer.setNextPlayer(whitePlayer);
-			
+
 			//GamePosition currentGamePosition = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition();
 			currentGamePosition.addBlackWallsOnBoard(wallmove.getWallPlaced());
 			currentGamePosition.setPlayerToMove(whitePlayer);
@@ -374,7 +382,12 @@ public class QuoridorController {
 			//QuoridorApplication.getQuoridor().getCurrentGame().addPosition(currentGamePosition);
 			//QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(currentGamePosition);
 		}
-		
+
+
+
+		//moveList.add(wallmove);
+
+
 		System.out.println("wall position: row= "+QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getRow()+
 				"column = "+QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getColumn());
 
@@ -495,7 +508,7 @@ public class QuoridorController {
 		if(s1=='g') newColumn = 7;
 		if(s1=='h') newColumn = 8;
 		if(s1=='i') newColumn = 9;
-		
+
 		if(s2=='1') newRow = 1;
 		if(s2=='2') newRow = 2;
 		if(s2=='3') newRow = 3;
@@ -505,7 +518,7 @@ public class QuoridorController {
 		if(s2=='7') newRow = 7;
 		if(s2=='8') newRow = 8;
 		if(s2=='9') newRow = 9;
-		
+
 		if((newRow==oldRow)&&(newColumn==oldColumn+1)) {
 			return "right";
 		}
@@ -520,8 +533,8 @@ public class QuoridorController {
 		}	
 		return string;
 	}
-	
-	
+
+
 	/**
 	 * Feature:StepForward
 	 * 
@@ -551,7 +564,7 @@ public class QuoridorController {
 		if(s1=='g') newRow = 7;
 		if(s1=='h') newRow = 8;
 		if(s1=='i') newRow = 9;
-		
+
 		if(s2=='1') newColumn = 1;
 		if(s2=='2') newColumn = 2;
 		if(s2=='3') newColumn = 3;
@@ -561,11 +574,11 @@ public class QuoridorController {
 		if(s2=='7') newColumn = 7;
 		if(s2=='8') newColumn = 8;
 		if(s2=='9') newColumn = 9;
-		
+
 		ArrayList<Integer> result = new ArrayList<Integer>();
 		result.add(newRow);
 		result.add(newColumn);
-		
+
 		return result;
 	}
 	/**
@@ -580,7 +593,7 @@ public class QuoridorController {
 	 * in the end, it set newID to current game. The game then is set to next version in replay mode.
 	 * 
 	 */
-	
+
 	public static void stepForward() {
 		int oldID = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getId();
 		int newID = oldID + 1;
@@ -589,8 +602,8 @@ public class QuoridorController {
 		}
 		QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(QuoridorApplication.getQuoridor().getCurrentGame().getPositions().get(newID));	
 	}
-	
-	
+
+
 	/**
 	 * Feature: StepBackward
 	 * 
@@ -612,39 +625,39 @@ public class QuoridorController {
 		QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(QuoridorApplication.getQuoridor().getCurrentGame().getPositions().get(newID));	
 	}
 
-	
+
 	/**
-	  * Feature: JumpToStart
-	  * 
-	  * @author Yujing Yang
-	  * @param this method does not take input parameter
-	  * @return void
-	  * 
-	  * functionality: This JumpToStart method moves the current game to the first step in the game, when it has not been played.
-	  * The ID for the initial step should be 0; so the method set position of currentGame to 0. 
-	  * The current game is then jumped to start in replay mode.
-	  */
-	 
-	 public static void jumpToStart() {
-	  QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(QuoridorApplication.getQuoridor().getCurrentGame().getPositions().get(0));
-	 }
-	 
-	 /**
-	  * Feature: JumpToFinal
-	  * 
-	  * @author Yujing Yang
-	  * @param this method does not take input parameter
-	  * @return void
-	  * 
-	  * functionality: This jumpToFinal method moves the current game to the last step in the game, when all steps has been made.
-	  * The ID for the last step should be the size of position -1; so the method set position of currentGame to size-1. 
-	  * The current game is then jumped to final version in replay mode.
-	  */
-	 
-	 public static void jumpToFinal() {
-	  int ID = QuoridorApplication.getQuoridor().getCurrentGame().getPositions().size() - 1;
-	  QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(QuoridorApplication.getQuoridor().getCurrentGame().getPositions().get(ID));
-	 }
+	 * Feature: JumpToStart
+	 * 
+	 * @author Yujing Yang
+	 * @param this method does not take input parameter
+	 * @return void
+	 * 
+	 * functionality: This JumpToStart method moves the current game to the first step in the game, when it has not been played.
+	 * The ID for the initial step should be 0; so the method set position of currentGame to 0. 
+	 * The current game is then jumped to start in replay mode.
+	 */
+
+	public static void jumpToStart() {
+		QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(QuoridorApplication.getQuoridor().getCurrentGame().getPositions().get(0));
+	}
+
+	/**
+	 * Feature: JumpToFinal
+	 * 
+	 * @author Yujing Yang
+	 * @param this method does not take input parameter
+	 * @return void
+	 * 
+	 * functionality: This jumpToFinal method moves the current game to the last step in the game, when all steps has been made.
+	 * The ID for the last step should be the size of position -1; so the method set position of currentGame to size-1. 
+	 * The current game is then jumped to final version in replay mode.
+	 */
+
+	public static void jumpToFinal() {
+		int ID = QuoridorApplication.getQuoridor().getCurrentGame().getPositions().size() - 1;
+		QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(QuoridorApplication.getQuoridor().getCurrentGame().getPositions().get(ID));
+	}
 
 
 	/**
@@ -709,11 +722,11 @@ public class QuoridorController {
 		currentGamePosition.setWhiteWallsInStock(winStock);
 		QuoridorApplication.getQuoridor().getCurrentGame().addPosition(currentGamePosition);
 		QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(currentGamePosition);
-		
+
 
 		try {
 			if(currentPlayer.hasGameAsBlack()) {			
-				
+
 				List<Wall> inStock = currentGamePosition.getBlackWallsInStock();		
 				Wall grabbedWall = inStock.get(0);
 
@@ -729,7 +742,7 @@ public class QuoridorController {
 			}
 
 			if(currentPlayer.hasGameAsWhite()) {
-				
+
 				List<Wall> inStock = currentGamePosition.getWhiteWallsInStock();
 				Wall grabbedWall = inStock.get(0);
 
@@ -1123,9 +1136,9 @@ public class QuoridorController {
 			return pawnIsValid;
 		}
 	}
-	
-	
-	
+
+
+
 	/**
 	 * Feature: IdentifyGameDrawn
 	 * This method checks the result of the game is Pending or Drawn
@@ -1134,11 +1147,11 @@ public class QuoridorController {
 	 * @author Bozhong Lu
 	 * @return String
 	 */
-	
+
 	public static String checkGameDrawn() {
 
 		boolean gameDrawn = false;
-		
+
 		ArrayList<ArrayList<Integer>> outer = new ArrayList<ArrayList<Integer>>();
 		int numberOfMovesPerformed = QuoridorApplication.getQuoridor().getCurrentGame().numberOfMoves() ;
 		int index = numberOfMovesPerformed-1 ;
@@ -1164,7 +1177,7 @@ public class QuoridorController {
 			int move3column = outer.get(6).get(1);
 			int move1row = outer.get(8).get(0);
 			int move1column = outer.get(8).get(1);
-			
+
 			//opponent player moves
 			int move8row = outer.get(1).get(0);
 			int move8column = outer.get(1).get(1);
@@ -1174,7 +1187,7 @@ public class QuoridorController {
 			int move4column = outer.get(5).get(1);
 			int move2row = outer.get(7).get(0);
 			int move2column = outer.get(7).get(1);
-			
+
 			if((move9row == move5row)&&(move5row == move1row)&&(move9column == move5column)&&(move5column == move1column)) {
 				if((move3row == move7row)&&(move3column == move7column)) {
 					if(((move9row == move7row+1)||(move9row == move7row-1))&&(move9column == move7column)) {
@@ -1197,8 +1210,8 @@ public class QuoridorController {
 				}
 			}
 		}
-		
-		
+
+
 		if (gameDrawn) {
 			QuoridorApplication.getQuoridor().getCurrentGame().setGameStatus(GameStatus.Draw);
 			return "Drawn" ;
@@ -1206,11 +1219,11 @@ public class QuoridorController {
 		else {
 			return "Pending";
 		}
-		
+
 	}
-	
-	
-	
+
+
+
 	/**
 	 * Feature:IdentifyGameDrawn
 	 * 
@@ -1221,7 +1234,7 @@ public class QuoridorController {
 	 * @exception nothing 
 	 */
 	public static String convertToMove(String stringRow , String stringCol , int oldRow, int oldColumn) {
-		
+
 		String result = "";
 		int newRow = 0;
 		int newColumn = 0;
@@ -1234,7 +1247,7 @@ public class QuoridorController {
 		if(stringCol=="7") newColumn = 7;
 		if(stringCol=="8") newColumn = 8;
 		if(stringCol=="9") newColumn = 9;
-		
+
 		if(stringRow=="1") newRow = 1;
 		if(stringRow=="2") newRow = 2;
 		if(stringRow=="3") newRow = 3;
@@ -1244,7 +1257,7 @@ public class QuoridorController {
 		if(stringRow=="7") newRow = 7;
 		if(stringRow=="8") newRow = 8;
 		if(stringRow=="9") newRow = 9;
-		
+
 		if((newRow==oldRow)&&(newColumn==oldColumn+1)) {
 			result = "right";
 		}
@@ -1259,23 +1272,23 @@ public class QuoridorController {
 		}	
 		return result;
 	}
-	
+
 
 
 
 	public static boolean loadGame(String filename, Player white, Player black) throws Exception {
 		Quoridor quoridor = QuoridorApplication.getQuoridor();
-		
+
 		//create game that is initializing
 		ArrayList<Player> playersList = new ArrayList<Player>();
 		playersList.add(white);
 		playersList.add(black);
 		QuoridorController.prepareToLoadGame(playersList);
-		
+
 		FileInputStream inputstream = new FileInputStream(filename);
 		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(inputstream);
-		
+
 		int whiteRound = 1;
 		int blackRound = 2;
 		int positionId = 1;
@@ -1285,13 +1298,13 @@ public class QuoridorController {
 		List<Wall> whiteWalls = new ArrayList<Wall>();
 		List<Wall> blackWalls = new ArrayList<Wall>();
 		List<Move> moves = new ArrayList<Move>();
-		
+
 		while (scanner.hasNextLine()) {
 			String line = scanner.nextLine();
 			String delims = "[ .]+";
 			String[] split = line.split(delims);
 			int moveNum = Integer.parseInt(split[0]);
-			
+
 			//*****************************************************************
 			//the first player to move is always white, now set up white player
 			//*****************************************************************
@@ -1330,12 +1343,12 @@ public class QuoridorController {
 				moves.add(new WallMove(moveNum, whiteRound, white, whitetile, quoridor.getCurrentGame(), direction, wall)); 	//put wall on the board
 				GamePosition currentGamePosition = (GamePosition) QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().clone();
 				List<Wall> wOnBoard = new ArrayList<Wall>();
-				  for(int i=0;i<currentGamePosition.getWhiteWallsOnBoard().size();i++) {
-				   wOnBoard.add(currentGamePosition.getWhiteWallsOnBoard().get(i));
-				  }
+				for(int i=0;i<currentGamePosition.getWhiteWallsOnBoard().size();i++) {
+					wOnBoard.add(currentGamePosition.getWhiteWallsOnBoard().get(i));
+				}
 				wOnBoard.add(wall);
-//				List<Wall> wWalls = currentGamePosition.getWhiteWallsOnBoard();
-//				wWalls.add(wall);
+				//				List<Wall> wWalls = currentGamePosition.getWhiteWallsOnBoard();
+				//				wWalls.add(wall);
 				currentGamePosition.setWhiteWallsOnBoard(wOnBoard);
 				//currentGamePosition.addWhiteWallsOnBoard(wall);
 				currentGamePosition.removeWhiteWallsInStock(wall);
@@ -1346,7 +1359,7 @@ public class QuoridorController {
 				positionId++;
 				whiteWalls.add(wall);			
 			}
-			
+
 			//*****************************************************************
 			//the second player to move is always black, now set up black player
 			//*****************************************************************
@@ -1385,12 +1398,12 @@ public class QuoridorController {
 				moves.add(new WallMove(moveNum, blackRound, black, blacktile, quoridor.getCurrentGame(), direction, wall)); 	//put wall on the board
 				GamePosition currentGamePosition = (GamePosition) QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().clone();
 				List<Wall> bOnBoard = new ArrayList<Wall>();
-				  for(int i=0;i<currentGamePosition.getBlackWallsOnBoard().size();i++) {
-				   bOnBoard.add(currentGamePosition.getBlackWallsOnBoard().get(i));
-				  }
+				for(int i=0;i<currentGamePosition.getBlackWallsOnBoard().size();i++) {
+					bOnBoard.add(currentGamePosition.getBlackWallsOnBoard().get(i));
+				}
 				bOnBoard.add(wall);
-//				List<Wall> bWalls = currentGamePosition.getBlackWallsOnBoard();
-//				bWalls.add(wall);
+				//				List<Wall> bWalls = currentGamePosition.getBlackWallsOnBoard();
+				//				bWalls.add(wall);
 				currentGamePosition.setBlackWallsOnBoard(bOnBoard);
 				//currentGamePosition.addBlackWallsOnBoard(wall);
 				currentGamePosition.removeBlackWallsInStock(wall);
@@ -1401,9 +1414,9 @@ public class QuoridorController {
 				positionId++;
 				blackWalls.add(wall);			
 			}
-			
+
 		}
-		
+
 		//quoridor.getCurrentGame().setGameStatus(GameStatus.ReadyToStart);
 		if (QuoridorController.checkGameResult() == "whiteWon" || QuoridorController.checkGameResult() == "blackWon") {
 			quoridor.getCurrentGame().setGameStatus(GameStatus.Replay);
@@ -1599,8 +1612,8 @@ public class QuoridorController {
 		return true;
 
 	}
-	
-	
+
+
 
 
 	/**
@@ -1686,17 +1699,17 @@ public class QuoridorController {
 		int whiteTarget = whiteDest.getTargetNumber();
 		int whiteRow = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhitePosition().getTile().getRow();
 		boolean whiteWon = (whiteDir == Direction.Horizontal) && (whiteTarget == whiteRow);
-		
+
 		Player black = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
 		Destination blackDest = black.getDestination();
 		Direction blackDir = blackDest.getDirection();
 		int blackTarget = blackDest.getTargetNumber();
 		int blackRow = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackPosition().getTile().getRow();
 		boolean blackWon = (blackDir == Direction.Horizontal) && (blackTarget == blackRow);
-		
+
 		//check Game Drawn
 		boolean gameDrawn = false;
-		
+
 		ArrayList<ArrayList<Integer>> outer = new ArrayList<ArrayList<Integer>>();
 		int numberOfMovesPerformed = QuoridorApplication.getQuoridor().getCurrentGame().numberOfMoves() ;
 		int index = numberOfMovesPerformed-1 ;
@@ -1722,7 +1735,7 @@ public class QuoridorController {
 			int move3column = outer.get(6).get(1);
 			int move1row = outer.get(8).get(0);
 			int move1column = outer.get(8).get(1);
-			
+
 			//opponent player moves
 			int move8row = outer.get(1).get(0);
 			int move8column = outer.get(1).get(1);
@@ -1732,7 +1745,7 @@ public class QuoridorController {
 			int move4column = outer.get(5).get(1);
 			int move2row = outer.get(7).get(0);
 			int move2column = outer.get(7).get(1);
-			
+
 			if((move9row == move5row)&&(move5row == move1row)&&(move9column == move5column)&&(move5column == move1column)) {
 				if((move3row == move7row)&&(move3column == move7column)) {
 					if(((move9row == move7row+1)||(move9row == move7row-1))&&(move9column == move7column)) {
@@ -1755,8 +1768,8 @@ public class QuoridorController {
 				}
 			}
 		}
-		
-		
+
+
 		if (gameDrawn) {
 			QuoridorApplication.getQuoridor().getCurrentGame().setGameStatus(GameStatus.Draw);
 			return "Drawn" ;
@@ -1771,9 +1784,9 @@ public class QuoridorController {
 		else {
 			return "pending";
 		}
-		
+
 	}
-	
+
 
 	/**
 	 * Feature:IdentifyGameWon
@@ -1797,7 +1810,7 @@ public class QuoridorController {
 			return "pending";
 		}
 	}
-	
+
 
 	/**
 	 * Feature:switch player
@@ -1811,7 +1824,7 @@ public class QuoridorController {
 		Player white = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
 		Player black = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
 
-			
+
 
 		if (player.hasGameAsBlack()) {
 
@@ -1853,17 +1866,17 @@ public class QuoridorController {
 
 
 	}
-public static void initializeEmptyBoard() {
-//	QuoridorApplication.setJBoard(new JBoard());
-	Board board = new Board(QuoridorApplication.getQuoridor());
-	//Board board = QuoridorApplication.getQuoridor().getBoard();
-	for(int i = 1; i<= 9; i++) {
-		for(int j = 1; j<=9; j++) {
-			Tile tile = new Tile(i, j, board);
-			board.addTile(tile);
+	public static void initializeEmptyBoard() {
+		//	QuoridorApplication.setJBoard(new JBoard());
+		Board board = new Board(QuoridorApplication.getQuoridor());
+		//Board board = QuoridorApplication.getQuoridor().getBoard();
+		for(int i = 1; i<= 9; i++) {
+			for(int j = 1; j<=9; j++) {
+				Tile tile = new Tile(i, j, board);
+				board.addTile(tile);
+			}
 		}
 	}
-}
 	/**
 	 * Feature: InitialzeBoard
 	 * This method initialize a new board with 9*9 tiles. Then it 
@@ -1895,7 +1908,7 @@ public static void initializeEmptyBoard() {
 		initializeBlackWall(g,blackPlayer);
 		g.setPlayerToMove(whitePlayer);
 
-		
+
 	}
 
 	/**
@@ -2275,7 +2288,7 @@ public static void initializeEmptyBoard() {
 			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(player);
 
 			return false;
-			}
+		}
 		return true;
 
 	}
@@ -2407,7 +2420,7 @@ public static void initializeEmptyBoard() {
 		return true;
 
 	}
-	
+
 	/**
 	 * This method takes two parameters: one for suggest player and one for direction. It will proceed a jump move
 	 * for the given player. It is assumed that the movement is legal.
@@ -2417,7 +2430,7 @@ public static void initializeEmptyBoard() {
 	 * @param direction
 	 * @return A boolean variable to suggest if the movement has been proceed.
 	 */
-	
+
 	public static boolean jumpPlayer(String player, String direction) {
 		Player p;
 		Tile currentTile;
@@ -2469,7 +2482,7 @@ public static void initializeEmptyBoard() {
 		}
 		return result;
 	}
-	
+
 	/**
 	 * This method will let the current player resign immediately and end the game.
 	 * @author Pengnan Fan
@@ -2494,7 +2507,7 @@ public static void initializeEmptyBoard() {
 		}
 		return result;
 	}
-	
+
 	/**
 	 * This method will set the current game to be in replay mode.
 	 * @author Pengnan Fan
@@ -2509,7 +2522,7 @@ public static void initializeEmptyBoard() {
 		result = currentGame.setGameStatus(GameStatus.Replay);
 		return result;
 	}
-	
+
 	//helper method
 
 	/**
@@ -2645,13 +2658,13 @@ public static void initializeEmptyBoard() {
 		Board board = new Board(quoridor);
 		// Creating tiles by rows, i.e., the column index changes with every tile
 		// creation
-					for (int i = 1; i <= 9; i++) { // rows
-						for (int j = 1; j <= 9; j++) { // columns
-							board.addTile(i, j);
-						}
-					}
+		for (int i = 1; i <= 9; i++) { // rows
+			for (int j = 1; j <= 9; j++) { // columns
+				board.addTile(i, j);
+			}
+		}
 	}
-	
+
 
 
 }
