@@ -1262,7 +1262,16 @@ public class QuoridorController {
 	
 
 
-
+	/**
+	 * This method will take a file as input and load all the moves and positions into the game
+	 * 
+	 * @author Zirui He
+	 * @param filename
+	 * @param white
+	 * @param black
+	 * @return
+	 * @throws Exception
+	 */
 	public static boolean loadGame(String filename, Player white, Player black) throws Exception {
 		Quoridor quoridor = QuoridorApplication.getQuoridor();
 		
