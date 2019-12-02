@@ -58,6 +58,7 @@ public class SaveGameDialoge extends JFrame {
 				QuoridorController.overwriteExistingFile();
 				setVisible(false);
 				QuoridorApplication.getJboard().setVisible(false);
+				QuoridorApplication.getQuoridor().getCurrentGame().delete();
 				QuoridorApplication.getMainMenu().setVisible(true);
 				
 			}
