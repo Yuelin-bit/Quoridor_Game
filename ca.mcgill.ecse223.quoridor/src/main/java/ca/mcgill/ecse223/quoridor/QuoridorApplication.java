@@ -110,13 +110,15 @@ public class QuoridorApplication {
 		mainMenu = new MainMenu();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-            	QuoridorController.initQuoridorAndBoard();
+            	//QuoridorController.initQuoridorAndBoard();
+            	QuoridorController.initializeEmptyBoard();
                 mainMenu.setVisible(true);
             }
         });
+        String music = (System.getProperty("os.name").contains("Windows")) ? "src\\main\\java\\ca\\mcgill\\ecse223\\quoridor\\resources\\zbj_wav.wav" 
+        		: "src/main/java/ca/mcgill/ecse223/quoridor/resources/xyj.wav";
         while(true) {
-        	MusicPlayer.play("src/main/java/ca/mcgill/ecse223/quoridor/"
-    				+ "resources/zbj_wav.wav");
+        	MusicPlayer.play(music);
         }
 	}
 	

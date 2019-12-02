@@ -33,8 +33,6 @@ import org.jgrapht.graph.*;
 import org.jgrapht.util.SupplierUtil;
 
 public class QuoridorController {
-	private static Stopwatch whiteWatch;
-	private static Stopwatch blackWatch;
 	/**
 	 * This method establish a thread that reset board data every second.
 	 */
@@ -358,11 +356,12 @@ public class QuoridorController {
 		}
 		//check if path exist
 		
-		String error = PathCheck.pathCheck();
-		if(!error.equals("both")) {
-			JOptionPane.showMessageDialog(null, "Only "+error+" player has path!");
-			return;
-		}
+
+//		String error = PathCheck.pathCheck();
+//		if(!error.equals("both")) {
+//			JOptionPane.showMessageDialog(null, "Only "+error+" player has path!");
+//			return;
+//		}
 		Tile t = wallmove.getTargetTile();
 		Player currentPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
 		Game currentGame = QuoridorApplication.getQuoridor().getCurrentGame();
@@ -389,7 +388,6 @@ public class QuoridorController {
 			//QuoridorApplication.getQuoridor().getCurrentGame().addPosition(currentGamePosition);
 			//QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(currentGamePosition);
 			
-
 		}else {	
 			int id = 1 + QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getId();
 			Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
@@ -401,11 +399,10 @@ public class QuoridorController {
 			//currentGamePosition.setId(id);
 			//QuoridorApplication.getQuoridor().getCurrentGame().addPosition(currentGamePosition);
 			//QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(currentGamePosition);
-			
 		}
+		
 
 		System.out.println("hasGameAsBlack(): "+QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove().hasGameAsBlack());
-
 	}
 
 	/**
@@ -1665,10 +1662,10 @@ public class QuoridorController {
 
 
 	/**
-	 * Feature: IdentifyGameWon
+	 * Feature: IdentifyGameDrawn , IdentifyGameWon
 	 * This method will check the game result and return a string to notify the result 
 	 * 
-	 * @author Zirui He
+	 * @author Bozhong Lu , Zirui He
 	 * @return game result in string
 	 */
 	public static String checkGameResult() {
@@ -1802,15 +1799,13 @@ public class QuoridorController {
 
 		Player white = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
 		Player black = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
+			
+
 		if (player.hasGameAsBlack()) {
-//			whiteWatch.suspend();
-//			blackWatch.resume();
 			player.setNextPlayer(white);
 			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(white);
 			//QuoridorApplication.getJboard().whiteTurn();
 		}else {
-//			whiteWatch.resume();
-//			blackWatch.suspend();
 			player.setNextPlayer(black);
 			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(black);
 			//QuoridorApplication.getJboard().blackTurn();
@@ -1844,7 +1839,17 @@ public class QuoridorController {
 
 
 	}
-
+public static void initializeEmptyBoard() {
+//	QuoridorApplication.setJBoard(new JBoard());
+	Board board = new Board(QuoridorApplication.getQuoridor());
+	//Board board = QuoridorApplication.getQuoridor().getBoard();
+	for(int i = 1; i<= 9; i++) {
+		for(int j = 1; j<=9; j++) {
+			Tile tile = new Tile(i, j, board);
+			board.addTile(tile);
+		}
+	}
+}
 	/**
 	 * Feature: InitialzeBoard
 	 * This method initialize a new board with 9*9 tiles. Then it 
@@ -1857,39 +1862,31 @@ public class QuoridorController {
 	 * @return A flag indicating whether the method successfully launched.
 	 */
 	public static void initializeBoard() {
-		//		QuoridorApplication.setJBoard(new JBoard());
-		Board board = new Board(QuoridorApplication.getQuoridor());
-		//Board board = QuoridorApplication.getQuoridor().getBoard();
-		for(int i = 1; i<= 9; i++) {
-			for(int j = 1; j<=9; j++) {
-				Tile tile = new Tile(i, j, board);
-				board.addTile(tile);
-			}
-		}
+
+		Board board = QuoridorApplication.getQuoridor().getBoard();
 		Game game = QuoridorApplication.getQuoridor().getCurrentGame();
 		QuoridorApplication.getQuoridor().setBoard(board);
 		Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
 		Player blackPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
 		whitePlayer.setGameAsWhite(game);
-		Tile initWhite = new Tile(9, 5, board);
-		Tile initBlack = new Tile(1, 5, board);
+		Tile initWhite = QuoridorApplication.getQuoridor().getBoard().getTile(8*9+4);
+		Tile initBlack = QuoridorApplication.getQuoridor().getBoard().getTile(4);
 		PlayerPosition initialWhite = new PlayerPosition(whitePlayer, initWhite);
 		PlayerPosition initialBlack = new PlayerPosition(whitePlayer, initBlack);
+		System.out.println("white============================================================");
 
 		GamePosition g = new GamePosition(0, initialWhite, initialBlack, whitePlayer, game);
 		g.setPlayerToMove(whitePlayer);
 		game.setCurrentPosition(g);
+		System.out.println("white============================================================");
 
 		initializeWhiteWall(g,whitePlayer);
 		initializeBlackWall(g,blackPlayer);
 		g.setPlayerToMove(whitePlayer);
-		Stopwatch white = new Stopwatch(whitePlayer);
-		whiteWatch = white;
-		Stopwatch black = new Stopwatch(blackPlayer);
-		blackWatch = black;
-		whiteWatch.start();
-		whiteWatch.setRunning(true);
-		blackWatch.start();
+		System.out.println("white============================================================");
+
+		 
+		
 	}
 
 	/**
@@ -2636,14 +2633,14 @@ public class QuoridorController {
 	 */
 	public static void initQuoridorAndBoard() {
 		Quoridor quoridor = QuoridorApplication.getQuoridor();
-		//Board board = new Board(quoridor);
+		Board board = new Board(quoridor);
 		// Creating tiles by rows, i.e., the column index changes with every tile
 		// creation
-		//			for (int i = 1; i <= 9; i++) { // rows
-		//				for (int j = 1; j <= 9; j++) { // columns
-		//					board.addTile(i, j);
-		//				}
-		//			}
+					for (int i = 1; i <= 9; i++) { // rows
+						for (int j = 1; j <= 9; j++) { // columns
+							board.addTile(i, j);
+						}
+					}
 	}
 	
 
