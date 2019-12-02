@@ -50,7 +50,7 @@ public class SaveGameDialoge extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		JLabel label = new JLabel("Would you like to save and overwrite your previous game ?");
+		JLabel label = new JLabel("Would you like to save your previous game and exit ?");
 		
 		JButton SaveGameButton = new JButton("Yes!");
 		SaveGameButton.addActionListener(new ActionListener() {
