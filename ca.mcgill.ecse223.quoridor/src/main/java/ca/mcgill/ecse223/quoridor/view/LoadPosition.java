@@ -241,6 +241,18 @@ public class LoadPosition extends JFrame {
 					QuoridorController.movePlayer("white","up");
 					QuoridorController.movePlayer("black","left");
 					QuoridorController.movePlayer("white","right");
+					
+					QuoridorController.grabWall();
+					QuoridorController.MoveWall("up");
+					QuoridorController.releaseWall();
+					
+					QuoridorController.grabWall();
+					QuoridorController.flipWall();
+					QuoridorController.MoveWall("left");
+					QuoridorController.MoveWall("left");
+					QuoridorController.MoveWall("left");
+					QuoridorController.releaseWall();
+					
 					QuoridorController.jumpToStart();
 				} catch (CloneNotSupportedException e1) {
 					// TODO Auto-generated catch block
