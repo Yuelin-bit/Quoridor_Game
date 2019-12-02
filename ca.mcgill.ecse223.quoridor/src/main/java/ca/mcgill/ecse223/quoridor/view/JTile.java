@@ -19,6 +19,7 @@ import javax.swing.plaf.metal.MetalButtonUI;
 import ca.mcgill.ecse223.quoridor.QuoridorApplication;
 import ca.mcgill.ecse223.quoridor.controller.PawnBehavior;
 import ca.mcgill.ecse223.quoridor.controller.PawnBehavior.MoveDirection;
+import ca.mcgill.ecse223.quoridor.model.Game.GameStatus;
 import ca.mcgill.ecse223.quoridor.view.NewJBoard.SmallWallTO;
 import ca.mcgill.ecse223.quoridor.controller.QuoridorController;
 
@@ -53,9 +54,9 @@ public class JTile extends JPanel {
 		int sideLengthPlus = 56;
 		int referX = 26;
 		int referY = 194;
-		
-		
-		
+
+
+
 		JButton NewButton11 = new JButton("");
 		JButton NewButton12 = new JButton("");
 		JButton NewButton13 = new JButton("");
@@ -137,7 +138,7 @@ public class JTile extends JPanel {
 		JButton NewButton97 = new JButton("");
 		JButton NewButton98 = new JButton("");
 		JButton NewButton99 = new JButton("");
-		
+
 		allButton[1][1] = NewButton11;
 		allButton[1][2] = NewButton12;
 		allButton[1][3] = NewButton13;
@@ -147,7 +148,7 @@ public class JTile extends JPanel {
 		allButton[1][7] = NewButton17;
 		allButton[1][8] = NewButton18;
 		allButton[1][9] = NewButton19;
-		
+
 		allButton[2][1] = NewButton21;
 		allButton[2][2] = NewButton22;
 		allButton[2][3] = NewButton23;
@@ -157,7 +158,7 @@ public class JTile extends JPanel {
 		allButton[2][7] = NewButton27;
 		allButton[2][8] = NewButton28;
 		allButton[2][9] = NewButton29;
-		
+
 		allButton[3][1] = NewButton31;
 		allButton[3][2] = NewButton32;
 		allButton[3][3] = NewButton33;
@@ -167,7 +168,7 @@ public class JTile extends JPanel {
 		allButton[3][7] = NewButton37;
 		allButton[3][8] = NewButton38;
 		allButton[3][9] = NewButton39;
-		
+
 		allButton[4][1] = NewButton41;
 		allButton[4][2] = NewButton42;
 		allButton[4][3] = NewButton43;
@@ -177,7 +178,7 @@ public class JTile extends JPanel {
 		allButton[4][7] = NewButton47;
 		allButton[4][8] = NewButton48;
 		allButton[4][9] = NewButton49;
-		
+
 		allButton[5][1] = NewButton51;
 		allButton[5][2] = NewButton52;
 		allButton[5][3] = NewButton53;
@@ -187,7 +188,7 @@ public class JTile extends JPanel {
 		allButton[5][7] = NewButton57;
 		allButton[5][8] = NewButton58;
 		allButton[5][9] = NewButton59;
-		
+
 		allButton[6][1] = NewButton61;
 		allButton[6][2] = NewButton62;
 		allButton[6][3] = NewButton63;
@@ -197,7 +198,7 @@ public class JTile extends JPanel {
 		allButton[6][7] = NewButton67;
 		allButton[6][8] = NewButton68;
 		allButton[6][9] = NewButton69;
-		
+
 		allButton[7][1] = NewButton71;
 		allButton[7][2] = NewButton72;
 		allButton[7][3] = NewButton73;
@@ -207,7 +208,7 @@ public class JTile extends JPanel {
 		allButton[7][7] = NewButton77;
 		allButton[7][8] = NewButton78;
 		allButton[7][9] = NewButton79;
-		
+
 		allButton[8][1] = NewButton81;
 		allButton[8][2] = NewButton82;
 		allButton[8][3] = NewButton83;
@@ -217,7 +218,7 @@ public class JTile extends JPanel {
 		allButton[8][7] = NewButton87;
 		allButton[8][8] = NewButton88;
 		allButton[8][9] = NewButton89;
-		
+
 		allButton[9][1] = NewButton91;
 		allButton[9][2] = NewButton92;
 		allButton[9][3] = NewButton93;
@@ -227,8 +228,8 @@ public class JTile extends JPanel {
 		allButton[9][7] = NewButton97;
 		allButton[9][8] = NewButton98;
 		allButton[9][9] = NewButton99;
-		
-		
+
+
 		NewButton11.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -241,7 +242,7 @@ public class JTile extends JPanel {
 		});
 		NewButton11.setBounds(referX,referY,sideLength,sideLength);
 		add(NewButton11);
-		
+
 		NewButton12.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -254,7 +255,7 @@ public class JTile extends JPanel {
 		});
 		NewButton12.setBounds(referX+sideLengthPlus*1,referY,sideLength,sideLength);
 		add(NewButton12);
-		
+
 		NewButton13.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -267,7 +268,7 @@ public class JTile extends JPanel {
 		});
 		NewButton13.setBounds(referX+sideLengthPlus*2,referY,sideLength,sideLength);
 		add(NewButton13);
-		
+
 		NewButton14.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -280,7 +281,7 @@ public class JTile extends JPanel {
 		});
 		NewButton14.setBounds(referX+sideLengthPlus*3,referY,sideLength,sideLength);
 		add(NewButton14);
-		
+
 		NewButton15.setIcon(new ImageIcon(JTile.class.getResource("/ca/mcgill/ecse223/quoridor/resources/bpawn.png")));
 		NewButton15.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -294,7 +295,7 @@ public class JTile extends JPanel {
 		});
 		NewButton15.setBounds(referX+sideLengthPlus*4,referY,sideLength,sideLength);
 		add(NewButton15);
-		
+
 		NewButton16.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -307,7 +308,7 @@ public class JTile extends JPanel {
 		});
 		NewButton16.setBounds(referX+sideLengthPlus*5,referY,sideLength,sideLength);
 		add(NewButton16);
-		
+
 		NewButton17.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -320,7 +321,7 @@ public class JTile extends JPanel {
 		});
 		NewButton17.setBounds(referX+sideLengthPlus*6,referY,sideLength,sideLength);
 		add(NewButton17);
-		
+
 		NewButton18.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -333,7 +334,7 @@ public class JTile extends JPanel {
 		});
 		NewButton18.setBounds(referX+sideLengthPlus*7,referY,sideLength,sideLength);
 		add(NewButton18);
-		
+
 		NewButton19.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -346,9 +347,9 @@ public class JTile extends JPanel {
 		});
 		NewButton19.setBounds(referX+sideLengthPlus*8,referY,sideLength,sideLength);
 		add(NewButton19);
-		
-		
-		
+
+
+
 		NewButton21.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -361,7 +362,7 @@ public class JTile extends JPanel {
 		});
 		NewButton21.setBounds(referX,referY+sideLengthPlus*1,sideLength,sideLength);
 		add(NewButton21);
-		
+
 		NewButton22.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -374,7 +375,7 @@ public class JTile extends JPanel {
 		});
 		NewButton22.setBounds(referX+sideLengthPlus*1,referY+sideLengthPlus*1,sideLength,sideLength);
 		add(NewButton22);
-		
+
 		NewButton23.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -387,7 +388,7 @@ public class JTile extends JPanel {
 		});
 		NewButton23.setBounds(referX+sideLengthPlus*2,referY+sideLengthPlus*1,sideLength,sideLength);
 		add(NewButton23);
-		
+
 		NewButton24.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -400,7 +401,7 @@ public class JTile extends JPanel {
 		});
 		NewButton24.setBounds(referX+sideLengthPlus*3,referY+sideLengthPlus*1,sideLength,sideLength);
 		add(NewButton24);
-		
+
 		NewButton25.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -413,7 +414,7 @@ public class JTile extends JPanel {
 		});
 		NewButton25.setBounds(referX+sideLengthPlus*4,referY+sideLengthPlus*1,sideLength,sideLength);
 		add(NewButton25);
-		
+
 		NewButton26.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -426,7 +427,7 @@ public class JTile extends JPanel {
 		});
 		NewButton26.setBounds(referX+sideLengthPlus*5,referY+sideLengthPlus*1,sideLength,sideLength);
 		add(NewButton26);
-		
+
 		NewButton27.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -439,7 +440,7 @@ public class JTile extends JPanel {
 		});
 		NewButton27.setBounds(referX+sideLengthPlus*6,referY+sideLengthPlus*1,sideLength,sideLength);
 		add(NewButton27);
-		
+
 		NewButton28.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -452,7 +453,7 @@ public class JTile extends JPanel {
 		});
 		NewButton28.setBounds(referX+sideLengthPlus*7,referY+sideLengthPlus*1,sideLength,sideLength);
 		add(NewButton28);
-		
+
 		NewButton29.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -465,10 +466,10 @@ public class JTile extends JPanel {
 		});
 		NewButton29.setBounds(referX+sideLengthPlus*8,referY+sideLengthPlus*1,sideLength,sideLength);
 		add(NewButton29);
-		
-		
-		
-		
+
+
+
+
 		NewButton31.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -481,7 +482,7 @@ public class JTile extends JPanel {
 		});
 		NewButton31.setBounds(referX,referY+sideLengthPlus*2,sideLength,sideLength);
 		add(NewButton31);
-		
+
 		NewButton32.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -494,7 +495,7 @@ public class JTile extends JPanel {
 		});
 		NewButton32.setBounds(referX+sideLengthPlus*1,referY+sideLengthPlus*2,sideLength,sideLength);
 		add(NewButton32);
-		
+
 		NewButton33.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -507,7 +508,7 @@ public class JTile extends JPanel {
 		});
 		NewButton33.setBounds(referX+sideLengthPlus*2,referY+sideLengthPlus*2,sideLength,sideLength);
 		add(NewButton33);
-		
+
 		NewButton34.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -520,7 +521,7 @@ public class JTile extends JPanel {
 		});
 		NewButton34.setBounds(referX+sideLengthPlus*3,referY+sideLengthPlus*2,sideLength,sideLength);
 		add(NewButton34);
-		
+
 		NewButton35.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -533,7 +534,7 @@ public class JTile extends JPanel {
 		});
 		NewButton35.setBounds(referX+sideLengthPlus*4,referY+sideLengthPlus*2,sideLength,sideLength);
 		add(NewButton35);
-		
+
 		NewButton36.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -546,7 +547,7 @@ public class JTile extends JPanel {
 		});
 		NewButton36.setBounds(referX+sideLengthPlus*5,referY+sideLengthPlus*2,sideLength,sideLength);
 		add(NewButton36);
-		
+
 		NewButton37.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -559,7 +560,7 @@ public class JTile extends JPanel {
 		});
 		NewButton37.setBounds(referX+sideLengthPlus*6,referY+sideLengthPlus*2,sideLength,sideLength);
 		add(NewButton37);
-		
+
 		NewButton38.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -572,7 +573,7 @@ public class JTile extends JPanel {
 		});
 		NewButton38.setBounds(referX+sideLengthPlus*7,referY+sideLengthPlus*2,sideLength,sideLength);
 		add(NewButton38);
-		
+
 		NewButton39.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -585,12 +586,12 @@ public class JTile extends JPanel {
 		});
 		NewButton39.setBounds(referX+sideLengthPlus*8,referY+sideLengthPlus*2,sideLength,sideLength);
 		add(NewButton39);
-		
-		
-		
-		
-		
-		
+
+
+
+
+
+
 		NewButton41.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -603,7 +604,7 @@ public class JTile extends JPanel {
 		});
 		NewButton41.setBounds(referX,referY+sideLengthPlus*3,sideLength,sideLength);
 		add(NewButton41);
-	
+
 		NewButton42.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -616,7 +617,7 @@ public class JTile extends JPanel {
 		});
 		NewButton42.setBounds(referX+sideLengthPlus*1,referY+sideLengthPlus*3,sideLength,sideLength);
 		add(NewButton42);
-		
+
 		NewButton43.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -629,7 +630,7 @@ public class JTile extends JPanel {
 		});
 		NewButton43.setBounds(referX+sideLengthPlus*2,referY+sideLengthPlus*3,sideLength,sideLength);
 		add(NewButton43);
-		
+
 		NewButton44.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -642,7 +643,7 @@ public class JTile extends JPanel {
 		});
 		NewButton44.setBounds(referX+sideLengthPlus*3,referY+sideLengthPlus*3,sideLength,sideLength);
 		add(NewButton44);
-		
+
 		NewButton45.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -655,7 +656,7 @@ public class JTile extends JPanel {
 		});
 		NewButton45.setBounds(referX+sideLengthPlus*4,referY+sideLengthPlus*3,sideLength,sideLength);
 		add(NewButton45);
-		
+
 		NewButton46.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -668,7 +669,7 @@ public class JTile extends JPanel {
 		});
 		NewButton46.setBounds(referX+sideLengthPlus*5,referY+sideLengthPlus*3,sideLength,sideLength);
 		add(NewButton46);
-		
+
 		NewButton47.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -681,7 +682,7 @@ public class JTile extends JPanel {
 		});
 		NewButton47.setBounds(referX+sideLengthPlus*6,referY+sideLengthPlus*3,sideLength,sideLength);
 		add(NewButton47);
-		
+
 		NewButton48.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -694,7 +695,7 @@ public class JTile extends JPanel {
 		});
 		NewButton48.setBounds(referX+sideLengthPlus*7,referY+sideLengthPlus*3,sideLength,sideLength);
 		add(NewButton48);
-		
+
 		NewButton49.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -707,9 +708,9 @@ public class JTile extends JPanel {
 		});
 		NewButton49.setBounds(referX+sideLengthPlus*8,referY+sideLengthPlus*3,sideLength,sideLength);
 		add(NewButton49);
-		
-		
-		
+
+
+
 		NewButton51.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -722,7 +723,7 @@ public class JTile extends JPanel {
 		});
 		NewButton51.setBounds(referX,referY+sideLengthPlus*4,sideLength,sideLength);
 		add(NewButton51);
-		
+
 		NewButton52.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -735,7 +736,7 @@ public class JTile extends JPanel {
 		});
 		NewButton52.setBounds(referX+sideLengthPlus*1,referY+sideLengthPlus*4,sideLength,sideLength);
 		add(NewButton52);
-		
+
 		NewButton53.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -748,7 +749,7 @@ public class JTile extends JPanel {
 		});
 		NewButton53.setBounds(referX+sideLengthPlus*2,referY+sideLengthPlus*4,sideLength,sideLength);
 		add(NewButton53);
-		
+
 		NewButton54.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -761,7 +762,7 @@ public class JTile extends JPanel {
 		});
 		NewButton54.setBounds(referX+sideLengthPlus*3,referY+sideLengthPlus*4,sideLength,sideLength);
 		add(NewButton54);
-		
+
 		NewButton55.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -774,7 +775,7 @@ public class JTile extends JPanel {
 		});
 		NewButton55.setBounds(referX+sideLengthPlus*4,referY+sideLengthPlus*4,sideLength,sideLength);
 		add(NewButton55);
-		
+
 		NewButton56.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -787,7 +788,7 @@ public class JTile extends JPanel {
 		});
 		NewButton56.setBounds(referX+sideLengthPlus*5,referY+sideLengthPlus*4,sideLength,sideLength);
 		add(NewButton56);
-		
+
 		NewButton57.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -800,7 +801,7 @@ public class JTile extends JPanel {
 		});
 		NewButton57.setBounds(referX+sideLengthPlus*6,referY+sideLengthPlus*4,sideLength,sideLength);
 		add(NewButton57);
-		
+
 		NewButton58.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -813,7 +814,7 @@ public class JTile extends JPanel {
 		});
 		NewButton58.setBounds(referX+sideLengthPlus*7,referY+sideLengthPlus*4,sideLength,sideLength);
 		add(NewButton58);
-		
+
 		NewButton59.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -826,10 +827,10 @@ public class JTile extends JPanel {
 		});
 		NewButton59.setBounds(referX+sideLengthPlus*8,referY+sideLengthPlus*4,sideLength,sideLength);
 		add(NewButton59);
-		
-		
-		
-		
+
+
+
+
 		NewButton61.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -842,7 +843,7 @@ public class JTile extends JPanel {
 		});
 		NewButton61.setBounds(referX,referY+sideLengthPlus*5,sideLength,sideLength);
 		add(NewButton61);
-		
+
 		NewButton62.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -855,7 +856,7 @@ public class JTile extends JPanel {
 		});
 		NewButton62.setBounds(referX+sideLengthPlus*1,referY+sideLengthPlus*5,sideLength,sideLength);
 		add(NewButton62);
-		
+
 		NewButton63.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -868,7 +869,7 @@ public class JTile extends JPanel {
 		});
 		NewButton63.setBounds(referX+sideLengthPlus*2,referY+sideLengthPlus*5,sideLength,sideLength);
 		add(NewButton63);
-		
+
 		NewButton64.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -881,7 +882,7 @@ public class JTile extends JPanel {
 		});
 		NewButton64.setBounds(referX+sideLengthPlus*3,referY+sideLengthPlus*5,sideLength,sideLength);
 		add(NewButton64);
-		
+
 		NewButton65.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -894,7 +895,7 @@ public class JTile extends JPanel {
 		});
 		NewButton65.setBounds(referX+sideLengthPlus*4,referY+sideLengthPlus*5,sideLength,sideLength);
 		add(NewButton65);
-		
+
 		NewButton66.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -907,7 +908,7 @@ public class JTile extends JPanel {
 		});
 		NewButton66.setBounds(referX+sideLengthPlus*5,referY+sideLengthPlus*5,sideLength,sideLength);
 		add(NewButton66);
-		
+
 		NewButton67.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -920,7 +921,7 @@ public class JTile extends JPanel {
 		});
 		NewButton67.setBounds(referX+sideLengthPlus*6,referY+sideLengthPlus*5,sideLength,sideLength);
 		add(NewButton67);
-		
+
 		NewButton68.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -933,7 +934,7 @@ public class JTile extends JPanel {
 		});
 		NewButton68.setBounds(referX+sideLengthPlus*7,referY+sideLengthPlus*5,sideLength,sideLength);
 		add(NewButton68);
-		
+
 		NewButton69.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -946,9 +947,9 @@ public class JTile extends JPanel {
 		});
 		NewButton69.setBounds(referX+sideLengthPlus*8,referY+sideLengthPlus*5,sideLength,sideLength);
 		add(NewButton69);
-		
 
-	
+
+
 		NewButton71.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -961,7 +962,7 @@ public class JTile extends JPanel {
 		});
 		NewButton71.setBounds(referX,referY+sideLengthPlus*6,sideLength,sideLength);
 		add(NewButton71);
-		
+
 		NewButton72.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -974,7 +975,7 @@ public class JTile extends JPanel {
 		});
 		NewButton72.setBounds(referX+sideLengthPlus*1,referY+sideLengthPlus*6,sideLength,sideLength);
 		add(NewButton72);
-		
+
 		NewButton73.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -987,7 +988,7 @@ public class JTile extends JPanel {
 		});
 		NewButton73.setBounds(referX+sideLengthPlus*2,referY+sideLengthPlus*6,sideLength,sideLength);
 		add(NewButton73);
-		
+
 		NewButton74.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -1000,7 +1001,7 @@ public class JTile extends JPanel {
 		});
 		NewButton74.setBounds(referX+sideLengthPlus*3,referY+sideLengthPlus*6,sideLength,sideLength);
 		add(NewButton74);
-		
+
 		NewButton75.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -1013,7 +1014,7 @@ public class JTile extends JPanel {
 		});
 		NewButton75.setBounds(referX+sideLengthPlus*4,referY+sideLengthPlus*6,sideLength,sideLength);
 		add(NewButton75);
-		
+
 		NewButton76.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -1026,7 +1027,7 @@ public class JTile extends JPanel {
 		});
 		NewButton76.setBounds(referX+sideLengthPlus*5,referY+sideLengthPlus*6,sideLength,sideLength);
 		add(NewButton76);
-		
+
 		NewButton77.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -1039,7 +1040,7 @@ public class JTile extends JPanel {
 		});
 		NewButton77.setBounds(referX+sideLengthPlus*6,referY+sideLengthPlus*6,sideLength,sideLength);
 		add(NewButton77);
-		
+
 		NewButton78.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -1052,7 +1053,7 @@ public class JTile extends JPanel {
 		});
 		NewButton78.setBounds(referX+sideLengthPlus*7,referY+sideLengthPlus*6,sideLength,sideLength);
 		add(NewButton78);
-		
+
 		NewButton79.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -1065,9 +1066,9 @@ public class JTile extends JPanel {
 		});
 		NewButton79.setBounds(referX+sideLengthPlus*8,referY+sideLengthPlus*6,sideLength,sideLength);
 		add(NewButton79);
-		
-		
-		
+
+
+
 		NewButton81.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -1080,7 +1081,7 @@ public class JTile extends JPanel {
 		});
 		NewButton81.setBounds(referX,referY+sideLengthPlus*7,sideLength,sideLength);
 		add(NewButton81);
-		
+
 		NewButton82.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -1093,7 +1094,7 @@ public class JTile extends JPanel {
 		});
 		NewButton82.setBounds(referX+sideLengthPlus*1,referY+sideLengthPlus*7,sideLength,sideLength);
 		add(NewButton82);
-		
+
 		NewButton83.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -1106,7 +1107,7 @@ public class JTile extends JPanel {
 		});
 		NewButton83.setBounds(referX+sideLengthPlus*2,referY+sideLengthPlus*7,sideLength,sideLength);
 		add(NewButton83);
-		
+
 		NewButton84.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -1119,7 +1120,7 @@ public class JTile extends JPanel {
 		});
 		NewButton84.setBounds(referX+sideLengthPlus*3,referY+sideLengthPlus*7,sideLength,sideLength);
 		add(NewButton84);
-		
+
 		NewButton85.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -1132,7 +1133,7 @@ public class JTile extends JPanel {
 		});
 		NewButton85.setBounds(referX+sideLengthPlus*4,referY+sideLengthPlus*7,sideLength,sideLength);
 		add(NewButton85);
-		
+
 		NewButton86.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -1145,7 +1146,7 @@ public class JTile extends JPanel {
 		});
 		NewButton86.setBounds(referX+sideLengthPlus*5,referY+sideLengthPlus*7,sideLength,sideLength);
 		add(NewButton86);
-		
+
 		NewButton87.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -1158,7 +1159,7 @@ public class JTile extends JPanel {
 		});
 		NewButton87.setBounds(referX+sideLengthPlus*6,referY+sideLengthPlus*7,sideLength,sideLength);
 		add(NewButton87);
-		
+
 		NewButton88.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -1171,7 +1172,7 @@ public class JTile extends JPanel {
 		});
 		NewButton88.setBounds(referX+sideLengthPlus*7,referY+sideLengthPlus*7,sideLength,sideLength);
 		add(NewButton88);
-	
+
 		NewButton89.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -1184,11 +1185,11 @@ public class JTile extends JPanel {
 		});
 		NewButton89.setBounds(referX+sideLengthPlus*8,referY+sideLengthPlus*7,sideLength,sideLength);
 		add(NewButton89);
-		
-		
-		
-		
-		
+
+
+
+
+
 		NewButton91.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -1201,7 +1202,7 @@ public class JTile extends JPanel {
 		});
 		NewButton91.setBounds(referX,referY+sideLengthPlus*8,sideLength,sideLength);
 		add(NewButton91);
-		
+
 		NewButton92.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -1214,7 +1215,7 @@ public class JTile extends JPanel {
 		});
 		NewButton92.setBounds(referX+sideLengthPlus*1,referY+sideLengthPlus*8,sideLength,sideLength);
 		add(NewButton92);
-		
+
 		NewButton93.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -1227,7 +1228,7 @@ public class JTile extends JPanel {
 		});
 		NewButton93.setBounds(referX+sideLengthPlus*2,referY+sideLengthPlus*8,sideLength,sideLength);
 		add(NewButton93);
-		
+
 		NewButton94.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -1240,7 +1241,7 @@ public class JTile extends JPanel {
 		});
 		NewButton94.setBounds(referX+sideLengthPlus*3,referY+sideLengthPlus*8,sideLength,sideLength);
 		add(NewButton94);
-	
+
 		NewButton95.setIcon(new ImageIcon(JTile.class.getResource("/ca/mcgill/ecse223/quoridor/resources/wpawn.png")));
 		NewButton95.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -1254,7 +1255,7 @@ public class JTile extends JPanel {
 		});
 		NewButton95.setBounds(referX+sideLengthPlus*4,referY+sideLengthPlus*8,sideLength,sideLength);
 		add(NewButton95);
-		
+
 		NewButton96.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -1267,7 +1268,7 @@ public class JTile extends JPanel {
 		});
 		NewButton96.setBounds(referX+sideLengthPlus*5,referY+sideLengthPlus*8,sideLength,sideLength);
 		add(NewButton96);
-		
+
 		NewButton97.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -1280,7 +1281,7 @@ public class JTile extends JPanel {
 		});
 		NewButton97.setBounds(referX+sideLengthPlus*6,referY+sideLengthPlus*8,sideLength,sideLength);
 		add(NewButton97);
-		
+
 		NewButton98.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -1293,7 +1294,7 @@ public class JTile extends JPanel {
 		});
 		NewButton98.setBounds(referX+sideLengthPlus*7,referY+sideLengthPlus*8,sideLength,sideLength);
 		add(NewButton98);
-		
+
 		NewButton99.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -1306,84 +1307,89 @@ public class JTile extends JPanel {
 		});
 		NewButton99.setBounds(referX+sideLengthPlus*8,referY+sideLengthPlus*8,sideLength,sideLength);
 		add(NewButton99);
-		
-		
-		
-		
-		
+
+
+
+
+
 		//JButton[][] allButton = new JButton[9][9];
-		
-	
-		
+
+
+
 	}
 	boolean dangerous = false;
 	public void takeActions(int x, int y) throws CloneNotSupportedException {
-		if(isSelectedState==false) {
-			if(makeSureLegalTrun(x, y)) {
-				findAndGreenAvailableButton(x, y);
-				isSelectedState = !isSelectedState;
-			}
-		}else {
-			if(makeSureLegalMove(x, y)) {
-				refreshAllWhite();
-				if(QuoridorApplication.getJboard().isWhiteTurn()==false) {
-					if((x==blackPawn_row)&&(y==blackPawn_column)) {
-						isSelectedState = !isSelectedState;
-						System.out.println("suspend!");
-						this.requestFocus();
-						return;
-					}		
-					allButton[x][y].setIcon(new ImageIcon(JTile.class.getResource("/ca/mcgill/ecse223/quoridor/resources/bpawn.png")));
-					allButton[blackPawn_row][blackPawn_column].setIcon(null);
-//					System.out.println(determineDirection(x,y,blackPawn_row,blackPawn_column));
-					if(dangerous==false) {
-						String direction = determineDirection(x,y,blackPawn_row,blackPawn_column);
-						PawnBehavior pawnBehavior = new PawnBehavior();
-						if (pawnBehavior.isLegalStep(checkMoveDirection(direction))) {
-							boolean result = QuoridorController.movePlayer("black", direction);
-							String gameResult = QuoridorController.checkGameResult();
-							if (!gameResult.equals("pending")) {
-								errorHint.showMessageDialog(null, gameResult);
-							}
-						}
-					}
-					blackPawn_row = x;
-					blackPawn_column = y;
-					QuoridorApplication.getJboard().setWhiteTurn(true);
-					QuoridorApplication.getJboard().getWhiteTurnGUI().setVisible(true);
-					QuoridorApplication.getJboard().getBlackTurnGUI().setVisible(false);
-				}else {
-					if((x==whitePawn_row)&&(y==whitePawn_column)) {
-						isSelectedState = !isSelectedState;
-						System.out.println("suspend!");
-						this.requestFocus();
-						return;
-					}
-					allButton[x][y].setIcon(new ImageIcon(JTile.class.getResource("/ca/mcgill/ecse223/quoridor/resources/wpawn.png")));
-					allButton[whitePawn_row][whitePawn_column].setIcon(null);
-//					System.out.println(determineDirection(x,y,whitePawn_row,whitePawn_column));
-					if(dangerous==false) {
-						String direction = determineDirection(x,y,whitePawn_row,whitePawn_column);
-						PawnBehavior pawnBehavior = new PawnBehavior();
-						if (pawnBehavior.isLegalStep(checkMoveDirection(direction))) {
-							boolean result = QuoridorController.movePlayer("white", direction);
-							String gameResult = QuoridorController.checkGameResult();
-							if (!gameResult.equals("pending")) {
-								errorHint.showMessageDialog(null, gameResult);
-							}
-						}
-					}
-					whitePawn_row = x;
-					whitePawn_column = y;
-					QuoridorApplication.getJboard().setWhiteTurn(false);
-					QuoridorApplication.getJboard().getWhiteTurnGUI().setVisible(false);
-					QuoridorApplication.getJboard().getBlackTurnGUI().setVisible(true);
+		GameStatus current = QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus();
+		if(	!current.equals(GameStatus.BlackWon)&&
+				!current.equals(GameStatus.WhiteWon)&&
+				!current.equals(GameStatus.Draw)) {
+			if(isSelectedState==false) {
+				if(makeSureLegalTrun(x, y)) {
+					findAndGreenAvailableButton(x, y);
+					isSelectedState = !isSelectedState;
 				}
-				isSelectedState = !isSelectedState;
+			}else {
+				if(makeSureLegalMove(x, y)) {
+					refreshAllWhite();
+					if(QuoridorApplication.getJboard().isWhiteTurn()==false) {
+						if((x==blackPawn_row)&&(y==blackPawn_column)) {
+							isSelectedState = !isSelectedState;
+							System.out.println("suspend!");
+							this.requestFocus();
+							return;
+						}		
+						allButton[x][y].setIcon(new ImageIcon(JTile.class.getResource("/ca/mcgill/ecse223/quoridor/resources/bpawn.png")));
+						allButton[blackPawn_row][blackPawn_column].setIcon(null);
+						//					System.out.println(determineDirection(x,y,blackPawn_row,blackPawn_column));
+						if(dangerous==false) {
+							String direction = determineDirection(x,y,blackPawn_row,blackPawn_column);
+							PawnBehavior pawnBehavior = new PawnBehavior();
+							if (pawnBehavior.isLegalStep(checkMoveDirection(direction))) {
+								boolean result = QuoridorController.movePlayer("black", direction);
+								String gameResult = QuoridorController.checkGameResult();
+								if (!gameResult.equals("pending")) {
+									errorHint.showMessageDialog(null, gameResult);
+								}
+							}
+						}
+						blackPawn_row = x;
+						blackPawn_column = y;
+						QuoridorApplication.getJboard().setWhiteTurn(true);
+						QuoridorApplication.getJboard().getWhiteTurnGUI().setVisible(true);
+						QuoridorApplication.getJboard().getBlackTurnGUI().setVisible(false);
+					}else {
+						if((x==whitePawn_row)&&(y==whitePawn_column)) {
+							isSelectedState = !isSelectedState;
+							System.out.println("suspend!");
+							this.requestFocus();
+							return;
+						}
+						allButton[x][y].setIcon(new ImageIcon(JTile.class.getResource("/ca/mcgill/ecse223/quoridor/resources/wpawn.png")));
+						allButton[whitePawn_row][whitePawn_column].setIcon(null);
+						//					System.out.println(determineDirection(x,y,whitePawn_row,whitePawn_column));
+						if(dangerous==false) {
+							String direction = determineDirection(x,y,whitePawn_row,whitePawn_column);
+							PawnBehavior pawnBehavior = new PawnBehavior();
+							if (pawnBehavior.isLegalStep(checkMoveDirection(direction))) {
+								boolean result = QuoridorController.movePlayer("white", direction);
+								String gameResult = QuoridorController.checkGameResult();
+								if (!gameResult.equals("pending")) {
+									errorHint.showMessageDialog(null, gameResult);
+								}
+							}
+						}
+						whitePawn_row = x;
+						whitePawn_column = y;
+						QuoridorApplication.getJboard().setWhiteTurn(false);
+						QuoridorApplication.getJboard().getWhiteTurnGUI().setVisible(false);
+						QuoridorApplication.getJboard().getBlackTurnGUI().setVisible(true);
+					}
+					isSelectedState = !isSelectedState;
+				}
+				this.requestFocus();
 			}
-			this.requestFocus();
 		}
-		
+
 	}
 	public String determineDirection(int x, int y, int a, int b) {
 		if(((x-1)==a)&&(y==b)) {
@@ -1402,7 +1408,7 @@ public class JTile extends JPanel {
 			return null;
 		}
 	}
-	
+
 	private MoveDirection checkMoveDirection(String direction) {
 		MoveDirection movedirection = null;
 		if (direction.equals("left")) {
@@ -1419,7 +1425,7 @@ public class JTile extends JPanel {
 		}
 		return movedirection;
 	}
-	
+
 	public boolean makeSureLegalTrun(int x, int y) {
 		if(QuoridorApplication.getJboard().isWhiteTurn()==false) {
 			if((x==blackPawn_row)&&(y==blackPawn_column)) {
@@ -1537,7 +1543,7 @@ public class JTile extends JPanel {
 				dangerous = true;
 				return (legalMove("upLeftJump", whitePawn_row, whitePawn_column)||legalMove("leftUpJump", whitePawn_row, whitePawn_column));
 			}
-				///////
+			///////
 			return false;
 		}
 	}
@@ -1623,7 +1629,7 @@ public class JTile extends JPanel {
 		else if(s.equalsIgnoreCase("downJump")) {
 			boolean can = true;
 			if(!(((origin_x+1==blackPawn_row)&&(origin_y==blackPawn_column))
-				||((origin_x+1==whitePawn_row)&&(origin_y==whitePawn_column)))) {
+					||((origin_x+1==whitePawn_row)&&(origin_y==whitePawn_column)))) {
 				can = false;
 			}
 			for(int i=0; i<t.size(); i++) {
@@ -1641,7 +1647,7 @@ public class JTile extends JPanel {
 		else if(s.equalsIgnoreCase("upJump")) {
 			boolean can = true;
 			if(!(((origin_x-1==blackPawn_row)&&(origin_y==blackPawn_column))
-				||((origin_x-1==whitePawn_row)&&(origin_y==whitePawn_column)))) {
+					||((origin_x-1==whitePawn_row)&&(origin_y==whitePawn_column)))) {
 				can = false;
 			}
 			for(int i=0; i<t.size(); i++) {
@@ -1660,7 +1666,7 @@ public class JTile extends JPanel {
 			boolean can = true;
 			if(!(((origin_x==blackPawn_row)&&(origin_y+1==blackPawn_column))
 					||((origin_x==whitePawn_row)&&(origin_y+1==whitePawn_column)))) {
-					can = false;
+				can = false;
 			}
 			for(int i=0; i<t.size(); i++) {
 				if(t.get(i).isVertical()==true) {
@@ -1678,7 +1684,7 @@ public class JTile extends JPanel {
 			boolean can = true;
 			if(!(((origin_x==blackPawn_row)&&(origin_y-1==blackPawn_column))
 					||((origin_x==whitePawn_row)&&(origin_y-1==whitePawn_column)))) {
-					can = false;
+				can = false;
 			}
 			for(int i=0; i<t.size(); i++) {
 				if(t.get(i).isVertical()==true) {
@@ -1697,7 +1703,7 @@ public class JTile extends JPanel {
 			boolean exist = false;
 			if(!(((origin_x+1==blackPawn_row)&&(origin_y==blackPawn_column))
 					||((origin_x+1==whitePawn_row)&&(origin_y==whitePawn_column)))) {
-					can = false;
+				can = false;
 			}
 			for(int i=0; i<t.size(); i++) {
 				if(t.get(i).isVertical()==false) {
@@ -1723,7 +1729,7 @@ public class JTile extends JPanel {
 			boolean exist = false;
 			if(!(((origin_x==blackPawn_row)&&(origin_y+1==blackPawn_column))
 					||((origin_x==whitePawn_row)&&(origin_y+1==whitePawn_column)))) {
-					can = false;
+				can = false;
 			}
 			for(int i=0; i<t.size(); i++) {
 				if(t.get(i).isVertical()==true) {
@@ -1748,7 +1754,7 @@ public class JTile extends JPanel {
 			boolean exist = false;
 			if(!(((origin_x+1==blackPawn_row)&&(origin_y==blackPawn_column))
 					||((origin_x+1==whitePawn_row)&&(origin_y==whitePawn_column)))) {
-					can = false;
+				can = false;
 			}
 			for(int i=0; i<t.size(); i++) {
 				if(t.get(i).isVertical()==false) {
@@ -1774,7 +1780,7 @@ public class JTile extends JPanel {
 			boolean exist = false;
 			if(!(((origin_x==blackPawn_row)&&(origin_y-1==blackPawn_column))
 					||((origin_x==whitePawn_row)&&(origin_y-1==whitePawn_column)))) {
-					can = false;
+				can = false;
 			}
 			for(int i=0; i<t.size(); i++) {
 				if(t.get(i).isVertical()==true) {
@@ -1799,7 +1805,7 @@ public class JTile extends JPanel {
 			boolean exist = false;
 			if(!(((origin_x-1==blackPawn_row)&&(origin_y==blackPawn_column))
 					||((origin_x-1==whitePawn_row)&&(origin_y==whitePawn_column)))) {
-					can = false;
+				can = false;
 			}
 			for(int i=0; i<t.size(); i++) {
 				if(t.get(i).isVertical()==false) {
@@ -1825,7 +1831,7 @@ public class JTile extends JPanel {
 			boolean exist = false;
 			if(!(((origin_x==blackPawn_row)&&(origin_y+1==blackPawn_column))
 					||((origin_x==whitePawn_row)&&(origin_y+1==whitePawn_column)))) {
-					can = false;
+				can = false;
 			}
 			for(int i=0; i<t.size(); i++) {
 				if(t.get(i).isVertical()==true) {
@@ -1850,7 +1856,7 @@ public class JTile extends JPanel {
 			boolean exist = false;
 			if(!(((origin_x-1==blackPawn_row)&&(origin_y==blackPawn_column))
 					||((origin_x-1==whitePawn_row)&&(origin_y==whitePawn_column)))) {
-					can = false;
+				can = false;
 			}
 			for(int i=0; i<t.size(); i++) {
 				if(t.get(i).isVertical()==false) {
@@ -1876,7 +1882,7 @@ public class JTile extends JPanel {
 			boolean exist = false;
 			if(!(((origin_x==blackPawn_row)&&(origin_y-1==blackPawn_column))
 					||((origin_x==whitePawn_row)&&(origin_y-1==whitePawn_column)))) {
-					can = false;
+				can = false;
 			}
 			for(int i=0; i<t.size(); i++) {
 				if(t.get(i).isVertical()==true) {
@@ -1896,7 +1902,7 @@ public class JTile extends JPanel {
 			}
 			return false;
 		}
-		
+
 		else {
 			return false;
 		}
@@ -1973,7 +1979,7 @@ public class JTile extends JPanel {
 	}
 	public boolean legalB(int x, int y) {
 		if((x>=1)&&(x<=9)&(y>=1)&(y<=9)) {
-		return true;
+			return true;
 		}
 		return false;
 	}
@@ -1982,22 +1988,22 @@ public class JTile extends JPanel {
 		button.setOpaque(true); 
 		button.setBorderPainted(false);
 	}
-	
-	
-public void paint(Graphics g){
-		
+
+
+	public void paint(Graphics g){
+
 		super.paint(g);
 		Font f=new Font("微软雅黑",Font.BOLD,30);
 		g.setFont(f);
-		
-		
+
+
 		int a = 16;
 		int b = 184;
 		int tileLength = 46;
 		int wallLength = 10;
 		int c = (tileLength+wallLength)*9 + wallLength;
 		int d = c;
-		
+
 		int length=b+wallLength;
 		Color  brown0  = new Color(139, 69, 19);
 		g.setColor(brown0);
@@ -2005,49 +2011,97 @@ public void paint(Graphics g){
 		g.drawRect(a-1, b-1,c+2, d+2); 
 		//g.drawRect(a, b,c, d); 
 		Color  brown  = new Color(139, 105, 20);
-		
+
 		g.setColor(brown);
-		
+
 		for(int j=0;j<9;j++) {
 			int ini70 = a+wallLength;
-		for(int i=0;i<9;i++){
-			g.drawLine(ini70, length, ini70+tileLength, length);
-			ini70 = ini70 + tileLength + wallLength;    
+			for(int i=0;i<9;i++){
+				g.drawLine(ini70, length, ini70+tileLength, length);
+				ini70 = ini70 + tileLength + wallLength;    
 			}
-		length = length + tileLength + wallLength;
+			length = length + tileLength + wallLength;
 		}
-		
+
 		length=b + tileLength+wallLength;
 		for(int j=0;j<9;j++) {
 			int ini70 = a+wallLength;			
-		for(int i=0;i<9;i++){
-			g.drawLine(ini70, length, ini70+tileLength, length);
-			ini70 = ini70 + tileLength+wallLength;    
+			for(int i=0;i<9;i++){
+				g.drawLine(ini70, length, ini70+tileLength, length);
+				ini70 = ini70 + tileLength+wallLength;    
 			}
-		length = length + tileLength+wallLength;
+			length = length + tileLength+wallLength;
 		}
-		
+
 		int inix = a+wallLength;
 		int iniy = b+wallLength;
 		for(int j=0;j<9;j++) {
-		iniy = b+wallLength;
-		for(int i=0;i<9;i++){
-			g.drawLine(inix, iniy, inix, iniy+tileLength);
-			iniy = iniy + tileLength+wallLength;    
+			iniy = b+wallLength;
+			for(int i=0;i<9;i++){
+				g.drawLine(inix, iniy, inix, iniy+tileLength);
+				iniy = iniy + tileLength+wallLength;    
 			}
-		inix  = inix + tileLength+wallLength;
-		}
-		
-		inix = a+tileLength+wallLength;
-		for(int j=0;j<9;j++) {
-		iniy = b+wallLength;
-		for(int i=0;i<9;i++){
-			g.drawLine(inix, iniy, inix, iniy+tileLength);
-			iniy = iniy + tileLength+wallLength;    
-			}
-		inix  = inix + tileLength+wallLength;
+			inix  = inix + tileLength+wallLength;
 		}
 
+		inix = a+tileLength+wallLength;
+		for(int j=0;j<9;j++) {
+			iniy = b+wallLength;
+			for(int i=0;i<9;i++){
+				g.drawLine(inix, iniy, inix, iniy+tileLength);
+				iniy = iniy + tileLength+wallLength;    
+			}
+			inix  = inix + tileLength+wallLength;
+		}
+
+	}
+	public JOptionPane getErrorHint() {
+		return errorHint;
+	}
+	public JButton[][] getAllButton() {
+		return allButton;
+	}
+	public boolean isSelectedState() {
+		return isSelectedState;
+	}
+	public int getWhitePawn_row() {
+		return whitePawn_row;
+	}
+	public int getWhitePawn_column() {
+		return whitePawn_column;
+	}
+	public int getBlackPawn_row() {
+		return blackPawn_row;
+	}
+	public int getBlackPawn_column() {
+		return blackPawn_column;
+	}
+	public boolean isDangerous() {
+		return dangerous;
+	}
+	public void setErrorHint(JOptionPane errorHint) {
+		this.errorHint = errorHint;
+	}
+	public void setAllButton(JButton[][] allButton) {
+		this.allButton = allButton;
+	}
+	public void setSelectedState(boolean isSelectedState) {
+		this.isSelectedState = isSelectedState;
+	}
+	public void setWhitePawn_row(int whitePawn_row) {
+		this.whitePawn_row = whitePawn_row;
+	}
+	public void setWhitePawn_column(int whitePawn_column) {
+		this.whitePawn_column = whitePawn_column;
+	}
+	public void setBlackPawn_row(int blackPawn_row) {
+		this.blackPawn_row = blackPawn_row;
+	}
+	public void setBlackPawn_column(int blackPawn_column) {
+		this.blackPawn_column = blackPawn_column;
+	}
+	public void setDangerous(boolean dangerous) {
+		this.dangerous = dangerous;
 	}
 }
 

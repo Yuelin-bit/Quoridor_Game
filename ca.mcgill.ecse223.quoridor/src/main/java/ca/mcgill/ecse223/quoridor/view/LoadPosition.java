@@ -177,6 +177,9 @@ public class LoadPosition extends JFrame {
 		JButton btnNewButton = new JButton("Load");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(QuoridorApplication.getQuoridor().hasCurrentGame()) {
+					QuoridorApplication.getQuoridor().getCurrentGame().delete();
+				}
 				if (loadNum == 1) {
 					errorHint.showMessageDialog(null, "Can't load position twice");
 				} else {
