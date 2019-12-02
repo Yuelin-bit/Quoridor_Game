@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import ca.mcgill.ecse223.quoridor.QuoridorApplication;
+import ca.mcgill.ecse223.quoridor.controller.PathCheck;
 import ca.mcgill.ecse223.quoridor.controller.QuoridorController;
 //import ca.mcgill.ecse223.quoridor.controller.nothing;
 import ca.mcgill.ecse223.quoridor.view.Pawn.PawnColor;
@@ -56,6 +57,7 @@ public class NewJBoard extends JFrame {
 	private JLabel whiteTime;
 	private JButton setting;
 	private JLabel whiteTurnGUI;
+	private SaveGameDialoge saveGame;
 	/**
 	 * 
 	 * The below is generated automatically
@@ -159,7 +161,7 @@ public class NewJBoard extends JFrame {
 	 * Create the frame.
 	 */
 	public NewJBoard() {
-		
+		saveGame = new SaveGameDialoge ();
 		System.out.println(jWallCandidate_1.getLocation().x+" and "+jWallCandidate_1.getLocation().y);
 
 		
@@ -224,6 +226,7 @@ public class NewJBoard extends JFrame {
 		                "Setting",
 		                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[]{"Back to Main Menu", "Resign"}, "Back to Main Menu");
 				if (result==0) {
+					saveGame.setVisible(true);
 					QuoridorApplication.getJboard().setVisible(false);
 					QuoridorApplication.getMainMenu().setVisible(true);
 				} else {
@@ -507,7 +510,8 @@ public class NewJBoard extends JFrame {
 				}
 				if (e.getKeyChar()=='t') if (e.getKeyChar()=='t') {
 					if(jWallCandidate!=null) {
-						if(QuoridorController.verifyOverlapped(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate())==false) 
+						if(!QuoridorController.verifyOverlapped(QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate())&&
+								PathCheck.pathCheck().equals("both")) 
 						{
 							if(isWhiteTurn) {
 								int x = jWallCandidate.getLocation().x;
