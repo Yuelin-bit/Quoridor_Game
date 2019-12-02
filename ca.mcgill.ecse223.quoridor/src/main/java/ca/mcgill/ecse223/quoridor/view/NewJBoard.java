@@ -48,6 +48,8 @@ public class NewJBoard extends JFrame {
 
 	private JPanel contentPane;
 	private JPanel mainLayerPanel;
+	
+
 	private JTile tile;
 	private JUser users;
 	private JLabel txtrSeconds;
@@ -227,10 +229,11 @@ public class NewJBoard extends JFrame {
 		                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[]{"Back to Main Menu", "Resign"}, "Back to Main Menu");
 				if (result==0) {
 					saveGame.setVisible(true);
-					QuoridorApplication.getJboard().setVisible(false);
-					QuoridorApplication.getMainMenu().setVisible(true);
-				} else {
+//					QuoridorApplication.getJboard().setVisible(false);
+//					QuoridorApplication.getMainMenu().setVisible(true);
+				} else if(result==1) {
 					QuoridorController.resign();
+		
 				}
 			}
 		});
@@ -795,6 +798,12 @@ public class NewJBoard extends JFrame {
 
 	public void setTxtrSeconds(JLabel txtrSeconds) {
 		this.txtrSeconds = txtrSeconds;
+	}
+	public JTile getTile() {
+		return tile;
+	}
+	public void setTile(JTile tile) {
+		this.tile = tile;
 	}
 
 

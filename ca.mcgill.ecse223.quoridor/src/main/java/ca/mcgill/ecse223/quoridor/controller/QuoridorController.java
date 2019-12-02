@@ -2,7 +2,6 @@ package ca.mcgill.ecse223.quoridor.controller;
 
 import java.io.FileInputStream;
 
-
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -46,34 +45,9 @@ public class QuoridorController {
 		}
 		RefreshData refresh = new RefreshData(QuoridorApplication.getJboard());
 		refresh.start();
-	}
-	/**
-	 * Stops both watch counting down.
-	 */
-	public static void stopWatch() {
-		
-		Time zero = new Time(0);
-		QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer().setRemainingTime(zero);
-		QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer().setRemainingTime(zero);
-	}
 
-//	public static void stopTime() {
-//		Time zero = new Time(0);
-//		QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer().setRemainingTime(zero);
-//		QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer().setRemainingTime(zero);
-//	}
-//	public static void stopWhiteWatch() {
-//		whiteWatch.stop();
-//	}
-//	public static void stopBlackWatch() {
-//		blackWatch.stop();
-//	}
-	/**
-	 * Ground both player.
-	 */
-	public static void terminatePlayerMove() {
-		QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(null);
 	}
+	
 	/**
 	 * Get game result.
 	 * @return
@@ -495,9 +469,17 @@ public class QuoridorController {
 	 * 
 	 * 
 	 * @author Yuelin Liu
-	 * @param string String stands for the direction of the wall that is to be moved.
-	 * @return void
+	 * @param String string, int oldRom, int oldColumn
+	 * description: 
+	 * String string: the input string; this contain two chars, the first one is from a to i and the second one is from 1 to 9
+	 * int oldRow: the old row number of the wall that is to be moved
+	 * int oldColumn: the old column number of the wall that is to be moved
+	 * @return String string
+	 * This method returns a string that the converted one; the returned string could be "right", "left", "down", "up"
 	 * @exception nothing 
+	 * 
+	 * Functionality:
+	 * This method compares and converts the original text to the data needed by the method.
 	 */
 	public static String convertMove2(String string, int oldRow, int oldColumn) {
 		char s1 = string.charAt(0);
@@ -545,9 +527,15 @@ public class QuoridorController {
 	 * 
 	 * 
 	 * @author Yuelin Liu
-	 * @param string String stands for the direction of the wall that is to be moved.
-	 * @return void
+	 * @param  String string
+	 * the input string: this contain two chars, the first one is from a to i and the second one is from 1 to 9
+	 * @return ArrayList<Integer> result
+	 * This method returns an Arraylist of the converted row number and column number; the returned arraylist contains two element, both from 1 to 9;
 	 * @exception nothing 
+	 * 
+	 * Functionality: 
+	 * This method takes the string from the text file, it then convert the two digits to int,
+	 * it then set the two int to column and row for future use.
 	 */
 	public static ArrayList convertMove3(String string) {
 		char s1 = string.charAt(0);
@@ -583,12 +571,14 @@ public class QuoridorController {
 	/**
 	 * Feature: StepForward
 	 * 
-	 * In the replay mode, I want to take a look at the next Position.
+	 * @author Yuelin Liu 
+	 * @param this method does not take input parameter
+	 * @return void 
 	 * 
-	 * I first get the ID of the current position and then set the id to id+1.
-	 * @author Yuelin Liu
+	 * functionality: This stepForward method moves the current game to the next step in the replay mode.
+	 * It first get the oldID from current position in current game; it then increase the oldID by one and set to the newID;
+	 * in the end, it set newID to current game. The game then is set to next version in replay mode.
 	 * 
-	 * @return void
 	 */
 	
 	public static void stepForward() {
@@ -604,12 +594,13 @@ public class QuoridorController {
 	/**
 	 * Feature: StepBackward
 	 * 
-	 * In the replay mode, I want to take a look at the next Position.
+	 * @author yujingyang Yuelin Liu
+	 * @param this method does not take input parameter
+	 * @return void 
 	 * 
-	 * I first get the ID of the current position and then set the id to id-1.
-	 * @author Yuelin Liu
-	 * 
-	 * @return void
+	 * functionality: This stepBackward method moves the current game to the previous step in the replay mode.
+	 * It first get the oldID from current position in the current game; it then decrease the oldID by one and set to the newID;
+	 * in the end, it set new ID to current game. The game then is set to the previous version in replay mode.
 	 */
 
 	public static void stepBackward() {
@@ -625,12 +616,13 @@ public class QuoridorController {
 	/**
 	  * Feature: JumpToStart
 	  * 
-	  * In the replay mode, I want to jump to the start position of the game
-	  * 
-	  * I first get the ID of the initial position and then set the id to it
 	  * @author Yujing Yang
-	  * 
+	  * @param this method does not take input parameter
 	  * @return void
+	  * 
+	  * functionality: This JumpToStart method moves the current game to the first step in the game, when it has not been played.
+	  * The ID for the initial step should be 0; so the method set position of currentGame to 0. 
+	  * The current game is then jumped to start in replay mode.
 	  */
 	 
 	 public static void jumpToStart() {
@@ -640,12 +632,13 @@ public class QuoridorController {
 	 /**
 	  * Feature: JumpToFinal
 	  * 
-	  * In the replay mode, I want to jump to the final position of the game
-	  * 
-	  * I first get the ID of the final position and then set the id to it
 	  * @author Yujing Yang
-	  * 
+	  * @param this method does not take input parameter
 	  * @return void
+	  * 
+	  * functionality: This jumpToFinal method moves the current game to the last step in the game, when all steps has been made.
+	  * The ID for the last step should be the size of position -1; so the method set position of currentGame to size-1. 
+	  * The current game is then jumped to final version in replay mode.
 	  */
 	 
 	 public static void jumpToFinal() {
@@ -661,7 +654,7 @@ public class QuoridorController {
 	 * The wall shall be rotated over the board to {string}
 	 * A wall move candidate shall exist with {string} at position \\({int}, {int})
 	 * 
-	 * @param WallMove
+	 * @param no parameter input
 	 * @author Yujing Yang
 	 * @return boolean		return true if flipWall successfully; return false if don't
 	 */
@@ -1336,7 +1329,15 @@ public class QuoridorController {
 				whiteWallIndex++;
 				moves.add(new WallMove(moveNum, whiteRound, white, whitetile, quoridor.getCurrentGame(), direction, wall)); 	//put wall on the board
 				GamePosition currentGamePosition = (GamePosition) QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().clone();
-				currentGamePosition.addWhiteWallsOnBoard(wall);
+				List<Wall> wOnBoard = new ArrayList<Wall>();
+				  for(int i=0;i<currentGamePosition.getWhiteWallsOnBoard().size();i++) {
+				   wOnBoard.add(currentGamePosition.getWhiteWallsOnBoard().get(i));
+				  }
+				wOnBoard.add(wall);
+//				List<Wall> wWalls = currentGamePosition.getWhiteWallsOnBoard();
+//				wWalls.add(wall);
+				currentGamePosition.setWhiteWallsOnBoard(wOnBoard);
+				//currentGamePosition.addWhiteWallsOnBoard(wall);
 				currentGamePosition.removeWhiteWallsInStock(wall);
 				currentGamePosition.setId(positionId);
 				QuoridorApplication.getQuoridor().getCurrentGame().addPosition(currentGamePosition);
@@ -1383,7 +1384,15 @@ public class QuoridorController {
 				blackWallIndex++;
 				moves.add(new WallMove(moveNum, blackRound, black, blacktile, quoridor.getCurrentGame(), direction, wall)); 	//put wall on the board
 				GamePosition currentGamePosition = (GamePosition) QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().clone();
-				currentGamePosition.addBlackWallsOnBoard(wall);
+				List<Wall> bOnBoard = new ArrayList<Wall>();
+				  for(int i=0;i<currentGamePosition.getBlackWallsOnBoard().size();i++) {
+				   bOnBoard.add(currentGamePosition.getBlackWallsOnBoard().get(i));
+				  }
+				bOnBoard.add(wall);
+//				List<Wall> bWalls = currentGamePosition.getBlackWallsOnBoard();
+//				bWalls.add(wall);
+				currentGamePosition.setBlackWallsOnBoard(bOnBoard);
+				//currentGamePosition.addBlackWallsOnBoard(wall);
 				currentGamePosition.removeBlackWallsInStock(wall);
 				currentGamePosition.setId(positionId);
 				QuoridorApplication.getQuoridor().getCurrentGame().addPosition(currentGamePosition);

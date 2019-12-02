@@ -40,7 +40,6 @@ public class SaveGameDialoge extends JFrame {
 			}
 		});
 	}
-
 	/**
 	 * Create the frame.
 	 */
@@ -51,14 +50,17 @@ public class SaveGameDialoge extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		JLabel label = new JLabel("Would you like to save and overwrite your previous game ?");
+		JLabel label = new JLabel("Would you like to save your previous game and exit ?");
 		
 		JButton SaveGameButton = new JButton("Yes!");
 		SaveGameButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				QuoridorController.overwriteExistingFile();
 				setVisible(false);
-				new MainMenu().setVisible(true);
+				QuoridorApplication.getJboard().setVisible(false);
+				QuoridorApplication.getQuoridor().getCurrentGame().delete();
+				QuoridorApplication.getMainMenu().setVisible(true);
+				
 			}
 		});
 		
@@ -67,7 +69,10 @@ public class SaveGameDialoge extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				QuoridorController.cancelOverwriteExistingFile();
 				setVisible(false);
-				new MainMenu().setVisible(true);
+				QuoridorApplication.getJboard().setVisible(false);
+				QuoridorApplication.getQuoridor().getCurrentGame().delete();
+				QuoridorApplication.getMainMenu().setVisible(true);
+				
 			}
 		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);

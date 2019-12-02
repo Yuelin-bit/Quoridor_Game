@@ -48,6 +48,13 @@ public class NewJBoardReplay extends JFrame {
 
 	private JPanel contentPane;
 	private JPanel mainLayerPanel;
+	public JPanel getMainLayerPanel() {
+		return mainLayerPanel;
+	}
+	public void setMainLayerPanel(JPanel mainLayerPanel) {
+		this.mainLayerPanel = mainLayerPanel;
+	}
+
 	private JTileR tile;
 	private JUser users;
 	private JButton setting;
@@ -89,29 +96,56 @@ public class NewJBoardReplay extends JFrame {
 	public void setBlackStock(JLabel blackStock) {
 		this.blackStock = blackStock;
 	}
+	public JWall[] getJWhiteWallOnBoard() {
+		return JWhiteWallOnBoard;
+	}
+	public void setJWhiteWallOnBoard(JWall[] jWhiteWallOnBoard) {
+		JWhiteWallOnBoard = jWhiteWallOnBoard;
+	}
+	public JWall[] getJBlackWallOnBoard() {
+		return JBlackWallOnBoard;
+	}
+	public void setJBlackWallOnBoard(JWall[] jBlackWallOnBoard) {
+		JBlackWallOnBoard = jBlackWallOnBoard;
+	}
+	public JWall[] getJWhiteWallInStock() {
+		return JWhiteWallInStock;
+	}
+	public void setJWhiteWallInStock(JWall[] jWhiteWallInStock) {
+		JWhiteWallInStock = jWhiteWallInStock;
+	}
+	public JWall[] getJBlackWallInStock() {
+		return JBlackWallInStock;
+	}
+	public void setJBlackWallInStock(JWall[] jBlackWallInStock) {
+		JBlackWallInStock = jBlackWallInStock;
+	}
+
+	
+
 
 	private JLabel blackStock;
 	
-	private JWall jWallCandidate_1= new JWall();
-	private JWall jWallCandidate_2= new JWall();
-	private JWall jWallCandidate_3= new JWall();
-	private JWall jWallCandidate_4= new JWall();
-	private JWall jWallCandidate_5= new JWall();
-	private JWall jWallCandidate_6= new JWall();
-	private JWall jWallCandidate_7= new JWall();
-	private JWall jWallCandidate_8= new JWall();
-	private JWall jWallCandidate_9= new JWall();
-	private JWall jWallCandidate_10= new JWall();
-	private JWall jWallCandidate_11= new JWall();
-	private JWall jWallCandidate_12= new JWall();
-	private JWall jWallCandidate_13= new JWall();
-	private JWall jWallCandidate_14= new JWall();
-	private JWall jWallCandidate_15= new JWall();
-	private JWall jWallCandidate_16= new JWall();
-	private JWall jWallCandidate_17= new JWall();
-	private JWall jWallCandidate_18= new JWall();
-	private JWall jWallCandidate_19= new JWall();
-	private JWall jWallCandidate_20= new JWall();
+	private JWall jWallCandidate_1 = new JWall();
+	private JWall jWallCandidate_2 = new JWall();
+	private JWall jWallCandidate_3 = new JWall();
+	private JWall jWallCandidate_4 = new JWall();
+	private JWall jWallCandidate_5 = new JWall();
+	private JWall jWallCandidate_6 = new JWall();
+	private JWall jWallCandidate_7 = new JWall();
+	private JWall jWallCandidate_8 = new JWall();
+	private JWall jWallCandidate_9 = new JWall();
+	private JWall jWallCandidate_10 = new JWall();
+	private JWall jWallCandidate_11 = new JWall();
+	private JWall jWallCandidate_12 = new JWall();
+	private JWall jWallCandidate_13 = new JWall();
+	private JWall jWallCandidate_14 = new JWall();
+	private JWall jWallCandidate_15 = new JWall();
+	private JWall jWallCandidate_16 = new JWall();
+	private JWall jWallCandidate_17 = new JWall();
+	private JWall jWallCandidate_18 = new JWall();
+	private JWall jWallCandidate_19 = new JWall();
+	private JWall jWallCandidate_20 = new JWall();
 	
 	private JWall[] JWhiteWallInStock = {jWallCandidate_1,jWallCandidate_2,jWallCandidate_3,jWallCandidate_4,jWallCandidate_5,jWallCandidate_6,jWallCandidate_7,jWallCandidate_8,jWallCandidate_9,jWallCandidate_10};
 	private JWall[] JBlackWallInStock = {jWallCandidate_11,jWallCandidate_12,jWallCandidate_13,jWallCandidate_14,jWallCandidate_15,jWallCandidate_16,jWallCandidate_17,jWallCandidate_18,jWallCandidate_19,jWallCandidate_20};
@@ -164,6 +198,31 @@ public class NewJBoardReplay extends JFrame {
 	 * Create the frame.
 	 */
 	public NewJBoardReplay() {
+		jWallCandidate_1= new JWall();
+		jWallCandidate_2= new JWall();
+		jWallCandidate_3= new JWall();
+		jWallCandidate_4= new JWall();
+		jWallCandidate_5= new JWall();
+		jWallCandidate_6= new JWall();
+		jWallCandidate_7= new JWall();
+		jWallCandidate_8= new JWall();
+		jWallCandidate_9= new JWall();
+		jWallCandidate_10= new JWall();
+	    jWallCandidate_11= new JWall();
+		jWallCandidate_12= new JWall();
+		jWallCandidate_13= new JWall();
+		jWallCandidate_14= new JWall();
+		jWallCandidate_15= new JWall();
+		jWallCandidate_16= new JWall();
+		jWallCandidate_17= new JWall();
+		jWallCandidate_18= new JWall();
+		jWallCandidate_19= new JWall();
+		jWallCandidate_20= new JWall();
+		
+		//JWhiteWallInStock = {jWallCandidate_1,jWallCandidate_2,jWallCandidate_3,jWallCandidate_4,jWallCandidate_5,jWallCandidate_6,jWallCandidate_7,jWallCandidate_8,jWallCandidate_9,jWallCandidate_10};
+		//JBlackWallInStock = {jWallCandidate_11,jWallCandidate_12,jWallCandidate_13,jWallCandidate_14,jWallCandidate_15,jWallCandidate_16,jWallCandidate_17,jWallCandidate_18,jWallCandidate_19,jWallCandidate_20};
+		JWhiteWallOnBoard = new JWall[10];
+		JBlackWallOnBoard = new JWall[10];
 		
 		System.out.println(jWallCandidate_1.getLocation().x+" and "+jWallCandidate_1.getLocation().y);
 
@@ -217,6 +276,8 @@ public class NewJBoardReplay extends JFrame {
 		setting = new JButton("");
 		setting.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				QuoridorApplication.getLoadposition().getReplayBoard().setVisible(false);
+				QuoridorApplication.getMainMenu().setVisible(true);
 			}
 		});
 		setting.addMouseListener(new MouseAdapter() {
@@ -556,6 +617,7 @@ public class NewJBoardReplay extends JFrame {
 	 *
 	 */
 	public String transferInt(int a) {
+		if(a==11) return "11";
 		if(a==10) return "10";
 		if(a==9) return "9";
 		if(a==8) return "8";
@@ -567,6 +629,7 @@ public class NewJBoardReplay extends JFrame {
 		if(a==2) return "2";
 		if(a==1) return "1";
 		if(a==0) return "0";
+		if(a==-1) return "-1";
 		return null;
 	}
 
