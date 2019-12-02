@@ -85,17 +85,14 @@ public class MainMenu extends JFrame {
 		btnNewButton.setBounds(74, 340, 166, 75);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!QuoridorApplication.getQuoridor().hasCurrentGame()) {
-					QuoridorController.initializeNewGame();
-					SelectName page = new SelectName();
-					page.setVisible(true);
-					setVisible(false);//close the mainMenu.
-					dispose();
-				} else {
-					JOptionPane.showOptionDialog(null, "You cannot have a new game without save the existing game.",
-			                "Warning",
-			                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[]{"OK"}, "OK");
+				if(QuoridorApplication.getQuoridor().hasCurrentGame()) {
+					QuoridorApplication.getQuoridor().getCurrentGame().delete();
 				}
+				QuoridorController.initializeNewGame();
+				SelectName page = new SelectName();
+				page.setVisible(true);
+				setVisible(false);//close the mainMenu.
+				dispose();
 			}
 		});
 		

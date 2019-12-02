@@ -180,9 +180,10 @@ public class LoadPosition extends JFrame {
 				if(QuoridorApplication.getQuoridor().hasCurrentGame()) {
 					QuoridorApplication.getQuoridor().getCurrentGame().delete();
 				}
-				if (loadNum == 1) {
-					errorHint.showMessageDialog(null, "Can't load position twice");
-				} else {
+//				if (loadNum == 1) {
+//					errorHint.showMessageDialog(null, "Can't load position twice");
+//				} 
+//				else {
 					String filename = (String) comboBox.getSelectedItem();
 					ArrayList<Player> playersList = QuoridorController.createUsersAndPlayers(textField.getText(), textField_1.getText());
 					loadNum = 1;
@@ -197,7 +198,7 @@ public class LoadPosition extends JFrame {
 						errorHint.showMessageDialog(null, e1.getMessage());
 						
 					}
-				}
+//				}
 				
 				
 			}
