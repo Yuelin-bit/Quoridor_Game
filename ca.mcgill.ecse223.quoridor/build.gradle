@@ -23,6 +23,8 @@ dependencies {
     testRuntimeOnly "org.junit.vintage:junit-vintage-engine:5.5.0"
     
     compile "org.eclipse:swt:3.3.0-v3346"
+    def jgraphtVersion = '1.3.0'
+    compile "org.jgrapht:jgrapht-core:$jgraphtVersion"
 }
 
 test {
