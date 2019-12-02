@@ -50,7 +50,7 @@ import javax.swing.JTextField;
 
 public class LoadPosition extends JFrame {
 	
-	private int loadNum = 0;
+//	private int loadNum = 0;
 	private JLabel errorLabel;
 	private String error = null;
 	private JPanel contentPane;
@@ -186,7 +186,7 @@ public class LoadPosition extends JFrame {
 //				else {
 					String filename = (String) comboBox.getSelectedItem();
 					ArrayList<Player> playersList = QuoridorController.createUsersAndPlayers(textField.getText(), textField_1.getText());
-					loadNum = 1;
+//					loadNum = 1;
 					try {
 						if (filename.equals("quoridor_test_game_invalid_jump_move.mov")) {
 							errorHint.showMessageDialog(null, "Invalid jump move!");
