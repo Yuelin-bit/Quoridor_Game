@@ -47,6 +47,16 @@ public class QuoridorController {
 		refresh.start();
 
 	}
+	
+	/**
+	 * Get game result.
+	 * @return
+	 */
+	public static String getGameResult() {
+	if(QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus().equals(GameStatus.WhiteWon)) return "WhiteWon!";
+	else if(QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus().equals(GameStatus.BlackWon)) return "BlackWon!";
+	else return "Peace and Love";
+	}
 	/**
 	 * This method helps communicating through model and UI.
 	 * @return A string of white user's time
@@ -584,7 +594,7 @@ public class QuoridorController {
 	/**
 	 * Feature: StepBackward
 	 * 
-	 * @author Yuelin Liu
+	 * @author yujingyang Yuelin Liu
 	 * @param this method does not take input parameter
 	 * @return void 
 	 * 
@@ -2616,11 +2626,11 @@ public static void initializeEmptyBoard() {
 
 		// Add the walls as in stock for the players
 		for (int j = 0; j < 10; j++) {
-			Wall wall = Wall.getWithId(j+1);
+			Wall wall = Wall.getWithId(j);
 			gamePosition.addWhiteWallsInStock(wall);
 		}
 		for (int j = 0; j < 10; j++) {
-			Wall wall = Wall.getWithId(j + 11);
+			Wall wall = Wall.getWithId(j + 10);
 			gamePosition.addBlackWallsInStock(wall);
 		}
 
