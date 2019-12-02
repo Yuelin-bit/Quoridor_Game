@@ -32,9 +32,7 @@ public class Stopwatch extends Thread{
 		this.minute = this.white.getRemainingTime().getMinutes();
 		this.second = this.white.getRemainingTime().getSeconds();
 		this.total = minute*60 + second;
-		System.out.println(total);
 		this.totalInMilli = total * numConversion;
-		System.out.println(totalInMilli);
 	}
 	
 	public void run() {

@@ -222,9 +222,9 @@ public class SelectName extends JFrame {
 				}
 
 				QuoridorController.setTotalThinkingTime(min, sec);
-				if(!QuoridorApplication.getQuoridor().hasBoard()) {
+				//if(!QuoridorApplication.getQuoridor().hasBoard()) {
 					QuoridorController.initializeBoard();
-				}
+				//}
 				QuoridorController.verifyGameIsReady();
 				
 				if (QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus().equals(GameStatus.ReadyToStart)) {
