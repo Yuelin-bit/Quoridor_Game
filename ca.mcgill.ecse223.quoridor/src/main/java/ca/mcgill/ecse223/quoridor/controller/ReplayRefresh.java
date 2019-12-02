@@ -103,7 +103,11 @@ public class ReplayRefresh {
 		}
 		QuoridorApplication.getLoadPosition().getReplayBoard().setJWhiteWallInStock(ww2);
 		
+		//QuoridorApplication.getLoadPosition().getReplayBoard().getWhiteStock().setText(QuoridorApplication.getLoadPosition().getReplayBoard().transferInt(10));
+		//QuoridorApplication.getLoadPosition().getReplayBoard().getBlackStock().setText(QuoridorApplication.getLoadPosition().getReplayBoard().transferInt(10));
 		
+		QuoridorApplication.getLoadPosition().getReplayBoard().getWhiteStock().setText(QuoridorApplication.getLoadPosition().getReplayBoard().transferInt(10-QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getWhiteWallsOnBoard().size()));
+		QuoridorApplication.getLoadPosition().getReplayBoard().getBlackStock().setText(QuoridorApplication.getLoadPosition().getReplayBoard().transferInt(10-QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getBlackWallsOnBoard().size()));
 	}
 	
 	private static void setLocation(JWall a, boolean isV, int row, int column) {

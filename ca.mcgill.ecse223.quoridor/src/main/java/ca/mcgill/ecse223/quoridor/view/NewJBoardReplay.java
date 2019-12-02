@@ -617,6 +617,7 @@ public class NewJBoardReplay extends JFrame {
 	 *
 	 */
 	public String transferInt(int a) {
+		if(a==11) return "11";
 		if(a==10) return "10";
 		if(a==9) return "9";
 		if(a==8) return "8";
@@ -628,6 +629,7 @@ public class NewJBoardReplay extends JFrame {
 		if(a==2) return "2";
 		if(a==1) return "1";
 		if(a==0) return "0";
+		if(a==-1) return "-1";
 		return null;
 	}
 

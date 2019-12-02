@@ -619,7 +619,7 @@ public class QuoridorController {
 	/**
 	 * Feature: StepBackward
 	 * 
-	 * @author yujingyang Yuelin Liu
+	 * @author Yuelin Liu
 	 * @param this method does not take input parameter
 	 * @return void 
 	 * 
@@ -2651,11 +2651,11 @@ public static void initializeEmptyBoard() {
 
 		// Add the walls as in stock for the players
 		for (int j = 0; j < 10; j++) {
-			Wall wall = Wall.getWithId(j);
+			Wall wall = Wall.getWithId(j+1);
 			gamePosition.addWhiteWallsInStock(wall);
 		}
 		for (int j = 0; j < 10; j++) {
-			Wall wall = Wall.getWithId(j + 10);
+			Wall wall = Wall.getWithId(j + 11);
 			gamePosition.addBlackWallsInStock(wall);
 		}
 
