@@ -224,10 +224,7 @@ public class PathCheck {
 	private static Wall getWall(List<Wall> walls, int row, int col) {
 		Board board = QuoridorApplication.getQuoridor().getBoard();
 		for (Wall w : walls) {
-			System.out.println(w.getId());
-			System.out.println("wall at ("+w.getMove().getTargetTile().getRow()+","+w.getMove().getTargetTile().getColumn()+")");
 			if (w.getMove().getTargetTile().getRow() == row && w.getMove().getTargetTile().getColumn() == col) {
-				System.out.println("wall found at ("+row+","+col+")");
 				return w;
 				}
 		}
