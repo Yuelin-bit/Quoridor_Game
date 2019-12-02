@@ -39,10 +39,6 @@ public class RefreshData extends Thread{
 				board.getBigTime().setBackground(Color.RED);
 				board.getBigTime().setText("White Won!");
 			}
-			//board.getwhitePawn().setVisible(whiteTurn);
-			//board.getblackPawn().setVisible(blackTurn);
-			board.getWhiteStock().setText(QuoridorController.getWhiteStocks());
-			board.getBlackStock().setText(QuoridorController.getBlackStocks());	
 			if(whiteTurn) {
 				watch.setWhiteRunning(true);
 				watch.setBlackRunning(false);

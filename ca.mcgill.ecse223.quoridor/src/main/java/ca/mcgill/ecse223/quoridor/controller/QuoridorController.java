@@ -2,6 +2,7 @@ package ca.mcgill.ecse223.quoridor.controller;
 
 import java.io.FileInputStream;
 
+
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
