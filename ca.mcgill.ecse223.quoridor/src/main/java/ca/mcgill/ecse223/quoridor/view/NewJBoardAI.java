@@ -221,13 +221,14 @@ public class NewJBoardAI extends JFrame {
 		setting = new JButton("");
 		setting.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				QuoridorApplication.getJboardAI().setVisible(false);
+				QuoridorApplication.getMainMenu().setVisible(true);
 			}
 		});
 		setting.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				QuoridorApplication.getJboard().setVisible(false);
-				QuoridorApplication.getMainMenu().setVisible(true);
+				
 			}
 		});
 		setting.setBounds(296, 135, 30, 28);
