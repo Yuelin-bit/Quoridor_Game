@@ -1471,7 +1471,7 @@ public class CucumberStepDefinitions {
 
 		
 		
-		// ***********************************************
+				// ***********************************************
 				// Load Position
 				// ***********************************************
 				@When("I initiate to load a saved game {string}")
@@ -1643,7 +1643,7 @@ public class CucumberStepDefinitions {
 				
 		
 		
-		// ***********************************************
+				// ***********************************************
 				// Load Game
 				// ***********************************************
 				@When("I initiate to load a game in {string}")
