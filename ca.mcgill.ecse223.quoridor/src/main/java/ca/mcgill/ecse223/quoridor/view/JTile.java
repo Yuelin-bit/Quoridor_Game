@@ -23,6 +23,8 @@ import ca.mcgill.ecse223.quoridor.view.NewJBoard.SmallWallTO;
 import ca.mcgill.ecse223.quoridor.controller.QuoridorController;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
@@ -33,6 +35,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
 public class JTile extends JPanel {
+	private JOptionPane errorHint;
 	JButton[][] allButton = new JButton[10][10];
 	boolean isSelectedState = false;
 	int whitePawn_row = 9;
@@ -1338,6 +1341,10 @@ public class JTile extends JPanel {
 						PawnBehavior pawnBehavior = new PawnBehavior();
 						if (pawnBehavior.isLegalStep(checkMoveDirection(direction))) {
 							boolean result = QuoridorController.movePlayer("black", direction);
+							String gameResult = QuoridorController.checkGameResult();
+							if (!gameResult.equals("pending")) {
+								errorHint.showMessageDialog(null, gameResult);
+							}
 						}
 					}
 					blackPawn_row = x;
@@ -1360,6 +1367,10 @@ public class JTile extends JPanel {
 						PawnBehavior pawnBehavior = new PawnBehavior();
 						if (pawnBehavior.isLegalStep(checkMoveDirection(direction))) {
 							boolean result = QuoridorController.movePlayer("white", direction);
+							String gameResult = QuoridorController.checkGameResult();
+							if (!gameResult.equals("pending")) {
+								errorHint.showMessageDialog(null, gameResult);
+							}
 						}
 					}
 					whitePawn_row = x;

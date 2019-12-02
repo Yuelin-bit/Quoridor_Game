@@ -276,6 +276,8 @@ public class NewJBoardReplay extends JFrame {
 		setting = new JButton("");
 		setting.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				QuoridorApplication.getLoadposition().getReplayBoard().setVisible(false);
+				QuoridorApplication.getMainMenu().setVisible(true);
 			}
 		});
 		setting.addMouseListener(new MouseAdapter() {
