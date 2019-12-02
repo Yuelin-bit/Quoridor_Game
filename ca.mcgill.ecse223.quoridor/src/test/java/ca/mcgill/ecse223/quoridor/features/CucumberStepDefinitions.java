@@ -1961,6 +1961,8 @@ public class CucumberStepDefinitions {
 		 */
 		@When ("The initialization of the board is initiated")
 		public void the_initialization_of_the_board_is_initiated() {
+			QuoridorController.initializeEmptyBoard();
+			
 			QuoridorController.initializeBoard();
 			whiteStartTime = System.currentTimeMillis();
 		}

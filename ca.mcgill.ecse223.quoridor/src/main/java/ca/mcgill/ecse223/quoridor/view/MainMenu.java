@@ -57,7 +57,10 @@ public class MainMenu extends JFrame {
 					frame.setVisible(true);
 					//QuoridorController.initQuoridorAndBoard();
 					QuoridorController.initializeNewGame();
-//					QuoridorController.initializeEmptyBoard();
+				if(!QuoridorApplication.getQuoridor().hasBoard()) {
+
+					QuoridorController.initializeEmptyBoard();
+				}
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -76,6 +79,7 @@ public class MainMenu extends JFrame {
 		contentPane.setBackground(Color.LIGHT_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		
 		
 		JButton btnNewButton = new JButton("Play 1 on 1");
 		btnNewButton.setBounds(74, 340, 166, 75);

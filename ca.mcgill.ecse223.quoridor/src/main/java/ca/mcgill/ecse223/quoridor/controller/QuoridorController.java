@@ -50,8 +50,7 @@ public class QuoridorController {
 	 * Stops both watch counting down.
 	 */
 	public static void stopWatch() {
-		whiteWatch.stop();
-		blackWatch.stop();
+		
 		Time zero = new Time(0);
 		QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer().setRemainingTime(zero);
 		QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer().setRemainingTime(zero);
@@ -357,11 +356,11 @@ public class QuoridorController {
 		//check if path exist
 		
 
-//		String error = PathCheck.pathCheck();
-//		if(!error.equals("both")) {
-//			JOptionPane.showMessageDialog(null, "Only "+error+" player has path!");
-//			return;
-//		}
+		String error = PathCheck.pathCheck();
+		if(!error.equals("both")) {
+			JOptionPane.showMessageDialog(null, "Only "+error+" player has path!");
+			return;
+		}
 		Tile t = wallmove.getTargetTile();
 		Player currentPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
 		Game currentGame = QuoridorApplication.getQuoridor().getCurrentGame();
@@ -401,6 +400,8 @@ public class QuoridorController {
 			//QuoridorApplication.getQuoridor().getCurrentGame().setCurrentPosition(currentGamePosition);
 		}
 		
+		System.out.println("wall position: row= "+QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getRow()+
+				"column = "+QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getTargetTile().getColumn());
 
 		System.out.println("hasGameAsBlack(): "+QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove().hasGameAsBlack());
 	}
@@ -1799,13 +1800,16 @@ public class QuoridorController {
 
 		Player white = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
 		Player black = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
+
 			
 
 		if (player.hasGameAsBlack()) {
+
 			player.setNextPlayer(white);
 			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(white);
 			//QuoridorApplication.getJboard().whiteTurn();
 		}else {
+
 			player.setNextPlayer(black);
 			QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(black);
 			//QuoridorApplication.getJboard().blackTurn();
@@ -1873,19 +1877,14 @@ public static void initializeEmptyBoard() {
 		Tile initBlack = QuoridorApplication.getQuoridor().getBoard().getTile(4);
 		PlayerPosition initialWhite = new PlayerPosition(whitePlayer, initWhite);
 		PlayerPosition initialBlack = new PlayerPosition(whitePlayer, initBlack);
-		System.out.println("white============================================================");
 
 		GamePosition g = new GamePosition(0, initialWhite, initialBlack, whitePlayer, game);
-		g.setPlayerToMove(whitePlayer);
+		game.addPosition(g);
 		game.setCurrentPosition(g);
-		System.out.println("white============================================================");
-
 		initializeWhiteWall(g,whitePlayer);
 		initializeBlackWall(g,blackPlayer);
 		g.setPlayerToMove(whitePlayer);
-		System.out.println("white============================================================");
 
-		 
 		
 	}
 
@@ -1902,7 +1901,7 @@ public static void initializeEmptyBoard() {
 	public static List<Wall> initializeBlackWall(GamePosition g,Player blackPlayer) {
 		//TODO GUI
 		List<Wall> whiteWallsInStock = new ArrayList<Wall>();
-		int blackIndex = 0;
+		int blackIndex = 1;
 		if(!blackPlayer.hasWalls()) {
 			for(int i = 0; i<10;i++) {
 				Wall wall = new Wall(blackIndex+i, blackPlayer);
@@ -1924,7 +1923,7 @@ public static void initializeEmptyBoard() {
 	 */
 	public static void initializeWhiteWall(GamePosition g,Player whitePlayer) {
 		//TODO GUIint blackIndex = 0;
-		int whiteIndex = 10;
+		int whiteIndex = 11;
 		List<Wall> blackWallsInStock= new ArrayList<Wall>();
 		if(!whitePlayer.hasWalls()) {
 			for(int i = 0; i<10;i++) {
