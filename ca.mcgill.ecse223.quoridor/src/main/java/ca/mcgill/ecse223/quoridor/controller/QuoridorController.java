@@ -1663,10 +1663,10 @@ public class QuoridorController {
 
 
 	/**
-	 * Feature: IdentifyGameWon
+	 * Feature: IdentifyGameDrawn , IdentifyGameWon
 	 * This method will check the game result and return a string to notify the result 
 	 * 
-	 * @author Zirui He
+	 * @author Bozhong Lu , Zirui He
 	 * @return game result in string
 	 */
 	public static String checkGameResult() {
