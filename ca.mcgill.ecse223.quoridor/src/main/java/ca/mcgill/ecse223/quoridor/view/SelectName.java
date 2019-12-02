@@ -228,6 +228,7 @@ public class SelectName extends JFrame {
 				QuoridorController.verifyGameIsReady();
 				
 				if (QuoridorApplication.getQuoridor().getCurrentGame().getGameStatus().equals(GameStatus.ReadyToStart)) {
+					QuoridorApplication.getQuoridor().getCurrentGame().setGameStatus(GameStatus.Running);
 					NewJBoard jboard = new NewJBoard();
 					QuoridorApplication.setJboard(jboard);
 					jboard.setVisible(true);
