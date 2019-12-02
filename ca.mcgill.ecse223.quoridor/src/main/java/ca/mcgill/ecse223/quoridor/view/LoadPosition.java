@@ -119,11 +119,50 @@ public class LoadPosition extends JFrame {
 		
 
 		
+//		comboBox = new JComboBox<String>();
+//		try (Stream<Path> walk = Files.walk(Paths.get(""))) {
+//
+//			List<String> result = walk.map(x -> x.toString())
+//					.filter(f -> f.endsWith(".dat")).collect(Collectors.toList());
+//
+//			for (String file : result) {
+//				comboBox.addItem(file);
+//			}
+//
+//		} catch (IOException e1) {
+//			e1.printStackTrace();
+//		}
+//		comboBox.setSelectedIndex(0);
+//		
+//		JButton btnNewButton = new JButton("Load");
+//		btnNewButton.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				if (loadNum == 1) {
+//					errorHint.showMessageDialog(null, "Can't load position twice");
+//				} else {
+//					String filename = (String) comboBox.getSelectedItem();
+//					ArrayList<Player> playersList = QuoridorController.createUsersAndPlayers(textField.getText(), textField_1.getText());
+//					loadNum = 1;
+//					try {
+//						
+//						QuoridorController.loadPosition(filename, playersList.get(0), playersList.get(1));
+//						QuoridorController.validation();
+//					} catch (Exception e1) {
+//						errorHint.showMessageDialog(null, e1.getMessage());
+//						
+//					}
+//				}
+//				
+//				
+//			}
+//		
+//		});
+		
 		comboBox = new JComboBox<String>();
 		try (Stream<Path> walk = Files.walk(Paths.get(""))) {
 
 			List<String> result = walk.map(x -> x.toString())
-					.filter(f -> f.endsWith(".dat")).collect(Collectors.toList());
+					.filter(f -> f.endsWith(".mov")).collect(Collectors.toList());
 
 			for (String file : result) {
 				comboBox.addItem(file);
@@ -145,7 +184,7 @@ public class LoadPosition extends JFrame {
 					loadNum = 1;
 					try {
 						
-						QuoridorController.loadPosition(filename, playersList.get(0), playersList.get(1));
+						QuoridorController.loadGame(filename, playersList.get(0), playersList.get(1));
 						QuoridorController.validation();
 					} catch (Exception e1) {
 						errorHint.showMessageDialog(null, e1.getMessage());
@@ -157,6 +196,7 @@ public class LoadPosition extends JFrame {
 			}
 		
 		});
+		
 		
 		
 		JButton btnNewButton_1 = new JButton("Back");
@@ -187,53 +227,9 @@ public class LoadPosition extends JFrame {
 				replayBoard = new NewJBoardReplay();
 				replayBoard.setVisible(true);
 				
-				QuoridorController.initializeNewGame();
-			    QuoridorController.replay();
-				Quoridor quoridorR = QuoridorApplication.getQuoridor();
-				//new Game(GameStatus.Initializing, MoveMode.WallMove, QuoridorApplication.getQuoridor());
-				if(QuoridorApplication.getQuoridor().getBoard()==null) {
-					Quoridor quoridor = QuoridorApplication.getQuoridor();
-					Board board = new Board(quoridor);
-					// Creating tiles by rows, i.e., the column index changes with every tile
-					// creation
-					for (int i = 1; i <= 9; i++) { // rows
-						for (int j = 1; j <= 9; j++) { // columns
-							board.addTile(i, j);
-						}
-					}
-				}
-				User user1 = quoridorR.addUser("whiteReplayer");
-				User user2 = quoridorR.addUser("blackReplayer");
-				int thinkingTime = 180;
-				Player player1 = new Player(new Time(thinkingTime), user1, 9, Direction.Horizontal);
-				Player player2 = new Player(new Time(thinkingTime), user2, 1, Direction.Horizontal);
-				Player[] players = { player1, player2 };
-				for (int i = 0; i < 2; i++) {
-					for (int j = 0; j < 10; j++) {
-						new Wall(i * 10 + j+1, players[i]);
-					}
-				}
+				QuoridorController.jumpToStart();
 				
-				Tile player1StartPos = quoridorR.getBoard().getTile(76);
-				Tile player2StartPos = quoridorR.getBoard().getTile(4);
-				QuoridorApplication.getQuoridor().getCurrentGame().setWhitePlayer(player1);
-				QuoridorApplication.getQuoridor().getCurrentGame().setBlackPlayer(player2);
-
-				Game gameR = QuoridorApplication.getQuoridor().getCurrentGame();
-				PlayerPosition player1Position = new PlayerPosition(quoridorR.getCurrentGame().getWhitePlayer(), player1StartPos);
-				PlayerPosition player2Position = new PlayerPosition(quoridorR.getCurrentGame().getBlackPlayer(), player2StartPos);
-				GamePosition gamePosition = new GamePosition(0, player1Position, player2Position, player1, gameR);
-				
-				for (int j = 0; j < 10; j++) {
-					Wall wall = Wall.getWithId(j+1);
-					gamePosition.addWhiteWallsInStock(wall);
-				}
-				for (int j = 0; j < 10; j++) {
-					Wall wall = Wall.getWithId(j + 10+1);
-					gamePosition.addBlackWallsInStock(wall);
-				}
-				gameR.setCurrentPosition(gamePosition);
-				
+<<<<<<< HEAD
 				
 				try {
 					QuoridorController.movePlayer("white","up");
@@ -258,6 +254,67 @@ public class LoadPosition extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+=======
+//				QuoridorController.initializeNewGame();
+//			    QuoridorController.replay();
+//				Quoridor quoridorR = QuoridorApplication.getQuoridor();
+//				//new Game(GameStatus.Initializing, MoveMode.WallMove, QuoridorApplication.getQuoridor());
+//				if(QuoridorApplication.getQuoridor().getBoard()==null) {
+//					Quoridor quoridor = QuoridorApplication.getQuoridor();
+//					Board board = new Board(quoridor);
+//					// Creating tiles by rows, i.e., the column index changes with every tile
+//					// creation
+//					for (int i = 1; i <= 9; i++) { // rows
+//						for (int j = 1; j <= 9; j++) { // columns
+//							board.addTile(i, j);
+//						}
+//					}
+//				}
+//				User user1 = quoridorR.addUser("whiteReplayer");
+//				User user2 = quoridorR.addUser("blackReplayer");
+//				int thinkingTime = 180;
+//				Player player1 = new Player(new Time(thinkingTime), user1, 9, Direction.Horizontal);
+//				Player player2 = new Player(new Time(thinkingTime), user2, 1, Direction.Horizontal);
+//				Player[] players = { player1, player2 };
+//				for (int i = 0; i < 2; i++) {
+//					for (int j = 0; j < 10; j++) {
+//						new Wall(i * 10 + j+1, players[i]);
+//					}
+//				}
+//				
+//				Tile player1StartPos = quoridorR.getBoard().getTile(76);
+//				Tile player2StartPos = quoridorR.getBoard().getTile(4);
+//				QuoridorApplication.getQuoridor().getCurrentGame().setWhitePlayer(player1);
+//				QuoridorApplication.getQuoridor().getCurrentGame().setBlackPlayer(player2);
+//
+//				Game gameR = QuoridorApplication.getQuoridor().getCurrentGame();
+//				PlayerPosition player1Position = new PlayerPosition(quoridorR.getCurrentGame().getWhitePlayer(), player1StartPos);
+//				PlayerPosition player2Position = new PlayerPosition(quoridorR.getCurrentGame().getBlackPlayer(), player2StartPos);
+//				GamePosition gamePosition = new GamePosition(0, player1Position, player2Position, player1, gameR);
+//				
+//				for (int j = 0; j < 10; j++) {
+//					Wall wall = Wall.getWithId(j+1);
+//					gamePosition.addWhiteWallsInStock(wall);
+//				}
+//				for (int j = 0; j < 10; j++) {
+//					Wall wall = Wall.getWithId(j + 10+1);
+//					gamePosition.addBlackWallsInStock(wall);
+//				}
+//				gameR.setCurrentPosition(gamePosition);
+//				
+//				
+//				try {
+//					QuoridorController.movePlayer("white","up");
+//					QuoridorController.movePlayer("black","down");
+//					QuoridorController.movePlayer("white","up");
+//					QuoridorController.movePlayer("black","left");
+//					QuoridorController.movePlayer("white","right");
+//					QuoridorController.jumpToStart();
+//				} catch (CloneNotSupportedException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				}
+>>>>>>> bb0428dd7167082c67662a368cfcee7110a7335e
 				
 			}
 		});
