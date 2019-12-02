@@ -1334,7 +1334,15 @@ public class QuoridorController {
 				whiteWallIndex++;
 				moves.add(new WallMove(moveNum, whiteRound, white, whitetile, quoridor.getCurrentGame(), direction, wall)); 	//put wall on the board
 				GamePosition currentGamePosition = (GamePosition) QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().clone();
-				currentGamePosition.addWhiteWallsOnBoard(wall);
+				List<Wall> wOnBoard = new ArrayList<Wall>();
+				  for(int i=0;i<currentGamePosition.getWhiteWallsOnBoard().size();i++) {
+				   wOnBoard.add(currentGamePosition.getWhiteWallsOnBoard().get(i));
+				  }
+				wOnBoard.add(wall);
+//				List<Wall> wWalls = currentGamePosition.getWhiteWallsOnBoard();
+//				wWalls.add(wall);
+				currentGamePosition.setWhiteWallsOnBoard(wOnBoard);
+				//currentGamePosition.addWhiteWallsOnBoard(wall);
 				currentGamePosition.removeWhiteWallsInStock(wall);
 				currentGamePosition.setId(positionId);
 				QuoridorApplication.getQuoridor().getCurrentGame().addPosition(currentGamePosition);
@@ -1381,7 +1389,15 @@ public class QuoridorController {
 				blackWallIndex++;
 				moves.add(new WallMove(moveNum, blackRound, black, blacktile, quoridor.getCurrentGame(), direction, wall)); 	//put wall on the board
 				GamePosition currentGamePosition = (GamePosition) QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().clone();
-				currentGamePosition.addBlackWallsOnBoard(wall);
+				List<Wall> bOnBoard = new ArrayList<Wall>();
+				  for(int i=0;i<currentGamePosition.getBlackWallsOnBoard().size();i++) {
+				   bOnBoard.add(currentGamePosition.getBlackWallsOnBoard().get(i));
+				  }
+				bOnBoard.add(wall);
+//				List<Wall> bWalls = currentGamePosition.getBlackWallsOnBoard();
+//				bWalls.add(wall);
+				currentGamePosition.setBlackWallsOnBoard(bOnBoard);
+				//currentGamePosition.addBlackWallsOnBoard(wall);
 				currentGamePosition.removeBlackWallsInStock(wall);
 				currentGamePosition.setId(positionId);
 				QuoridorApplication.getQuoridor().getCurrentGame().addPosition(currentGamePosition);
