@@ -1381,7 +1381,7 @@ public class CucumberStepDefinitions {
 		@When("I start the clock")
 		public void i_start_the_clock() {
 		    // Write code here that turns the phrase above into concrete actions
-		    whiteStartTime = QuoridorController.startClock();
+		    //whiteStartTime = QuoridorController.startClock();
 		    game.setGameStatus(GameStatus.Running);
 		}
 
@@ -1832,14 +1832,14 @@ public class CucumberStepDefinitions {
 //				blackWatch = new Stopwatch(QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer());
 //				whiteWatch = new Stopwatch(QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer());
 //				blackWatch.start();
-				long nanotime = QuoridorController.startClock();
+				long nanotime = 0;
 				blackStartTime = nanotime;
 				blackStartTime = TimeUnit.SECONDS.convert(nanotime, TimeUnit.NANOSECONDS);
 			}else {
 //				whiteWatch = new Stopwatch(QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer());
 //				blackWatch = new Stopwatch(QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer());
 //				whiteWatch.start();
-				long nanotime = QuoridorController.startClock();
+				long nanotime = 0;
 				whiteStartTime = nanotime;
 				whiteStartTime = TimeUnit.SECONDS.convert(nanotime, TimeUnit.NANOSECONDS);
 			}
@@ -1863,10 +1863,10 @@ public class CucumberStepDefinitions {
 				QuoridorController.completeMove(blackPlayer);
 //				blackWatch.suspend();
 //				whiteWatch.start();
-				long nanotimeBlack = QuoridorController.startClock();
+				long nanotimeBlack = 0;
 				blackEndTime = nanotimeBlack;
 				blackEndTime = TimeUnit.SECONDS.convert(nanotimeBlack, TimeUnit.NANOSECONDS);
-				long nanotimeWhite = QuoridorController.startClock();
+				long nanotimeWhite = 0;
 				whiteStartTime = nanotimeWhite;
 				whiteStartTime = TimeUnit.SECONDS.convert(nanotimeWhite, TimeUnit.NANOSECONDS);
 			} else {
@@ -1874,10 +1874,10 @@ public class CucumberStepDefinitions {
 				QuoridorController.completeMove(whitePlayer);
 //				whiteWatch.suspend();
 //				blackWatch.start();
-				long nanotimeWhite = QuoridorController.startClock();
+				long nanotimeWhite = 0;
 				whiteEndTime = nanotimeWhite;
 				whiteEndTime = TimeUnit.SECONDS.convert(nanotimeWhite, TimeUnit.NANOSECONDS);
-				long nanotimeBlack = QuoridorController.startClock();
+				long nanotimeBlack = 0;
 				blackStartTime = nanotimeBlack;
 				blackStartTime = TimeUnit.SECONDS.convert(nanotimeBlack, TimeUnit.NANOSECONDS);
 			}
