@@ -594,7 +594,7 @@ public class QuoridorController {
 	/**
 	 * Feature: StepBackward
 	 * 
-	 * @author yujingyang Yuelin Liu
+	 * @author Yuelin Liu
 	 * @param this method does not take input parameter
 	 * @return void 
 	 * 
