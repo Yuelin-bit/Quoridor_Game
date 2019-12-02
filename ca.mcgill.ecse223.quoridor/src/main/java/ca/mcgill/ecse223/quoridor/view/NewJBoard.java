@@ -220,11 +220,6 @@ public class NewJBoard extends JFrame {
 		setting = new JButton("");
 		setting.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		setting.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
 				int result = JOptionPane.showOptionDialog(null, "Setting",
 		                "Setting",
 		                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[]{"Back to Main Menu", "Resign"}, "Back to Main Menu");
@@ -234,6 +229,12 @@ public class NewJBoard extends JFrame {
 				} else {
 					QuoridorController.resign();
 				}
+			}
+		});
+		setting.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
 			}
 		});
 		setting.setBounds(296, 135, 30, 28);
