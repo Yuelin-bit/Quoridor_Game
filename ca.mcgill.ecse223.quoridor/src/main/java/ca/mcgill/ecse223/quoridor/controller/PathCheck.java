@@ -19,8 +19,13 @@ import ca.mcgill.ecse223.quoridor.model.Quoridor;
 import ca.mcgill.ecse223.quoridor.model.Tile;
 import ca.mcgill.ecse223.quoridor.model.Wall;
 import ca.mcgill.ecse223.quoridor.model.WallMove;
-
+/**
+ * Check if path exist controller
+ * @author Sun Gengyi
+ *
+ */
 public class PathCheck {
+
 
 	/**
 	 * @author Sun, Gengyi
@@ -44,6 +49,7 @@ public class PathCheck {
 		return result;
 	}
 	/**
+	 * @author Sun, Gengyi
 	 * Checking for player's available path.
 	 * @param player
 	 * @return A boolean indicating whether player has a path to destination.
@@ -55,6 +61,7 @@ public class PathCheck {
 
 	/**
 	 * 	Showing what color is the player.
+	 * @author Sun, Gengyi
 	 * @param p
 	 * @return	a boolean indicating if player is white player.
 	 * @throws RuntimeException
@@ -70,7 +77,8 @@ public class PathCheck {
 	}
 
 	/**
-	 * Connect the current game position as a graph.
+	 * Connect the current game position as a graph.	 
+	 * @author Sun, Gengyi
 	 * @return A undirected graph, tiles are the vertices
 	 */
 	public static DefaultUndirectedGraph initializeGraph(){
@@ -303,6 +311,7 @@ public class PathCheck {
 	 * @param row
 	 * @param col
 	 * @return a specific wall on board at row, col
+	 * 
 	 */
 	private static Wall getWall(List<Wall> walls, int row, int col) {
 		Board board = QuoridorApplication.getQuoridor().getBoard();
