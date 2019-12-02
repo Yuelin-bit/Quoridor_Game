@@ -225,9 +225,9 @@ public class LoadPosition extends JFrame {
 		textField_1.setColumns(10);
 		textField_1.setText("");
 		
-		JLabel lblNewLabel = new JLabel("Enter user name");
+		JLabel lblNewLabel = new JLabel("Enter existing user name");
 		
-		JLabel lblNewLabel_1 = new JLabel("Enter user name");
+		JLabel lblNewLabel_1 = new JLabel("Enter existing user name");
 		
 		JButton btnRepLaA = new JButton("Replay");
 		btnRepLaA.addActionListener(new ActionListener() {
@@ -270,7 +270,7 @@ public class LoadPosition extends JFrame {
 		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(38)
 					.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
@@ -279,9 +279,9 @@ public class LoadPosition extends JFrame {
 					.addGap(405)
 					.addComponent(lblChooseGameTo, GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
 					.addGap(495))
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(372)
-					.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+					.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
 					.addGap(597))
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(328)
@@ -293,16 +293,14 @@ public class LoadPosition extends JFrame {
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 								.addComponent(btnRepLaA)
 								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-									.addGap(68)
-									.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+										.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(lblNewLabel))
+									.addGap(42)
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+										.addComponent(lblNewLabel_1)
+										.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
 							.addGap(414))))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(337)
-					.addComponent(lblNewLabel)
-					.addGap(98)
-					.addComponent(lblNewLabel_1)
-					.addContainerGap(433, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)

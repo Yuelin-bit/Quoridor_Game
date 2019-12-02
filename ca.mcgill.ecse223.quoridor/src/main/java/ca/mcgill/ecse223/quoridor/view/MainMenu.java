@@ -140,7 +140,9 @@ public class MainMenu extends JFrame {
 		JButton btnPracticeai = new JButton("Practice (AI)");
 		btnPracticeai.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				if(QuoridorApplication.getQuoridor().hasCurrentGame()) {
+					QuoridorApplication.getQuoridor().getCurrentGame().delete();
+				}
 				NewJBoardAI jai = new NewJBoardAI();
 				QuoridorApplication.setJboardAI(jai);
 				QuoridorApplication.getJboardAI().setVisible(true);

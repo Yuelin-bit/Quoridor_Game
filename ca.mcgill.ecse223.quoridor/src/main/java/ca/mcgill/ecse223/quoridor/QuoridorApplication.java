@@ -43,6 +43,14 @@ public class QuoridorApplication {
 	}
 
 	private static Quoridor quoridor;
+	private static ca.mcgill.ecse223.quoridor.model.model4.Quoridor quoridor4;
+	public static ca.mcgill.ecse223.quoridor.model.model4.Quoridor getQuoridor4() {
+		return quoridor4;
+	}
+	public static void setQuoridor4(ca.mcgill.ecse223.quoridor.model.model4.Quoridor quoridor4) {
+		QuoridorApplication.quoridor4 = quoridor4;
+	}
+
 	static MainMenu mainMenu;
 	public static MainMenu getMainMenu() {
 		return mainMenu;
