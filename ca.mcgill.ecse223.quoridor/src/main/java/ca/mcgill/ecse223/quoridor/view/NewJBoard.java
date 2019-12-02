@@ -57,6 +57,7 @@ public class NewJBoard extends JFrame {
 	private JLabel whiteTime;
 	private JButton setting;
 	private JLabel whiteTurnGUI;
+	private SaveGameDialoge saveGame;
 	/**
 	 * 
 	 * The below is generated automatically
@@ -160,7 +161,7 @@ public class NewJBoard extends JFrame {
 	 * Create the frame.
 	 */
 	public NewJBoard() {
-		
+		saveGame = new SaveGameDialoge ();
 		System.out.println(jWallCandidate_1.getLocation().x+" and "+jWallCandidate_1.getLocation().y);
 
 		
@@ -221,20 +222,22 @@ public class NewJBoard extends JFrame {
 		setting = new JButton("");
 		setting.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		setting.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
 				int result = JOptionPane.showOptionDialog(null, "Setting",
 		                "Setting",
 		                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[]{"Back to Main Menu", "Resign"}, "Back to Main Menu");
 				if (result==0) {
+					saveGame.setVisible(true);
 					QuoridorApplication.getJboard().setVisible(false);
 					QuoridorApplication.getMainMenu().setVisible(true);
 				} else {
 					QuoridorController.resign();
 				}
+			}
+		});
+		setting.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
 			}
 		});
 		setting.setBounds(296, 135, 30, 28);
