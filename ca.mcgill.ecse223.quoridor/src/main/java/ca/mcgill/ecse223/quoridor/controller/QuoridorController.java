@@ -1129,7 +1129,7 @@ public class QuoridorController {
 	/**
 	 * Feature: IdentifyGameDrawn
 	 * This method checks the result of the game is Pending or Drawn
-	 * is within the board boundary 
+	 *  
 	 * 
 	 * @author Bozhong Lu
 	 * @return String
