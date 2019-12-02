@@ -40,7 +40,6 @@ public class SaveGameDialoge extends JFrame {
 			}
 		});
 	}
-
 	/**
 	 * Create the frame.
 	 */
@@ -58,7 +57,9 @@ public class SaveGameDialoge extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				QuoridorController.overwriteExistingFile();
 				setVisible(false);
-				new MainMenu().setVisible(true);
+				QuoridorApplication.getJboard().setVisible(false);
+				QuoridorApplication.getMainMenu().setVisible(true);
+				
 			}
 		});
 		
@@ -67,7 +68,9 @@ public class SaveGameDialoge extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				QuoridorController.cancelOverwriteExistingFile();
 				setVisible(false);
-				new MainMenu().setVisible(true);
+				QuoridorApplication.getJboard().setVisible(false);
+				QuoridorApplication.getMainMenu().setVisible(true);
+				
 			}
 		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
