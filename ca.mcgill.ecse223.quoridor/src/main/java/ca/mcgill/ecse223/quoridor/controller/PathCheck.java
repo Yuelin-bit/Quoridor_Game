@@ -22,25 +22,26 @@ import ca.mcgill.ecse223.quoridor.model.WallMove;
 
 public class PathCheck {
 
+	@SuppressWarnings("unchecked")
 	public static String pathCheck() {
+
 		DefaultUndirectedGraph<Tile, DefaultEdge> graph = initializeGraph();
 		Player white = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
 		Player black = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
 		String result = "";
-		boolean whiteHasPath = PathToDestination(white, graph);
-		boolean blackHasPath = PathToDestination(black, graph);
-		if(whiteHasPath||blackHasPath) {
-			if(whiteHasPath)result = "white";
-			else 
-		if(blackHasPath) result = "black";
-			if(whiteHasPath&&blackHasPath) result = "both";
-		}
+		boolean whiteHasPath = playPath(white, graph);
+		boolean blackHasPath = playPath(black, graph);
+
+		if(whiteHasPath&&blackHasPath) result = "both";
+		else if(whiteHasPath)result = "white";
+		else if(blackHasPath) result = "black";
 		else result = "none";
+		System.out.println(result+"-----------------------");
 		return result;
 	}
 	public static boolean pathCheckPlayer(Player player) {
 		DefaultUndirectedGraph<Tile, DefaultEdge> graph = initializeGraph();
-		return PathToDestination(player, graph);	
+		return testPath(player, graph);	
 	}
 
 	public static boolean isWhitePlayer(Player p) throws RuntimeException {
@@ -69,7 +70,7 @@ public class PathCheck {
 			catch(ArrayIndexOutOfBoundsException e) {
 				System.out.println(e.getMessage());
 			}
-			
+
 		}
 		for (int i = 1; i <= 9; i++) {
 			for (int j = 1; j <= 8; j++) {
@@ -117,7 +118,7 @@ public class PathCheck {
 
 
 
-	private static boolean PathToDestination(Player player, DefaultUndirectedGraph<Tile, DefaultEdge> boardGraph) {
+	private static boolean playPath(Player player, DefaultUndirectedGraph<Tile, DefaultEdge> boardGraph) {
 		Board board = QuoridorApplication.getQuoridor().getBoard();
 		Destination destination = player.getDestination();
 		Tile playerTile = null;
@@ -129,16 +130,18 @@ public class PathCheck {
 		}
 		//Path algorithm
 		DijkstraShortestPath<Tile, DefaultEdge> pathAlgo = new DijkstraShortestPath<Tile, DefaultEdge>(boardGraph);
-		//		int row = destination.getTargetNumber();
-		//		row = row==9?1:9;
-		
+
 		if(destination.getDirection().equals(Direction.Horizontal)) {
 			int row = destination.getTargetNumber();
-			row = row==9?1:9;
-				
-			for(int col = 1; col <= 9; col++ ) {			
+			try {
+				if(getPlayerPosition(player).getTile().getRow()==9) row = 1;
+				else row = 9;
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}			for(int col = 1; col <= 9; col++ ) {			
 				if(pathAlgo.getPath(playerTile, board.getTile(9*(row - 1) + col - 1)) != null) {
-					
+
 
 					return true;
 				}
@@ -149,7 +152,42 @@ public class PathCheck {
 			col= col==9?1:9;
 			for(int row = 1; row<= 9; row++ ) { 
 				if(pathAlgo.getPath(playerTile, board.getTile(9*(row - 1) + col - 1))!=null) {
-					pathAlgo.getPath(playerTile, board.getTile(9*(row - 1) + col - 1)).getGraph().toString();
+					System.out.print(pathAlgo.getPath(playerTile, board.getTile(9*(row - 1) + col - 1)).getGraph().toString());
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	private static boolean testPath(Player player, DefaultUndirectedGraph<Tile, DefaultEdge> boardGraph) {
+		Board board = QuoridorApplication.getQuoridor().getBoard();
+		Destination destination = player.getDestination();
+		Tile playerTile = null;
+		try {
+			playerTile = getPlayerPosition(player).getTile();
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		DijkstraShortestPath<Tile, DefaultEdge> pathAlgo = new DijkstraShortestPath<Tile, DefaultEdge>(boardGraph);
+
+		if(destination.getDirection().equals(Direction.Horizontal)) {
+			int row = destination.getTargetNumber();
+			row = row ==9?1:9;
+			for(int col = 1; col <= 9; col++ ) {			
+				if(pathAlgo.getPath(playerTile, board.getTile(9*(row - 1) + col - 1)) != null) {
+
+
+					return true;
+				}
+			}
+		} 
+		else {
+			int col = destination.getTargetNumber();
+			col= col==9?1:9;
+			for(int row = 1; row<= 9; row++ ) { 
+				if(pathAlgo.getPath(playerTile, board.getTile(9*(row - 1) + col - 1))!=null) {
+					System.out.print(pathAlgo.getPath(playerTile, board.getTile(9*(row - 1) + col - 1)).getGraph().toString());
 					return true;
 				}
 			}
@@ -201,27 +239,25 @@ public class PathCheck {
 			} else return false;
 		}
 	}
+	
 	private static List<Wall> getWallsOnBoard() {
 		GamePosition currentPosition = QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition();
 		List<Wall> walls = new ArrayList<Wall>();
-		if (currentPosition.hasWhiteWallsOnBoard()) {
+
 			walls.addAll(currentPosition.getWhiteWallsOnBoard());
-		}
-		if (currentPosition.hasBlackWallsInStock()) {
 			walls.addAll(currentPosition.getBlackWallsOnBoard());
-		}
 		return walls;
 	}
-
-
 	private static Wall getWall(List<Wall> walls, int row, int col) {
 		Board board = QuoridorApplication.getQuoridor().getBoard();
 		for (Wall w : walls) {
-			if (w.getMove().getTargetTile().equals(board.getTile(9 * (row - 1) + col - 1)))
+			if (w.getMove().getTargetTile().getRow() == row && w.getMove().getTargetTile().getColumn() == col) {
 				return w;
+				}
 		}
 		return null;
 	}
+	
 
 
 }
