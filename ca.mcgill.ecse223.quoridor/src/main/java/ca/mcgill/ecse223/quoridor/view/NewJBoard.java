@@ -227,8 +227,8 @@ public class NewJBoard extends JFrame {
 		                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[]{"Back to Main Menu", "Resign"}, "Back to Main Menu");
 				if (result==0) {
 					saveGame.setVisible(true);
-					QuoridorApplication.getJboard().setVisible(false);
-					QuoridorApplication.getMainMenu().setVisible(true);
+//					QuoridorApplication.getJboard().setVisible(false);
+//					QuoridorApplication.getMainMenu().setVisible(true);
 				} else {
 					QuoridorController.resign();
 				}
