@@ -20,6 +20,9 @@ import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class NewJBoard4 extends JFrame {
 
@@ -263,6 +266,16 @@ public class NewJBoard4 extends JFrame {
         
         
         tile4.setFocusable(true);
+        
+        JButton btnNewButton = new JButton("Back");
+        btnNewButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		QuoridorApplication.getMainMenu().setVisible(true);
+        		QuoridorApplication.getJboard4().setVisible(false);
+        	}
+        });
+        btnNewButton.setBounds(28, 76, 66, 43);
+        tile4.add(btnNewButton);
         tile4.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -641,5 +654,4 @@ public class NewJBoard4 extends JFrame {
 		}	
 		return listOfGUIWall;
 	}
-
 }

@@ -234,6 +234,7 @@ public class LoadPosition extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				replayBoard = new NewJBoardReplay();
 				replayBoard.setVisible(true);
+				QuoridorApplication.getLoadposition().setVisible(false);
 				QuoridorController.jumpToStart();
 				ReplayRefresh.refreshBoardInReplayMode();
 				

@@ -607,7 +607,7 @@ public class QuoridorController {
 	/**
 	 * Feature: StepBackward
 	 * 
-	 * @author yujingyang Yuelin Liu
+	 * @author Yuelin Liu
 	 * @param this method does not take input parameter
 	 * @return void 
 	 * 
@@ -1142,7 +1142,7 @@ public class QuoridorController {
 	/**
 	 * Feature: IdentifyGameDrawn
 	 * This method checks the result of the game is Pending or Drawn
-	 * is within the board boundary 
+	 *  
 	 * 
 	 * @author Bozhong Lu
 	 * @return String
@@ -1275,7 +1275,16 @@ public class QuoridorController {
 
 
 
-
+	/**
+	 * This method will take a file as input and load all the moves and positions into the game
+	 * 
+	 * @author Zirui He
+	 * @param filename
+	 * @param white
+	 * @param black
+	 * @return
+	 * @throws Exception
+	 */
 	public static boolean loadGame(String filename, Player white, Player black) throws Exception {
 		Quoridor quoridor = QuoridorApplication.getQuoridor();
 
