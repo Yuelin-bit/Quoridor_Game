@@ -1463,6 +1463,44 @@ public class JTile extends JPanel {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
+							
+							{
+								File file = new File("save_game_test.mov");
+								FileWriter fr = null;
+								BufferedWriter br = null;
+								try {
+									// to append to file, you need to initialize FileWriter using below constructor
+									fr = new FileWriter(file, true);
+									br = new BufferedWriter(fr);
+									Quoridor quoridor = QuoridorApplication.getQuoridor();
+									String characters = new String("abcdefghi");
+									ArrayList<Character> characterList = new ArrayList<Character>();
+									for(int i = 0; i<characters.length(); i++){
+										characterList.add(characters.charAt(i));
+									}
+									int index = NewJBoard.index ;
+									String blackPositionToWrite = ""+index+". " ;
+									int playerColumn = y;
+									int playerRow =x;
+									Character blackColumnToWrite = characterList.get(playerColumn-1);
+									String blackRowToWrite = Integer.toString(playerRow) ;
+									blackPositionToWrite = blackPositionToWrite + blackColumnToWrite + blackRowToWrite ;
+									//br.newLine();											
+									br.write(blackPositionToWrite);
+								} catch (IOException e1) {
+									e1.printStackTrace();
+								} finally {
+									try {
+										br.close();
+										fr.close();
+									} catch (IOException e1) {
+										e1.printStackTrace();
+									}
+								}
+							}
+							
+							
+							
 						}else {
 							File file = new File("save_game_test.mov");
 							FileWriter fr = null;
