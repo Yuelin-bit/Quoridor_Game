@@ -19,6 +19,7 @@ import javax.swing.plaf.metal.MetalButtonUI;
 import ca.mcgill.ecse223.quoridor.QuoridorApplication;
 import ca.mcgill.ecse223.quoridor.controller.PawnBehavior;
 import ca.mcgill.ecse223.quoridor.controller.PawnBehavior.MoveDirection;
+import ca.mcgill.ecse223.quoridor.model.Quoridor;
 import ca.mcgill.ecse223.quoridor.model.Game.GameStatus;
 import ca.mcgill.ecse223.quoridor.view.NewJBoard.SmallWallTO;
 import ca.mcgill.ecse223.quoridor.controller.QuoridorController;
@@ -31,6 +32,10 @@ import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -1340,7 +1345,6 @@ public class JTile extends JPanel {
 						}		
 						allButton[x][y].setIcon(new ImageIcon(JTile.class.getResource("/ca/mcgill/ecse223/quoridor/resources/bpawn.png")));
 						allButton[blackPawn_row][blackPawn_column].setIcon(null);
-						//					System.out.println(determineDirection(x,y,blackPawn_row,blackPawn_column));
 						if(dangerous==false) {
 							String direction = determineDirection(x,y,blackPawn_row,blackPawn_column);
 							PawnBehavior pawnBehavior = new PawnBehavior();
@@ -1349,6 +1353,64 @@ public class JTile extends JPanel {
 								String gameResult = QuoridorController.checkGameResult();
 								if (!gameResult.equals("pending")) {
 									errorHint.showMessageDialog(null, gameResult);
+								}
+							}
+						}
+						//
+						if(!QuoridorController.checkFileExistence("save_game_test.mov")) {
+							try {
+								QuoridorController.creatNewFile("save_game_test.mov");
+								Quoridor quoridor = QuoridorApplication.getQuoridor();
+								BufferedWriter writer = new BufferedWriter(new FileWriter("save_game_test.mov"));
+								String characters = new String("abcdefghi");
+								ArrayList<Character> characterList = new ArrayList<Character>();
+								for(int i = 0; i<characters.length(); i++){
+									characterList.add(characters.charAt(i));
+								}
+								int index = NewJBoard.index;
+								NewJBoard.plusIndex();
+								String blackPositionToWrite = " " ;
+								int playerColumn = y;
+								int playerRow = x;
+								Character blackColumnToWrite = characterList.get(playerColumn-1);
+								String blackRowToWrite = Integer.toString(playerRow) ;
+								blackPositionToWrite = blackPositionToWrite + blackColumnToWrite + blackRowToWrite ;									
+								writer.write(blackPositionToWrite);	
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+						}else {
+							File file = new File("save_game_test.mov");
+							FileWriter fr = null;
+							BufferedWriter br = null;
+							try {
+								// to append to file, you need to initialize FileWriter using below constructor
+								fr = new FileWriter(file, true);
+								br = new BufferedWriter(fr);
+								Quoridor quoridor = QuoridorApplication.getQuoridor();
+								String characters = new String("abcdefghi");
+								ArrayList<Character> characterList = new ArrayList<Character>();
+								for(int i = 0; i<characters.length(); i++){
+									characterList.add(characters.charAt(i));
+								}
+								int index = NewJBoard.index;
+								NewJBoard.plusIndex();
+								String blackPositionToWrite = " " ;
+								int playerColumn = y;
+								int playerRow = x;
+								Character blackColumnToWrite = characterList.get(playerColumn-1);
+								String blackRowToWrite = Integer.toString(playerRow) ;
+								blackPositionToWrite = blackPositionToWrite + blackColumnToWrite + blackRowToWrite ;
+								br.write(blackPositionToWrite);	
+							} catch (IOException e1) {
+								e1.printStackTrace();
+							} finally {
+								try {
+									br.close();
+									fr.close();
+								} catch (IOException e1) {
+									e1.printStackTrace();
 								}
 							}
 						}
@@ -1367,7 +1429,6 @@ public class JTile extends JPanel {
 						}
 						allButton[x][y].setIcon(new ImageIcon(JTile.class.getResource("/ca/mcgill/ecse223/quoridor/resources/wpawn.png")));
 						allButton[whitePawn_row][whitePawn_column].setIcon(null);
-						//					System.out.println(determineDirection(x,y,whitePawn_row,whitePawn_column));
 						if(dangerous==false) {
 							String direction = determineDirection(x,y,whitePawn_row,whitePawn_column);
 							PawnBehavior pawnBehavior = new PawnBehavior();
@@ -1376,6 +1437,63 @@ public class JTile extends JPanel {
 								String gameResult = QuoridorController.checkGameResult();
 								if (!gameResult.equals("pending")) {
 									errorHint.showMessageDialog(null, gameResult);
+								}
+							}
+						}
+						//
+						if(!QuoridorController.checkFileExistence("save_game_test.mov")) {
+							try {
+								QuoridorController.creatNewFile("save_game_test.mov");
+								Quoridor quoridor = QuoridorApplication.getQuoridor();
+								BufferedWriter writer = new BufferedWriter(new FileWriter("save_game_test.mov"));
+								String characters = new String("abcdefghi");
+								ArrayList<Character> characterList = new ArrayList<Character>();
+								for(int i = 0; i<characters.length(); i++){
+									characterList.add(characters.charAt(i));
+								}
+								int index = NewJBoard.index;
+								String blackPositionToWrite = ""+index+". " ;
+								int playerColumn = y;
+								int playerRow = x;
+								Character blackColumnToWrite = characterList.get(playerColumn-1);
+								String blackRowToWrite = Integer.toString(playerRow) ;
+								blackPositionToWrite = blackPositionToWrite + blackColumnToWrite + blackRowToWrite ;										
+								writer.write(blackPositionToWrite);	
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+						}else {
+							File file = new File("save_game_test.mov");
+							FileWriter fr = null;
+							BufferedWriter br = null;
+							try {
+								// to append to file, you need to initialize FileWriter using below constructor
+								fr = new FileWriter(file, true);
+								br = new BufferedWriter(fr);
+								Quoridor quoridor = QuoridorApplication.getQuoridor();
+								String characters = new String("abcdefghi");
+								ArrayList<Character> characterList = new ArrayList<Character>();
+								for(int i = 0; i<characters.length(); i++){
+									characterList.add(characters.charAt(i));
+								}
+								int index = NewJBoard.index ;
+								String blackPositionToWrite = ""+index+". " ;
+								int playerColumn = y;
+								int playerRow =x;
+								Character blackColumnToWrite = characterList.get(playerColumn-1);
+								String blackRowToWrite = Integer.toString(playerRow) ;
+								blackPositionToWrite = blackPositionToWrite + blackColumnToWrite + blackRowToWrite ;
+								br.newLine();											
+								br.write(blackPositionToWrite);
+							} catch (IOException e1) {
+								e1.printStackTrace();
+							} finally {
+								try {
+									br.close();
+									fr.close();
+								} catch (IOException e1) {
+									e1.printStackTrace();
 								}
 							}
 						}

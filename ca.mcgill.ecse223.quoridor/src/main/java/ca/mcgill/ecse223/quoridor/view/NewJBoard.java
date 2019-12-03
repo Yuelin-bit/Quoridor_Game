@@ -12,6 +12,9 @@ import javax.swing.border.EmptyBorder;
 import ca.mcgill.ecse223.quoridor.QuoridorApplication;
 import ca.mcgill.ecse223.quoridor.controller.PathCheck;
 import ca.mcgill.ecse223.quoridor.controller.QuoridorController;
+import ca.mcgill.ecse223.quoridor.model.Direction;
+import ca.mcgill.ecse223.quoridor.model.Quoridor;
+import ca.mcgill.ecse223.quoridor.model.Wall;
 //import ca.mcgill.ecse223.quoridor.controller.nothing;
 import ca.mcgill.ecse223.quoridor.view.Pawn.PawnColor;
 
@@ -32,8 +35,13 @@ import javax.swing.UIManager;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * 
@@ -60,6 +68,12 @@ public class NewJBoard extends JFrame {
 	private JButton setting;
 	private JLabel whiteTurnGUI;
 	private SaveGameDialoge saveGame;
+	public static int index = 1 ;
+	
+	public static void plusIndex() {
+		index = index+1 ;
+	}
+
 	/**
 	 * 
 	 * The below is generated automatically
@@ -526,6 +540,89 @@ public class NewJBoard extends JFrame {
 								whiteStock.setText(transferInt(10-WHITE_WALL_INDEX));
 								whiteTurnGUI.setVisible(false);
 								blackTurnGUI.setVisible(true);
+								boolean isVertical;
+								int rowSmall;
+								int columnSmall;
+								if(jWallCandidate.getHeight()==9) {
+									isVertical = false;
+									rowSmall = (jWallCandidate.getLocation().y - 185) / 56;
+									columnSmall = (jWallCandidate.getLocation().x + 30) / 56;
+								}else {
+									isVertical = true;
+									rowSmall = (jWallCandidate.getLocation().y - 138) / 56;
+									columnSmall = (jWallCandidate.getLocation().x -17) / 56;
+								}
+								if(!QuoridorController.checkFileExistence("save_game_test.mov")) {
+									try {
+										QuoridorController.creatNewFile("save_game_test.mov");
+										Quoridor quoridor = QuoridorApplication.getQuoridor();
+										BufferedWriter writer = new BufferedWriter(new FileWriter("save_game_test.mov"));
+										String characters = new String("abcdefghi");
+										ArrayList<Character> characterList = new ArrayList<Character>();
+										for(int i = 0; i<characters.length(); i++){
+											characterList.add(characters.charAt(i));
+										}
+
+										String blackPositionToWrite = ""+index+". " ;
+										int playerColumn = columnSmall;
+										int playerRow = rowSmall;
+										Character blackColumnToWrite = characterList.get(playerColumn-1);
+										String blackRowToWrite = Integer.toString(playerRow) ;
+										blackPositionToWrite = blackPositionToWrite + blackColumnToWrite + blackRowToWrite ;										
+											
+										String wallDirectionToWrite = "" ;
+										if(isVertical) {
+											wallDirectionToWrite = "v";
+										}else{
+											wallDirectionToWrite = "h";
+										}
+										blackPositionToWrite = blackPositionToWrite + wallDirectionToWrite ;
+										writer.write(blackPositionToWrite);	
+									} catch (IOException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									}
+								}else {
+									File file = new File("save_game_test.mov");
+									FileWriter fr = null;
+									BufferedWriter br = null;
+									try {
+										// to append to file, you need to initialize FileWriter using below constructor
+										fr = new FileWriter(file, true);
+										br = new BufferedWriter(fr);
+										Quoridor quoridor = QuoridorApplication.getQuoridor();
+										String characters = new String("abcdefghi");
+										ArrayList<Character> characterList = new ArrayList<Character>();
+										for(int i = 0; i<characters.length(); i++){
+											characterList.add(characters.charAt(i));
+										}
+										String blackPositionToWrite = ""+index+". " ;
+										int playerColumn = columnSmall;
+										int playerRow = rowSmall;
+										Character blackColumnToWrite = characterList.get(playerColumn-1);
+										String blackRowToWrite = Integer.toString(playerRow) ;
+										blackPositionToWrite = blackPositionToWrite + blackColumnToWrite + blackRowToWrite ;
+										br.newLine();											
+										String wallDirectionToWrite = "" ;
+										if(isVertical) {
+											wallDirectionToWrite = "v";
+										}else{
+											wallDirectionToWrite = "h";
+										}
+										blackPositionToWrite = blackPositionToWrite + wallDirectionToWrite ;
+										br.write(blackPositionToWrite);
+									} catch (IOException e1) {
+										e1.printStackTrace();
+									} finally {
+										try {
+											br.close();
+											fr.close();
+										} catch (IOException e1) {
+											e1.printStackTrace();
+										}
+									}
+								}
+								
 							}else {
 								int x = jWallCandidate.getLocation().x;
 								int y = jWallCandidate.getLocation().y;
@@ -536,6 +633,90 @@ public class NewJBoard extends JFrame {
 								blackStock.setText(transferInt(10-BLACK_WALL_INDEX));
 								whiteTurnGUI.setVisible(true);
 								blackTurnGUI.setVisible(false);
+								
+								boolean isVertical;
+								int rowSmall;
+								int columnSmall;
+								if(jWallCandidate.getHeight()==9) {
+									isVertical = false;
+									rowSmall = (jWallCandidate.getLocation().y - 185) / 56;
+									columnSmall = (jWallCandidate.getLocation().x + 30) / 56;
+								}else {
+									isVertical = true;
+									rowSmall = (jWallCandidate.getLocation().y - 138) / 56;
+									columnSmall = (jWallCandidate.getLocation().x -17) / 56;
+								}
+								if(!QuoridorController.checkFileExistence("save_game_test.mov")) {
+									try {
+										QuoridorController.creatNewFile("save_game_test.mov");
+										Quoridor quoridor = QuoridorApplication.getQuoridor();
+										BufferedWriter writer = new BufferedWriter(new FileWriter("save_game_test.mov"));
+										String characters = new String("abcdefghi");
+										ArrayList<Character> characterList = new ArrayList<Character>();
+										for(int i = 0; i<characters.length(); i++){
+											characterList.add(characters.charAt(i));
+										}
+
+										index++;
+										String blackPositionToWrite = " " ;
+										int playerColumn = columnSmall;
+										int playerRow = rowSmall;
+										Character blackColumnToWrite = characterList.get(playerColumn-1);
+										String blackRowToWrite = Integer.toString(playerRow) ;
+										blackPositionToWrite = blackPositionToWrite + blackColumnToWrite + blackRowToWrite ;									
+											
+										String wallDirectionToWrite = "" ;
+										if(isVertical) {
+											wallDirectionToWrite = "v";
+										}else{
+											wallDirectionToWrite = "h";
+										}
+										blackPositionToWrite = blackPositionToWrite + wallDirectionToWrite ;
+										writer.write(blackPositionToWrite);	
+									} catch (IOException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									}
+								}else {
+									File file = new File("save_game_test.mov");
+									FileWriter fr = null;
+									BufferedWriter br = null;
+									try {
+										// to append to file, you need to initialize FileWriter using below constructor
+										fr = new FileWriter(file, true);
+										br = new BufferedWriter(fr);
+										Quoridor quoridor = QuoridorApplication.getQuoridor();
+										String characters = new String("abcdefghi");
+										ArrayList<Character> characterList = new ArrayList<Character>();
+										for(int i = 0; i<characters.length(); i++){
+											characterList.add(characters.charAt(i));
+										}
+										index++;
+										String blackPositionToWrite = " " ;
+										int playerColumn = columnSmall;
+										int playerRow = rowSmall;
+										Character blackColumnToWrite = characterList.get(playerColumn-1);
+										String blackRowToWrite = Integer.toString(playerRow) ;
+										blackPositionToWrite = blackPositionToWrite + blackColumnToWrite + blackRowToWrite ;
+										String wallDirectionToWrite = "" ;
+										if(isVertical) {
+											wallDirectionToWrite = "v";
+										}else{
+											wallDirectionToWrite = "h";
+										}
+										blackPositionToWrite = blackPositionToWrite + wallDirectionToWrite ;
+										br.write(blackPositionToWrite);	
+									} catch (IOException e1) {
+										e1.printStackTrace();
+									} finally {
+										try {
+											br.close();
+											fr.close();
+										} catch (IOException e1) {
+											e1.printStackTrace();
+										}
+									}
+								}
 							}
 							jWallCandidate = null;
 							isWhiteTurn = !isWhiteTurn;
