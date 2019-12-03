@@ -2635,8 +2635,8 @@ public class QuoridorController {
 		// There are total 36 tiles in the first four rows and
 		// indexing starts from 0 -> tiles with indices 36 and 36+8=44 are the starting
 		// positions
-		Tile player1StartPos = quoridor.getBoard().getTile(4);
-		Tile player2StartPos = quoridor.getBoard().getTile(76);
+		Tile player1StartPos = quoridor.getBoard().getTile(76);
+		Tile player2StartPos = quoridor.getBoard().getTile(4);
 
 		Game game = new Game(GameStatus.Initializing, MoveMode.PlayerMove, quoridor);
 		game.setWhitePlayer(players.get(0));
