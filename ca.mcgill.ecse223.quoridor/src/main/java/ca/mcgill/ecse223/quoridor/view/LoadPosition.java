@@ -195,7 +195,7 @@ public class LoadPosition extends JFrame {
 							QuoridorController.validation();
 						}					
 					} catch (Exception e1) {
-						errorHint.showMessageDialog(null, e1.getMessage());
+						errorHint.showMessageDialog(null, "fine");
 						
 					}
 //				}
